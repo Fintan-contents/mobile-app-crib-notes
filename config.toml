@@ -1,0 +1,11 @@
+title = "Santoku"
+description = ""
+hasCJKLanguage = true
+
+theme = "book"
+
+enableEmoji = true
+
+[markup.goldmark.renderer]
+# Markdownファイル内でHTMLタグを有効にする
+unsafe = true
