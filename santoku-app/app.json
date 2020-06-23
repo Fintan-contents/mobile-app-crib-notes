@@ -1,0 +1,16 @@
+{
+  "name": "SantokuApp",
+  "displayName": "SantokuApp",
+  "expo": {
+    "name": "SantokuApp",
+    "slug": "SantokuApp",
+    "version": "0.0.1",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
