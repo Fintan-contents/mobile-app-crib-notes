@@ -1,20 +1,70 @@
-# All available Hugo versions are listed here: https://gitlab.com/pages/hugo/container_registry
-image: registry.gitlab.com/pages/hugo:latest
-
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
+  HUGO_VERSION: 0.72.0
+  REVIEWDOG_VERSION: v0.9.17
 
-test:
-  script:
-  - hugo
-  except:
-  - master
+stages:
+  - build
+  - test
+  - deploy
 
-pages:
+lint-documents:
+  stage: test
+  image: node:latest
+  only:
+    - merge_requests
+    - master
+  variables:
+    REVIEWDOG_INSTALL_DIR: ~/bin
+    REVIEWDOG: $REVIEWDOG_INSTALL_DIR/reviewdog-$REVIEWDOG_VERSION
+  cache:
+    key: $CI_JOB_NAME-$CI_JOB_STAGE
+    paths:
+      - node_modules
+      - $REVIEWDOG
+  before_script:
+    # reviewdogのバイナリを落としてパスを通す
+    - test ! -x $REVIEWDOG && echo "Install reviewdog as $REVIEWDOG" && mkdir -p $REVIEWDOG_INSTALL_DIR && curl -fSL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b $REVIEWDOG_INSTALL_DIR $REVIEWDOG_VERSION && mv $REVIEWDOG_INSTALL_DIR/reviewdog $REVIEWDOG && chmod +x $REVIEWDOG
+    # lintに必要なパッケージをインストールする
+    - npm install
   script:
-  - hugo
+    - npx textlint -f checkstyle '!(node_modules)/*.md' > /tmp/textlint-errors.xml
+  after_script:
+    # after_scriptは別のshellが立ち上げられて実行されるので、環境変数などをscriptやbefore_scriptから引き継げない。
+    # cf.) https://docs.gitlab.com/ee/ci/yaml/#before_script-and-after_script
+    - cat /tmp/textlint-errors.xml | tee | $REVIEWDOG -f=checkstyle -reporter=gitlab-mr-discussion
+
+test-applications:
+  stage: test
+  image: node:latest
+  only:
+    - merge_requests
+    - master
+  script:
+    - |
+       echo "TODO: run lint and tests in santoku-app"
+
+build-documents:
+  stage: build
+  image: registry.gitlab.com/pages/hugo:$HUGO_VERSION
+  only:
+    - merge_requests
+    - master
+  script:
+    - hugo --minify
   artifacts:
     paths:
-    - public
+      - public
+    expire_in: 1 month
+
+
+pages:
+  stage: deploy
+  dependencies:
+    - lint-documents 
+    - test-applications
+    - build-documents
+  image: registry.gitlab.com/pages/hugo:$HUGO_VERSION
   only:
-  - master
+    - master
+  script: echo 'deploy only'
