@@ -61,10 +61,11 @@ build-documents:
 pages:
   stage: deploy
   dependencies:
-    - lint-documents 
-    - test-applications
     - build-documents
   image: registry.gitlab.com/pages/hugo:$HUGO_VERSION
   only:
     - master
+  artifacts:
+    paths:
+      - public
   script: echo 'deploy only'
