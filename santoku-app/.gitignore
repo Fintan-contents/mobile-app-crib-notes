@@ -63,3 +63,6 @@ buck-out/
 .expo/*
 web-build/
 .vscode
+
+# Jest
+junit.xml

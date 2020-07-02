@@ -1,70 +1,108 @@
 variables:
+  HUGO_VERSION: 0.73.0
+  NODE_VERSION: 12.18.2
+  REVIEWDOG_VERSION: v0.10.1
+  REVIEWDOG_INSTALL_DIR: .bin
+  REVIEWDOG: ${REVIEWDOG_INSTALL_DIR}/reviewdog-${REVIEWDOG_VERSION}
   GIT_SUBMODULE_STRATEGY: recursive
-  HUGO_VERSION: 0.72.0
-  REVIEWDOG_VERSION: v0.9.17
+  # キャッシュを強制的に無効化したい時は、CACHE_TAGを変更してください
+  CACHE_TAG: 2020.07.02
+
+workflow:
+  rules:
+    - when: always
 
 stages:
   - build
+  - prepare-tools
   - test
   - deploy
 
+cache: &global_cache
+  # branchごとに異なるキャッシュを利用するように設定しておきます
+  key: ${CACHE_TAG}-${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm
+    - .bin
+    - node_modules
+    - santoku-app/node_modules
+  policy: pull
+
+.on_master_or_mr: &master_or_merge_request
+  - master
+  - merge_request
+
+.on_master: &master
+  - master
+
+prepare-tools:
+  stage: prepare-tools
+  image: node:${NODE_VERSION}
+  # プッシュされたら、とりあえずキャッシュを作っておきます
+  cache:
+    <<: *global_cache
+    policy: pull-push
+  script:
+    # reviewdogのバイナリを落としてパスを通します
+    - |
+      if [ ! -x ${REVIEWDOG} ]; then
+        echo "Removing previous versions"
+        rm -f ${REVIEWDOG_INSTALL_DIR}/reviewdog*
+        echo "Installing reviewdog as ${REVIEWDOG}"
+        mkdir -p ${REVIEWDOG_INSTALL_DIR}
+        curl -fSL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b ${REVIEWDOG_INSTALL_DIR} ${REVIEWDOG_VERSION}
+        mv ${REVIEWDOG_INSTALL_DIR}/reviewdog ${REVIEWDOG}
+        chmod +x ${REVIEWDOG}
+      fi
+    # ドキュメント用のNode.jsツールをインストールします
+    - npm install --cache .npm --prefer-offline --no-fund --no-audit
+    # santoku-appの依存ライブラリをインストールします
+    - npm install --cache .npm --prefer-offline --no-fund --no-audit --prefix santoku-app
+
 lint-documents:
   stage: test
-  image: node:latest
-  only:
-    - merge_requests
-    - master
-  variables:
-    REVIEWDOG_INSTALL_DIR: ~/bin
-    REVIEWDOG: $REVIEWDOG_INSTALL_DIR/reviewdog-$REVIEWDOG_VERSION
-  cache:
-    key: $CI_JOB_NAME-$CI_JOB_STAGE
-    paths:
-      - node_modules
-      - $REVIEWDOG
-  before_script:
-    # reviewdogのバイナリを落としてパスを通す
-    - test ! -x $REVIEWDOG && echo "Install reviewdog as $REVIEWDOG" && mkdir -p $REVIEWDOG_INSTALL_DIR && curl -fSL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b $REVIEWDOG_INSTALL_DIR $REVIEWDOG_VERSION && mv $REVIEWDOG_INSTALL_DIR/reviewdog $REVIEWDOG && chmod +x $REVIEWDOG
-    # lintに必要なパッケージをインストールする
-    - npm install
-  script:
-    - npx textlint -f checkstyle '!(node_modules)/*.md' > /tmp/textlint-errors.xml
-  after_script:
-    # after_scriptは別のshellが立ち上げられて実行されるので、環境変数などをscriptやbefore_scriptから引き継げない。
-    # cf.) https://docs.gitlab.com/ee/ci/yaml/#before_script-and-after_script
-    - cat /tmp/textlint-errors.xml | tee | $REVIEWDOG -f=checkstyle -reporter=gitlab-mr-discussion
+  image: node:${NODE_VERSION}
+  only: *master_or_merge_request
+  script: npm run -s textlint | ${REVIEWDOG} -tee -f eslint -reporter gitlab-mr-discussion -fail-on-error
+
+lint-application:
+  stage: test
+  image: node:${NODE_VERSION}
+  only: *master_or_merge_request
+  script: npm run -s eslint --prefix santoku-app | ${REVIEWDOG} -tee -f eslint -reporter gitlab-mr-discussion -fail-on-error
 
 test-applications:
   stage: test
-  image: node:latest
-  only:
-    - merge_requests
-    - master
-  script:
-    - |
-       echo "TODO: run lint and tests in santoku-app"
+  image: node:${NODE_VERSION}
+  only: *master_or_merge_request
+  script: npm run -s test:ci --prefix santoku-app
+  artifacts:
+    paths:
+      - santoku-app/junit.xml
+      - santoku-app/coverage/cobertura-coverage.xml
+    reports:
+      junit: santoku-app/junit.xml
+      cobertura: santoku-app/coverage/cobertura-coverage.xml
+    expire_in: 1 month
 
 build-documents:
   stage: build
-  image: registry.gitlab.com/pages/hugo:$HUGO_VERSION
-  only:
-    - merge_requests
-    - master
-  script:
-    - hugo --minify
+  image: registry.gitlab.com/pages/hugo:${HUGO_VERSION}
+  only: *master_or_merge_request
+  # Hugoビルドにはツールのインストールなどは不要。キャッシュの復元もしない。
+  cache: {}
+  script: hugo --minify
   artifacts:
     paths:
       - public
     expire_in: 1 month
 
-
 pages:
   stage: deploy
   dependencies:
     - build-documents
-  image: registry.gitlab.com/pages/hugo:$HUGO_VERSION
-  only:
-    - master
+  image: registry.gitlab.com/pages/hugo:${HUGO_VERSION}
+  only: *master
   artifacts:
     paths:
       - public
