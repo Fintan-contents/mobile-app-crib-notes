@@ -1,4 +1,4 @@
-package com.santokuapp;
+package jp.fintan.mobile.santokuapp;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

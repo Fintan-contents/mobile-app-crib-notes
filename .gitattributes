@@ -1,0 +1,19 @@
+* text=auto eol=lf
+
+# Windows script files
+# ====================
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files
+# ============
+*.jar   binary
+*.class binary
+
+# Font files
+# ==========
+*.ttf   binary
+*.otf   binary
+*.woff  binary
+*.woff2 binary
+*.eot   binary

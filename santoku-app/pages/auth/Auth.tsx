@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 const menu = [
   {
     title: 'ステートレスな認証',
-    pageName: '',
+    pageName: 'StatelessAuth',
   },
   {
     title: 'ローカル認証',

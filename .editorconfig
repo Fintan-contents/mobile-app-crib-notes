@@ -1,0 +1,33 @@
+root = true
+
+# noinspection EditorConfigKeyCorrectness
+[*]
+indent_style = space
+indent_size = 2
+tab_width = 8
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+max_line_length = 150
+quote_type = single
+curly_bracket_next_line = false
+spaces_around_operators = true
+spaces_around_brackets = inside
+
+# noinspection EditorConfigKeyCorrectness
+# IntelliJ IDEAでフォーマットすると、拡張子を指定する部分の`,`の後に空白が含まれてしまうのですが、その状態だとprettierが正しく設定を読み込めないようです。
+#@formatter:off
+[*.{java,ts,tsx,js,jsx,html,css,scss,properties,gradle,groovy,xml,yaml,yml,json,toml}]
+#@formatter:on
+continuation_indent_size = 4
+trim_trailing_whitespace = true
+
+#@formatter:off
+[*.{md,adoc}]
+#@formatter:on
+trim_trailing_whitespace = false
+
+#@formatter:off
+[*.{bat,cmd}]
+#@formatter:on
+end_of_line = crlf

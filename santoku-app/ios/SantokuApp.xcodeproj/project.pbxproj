@@ -279,7 +279,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jp.co.tis.intra.adc.mobile.jikanwari.react.native.SantokuApp;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.fintan.mobile.SantokuApp;
 				PRODUCT_NAME = SantokuApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -292,9 +292,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D9MUZCM4X6;
 				INFOPLIST_FILE = SantokuApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -302,7 +302,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jp.co.tis.intra.adc.mobile.jikanwari.react.native.SantokuApp;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.fintan.mobile.SantokuApp;
 				PRODUCT_NAME = SantokuApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";

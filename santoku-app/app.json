@@ -11,6 +11,7 @@
     ],
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "scheme": "myclientapp"
   }
 }

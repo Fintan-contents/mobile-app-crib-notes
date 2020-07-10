@@ -6,6 +6,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './DrawerContent';
 import NativeWithWebView from './webview/NativeWithWebView';
 import Auth from './auth/Auth';
+import StatelessAuth from './auth/StatelessAuth';
 import Top from './Top';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 
@@ -65,6 +66,20 @@ const AuthScreen = () => {
         component={Auth}
         options={{
           title: '認証・認可',
+          headerStyle: { backgroundColor: '#9DC6BF' },
+          headerTitleStyle: { fontWeight: 'bold' },
+          headerLeft: () => (
+            <Button transparent>
+              <Icon name="menu" style={styles.icon} onPress={() => dispatch(DrawerActions.openDrawer())} />
+            </Button>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="StatelessAuth"
+        component={StatelessAuth}
+        options={{
+          title: 'ステートレスな認証',
           headerStyle: { backgroundColor: '#9DC6BF' },
           headerTitleStyle: { fontWeight: 'bold' },
           headerLeft: () => (
