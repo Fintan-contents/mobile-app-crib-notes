@@ -6,24 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 
 const menu = [
   {
-    title: 'シームレスな画面遷移',
-    pageName: '',
-  },
-  {
-    title: 'データの受け渡し',
-    pageName: '',
-  },
-  {
-    title: 'イベントのトリガー',
-    pageName: '',
-  },
-  {
-    title: '認証の連携',
-    pageName: '',
-  },
-  {
-    title: 'モバイルの標準ブラウザと情報を共有',
-    pageName: '',
+    title: 'ステートフルな認証',
+    pageName: 'StatefulAuthIntegration',
   },
 ];
 

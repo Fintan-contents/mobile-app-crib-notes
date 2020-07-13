@@ -41,7 +41,7 @@ export default function DrawerContent(props: any) {
       </View>
       <Content>
         <MenuItem {...props} to="NativeWithWebViewDrawer">
-          ネイティブとWebViewの連携
+          既存Web資産との連携
         </MenuItem>
         <MenuItem {...props} to="AuthDrawer">
           認証・認可

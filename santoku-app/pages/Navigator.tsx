@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from './DrawerContent';
 import NativeWithWebView from './webview/NativeWithWebView';
+import StatefulAuthIntegration from './webview/StatefulAuthIntegration';
 import Auth from './auth/Auth';
 import StatelessAuth from './auth/StatelessAuth';
 import Top from './Top';
@@ -42,7 +43,21 @@ const NativeWithWebViewScreen = () => {
         name="nativeWithWebView"
         component={NativeWithWebView}
         options={{
-          title: 'ネイティブとWebViewの連携',
+          title: '既存Web資産との連携',
+          headerStyle: { backgroundColor: '#9DC6BF' },
+          headerTitleStyle: { fontWeight: 'bold' },
+          headerLeft: () => (
+            <Button transparent>
+              <Icon name="menu" style={styles.icon} onPress={() => dispatch(DrawerActions.openDrawer())} />
+            </Button>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="StatefulAuthIntegration"
+        component={StatefulAuthIntegration}
+        options={{
+          title: 'ステートフルな認証',
           headerStyle: { backgroundColor: '#9DC6BF' },
           headerTitleStyle: { fontWeight: 'bold' },
           headerLeft: () => (
