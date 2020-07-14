@@ -48,7 +48,7 @@
 `npm run android`を実行してアプリケーションを起動すると、同時に[Metro Bundler](https://facebook.github.io/metro/)が起動します。
 Metro Bundlerの起動失敗などの理由でアプリケーションからMetro Bundlerにアクセスできないと、以下のようなエラー画面が表示されます。
 
-![](readme-files/failtoload.png)
+![](../images/failtoload.png)
 
 Metro Bundlerはデフォルトでは`8081`ポートを利用して起動します。`http://localhost:8081`にアクセスして、`React Native packager is running`のように表示されることを確認してください。
 

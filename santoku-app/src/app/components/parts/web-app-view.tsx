@@ -35,11 +35,7 @@ function WebViewWrapper({
         <Body style={styles.flexBasis}>
           <Title>{title}</Title>
         </Body>
-        <Right style={styles.flexBasis}>
-          <Button transparent hasText onPress={close} accessibilityLabel="Close">
-            <Text>{closeLabel}</Text>
-          </Button>
-        </Right>
+        <Right style={styles.flexBasis} />
       </Header>
       {children}
       <Footer>

@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Container, Button, Text } from 'native-base';
 // @ts-ignore
 import { WEB_APP_URI } from '@env';
-import WebAppView from '../../src/components/parts/web-app-view';
+import WebAppView from '../../parts/web-app-view';
 
 export default function StatefulAuthIntegration() {
   const [showWebView, setShowWebView] = useState(false);

@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "textlint": "textlint '*.md' '!(node_modules|public|themes|santoku-app)/**/*.md' 'santoku-app/*.md' 'santoku-app/!(node_modules)/**/*.md' || echo",
+    "textlint": "textlint \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules)/**/*.md\" || echo",
     "textlint:fix": "textlint --fix '*.md' '!(node_modules|public|themes|santoku-app)/**/*.md' 'santoku-app/*.md' 'santoku-app/!(node_modules)/**/*.md'"
   },
   "repository": {

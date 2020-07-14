@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { Container, Text, Spinner, Button, Card } from 'native-base';
-import useAuthState from '../../src/hooks/stateless-auth-hooks';
+import useAuthState from '../../../hooks/stateless-auth-hooks';
 
 export default function StatelessAuth() {
   const { authState, loading, signIn, signOut, refresh, hasJustSignOut } = useAuthState();

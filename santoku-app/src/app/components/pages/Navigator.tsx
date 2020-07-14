@@ -8,7 +8,7 @@ import NativeWithWebView from './webview/NativeWithWebView';
 import StatefulAuthIntegration from './webview/StatefulAuthIntegration';
 import Auth from './auth/Auth';
 import StatelessAuth from './auth/StatelessAuth';
-import Top from './Top';
+import Top from './top/Top';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 
 const TopScreen = () => {
