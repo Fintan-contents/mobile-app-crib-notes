@@ -1,41 +1,14 @@
 module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-  },
-  extends: ['plugin:react/recommended', 'google', 'plugin:prettier/recommended', 'prettier/@typescript-eslint'],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2020,
-    sourceType: 'module',
-  },
-  plugins: ['react', 'react-hooks', '@typescript-eslint'],
-  rules: {
-    'require-jsdoc': 0,
-    'react/display-name': 0,
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-  },
+  root: true,
+  extends: ['@react-native-community'],
   overrides: [
     {
-      files: ['**/*.ts', '**/*.tsx'],
-      rules: {
-        'no-unused-vars': ['off'],
-        'no-undef': ['off'],
-        '@typescript-eslint/no-unused-vars': 'error',
+      files: ['*.ts', '*.tsx'],
+      parserOptions: {
+        project: 'tsconfig.json',
       },
+      // TODO: ここでも `@react-native-community` を設定する必要はある？
+      extends: ['@react-native-community', 'plugin:@typescript-eslint/recommended', 'plugin:@typescript-eslint/recommended-requiring-type-checking'],
     },
   ],
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
 };

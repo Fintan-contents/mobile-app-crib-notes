@@ -42,8 +42,7 @@ async function refreshAuthAsync({ refreshToken }: { refreshToken: string }) {
 }
 
 async function _saveAuthState({ accessTokenExpirationDate, idToken, refreshToken, accessToken }: AuthState) {
-  accessTokenExpirationDate &&
-    (await SecureStore.setItemAsync('authState-accessTokenExpirationDate', JSON.stringify(accessTokenExpirationDate)));
+  accessTokenExpirationDate && (await SecureStore.setItemAsync('authState-accessTokenExpirationDate', JSON.stringify(accessTokenExpirationDate)));
   idToken && (await SecureStore.setItemAsync('authState-idToken', JSON.stringify(idToken)));
   refreshToken && (await SecureStore.setItemAsync('authState-refreshToken', JSON.stringify(refreshToken)));
   accessToken && (await SecureStore.setItemAsync('authState-accessToken', JSON.stringify(accessToken)));

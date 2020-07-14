@@ -17,31 +17,31 @@ export default function StatelessAuth() {
               <Button full onPress={signOut}>
                 <Text>サインアウト</Text>
               </Button>
-              <Text>{`\n`}</Text>
+              <Text>{'\n'}</Text>
               <Button full onPress={refresh}>
                 <Text>トークンをリフレッシュ</Text>
               </Button>
-              <Text>{`\n\n`}</Text>
+              <Text>{'\n\n'}</Text>
 
-              <Text style={styles.title}>accessTokenExpirationDate{`\n`}</Text>
+              <Text style={styles.title}>accessTokenExpirationDate{'\n'}</Text>
               <Text>
                 {authState.accessTokenExpirationDate}
-                {`\n`}
+                {'\n'}
               </Text>
-              <Text style={styles.title}>idToken{`\n`}</Text>
+              <Text style={styles.title}>idToken{'\n'}</Text>
               <Text>
                 {authState.idToken}
-                {`\n`}
+                {'\n'}
               </Text>
-              <Text style={styles.title}>accessToken{`\n`}</Text>
+              <Text style={styles.title}>accessToken{'\n'}</Text>
               <Text>
                 {authState.accessToken}
-                {`\n`}
+                {'\n'}
               </Text>
-              <Text style={styles.title}>refreshToken{`\n`}</Text>
+              <Text style={styles.title}>refreshToken{'\n'}</Text>
               <Text>
                 {authState.refreshToken}
-                {`\n`}
+                {'\n'}
               </Text>
             </>
           ) : (

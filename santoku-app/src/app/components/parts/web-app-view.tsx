@@ -14,16 +14,7 @@ type WebViewWrapperProps = {
   forwardHandler: () => void;
 };
 
-function WebViewWrapper({
-  children,
-  title,
-  close,
-  closeLabel = '完了',
-  canGoBack,
-  backHandler,
-  canGoForward,
-  forwardHandler,
-}: WebViewWrapperProps) {
+function WebViewWrapper({ children, title, close, closeLabel = '完了', canGoBack, backHandler, canGoForward, forwardHandler }: WebViewWrapperProps) {
   return (
     <>
       <Header>

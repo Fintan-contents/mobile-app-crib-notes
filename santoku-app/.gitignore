@@ -69,6 +69,7 @@ web-build/
 
 # Jest
 junit.xml
+coverage/
 
 ### Eclipse project files (legacy) ###
 .classpath
