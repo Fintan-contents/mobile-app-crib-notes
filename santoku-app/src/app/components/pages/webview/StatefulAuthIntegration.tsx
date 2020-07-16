@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Container, Button, Text } from 'native-base';
-// @ts-ignore
 import { WEB_APP_URI } from '@env';
 import WebAppView from '../../parts/web-app-view';
 

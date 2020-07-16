@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import * as AppAuth from 'react-native-app-auth';
 import * as SecureStore from 'expo-secure-store';
-// @ts-ignore
 import { COGNITO_CLIENT_ID, COGNITO_DOMAIN_URL, COGNITO_REDIRECT_URL } from '@env';
 
 export type AuthState = {

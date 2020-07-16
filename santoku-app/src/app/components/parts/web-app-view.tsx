@@ -76,11 +76,11 @@ function WebAppView({ close, closeLabel, ...webViewProps }: WebAppViewProps) {
     return <MemoActivityIndicator />;
   }, []);
 
-  const onNavigationStateChange = useCallback(({ title, canGoBack, canGoForward, url }) => {
-    setTitle(title);
-    setCanGoBack(canGoBack);
-    setCanGoForward(canGoForward);
-    setCurrentUrl(url);
+  const onNavigationStateChange = useCallback(({ newTitle, newCanGoBack, newCanGoForward, newUrl }) => {
+    setTitle(newTitle);
+    setCanGoBack(newCanGoBack);
+    setCanGoForward(newCanGoForward);
+    setCurrentUrl(newUrl);
   }, []);
 
   const mergedWebViewProps = {
