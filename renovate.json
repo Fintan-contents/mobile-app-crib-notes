@@ -2,6 +2,12 @@
   "extends": [
     "config:base"
   ],
+  "packageRules": [
+    {
+      "packageNames": ["@types/react", "@types/react-native"],
+      "groupName": "react monorepo"
+    }
+  ],
   "hostRules": [
     {
       "domainName": "github.com",
