@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
-    "@react-navigation/drawer": "5.8.2",
-    "@react-navigation/native": "5.5.0",
-    "@react-navigation/stack": "5.4.1",
+    "@react-navigation/drawer": "5.8.6",
+    "@react-navigation/native": "5.7.1",
+    "@react-navigation/stack": "5.7.1",
     "babel-plugin-dotenv-import": "2.1.0",
     "expo": "37.0.12",
     "expo-notifications": "0.4.0",
