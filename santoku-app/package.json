@@ -42,7 +42,7 @@
     "babel-preset-expo": "8.2.3",
     "eslint": "7.5.0",
     "jest-expo": "37.0.0",
-    "jest-junit": "11.0.1",
+    "jest-junit": "11.1.0",
     "prettier": "2.0.5",
     "typescript": "3.9.7"
   },
