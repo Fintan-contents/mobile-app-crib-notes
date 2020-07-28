@@ -19,7 +19,7 @@
     "expo": "37.0.12",
     "expo-notifications": "0.4.0",
     "expo-secure-store": "9.0.1",
-    "expo-updates": "0.2.11",
+    "expo-updates": "0.2.12",
     "native-base": "2.13.12",
     "react": "16.13.1",
     "react-dom": "16.13.1",
