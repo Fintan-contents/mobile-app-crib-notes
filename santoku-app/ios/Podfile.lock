@@ -31,7 +31,7 @@ PODS:
     - UMCore
     - UMPermissionsInterface
     - UMTaskManagerInterface
-  - EXNotifications (0.3.1):
+  - EXNotifications (0.4.0):
     - UMCore
     - UMPermissionsInterface
   - EXPermissions (9.0.1):
@@ -42,9 +42,6 @@ PODS:
   - EXSQLite (8.1.0):
     - UMCore
     - UMFileSystemInterface
-  - EXUpdates (0.2.7):
-    - React
-    - UMCore
   - EXWebBrowser (8.2.1):
     - UMCore
   - FBLazyVector (0.61.5)
@@ -231,9 +228,9 @@ PODS:
   - react-native-app-auth (5.1.2):
     - AppAuth (= 1.2.0)
     - React
-  - react-native-image-picker (2.3.1):
+  - react-native-image-picker (2.3.3):
     - React
-  - react-native-safe-area-context (3.0.2):
+  - react-native-safe-area-context (3.1.1):
     - React
   - react-native-webview (10.3.2):
     - React
@@ -274,11 +271,11 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.5)
   - RNCMaskedView (0.1.10):
     - React
-  - RNGestureHandler (1.6.1):
+  - RNGestureHandler (1.7.0):
     - React
-  - RNReanimated (1.7.1):
+  - RNReanimated (1.10.1):
     - React
-  - RNScreens (2.2.0):
+  - RNScreens (2.9.0):
     - React
   - UMAppLoader (1.2.0)
   - UMBarCodeScannerInterface (5.2.1)
@@ -314,7 +311,6 @@ DEPENDENCIES:
   - EXPermissions (from `../node_modules/react-native-unimodules/node_modules/expo-permissions/ios`)
   - EXSecureStore (from `../node_modules/expo-secure-store/ios`)
   - EXSQLite (from `../node_modules/expo-sqlite/ios`)
-  - EXUpdates (from `../node_modules/expo-updates/ios`)
   - EXWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
@@ -399,8 +395,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-secure-store/ios"
   EXSQLite:
     :path: "../node_modules/expo-sqlite/ios"
-  EXUpdates:
-    :path: "../node_modules/expo-updates/ios"
   EXWebBrowser:
     :path: "../node_modules/expo-web-browser/ios"
   FBLazyVector:
@@ -507,11 +501,10 @@ SPEC CHECKSUMS:
   EXKeepAwake: d045bc2cf1ad5a04f0323cc7c894b95b414042e0
   EXLinearGradient: 97d8095d1e4ad96f7893e010e564796ed8aeea42
   EXLocation: bbd487fd96a18a3ad9725389bbb94c4a5f78edf3
-  EXNotifications: 0b3ee1b4e63b3f7182f455e204fcb640e61af17e
+  EXNotifications: f0f89e5ba8ef5ad7568b9f1e65031a6f40fbd313
   EXPermissions: 80ac3acbdb145930079810fe5b08c022b3428aa8
   EXSecureStore: 908934a8b02301997fee88e3f4c05eea4e2a9ffb
   EXSQLite: 877ad6c8eb169353a2f94d5ad26510ffadd46a1f
-  EXUpdates: db34a484d109fc11fc6f48bb42c2cabf5a2eafc8
   EXWebBrowser: 5902f99ac5ac551e5c82ff46f13a337b323aa9ea
   FBLazyVector: aaeaf388755e4f29cd74acbc9e3b8da6d807c37f
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
@@ -527,8 +520,8 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-app-auth: 3a8af9e5f62aa3d7a9391d5aa89ab91aeb5a0062
-  react-native-image-picker: 6a850c41f57f0848d918c2a77aedd7aa272ffa30
-  react-native-safe-area-context: b11a34881faac509cad5578726c98161ad4d275c
+  react-native-image-picker: 3d3f85baabca60a00b75fb8facc1376db7bbdafa
+  react-native-safe-area-context: 344b969c45af3d8464d36e8dea264942992ef033
   react-native-webview: 679b6f400176e2ea8a785acf7ae16cf282e7d1eb
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
@@ -541,9 +534,9 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
-  RNReanimated: 4e102df74a9674fa943e05f97f3362b6e44d0b48
-  RNScreens: 812b79d384e2bea7eebc4ec981469160d4948fd5
+  RNGestureHandler: b6b359bb800ae399a9c8b27032bdbf7c18f08a08
+  RNReanimated: c2bb7438b57a3d987bb2e4e6e4bca94787e30b02
+  RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
   UMAppLoader: 61049c8d55590b74e9ae1d5429bf68d96b4a2528
   UMBarCodeScannerInterface: e5e4c87797d3d01214e25cd1618866caf5d4f17f
   UMCameraInterface: 415ac060034edecacdbbaa739c223e3f276e0056
@@ -561,4 +554,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: ee3a3b12528204705698b9f68d08d4a1483ffa72
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

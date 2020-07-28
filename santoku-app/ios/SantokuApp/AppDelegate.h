@@ -10,11 +10,9 @@
 #import <React/RCTBridgeDelegate.h>
 #import <UMCore/UMAppDelegateWrapper.h>
 
-#import <EXUpdates/EXUpdatesAppController.h>
-
 #import "RNAppAuthAuthorizationFlowManager.h"
 
-@interface AppDelegate : UMAppDelegateWrapper <RCTBridgeDelegate, EXUpdatesAppControllerDelegate, RNAppAuthAuthorizationFlowManager>
+@interface AppDelegate : UMAppDelegateWrapper <RCTBridgeDelegate, RNAppAuthAuthorizationFlowManager>
 
 @property (nonatomic, strong) UMModuleRegistryAdapter *moduleRegistryAdapter;
 @property (nonatomic, strong) UIWindow *window;
