@@ -31,7 +31,7 @@
     "react-native-screens": "2.9.0",
     "react-native-unimodules": "0.10.1",
     "react-native-web": "0.13.4",
-    "react-native-webview": "10.3.2"
+    "react-native-webview": "10.3.3"
   },
   "devDependencies": {
     "@babel/core": "7.10.5",
