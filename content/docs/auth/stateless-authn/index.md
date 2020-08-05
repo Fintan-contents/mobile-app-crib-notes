@@ -68,13 +68,6 @@ OIDC認証で利用されるトークン(JSON Web Token)は全部で3種類あ�
 * Android: KeyStoreに保存した鍵で暗号化したトークンを保管する
 * iOS: KeyChainにトークンを保管する
 
-WebViewを起点としてWebViewの中でOIDC認証をする時に、認証情報をネイティブ側と共有したい場合(※1)は、
-両方がアクセス可能なストレージにトークンを保管する必要があります。
-Cordovaなどのネイティブ機能にアクセスするようなツールを使って、AndroidならKeyStore、iOSならKeyChainにトークンを保管しましょう。
-
-(※1) [ハイブリッドアプリにおけるOIDCを使った認証アーキテクチャ > インアップブラウザを使うパターン])のことを指しています。
-
-
 
 ## 認証状態のライフサイクル管理
 
@@ -101,4 +94,71 @@ KeyChainは以下の特性があるため、要件によっては設定変更ま
 
 iCloud同期のタイミングは不定期のため、いつバックアップ/同期されるか分かりません。
 特に1度しか使えないような仕様のアクセストークンやリフレッシュトークンが同期されてしまい、複数台で同時に利用されると予期しない不整合が発生してしまう可能性があります。
+
+
+
+## OIDC認証のパターン
+
+モバイルアプリケーションにおいてOIDC認証は、どのようにログイン画面(認証情報を入力する画面)を表示するかによってパターンがいくつかあります。
+パターンごとの特徴を以下に示します。
+プロジェクトの要件に応じて選択できますが、一般的にIn-App Browserで表示することが多いようです。
+
+
+| 選択肢                |1アプリケーション内で認証が完結 | Cookie共有(Default Browserと) | UIのカスタム | 処理のカスタム | セキュリティポリシー |
+|--------------------|-------------|------------------|------|----------------------------|---------|
+| Default Browser           | ☓                | ○                          | ☓       | ☓       | ブラウザベンダー準拠 |
+| In-App Browser            | ○                | ○                          | △       | ☓       | ブラウザベンダー準拠 |
+| ~~WebView~~ **(※2)**   | ~~○~~            | ~~☓~~                      | ~~○~~   | ~~○~~   | ~~開発者次第~~  |
+
+
+前述しました通り、ブラウザには以下の3種類があり、OSごとに以下が用意されています。
+
+| ブラウザの種類 ＼ OS    | Android            | iOS                    |
+|-----------------|--------------------|------------------------|
+| Default Browser | Chrome             | Safari                 |
+| In-App Browser  | Chrome Custom Tabs | SFSafariViewController/SFAuthenticationSession/ASWebAuthenticationSession |
+| WebView         | WebView            | WKWebView              |
+
+{{<hint danger>}}
+**(※2)** OIDC認証の場合でブラウザを使う場合はWebViewを使わないでください。
+代わりにIn-App Browserを使うように、2016/8にGoogle Developersから[勧告](https://developers.googleblog.com/2016/08/modernizing-oauth-interactions-in-native-apps.html)が出ています。
+{{</hint >}}
+
+
+
+以下に詳細を示します。
+
+### 1. Default Browser
+
+![](./authn-pattern-defaultbrowser.png)
+
+#### 長所
+
+- ユーザーが普段使い慣れたアプリケーションなので操作しやすい
+- SNS認証などの場合、一度Default Browserでログインしておけば、改めてログインする必要がない
+- セキュリティポリシーがブラウザベンダー準拠
+
+
+#### 短所
+
+- 別アプリケーション(ChromeかSafari)なのでUIをカスタムできない
+- 別アプリケーション(ChromeかSafari)を開いて認証後に戻ってくる必要があるので、UXが多少低下する
+
+<br/>
+
+### 2. In-App Browser
+
+![](./authn-pattern-inappbrowser.png)
+
+#### 長所
+
+- アプリケーション内で認証が完結するのでUXが良い
+- Default BrowserとCookieを共有できるので、一度Default Browserでログインしておけば、改めてログインする必要がない
+- セキュリティポリシーがブラウザベンダー準拠
+
+#### 短所
+
+- UIはツールバーの色、閉じるボタンのアイコンなどしかカスタムできない
+
+
 

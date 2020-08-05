@@ -7,12 +7,12 @@ theme = "book"
 baseURL = "fintan-contents-draft/mobile-app-crib-notes"
 canonifyURLs = true
 relativeURLs = true
-# GitLabのJob artifactを確認する場合、ディレクトリアクセスだとindex.htmlを表示してくれない。
-# 仕方ないのでURLにディレクトリを使うのではなく、HTMLファイル名を使うようにしておく。
-# ただ、左上のロゴからホームへのリンクは `./index.html` ではなく `./` となってしまうので
-# Job artifactで確認している時は404となってしまう。
-# GitLab Pagesで表示している時は問題ない。
-uglyurls = true
+# GitLabのJob artifactを確認する場合、ディレクトリアクセスだとindex.htmlを表示してくれない
+# uglyurls = trueにすれば解消されるが、そうするとマークダウン中の画像パス指定がそれに合わせる必要があり
+# GitLabまたはGitHubでリポジトリを見た時に、またはローカル開発時にマークダウンプレビューで画像で表示されない
+# 以上のことからGitLabのJob artifactでの問題は目をつぶり、それ以外での扱いやすさを優先するため
+# ここではuglyurls = falseを設定する
+uglyurls = false
 
 enableEmoji = true
 
