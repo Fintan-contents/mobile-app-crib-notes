@@ -72,7 +72,7 @@ async function _deleteAuthState() {
   await SecureStore.deleteItemAsync('authState-accessToken');
 }
 
-const useStatelessAuthState = () => {
+export const useStatelessAuthState = () => {
   const [authState, setAuthState] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [hasJustSignOut, setHasJustSignOut] = useState<boolean>(false);
@@ -164,5 +164,3 @@ const useStatelessAuthState = () => {
     hasJustSignOut,
   };
 };
-
-export default useStatelessAuthState;

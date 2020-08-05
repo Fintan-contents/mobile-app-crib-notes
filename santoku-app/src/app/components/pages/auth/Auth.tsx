@@ -27,7 +27,7 @@ const menu = [
   },
 ];
 
-export default function Auth() {
+const Auth: React.FC = () => {
   const { navigate } = useNavigation();
   return (
     <Container>
@@ -49,7 +49,10 @@ export default function Auth() {
       </View>
     </Container>
   );
-}
+};
+
+export default Auth;
+
 const styles = StyleSheet.create({
   view: {
     margin: 10,

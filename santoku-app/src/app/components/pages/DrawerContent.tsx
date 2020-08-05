@@ -5,13 +5,12 @@ import { Container, Content, ListItem } from 'native-base';
 // 幅と高さを取得する
 const { width: DEVICE_WIDTH } = Dimensions.get('window');
 
-type Menu = {
+type MenuProps = {
   to: string;
   navigation: any;
-  children: React.ReactNode;
 };
 
-const MenuItem = (props: Menu) => {
+const MenuItem: React.FC<MenuProps> = (props) => {
   return (
     <ListItem
       onPress={() => {
@@ -24,7 +23,12 @@ const MenuItem = (props: Menu) => {
   );
 };
 
-export default function DrawerContent(props: any) {
+type Props = {
+  to: string;
+  navigation: any;
+};
+
+const DrawerContent: React.FC<Props> = (props) => {
   return (
     <Container style={styles.containerBackgroundStyle}>
       <View style={styles.containerHeaderStyle}>
@@ -49,7 +53,10 @@ export default function DrawerContent(props: any) {
       </Content>
     </Container>
   );
-}
+};
+
+export default DrawerContent;
+
 const styles = StyleSheet.create({
   containerHeaderStyle: {
     height: 160,

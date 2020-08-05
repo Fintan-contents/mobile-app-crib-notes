@@ -11,7 +11,7 @@ import StatelessAuth from './auth/StatelessAuth';
 import Top from './top/Top';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 
-const TopScreen = () => {
+const TopScreen: React.FC = () => {
   const Stack = createStackNavigator();
   const { dispatch } = useNavigation();
   return (
@@ -34,7 +34,7 @@ const TopScreen = () => {
   );
 };
 
-const NativeWithWebViewScreen = () => {
+const NativeWithWebViewScreen: React.FC = () => {
   const Stack = createStackNavigator();
   const { dispatch } = useNavigation();
   return (
@@ -71,7 +71,7 @@ const NativeWithWebViewScreen = () => {
   );
 };
 
-const AuthScreen = () => {
+const AuthScreen: React.FC = () => {
   const Stack = createStackNavigator();
   const { dispatch } = useNavigation();
   return (
@@ -109,7 +109,8 @@ const AuthScreen = () => {
 };
 
 const Drawer = createDrawerNavigator();
-export default function Navigator() {
+
+const Navigator: React.FC = () => {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="TopDrawer" component={TopScreen} />
@@ -117,7 +118,10 @@ export default function Navigator() {
       <Drawer.Screen name="AuthDrawer" component={AuthScreen} />
     </Drawer.Navigator>
   );
-}
+};
+
+export default Navigator;
+
 const styles = StyleSheet.create({
   icon: {
     color: 'black',

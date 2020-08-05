@@ -1,79 +1,63 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
-import { Container, Text, Spinner, Button, Card } from 'native-base';
-import useAuthState from '../../../hooks/stateless-auth-hooks';
+import { ScrollView } from 'react-native';
+import { Spinner } from 'native-base';
+import { useStatelessAuthState } from '../../../hooks/auth';
+import { Container, Title, Text, TextButton, Section, Description } from '../../basics';
 
-export default function StatelessAuth() {
-  const { authState, loading, signIn, signOut, refresh, hasJustSignOut } = useAuthState();
+const StatelessAuth: React.FC = () => {
+  const { authState, loading, signIn, signOut, refresh, hasJustSignOut } = useStatelessAuthState();
 
   return (
     <Container>
       {loading ? (
         <Spinner />
       ) : (
-        <ScrollView style={styles.view}>
+        <ScrollView>
           {authState ? (
             <>
-              <Button full onPress={signOut}>
-                <Text>サインアウト</Text>
-              </Button>
-              <Text>{'\n'}</Text>
-              <Button full onPress={refresh}>
-                <Text>トークンをリフレッシュ</Text>
-              </Button>
-              <Text>{'\n\n'}</Text>
-
-              <Text style={styles.title}>accessTokenExpirationDate{'\n'}</Text>
-              <Text>
-                {authState.accessTokenExpirationDate}
-                {'\n'}
-              </Text>
-              <Text style={styles.title}>idToken{'\n'}</Text>
-              <Text>
-                {authState.idToken}
-                {'\n'}
-              </Text>
-              <Text style={styles.title}>accessToken{'\n'}</Text>
-              <Text>
-                {authState.accessToken}
-                {'\n'}
-              </Text>
-              <Text style={styles.title}>refreshToken{'\n'}</Text>
-              <Text>
-                {authState.refreshToken}
-                {'\n'}
-              </Text>
+              <Description>
+                認証が成功して、各種トークンが取得できました。{'\n\n'}
+                取得結果を以下に示します。AWS CognitoのOIDC認証ではIDトークン、アクセストークン、リフレッシュトークンの3つが取得できます。{'\n'}
+                ここでは便宜上取得結果を画面に表示していますが、
+                通常のアプリであれば、ユーザーまたは第三者の目に触れることのないようにセキュアなストレージに保管して管理してください。
+                このアプリでは、AndroidではKeyStore、iOSではKeyChainに保管しています。
+              </Description>
+              <Section>
+                <TextButton onPress={signOut} value={'サインアウト'} />
+                <TextButton onPress={refresh} value={'トークンをリフレッシュ'} />
+              </Section>
+              <Section>
+                <Title>accessTokenExpirationDate</Title>
+                <Text>{authState.accessTokenExpirationDate}</Text>
+                <Title>idToken</Title>
+                <Text>{authState.idToken}</Text>
+                <Title>accessToken</Title>
+                <Text>{authState.accessToken}</Text>
+                <Title>refreshToken</Title>
+                <Text>{authState.refreshToken}</Text>
+              </Section>
             </>
           ) : (
             <>
-              <Button full onPress={signIn}>
-                <Text>サインイン</Text>
-              </Button>
+              <Description>
+                AWS Cognitoを使ったOIDC認証の例を示します。 {'\n\n'}
+                以下のボタンをタップするとAWS Cognitoの認証画面に遷移して、認証を求められます。 IDとパスワードはそれぞれ「guest」「P@ssw0rd」
+                を入力してください。
+              </Description>
               {hasJustSignOut && (
-                <Card>
-                  <Text style={styles.description}>
-                    サインアウトするとトークンは破棄されますが、OpenID Providerの認証状態は一定期間残ります。
-                    そのためサインアウト後に再度サインインする場合は、サインイン画面でIDとパスワードの入力が省略され、
-                    すぐにアプリに戻ってきてサインインが完了します。
-                  </Text>
-                </Card>
+                <Description>
+                  ※サインアウトするとトークンは破棄されますが、OpenID Providerの認証状態は一定期間残ります。
+                  そのためサインアウト後に再度サインインする場合は、サインイン画面でIDとパスワードの入力が省略され、
+                  すぐにアプリに戻ってきてサインインが完了します。
+                </Description>
               )}
+              <TextButton onPress={signIn} value={'サインイン'} />
             </>
           )}
         </ScrollView>
       )}
     </Container>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  title: {
-    fontWeight: 'bold',
-  },
-  view: {
-    margin: 10,
-  },
-  description: {
-    padding: 20,
-  },
-});
+export default StatelessAuth;

@@ -11,7 +11,7 @@ const menu = [
   },
 ];
 
-export default function NativeWithWebView() {
+const NativeWithWebView: React.FC = () => {
   const { navigate } = useNavigation();
   return (
     <Container>
@@ -33,7 +33,10 @@ export default function NativeWithWebView() {
       </View>
     </Container>
   );
-}
+};
+
+export default NativeWithWebView;
+
 const styles = StyleSheet.create({
   view: {
     margin: 10,
