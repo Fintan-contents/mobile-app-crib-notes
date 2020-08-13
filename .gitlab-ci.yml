@@ -55,9 +55,9 @@ prepare-tools:
         chmod +x ${REVIEWDOG}
       fi
     # ドキュメント用のNode.jsツールをインストールします
-    - npm install --cache .npm --prefer-offline --no-fund --no-audit
+    - npm ci --cache .npm --prefer-offline --no-fund --no-audit
     # santoku-appの依存ライブラリをインストールします
-    - npm install --cache .npm --prefer-offline --no-fund --no-audit --prefix santoku-app
+    - npm ci --cache .npm --prefer-offline --no-fund --no-audit --prefix santoku-app
 
 lint-documents:
   stage: test
