@@ -1,11 +1,20 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { Spinner } from 'native-base';
-import { useStatelessAuthState } from '../../../hooks/auth';
-import { Container, Title, Text, TextButton, Section, Description } from '../../basics';
+import { useOidcAuthCodeFlowAuthentication } from '../../../hooks/auth';
+import { Container, Title, Text, TextButton, Section, Description, translateToViewData } from '../../basics';
+
+class AuthnStateViewData {
+  accessTokenExpirationDate?: string;
+  accessToken?: string;
+  idToken?: string;
+  refreshToken?: string;
+}
 
 const StatelessAuth: React.FC = () => {
-  const { authState, loading, signIn, signOut, refresh, hasJustSignOut } = useStatelessAuthState();
+  const { signIn, signOut, refresh, authState, loading, hasJustSignOut } = useOidcAuthCodeFlowAuthentication();
+
+  const authnStateViewData = translateToViewData<AuthnStateViewData>(authState);
 
   return (
     <Container>
@@ -13,7 +22,7 @@ const StatelessAuth: React.FC = () => {
         <Spinner />
       ) : (
         <ScrollView>
-          {authState ? (
+          {authState.isAuthenticated() ? (
             <>
               <Description>
                 認証が成功して、各種トークンが取得できました。{'\n\n'}
@@ -28,13 +37,13 @@ const StatelessAuth: React.FC = () => {
               </Section>
               <Section>
                 <Title>accessTokenExpirationDate</Title>
-                <Text>{authState.accessTokenExpirationDate}</Text>
+                <Text>{authnStateViewData.accessTokenExpirationDate}</Text>
                 <Title>idToken</Title>
-                <Text>{authState.idToken}</Text>
+                <Text>{authnStateViewData.idToken}</Text>
                 <Title>accessToken</Title>
-                <Text>{authState.accessToken}</Text>
+                <Text>{authnStateViewData.accessToken}</Text>
                 <Title>refreshToken</Title>
-                <Text>{authState.refreshToken}</Text>
+                <Text>{authnStateViewData.refreshToken}</Text>
               </Section>
             </>
           ) : (

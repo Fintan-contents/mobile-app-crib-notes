@@ -1,4 +1,4 @@
-import { AuthState, useStatelessAuthState } from './useStatelessAuthState';
+import { useOidcAuthCodeFlowAuthentication, AuthenticationState, OidcAuthenticated } from './useOidcAuthCodeFlowAuthentication';
 
-export type { AuthState };
-export { useStatelessAuthState };
+export type { AuthenticationState };
+export { useOidcAuthCodeFlowAuthentication, OidcAuthenticated };

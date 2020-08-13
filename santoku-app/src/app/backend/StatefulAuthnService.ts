@@ -4,7 +4,34 @@ import type { Cookie } from '@react-native-community/cookies';
 
 import axios from 'axios';
 import { STATEFUL_AUTH_BASE_URL, STATEFUL_AUTH_DOMAIN } from '@env';
+
 const SESSION_ID_KEY = 'NABLARCH_SID';
+
+export interface StatefulAuthnService {
+  login: LoginApiAdapter;
+  logout: LogoutApiAdapter;
+  sessionId: SessionId;
+  isAuthenticated: boolean;
+}
+
+export interface LoginCredential {
+  userId: string;
+  password: string;
+}
+
+export interface LoginApiAdapter {
+  (credential: LoginCredential): Promise<void>;
+}
+
+export interface LogoutApiAdapter {
+  (): Promise<void>;
+}
+
+export type SessionId = Cookie | null;
+
+interface StatefulAuthnServiceProvider {
+  (): StatefulAuthnService;
+}
 
 async function clearSessionId(): Promise<void> {
   // CookieManager.clearByNameはiOSでしか使えない
@@ -16,7 +43,7 @@ async function getSessionId(): Promise<Cookie> {
   return cookies[SESSION_ID_KEY];
 }
 
-async function callLoginApi(userId: string, password: string): Promise<void> {
+async function callLoginApi({ userId, password }: LoginCredential): Promise<void> {
   try {
     await axios.post(
       `${STATEFUL_AUTH_BASE_URL}/login`,
@@ -34,6 +61,7 @@ async function callLoginApi(userId: string, password: string): Promise<void> {
     throw e;
   }
 }
+
 async function callLogoutApi(): Promise<void> {
   try {
     await axios({
@@ -50,9 +78,9 @@ async function callLogoutApi(): Promise<void> {
   }
 }
 
-const useStatefulAuthnService = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [sessionId, setSessionId] = useState<Cookie | null>(null);
+const useStatefulAuthnService: StatefulAuthnServiceProvider = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [sessionId, setSessionId] = useState<SessionId>(null);
 
   const _clearSessionId = useCallback(async () => {
     await clearSessionId();
@@ -60,14 +88,14 @@ const useStatefulAuthnService = () => {
     setIsAuthenticated(false);
   }, []);
 
-  const login = useCallback(async (userId: string, password: string) => {
-    await callLoginApi(userId, password);
+  const login = useCallback<LoginApiAdapter>(async (credential: LoginCredential) => {
+    await callLoginApi(credential);
     const newSessionId = await getSessionId();
     setSessionId(newSessionId);
     setIsAuthenticated(true);
   }, []);
 
-  const logout = useCallback(async () => {
+  const logout = useCallback<LogoutApiAdapter>(async () => {
     await callLogoutApi();
     setIsAuthenticated(false);
     await _clearSessionId();

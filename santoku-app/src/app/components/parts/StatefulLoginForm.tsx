@@ -4,6 +4,7 @@ import { Form, Item, Input, Label, Button, Text } from 'native-base';
 import { Container, Section, Title, Description } from '../basics';
 import { useValidation, CommonErrorKey } from '../../hooks/validation';
 import type { Errors, ErrorsKey, Values } from '../../hooks/validation';
+import { LoginApiAdapter } from '../../backend/StatefulAuthnService';
 
 enum FormData {
   USER_ID = 'userId',
@@ -48,7 +49,7 @@ const initialValues: Values<FormData> = {
 };
 
 type Props = {
-  login: (userId: string, password: string) => Promise<void>;
+  login: LoginApiAdapter;
 };
 
 const StatefulLoginForm: React.FC<Props> = ({ login }) => {
@@ -65,7 +66,7 @@ const StatefulLoginForm: React.FC<Props> = ({ login }) => {
 
   const onSubmit = useCallback(async () => {
     try {
-      await login(values.userId, values.password);
+      await login(values);
     } catch (e) {
       if (e.response.status === 400) {
         setCommonErrors(['ユーザーIDまたはパスワードが正しくありません。']);
@@ -74,7 +75,7 @@ const StatefulLoginForm: React.FC<Props> = ({ login }) => {
       }
       clearStatus();
     }
-  }, [clearStatus, login, setCommonErrors, values.password, values.userId]);
+  }, [clearStatus, login, setCommonErrors, values]);
 
   return (
     <Container>
@@ -94,7 +95,12 @@ const StatefulLoginForm: React.FC<Props> = ({ login }) => {
               {...inputProps(USER_ID)}
               getRef={setUserIdRef}
               onSubmitEditing={() => {
-                passwordRef._root.focus();
+                if (passwordRef) {
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore: maybe NativeBase bug? https://github.com/GeekyAnts/NativeBase/issues/1803
+                  passwordRef._root.focus();
+                  // TODO: passwordRefがTextInputなら、`_root`を経由しないで直接`focus`を呼べるのでは、、、？型定義が間違えている？
+                }
               }}
               returnKeyType="next"
             />
