@@ -1,19 +1,19 @@
 import * as AppAuth from 'react-native-app-auth';
-import { COGNITO_CLIENT_ID, COGNITO_DOMAIN_URL, COGNITO_REDIRECT_URL } from '@env';
 import { AuthorizeResult, RefreshResult } from 'react-native-app-auth';
+import { AppConfig } from '../../../AppConfig';
 import { AuthenticationState, NotAuthenticated } from '../AuthenticationState';
 import { OidcAuthenticated, OidcRefreshableAuthenticated } from './OidcAuthenticationState';
 
 // TODO: Cognito用のクラスを作るとかしたほうがよさそう。
 const config: AppAuth.AuthConfiguration = {
   scopes: ['openid', 'profile'],
-  clientId: COGNITO_CLIENT_ID,
-  redirectUrl: COGNITO_REDIRECT_URL,
+  clientId: AppConfig.COGNITO_CLIENT_ID,
+  redirectUrl: AppConfig.COGNITO_REDIRECT_URL,
   usePKCE: true,
   serviceConfiguration: {
-    authorizationEndpoint: `${COGNITO_DOMAIN_URL}/oauth2/authorize`,
-    tokenEndpoint: `${COGNITO_DOMAIN_URL}/oauth2/token`,
-    revocationEndpoint: `${COGNITO_DOMAIN_URL}/oauth2/revoke`,
+    authorizationEndpoint: `${AppConfig.COGNITO_DOMAIN_URL}/oauth2/authorize`,
+    tokenEndpoint: `${AppConfig.COGNITO_DOMAIN_URL}/oauth2/token`,
+    revocationEndpoint: `${AppConfig.COGNITO_DOMAIN_URL}/oauth2/revoke`,
   },
 };
 

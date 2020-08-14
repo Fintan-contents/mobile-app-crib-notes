@@ -37,7 +37,6 @@ target 'SantokuApp' do
   pod 'Folly', :podspec => "#{rnPrefix}/third-party-podspecs/Folly.podspec"
 
   # Other native modules
-  pod 'react-native-cookies', :path => '../node_modules/@react-native-community/cookies'
 
   # Automatically detect installed unimodules
   use_unimodules!

@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import type { Cookie } from '@react-native-community/cookies';
-import { WEB_APP_URI } from '@env';
+import { AppConfig } from '../../../AppConfig';
 import WebAppView from '../../parts/WebAppView';
 import StatefulLogin from '../../parts/StatefulLoginForm';
-import { Container, Title, Text, Description, TextButton } from '../../basics';
+import { Container, Description, Text, TextButton, Title } from '../../basics';
 import { useStatefulAuthnService } from '../../../backend/StatefulAuthnService';
 
 const StatefulAuthIntegration: React.FC = () => {
@@ -52,7 +52,7 @@ const StatefulAuthIntegration: React.FC = () => {
       close={close}
       closeLabel="閉じる"
       source={{
-        uri: WEB_APP_URI,
+        uri: AppConfig.WEB_APP_URI,
         headers: {
           Cookie: `${sessionIdForWebView.name}=${sessionIdForWebView.value}`,
         },

@@ -4,14 +4,9 @@ module.exports = function (api) {
     presets: ['babel-preset-expo'],
     plugins: [
       [
-        'dotenv-import',
+        'transform-inline-environment-variables',
         {
-          moduleName: '@env',
-          path: '.env',
-          blacklist: null,
-          whitelist: null,
-          safe: false,
-          allowUndefined: false,
+          include: ['REACT_NATIVE_SANTOKU_ENCRYPTION_SECRET'],
         },
       ],
     ],

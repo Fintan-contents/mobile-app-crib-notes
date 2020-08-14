@@ -1,9 +1,9 @@
-import { useState, useCallback } from 'react';
-import CookieManager from '@react-native-community/cookies';
+import { useCallback, useState } from 'react';
 import type { Cookie } from '@react-native-community/cookies';
+import CookieManager from '@react-native-community/cookies';
 
 import axios from 'axios';
-import { STATEFUL_AUTH_BASE_URL, STATEFUL_AUTH_DOMAIN } from '@env';
+import { AppConfig } from '../AppConfig';
 
 const SESSION_ID_KEY = 'NABLARCH_SID';
 
@@ -39,14 +39,14 @@ async function clearSessionId(): Promise<void> {
 }
 
 async function getSessionId(): Promise<Cookie> {
-  const cookies = await CookieManager.get(STATEFUL_AUTH_DOMAIN);
+  const cookies = await CookieManager.get(AppConfig.STATEFUL_AUTH_DOMAIN);
   return cookies[SESSION_ID_KEY];
 }
 
 async function callLoginApi({ userId, password }: LoginCredential): Promise<void> {
   try {
     await axios.post(
-      `${STATEFUL_AUTH_BASE_URL}/login`,
+      `${AppConfig.STATEFUL_AUTH_BASE_URL}/login`,
       JSON.stringify({
         loginId: userId,
         userPassword: password,
@@ -65,7 +65,7 @@ async function callLoginApi({ userId, password }: LoginCredential): Promise<void
 async function callLogoutApi(): Promise<void> {
   try {
     await axios({
-      baseURL: STATEFUL_AUTH_BASE_URL,
+      baseURL: AppConfig.STATEFUL_AUTH_BASE_URL,
       url: '/logout',
       method: 'post',
       headers: {

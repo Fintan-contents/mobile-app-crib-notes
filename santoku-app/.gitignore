@@ -76,3 +76,7 @@ coverage/
 .project
 .cproject
 .settings/
+
+
+### Local environmental variables
+.secret
