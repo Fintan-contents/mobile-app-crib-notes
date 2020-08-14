@@ -46,6 +46,7 @@ function useOidcAuthCodeFlowAuthentication(): OidcAuthCodeFlowAuthenticationHook
     }
     setAuthnState(NotAuthenticated);
     setHasJustSignOut(true);
+    setLoading(false);
   }, [authnState]);
 
   const refresh = useCallback(async () => {

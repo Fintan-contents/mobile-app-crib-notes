@@ -2,11 +2,13 @@ interface AuthenticationState {
   isAuthenticated(): boolean;
 }
 
-const NotAuthenticated: AuthenticationState = Object.freeze({
+class NotAuthenticatedState implements Readonly<AuthenticationState> {
   isAuthenticated() {
     return false;
-  },
-});
+  }
+}
+
+const NotAuthenticated = Object.freeze(new NotAuthenticatedState());
 
 export type { AuthenticationState };
 export { NotAuthenticated };
