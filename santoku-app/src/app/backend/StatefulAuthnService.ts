@@ -4,6 +4,7 @@ import CookieManager from '@react-native-community/cookies';
 
 import axios from 'axios';
 import { AppConfig } from '../AppConfig';
+import { log } from '../../framework/logging';
 
 const SESSION_ID_KEY = 'NABLARCH_SID';
 
@@ -74,7 +75,7 @@ async function callLogoutApi(): Promise<void> {
     });
   } catch (e) {
     // TODO エラー処理
-    console.error(e);
+    log.error(() => 'Exception occurred while calling login api. exception: %o', e);
   }
 }
 

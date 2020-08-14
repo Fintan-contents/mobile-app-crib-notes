@@ -2,6 +2,7 @@ import { AuthenticationState, NotAuthenticated } from '../AuthenticationState';
 import { SecureStorageAdapter } from './SecureStorageAdapter';
 import { OidcAuthCodeFlowAdapter } from './OidcAuthCodeFlowAdapter';
 import { OidcAuthenticated } from './OidcAuthenticationState';
+import { log } from '../../../../framework/logging';
 
 const _api = new OidcAuthCodeFlowAdapter();
 const _storage = new SecureStorageAdapter();
@@ -20,7 +21,7 @@ class OidcAuthCodeFlowAuthenticationUseCase {
       return s;
     } catch (e) {
       // TODO エラー処理
-      console.log(e);
+      log.error(() => 'Exception occurred while signing in. exception: %o', e);
     }
     return NotAuthenticated;
   }
@@ -31,7 +32,7 @@ class OidcAuthCodeFlowAuthenticationUseCase {
       await this.storage.delete();
     } catch (e) {
       // TODO エラー処理
-      console.log(e);
+      log.error(() => 'Exception occurred while signing out. exception: %o', e);
     }
   }
 
@@ -44,7 +45,7 @@ class OidcAuthCodeFlowAuthenticationUseCase {
       return s;
     } catch (e) {
       // TODO エラー処理
-      console.log(e, authnState);
+      log.error(() => 'Exception occurred while refreshing OIDC tokens. state: %o, exception: %o', authnState, e);
     }
     return NotAuthenticated;
   }
@@ -54,7 +55,7 @@ class OidcAuthCodeFlowAuthenticationUseCase {
       return this.storage.load();
     } catch (e) {
       // TODO エラー処理
-      console.log(e);
+      log.error(() => 'Exception occurred while loading OIDC tokens from storage. exception: %o', e);
     }
     return NotAuthenticated;
   }

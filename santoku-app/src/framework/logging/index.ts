@@ -5,7 +5,7 @@ function createLogger(options: LoggerOptions): Logger {
   return new SimpleConsoleLogger({ ...DEFAULT_LOGGER_OPTIONS, ...options });
 }
 
-const logger = createLogger(DEFAULT_LOGGER_OPTIONS);
+const log = createLogger(DEFAULT_LOGGER_OPTIONS);
 
 export type { Logger, LoggerOptions };
-export { logger, createLogger };
+export { log, createLogger };
