@@ -1,3 +1,11 @@
-import log from './Logger';
+import { DEFAULT_LOGGER_OPTIONS, Logger, LoggerOptions } from './Logger';
+import { SimpleConsoleLogger } from './SimpleConsoleLogger';
 
-export { log };
+function createLogger(options: LoggerOptions): Logger {
+  return new SimpleConsoleLogger({ ...DEFAULT_LOGGER_OPTIONS, ...options });
+}
+
+const logger = createLogger(DEFAULT_LOGGER_OPTIONS);
+
+export type { Logger, LoggerOptions };
+export { logger, createLogger };
