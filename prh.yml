@@ -11,3 +11,7 @@ rules:
     prh: 公式が "Differences between electron-updater and built-in autoUpdater" って書いている
   - expected: Docker
     patterns: docker
+  - expected: ユーザ
+    patterns: ユーザー
+  - expected: サーバ
+    patterns: サーバー

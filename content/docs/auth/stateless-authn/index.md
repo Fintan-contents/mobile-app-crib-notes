@@ -1,164 +1,120 @@
 ---
 title: ステートレスな認証
+weight: 300
 ---
 
+## OpenID Connect (OIDC)
 
-## Open ID Connect(OIDC)を使った認証フロー
+ステートレスな認証においてOpenID Connect (OIDC)は主流な認証方式の１つとなっています。
 
-PKCEでトークン取得するフローを簡単に説明します。
-正確な仕様は[OpenID ファウンデーション・ジャパン](https://www.openid.or.jp/document/index.html)のサイトを御覧ください。OpenID関連技術仕様の日本語訳や、プレゼンテーション資料、その他各種文書を公開されています。
+新しいサービスを使う時に名前やメールアドレスを登録せずにSNSのIDでログインできるのが最近のトレンドですが、それらはOpenId Connectを使って実現されています。
 
-以下3者でやり取りします。
-
-- End User
-  - Relying Partyのサービスを利用する人。
-- OpenID Provider
-  - ユーザー認証の機能があり、Relying Partyから要求されたアイデンティティ情報を提供するエンドポイントを持つ。
-- Relying Party
-  - OpenID Providerにトークンとアイデンティティ情報を要求するサービス。
+以下では、OpenID Connectによる認証について簡単に紹介しています。
 
 
-下記図に示すようなフローで、Relying Partyはトークン(アクセストークンとIDトークン、場合によってはリフレッシュトークンも含む)を保管します。最終的には、Relying Partyはこれらのトークンをリクエストに付与することで、認証が必要なエンドポイントにアクセスできます。
+### OpenID Connectにおける認証フロー
 
-![](./oidc-flow.drawio.png)
+OpenID Connectでは認証のためのフローがいくつか定義されています。[ログイン画面の表示パターン]({{< relref "../how-to-display-login-page/index.md" >}})で紹介しているように、モバイルアプリで主に利用されるOIDCの認証フローは次の３つです。
 
+1. 認可コードフロー + PKCE
+2. リソースオーナー・パスワード・クレデンシャルズフロー
+3. ハイブリッドフロー
 
-OIDC認証フローで、もう1つ重要なのが2015年9月に[RFC 7636](https://tools.ietf.org/html/rfc7636)として公開された仕様があります。こちらは、認可コード横取り攻撃(authorization code interception attack)への対策として策定されたものです。詳細は以下の記事を御覧ください。
-- [PKCE: 認可コード横取り攻撃対策のために OAuth サーバーとクライアントが実装すべきこと - Qiita](https://qiita.com/TakahikoKawasaki/items/00f333c72ed96c4da659)
+ハイブリッドフロー以外のフローはOAuth 2.0で定義されているもので、以下の文章中でもOAuth 2.0として言及している部分があります。
 
-### モバイルアプリケーションの役割
+なお、これらのパターンの中で最も安全なのはハイブリッドフローですが、その分フローも複雑です。また、モバイルアプリのユーザ操作という観点では「認可コードフロー＋PKCE」と変わらないのでここでは割愛しています。ハイブリッドフローの仕様については[Authentication using the Hybrid Flow - OpenID Connect Core 1.0](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#HybridFlowAuth)を参照してください。
 
-上記で説明したOIDC認証のフローの中のRelying Partyが、モバイルアプリケーションに該当します。
-そのためモバイルアプリケーションは以下のような役割を担います。
-- OIDC認証の開始
-  - エンドユーザーの指示に従って、OIDC Providerの認可エンドポイントにリダイレクトでリクエストを送信する
-- トークン取得・保管
-  - OIDC Providerから返却される認可コードを受け取り、Open Providerのトークンエンドポイントに認可コードを付与したトークン取得リクエストを送る
-  - レスポンスからトークンを取得し、モバイルアプリケーションのストレージに保管する
-- 認証が必要なエンドポイントへのアクセス
-  - トークンをリクエストに付与して認証が必要なエンドポイントにアクセスする
+{{< hint warning >}}
+ここでの紹介はごく簡単なものにとどめており、不正確な表現を含む可能性があります。正確な仕様についてはRFCなどで確認するようにしてください。[OpenID ファウンデーション・ジャパン](https://www.openid.or.jp/document/index.html)では、OpenID関連RFCの日本語訳やプレゼンテーション資料、その他各種文書が公開されています。
+
+{{< /hint >}}
 
 
-## トークン
+### OpenID Connectのトークンの種類
 
-OIDC認証を使う場合、モバイルアプリケーションでトークンを管理する必要があります。
-ここではトークンの種類と役割、保管方法、ライフサイクル管理などを示します。
-
-
-### トークンの種類
-OIDC認証で利用されるトークン(JSON Web Token)は全部で3種類あります。
+OpenID Connectで利用されるトークン(JSON Web Token)は全部で3種類あります。
 
 - IDトークン
-  - ユーザーの属性が含まれています
+  - ユーザの属性が含まれています
   - 通常IDトークンには短い有効期限が設定されます
-  - 認証に使用されます。リソースサーバーでイシュアーの管理するID情報が必要な場合に使用されます
+  - 認証に使用されます。リソースサーバでイシュアーの管理するID情報が必要な場合に使用されます
 - アクセストークン
   - リソースアクセスに必要な情報が含まれています
   - 通常アクセストークンには短い有効期限が設定されます
-  - 認可に使用されます。リソースサーバーへのアクセスコントロールを目的として使用されます
+  - 認可に使用されます。リソースサーバへのアクセスコントロールを目的として使用されます
 - リフレッシュトークン
   - 新しいIDトークンもしくはアクセストークンを発行するために必要な情報が含まれています
   - IDトークンもしくはアクセストークンの期限が切れた後に、再発行するために使用します
   - リフレッシュトークンには比較的長めの有効期限が設定されます
 
 
-### トークンの保管方法
+### 認可コードフロー (with PKCE)
 
-プラットフォームに応じてセキュアな方法でトークンを保管しましょう。
-* Android: KeyStoreに保存した鍵で暗号化したトークンを保管する
-* iOS: KeyChainにトークンを保管する
+[認可コードフロー](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth)では、以下の３者でやり取りします。
 
-
-## 認証状態のライフサイクル管理
-
-AndroidならKeyStore、iOSならKeyChainに保存することを前提に、認証状態のライフサイクル管理について説明します。
-
-### KeyStore
-
-KeyStoreに保存した鍵は、以下のような操作で消えてしまいます。鍵が取得できない場合はユーザに再度ログイン操作を要求する必要があります。
-* アプリのアンインストール
-* [ユーザが認証された状態でしか鍵を利用できないように設定している場合](https://developer.android.com/training/articles/keystore?hl=ja#UserAuthentication)は、次の場合
-  * セキュアロック画面が無効化された場合や強制的にリセットされた場合
-  * 新しい指紋が登録された場合やすべての指紋の登録が抹消された場合
-
-### KeyChain
-
-KeyChainは以下の特性があるため、要件によっては設定変更または個別にロジックの実装が必要です。
-
-#### 1. アプリをアンインストールしても消えない
-
-特に何もしない場合は、再インストール時に認証状態が引き継がれることになります。
-もしインストール後に必ず認証するような仕様の場合は、UserDefaultsにフラグを設けてログイン状態を管理などの実装が必要になります。
-
-#### 2. iCloud同期により同じAppleIDでログインしている別の端末に同期される
-
-iCloud同期のタイミングは不定期のため、いつバックアップ/同期されるか分かりません。
-特に1度しか使えないような仕様のアクセストークンやリフレッシュトークンが同期されてしまい、複数台で同時に利用されると予期しない不整合が発生してしまう可能性があります。
+- End User
+  - Relying Partyのサービスを利用する人
+- OpenID Provider
+  - ユーザ認証の機能があり、Relying Partyから要求されたアイデンティティ情報を提供するエンドポイントを持つ
+- Relying Party
+  - OpenID Providerにトークンとアイデンティティ情報を要求するサービス
 
 
+下記図に示すようなフローで、Relying Partyはトークン（アクセストークンとIDトークン、場合によってはリフレッシュトークンも含む）を保管します。Relying Partyはこれらのトークンをログイン資格情報としてリクエストに付与することで、認証が必要なエンドポイントにアクセスできます。
 
-## OIDC認証のパターン
-
-モバイルアプリケーションにおいてOIDC認証は、どのようにログイン画面(認証情報を入力する画面)を表示するかによってパターンがいくつかあります。
-パターンごとの特徴を以下に示します。
-プロジェクトの要件に応じて選択できますが、一般的にIn-App Browserで表示することが多いようです。
+![](oidc-authorization-code-flow.drawio.png)
 
 
-| 選択肢                |1アプリケーション内で認証が完結 | Cookie共有(Default Browserと) | UIのカスタム | 処理のカスタム | セキュリティポリシー |
-|--------------------|-------------|------------------|------|----------------------------|---------|
-| Default Browser           | ☓                | ○                          | ☓       | ☓       | ブラウザベンダー準拠 |
-| In-App Browser            | ○                | ○                          | △       | ☓       | ブラウザベンダー準拠 |
-| ~~WebView~~ **(※2)**   | ~~○~~            | ~~☓~~                      | ~~○~~   | ~~○~~   | ~~開発者次第~~  |
+モバイルアプリで認可コードフローを使う上ではもう1つ重要な仕様として、[PKCE](https://tools.ietf.org/html/rfc7636)と呼ばれる仕様があります。
+この仕様は、認可コード横取り攻撃(authorization code interception attack)への対策として策定されたものです。以下の記事で、わかりやすく解説されています。
+- [PKCE: 認可コード横取り攻撃対策のために OAuth サーバーとクライアントが実装すべきこと - Qiita](https://qiita.com/TakahikoKawasaki/items/00f333c72ed96c4da659)
 
+モバイルアプリの認証にOAuth 2.0を利用するときのBest Current Practiceを定義している[RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)では、認可コードフロー＋PKCEを採用しています。また、OpenID FoundationはRFC 8252を実装したSDK（[AppAuth](https://appauth.io/)）を提供しています。このSDKを利用することで、アプリに比較的簡単に認可コードフロー＋PKCEでの認証を導入できます。
 
-前述しました通り、ブラウザには以下の3種類があり、OSごとに以下が用意されています。
+#### モバイルアプリケーションの役割
 
-| ブラウザの種類 ＼ OS    | Android            | iOS                    |
-|-----------------|--------------------|------------------------|
-| Default Browser | Chrome             | Safari                 |
-| In-App Browser  | Chrome Custom Tabs | SFSafariViewController/SFAuthenticationSession/ASWebAuthenticationSession |
-| WebView         | WebView            | WKWebView              |
+モバイルアプリは、上の図のRelying Partyに該当し、以下のような役割を担います。
 
-{{<hint danger>}}
-**(※2)** OIDC認証の場合でブラウザを使う場合はWebViewを使わないでください。
-代わりにIn-App Browserを使うように、2016/8にGoogle Developersから[勧告](https://developers.googleblog.com/2016/08/modernizing-oauth-interactions-in-native-apps.html)が出ています。
-{{</hint >}}
+- 認証フローの開始
+  - End Userの指示に従って、OpenID Providerの認可エンドポイントにリクエストを送信する
+  - End UserがOpenID Providerにログイン済みでない場合は、OpenID Providerが返したログイン画面を表示する
+  - End UserがRelying Partyに対して認可を与えていない場合は、OpenID Providerが返した認可画面を表示する
+- トークン取得・保管
+  - OpenId Providerから返却される認可コードを受け取り、Open Providerのトークンエンドポイントに認可コードを付与してトークン取得リクエストを送る
+  - レスポンスからトークンを取得し、モバイルアプリの安全なストレージに保管する
+- 認証が必要なエンドポイントへのアクセス
+  - トークンをリクエストに付与して、認証が必要なエンドポイントにアクセスする
 
+### リソースオーナー・パスワード・クレデンシャルズフロー
 
+[リソースオーナー・パスワード・クレデンシャルズフロー](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-password)にも、認可コードフローと同じくEnd User、Relying Party、Relying Partyの3者が登場します。
 
-以下に詳細を示します。
+ただし、認可コードフローとは異なりEnd UserがすでにRelying Partyを信頼していることが前提になります。そのため、フローとして次のような違いがあります。
 
-### 1. Default Browser
+- 認証情報の受け渡し
+  - End UserはOpenID Providerに対してではなく、Replying Partyに認証情報を渡す
+    - 認可コードフローの場合、End UserはOpenID Providerに対して認証情報を渡す
+- リクエスト先のエンドポイント
+  - Relying PartyからOpenID Providerの認可エンドポイントは呼ばず、トークンエンドポイントを直接呼び出す
+    
 
-![](./authn-pattern-defaultbrowser.png)
+![](oidc-resource-owner-password-credentials-flow.drawio.png)
 
-#### 長所
+Relying PartyにEnd Userの認証情報が渡されるため、End Userから見るとRelying Partyは認証情報を悪用できます。「[アクセストークン取得直後にクレデンシャルを破棄しなければならない](https://openid-foundation-japan.github.io/rfc6749.ja.html#anchor26)」とされていますが、Relying Partyが仕様に準拠していることを確認するのは難しいことです。
 
-- ユーザーが普段使い慣れたアプリケーションなので操作しやすい
-- SNS認証などの場合、一度Default Browserでログインしておけば、改めてログインする必要がない
-- セキュリティポリシーがブラウザベンダー準拠
+したがって、このフローはEnd Userのこのような不安を解消できる場合のみ利用されるフローになります。例えば、Relying PartyとOpenID Providerが、End Userから見て同じシステムである場合などが該当します。また、OpenID Providerから見てもRelying Partyが仕様を遵守していることを確認することはむずかしく、OpenID Provider側でこのフローを許可しないケースもあります。
 
+**このフローを採用する前に他のフローを採用できないか十分に検討することをお勧めします。**
 
-#### 短所
+#### モバイルアプリケーションの役割
 
-- 別アプリケーション(ChromeかSafari)なのでUIをカスタムできない
-- 別アプリケーション(ChromeかSafari)を開いて認証後に戻ってくる必要があるので、UXが多少低下する
+上記図のRelying Partyが、モバイルアプリケーションに該当し以下のような役割を担います。
 
-<br/>
-
-### 2. In-App Browser
-
-![](./authn-pattern-inappbrowser.png)
-
-#### 長所
-
-- アプリケーション内で認証が完結するのでUXが良い
-- Default BrowserとCookieを共有できるので、一度Default Browserでログインしておけば、改めてログインする必要がない
-- セキュリティポリシーがブラウザベンダー準拠
-
-#### 短所
-
-- UIはツールバーの色、閉じるボタンのアイコンなどしかカスタムできない
-
-
+- 認証情報の取得・送信
+  - ログイン画面を表示して、ユーザから認証情報を受け取る
+  - 受け取った認証情報を、OIDC Providerのトークンエンドポイントにリクエストで送信する
+- トークン取得・保管
+  - OIDC Providerからトークンを受け取り、モバイルアプリの安全なストレージに保管する
+- 認証が必要なエンドポイントへのアクセス
+  - トークンをリクエストに付与して、認証が必要なエンドポイントにアクセスする
 

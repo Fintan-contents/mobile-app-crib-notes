@@ -1,8 +1,9 @@
 ---
-title: モバイルアプリケーション開発における注意事項
+title: セキュリティ
+weight: 100
 ---
 
-本ドキュメントではモバイルアプリケーション開発を始める上で参考になる、セキュリティ関連のガイドや記事を紹介します。
+ここでは、モバイルアプリケーション開発を始める上で参考になる、セキュリティ関連のガイドや記事を紹介します。
 
 ## OWASP Mobile Top10
 
@@ -11,7 +12,7 @@ title: モバイルアプリケーション開発における注意事項
 
 プロジェクト開始時に確認することをお勧めします。特にモバイル開発に初めて取り組む方は必ず知っておくべき内容です。
 
-[Open Web Application Security Project(OWASP)](https://owasp.org/)が公開しているドキュメントで、モバイル開発する上で注意すべきセキュリティ事項が簡潔にまとめられています。数時間もあれば読み終えることができます。
+[Open Web Application Security Project (OWASP)](https://owasp.org/)が公開しているドキュメントで、モバイル開発する上で注意すべきセキュリティ事項が簡潔にまとめられています。数時間もあれば読み終えることができます。
 
 ただし記載が不足している箇所もあるので、次に紹介するOWASP Mobile Security Testing Guideも参照するとより理解を深めることができます。例えば以下のような記事です。
 - [iOSのアプリで脱獄(Jailbreak)を検知する方法](https://coky-t.gitbook.io/owasp-mstg-ja/ios-tesutogaido/0x06j-testing-resiliency-against-reverse-engineering)
@@ -26,7 +27,7 @@ title: モバイルアプリケーション開発における注意事項
 
 プロジェクト開始時に確認することをお勧めします。
 
-[Open Web Application Security Project(OWASP)](https://owasp.org/)が公開しているドキュメントです。モバイル開発におけるセキュリティ要件がチェックリスト形式でまとめられており、数時間もあれば読み終えることができます。
+[Open Web Application Security Project (OWASP)](https://owasp.org/)が公開しているドキュメントです。モバイル開発におけるセキュリティ要件がチェックリスト形式でまとめられており、数時間もあれば読み終えることができます。
 
 MASVSは2つのセキュリティ検証レベル(MASVS-L1およびMASVS-L2)とリバースエンジニアリング耐性要件(MASVS-R)を定義しています。
 
@@ -34,8 +35,7 @@ MASVSは2つのセキュリティ検証レベル(MASVS-L1およびMASVS-L2)と�
 - MASVS-L2: 機密性の高いデータを扱うアプリに推奨される
 - MASVS-R:  追加の保護コントロール
 
-[Using the MASVS](https://mobile-security.gitbook.io/masvs/0x03-using_the_masvs)（[日本語](https://coky-t.gitbook.io/owasp-masvs-ja/0x03-using_the_masvs)）に、どのようなアプリケーションでどのセキュリティ検証レベルを採用するべきかについて簡単な説明が記載されています。
-
+[Using the MASVS](https://mobile-security.gitbook.io/masvs/0x03-using_the_masvs)（[日本語](https://coky-t.gitbook.io/owasp-masvs-ja/0x03-using_the_masvs)）に、どのようなアプリケーションでどのセキュリティ検証レベルを採用するべきかについて説明が記載されています。プロジェクトで[どのセキュリティ検証レベルを採用するべきかについてもガイドラインが提示されている](https://mobile-security.gitbook.io/masvs/0x03-using_the_masvs#which-verification-type-to-choose)（[日本語](https://coky-t.gitbook.io/owasp-masvs-ja/0x03-using_the_masvs#donotaipuwosuruka)）ので、セキュリティ要件を定義する際などに参考にしてください。
 
 ## OWASP Mobile Security Testing Guide(OWASP MSTG)
 

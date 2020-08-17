@@ -2,8 +2,13 @@
   <dictionary name="ryotan">
     <words>
       <w>intelli</w>
+      <w>masvs</w>
       <w>pkce</w>
+      <w>qiita</w>
+      <w>relref</w>
+      <w>relying party</w>
       <w>santoku</w>
+      <w>textlint</w>
     </words>
   </dictionary>
 </component>

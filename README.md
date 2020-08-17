@@ -2,6 +2,37 @@
 
 モバイルアプリケーションを開発する際に役立つノウハウ集です。
 
+## ドキュメントの表示方法
+
+本ドキュメントは[Hugo](https://gohugo.io/)を使っています。
+
+### 前提条件
+- [Hugo](https://gohugo.io/)をインストール済み
+
+### 手順
+
+- クローンしたリポジトリで`hugo serve`を実行
+```
+cd mobile-app-crib-notes
+hugo serve
+```
+- ブラウザで[http://localhost:1313/mobile-app-crib-notes/](http://localhost:1313/mobile-app-crib-notes/)にアクセス
+
+
+#### `hugo serve`でエラーが出る場合
+
+本ドキュメントではHugoのテーマ[alex-shpak/hugo-book](https://github.com/alex-shpak/hugo-book)をサブモジュールとして使っていますが、それがうまくクローンできていない可能性があります。
+リポジトリのフォルダで以下コマンドを実行してください。
+
+```
+git submodule update --init
+```
+
+`themes/book`配下に[alex-shpak/hugo-book](https://github.com/alex-shpak/hugo-book)のソースコードなどが格納されていれば成功です。
+
+※これで解消されない場合は、リポジトリをクローンする時に`--recursive`オプションをつけてやり直してみてください。
+
+
 <!-- textlint-disable -->
 
 ## ライセンス
