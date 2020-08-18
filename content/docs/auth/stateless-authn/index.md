@@ -87,7 +87,7 @@ OpenID Connectで利用されるトークン(JSON Web Token)は全部で3種類�
 
 ### リソースオーナー・パスワード・クレデンシャルズフロー
 
-[リソースオーナー・パスワード・クレデンシャルズフロー](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-password)にも、認可コードフローと同じくEnd User、Relying Party、Relying Partyの3者が登場します。
+[リソースオーナー・パスワード・クレデンシャルズフロー](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-password)にも、認可コードフローと同じくEnd User、OpenID Provider、Relying Partyの3者が登場します。
 
 ただし、認可コードフローとは異なりEnd UserがすでにRelying Partyを信頼していることが前提になります。そのため、フローとして次のような違いがあります。
 
