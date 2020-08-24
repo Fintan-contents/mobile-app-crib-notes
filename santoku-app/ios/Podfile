@@ -3,7 +3,12 @@ platform :ios, '10.0'
 require_relative '../node_modules/react-native-unimodules/cocoapods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+project 'SantokuApp',
+        'DebugAdvanced' => :debug
+
 target 'SantokuApp' do
+  project 'SantokuApp'
+
   rnPrefix = "../node_modules/react-native"
 
   # React Native and its dependencies

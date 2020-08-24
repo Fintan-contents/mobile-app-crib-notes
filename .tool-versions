@@ -1,1 +1,4 @@
-gohugo 0.73.0
+gohugo 0.74.3
+nodejs 12.18.3
+golang 1.15
+java zulu-11.41.23
