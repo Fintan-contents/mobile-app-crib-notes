@@ -112,3 +112,12 @@ Xcode Project内で、React Nativeのバンドル時にnodeコマンドを使用
     ```bash
     export PATH=$PATH:[Nodeのインストールディレクトリ]/bin
     ```
+
+
+
+### アイコンについて
+
+アイコンには、以下のURLで配布していただいている画像を編集して利用しています。
+
+* https://www.iconfinder.com/icons/5481160/aquarium_fish_fishing_seafood_icon
+* https://www.iconfinder.com/icons/5370107/cooking_food_gastronomy_kitchen_tomato_vegetable_icon

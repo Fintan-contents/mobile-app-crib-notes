@@ -157,10 +157,12 @@ android {
     }
     buildTypes {
         debug {
+            applicationIdSuffix ".debug"
+            debuggable true
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
+            // FIXME: Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds

@@ -1,7 +1,7 @@
 {
   "main": "index.js",
   "scripts": {
-    "android": "env-cmd -f .secret react-native run-android",
+    "android": "env-cmd -f .secret react-native run-android --appIdSuffix debug",
     "ios": "env-cmd -f .secret react-native run-ios",
     "web": "env-cmd -f .secret expo start --web",
     "start": "env-cmd -f .secret react-native start",
@@ -18,10 +18,8 @@
     "@react-navigation/native": "5.7.2",
     "@react-navigation/stack": "5.8.0",
     "axios": "0.19.2",
-    "expo": "^38.0.0",
     "expo-notifications": "~0.3.3",
     "expo-secure-store": "~9.0.1",
-    "expo-splash-screen": "^0.4.0",
     "native-base": "2.13.12",
     "react": "16.11.0",
     "react-dom": "16.11.0",
@@ -48,6 +46,7 @@
     "babel-preset-expo": "^8.2.3",
     "env-cmd": "^10.1.0",
     "eslint": "7.5.0",
+    "expo": "^38.0.9",
     "ini": "^1.3.5",
     "jest": "26.0.0",
     "jest-expo": "^38.0.2",
