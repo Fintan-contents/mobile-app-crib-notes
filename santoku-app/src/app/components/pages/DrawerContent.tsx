@@ -44,11 +44,11 @@ const DrawerContent: React.FC<Props> = (props) => {
         </View>
       </View>
       <Content>
-        <MenuItem {...props} to="NativeWithWebViewDrawer">
-          既存Web資産との連携
+        <MenuItem {...props} to="DisplayWebApp">
+          Webアプリケーションの表示
         </MenuItem>
-        <MenuItem {...props} to="AuthDrawer">
-          認証・認可
+        <MenuItem {...props} to="StatelessAuth">
+          ステートレスな認証
         </MenuItem>
       </Content>
     </Container>
