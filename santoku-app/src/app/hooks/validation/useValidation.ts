@@ -21,34 +21,51 @@ export function useValidation<T extends string>(initialValues: Values<T>, valida
   const [dirty, setDirty] = useState(initialDirty);
   const [errors, setErrors] = useState<Errors<T>>(keys.reduce((result, key) => ({ ...result, ...{ [key]: [] } }), { common: [] }));
 
-  const validateAll = useCallback(() => {
-    setErrors(validate(values));
-  }, [values, validate]);
+  const validateAll = useCallback(
+    (removeCommonError = false) => {
+      const commonError = errors[CommonErrorKey.COMMON] ? { [CommonErrorKey.COMMON]: errors[CommonErrorKey.COMMON] } : {};
+      const newCommonError = removeCommonError ? {} : commonError;
+
+      setErrors({ ...validate(values), ...newCommonError });
+    },
+    [errors, values, validate]
+  );
 
   const invalid = useMemo(() => {
     return !!Object.keys(errors).find((key) => !!errors[key].find((e) => !!e));
   }, [errors]);
 
+  const dirtySome = useMemo(() => {
+    return Object.keys(dirty).some((key: T) => dirty[key]);
+  }, [dirty]);
+
+  const touchedSome = useMemo(() => {
+    return Object.keys(touched).some((key: T) => touched[key]);
+  }, [touched]);
+
   const onChangeText = useCallback(
     (key: T, newValue: string) => {
       setDirty({ ...dirty, ...{ [key]: true } });
       setValues({ ...values, ...{ [key]: newValue } });
-      validateAll();
+
+      const removeCommonError = touchedSome;
+      validateAll(removeCommonError);
     },
-    [dirty, values, validateAll]
+    [dirty, values, touchedSome, validateAll]
   );
 
   const onBlur = useCallback(
     (key: T) => {
       setTouched({ ...touched, ...{ [key]: true } });
-      validateAll();
+      const removeCommonError = dirtySome;
+      validateAll(removeCommonError);
     },
-    [touched, validateAll]
+    [touched, dirtySome, validateAll]
   );
 
   const setCommonErrors = useCallback(
     (messages: string[]) => {
-      setErrors({ ...errors, ...{ common: messages } });
+      setErrors({ ...errors, ...{ [CommonErrorKey.COMMON]: messages } });
     },
     [errors]
   );
