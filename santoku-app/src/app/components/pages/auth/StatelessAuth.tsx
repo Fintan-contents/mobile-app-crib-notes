@@ -1,6 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
-import { Spinner } from 'native-base';
+import { Content, Spinner } from 'native-base';
 import { useOidcAuthCodeFlowAuthentication } from '../../../hooks/auth';
 import { Container, Title, Text, TextButton, Section, Description, translateToViewData } from '../../basics';
 
@@ -21,7 +20,7 @@ const StatelessAuth: React.FC = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <ScrollView>
+        <Content>
           {authState.isAuthenticated() ? (
             <>
               <Description>
@@ -63,7 +62,7 @@ const StatelessAuth: React.FC = () => {
               <TextButton onPress={signIn} value={'サインイン'} />
             </>
           )}
-        </ScrollView>
+        </Content>
       )}
     </Container>
   );

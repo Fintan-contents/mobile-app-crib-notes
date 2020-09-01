@@ -1,28 +1,29 @@
 import React from 'react';
-import { StyleSheet, ScrollView, SafeAreaView } from 'react-native';
-import { Container } from 'native-base';
-import type { RnViewStyleProp } from 'native-base';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import { Container, Content, NativeBase } from 'native-base';
 
-type Props = {
-  style?: RnViewStyleProp | Array<RnViewStyleProp>;
-};
-
-const AppContainer: React.FC<Props> = ({ style, children }) => {
+const AppContainer: React.FC<NativeBase.Content> = ({ children, ...props }) => {
   return (
-    <ScrollView>
-      <Container style={[styles.container, style]}>
+    <Container style={styles.container}>
+      <Content style={[styles.content]} {...defaultProps} {...props}>
         <SafeAreaView>{children}</SafeAreaView>
-      </Container>
-    </ScrollView>
+      </Content>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
+  },
+  content: {
     padding: 12,
-    paddingTop: 24,
-    paddingBottom: 24,
   },
 });
+
+const defaultProps: NativeBase.Content = {
+  scrollEnabled: true,
+  contentInset: { bottom: 12 },
+};
 
 export default AppContainer;
