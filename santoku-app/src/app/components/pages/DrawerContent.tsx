@@ -1,9 +1,7 @@
 import React from 'react';
 // ReactNativeを使用したコンポーネントの呼び出し
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Container, Content, ListItem } from 'native-base';
-// 幅と高さを取得する
-const { width: DEVICE_WIDTH } = Dimensions.get('window');
 
 type MenuProps = {
   to: string;
@@ -31,18 +29,20 @@ type Props = {
 const DrawerContent: React.FC<Props> = (props) => {
   return (
     <Container style={styles.containerBackgroundStyle}>
-      <View style={styles.containerHeaderStyle}>
-        <View style={styles.overlayStyle}>
-          <Text
-            style={styles.overlayTextStyle}
-            onPress={() => {
-              props.navigation.navigate('TopDrawer');
-            }}
-          >
-            SantokuApp
-          </Text>
+      <SafeAreaView style={styles.headerStyle}>
+        <View style={styles.containerHeaderStyle}>
+          <View style={styles.overlayStyle}>
+            <Text
+              style={styles.overlayTextStyle}
+              onPress={() => {
+                props.navigation.navigate('TopDrawer');
+              }}
+            >
+              SantokuApp
+            </Text>
+          </View>
         </View>
-      </View>
+      </SafeAreaView>
       <Content>
         <MenuItem {...props} to="DisplayWebApp">
           Webアプリケーションの表示
@@ -60,12 +60,10 @@ export default DrawerContent;
 const styles = StyleSheet.create({
   containerHeaderStyle: {
     height: 160,
-    backgroundColor: '#9DC6BF',
     position: 'relative',
   },
-  containerHeaderImageStyle: {
-    height: 160,
-    width: DEVICE_WIDTH - 80,
+  headerStyle: {
+    backgroundColor: '#9DC6BF',
   },
   overlayStyle: {
     position: 'absolute',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { Container } from 'native-base';
 import type { RnViewStyleProp } from 'native-base';
 
@@ -10,7 +10,9 @@ type Props = {
 const AppContainer: React.FC<Props> = ({ style, children }) => {
   return (
     <ScrollView>
-      <Container style={[styles.container, style]}>{children}</Container>
+      <Container style={[styles.container, style]}>
+        <SafeAreaView>{children}</SafeAreaView>
+      </Container>
     </ScrollView>
   );
 };
