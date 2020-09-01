@@ -54,7 +54,7 @@ function useOidcAuthCodeFlowAuthentication(): OidcAuthCodeFlowAuthenticationHook
     if (authnState instanceof OidcRefreshableAuthenticated) {
       const s = await oidc.refresh(authnState);
       if (s.isAuthenticated()) {
-        setAuthnState((prev: AuthenticationState) => ({ ...prev, ...s }));
+        setAuthnState(s);
       }
     }
 

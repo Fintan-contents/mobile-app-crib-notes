@@ -52,11 +52,17 @@ class OidcAuthCodeFlowAppAuthAdapter implements OidcAuthCodeFlowAdapter {
 
   async refresh(authnState: OidcAuthenticated): Promise<AuthenticationState> {
     if (authnState instanceof OidcRefreshableAuthenticated) {
-      return translateAppAuthResult(
-        await AppAuth.refresh(config, {
-          refreshToken: authnState.refreshToken,
-        })
-      );
+      const result = await AppAuth.refresh(config, {
+        refreshToken: authnState.refreshToken,
+      });
+
+      return translateAppAuthResult({
+        accessToken: result.accessToken,
+        accessTokenExpirationDate: result.accessTokenExpirationDate,
+        idToken: result.idToken,
+        tokenType: result.tokenType,
+        refreshToken: result.refreshToken ? result.refreshToken : authnState.refreshToken,
+      });
     }
     return authnState;
   }
