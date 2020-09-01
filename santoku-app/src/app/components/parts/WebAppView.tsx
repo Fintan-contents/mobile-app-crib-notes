@@ -80,7 +80,7 @@ const WebAppView: React.FC<Props> = ({ close, closeLabel, ...webViewProps }) => 
     return <MemoActivityIndicator />;
   }, []);
 
-  const onNavigationStateChange = useCallback(({ newTitle, newCanGoBack, newCanGoForward }) => {
+  const onNavigationStateChange = useCallback(({ title: newTitle, canGoBack: newCanGoBack, canGoForward: newCanGoForward }) => {
     setTitle(newTitle);
     setCanGoBack(newCanGoBack);
     setCanGoForward(newCanGoForward);
