@@ -10,18 +10,10 @@
 ## 環境構築手順
 
 ### ソースコードの準備（iOS、Android共通）
-1. ローカルの任意の作業ディレクトリでソースコードを取得
-    ```bash
-    git clone https://gitlab.com/ws-4020/fintan-contents-draft/mobile-app-crib-notes.git
-    ```
 
-1. プロジェクトのルートディレクトリに移動
+1. クローンしたリポジトリで依存ライブラリをインストール
     ```bash
     cd santoku-app
-    ```
-    
-1. 以下コマンドで依存ライブラリをインストール
-    ```bash
     npm ci
     ```
 

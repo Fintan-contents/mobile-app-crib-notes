@@ -7,10 +7,6 @@
     "textlint": "textlint \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules)/**/*.md\" || echo",
     "textlint:fix": "textlint --fix \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules)/**/*.md\""
   },
-  "repository": {
-    "type": "git",
-    "url": "https://gitlab.com/ws-4020/fintan-contents-draft/mobile-app-crib-notes.git"
-  },
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {},
