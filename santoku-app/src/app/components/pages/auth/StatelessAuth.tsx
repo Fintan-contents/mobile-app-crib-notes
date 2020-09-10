@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Content, Spinner } from 'native-base';
-import { useOidcAuthCodeFlowAuthentication } from '../../../hooks/auth';
+import { useStatelessLoginContext } from '../../../context/StatelessLoginContext';
 import { Container, Title, Text, TextButton, Section, Description, translateToViewData } from '../../basics';
+import WithStatelessLoginContext from '../../parts/WithStatelessLoginContext';
 
 class AuthnStateViewData {
   accessTokenExpirationDate?: string;
@@ -10,8 +11,31 @@ class AuthnStateViewData {
   refreshToken?: string;
 }
 
-const StatelessAuth: React.FC = () => {
-  const { signIn, signOut, refresh, authState, loading, hasJustSignOut } = useOidcAuthCodeFlowAuthentication();
+const StatelessAuthInner: React.FC = () => {
+  const { signIn: loginContextSignIn, signOut: loginContextSighOut, refresh: loginContextRefresh, authState } = useStatelessLoginContext();
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hasJustSignOut, setHasJustSignOut] = useState<boolean>(false);
+
+  const signIn = useCallback(async () => {
+    setLoading(true);
+    await loginContextSignIn();
+    setHasJustSignOut(false);
+    setLoading(false);
+  }, [loginContextSignIn]);
+
+  const signOut = useCallback(async () => {
+    setLoading(true);
+    await loginContextSighOut();
+    setHasJustSignOut(true);
+    setLoading(false);
+  }, [loginContextSighOut]);
+
+  const refresh = useCallback(async () => {
+    setLoading(true);
+    await loginContextRefresh();
+    setLoading(false);
+  }, [loginContextRefresh]);
 
   const authnStateViewData = translateToViewData<AuthnStateViewData>(authState);
 
@@ -65,6 +89,14 @@ const StatelessAuth: React.FC = () => {
         </Content>
       )}
     </Container>
+  );
+};
+
+const StatelessAuth: React.FC = () => {
+  return (
+    <WithStatelessLoginContext>
+      <StatelessAuthInner />
+    </WithStatelessLoginContext>
   );
 };
 

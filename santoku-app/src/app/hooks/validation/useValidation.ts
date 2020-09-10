@@ -77,17 +77,6 @@ export function useValidation<T extends string>(initialValues: Values<T>, valida
     [errors]
   );
 
-  const inputProps = useCallback(
-    (key: T) => {
-      return {
-        value: values[key],
-        onBlur: () => onBlur(key),
-        onChangeText: (value: string) => onChangeText(key, value),
-      };
-    },
-    [onBlur, onChangeText, values]
-  );
-
   const hasError = useCallback(
     (key: ErrorsKey<T>) => {
       if (Array.isArray(errors[key])) {
@@ -129,9 +118,10 @@ export function useValidation<T extends string>(initialValues: Values<T>, valida
     setError,
     invalid,
     values,
+    onBlur,
+    onChangeText,
     hasError,
     shouldShowErrorMessage,
     clearStatus,
-    inputProps,
   };
 }

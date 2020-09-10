@@ -1,4 +1,3 @@
-import { useCallback, useState } from 'react';
 import type { Cookie } from '@react-native-community/cookies';
 import CookieManager from '@react-native-community/cookies';
 
@@ -8,30 +7,18 @@ import { log } from '../../framework/logging';
 
 const SESSION_ID_KEY = 'NABLARCH_SID';
 
-export interface StatefulAuthnService {
-  login: LoginApiAdapter;
-  logout: LogoutApiAdapter;
-  sessionId: SessionId;
-  isAuthenticated: boolean;
-}
-
 export interface LoginCredential {
   userId: string;
   password: string;
 }
 
-export interface LoginApiAdapter {
-  (credential: LoginCredential): Promise<void>;
-}
-
-export interface LogoutApiAdapter {
-  (): Promise<void>;
-}
-
 export type SessionId = Cookie | null;
 
-interface StatefulAuthnServiceProvider {
-  (): StatefulAuthnService;
+export interface StatefulAuthnService {
+  clearSessionId: () => Promise<void>;
+  getSessionId: () => Promise<Cookie>;
+  login: (loginCredential: LoginCredential) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 async function clearSessionId(): Promise<void> {
@@ -44,7 +31,7 @@ async function getSessionId(): Promise<Cookie> {
   return cookies[SESSION_ID_KEY];
 }
 
-async function callLoginApi({ userId, password }: LoginCredential): Promise<void> {
+async function login({ userId, password }: LoginCredential): Promise<void> {
   try {
     await axios.post(
       `${AppConfig.STATEFUL_AUTH_BASE_URL}/login`,
@@ -59,11 +46,17 @@ async function callLoginApi({ userId, password }: LoginCredential): Promise<void
       }
     );
   } catch (e) {
-    throw e;
+    // 入力チェックエラーのハンドリングはコンポーネントに委ねる
+    if (e.response.status === 400) {
+      throw e;
+    }
+
+    // TODO エラー処理
+    log.error(() => 'Exception occurred while calling login api. exception: %o', e);
   }
 }
 
-async function callLogoutApi(): Promise<void> {
+async function logout(): Promise<void> {
   try {
     await axios({
       baseURL: AppConfig.STATEFUL_AUTH_BASE_URL,
@@ -75,39 +68,13 @@ async function callLogoutApi(): Promise<void> {
     });
   } catch (e) {
     // TODO エラー処理
-    log.error(() => 'Exception occurred while calling login api. exception: %o', e);
+    log.error(() => 'Exception occurred while calling logout api. exception: %o', e);
   }
 }
 
-const useStatefulAuthnService: StatefulAuthnServiceProvider = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [sessionId, setSessionId] = useState<SessionId>(null);
-
-  const _clearSessionId = useCallback(async () => {
-    await clearSessionId();
-    setSessionId(null);
-    setIsAuthenticated(false);
-  }, []);
-
-  const login = useCallback<LoginApiAdapter>(async (credential: LoginCredential) => {
-    await callLoginApi(credential);
-    const newSessionId = await getSessionId();
-    setSessionId(newSessionId);
-    setIsAuthenticated(true);
-  }, []);
-
-  const logout = useCallback<LogoutApiAdapter>(async () => {
-    await callLogoutApi();
-    setIsAuthenticated(false);
-    await _clearSessionId();
-  }, [_clearSessionId]);
-
-  return {
-    login,
-    logout,
-    isAuthenticated,
-    sessionId,
-  };
+export const statefulAuthnService: StatefulAuthnService = {
+  clearSessionId,
+  getSessionId,
+  login,
+  logout,
 };
-
-export { useStatefulAuthnService };

@@ -4,7 +4,7 @@ import { Form, Item, Input, Label, Button, Text } from 'native-base';
 import { Container, Section, Title, Description } from '../basics';
 import { useValidation, CommonErrorKey } from '../../hooks/validation';
 import type { Errors, ErrorsKey, Values } from '../../hooks/validation';
-import { LoginApiAdapter } from '../../backend/StatefulAuthnService';
+import type { LoginApiAdapter } from '../../context/StatefulLoginContext';
 
 enum FormData {
   USER_ID = 'userId',
@@ -53,7 +53,7 @@ type Props = {
 };
 
 const StatefulLoginForm: React.FC<Props> = ({ login }) => {
-  const { values, errors, setCommonErrors, inputProps, invalid, shouldShowErrorMessage, clearStatus } = useValidation<FormData>(
+  const { values, onBlur, onChangeText, errors, setCommonErrors, invalid, shouldShowErrorMessage, clearStatus } = useValidation<FormData>(
     initialValues,
     validate
   );
@@ -92,7 +92,9 @@ const StatefulLoginForm: React.FC<Props> = ({ login }) => {
           <Item floatingLabel error={shouldShowErrorMessage(USER_ID)}>
             <Label>ユーザーID</Label>
             <Input
-              {...inputProps(USER_ID)}
+              value={values[USER_ID]}
+              onBlur={() => onBlur(USER_ID)}
+              onChangeText={(value: string) => onChangeText(USER_ID, value)}
               getRef={setUserIdRef}
               onSubmitEditing={() => {
                 if (passwordRef) {
@@ -109,7 +111,13 @@ const StatefulLoginForm: React.FC<Props> = ({ login }) => {
 
           <Item floatingLabel last error={shouldShowErrorMessage(PASSWORD)}>
             <Label>パスワード</Label>
-            <Input {...inputProps(PASSWORD)} getRef={setPasswordRef} returnKeyType="done" />
+            <Input
+              value={values[PASSWORD]}
+              onBlur={() => onBlur(PASSWORD)}
+              onChangeText={(value: string) => onChangeText(PASSWORD, value)}
+              getRef={setPasswordRef}
+              returnKeyType="done"
+            />
           </Item>
           {shouldShowErrorMessage(PASSWORD) && errorMessage(errors, PASSWORD)}
           <Button style={styles.submitButton} disabled={invalid} onPress={onSubmit}>
