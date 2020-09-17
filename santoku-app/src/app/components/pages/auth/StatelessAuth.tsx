@@ -78,7 +78,7 @@ const StatelessAuthInner: React.FC = () => {
               </Description>
               {hasJustSignOut && (
                 <Description>
-                  ※サインアウトするとトークンは破棄されますが、OpenID Providerの認証状態は一定期間残ります。
+                  ※サインアウトするとトークンは破棄されますが、OpenID Providerへのログイン済状態は一定期間残ります。
                   そのためサインアウト後に再度サインインする場合は、サインイン画面でIDとパスワードの入力が省略され、
                   すぐにアプリに戻ってきてサインインが完了します。
                 </Description>

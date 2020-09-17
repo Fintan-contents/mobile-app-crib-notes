@@ -14,15 +14,21 @@ weight: 300
 
 ### OpenID Connectにおける認証フロー
 
-OpenID Connectでは認証のためのフローがいくつか定義されています。[ログイン画面の表示パターン]({{< relref "../how-to-display-login-page/index.md" >}})で紹介しているように、モバイルアプリケーションで主に利用されるOIDCの認証フローは次の３つです。
+OpenID Connectでは認証のためのフローがいくつか定義されています。[ログイン画面の表示パターン]({{< relref "../how-to-display-login-page/index.md" >}})で紹介しているように、
+モバイルアプリケーションで主に利用されるOIDCの認証フローの以下２つについて説明します。
 
 1. 認可コードフロー + PKCE
 2. リソースオーナー・パスワード・クレデンシャルズフロー
-3. ハイブリッドフロー
 
-ハイブリッドフロー以外のフローはOAuth 2.0で定義されているもので、以下の文章中でもOAuth 2.0として言及している部分があります。
+これらのフローはOAuth 2.0で定義されているもので、以下の文章中でもOAuth 2.0として言及している部分があります。
 
-なお、これらのパターンの中で最も安全なのはハイブリッドフローですが、その分フローも複雑です。また、モバイルアプリケーションのユーザ操作という観点では「認可コードフロー＋PKCE」と変わらないのでここでは割愛しています。ハイブリッドフローの仕様については[Authentication using the Hybrid Flow - OpenID Connect Core 1.0](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#HybridFlowAuth)を参照してください。
+なお、モバイルアプリケーションの認証にOAuth 2.0を利用するときのBest Current Practiceを定義している[RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)では、認可コードフロー＋PKCEを採用しています。また、OpenID FoundationはRFC 8252を実装したSDK（[AppAuth](https://appauth.io/)）を提供しています。このSDKを利用することで、アプリに比較的簡単に認可コードフロー＋PKCEでの認証を導入できます。
+
+
+{{<hint info >}}
+OpenID Connectでは、より安全なハイブリッドフローという認証フローも定義されています。ただ、フローが複雑で、モバイルアプリケーションのユーザ操作という観点では「認可コードフロー＋PKCE」と変わらないのでここでは割愛しています。
+ハイブリッドフローの仕様については[Authentication using the Hybrid Flow - OpenID Connect Core 1.0](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#HybridFlowAuth)を参照してください。
+{{</hint >}}
 
 {{<hint warning >}}
 ここでの紹介はごく簡単なものにとどめており、不正確な表現を含む可能性があります。正確な仕様についてはRFCなどで確認するようにしてください。[OpenID ファウンデーション・ジャパン](https://www.openid.or.jp/document/index.html)では、OpenID関連RFCの日本語訳やプレゼンテーション資料、その他各種文書が公開されています。
@@ -48,7 +54,7 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
   - リフレッシュトークンには比較的長めの有効期限が設定されます
 
 
-### 認可コードフロー (with PKCE)
+### 認可コードフロー + PKCE
 
 [認可コードフロー](https://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth)では、以下の３者でやり取りします。
 
@@ -78,8 +84,6 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 モバイルアプリケーションで認可コードフローを使う上ではもう1つ重要な仕様として、[PKCE](https://tools.ietf.org/html/rfc7636)と呼ばれる仕様があります。
 この仕様は、認可コード横取り攻撃(authorization code interception attack)への対策として策定されたものです。以下の記事で、わかりやすく解説されています。
 - [PKCE: 認可コード横取り攻撃対策のために OAuth サーバーとクライアントが実装すべきこと - Qiita](https://qiita.com/TakahikoKawasaki/items/00f333c72ed96c4da659)
-
-モバイルアプリケーションの認証にOAuth 2.0を利用するときのBest Current Practiceを定義している[RFC 8252](https://www.rfc-editor.org/rfc/rfc8252.txt)では、認可コードフロー＋PKCEを採用しています。また、OpenID FoundationはRFC 8252を実装したSDK（[AppAuth](https://appauth.io/)）を提供しています。このSDKを利用することで、アプリに比較的簡単に認可コードフロー＋PKCEでの認証を導入できます。
 
 #### モバイルアプリケーションの役割
 
@@ -120,9 +124,9 @@ OpenID Connectで利用されるトークンは全部で3種類あります。
 
 モバイルアプリケーションにEnd Userの認証情報が渡されるため、End Userから見るとモバイルアプリケーションは認証情報を悪用できます。「[アクセストークン取得直後にクレデンシャルを破棄しなければならない](https://openid-foundation-japan.github.io/rfc6749.ja.html#anchor26)」とされていますが、モバイルアプリケーションが仕様に準拠していることを確認するのは難しいことです。
 
-したがって、このフローはEnd Userのこのような不安を解消できる場合のみ利用されるフローになります。例えば、モバイルアプリケーションとOpenID Providerが、End Userから見て同じシステムである場合などが該当します。また、OpenID Providerから見てもモバイルアプケーションが仕様を遵守していることを確認することはむずかしく、OpenID Provider側でこのフローを許可しないケースもあります。
+したがって、このフローはEnd Userのこのような不安を解消できる場合のみ利用できるフローになります。例えば、モバイルアプリケーションとOpenID Providerが、End Userから見て同じシステムである場合などが該当します。また、OpenID Providerから見てもモバイルアプケーションが仕様を遵守していることを確認することはむずかしく、OpenID Provider側でこのフローを許可しないケースもあります。
 
-**このフローを採用する前に他のフローを採用できないか十分に検討することをお勧めします。**
+このフローを利用するには、上記の条件を満たしているか確認する必要があります。
 
 #### モバイルアプリケーションの役割
 
