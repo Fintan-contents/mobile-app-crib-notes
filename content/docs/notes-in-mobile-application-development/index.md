@@ -88,4 +88,3 @@ OWASP MSTGの[iOSテストガイド](https://coky-t.gitbook.io/owasp-mstg-ja/ios
 - [Flutter](https://flutter.dev/security)
 - [Ionic](https://ionicframework.com/docs/techniques/security)
 - [Cordova](https://cordova.apache.org/docs/en/latest/guide/appdev/security/index.html)
-- [PhoneGap](https://github.com/phonegap/phonegap/wiki/Platform-Security)
