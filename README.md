@@ -16,7 +16,7 @@
 cd mobile-app-crib-notes
 hugo serve
 ```
-- ブラウザで[http://localhost:1313/mobile-app-crib-notes/](http://localhost:1313/mobile-app-crib-notes/)にアクセス
+- ブラウザで[http://localhost:1313](http://localhost:1313)にアクセス
 
 
 #### `hugo serve`でエラーが出る場合

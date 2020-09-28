@@ -4,8 +4,6 @@ hasCJKLanguage = true
 
 theme = "book"
 
-baseURL = "fintan-contents-draft/mobile-app-crib-notes"
-canonifyURLs = true
 relativeURLs = true
 # GitLabのJob artifactを確認する場合、ディレクトリアクセスだとindex.htmlを表示してくれない
 # uglyurls = trueにすれば解消されるが、そうするとマークダウン中の画像パス指定がそれに合わせる必要があり
