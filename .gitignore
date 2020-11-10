@@ -78,6 +78,9 @@ typings/
 # rollup.js default build output
 dist/
 
+# For Mac
+.DS_Store
+
 # End of https://www.gitignore.io/?templates=node
 
 ### IntelliJ IDEA ###
