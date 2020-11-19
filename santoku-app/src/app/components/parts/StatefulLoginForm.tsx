@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { StyleSheet, TextInput, Platform, KeyboardAvoidingView, StatusBar, ScrollView } from 'react-native';
+import { StyleSheet, TextInput } from 'react-native';
 import { Form, Item, Input, Label, Button, Text } from 'native-base';
-import {useHeaderHeight} from '@react-navigation/stack';
-import { Container, Section, Title, Description } from '../basics';
+import { Container, Section, Title, Description, KeyboardAvoidingView } from '../basics';
 import { useValidation, CommonErrorKey } from '../../hooks/validation';
 import type { Errors, ErrorsKey, Values } from '../../hooks/validation';
 import type { LoginApiAdapter } from '../../context/StatefulLoginContext';
@@ -54,7 +53,6 @@ type Props = {
 };
 
 const StatefulLoginForm: React.FC<Props> = ({ login }) => {
-  const headerHeight = useHeaderHeight();
   const { values, onBlur, onChangeText, errors, setCommonErrors, invalid, shouldShowErrorMessage, clearStatus } = useValidation<FormData>(
     initialValues,
     validate
@@ -81,67 +79,53 @@ const StatefulLoginForm: React.FC<Props> = ({ login }) => {
 
   return (
     <Container>
-      <KeyboardAvoidingView
-        behavior={Platform.select({
-          ios: 'padding',
-          android: 'height'
-        })}
-        style={{flex: 1}}
-        keyboardVerticalOffset={Platform.select({
-          ios: headerHeight,
-          android: headerHeight + (StatusBar.currentHeight ?? 0),
-        })}>
-        {/* 一旦キーボードを表示して非表示にした時に、画面の高さが大幅に下に伸びてしまわないようにScrollViewを設定しておく */}
-        <ScrollView>
+      <KeyboardAvoidingView>
+        <Description>
+          ネイティブ側で既存Web資産にログインすれば、そのままWebViewで認証が必要な画面を開けるという例を示します。{'\n\n'}
+          まずはネイティブ側から既存Web資産にログインAPIを読んでセッションIDを取得します。{'\n\n'}
+          以下ログインフォームにログインIDに10000001にパスワードにpass123-を入力してログインボタンをタップしてください。
+        </Description>
+        <Section>
+          <Title>ログインフォーム</Title>
 
-          <Description>
-            ネイティブ側で既存Web資産にログインすれば、そのままWebViewで認証が必要な画面を開けるという例を示します。{'\n\n'}
-            まずはネイティブ側から既存Web資産にログインAPIを読んでセッションIDを取得します。{'\n\n'}
-            以下ログインフォームにログインIDに10000001にパスワードにpass123-を入力してログインボタンをタップしてください。
-          </Description>
-          <Section>
-            <Title>ログインフォーム</Title>
+          {shouldShowErrorMessage(COMMON) && errorMessage(errors, COMMON)}
+          <Form>
+            <Item floatingLabel error={shouldShowErrorMessage(USER_ID)}>
+              <Label>ユーザーID</Label>
+              <Input
+                value={values[USER_ID]}
+                onBlur={() => onBlur(USER_ID)}
+                onChangeText={(value: string) => onChangeText(USER_ID, value)}
+                getRef={setUserIdRef}
+                onSubmitEditing={() => {
+                  if (passwordRef) {
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore: maybe NativeBase bug? https://github.com/GeekyAnts/NativeBase/issues/1803
+                    passwordRef._root.focus();
+                    // TODO: passwordRefがTextInputなら、`_root`を経由しないで直接`focus`を呼べるのでは、、、？型定義が間違えている？
+                  }
+                }}
+                returnKeyType="next"
+              />
+            </Item>
+            {shouldShowErrorMessage(USER_ID) && errorMessage(errors, USER_ID)}
 
-            {shouldShowErrorMessage(COMMON) && errorMessage(errors, COMMON)}
-            <Form>
-              <Item floatingLabel error={shouldShowErrorMessage(USER_ID)}>
-                <Label>ユーザーID</Label>
-                <Input
-                  value={values[USER_ID]}
-                  onBlur={() => onBlur(USER_ID)}
-                  onChangeText={(value: string) => onChangeText(USER_ID, value)}
-                  getRef={setUserIdRef}
-                  onSubmitEditing={() => {
-                    if (passwordRef) {
-                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                      // @ts-ignore: maybe NativeBase bug? https://github.com/GeekyAnts/NativeBase/issues/1803
-                      passwordRef._root.focus();
-                      // TODO: passwordRefがTextInputなら、`_root`を経由しないで直接`focus`を呼べるのでは、、、？型定義が間違えている？
-                    }
-                  }}
-                  returnKeyType="next"
-                />
-              </Item>
-              {shouldShowErrorMessage(USER_ID) && errorMessage(errors, USER_ID)}
-
-              <Item floatingLabel last error={shouldShowErrorMessage(PASSWORD)}>
-                <Label>パスワード</Label>
-                <Input
-                  value={values[PASSWORD]}
-                  onBlur={() => onBlur(PASSWORD)}
-                  onChangeText={(value: string) => onChangeText(PASSWORD, value)}
-                  getRef={setPasswordRef}
-                  returnKeyType="done"
-                />
-              </Item>
-              {shouldShowErrorMessage(PASSWORD) && errorMessage(errors, PASSWORD)}
-              <Button style={styles.submitButton} disabled={invalid} onPress={onSubmit}>
-                <Text>ログイン</Text>
-              </Button>
-            </Form>
-          </Section>
-
-        </ScrollView>
+            <Item floatingLabel last error={shouldShowErrorMessage(PASSWORD)}>
+              <Label>パスワード</Label>
+              <Input
+                value={values[PASSWORD]}
+                onBlur={() => onBlur(PASSWORD)}
+                onChangeText={(value: string) => onChangeText(PASSWORD, value)}
+                getRef={setPasswordRef}
+                returnKeyType="done"
+              />
+            </Item>
+            {shouldShowErrorMessage(PASSWORD) && errorMessage(errors, PASSWORD)}
+            <Button style={styles.submitButton} disabled={invalid} onPress={onSubmit}>
+              <Text>ログイン</Text>
+            </Button>
+          </Form>
+        </Section>
       </KeyboardAvoidingView>
     </Container>
   );
