@@ -1,7 +1,7 @@
 import Config from 'react-native-config';
 import SecureConfig from 'react-native-config-encrypted';
 
-const secret = process.env.REACT_NATIVE_SANTOKU_ENCRYPTION_SECRET || '';
+const secret = Config.REACT_NATIVE_SANTOKU_ENCRYPTION_SECRET;
 
 if (!secret) {
   console.error('Encryption secret is no set. Can not configure SecureConfig.');

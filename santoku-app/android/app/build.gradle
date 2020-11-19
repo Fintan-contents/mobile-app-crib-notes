@@ -157,11 +157,11 @@ android {
         }
         release {
             // You must set following properties in gradle.properties for release build
-            if (project.hasProperty('APP_UPLOAD_STORE_FILE')) {
-                storeFile file(APP_UPLOAD_STORE_FILE)
-                storePassword APP_UPLOAD_STORE_PASSWORD
-                keyAlias APP_UPLOAD_KEY_ALIAS
-                keyPassword APP_UPLOAD_KEY_PASSWORD
+            if (project.hasProperty('SANTOKU_UPLOAD_KEYSTORE_FILE')) {
+                storeFile file(SANTOKU_UPLOAD_KEYSTORE_FILE)
+                storePassword SANTOKU_UPLOAD_KEYSTORE_PASSWORD
+                keyAlias SANTOKU_UPLOAD_KEY_ALIAS
+                keyPassword SANTOKU_UPLOAD_KEY_PASSWORD
             }
         }
     }

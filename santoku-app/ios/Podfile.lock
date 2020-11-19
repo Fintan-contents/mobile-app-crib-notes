@@ -6,8 +6,6 @@ PODS:
   - AppAuth/ExternalUserAgent (1.2.0)
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
-  - EXApplication (2.2.1):
-    - UMCore
   - EXConstants (9.1.1):
     - UMConstantsInterface
     - UMCore
@@ -31,9 +29,6 @@ PODS:
     - UMCore
     - UMPermissionsInterface
     - UMTaskManagerInterface
-  - EXNotifications (0.3.3):
-    - UMCore
-    - UMPermissionsInterface
   - EXPermissions (9.0.1):
     - UMCore
     - UMPermissionsInterface
@@ -329,7 +324,6 @@ PODS:
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
-  - EXApplication (from `../node_modules/expo-application/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
@@ -338,7 +332,6 @@ DEPENDENCIES:
   - EXKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - EXLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - EXLocation (from `../node_modules/expo-location/ios`)
-  - EXNotifications (from `../node_modules/expo-notifications/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - EXSecureStore (from `../node_modules/expo-secure-store/ios`)
   - EXSplashScreen (from `../node_modules/expo/node_modules/expo-splash-screen/ios`)
@@ -402,8 +395,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
-  EXApplication:
-    :path: "../node_modules/expo-application/ios"
   EXConstants:
     :path: "../node_modules/expo-constants/ios"
   EXErrorRecovery:
@@ -420,8 +411,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-linear-gradient/ios"
   EXLocation:
     :path: "../node_modules/expo-location/ios"
-  EXNotifications:
-    :path: "../node_modules/expo-notifications/ios"
   EXPermissions:
     :path: "../node_modules/expo-permissions/ios"
   EXSecureStore:
@@ -529,7 +518,6 @@ SPEC CHECKSUMS:
   AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
-  EXApplication: d7ccb60c33fa4d506967ff6adde42a0f872d69ad
   EXConstants: f907b3b6ce16e20d1750f22af1e095e924574bcb
   EXErrorRecovery: 500f1d4231c534f415e86caeb3fc677c7f5dd23c
   EXFileSystem: 76875135b61708b9afa7e6a89b72a60ba0fdfa20
@@ -538,7 +526,6 @@ SPEC CHECKSUMS:
   EXKeepAwake: 8b0f68242f036b971f9f8976341823cbe6f50812
   EXLinearGradient: 663bf3b9009a96567e98498016e40422631be81d
   EXLocation: e93020e255f52a1cc031e0f45b0a24eb20fc4b55
-  EXNotifications: 4066720495cdd6366d0178f853a93671d9ea11c6
   EXPermissions: 80ac3acbdb145930079810fe5b08c022b3428aa8
   EXSecureStore: 908934a8b02301997fee88e3f4c05eea4e2a9ffb
   EXSplashScreen: 9423d258b71afa5bf128a83dcb57b636d9900a74
@@ -593,4 +580,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: cff58a4a5df2d1263d63f6e53c0f47290f78ad09
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

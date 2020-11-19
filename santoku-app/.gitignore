@@ -79,5 +79,4 @@ coverage/
 
 
 ### Local environmental variables
-.secret
 ios/PersonalAccount.xcconfig
