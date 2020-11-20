@@ -25,12 +25,16 @@
    ```
 1. `ios/PersonalAccount.xcconfig`にApple IDの設定を追加
    * `CODE_SIGN_STYLE` は `Automatic` に設定
-   * `PERSONAL_IDENTIFIER` は他の人と重複しない値に設定（Bundle Identiferのサフィックスとして利用されます）
+   * `PERSONAL_IDENTIFIER` は他の人と重複しない値に設定（Bundle Identifierのサフィックスとして利用されます）
    * `DEVELOPMENT_TEAM` は、Xcodeで個人のApple IDをTEAMとして設定したときに表示される値を設定
+
+### シークレットの設定
+
+CognitoのクライアントIDなど、一部の設定値は暗号化して保存しています。パスワードを教えてもらったら、`.env`ファイルの`REACT_NATIVE_SANTOKU_ENCRYPTION_SECRET`に設定してください。
 
 ### iOS
 1. Podをインストール
-  * `npx pod-install`
+    * `npx pod-install`
 
 1. 以下コマンドで、iOSのシミュレータでアプリを起動
     ```bash
