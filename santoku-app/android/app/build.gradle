@@ -134,8 +134,8 @@ android {
         applicationId "jp.fintan.mobile.santokuapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "0.0.1"
         resValue "string", "build_config_package", "jp.fintan.mobile.santokuapp"
     }
     defaultConfig.manifestPlaceholders = [
@@ -173,6 +173,7 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
+            applicationIdSuffix ".release"
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
