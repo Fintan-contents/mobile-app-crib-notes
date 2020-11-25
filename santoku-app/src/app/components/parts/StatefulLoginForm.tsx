@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, TextInput } from 'react-native';
-import { Form, Item, Input, Label, Button, Text } from 'native-base';
-import { Container, Section, Title, Description, KeyboardAvoidingView } from '../basics';
+import { Form, Item, Input, Label, Text } from 'native-base';
+import { Container, Section, Title, Description, KeyboardAvoidingView, TextButton } from '../basics';
 import { useValidation, CommonErrorKey } from '../../hooks/validation';
 import type { Errors, ErrorsKey, Values } from '../../hooks/validation';
 import type { LoginApiAdapter } from '../../context/StatefulLoginContext';
@@ -121,9 +121,7 @@ const StatefulLoginForm: React.FC<Props> = ({ login }) => {
               />
             </Item>
             {shouldShowErrorMessage(PASSWORD) && errorMessage(errors, PASSWORD)}
-            <Button style={styles.submitButton} disabled={invalid} onPress={onSubmit}>
-              <Text>ログイン</Text>
-            </Button>
+            <TextButton style={styles.submitButton} disabled={invalid} onPress={onSubmit} value={'ログイン'} />
           </Form>
         </Section>
       </KeyboardAvoidingView>
