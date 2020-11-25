@@ -6,12 +6,13 @@ import type { RnViewStyleProp } from 'native-base';
 type Props = {
   value: string;
   style?: RnViewStyleProp | Array<RnViewStyleProp>;
+  disabled?: boolean;
   onPress?: () => void;
 };
 
-const TextButton: React.FC<Props> = ({ value, style, onPress = () => true }) => {
+const TextButton: React.FC<Props> = ({ value, style, disabled = false, onPress = () => true }) => {
   return (
-    <Button full primary style={[styles.button, style]} onPress={onPress}>
+    <Button full primary style={[styles.button, style]} disabled={disabled} onPress={onPress}>
       <Text>{value}</Text>
     </Button>
   );
