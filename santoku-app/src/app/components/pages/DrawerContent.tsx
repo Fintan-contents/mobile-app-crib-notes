@@ -44,8 +44,8 @@ const DrawerContent: React.FC<Props> = (props) => {
         </View>
       </SafeAreaView>
       <Content>
-        <MenuItem {...props} to="DisplayWebApp">
-          Webアプリケーションの表示
+        <MenuItem {...props} to="AuthIntegrationWithWebApps">
+          Webアプリとの認証情報の連携
         </MenuItem>
         <MenuItem {...props} to="StatelessAuth">
           ステートレスな認証
