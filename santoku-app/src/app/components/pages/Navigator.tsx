@@ -33,17 +33,17 @@ const TopScreen: React.FC = () => {
   );
 };
 
-const AuthIntegrationWithWebAppsStack = createStackNavigator();
+const DisplayWebAppStack = createStackNavigator();
 
-const AuthIntegrationWithWebAppsStackScreen: React.FC = () => {
+const DisplayWebAppStackScreen: React.FC = () => {
   const { dispatch } = useNavigation();
   return (
-    <AuthIntegrationWithWebAppsStack.Navigator>
-      <AuthIntegrationWithWebAppsStack.Screen
-        name="AuthIntegrationWithWebApps"
+    <DisplayWebAppStack.Navigator>
+      <DisplayWebAppStack.Screen
+        name="DisplayWebApp"
         component={StatefulAuthIntegration}
         options={{
-          title: 'Webアプリとの認証情報の連携',
+          title: 'Webアプリケーションの表示',
           headerStyle: { backgroundColor: '#9DC6BF' },
           headerTitleStyle: { fontWeight: 'bold' },
           headerLeft: () => (
@@ -53,7 +53,7 @@ const AuthIntegrationWithWebAppsStackScreen: React.FC = () => {
           ),
         }}
       />
-    </AuthIntegrationWithWebAppsStack.Navigator>
+    </DisplayWebAppStack.Navigator>
   );
 };
 
@@ -87,7 +87,7 @@ const Navigator: React.FC = () => {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="TopDrawer" component={TopScreen} />
-      <Drawer.Screen name="AuthIntegrationWithWebApps" component={AuthIntegrationWithWebAppsStackScreen} />
+      <Drawer.Screen name="DisplayWebApp" component={DisplayWebAppStackScreen} />
       <Drawer.Screen name="StatelessAuth" component={StatelessAuthScreen} />
     </Drawer.Navigator>
   );
