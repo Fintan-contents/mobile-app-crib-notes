@@ -36,7 +36,6 @@ chore:
   - .editorconfig
   - .gitattributes
   - .gitignore
-  - .gitmodules
   - .tool-versions
   - LICENSE
 

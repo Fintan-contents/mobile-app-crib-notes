@@ -14,7 +14,6 @@ on:
       - layouts/**
       - resources/**
       - themes/**
-      - .gitmodules
       - .htmltest.yaml
       - .markdownlint.js
       - .textlintrc
