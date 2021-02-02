@@ -25,6 +25,7 @@ npm start
 
 ```console
 ℹ ｢wds｣: Project is running at http://localhost:3000/
+ℹ ｢wds｣: webpack output is served from /mobile-app-crib-notes/
 ```
 
 ## ビルド

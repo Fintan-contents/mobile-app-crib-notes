@@ -35,3 +35,12 @@
   height: 200px;
   width: 200px;
 }
+
+.featureCard {
+  color: var(--ifm-color-content);
+}
+
+.featureCard:hover {
+  color: var(--ifm-color-content);
+  text-decoration: none;
+}

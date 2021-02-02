@@ -8,48 +8,57 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Easy to Use',
+    title: 'Reference',
+    to: 'docs',
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        リファレンス
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Use React Native',
+    to: 'guide',
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        開発ガイド
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Learn React Native',
+    to: 'learn',
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        学習用コンテンツ
       </>
     ),
   },
 ];
 
-function Feature({imageUrl, title, description}) {
+function Feature({to, imageUrl, title, description}) {
+  const toUrl = useBaseUrl(to);
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={clsx('col col--4', styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
+      <Link className={clsx(styles.featureCard)} to={toUrl}>
+        <div className={clsx('card')}>
+          <div className={clsx('card__header')}>
+            <h3>{title}</h3>
+          </div>
+          {imgUrl && (
+            <div className="card__image">
+              <img className={styles.featureImage} src={imgUrl} alt={title} />
+            </div>
+          )}
+          <div className={clsx('card__body')}>
+            <p>{description}</p>
+          </div>
         </div>
-      )}
-      <h3>{title}</h3>
-      <p>{description}</p>
+      </Link>
     </div>
   );
 }
@@ -59,8 +68,9 @@ function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      // title="Home"
+      // description="Description will go into a meta tag in <head />"
+    >
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
@@ -68,10 +78,10 @@ function Home() {
           <div className={styles.buttons}>
             <Link
               className={clsx(
-                'button button--outline button--secondary button--lg',
+                'button button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('docs/')}>
+              to={useBaseUrl('learn')}>
               Get Started
             </Link>
           </div>
