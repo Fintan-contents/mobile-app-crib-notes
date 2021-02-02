@@ -1,0 +1,66 @@
+# Add 'iOS' label to any change within the 'ios' directory
+iOS:
+  - santoku-app/ios/**/*
+
+# Add 'Android' label to any change within the 'android' directory
+Android:
+  - santoku-app/android/**/*
+
+# Add 'app' label to any change within the 'src' directory and to the files listed below
+app:
+  - santoku-app/src/**/*
+  - santoku-app/app.json
+  - santoku-app/index.js
+
+# Add 'build' label to any changes to the files listed below
+build:
+  - santoku-app/.script/**/*
+  - santoku-app/.buckconfig
+  - santoku-app/.editorconfig
+  - santoku-app/.eslintrc.js
+  - santoku-app/babel.config.js
+  - santoku-app/metro.config.js
+  - santoku-app/package.json
+  - santoku-app/package-lock.json
+  - santoku-app/tsconfig.json
+  - .tool-versions
+
+# Add 'chore' label to any change within the '.github' directory and to the files listed below
+chore:
+  # Changes to files within '.github/workflows' should correspond to the 'ci' label
+  - any: ['.github/**/*', '!.github/workflows/**/*']
+  - .idea/**/*
+  - .run/**/*
+  - santoku-app/.gitattributes
+  - santoku-app/.gitignore
+  - .editorconfig
+  - .gitattributes
+  - .gitignore
+  - .gitmodules
+  - .tool-versions
+  - LICENSE
+
+# Add 'ci' label to any change within the '.github/workflows' directory
+ci:
+  - .github/workflows/**/*
+
+# Add 'doc' label to any change within the 'docs' directory
+doc:
+  - content/**/*
+  - images/**/*
+  - layouts/**/*
+  - resources/**/*
+  - santoku-app/docs/**/*
+  - santoku-app/README.md
+  - .textlintrc
+  - config.toml
+  - package.json
+  - package-lock.json
+  - prh.yaml
+  - README.md
+
+# Add 'test' label to any change to files within the directories listed below
+test:
+  - santoku-app/jest/**/*
+  - santoku-app/jest.config.js
+  - santoku-app/src/**/*.test.tsx
