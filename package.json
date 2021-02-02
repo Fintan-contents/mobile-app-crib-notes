@@ -15,7 +15,6 @@
     "fix:text": "textlint --fix \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules|ios|android|vendor)/**/*.md\" || echo",
     "fix:md": "markdownlint-cli2-fix \"**/*.md\" \"#{node_modules,**/node_modules,**/ios,**/android,**/vendor}\" || echo"
   },
-  "author": "",
   "license": "Apache-2.0",
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.70",
