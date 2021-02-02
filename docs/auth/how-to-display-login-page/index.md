@@ -7,9 +7,9 @@ weight: 100
 
 |No.|表示方法|取りうる認証方法の例|
 |-|-|-|
-|1|ネイティブ側に表示する|<ul><li>セッションID</li><li>[OpenID Connect（リソースオーナー・パスワード・クレデンシャルズフロー）]({{< relref "../stateless-authn/index.md#リソースオーナーパスワードクレデンシャルズフロー" >}})</li></ul> |
-|2|In-App Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>[OpenID Connect（認可コードフロー）]({{< relref "../stateless-authn/index.md#認可コードフロー--pkce" >}})</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
-|3|Default Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>[OpenID Connect（認可コードフロー）]({{< relref "../stateless-authn/index.md#認可コードフロー--pkce" >}})</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
+|1|ネイティブ側に表示する|<ul><li>セッションID</li><li>[OpenID Connect（リソースオーナー・パスワード・クレデンシャルズフロー）](../stateless-authn/index.md#リソースオーナーパスワードクレデンシャルズフロー)</li></ul> |
+|2|In-App Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>[OpenID Connect（認可コードフロー）](../stateless-authn/index.md#認可コードフロー--pkce)</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
+|3|Default Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>[OpenID Connect（認可コードフロー）](../stateless-authn/index.md#認可コードフロー--pkce)</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
 |~~4~~|~~WebViewに表示する~~|~~OIDC認証~~|
 
 

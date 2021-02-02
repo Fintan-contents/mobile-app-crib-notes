@@ -14,7 +14,7 @@ weight: 300
 
 ### OpenID Connectにおける認証フロー
 
-OpenID Connectでは認証のためのフローがいくつか定義されています。[ログイン画面の表示パターン]({{< relref "../how-to-display-login-page/index.md" >}})で紹介しているように、
+OpenID Connectでは認証のためのフローがいくつか定義されています。[ログイン画面の表示パターン](../how-to-display-login-page/index.md)で紹介しているように、
 モバイルアプリケーションで主に利用されるOIDCの認証フローの以下２つについて説明します。
 
 1. 認可コードフロー + PKCE

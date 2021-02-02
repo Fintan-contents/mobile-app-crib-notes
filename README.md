@@ -35,6 +35,14 @@ npm run build
 
 このコマンドは静的コンテンツを `build` ディレクトリに生成します。
 
+## ビルドされたものを表示する
+
+`build`ディレクトリ内のファイルを`/mobile-app-crib-notes/`というコンテキストパスで表示します。Dockerでnginxを起動すると簡単です。
+
+```bash
+docker run -v $(pwd)/build:/usr/share/nginx/html/mobile-app-crib-notes/ --rm -p 3001:80 nginx
+```
+
 ## Lint
 
 ### 文章校正

@@ -7,8 +7,6 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve",
     "clear": "docusaurus clear",
     "lint": "run-s --print-name --continue-on-error lint:*",
     "lint:text": "textlint \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules|ios|android|vendor)/**/*.md\" || echo",

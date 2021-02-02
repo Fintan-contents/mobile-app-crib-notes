@@ -1,16 +1,17 @@
 module.exports = {
-  title: 'Fintan - Mobile',
+  title: 'React Native - Fintan',
   tagline: '',
-  url: 'https://fintan-contents.github.io/mobile-app-crib-notes',
-  baseUrl: '/',
+  url: 'https://fintan-contents.github.io',
+  baseUrl: '/mobile-app-crib-notes/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'fintan-contents', // Usually your GitHub org/user name.
   projectName: 'mobile-app-crib-notes', // Usually your repo name.
   themeConfig: {
+    hideableSidebar: true,
     navbar: {
-      title: 'Fintan',
+      title: 'React Native - Fintan',
       logo: {
         alt: 'Fintan Logo',
         src: 'img/logo.svg',
@@ -33,48 +34,31 @@ module.exports = {
       // TODO: Setup footer links.
       links: [
         {
-          title: 'Docs',
+          title: 'Contents',
           items: [
             {
-              label: 'Style Guide',
+              label: 'Docs',
               to: 'docs/',
             },
             {
-              label: 'Second Doc',
+              label: 'Guide',
+              to: 'docs/doc2/',
+            },
+            {
+              label: 'Learn',
               to: 'docs/doc2/',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Related',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
-        },
+              label: 'Fintan',
+              href: 'https://fintan.jp'
+            }
+          ]
+        }
       ],
       copyright: `Copyright © ${new Date().getFullYear()} TIS Inc. Built with <a href="https://v2.docusaurus.io/">Docusaurus</a>.`,
     },
