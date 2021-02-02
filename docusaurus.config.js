@@ -1,37 +1,36 @@
 module.exports = {
-  title: 'My Site',
-  tagline: 'The tagline of my site',
+  title: 'Fintan - Mobile',
+  tagline: '',
   url: 'https://fintan-contents.github.io/mobile-app-crib-notes',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'fintan-contents', // Usually your GitHub org/user name.
+  projectName: 'mobile-app-crib-notes', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: 'Fintan',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Fintan Logo',
         src: 'img/logo.svg',
       },
       items: [
         {
-          to: 'docs/',
-          activeBasePath: 'docs',
+          to: 'docs',
           label: 'Docs',
           position: 'left',
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
+          href: 'https://github.com/fintan-contents/mobile-app-crib-notes',
           position: 'right',
         },
       ],
     },
     footer: {
       style: 'dark',
+      // TODO: Setup footer links.
       links: [
         {
           title: 'Docs',
@@ -77,7 +76,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} TIS Inc. Built with <a href="https://v2.docusaurus.io/">Docusaurus</a>.`,
     },
   },
   presets: [
@@ -85,16 +84,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+          sidebarPath: require.resolve('./docs/sidebars.js'),
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

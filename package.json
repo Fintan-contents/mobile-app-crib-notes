@@ -1,21 +1,52 @@
 {
   "name": "mobile-app-crib-notes",
   "version": "0.0.1",
-  "description": "",
   "private": true,
   "scripts": {
-    "textlint": "textlint \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules)/**/*.md\" || echo",
-    "textlint:fix": "textlint --fix \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules)/**/*.md\""
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "serve": "docusaurus serve",
+    "clear": "docusaurus clear",
+    "lint": "run-s --print-name --continue-on-error lint:*",
+    "lint:text": "textlint \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules|ios|android|vendor)/**/*.md\" || echo",
+    "lint:md": "markdownlint-cli2 \"**/*.md\" \"#{node_modules,**/node_modules,**/ios,**/android,**/vendor}\" || echo",
+    "fix": "run-s --print-name --continue-on-error fix:*",
+    "fix:text": "textlint --fix \"*.md\" \"!(node_modules|public|themes|santoku-app)/**/*.md\" \"santoku-app/*.md\" \"santoku-app/!(node_modules|ios|android|vendor)/**/*.md\" || echo",
+    "fix:md": "markdownlint-cli2-fix \"**/*.md\" \"#{node_modules,**/node_modules,**/ios,**/android,**/vendor}\" || echo"
   },
   "author": "",
   "license": "Apache-2.0",
-  "dependencies": {},
+  "dependencies": {
+    "@docusaurus/core": "2.0.0-alpha.70",
+    "@docusaurus/preset-classic": "2.0.0-alpha.70",
+    "@mdx-js/react": "^1.6.21",
+    "clsx": "^1.1.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
   "devDependencies": {
+    "markdownlint-cli2": "0.0.13",
+    "npm-run-all": "^4.1.5",
     "textlint": "11.7.6",
     "textlint-filter-rule-comments": "1.2.2",
     "textlint-rule-preset-ja-spacing": "2.0.1",
     "textlint-rule-preset-ja-technical-writing": "4.0.1",
     "textlint-rule-prh": "5.3.0",
     "textlint-rule-spellcheck-tech-word": "5.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
