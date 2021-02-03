@@ -1,25 +1,20 @@
 const baseUrl = '/mobile-app-crib-notes/';
 
 // TODO: Copyrightのスタイルはもうちょっと（目立たないように）調整したい。
-const copyright = `<p>Copyright © ${new Date().getFullYear()} TIS Inc. Built with <a href="https://v2.docusaurus.io/">Docusaurus</a>.</p><p>
-  ドキュメントは、<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">クリエイティブ・コモンズ 表示 - 継承 4.0 国際 ライセンス</a
-  >の下に提供されており、コードサンプルは<a rel="license" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a
-  >の下に提供されています。
-</p>
-
-<div style="display:flex; justify-content: space-between; align-items: flex-start;">
-  <p>
-    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"
-      ><img
-        alt="クリエイティブ・コモンズ・ライセンス"
-        style="border-width: 0; height: auto;"
-        src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
-      />
-    </a>
-  </p>
-  <p>
-    <a href="${baseUrl}trademark/" class="footer__link-item">商標について</a>
-  </p>
+const copyright = `<div class="no-content">
+<div class="copyright">
+  <div class="copyrightImage">
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width: 0; height: auto;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+  </div>
+  <div class="copyrightText">
+    ドキュメントは、<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">クリエイティブ・コモンズ 表示 - 継承 4.0 国際 ライセンス</a
+    >の下に提供されており、コードサンプルは<a rel="license" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a
+    >の下に提供されています。
+  </div>
+</div>
+<div class="supplementary">
+  <a href="${baseUrl}trademark/" class="footer__link-item">商標について</a>
+</div>
 </div>
 `
 

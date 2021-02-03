@@ -16,6 +16,7 @@
   /*--ifm-color-primary-lightest: rgb(146, 224, 208);*/
   --ifm-code-font-size: 95%;
   --ifm-container-width: 1250px;
+  --font-size-small: 90%;
 }
 
 .docusaurus-highlight-code-line {
@@ -23,4 +24,42 @@
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+.no-content {
+  font-size: var(--font-size-small);
+}
+
+.no-content .copyright {
+  text-align: start;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.copyrightText {
+  flex-shrink: 1;
+  margin-left: var(--ifm-spacing-horizontal);
+}
+
+@media (max-width: 996px) {
+  .no-content .copyright {
+    flex-direction: column;
+  }
+  .copyrightText {
+    margin-left: 0;
+  }
+}
+
+.copyrightImage {
+  flex-shrink: 0;
+}
+
+.supplementary {
+  display: flex;
+  justify-content: flex-end;
+  font-size: var(--font-size-small);
+  padding: 0 var(--ifm-spacing-horizontal);
 }
