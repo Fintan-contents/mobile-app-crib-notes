@@ -24,7 +24,7 @@ const copyright = `<p>Copyright © ${new Date().getFullYear()} TIS Inc. Built wi
 `
 
 module.exports = {
-  title: 'Fintan › Mobile App',
+  title: 'Fintan » Mobile App Development',
   tagline: '',
   url: 'https://fintan-contents.github.io',
   baseUrl,
@@ -36,7 +36,7 @@ module.exports = {
   themeConfig: {
     hideableSidebar: true,
     navbar: {
-      title: 'Fintan › Mobile App',
+      title: 'Fintan » Mobile App',
       logo: {
         alt: 'Fintan Logo',
         src: 'https://fintan.jp/wp-content/themes/fintan-luxeritas-child-theme_2.70/assets/favicon.ico',
@@ -84,25 +84,34 @@ module.exports = {
               label: 'Reference',
               to: 'reference',
             },
+          ],
+        },
+        {
+          title: 'React Native',
+          items: [
             {
-              label: 'Guide (React Native)',
+              label: 'Guide',
               to: 'react-native/guide',
             },
             {
-              label: 'Learn (React Native)',
+              label: 'Learn',
               to: 'react-native/learn',
             },
           ],
         },
         {
-          title: 'Fintan',
+          title: 'Related Work',
           items: [
+            {
+              label: 'Fintan',
+              href: 'https://fintan.jp'
+            },
             {
               label: 'SPA + REST API構成のサービス開発リファレンス',
               href: 'https://fintan.jp/?p=5952'
             },
             {
-              label: 'Tag: React Native',
+              label: 'Fintan » React Native',
               href: 'https://fintan.jp/?tag=react-native'
             },
           ]

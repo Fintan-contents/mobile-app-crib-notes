@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const features = [
   {
     title: 'Reference',
-    to: 'docs',
+    to: 'reference',
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
@@ -19,7 +19,7 @@ const features = [
   },
   {
     title: 'Use React Native',
-    to: 'guide',
+    to: 'react-native/guide',
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
@@ -29,7 +29,7 @@ const features = [
   },
   {
     title: 'Learn React Native',
-    to: 'learn',
+    to: 'react-native/learn',
     imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
@@ -44,19 +44,17 @@ function Feature({to, imageUrl, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={clsx('col col--4', styles.feature)}>
-      <Link className={clsx(styles.featureCard)} to={toUrl}>
-        <div className={clsx('card')}>
-          <div className={clsx('card__header')}>
-            <h3>{title}</h3>
+      <Link className={clsx('card', styles.featureCard)} to={toUrl}>
+        <div className={clsx('card__header')}>
+          <h3>{title}</h3>
+        </div>
+        {imgUrl && (
+          <div className={clsx("card__image", styles.featureCardImageContainer)}>
+            <img className={styles.featureImage} src={imgUrl} alt={title} />
           </div>
-          {imgUrl && (
-            <div className="card__image">
-              <img className={styles.featureImage} src={imgUrl} alt={title} />
-            </div>
-          )}
-          <div className={clsx('card__body')}>
-            <p>{description}</p>
-          </div>
+        )}
+        <div className={clsx('card__body')}>
+          <p>{description}</p>
         </div>
       </Link>
     </div>
