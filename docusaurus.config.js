@@ -34,8 +34,19 @@ module.exports = {
   },
   themeConfig: {
     hideableSidebar: true,
+    colorMode: {
+      // "light" | "dark"
+      defaultMode: 'light',
+      // Hides the switch in the navbar
+      // Useful if you want to support a single color mode
+      disableSwitch: true,
+      // Should we use the prefers-color-scheme media-query,
+      // using user system preferences, instead of the hardcoded defaultMode
+      respectPrefersColorScheme: false,
+    },
     navbar: {
       title: 'Fintan » Mobile App',
+      hideOnScroll: true,
       logo: {
         alt: 'Fintan Logo',
         src: 'https://fintan.jp/wp-content/themes/fintan-luxeritas-child-theme_2.70/assets/favicon.ico',
