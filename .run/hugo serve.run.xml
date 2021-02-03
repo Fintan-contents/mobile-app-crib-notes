@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="hugo serve" type="HUGO_RUN_CONFIGURATION" factoryName="Hugo configuration factory">
-    <option name="hugo.plugin.arguments" value="" />
-    <option name="hugo.plugin.run.server" value="run" />
-    <option name="hugo.plugin.custom.project.dir" value="C:\Users\ryotan\ws\src\w.gitlab.com\ws-4020\fintan-contents-draft\mobile-app-crib-notes" />
-    <method v="2" />
-  </configuration>
-</component>
