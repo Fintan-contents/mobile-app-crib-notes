@@ -28,6 +28,10 @@ module.exports = {
   favicon: 'https://fintan.jp/wp-content/themes/fintan-luxeritas-child-theme_2.70/assets/favicon.ico',
   organizationName: 'fintan-contents', // Usually your GitHub org/user name.
   projectName: 'mobile-app-crib-notes', // Usually your repo name.
+  i18n: {
+    defaultLocale: 'ja-JP',
+    locales: ['ja-JP']
+  },
   themeConfig: {
     hideableSidebar: true,
     navbar: {
@@ -124,6 +128,7 @@ module.exports = {
           routeBasePath: '/',
           showLastUpdateTime: true,
         },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
