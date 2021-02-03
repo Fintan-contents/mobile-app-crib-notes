@@ -15,3 +15,5 @@ rules:
     patterns: ユーザー
   - expected: サーバ
     patterns: サーバー
+  - expected: CocoaPods
+    patterns: Cocoapods
