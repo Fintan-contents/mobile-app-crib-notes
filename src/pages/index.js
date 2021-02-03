@@ -79,7 +79,7 @@ function Home() {
                 'button button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('learn')}>
+              to={useBaseUrl('react-native/learn')}>
               Get Started
             </Link>
           </div>
