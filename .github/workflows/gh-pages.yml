@@ -4,12 +4,89 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '**.md'
+      - content/**
+      - images/**
+      - layouts/**
+      - resources/**
+      - themes/**
+      - .gitmodules
+      - .htmltest.yaml
+      - .markdownlint.js
+      - .textlintrc
+      - config.toml
+      - package.json
+      - package-lock.json
+      - prh.yaml
+      - README.md
+      - .github/workflows/docs.yaml
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
-  deploy:
-    runs-on: ubuntu-18.04
+  lint:
+    name: Run lints
+    runs-on: ubuntu-20.04
+    env:
+      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      # Cache '.npm' to speed up clean-install when package-lock.json is updated.
+      # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
+      - name: Cache .npm
+        id: cache-npm
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          # If cache is corrupted, increment prefixed number.
+          key: 1-${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            1-${{ runner.os }}-npm-
+
+      # If package-lock.json matches, node_modules will also match.
+      # So, cache node_modules directly to skip install step.
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: SantokuApp/node_modules
+          # If cache is corrupted, increment prefixed number.
+          key: 1-${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm clean-install
+
+      - name: Set up reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Lint (textlint)
+        run: |
+          npm run -s lint:text | reviewdog -tee -f eslint -name textlint -reporter github-pr-review -fail-on-error
+
+      - name: Lint (markdownlint)
+        # https://github.com/reviewdog/action-markdownlint/blob/master/entrypoint.sh
+        run: |
+          npm run -s lint:md | reviewdog -tee -efm="%f:%l:%c %m" -efm="%f:%l %m" -name markdownlint -reporter github-pr-review -fail-on-error
+
+  build-deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
           submodules: true
           fetch-depth: 0
@@ -17,13 +94,26 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.73.0'
+          hugo-version: '0.80.0'
 
       - name: Build
         run: hugo --minify
 
+      - name: Run htmltest
+        uses: docker://wjdp/htmltest:v0.14.0
+        with:
+          args: --conf .htmltest.yaml
+
+      - name: Save artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: mobile-app-crib-notes
+          path: ./public
+          retention-days: 30
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public

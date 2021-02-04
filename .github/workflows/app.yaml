@@ -1,0 +1,97 @@
+name: App
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    paths:
+      - santoku-app/**/*.js
+      - santoku-app/**/*.jsx
+      - santoku-app/**/*.ts
+      - santoku-app/**/*.tsx
+      - santoku-app/jest/**
+      - santoku-app/src/**
+      - santoku-app/.editorconfig
+      - santoku-app/.eslintrc.js
+      - santoku-app/babel.config.js
+      - santoku-app/index.js
+      - santoku-app/jest.config.js
+      - santoku-app/metro.config.js
+      - santoku-app/package.json
+      - santoku-app/package-lock.json
+      - santoku-app/tsconfig.json
+      - .github/workflows/app.yaml
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  lint-and-test:
+    name: Run lint and test
+    runs-on: macos-10.15
+    env:
+      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      # Cache '.npm' to speed up clean-install when package-lock.json is updated.
+      # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
+      - name: Cache .npm
+        id: cache-npm
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          # If cache is corrupted, increment prefixed number.
+          key: 1-${{ runner.os }}-npm-${{ hashFiles('santoku-app/**/package-lock.json') }}
+          restore-keys: |
+            1-${{ runner.os }}-npm-
+
+      # If package-lock.json matches, node_modules will also match.
+      # So, cache node_modules directly to skip install step.
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: santoku-app/node_modules
+          # If cache is corrupted, increment prefixed number.
+          key: 1-${{ runner.os }}-santoku-app-node-modules-${{ hashFiles('santoku-app/**/package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm clean-install --prefix santoku-app
+
+      - name: Set up reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Lint (ESLint)
+        if: always()
+        run: |
+          npm run -s lint:es --prefix santoku-app | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=eslint -name="ESLint"
+
+      - name: Lint (TypeScript)
+        if: always()
+        run: |
+          npm run -s lint:tsc --prefix santoku-app | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name="TypeScript"
+
+      - name: Test
+        if: always()
+        run: |
+          npm run -s test --prefix santoku-app -- --ci --reporters=default --reporters=jest-junit --coverage
+
+      - name: Report test result
+        uses: ashley-taylor/junit-report-annotations-action@master
+        if: always()
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          name: Test results
+          path: santoku-app/junit.xml

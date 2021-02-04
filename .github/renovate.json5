@@ -1,0 +1,67 @@
+{
+  commitMessagePrefix: '⬆️: ',
+  extends: ['config:base', ':preserveSemverRanges'],
+  timezone: 'Asia/Tokyo',
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: ['before 20:00 on sunday'],
+  },
+  ignorePaths: [
+    'santoku-app/android',
+    'santoku-app/ios'
+  ],
+  packageRules: [
+    {
+      groupName: 'Expo upgrade',
+      enabled: false,
+      packageNames: [
+        '@react-native-community/masked-view',
+        'expo',
+        'expo-splash-screen',
+        'expo-updates',
+        'react',
+        'react-dom',
+        'react-native',
+        'react-native-gesture-handler',
+        'react-native-reanimated',
+        'react-native-safe-area-context',
+        'react-native-screens',
+        'react-native-unimodules',
+        'react-native-web',
+        '@babel/core',
+        '@types/react',
+        '@types/react-dom',
+        '@types/react-native',
+        'babel-preset-expo',
+        'jest-expo',
+        'typescript',
+      ],
+    },
+    {
+      groupName: 'Depends on Expo version',
+      enabled: false,
+      packageNames: [
+        '@types/jest', // jest-expo -> jest
+        '@types/react-test-renderer', // jest-expo -> react-test-renderer
+      ],
+    },
+    {
+      groupName: 'React Navigation',
+      packagePatterns: ['^@react-navigation/'],
+    },
+    {
+      groupName: 'Tools',
+      packageNames: [
+        '@testing-library/react-native',
+        '@typescript-eslint/eslint-plugin',
+        '@typescript-eslint/parser',
+        'eslint',
+        'eslint-config-universe',
+        'jest-junit',
+        'npm-run-all',
+        'prettier',
+      ],
+      packagePatterns: ['^markdownlint', '^textlint'],
+    },
+  ],
+}

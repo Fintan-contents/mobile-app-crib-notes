@@ -1,0 +1,23 @@
+name: Triage
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+
+jobs:
+  triage:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Label according to modified files
+        # https://github.com/marketplace/actions/labeler
+        uses: actions/labeler@master
+        with:
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          # Default is '.github/labeler.yml', but we use 'yaml' as an extension of YAML files.
+          configuration-path: .github/labeler.yaml
+          # Remove labels when matching files are reverted or no longer changed by the PR
+          sync-labels: true
