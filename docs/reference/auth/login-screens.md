@@ -1,22 +1,20 @@
 ---
 title: ログイン画面の表示パターン
-weight: 100
 ---
 
 モバイルアプリでは、ログイン画面をどのように表示するかについていくつか選択肢があり、それぞれで取りうる認証方法が変わってきます。
 
 |No.|表示方法|取りうる認証方法の例|
 |-|-|-|
-|1|ネイティブ側に表示する|<ul><li>セッションID</li><li>[OpenID Connect（リソースオーナー・パスワード・クレデンシャルズフロー）](../stateless-authn/index.md#リソースオーナーパスワードクレデンシャルズフロー)</li></ul> |
-|2|In-App Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>[OpenID Connect（認可コードフロー）](../stateless-authn/index.md#認可コードフロー--pkce)</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
-|3|Default Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>[OpenID Connect（認可コードフロー）](../stateless-authn/index.md#認可コードフロー--pkce)</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
+|1|ネイティブ側に表示する|<ul><li>セッションID</li><li>OpenID Connect（[リソースオーナー・パスワード・クレデンシャルズフロー](./stateless-authn.md#リソースオーナーパスワードクレデンシャルズフロー)）</li></ul> |
+|2|In-App Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>OpenID Connect（[認可コードフロー + PKCE](./stateless-authn.md#認可コードフロー--pkce)）</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
+|3|Default Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>OpenID Connect（[認可コードフロー + PKCE](./stateless-authn.md#認可コードフロー--pkce)）</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
 |~~4~~|~~WebViewに表示する~~|~~OIDC認証~~|
 
 
-{{<hint danger>}}
-OpenID Connectでログイン画面を表示する時にWebViewを使わないでください。
-代わりにIn-App Browserを使うように、2016/8にGoogle Developersから[勧告](https://developers.googleblog.com/2016/08/modernizing-oauth-interactions-in-native-apps.html)が出ています。
-{{</hint >}}
+:::danger
+OpenID Connectでログイン画面を表示する時にWebViewを使わないでください。代わりにIn-App Browserを使うように、2016/8にGoogle Developersから[勧告が出ています](https://developers.googleblog.com/2016/08/modernizing-oauth-interactions-in-native-apps.html)。
+:::
 
 なお、2～4に記載しているブラウザの種類と、各OSでのブラウザやSDKとの対応は次のようになります。
 
@@ -32,14 +30,14 @@ OpenID Connectでログイン画面を表示する時にWebViewを使わない�
 
 ログイン画面の表示方法ごとにメリット・デメリットを以下に示します。
 
-{{<hint info>}}
+:::info
 以下に示す図は、モバイルアプリと認証サービスプロバイダー間の画面遷移を中心としてかなり簡略化した図です。仕様を正確に表現したものではないので注意してください。
-{{</hint >}}
+:::
 
 ### 1. ログイン画面をネイティブ側に表示する
 
 
-![](authn-pattern-native.png)
+![ログイン画面をネイティブ側に表示する](authn-pattern-native.png)
 
 #### メリット
 
@@ -57,7 +55,7 @@ OpenID Connectでログイン画面を表示する時にWebViewを使わない�
 
 ### 2. In-App Browserで認証サービスが用意しているログイン画面を表示する
 
-![](authn-pattern-inappbrowser.png)
+![In-App Browserで認証サービスが用意しているログイン画面を表示する](authn-pattern-inappbrowser.png)
 
 #### メリット
 
@@ -72,7 +70,7 @@ OpenID Connectでログイン画面を表示する時にWebViewを使わない�
 
 ### 3. Default Browserで認証サービスが用意しているログイン画面を表示する
 
-![](authn-pattern-defaultbrowser.png)
+![Default Browserで認証サービスが用意しているログイン画面を表示する](authn-pattern-defaultbrowser.png)
 
 
 #### メリット

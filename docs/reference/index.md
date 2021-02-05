@@ -1,7 +1,6 @@
 ---
-id: index
 title: モバイルアプリケーション開発ガイド
-slug: /reference/
+slug: /reference
 ---
 
 ## 目的

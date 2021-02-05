@@ -1,6 +1,5 @@
 ---
 title: セキュリティ関連リンク
-weight: 100
 ---
 
 ここでは、モバイルアプリケーション開発を始める上で参考になる、セキュリティ関連のガイドや記事を紹介します。
@@ -19,7 +18,7 @@ weight: 100
 - [KeyStoreはデバイスによってはTrusted Execution Environment(TEE)、Secure Elements(SE)に未対応](https://coky-t.gitbook.io/owasp-mstg-ja/android-tesutogaido/0x05d-testing-data-storage#keystore-androidkeystore)
 
 
-## OWASP Mobile AppSec Verification Standard(OWASP MASVS)
+## OWASP Mobile AppSec Verification Standard (OWASP MASVS)
 
 - [原文](https://mobile-security.gitbook.io/masvs/)
 - [日本語訳](https://coky-t.gitbook.io/owasp-masvs-ja/)
@@ -37,7 +36,7 @@ MASVSは2つのセキュリティ検証レベル(MASVS-L1およびMASVS-L2)と�
 
 [Using the MASVS](https://mobile-security.gitbook.io/masvs/0x03-using_the_masvs)（[日本語](https://coky-t.gitbook.io/owasp-masvs-ja/0x03-using_the_masvs)）に、どのようなアプリケーションでどのセキュリティ検証レベルを採用するべきかについて説明が記載されています。プロジェクトで[どのセキュリティ検証レベルを採用するべきかについてもガイドラインが提示されている](https://mobile-security.gitbook.io/masvs/0x03-using_the_masvs#which-verification-type-to-choose)（[日本語](https://coky-t.gitbook.io/owasp-masvs-ja/0x03-using_the_masvs#donotaipuwosuruka)）ので、セキュリティ要件を定義する際などに参考にしてください。
 
-## OWASP Mobile Security Testing Guide(OWASP MSTG)
+## OWASP Mobile Security Testing Guide (OWASP MSTG)
 
 - [原文](https://owasp.org/www-project-mobile-security-testing-guide/)
 - [GitBook(原文)](https://mobile-security.gitbook.io/mobile-security-testing-guide/)
@@ -57,7 +56,7 @@ MASVSは2つのセキュリティ検証レベル(MASVS-L1およびMASVS-L2)と�
 
 [Android オープンソース プロジェクト](https://source.android.com/?hl=ja)が公開しているガイドで、Androidアプリケーションを設計する際に読むと参考になります。
 
-セキュリティ観点は[OWASP Mobile Top 10](https://github.com/LAC-Japan/OWASP-Mobile-Top-10-2016)や[OWASP MASVS](https://coky-t.gitbook.io/owasp-masvs-ja/)、[OWASP MSTG](https://coky-t.gitbook.io/owasp-mstg-ja/)で網羅できますが、Android特有のセキュリティ観点についてはこちらを一読するのをお勧めします。次で紹介する[Androidアプリのセキュア設計・セキュアコーディングガイド](https://www.jssec.org/dl/android_securecoding/index.html)をあわせて読むと、より実装ベースで理解できます。分量は多いですが、案件の内容に合わせてピックアップして読むだけでも十分役に立ちます。
+一般的なセキュリティ観点は[OWASP Mobile Top 10](https://github.com/LAC-Japan/OWASP-Mobile-Top-10-2016)や[OWASP MASVS](https://coky-t.gitbook.io/owasp-masvs-ja/)、[OWASP MSTG](https://coky-t.gitbook.io/owasp-mstg-ja/)で網羅できますが、Android特有のセキュリティ観点についてはこちらを一読するのをお勧めします。次で紹介する[Androidアプリのセキュア設計・セキュアコーディングガイド](https://www.jssec.org/dl/android_securecoding/index.html)をあわせて読むと、より実装ベースで理解できます。分量は多いですが、案件の内容に合わせてピックアップして読むだけでも十分役に立ちます。
 
 
 ## Androidアプリのセキュア設計・セキュアコーディングガイド

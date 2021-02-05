@@ -147,4 +147,41 @@ module.exports = {
       },
     ],
   ],
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            from: '/docs/notes-in-mobile-application-development', // string | string[]
+            to: '/reference/security/awesome-sites', // string
+          },
+          {
+            from: '/docs/auth/how-to-display-login-page', // string | string[]
+            to: '/reference/auth/login-screens', // string
+          },
+          {
+            from: '/docs/auth/management-of-log-in-credentials', // string | string[]
+            to: '/reference/auth/manage-credentials', // string
+          },
+          {
+            from: '/docs/auth', // string | string[]
+            to: '/reference/auth/authn-architecture', // string
+          },
+          {
+            from: '/docs/webassets-integration', // string | string[]
+            to: '/reference/auth/webassets-integration', // string
+          },
+          {
+            from: '/docs/auth/stateless-authn', // string | string[]
+            to: '/reference/auth/stateless-authn', // string
+          },
+          {
+            from: '/docs', // string | string[]
+            to: '/reference', // string
+          },
+        ],
+      },
+    ],
+  ],
 };
