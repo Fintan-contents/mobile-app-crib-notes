@@ -4,14 +4,14 @@ module.exports = {
       "reference/index"
     ],
     "セキュリティ": [
-      'reference/notes-in-mobile-application-development/index'
+      'reference/security/awesome-sites'
     ],
     "認証": [
-      'reference/auth/index',
-      'reference/auth/how-to-display-login-page/index',
-      'reference/auth/management-of-log-in-credentials/index',
-      'reference/auth/stateless-authn/index',
-      'reference/webassets-integration/index'
+      'reference/auth/authn-architecture',
+      'reference/auth/login-screens',
+      'reference/auth/manage-credentials',
+      'reference/auth/stateless-authn',
+      'reference/auth/webassets-integration'
     ],
     "プッシュ通知": ['doc1', 'doc2', 'doc3']
   },
