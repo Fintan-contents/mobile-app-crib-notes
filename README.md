@@ -2,36 +2,72 @@
 
 モバイルアプリケーションを開発する際に役立つノウハウ集です。
 
-## ドキュメントの表示方法
+このドキュメントは[Docusaurus](https://v2.docusaurus.io/)で作成されています。
 
-本ドキュメントは[Hugo](https://gohugo.io/)を使っています。
+## 前提条件
+- [Node.js](https://nodejs.org/ja/)をインストール済み
 
-### 前提条件
-- [Hugo](https://gohugo.io/)をインストール済み
+## インストール
 
-### 手順
-
-- クローンしたリポジトリで`hugo serve`を実行
-```
-cd mobile-app-crib-notes
-hugo serve
-```
-- ブラウザで[http://localhost:1313](http://localhost:1313)にアクセス
-
-
-#### `hugo serve`でエラーが出る場合
-
-本ドキュメントではHugoのテーマ[alex-shpak/hugo-book](https://github.com/alex-shpak/hugo-book)をサブモジュールとして使っていますが、それがうまくクローンできていない可能性があります。
-リポジトリのフォルダで以下コマンドを実行してください。
-
-```
-git submodule update --init
+```bash
+npm install
 ```
 
-`themes/book`配下に[alex-shpak/hugo-book](https://github.com/alex-shpak/hugo-book)のソースコードなどが格納されていれば成功です。
+## ローカルで表示する
 
-※これで解消されない場合は、リポジトリをクローンする時に`--recursive`オプションをつけてやり直してみてください。
+```bash
+npm start
+```
 
+このコマンドは、ローカルの開発サーバーを起動し、ブラウザウィンドウを開きます。ほとんどの変更は、サーバーを再起動することなくライブで反映されます。
+
+ローカルの開発サーバが起動しているポートは、起動時のログに次のように表示されています。ブラウザウィンドウが自動的に開かれない場合などは、表示されているURLにアクセスしてください。
+
+```console
+ℹ ｢wds｣: Project is running at http://localhost:3000/
+ℹ ｢wds｣: webpack output is served from /mobile-app-crib-notes/
+```
+
+## ビルド
+
+```bash
+npm run build
+```
+
+このコマンドは静的コンテンツを `build` ディレクトリに生成します。
+
+## ビルドされたものを表示する
+
+`build`ディレクトリ内のファイルを`/mobile-app-crib-notes/`というコンテキストパスで表示します。Dockerでnginxを起動すると簡単です。
+
+```bash
+NGINX_PORT=3001 docker run -v $(pwd)/nginx:/etc/nginx/templates -v $(pwd)/build:/usr/share/nginx/html/mobile-app-crib-notes/ --rm -e NGINX_PORT -p 3001:3001 nginx
+```
+
+このコマンドを実行するnpm scriptを用意してあります。
+次のコマンドを実行して`http://localhost:3001/mobile-app-crib-notes/`にアクセスすれば、ビルドされたHTMLファイルを表示することができます。
+
+```bash
+npm run serve
+```
+
+## Lint
+
+### 文章校正
+
+[textlint](https://github.com/textlint/textlint)で文章を校正できます。
+
+textlintを実行するには、`npm run lint:text`を実行してください。ルールに沿わない文章が警告として表示されます。
+
+また、textlintを使って単純な誤りを自動的に修正できます。自動修正したい場合には`npm run fix:text`を実行してください。
+
+### Markdownファイルの規約チェック
+
+[markdownlint](https://github.com/DavidAnson/markdownlint)でMarkdownファイルの書き方が適切かどうかをチェックできます。
+
+markdownlintを実行するには、`npm run lint:md`を実行してください。ルールに沿わない箇所が警告として表示されます。
+
+また、markdownlintを使って単純な誤りを自動的に修正できます。自動修正したい場合には`npm run fix:md`を実行してください。
 
 <!-- textlint-disable -->
 

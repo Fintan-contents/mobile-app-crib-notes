@@ -30,13 +30,11 @@ chore:
   # Changes to files within '.github/workflows' should correspond to the 'ci' label
   - any: ['.github/**/*', '!.github/workflows/**/*']
   - .idea/**/*
-  - .run/**/*
   - santoku-app/.gitattributes
   - santoku-app/.gitignore
   - .editorconfig
   - .gitattributes
   - .gitignore
-  - .gitmodules
   - .tool-versions
   - LICENSE
 
@@ -46,14 +44,15 @@ ci:
 
 # Add 'doc' label to any change within the 'docs' directory
 doc:
-  - content/**/*
-  - images/**/*
-  - layouts/**/*
-  - resources/**/*
-  - santoku-app/docs/**/*
+  - docs/**
+  - src/**
+  - static/**
   - santoku-app/README.md
+  - .htmltest.yaml
+  - .markdownlint.js
   - .textlintrc
-  - config.toml
+  - babel.config.js
+  - docusaurus.config.js
   - package.json
   - package-lock.json
   - prh.yaml

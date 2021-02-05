@@ -50,11 +50,27 @@
       packagePatterns: ['^@react-navigation/'],
     },
     {
+      groupName: 'Docusaurus',
+      matchPaths: [
+        '+(package.json)'
+      ],
+      packageNames: [
+        '@mdx-js/react',
+        'clsx',
+        'react',
+        'react-dom',
+      ],
+      packagePatterns: [
+        '^@docusaurus'
+      ]
+    },
+    {
       groupName: 'Tools',
       packageNames: [
         '@testing-library/react-native',
         '@typescript-eslint/eslint-plugin',
         '@typescript-eslint/parser',
+        'cross-env',
         'eslint',
         'eslint-config-universe',
         'jest-junit',
