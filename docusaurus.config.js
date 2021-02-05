@@ -78,9 +78,10 @@ module.exports = {
           ]
         },
         {
-          label: 'GitHub',
           href: 'https://github.com/fintan-contents/mobile-app-crib-notes',
           position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
