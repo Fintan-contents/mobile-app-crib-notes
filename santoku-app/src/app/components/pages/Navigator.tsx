@@ -7,6 +7,7 @@ import DrawerContent from './DrawerContent';
 import StatefulAuthIntegration from './webview/StatefulAuthIntegration';
 import StatelessAuth from './auth/StatelessAuth';
 import Top from './top/Top';
+import PushNotification from './notification/PushNotification';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 
 const TopScreenStack = createStackNavigator();
@@ -81,6 +82,31 @@ const StatelessAuthScreen: React.FC = () => {
   );
 };
 
+const PushNotificationStack = createStackNavigator();
+
+const PushNotificationScreen: React.FC = () => {
+  const { dispatch } = useNavigation();
+  return (
+    <PushNotificationStack.Navigator>
+      <PushNotificationStack.Screen
+        name="PushNotification"
+        component={PushNotification}
+        options={{
+          title: 'プッシュ通知',
+          headerStyle: { backgroundColor: '#9DC6BF' },
+          headerTitleStyle: { fontWeight: 'bold' },
+          headerLeft: () => (
+            <Button transparent>
+              <Icon name="menu" style={styles.icon} onPress={() => dispatch(DrawerActions.openDrawer())} />
+            </Button>
+          ),
+        }}
+      />
+    </PushNotificationStack.Navigator>
+  );
+};
+
+
 const Drawer = createDrawerNavigator();
 
 const Navigator: React.FC = () => {
@@ -89,6 +115,7 @@ const Navigator: React.FC = () => {
       <Drawer.Screen name="TopDrawer" component={TopScreen} />
       <Drawer.Screen name="AuthIntegrationWithWebApps" component={AuthIntegrationWithWebAppsStackScreen} />
       <Drawer.Screen name="StatelessAuth" component={StatelessAuthScreen} />
+      <Drawer.Screen name="PushNotification" component={PushNotificationScreen} />
     </Drawer.Navigator>
   );
 };
