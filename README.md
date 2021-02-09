@@ -5,6 +5,7 @@
 このドキュメントは[Docusaurus](https://v2.docusaurus.io/)で作成されています。
 
 ## 前提条件
+
 - [Node.js](https://nodejs.org/ja/)をインストール済み
 
 ## インストール
@@ -19,7 +20,7 @@ npm install
 npm start
 ```
 
-このコマンドは、ローカルの開発サーバーを起動し、ブラウザウィンドウを開きます。ほとんどの変更は、サーバーを再起動することなくライブで反映されます。
+このコマンドは、ローカルの開発サーバを起動し、ブラウザウィンドウを開きます。ほとんどの変更は、サーバを再起動することなくライブで反映されます。
 
 ローカルの開発サーバが起動しているポートは、起動時のログに次のように表示されています。ブラウザウィンドウが自動的に開かれない場合などは、表示されているURLにアクセスしてください。
 
@@ -45,7 +46,7 @@ NGINX_PORT=3001 docker run -v $(pwd)/nginx:/etc/nginx/templates -v $(pwd)/build:
 ```
 
 このコマンドを実行するnpm scriptを用意してあります。
-次のコマンドを実行して`http://localhost:3001/mobile-app-crib-notes/`にアクセスすれば、ビルドされたHTMLファイルを表示することができます。
+次のコマンドを実行して`http://localhost:3001/mobile-app-crib-notes/`にアクセスすれば、ビルドされたHTMLファイルを表示できます。
 
 ```bash
 npm run serve

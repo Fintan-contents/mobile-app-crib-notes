@@ -73,6 +73,7 @@
         'cross-env',
         'eslint',
         'eslint-config-universe',
+        'eslint-formatter-rdjson',
         'jest-junit',
         'npm-run-all',
         'prettier',

@@ -3,6 +3,8 @@ id: mdx
 title: Powered by MDX
 ---
 
+<!-- textlint-disable -->
+
 You can write JSX and use React components within your Markdown thanks to [MDX](https://mdxjs.com/).
 
 export const Highlight = ({children, color}) => ( <span style={{
@@ -15,3 +17,5 @@ export const Highlight = ({children, color}) => ( <span style={{
 <Highlight color="#25c2a0">Docusaurus green</Highlight> and <Highlight color="#1877F2">Facebook blue</Highlight> are my favorite colors.
 
 I can write **Markdown** alongside my _JSX_!
+
+<!-- textlint-enable -->
