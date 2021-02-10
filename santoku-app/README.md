@@ -56,6 +56,20 @@ CognitoのクライアントIDなど、一部の設定値は暗号化して保�
     npm run android
     ```
 
+### ダミーのPush通知設定
+
+Push通知用のサンプルを手元で動作させる必要がない場合は、ダミーファイルをコピーしてアプリケーションを立ち上げられるようにしてください。
+
+
+```bash
+cp ios/GoogleService-Info.dummy.plist ios/GoogleService-Info.plist
+```
+
+実際にPush通知を確認する場合はRemote通知のためにBackendとの整合性のある設定が必要です。
+Push通知の設定方法は[ガイド](../TODO/mobile/crib-notes/link)を参照してください。
+設定方法に関しては、本アプリでもご自身が作成するアプリケーションでも共通です。
+
+
 ## トラブルシュート
 
 ### Android
