@@ -30,16 +30,20 @@ module.exports = {
     "About": [
       'react-native/learn'
     ],
-    "アプリを実装する前に": [
-      'react-native/learn/getting-started'
+    "Getting Started": [
+      'react-native/learn/getting-started',
+      'react-native/learn/getting-started/setting-up-development-environment',
+      'react-native/learn/getting-started/create-project',
+      'react-native/learn/getting-started/launch-created-app',
     ]
   },
   troubleshoot: {
     "About": [
       'react-native/troubleshooting'
     ],
-    "アプリが動かない": [
-      'react-native/troubleshooting/failed-to-run-app'
+    "アプリを実行できない": [
+      'react-native/troubleshooting/unable-to-load-script',
+      'react-native/troubleshooting/debug-keystore-not-found'
     ],
   },
 };
