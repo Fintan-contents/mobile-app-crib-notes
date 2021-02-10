@@ -1,6 +1,6 @@
+const path = require('path');
 const baseUrl = '/mobile-app-crib-notes/';
 
-// TODO: Copyrightのスタイルはもうちょっと（目立たないように）調整したい。
 const copyright = `<div class="no-content">
 <div class="copyright">
   <div class="copyrightImage">
@@ -16,7 +16,7 @@ const copyright = `<div class="no-content">
   <a href="${baseUrl}trademark/" class="footer__link-item">商標について</a>
 </div>
 </div>
-`
+`;
 
 module.exports = {
   title: 'Fintan » Mobile App Development',
@@ -30,7 +30,7 @@ module.exports = {
   projectName: 'mobile-app-crib-notes', // Usually your repo name.
   i18n: {
     defaultLocale: 'ja-JP',
-    locales: ['ja-JP']
+    locales: ['ja-JP'],
   },
   themeConfig: {
     hideableSidebar: true,
@@ -75,7 +75,7 @@ module.exports = {
               to: 'react-native/troubleshooting',
               position: 'left',
             },
-          ]
+          ],
         },
         {
           href: 'https://github.com/fintan-contents/mobile-app-crib-notes',
@@ -115,20 +115,20 @@ module.exports = {
           items: [
             {
               label: 'Fintan',
-              href: 'https://fintan.jp'
+              href: 'https://fintan.jp',
             },
             {
               label: 'SPA + REST API構成のサービス開発リファレンス',
-              href: 'https://fintan.jp/?p=5952'
+              href: 'https://fintan.jp/?p=5952',
             },
             {
               label: 'Fintan » React Native',
-              href: 'https://fintan.jp/?tag=react-native'
+              href: 'https://fintan.jp/?tag=react-native',
             },
-          ]
-        }
+          ],
+        },
       ],
-      copyright
+      copyright,
     },
   },
   presets: [
@@ -183,5 +183,6 @@ module.exports = {
         ],
       },
     ],
+    path.resolve(__dirname, 'src/plugins/medium-zoom-docusaurus-plugin'),
   ],
 };
