@@ -43,7 +43,8 @@ module.exports = {
     ],
     "アプリを実行できない": [
       'react-native/troubleshooting/unable-to-load-script',
-      'react-native/troubleshooting/debug-keystore-not-found'
+      'react-native/troubleshooting/debug-keystore-not-found',
+      'react-native/troubleshooting/react-native-cli-uninstall',
     ],
   },
 };
