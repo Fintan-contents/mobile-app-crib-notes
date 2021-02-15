@@ -1,0 +1,291 @@
+---
+title: Modal
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+モーダルは、メインコンテンツを一時的にブロックして別のコンテンツを表示します。
+いわゆるポップアップ画面です。
+
+モーダル画面のナビゲータ定義にも`StackNavigator`を用います。
+`StackNavigator`の`mode`プロパティに`'modal'`を指定すると、モーダル表示の画面アニメーションが実現できます。
+
+## ネストされたナビゲータ
+
+モーダルコンテンツは全てのメインコンテンツに優先して表示させるため、一般的にネストされたナビゲータを用いて定義します。
+次の図は、`Modal 1`をモーダルとして定義した場合のナビゲータ構成です。
+
+![Modal navigator structure](modal_image.png)
+
+`RootStack`は`MainStack`を子ナビゲータとして定義しています。
+
+このナビゲータ構成のコード例は次の通りです。
+
+```typescript jsx
+type RootParamList = {
+  MainStack: NavigatorScreenParams<MainParamList>;
+  Modal1: {message: string};
+};
+type MainParamList = {
+  Screen1: undefined;
+  Screen2: undefined;
+};
+
+const RootStack = createStackNavigator<RootParamList>();
+const MainStack = createStackNavigator<MainParamList>();
+
+export const App = () => {
+  return (
+    <NavigationContainer>
+      <RootStack.Navigator mode="modal" screenOptions={{headerShown: false}}>
+        <RootStack.Screen name="MainStack" component={Main} />
+        <RootStack.Screen name="Modal1" component={Modal1} />
+      </RootStack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+const Main = () => {
+  return (
+    <MainStack.Navigator>
+      <MainStack.Screen name="Screen1" component={Screen1} />
+      <MainStack.Screen name="Screen2" component={Screen2} />
+    </MainStack.Navigator>
+  );
+};
+```
+
+`RootStack.Navigator`タグの中で`mode`プロパティに`'modal'`を指定しています。
+これにより、`Modal1`への画面遷移はモーダル表示のアニメーションとなります。
+
+`RootParamList`の定義に注目してください。
+ネストされたナビゲータの型定義は、`NavigatorScreenParams`の型引数に子ナビゲータのパラメータリスト型を指定します。
+
+ネストされたナビゲータは次のように動作します。
+
+- 各ナビゲータは独自のナビゲーション履歴を保持する
+- 各ナビゲータ毎に独自のオプションを定義できる
+- ナビゲーション操作は現在のナビゲータによって処理され、処理できなかった場合は上位のナビゲータに処理を移譲する
+- 親ナビゲータのUIは、子ナビゲータの上に描画される
+
+## useNavigationの型定義
+
+`useNavigation`の型定義でネストされたナビゲータ構成を表すには、`CompositeNavigationProp`を用います。
+第一引数に現在のナビゲータの型定義を、第二引数に親ナビゲータの型定義を指定します。
+
+```typescript jsx
+  const navigation = useNavigation<
+    CompositeNavigationProp<
+      StackNavigationProp<MainParamList, 'Screen1'>,
+      StackNavigationProp<RootParamList>
+    >
+  >();
+```
+
+:::note
+
+親ナビゲータが複数ある（親もネストしたナビゲータ）場合、第二引数の型定義もネストします。
+
+```typescript
+  const navigation = useNavigation<
+    CompositeNavigationProp<
+      StackNavigationProp<CurrentParamList, 'CurrentScreen'>,
+      CompositeNavigationProp<
+        StackNavigationProp<ParentParamList>,
+        StackNavigationProp<GrandadParamList>
+      >
+    >
+  >();
+```
+
+`useNavigation`の型定義は複雑です。
+詳細は[公式サイト](https://reactnavigation.org/docs/typescript/#combining-navigation-props)の説明を参照してください。
+
+:::
+
+## Route定義
+
+`navigate`の引数で遷移先画面に渡すパラメータを指定できます。
+遷移先画面では、`route`からそのパラメータにアクセスできます。
+
+```typescript jsx
+type RootParamList = {
+    /* 省略 */
+  Modal1: {message: string};
+};
+
+const Screen1: React.FC = () => {
+    /* 省略 */
+      <Button
+        buttonStyle={styles.button}
+        title="Popup Modal 1"
+        onPress={() => navigation.navigate('Modal1', {message: 'from Screen2'})}
+      />
+    /* 省略 */
+  );
+};
+
+const Modal1: React.FC = () => {
+    /* 省略 */
+  const route = useRoute<RouteProp<RootParamList, 'Modal1'>>();
+  return (
+    /* 省略 */
+      <Text>{route.params.message}</Text>
+    /* 省略 */
+  );
+};
+```
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  defaultValue="image"
+  values={[
+    {label: '画面イメージ', value: 'image'},
+    {label: 'ソースコード', value: 'source'},
+  ]}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="image">
+
+![Modal](modal.png)
+
+</TabItem>
+
+<TabItem value="source">
+
+```typescript jsx title="/src/App.tsx"
+import {
+  CompositeNavigationProp,
+  NavigationContainer,
+  NavigatorScreenParams,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
+import {
+  createStackNavigator,
+  StackNavigationProp,
+} from '@react-navigation/stack';
+import React from 'react';
+import {Text, View, StyleSheet} from 'react-native';
+import {Button} from 'react-native-elements';
+
+type RootParamList = {
+  MainStack: NavigatorScreenParams<MainParamList>;
+  Modal1: {message: string};
+};
+type MainParamList = {
+  Screen1: undefined;
+  Screen2: undefined;
+};
+
+const RootStack = createStackNavigator<RootParamList>();
+const MainStack = createStackNavigator<MainParamList>();
+
+export const App = () => {
+  return (
+    <NavigationContainer>
+      <RootStack.Navigator mode="modal" screenOptions={{headerShown: false}}>
+        <RootStack.Screen name="MainStack" component={Main} />
+        <RootStack.Screen name="Modal1" component={Modal1} />
+      </RootStack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+const Main = () => {
+  return (
+    <MainStack.Navigator>
+      <MainStack.Screen name="Screen1" component={Screen1} />
+      <MainStack.Screen name="Screen2" component={Screen2} />
+    </MainStack.Navigator>
+  );
+};
+
+const Screen1: React.FC = () => {
+  const navigation = useNavigation<
+    CompositeNavigationProp<
+      StackNavigationProp<MainParamList, 'Screen1'>,
+      StackNavigationProp<RootParamList>
+    >
+  >();
+  return (
+    <View style={styles.screen}>
+      <Text style={styles.title}>Screen 1</Text>
+      <Button
+        buttonStyle={styles.button}
+        title="Navigate Screen 2"
+        onPress={() => navigation.navigate('Screen2')}
+      />
+      <Button
+        buttonStyle={styles.button}
+        title="Popup Modal 1"
+        onPress={() => navigation.navigate('Modal1', {message: 'from Screen1'})}
+      />
+    </View>
+  );
+};
+
+const Screen2: React.FC = () => {
+  const navigation = useNavigation<
+    CompositeNavigationProp<
+      StackNavigationProp<MainParamList, 'Screen2'>,
+      StackNavigationProp<RootParamList>
+    >
+  >();
+  return (
+    <View style={styles.screen}>
+      <Text style={styles.title}>Screen 2</Text>
+      <Button
+        buttonStyle={styles.button}
+        title="Go Back"
+        onPress={() => navigation.goBack()}
+      />
+      <Button
+        buttonStyle={styles.button}
+        title="Popup Modal 1"
+        onPress={() => navigation.navigate('Modal1', {message: 'from Screen2'})}
+      />
+    </View>
+  );
+};
+
+const Modal1: React.FC = () => {
+  const navigation = useNavigation<
+    StackNavigationProp<RootParamList, 'Modal1'>
+  >();
+  const route = useRoute<RouteProp<RootParamList, 'Modal1'>>();
+  return (
+    <View style={styles.screen}>
+      <Text style={styles.title}>Modal 1</Text>
+      <Text>{route.params.message}</Text>
+      <Button
+        buttonStyle={styles.button}
+        title="Close"
+        onPress={() => navigation.goBack()}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  title: {
+    padding: 20,
+    fontSize: 42,
+  },
+  button: {
+    margin: 10,
+    width: 200,
+  },
+});
+```
+
+</TabItem>
+</Tabs>

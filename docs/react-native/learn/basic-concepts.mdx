@@ -1,0 +1,32 @@
+---
+title: アプリの実装前に
+sidebar_label: Overview
+hide_table_of_contents: true
+---
+
+アプリを実装する前に必要となる前提知識を確認した後、React Nativeの基本、React Navigationの基本について学びます。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+import {PageList} from '../../../src/components';
+const overviews = [
+  {
+    title: '前提知識',
+    summary: <>アプリを実装する前に必要となる前提知識を確認します</>,
+    to: '/react-native/learn/basic-concepts/pre-requisites',
+  },
+  {
+    title: 'React Nativeの基本',
+    summary: <>React Nativeの基本知識について学びます。</>,
+    to: '/react-native/learn/basic-concepts/react-native-basics',
+  },
+  {
+    title: 'React Navigationの基本',
+    summary: <>React Navigationの基本知識について学びます。</>,
+    to: '/react-native/learn/basic-concepts/react-navigation-basics',
+  },
+]
+
+<PageList overviews={overviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->

@@ -1,0 +1,28 @@
+---
+title: Lists
+sidebar_label: Overview
+hide_table_of_contents: true
+---
+
+リストはScrollViewに似ていますが、要素をリサイクルして再描画を減らすことでパフォーマンス向上するよう最適化されています。
+そのため、`ScrollView` よりもやや複雑なコンポーネントとなります。
+
+大量のデータを画面に表示する場合、`FlatList`または`SectionList`の使用が推奨されます。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+import {PageList} from '../../../../../../src/components';
+const overviews = [
+  {
+    title: 'FlatList',
+    to: '/react-native/learn/basic-concepts/react-native-basics/components/lists/flat-list',
+  },
+  {
+    title: 'SectionList',
+    to: '/react-native/learn/basic-concepts/react-native-basics/components/lists/flat-list',
+  },
+]
+
+<PageList overviews={overviews} colSize={12}/>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
