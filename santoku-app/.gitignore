@@ -80,3 +80,7 @@ coverage/
 
 ### Local environmental variables
 ios/PersonalAccount.xcconfig
+
+### Notification
+**/google-services.json
+**/GoogleService-Info.plist

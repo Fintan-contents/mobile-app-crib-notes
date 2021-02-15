@@ -14,21 +14,20 @@ title: セキュリティ関連リンク
 [Open Web Application Security Project (OWASP)](https://owasp.org/)が公開しているドキュメントで、モバイル開発する上で注意すべきセキュリティ事項が簡潔にまとめられています。数時間もあれば読み終えることができます。
 
 ただし記載が不足している箇所もあるので、次に紹介するOWASP Mobile Security Testing Guideも参照するとより理解を深めることができます。例えば以下のような記事です。
+
 - [iOSのアプリで脱獄(Jailbreak)を検知する方法](https://coky-t.gitbook.io/owasp-mstg-ja/ios-tesutogaido/0x06j-testing-resiliency-against-reverse-engineering)
 - [KeyStoreはデバイスによってはTrusted Execution Environment(TEE)、Secure Elements(SE)に未対応](https://coky-t.gitbook.io/owasp-mstg-ja/android-tesutogaido/0x05d-testing-data-storage#keystore-androidkeystore)
-
 
 ## OWASP Mobile AppSec Verification Standard (OWASP MASVS)
 
 - [原文](https://mobile-security.gitbook.io/masvs/)
 - [日本語訳](https://coky-t.gitbook.io/owasp-masvs-ja/)
 
-
 プロジェクト開始時に確認することをお勧めします。
 
 [Open Web Application Security Project (OWASP)](https://owasp.org/)が公開しているドキュメントです。モバイル開発におけるセキュリティ要件がチェックリスト形式でまとめられており、数時間もあれば読み終えることができます。
 
-MASVSは2つのセキュリティ検証レベル(MASVS-L1およびMASVS-L2)とリバースエンジニアリング耐性要件(MASVS-R)を定義しています。
+MASVSは2つのセキュリティ検証レベル（MASVS-L1およびMASVS-L2）とリバースエンジニアリング耐性要件（MASVS-R）を定義しています。
 
 - MASVS-L1: 一般的なセキュリティ要件であり、すべてのモバイルアプリに推奨される
 - MASVS-L2: 機密性の高いデータを扱うアプリに推奨される
@@ -44,7 +43,7 @@ MASVSは2つのセキュリティ検証レベル(MASVS-L1およびMASVS-L2)と�
 - [チェックリスト (1.1.3)](https://github.com/OWASP/owasp-mstg/tree/1.1.3-excel/Checklists)
   - [OWASP MASVS](https://owasp.org/www-project-mobile-security-testing-guide/)と[OWASP MSTG](https://owasp.org/www-project-mobile-security-testing-guide/)のマッピング表です。
 - [チェックリスト(Framework別)](https://github.com/OWASP/owasp-mstg#about-hybrid-apps)
-  - React NativeやFlutterなどフレームワークごとにセキュリティ要件を担保しているかが明記されているチェックリストです。ただし未完成(Work In Progress)なので注意してください。
+  - React NativeやFlutterなどフレームワークごとにセキュリティ要件を担保しているかが明記されているチェックリストです。ただし未完成（Work In Progress）なので注意してください。
 
 [OWASP](https://owasp.org/www-chapter-japan/)が公開している、モバイルアプリケーションのセキュリティをテストするための包括的なマニュアルです。[OWASP MASVS](https://coky-t.gitbook.io/owasp-masvs-ja/)に記載されている要件に対応するテストケースのリストが含まれています。
 
@@ -56,8 +55,7 @@ MASVSは2つのセキュリティ検証レベル(MASVS-L1およびMASVS-L2)と�
 
 [Android オープンソース プロジェクト](https://source.android.com/?hl=ja)が公開しているガイドで、Androidアプリケーションを設計する際に読むと参考になります。
 
-一般的なセキュリティ観点は[OWASP Mobile Top 10](https://github.com/LAC-Japan/OWASP-Mobile-Top-10-2016)や[OWASP MASVS](https://coky-t.gitbook.io/owasp-masvs-ja/)、[OWASP MSTG](https://coky-t.gitbook.io/owasp-mstg-ja/)で網羅できますが、Android特有のセキュリティ観点についてはこちらを一読するのをお勧めします。次で紹介する[Androidアプリのセキュア設計・セキュアコーディングガイド](https://www.jssec.org/dl/android_securecoding/index.html)をあわせて読むと、より実装ベースで理解できます。分量は多いですが、案件の内容に合わせてピックアップして読むだけでも十分役に立ちます。
-
+一般的なセキュリティ観点はここまでに紹介したOWASPのドキュメントで網羅できますが、Android特有のセキュリティ観点についてはこちらを一読するのをお勧めします。次で紹介する[Androidアプリのセキュア設計・セキュアコーディングガイド](https://www.jssec.org/dl/android_securecoding/index.html)をあわせて読むと、より実装ベースで理解できます。分量は多いですが、案件の内容に合わせてピックアップして読むだけでも十分役に立ちます。
 
 ## Androidアプリのセキュア設計・セキュアコーディングガイド
 
@@ -70,14 +68,11 @@ MASVSは2つのセキュリティ検証レベル(MASVS-L1およびMASVS-L2)と�
 
 「ルールブック」のセクションでは、その記事がテーマとする開発者コンテキストにおいて、セキュリティ観点から守るべきルールや考慮事項を掲載しています。1、2章は読み飛ばして3～6章を読むことお勧めします。
 
-
-
 ## iOSのセキュリティについて
 
 iOSのセキュリティに関するガイド等で最近のドキュメントは見つけられておりません。
 
 OWASP MSTGの[iOSテストガイド](https://coky-t.gitbook.io/owasp-mstg-ja/ios-tesutogaido/0x06a-platform-overview)をご覧ください。
-
 
 ## 開発ツールごとのセキュリティに関するガイド
 

@@ -75,44 +75,36 @@ jobs:
         with:
           reviewdog_version: latest
 
-#      - name: Lint (textlint)
-#        if: always()
-#        # https://github.com/tsuyoshicho/action-textlint
-#        uses: tsuyoshicho/action-textlint@v3
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          reporter: github-pr-review
-#          # package.jsonでlint:textに設定しているのと同じ引数を渡す
-#          textlint_flags: '*.md !(node_modules|build|santoku-app)/**/*.md santoku-app/*.md santoku-app/!(node_modules|ios|android|vendor)/**/*.md'
+      - name: Lint (textlint)
+        if: always()
+        run: |
+          npm run -s lint:text -- -f checkstyle | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=checkstyle -name=textlint
 
-#      - name: Lint (markdownlint)
-#        if: always()
-#        run: |
-#          npm run -s lint:md | reviewdog -tee -fail-on-error -reporter=github-pr-review -efm="%f:%l:%c %m" -efm="%f:%l %m" -name=markdownlint
+      - name: Lint (markdownlint)
+        if: always()
+        run: |
+          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' | reviewdog -tee -fail-on-error -reporter=github-pr-review -efm="%t:%f:%l:%c %m" -efm="%t:%f:%l %m" -name=markdownlint
 
-#      - name: Lint (ESLint)
-#        if: always()
-#        # https://github.com/reviewdog/action-eslint
-#        uses: reviewdog/action-eslint@v1
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          reporter: github-pr-review
-#          # package.jsonでlint:esに設定しているのと同じ引数を渡す
-#          eslint_flags: '--ext .jsx,.js,.tsx,.ts src'
+      - name: Lint (ESLint)
+        if: always()
+        run: |
+          npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=rdjson -name=ESLint
 
-#      - name: Lint (TypeScript)
-#        if: always()
-#        run: |
-#          npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name="TypeScript"
+      - name: Lint (TypeScript)
+        if: always()
+        run: |
+          npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name=TypeScript
 
-#      - name: Lint (stylelint)
-#        if: always()
-#        # https://github.com/reviewdog/action-stylelint
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          reporter: github-pr-review
-#          # package.jsonでlint:cssに設定しているのと同じ引数を渡す
-#          stylelint_input: ' src/**/*.css'
+      - name: Lint (stylelint)
+        if: always()
+        uses: reviewdog/action-stylelint@v1
+        # https://github.com/reviewdog/action-stylelint
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          fail_on_error: true
+          # package.jsonでlint:cssに設定しているのと同じ引数を渡す
+          stylelint_input: 'src/**/*.css'
 
   build-deploy:
     runs-on: ubuntu-20.04
