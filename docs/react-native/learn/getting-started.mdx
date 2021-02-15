@@ -1,0 +1,32 @@
+---
+title: Getting Started
+sidebar_label: 概要
+hide_table_of_contents: true
+---
+
+React Nativeでのアプリ開発に必要な環境を用意し、アプリを起動できることを確認します。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+import {PageList} from '../../../src/components';
+const overviews = [
+  {
+    title: '環境構築',
+    summary: <>React Nativeでのアプリ開発に必要なツールをインストールします。</>,
+    to: '/react-native/learn/getting-started/setting-up-development-environment'
+  },
+  {
+    title: 'プロジェクトの作成',
+    summary: <>テンプレートからReact Nativeのプロジェクトを作成します。</>,
+    to: '/react-native/learn/getting-started/create-project'
+  },
+  {
+    title: 'アプリの起動',
+    summary: <>React Nativeのプロジェクトから、いくつかの方法でアプリを起動します。</>,
+    to: '/react-native/learn/getting-started/launch-created-app',
+  },
+];
+
+<PageList overviews={overviews} colSize={12}/>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
