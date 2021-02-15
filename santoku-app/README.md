@@ -60,7 +60,6 @@ CognitoのクライアントIDなど、一部の設定値は暗号化して保�
 
 Push通知用のサンプルを手元で動作させる必要がない場合は、ダミーファイルをコピーしてアプリケーションを立ち上げられるようにしてください。
 
-
 ```bash
 cp ios/GoogleService-Info.dummy.plist ios/GoogleService-Info.plist
 ```
@@ -68,7 +67,6 @@ cp ios/GoogleService-Info.dummy.plist ios/GoogleService-Info.plist
 実際にPush通知を確認する場合はRemote通知のためにBackendとの整合性のある設定が必要です。
 Push通知の設定方法は[ガイド](../TODO/mobile/crib-notes/link)を参照してください。
 設定方法に関しては、本アプリでもご自身が作成するアプリケーションでも共通です。
-
 
 ## トラブルシュート
 
@@ -79,7 +77,7 @@ Push通知の設定方法は[ガイド](../TODO/mobile/crib-notes/link)を参照
 `npm run android`を実行してアプリケーションを起動すると、同時に[Metro Bundler](https://facebook.github.io/metro/)が起動します。
 Metro Bundlerの起動失敗などの理由でアプリケーションからMetro Bundlerにアクセスできないと、以下のようなエラー画面が表示されます。
 
-![Unable to load JavaScript](../images/failtoload.png)
+![Unable to load JavaScript](../docs/react-native/troubleshooting/failed-to-load-script.png)
 
 Metro Bundlerはデフォルトでは`8081`ポートを利用して起動します。`http://localhost:8081`にアクセスして、`React Native packager is running`のように表示されることを確認してください。
 

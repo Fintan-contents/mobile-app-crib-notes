@@ -50,7 +50,7 @@ doc:
   - santoku-app/README.md
   - .htmltest.yaml
   - .markdownlint.js
-  - .textlintrc
+  - .textlintrc.js
   - babel.config.js
   - docusaurus.config.js
   - package.json

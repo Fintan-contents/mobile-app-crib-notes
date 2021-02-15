@@ -1,6 +1,18 @@
 const path = require('path');
 const baseUrl = '/mobile-app-crib-notes/';
 
+if (!process.env.CI) {
+  process.env.GITHUB_REPOSITORY = __dirname.toLowerCase().includes('ws-4020')
+    ? 'ws-4020/mobile-app-crib-notes'
+    : 'fintan-contents/mobile-app-crib-notes';
+}
+
+// for debug
+console.debug(`GITHUB_REPOSITORY: ${process.env.GITHUB_REPOSITORY}`);
+
+const isDraft = !!process.env.GITHUB_REPOSITORY && process.env.GITHUB_REPOSITORY.toLowerCase().startsWith('ws-4020');
+const organization = isDraft ? 'ws-4020' : 'fintan-contents';
+
 const copyright = `<div class="no-content">
 <div class="copyright">
   <div class="copyrightImage">
@@ -21,13 +33,14 @@ const copyright = `<div class="no-content">
 module.exports = {
   title: 'Fintan » Mobile App Development',
   tagline: '',
-  url: 'https://fintan-contents.github.io',
+  url: `https://${organization}.github.io`,
   baseUrl,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'https://fintan.jp/wp-content/themes/fintan-luxeritas-child-theme_2.70/assets/favicon.ico',
-  organizationName: 'fintan-contents', // Usually your GitHub org/user name.
+  organizationName: organization, // Usually your GitHub org/user name.
   projectName: 'mobile-app-crib-notes', // Usually your repo name.
+  noIndex: isDraft,
   i18n: {
     defaultLocale: 'ja-JP',
     locales: ['ja-JP'],
@@ -78,7 +91,7 @@ module.exports = {
           ],
         },
         {
-          href: 'https://github.com/fintan-contents/mobile-app-crib-notes',
+          href: `https://github.com/${organization}/mobile-app-crib-notes`,
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',

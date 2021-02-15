@@ -17,7 +17,7 @@ on:
       - .markdownlint.js
       - .prettierrc.js
       - .stylelintrc.js
-      - .textlintrc
+      - .textlintrc.js
       - babel.config.js
       - docusaurus.config.js
       - package.json
