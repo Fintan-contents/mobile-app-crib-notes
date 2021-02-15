@@ -7,11 +7,13 @@ import TabItem from '@theme/TabItem';
 
 [プロジェクトの作成](create-project.md)で作ったアプリの実行方法を紹介します。
 
-iOSアプリはiPhoneシミュレータ、AndroidアプリはAndroidエミュレータで起動するのが基本です。また、今回作成したプロジェクトはExpoを利用しているので、Expo Goというアプリを利用して実行することもできます。
+iOSアプリはiPhoneシミュレータ、AndroidアプリはAndroidエミュレータで起動するのが基本です。また、今回作成したプロジェクトはExpoを利用しているので、Expo Goというアプリでも実行できます。
 
 実行方法の中で紹介しているコマンドは、全てプロジェクトのルートディレクトリ（`package.json`のあるディレクトリ）で実行してください。
 
 うまく起動できない場合は、[トラブルシュート](../../troubleshooting.md)を参照してください。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
 <Tabs
   defaultValue="expo"
@@ -20,6 +22,8 @@ iOSアプリはiPhoneシミュレータ、AndroidアプリはAndroidエミュレ
     {label: 'iPhoneシミュレータ', value: 'iphone'},
     {label: 'Androidエミュレータ', value: 'android'},
   ]}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 <TabItem value="expo">
 
@@ -38,6 +42,7 @@ npx expo start
 This command requires Expo CLI.
 Do you want to install it globally [Y/n]?
 ```
+
 :::
 
 ターミナル上、もしくは起動したブラウザの左下に表示されたQRコードをスキャンします。AndroidではExpo Goから、iOSではOSのカメラアプリからQRコードをスキャンしてください。
@@ -49,23 +54,25 @@ iOSでは、QRコードをスキャンするとExpo Goで表示するかどう�
 :::info
 `npx expo start`では、Expoの開発者ツールとMetro Bundlerが起動します。デフォルトでは開発者ツールは`19002`ポート、Metro Bundlerは`19000`ポートでそれぞれ起動します。
 
-ブラウザがうまく起動せず開発者ツールの画面が自動的に開かれなかったとしても、[http://localhost:19002](http://localhost:19002)にアクセスすれば表示することができます。
+ブラウザがうまく起動せず開発者ツールの画面が自動的に開かれなかったとしても、[http://localhost:19002](http://localhost:19002)にアクセスすれば表示できます。
 
-なお、他のプロセスなどによってこれらのポートがすでに利用されている場合は、自動的に異なるポートが選択されて起動します。その場合でも、次のように表示されているログからURLを確認して開発者ツールにアクセスできます。
-```
+なお、他のプロセスなどによってこれらのポートがすでに利用されている場合は、自動的に異なるポートが選択されて起動します。その場合でも、次のように表示されているログからURLを確認して開発者ツールを表示できます。
+
+```console
 Expo DevTools is running at http://localhost:19003
 ```
+
 :::
 
 </TabItem>
 <TabItem value="android">
 
-`npm run android` と実行することで、Androidのエミュレータが起動しアプリが実行されます。
+`npm run android` と実行することで、Androidのエミュレータ内でアプリが起動します。
 
 </TabItem>
 <TabItem value="iphone">
 
-`npm run ios` と実行することで、iPhoneのシミュレータが起動しアプリが実行されます。
+`npm run ios` と実行することで、iPhoneのシミュレータ内でアプリが起動します。
 
 </TabItem>
 </Tabs>

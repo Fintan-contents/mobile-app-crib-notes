@@ -27,6 +27,8 @@ Metro Bundlerにアクセスできない場合は、`8081`ポートを利用し�
 
 `8081`ポートを利用しているプロセスは、次のコマンドで確認できます。
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
 <Tabs
   groupId="operating-systems"
   defaultValue="win"
@@ -35,16 +37,19 @@ Metro Bundlerにアクセスできない場合は、`8081`ポートを利用し�
     {label: 'Windows', value: 'win'},
   ]
 }>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
 <TabItem value="mac">
 
-```
+```bash
 sudo lsof -i:ポート番号
 ```
 
 </TabItem>
 <TabItem value="win">
 
-```
+```bash
 netstat -nao | find 8081
 ```
 
@@ -53,10 +58,11 @@ netstat -nao | find 8081
 
 確認した結果、停止しても問題ないプロセスであれば、アクティビティモニタやタスクマネージャなどからプロセスを停止してください。
 
-
 ### ポートの変更
 
 Metro Bundlerのポートは、次の方法で変更できます。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
 <Tabs
   defaultValue="android"
@@ -66,16 +72,18 @@ Metro Bundlerのポートは、次の方法で変更できます。
   ]
 }>
 
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
 <TabItem value="android">
 Androidでは、`npm run android`に引数`--port`を渡すことで利用するポートを変更できます。
 
-```
+```bash
 npm run android -- --port=xxx
 ```
 
 もしくは、環境変数`RCT_METRO_PORT`を設定することでも、変更できます。
 
-```
+```bash
 RCT_METRO_PORT=xxx npm run android
 ```
 
@@ -86,6 +94,6 @@ iOSでは、ポートを変更するには次の対応が必要です。
 * `npm run ios`に引数`--port`を指定（`npm run ios -- --port=xxx`）
 * PodsプロジェクトのPreprocessor Macrosに`RCT_METRO_PORT=xxx`を設定
 * Build ConfigurationsのEnvironment Variablesに`RCT_METRO_PORT=xxx`を設定
-  
+
 </TabItem>
 </Tabs>
