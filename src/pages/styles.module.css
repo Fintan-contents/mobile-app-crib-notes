@@ -23,35 +23,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.features {
-  display: flex;
-  align-items: center;
-  padding: 2rem 0;
-  width: 100%;
-}
-
-.featureImage {
-  height: 200px;
-  width: 200px;
-}
-
-.featureCard {
-  color: var(--ifm-color-content);
-  border: solid var(--ifm-color-gray-300) 1px;
-  transition-property: border-color;
-  transition-duration: var(--ifm-button-transition-duration);
-  transition-timing-function: var(--ifm-transition-timing-default);
-}
-
-.featureCard:hover {
-  color: var(--ifm-color-content);
-  text-decoration: none;
-  border-color: var(--ifm-color-primary-lightest);
-}
-
-.featureCardImageContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}

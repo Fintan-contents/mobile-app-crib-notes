@@ -6,57 +6,38 @@ import Layout from '@theme/Layout';
 import clsx from 'clsx';
 import React from 'react';
 
+import {PageList} from '../components';
 import styles from './styles.module.css';
 
-const features = [
+const genericOverview = [
   {
     title: 'Reference',
     to: 'reference',
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
-    description: <>リファレンス</>,
+    summary: <>リファレンス</>,
   },
+];
+
+const reactNativeOverview = [
   {
     title: 'Use React Native',
     to: 'react-native/guide',
     imageUrl: 'img/undraw_docusaurus_tree.svg',
-    description: <>開発ガイド</>,
+    summary: <>開発ガイド</>,
   },
   {
     title: 'Learn React Native',
     to: 'react-native/learn',
     imageUrl: 'img/undraw_docusaurus_react.svg',
-    description: <>学習用コンテンツ</>,
+    summary: <>学習用コンテンツ</>,
+  },
+  {
+    title: 'Troubleshooting',
+    to: 'react-native/troubleshooting',
+    imageUrl: 'img/undraw_docusaurus_react.svg',
+    summary: <>トラブルシュート</>,
   },
 ];
-
-interface FeatureProps {
-  to: string;
-  imageUrl: string;
-  title: string;
-  description: JSX.Element;
-}
-
-function Feature({to, imageUrl, title, description}: FeatureProps) {
-  const toUrl = useBaseUrl(to);
-  const imgUrl = useBaseUrl(imageUrl);
-  return (
-    <div className={clsx('col col--4', styles.feature)}>
-      <Link className={clsx('card', styles.featureCard)} to={toUrl}>
-        <div className={clsx('card__header')}>
-          <h3>{title}</h3>
-        </div>
-        {imgUrl && (
-          <div className={clsx('card__image', styles.featureCardImageContainer)}>
-            <img className={styles.featureImage} src={imgUrl} alt={title} />
-          </div>
-        )}
-        <div className={clsx('card__body')}>
-          <p>{description}</p>
-        </div>
-      </Link>
-    </div>
-  );
-}
 
 function Home() {
   const context = useDocusaurusContext() as DocusaurusContext;
@@ -75,17 +56,8 @@ function Home() {
         </div>
       </header>
       <main>
-        {features && features.length > 0 && (
-          <section className={styles.features}>
-            <div className="container">
-              <div className="row">
-                {features.map((props, idx) => (
-                  <Feature key={idx} {...props} />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
+        <PageList overviews={genericOverview} colSize={4} />
+        <PageList overviews={reactNativeOverview} colSize={4} />
       </main>
     </Layout>
   );
