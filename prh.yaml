@@ -17,3 +17,5 @@ rules:
     patterns: サーバー
   - expected: CocoaPods
     patterns: Cocoapods
+  - expected: ToDo
+    patterns: Todo
