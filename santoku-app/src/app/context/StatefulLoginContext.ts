@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react';
-import type { LoginCredential, SessionId } from '../backend/StatefulAuthnService';
+import {createContext, useContext} from 'react';
+import type {LoginCredential, SessionId} from '../backend/StatefulAuthnService';
 
 export interface LoginApiAdapter {
   (credential: LoginCredential): Promise<void>;

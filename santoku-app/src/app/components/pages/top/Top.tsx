@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Title, Text } from '../../basics';
+import {StyleSheet} from 'react-native';
+import {Container, Title, Text} from '../../basics';
 
 const Top: React.FC = () => {
   return (

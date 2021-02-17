@@ -10,5 +10,5 @@ class NotAuthenticatedState implements Readonly<AuthenticationState> {
 
 const NotAuthenticated = Object.freeze(new NotAuthenticatedState());
 
-export type { AuthenticationState };
-export { NotAuthenticated };
+export type {AuthenticationState};
+export {NotAuthenticated};

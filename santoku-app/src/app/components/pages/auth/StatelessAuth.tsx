@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from 'react';
-import { Content, Spinner } from 'native-base';
-import { useStatelessLoginContext } from '../../../context/StatelessLoginContext';
-import { Container, Title, Text, TextButton, Section, Description, translateToViewData } from '../../basics';
+import React, {useState, useCallback} from 'react';
+import {Content, Spinner} from 'native-base';
+import {useStatelessLoginContext} from '../../../context/StatelessLoginContext';
+import {Container, Title, Text, TextButton, Section, Description, translateToViewData} from '../../basics';
 import WithStatelessLoginContext from '../../parts/WithStatelessLoginContext';
 
 class AuthnStateViewData {
@@ -12,7 +12,7 @@ class AuthnStateViewData {
 }
 
 const StatelessAuthInner: React.FC = () => {
-  const { signIn: loginContextSignIn, signOut: loginContextSighOut, refresh: loginContextRefresh, authState } = useStatelessLoginContext();
+  const {signIn: loginContextSignIn, signOut: loginContextSighOut, refresh: loginContextRefresh, authState} = useStatelessLoginContext();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [hasJustSignOut, setHasJustSignOut] = useState<boolean>(false);

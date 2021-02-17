@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Description, Section, TextButton, Title } from '../../basics';
+import React, {useState} from 'react';
+import {Description, Section, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
 
 const DeviseTokenNotificationForm: React.FC = () => {

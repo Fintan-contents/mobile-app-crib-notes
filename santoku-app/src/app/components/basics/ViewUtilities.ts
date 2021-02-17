@@ -2,7 +2,7 @@
 // @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any を有効にしても、この行は無視する。eslint-disable-next-line  @typescript-eslint/explicit-module-boundary-types @typescript-eslint/no-explicit-any
 function translateToViewData<T>(domain: any): T {
   // @typescript-eslint/no-unsafe-return を有効にしても、この行は無視する。 eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return { ...domain };
+  return {...domain};
 }
 
-export { translateToViewData };
+export {translateToViewData};

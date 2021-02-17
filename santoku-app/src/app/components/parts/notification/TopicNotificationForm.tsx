@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Description, TextButton, Title } from '../../basics';
+import React, {useState} from 'react';
+import {StyleSheet} from 'react-native';
+import {Description, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
 
 const TopicNotificationForm: React.FC = () => {

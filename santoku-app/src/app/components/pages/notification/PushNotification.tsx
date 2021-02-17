@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Description, KeyboardAvoidingView } from '../../basics';
+import {Container, Description, KeyboardAvoidingView} from '../../basics';
 import DeviseTokenNotificationForm from '../../parts/notification/DeviseTokenNotificationForm';
 import TopicNotificationForm from '../../parts/notification/TopicNotificationForm';
 

@@ -1,6 +1,6 @@
-import { OidcAuthenticated, OidcAuthenticationStateTranslator, OidcRefreshableAuthenticated } from './OidcAuthenticationState';
+import {OidcAuthenticated, OidcAuthenticationStateTranslator, OidcRefreshableAuthenticated} from './OidcAuthenticationState';
 import * as SecureStore from 'expo-secure-store';
-import { AuthenticationState } from '../AuthenticationState';
+import {AuthenticationState} from '../AuthenticationState';
 
 interface SecureStorageAdapter {
   save(state: OidcAuthenticated): Promise<void[]>;
@@ -55,4 +55,4 @@ class SecureStorageExpoSecureStoreAdapter implements SecureStorageAdapter {
   }
 }
 
-export { SecureStorageExpoSecureStoreAdapter as SecureStorageAdapter };
+export {SecureStorageExpoSecureStoreAdapter as SecureStorageAdapter};

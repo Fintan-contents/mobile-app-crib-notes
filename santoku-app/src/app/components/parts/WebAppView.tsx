@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useRef, memo } from 'react';
-import { StyleSheet, ActivityIndicator } from 'react-native';
-import { Header, Left, Title, Body, Right, Footer, Button, Icon, Text } from 'native-base';
-import { WebView, WebViewProps } from 'react-native-webview';
+import React, {useState, useCallback, useRef, memo} from 'react';
+import {StyleSheet, ActivityIndicator} from 'react-native';
+import {Header, Left, Title, Body, Right, Footer, Button, Icon, Text} from 'native-base';
+import {WebView, WebViewProps} from 'react-native-webview';
 
 type WebViewWrapperProps = {
   children: React.ReactNode;
@@ -59,7 +59,7 @@ type ExternalWebViewWrapperProps = {
 
 type Props = ExternalWebViewWrapperProps & WebViewProps;
 
-const WebAppView: React.FC<Props> = ({ close, closeLabel, ...webViewProps }) => {
+const WebAppView: React.FC<Props> = ({close, closeLabel, ...webViewProps}) => {
   const [title, setTitle] = useState('');
   const [canGoBack, setCanGoBack] = useState(false);
   const [canGoForward, setCanGoForward] = useState(false);
@@ -80,7 +80,7 @@ const WebAppView: React.FC<Props> = ({ close, closeLabel, ...webViewProps }) => 
     return <MemoActivityIndicator />;
   }, []);
 
-  const onNavigationStateChange = useCallback(({ title: newTitle, canGoBack: newCanGoBack, canGoForward: newCanGoForward }) => {
+  const onNavigationStateChange = useCallback(({title: newTitle, canGoBack: newCanGoBack, canGoForward: newCanGoForward}) => {
     setTitle(newTitle);
     setCanGoBack(newCanGoBack);
     setCanGoForward(newCanGoForward);
@@ -95,7 +95,7 @@ const WebAppView: React.FC<Props> = ({ close, closeLabel, ...webViewProps }) => 
   };
 
   return (
-    <WebViewWrapper {...{ close, closeLabel, title, canGoBack, backHandler, canGoForward, forwardHandler }}>
+    <WebViewWrapper {...{close, closeLabel, title, canGoBack, backHandler, canGoForward, forwardHandler}}>
       <WebView {...mergedWebViewProps} />
     </WebViewWrapper>
   );

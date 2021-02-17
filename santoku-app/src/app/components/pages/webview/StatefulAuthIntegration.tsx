@@ -1,15 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import { Spinner } from 'native-base';
+import React, {useCallback, useState} from 'react';
+import {Spinner} from 'native-base';
 
-import { AppConfig } from '../../../AppConfig';
-import { log } from '../../../../framework/logging';
+import {AppConfig} from '../../../AppConfig';
+import {log} from '../../../../framework/logging';
 import WebAppView from '../../parts/WebAppView';
 import StatefulLogin from '../../parts/StatefulLoginForm';
-import { Container, Description, Text, TextButton, Title } from '../../basics';
+import {Container, Description, Text, TextButton, Title} from '../../basics';
 import WithStatefulLoginContext from '../../parts/WithStatefulLoginContext';
-import { useStatefulLoginContext } from '../../../context/StatefulLoginContext';
-import type { LoginApiAdapter, LogoutApiAdapter } from '../../../context/StatefulLoginContext';
-import type { LoginCredential } from '../../../backend/StatefulAuthnService';
+import {useStatefulLoginContext} from '../../../context/StatefulLoginContext';
+import type {LoginApiAdapter, LogoutApiAdapter} from '../../../context/StatefulLoginContext';
+import type {LoginCredential} from '../../../backend/StatefulAuthnService';
 
 const removeLogoutButtonInWebView = `
   const array=Array.from(document.querySelectorAll('.headerRightPane span.headerElement'));
@@ -21,7 +21,7 @@ const removeLogoutButtonInWebView = `
 `;
 
 const StatefulAuthIntegrationInner: React.FC = () => {
-  const { sessionId, isAuthenticated, login: loginContextLogin, logout: loginContextLogout } = useStatefulLoginContext();
+  const {sessionId, isAuthenticated, login: loginContextLogin, logout: loginContextLogout} = useStatefulLoginContext();
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -31,7 +31,7 @@ const StatefulAuthIntegrationInner: React.FC = () => {
       await loginContextLogin(credential);
       setLoading(false);
     },
-    [loginContextLogin]
+    [loginContextLogin],
   );
 
   const logout = useCallback<LogoutApiAdapter>(async () => {
