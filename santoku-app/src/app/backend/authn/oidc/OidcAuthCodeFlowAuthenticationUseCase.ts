@@ -1,8 +1,8 @@
-import { AuthenticationState, NotAuthenticated } from '../AuthenticationState';
-import { SecureStorageAdapter } from './SecureStorageAdapter';
-import { OidcAuthCodeFlowAdapter } from './OidcAuthCodeFlowAdapter';
-import { OidcAuthenticated } from './OidcAuthenticationState';
-import { log } from '../../../../framework/logging';
+import {AuthenticationState, NotAuthenticated} from '../AuthenticationState';
+import {SecureStorageAdapter} from './SecureStorageAdapter';
+import {OidcAuthCodeFlowAdapter} from './OidcAuthCodeFlowAdapter';
+import {OidcAuthenticated} from './OidcAuthenticationState';
+import {log} from '../../../../framework/logging';
 
 const _api = new OidcAuthCodeFlowAdapter();
 const _storage = new SecureStorageAdapter();
@@ -61,4 +61,4 @@ class OidcAuthCodeFlowAuthenticationUseCase {
   }
 }
 
-export { OidcAuthCodeFlowAuthenticationUseCase };
+export {OidcAuthCodeFlowAuthenticationUseCase};

@@ -1,4 +1,4 @@
-import { Logger, LogLevel, LogLevelSet, LogMessageSupplier, StrictLoggerOptions } from './Logger';
+import {Logger, LogLevel, LogLevelSet, LogMessageSupplier, StrictLoggerOptions} from './Logger';
 
 const ConsoleMethod = Object.freeze({
   trace: () => console.trace,
@@ -66,4 +66,4 @@ class SimpleConsoleLogger implements Logger {
   }
 }
 
-export { SimpleConsoleLogger };
+export {SimpleConsoleLogger};

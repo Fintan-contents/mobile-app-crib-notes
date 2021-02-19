@@ -75,6 +75,7 @@ Metro Bundlerのポートは、次の方法で変更できます。
 <!-- textlint-enable ja-technical-writing/sentence-length -->
 
 <TabItem value="android">
+
 Androidでは、`npm run android`に引数`--port`を渡すことで利用するポートを変更できます。
 
 ```bash
@@ -89,11 +90,15 @@ RCT_METRO_PORT=xxx npm run android
 
 </TabItem>
 <TabItem value="ios">
-iOSでは、ポートを変更するには次の対応が必要です。
+iOSでは、ポートを変更するには次の通りに対応してください。
 
-* `npm run ios`に引数`--port`を指定（`npm run ios -- --port=xxx`）
 * PodsプロジェクトのPreprocessor Macrosに`RCT_METRO_PORT=xxx`を設定
 * Build ConfigurationsのEnvironment Variablesに`RCT_METRO_PORT=xxx`を設定
+* 上記を設定後、`npm run ios`に引数`--port`を指定
+
+```bash
+npm run ios -- --port=xxx
+```
 
 </TabItem>
 </Tabs>

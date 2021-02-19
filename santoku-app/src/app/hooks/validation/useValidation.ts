@@ -1,25 +1,25 @@
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import {useState, useCallback, useMemo, useEffect} from 'react';
 
 export enum CommonErrorKey {
   COMMON = 'common',
 }
 
-type Touched<T extends string> = { [key in T]: boolean };
-type Dirty<T extends string> = { [key in T]: boolean };
-type BaseErrors = { [CommonErrorKey.COMMON]?: string[] };
-export type Errors<T extends string> = { [key in T]: string[] } & BaseErrors;
+type Touched<T extends string> = {[key in T]: boolean};
+type Dirty<T extends string> = {[key in T]: boolean};
+type BaseErrors = {[CommonErrorKey.COMMON]?: string[]};
+export type Errors<T extends string> = {[key in T]: string[]} & BaseErrors;
 export type ErrorsKey<T extends string> = T | keyof BaseErrors;
-export type Values<T extends string> = { [key in T]: string };
+export type Values<T extends string> = {[key in T]: string};
 
 export function useValidation<T extends string>(initialValues: Values<T>, validate: (values: Values<T>) => Errors<T>) {
   const keys = useMemo(() => Object.keys(initialValues), [initialValues]);
-  const initialTouched: Touched<T> = keys.reduce((result, key) => ({ ...result, ...{ [key]: false } }), {});
-  const initialDirty: Dirty<T> = keys.reduce((result, key) => ({ ...result, ...{ [key]: false } }), {});
+  const initialTouched: Touched<T> = keys.reduce((result, key) => ({...result, ...{[key]: false}}), {});
+  const initialDirty: Dirty<T> = keys.reduce((result, key) => ({...result, ...{[key]: false}}), {});
 
   const [values, setValues] = useState(initialValues);
   const [touched, setTouched] = useState(initialTouched);
   const [dirty, setDirty] = useState(initialDirty);
-  const [errors, setErrors] = useState<Errors<T>>(keys.reduce((result, key) => ({ ...result, ...{ [key]: [] } }), { common: [] }));
+  const [errors, setErrors] = useState<Errors<T>>(keys.reduce((result, key) => ({...result, ...{[key]: []}}), {common: []}));
 
   const touchedSome = useMemo(() => {
     return Object.keys(touched).some((key: T) => touched[key]);
@@ -35,10 +35,10 @@ export function useValidation<T extends string>(initialValues: Values<T>, valida
 
   const validateAll = (newValues: Values<T>) => {
     const removeCommonError = touchedSome || dirtySome;
-    const commonError = errors[CommonErrorKey.COMMON] ? { [CommonErrorKey.COMMON]: errors[CommonErrorKey.COMMON] } : {};
+    const commonError = errors[CommonErrorKey.COMMON] ? {[CommonErrorKey.COMMON]: errors[CommonErrorKey.COMMON]} : {};
     const newCommonError = removeCommonError ? {} : commonError;
 
-    setErrors({ ...validate(newValues), ...newCommonError });
+    setErrors({...validate(newValues), ...newCommonError});
   };
 
   useEffect(() => {
@@ -47,31 +47,31 @@ export function useValidation<T extends string>(initialValues: Values<T>, valida
 
   const onChangeText = useCallback(
     (key: T, newValue: string) => {
-      setDirty({ ...dirty, ...{ [key]: true } });
-      setValues({ ...values, ...{ [key]: newValue } });
+      setDirty({...dirty, ...{[key]: true}});
+      setValues({...values, ...{[key]: newValue}});
     },
-    [dirty, values]
+    [dirty, values],
   );
 
   const onBlur = useCallback(
     (key: T) => {
-      setTouched({ ...touched, ...{ [key]: true } });
+      setTouched({...touched, ...{[key]: true}});
     },
-    [touched]
+    [touched],
   );
 
   const setCommonErrors = useCallback(
     (messages: string[]) => {
-      setErrors({ ...errors, ...{ [CommonErrorKey.COMMON]: messages } });
+      setErrors({...errors, ...{[CommonErrorKey.COMMON]: messages}});
     },
-    [errors]
+    [errors],
   );
 
   const setError = useCallback(
     (key: T, messages: string[]) => {
-      setErrors({ ...errors, ...{ [key]: messages } });
+      setErrors({...errors, ...{[key]: messages}});
     },
-    [errors]
+    [errors],
   );
 
   const hasError = useCallback(
@@ -82,7 +82,7 @@ export function useValidation<T extends string>(initialValues: Values<T>, valida
 
       return !!errors[key];
     },
-    [errors]
+    [errors],
   );
 
   const shouldShowErrorMessage = useCallback(
@@ -93,7 +93,7 @@ export function useValidation<T extends string>(initialValues: Values<T>, valida
 
       return hasError(key) && touched[key] && dirty[key];
     },
-    [dirty, hasError, touched]
+    [dirty, hasError, touched],
   );
 
   const clearStatus = useCallback(() => {

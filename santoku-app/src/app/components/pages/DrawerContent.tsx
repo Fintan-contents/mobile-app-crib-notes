@@ -1,7 +1,7 @@
 import React from 'react';
 // ReactNativeを使用したコンポーネントの呼び出し
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import { Container, Content, ListItem } from 'native-base';
+import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {Container, Content, ListItem} from 'native-base';
 
 type MenuProps = {
   to: string;
@@ -14,8 +14,7 @@ const MenuItem: React.FC<MenuProps> = (props) => {
       onPress={() => {
         props.navigation.navigate(props.to);
       }}
-      style={styles.listItem}
-    >
+      style={styles.listItem}>
       <Text style={styles.menuTextStyle}>{props.children}</Text>
     </ListItem>
   );
@@ -36,8 +35,7 @@ const DrawerContent: React.FC<Props> = (props) => {
               style={styles.overlayTextStyle}
               onPress={() => {
                 props.navigation.navigate('TopDrawer');
-              }}
-            >
+              }}>
               SantokuApp
             </Text>
           </View>

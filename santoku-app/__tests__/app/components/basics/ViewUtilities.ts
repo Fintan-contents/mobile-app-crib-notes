@@ -1,4 +1,4 @@
-import { translateToViewData } from '../../../../src/app/components/basics';
+import {translateToViewData} from '../../../../src/app/components/basics';
 
 class Data1 {
   p1 = 'p1';

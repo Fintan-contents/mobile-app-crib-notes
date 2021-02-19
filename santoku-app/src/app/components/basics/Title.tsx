@@ -1,13 +1,13 @@
 import React from 'react';
-import { StyleSheet, TextStyle } from 'react-native';
-import { Text } from 'native-base';
-import type { RnViewStyleProp } from 'native-base';
+import {StyleSheet, TextStyle} from 'react-native';
+import {Text} from 'native-base';
+import type {RnViewStyleProp} from 'native-base';
 
 type Props = {
   style?: RnViewStyleProp | Array<RnViewStyleProp>;
 };
 
-const Title: React.FC<Props> = ({ children, style }) => {
+const Title: React.FC<Props> = ({children, style}) => {
   return <Text style={[styles.title, style]}>{children}</Text>;
 };
 

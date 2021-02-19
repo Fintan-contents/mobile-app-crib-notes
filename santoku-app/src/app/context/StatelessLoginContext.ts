@@ -1,5 +1,5 @@
-import { createContext, useContext } from 'react';
-import type { AuthenticationState } from '../backend/authn/AuthenticationState';
+import {createContext, useContext} from 'react';
+import type {AuthenticationState} from '../backend/authn/AuthenticationState';
 
 export interface OidcAuthCodeTokenClaimCallback {
   (): Promise<void>;

@@ -1,19 +1,19 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Button, Icon } from 'native-base';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {StyleSheet} from 'react-native';
+import {Button, Icon} from 'native-base';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import DrawerContent from './DrawerContent';
 import StatefulAuthIntegration from './webview/StatefulAuthIntegration';
 import StatelessAuth from './auth/StatelessAuth';
 import Top from './top/Top';
 import PushNotification from './notification/PushNotification';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 
 const TopScreenStack = createStackNavigator();
 
 const TopScreen: React.FC = () => {
-  const { dispatch } = useNavigation();
+  const {dispatch} = useNavigation();
   return (
     <TopScreenStack.Navigator>
       <TopScreenStack.Screen
@@ -21,8 +21,8 @@ const TopScreen: React.FC = () => {
         component={Top}
         options={{
           title: 'Top',
-          headerStyle: { backgroundColor: '#9DC6BF' },
-          headerTitleStyle: { fontWeight: 'bold' },
+          headerStyle: {backgroundColor: '#9DC6BF'},
+          headerTitleStyle: {fontWeight: 'bold'},
           headerLeft: () => (
             <Button transparent>
               <Icon name="menu" style={styles.icon} onPress={() => dispatch(DrawerActions.openDrawer())} />
@@ -37,7 +37,7 @@ const TopScreen: React.FC = () => {
 const AuthIntegrationWithWebAppsStack = createStackNavigator();
 
 const AuthIntegrationWithWebAppsStackScreen: React.FC = () => {
-  const { dispatch } = useNavigation();
+  const {dispatch} = useNavigation();
   return (
     <AuthIntegrationWithWebAppsStack.Navigator>
       <AuthIntegrationWithWebAppsStack.Screen
@@ -45,8 +45,8 @@ const AuthIntegrationWithWebAppsStackScreen: React.FC = () => {
         component={StatefulAuthIntegration}
         options={{
           title: 'Webアプリとの認証情報の連携',
-          headerStyle: { backgroundColor: '#9DC6BF' },
-          headerTitleStyle: { fontWeight: 'bold' },
+          headerStyle: {backgroundColor: '#9DC6BF'},
+          headerTitleStyle: {fontWeight: 'bold'},
           headerLeft: () => (
             <Button transparent>
               <Icon name="menu" style={styles.icon} onPress={() => dispatch(DrawerActions.openDrawer())} />
@@ -61,7 +61,7 @@ const AuthIntegrationWithWebAppsStackScreen: React.FC = () => {
 const StatelessAuthStack = createStackNavigator();
 
 const StatelessAuthScreen: React.FC = () => {
-  const { dispatch } = useNavigation();
+  const {dispatch} = useNavigation();
   return (
     <StatelessAuthStack.Navigator>
       <StatelessAuthStack.Screen
@@ -69,8 +69,8 @@ const StatelessAuthScreen: React.FC = () => {
         component={StatelessAuth}
         options={{
           title: 'ステートレスな認証',
-          headerStyle: { backgroundColor: '#9DC6BF' },
-          headerTitleStyle: { fontWeight: 'bold' },
+          headerStyle: {backgroundColor: '#9DC6BF'},
+          headerTitleStyle: {fontWeight: 'bold'},
           headerLeft: () => (
             <Button transparent>
               <Icon name="menu" style={styles.icon} onPress={() => dispatch(DrawerActions.openDrawer())} />
@@ -85,7 +85,7 @@ const StatelessAuthScreen: React.FC = () => {
 const PushNotificationStack = createStackNavigator();
 
 const PushNotificationScreen: React.FC = () => {
-  const { dispatch } = useNavigation();
+  const {dispatch} = useNavigation();
   return (
     <PushNotificationStack.Navigator>
       <PushNotificationStack.Screen
@@ -93,8 +93,8 @@ const PushNotificationScreen: React.FC = () => {
         component={PushNotification}
         options={{
           title: 'プッシュ通知',
-          headerStyle: { backgroundColor: '#9DC6BF' },
-          headerTitleStyle: { fontWeight: 'bold' },
+          headerStyle: {backgroundColor: '#9DC6BF'},
+          headerTitleStyle: {fontWeight: 'bold'},
           headerLeft: () => (
             <Button transparent>
               <Icon name="menu" style={styles.icon} onPress={() => dispatch(DrawerActions.openDrawer())} />
@@ -105,7 +105,6 @@ const PushNotificationScreen: React.FC = () => {
     </PushNotificationStack.Navigator>
   );
 };
-
 
 const Drawer = createDrawerNavigator();
 

@@ -1,18 +1,18 @@
-import React, { useCallback, useState } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
-import { Form, Item, Input, Label, Text } from 'native-base';
-import { Container, Section, Title, Description, KeyboardAvoidingView, TextButton } from '../basics';
-import { useValidation, CommonErrorKey } from '../../hooks/validation';
-import type { Errors, ErrorsKey, Values } from '../../hooks/validation';
-import type { LoginApiAdapter } from '../../context/StatefulLoginContext';
+import React, {useCallback, useState} from 'react';
+import {StyleSheet, TextInput} from 'react-native';
+import {Form, Item, Input, Label, Text} from 'native-base';
+import {Container, Section, Title, Description, KeyboardAvoidingView, TextButton} from '../basics';
+import {useValidation, CommonErrorKey} from '../../hooks/validation';
+import type {Errors, ErrorsKey, Values} from '../../hooks/validation';
+import type {LoginApiAdapter} from '../../context/StatefulLoginContext';
 
 enum FormData {
   USER_ID = 'userId',
   PASSWORD = 'password',
 }
 
-const { USER_ID, PASSWORD } = FormData;
-const { COMMON } = CommonErrorKey;
+const {USER_ID, PASSWORD} = FormData;
+const {COMMON} = CommonErrorKey;
 
 const errorMessage = (errors: Errors<FormData>, key: ErrorsKey<FormData>): JSX.Element[] | null => {
   const messages = errors[key];
@@ -27,7 +27,7 @@ const errorMessage = (errors: Errors<FormData>, key: ErrorsKey<FormData>): JSX.E
   ));
 };
 
-const validate = ({ userId, password }: Values<FormData>) => {
+const validate = ({userId, password}: Values<FormData>) => {
   const result: Errors<FormData> = {
     userId: [],
     password: [],
@@ -52,10 +52,10 @@ type Props = {
   login: LoginApiAdapter;
 };
 
-const StatefulLoginForm: React.FC<Props> = ({ login }) => {
-  const { values, onBlur, onChangeText, errors, setCommonErrors, invalid, shouldShowErrorMessage, clearStatus } = useValidation<FormData>(
+const StatefulLoginForm: React.FC<Props> = ({login}) => {
+  const {values, onBlur, onChangeText, errors, setCommonErrors, invalid, shouldShowErrorMessage, clearStatus} = useValidation<FormData>(
     initialValues,
-    validate
+    validate,
   );
 
   // 入力中キーボードのNextボタンをタップした時に次の入力項目にフォーカスを移すために使う
