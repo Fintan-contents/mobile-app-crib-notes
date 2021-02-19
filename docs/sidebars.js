@@ -96,6 +96,10 @@ module.exports = {
   ],
   troubleshoot: {
     About: ['react-native/troubleshooting'],
-    アプリを実行できない: ['react-native/troubleshooting/unable-to-load-script', 'react-native/troubleshooting/debug-keystore-not-found'],
+    アプリを実行できない: [
+      'react-native/troubleshooting/unable-to-load-script',
+      'react-native/troubleshooting/debug-keystore-not-found',
+      'react-native/troubleshooting/cant-build-in-xcode',
+    ],
   },
 };
