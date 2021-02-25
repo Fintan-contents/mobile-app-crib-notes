@@ -1,13 +1,32 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {StyleSheet} from 'react-native';
+import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
 import {Description, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
 
-const TopicNotificationForm: React.FC = () => {
-  const [topicName, setTopicName] = useState('');
-  const [topicTitle, setTopicTitle] = useState('');
-  const [topicText, setTopicText] = useState('');
-  const [sendTopicName, setSendTopicName] = useState('');
+type Props = {
+  deviseToken?: string;
+};
+
+const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
+  const [topicName, setTopicName] = useState<string>();
+  const [topicTitle, setTopicTitle] = useState<string>();
+  const [topicText, setTopicText] = useState<string>();
+  const [sendTopicName, setSendTopicName] = useState<string>();
+
+  const subscribeToTopic = useCallback(() => {
+    if (topicName) {
+      pushNotificationService.subscribeToTopic(topicName).catch((e) => {
+        console.warn(`fail to subscribe topic [${topicName}]`, e);
+      });
+    }
+  }, [topicName]);
+
+  const sendTopic = useCallback(() => {
+    if (deviseToken) {
+      pushNotificationService.sendMessage({data: {token: deviseToken}});
+    }
+  }, [deviseToken]);
 
   return (
     <>
@@ -23,12 +42,7 @@ const TopicNotificationForm: React.FC = () => {
         onChangeText={(value) => setTopicName(value)}
         placeholder="購読したいトピック名を入力してください"
       />
-      <TextButton
-        onPress={() => {
-          return true;
-        }}
-        value="この端末で購読するトピックを追加"
-      />
+      <TextButton onPress={subscribeToTopic} value="この端末で購読するトピックを追加" />
       <FormInput
         label="通知メッセージの送信先トピック名"
         value={sendTopicName}
@@ -47,12 +61,7 @@ const TopicNotificationForm: React.FC = () => {
         onChangeText={(value) => setTopicText(value)}
         placeholder="通知メッセージの本文を入力してください"
       />
-      <TextButton
-        onPress={() => {
-          return true;
-        }}
-        value="指定したトピックにプッシュ通知を送信する"
-      />
+      <TextButton onPress={sendTopic} value="指定したトピックにプッシュ通知を送信する" />
     </>
   );
 };

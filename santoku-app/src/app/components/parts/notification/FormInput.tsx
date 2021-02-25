@@ -5,7 +5,7 @@ import {Input, Item, Label} from 'native-base';
 type Props = {
   label: string;
   onChangeText?: (value: string) => void;
-  value: string;
+  value?: string;
   placeholder?: string;
   textStyle?: StyleProp<TextStyle>;
   readonly?: boolean;
