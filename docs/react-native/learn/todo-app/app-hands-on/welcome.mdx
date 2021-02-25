@@ -1,0 +1,83 @@
+---
+title: Welcome
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## ToDoアプリへようこそ
+
+ではさっそくToDoアプリの実装をすすめていきましょう。
+
+`/src/screens/home/Home.tsx`を`/src/screens/home/Welcome.tsx`にリネームし、次のコードに置き換えてください。
+
+```typescript jsx title="/src/screens/home/Welcome.tsx"
+import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Button, Text} from 'react-native-elements';
+
+export const Welcome: React.FC = () => {
+  const navigation = useNavigation();
+  return (
+    <View style={styles.container}>
+      <Text h1>Welcome</Text>
+      <View>
+        <Button onPress={() => navigation.navigate('Instructions')} title="登録する" />
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+```
+
+`/src/screens/home/index.tsx`を次の通り修正してください。
+
+:::note
+次のマークで追加・削除箇所を示します。
+変更は追加と削除の組み合わせで示します。
+
+- `+`: 追加
+- `-`: 削除
+:::
+
+```diff title="/src/screens/home/index.tsx"
+- export * from './Home';
++ export * from './Welcome';
+```
+
+最後に`/src/navigation/RootStackNav.tsx`を修正してください。
+
+```diff title="/src/navigation/RootStackNav.tsx"
+  import {createStackNavigator} from '@react-navigation/stack';
+  import React from 'react';
+- import {Home, Instructions} from 'screens';
++ import {Welcome, Instructions} from 'screens';
+
+  const nav = createStackNavigator();
+  export const RootStackNav: React.FC = () => {
+    return (
+-     <nav.Navigator initialRouteName={Home.name}>
+-       <nav.Screen name="Home" component={Home} options={{headerShown: false}} />
++     <nav.Navigator initialRouteName={Welcome.name}>
++       <nav.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
+        <nav.Screen name="Instructions" component={Instructions} />
+      </nav.Navigator>
+    );
+  };
+```
+
+[アプリの実装前に](../../basic-concepts.mdx)で得た知識があれば、上記コードは理解できるでしょう。
+
+修正できたら実行してください。
+次の画面が表示できたら成功です。
+次へ進みましょう。
+
+![Welcome](welcome.png)

@@ -91,7 +91,16 @@ module.exports = {
     {
       type: 'category',
       label: 'ToDoアプリの実装',
-      items: ['react-native/learn/todo-app', 'react-native/learn/todo-app/app-spec', 'react-native/learn/todo-app/app-project-desc'],
+      items: [
+        'react-native/learn/todo-app',
+        'react-native/learn/todo-app/app-spec',
+        'react-native/learn/todo-app/app-project-desc',
+        {
+          type: 'category',
+          label: 'ToDoアプリの実装',
+          items: ['react-native/learn/todo-app/app-hands-on', 'react-native/learn/todo-app/app-hands-on/welcome'],
+        },
+      ],
     },
   ],
   troubleshoot: {
