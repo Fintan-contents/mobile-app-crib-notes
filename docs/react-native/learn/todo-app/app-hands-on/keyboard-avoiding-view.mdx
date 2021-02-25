@@ -1,0 +1,60 @@
+---
+title: 仮想キーボードの制御
+---
+
+## KeyboardAvoidingView
+
+仮想キーボードが入力欄に覆いかぶさって操作しづらいことがあります。
+このような問題を解決するために、React Nativeではコアコンポーネントとして`KeyboardAvoidingView`が用意されています。
+キーボードの高さに基づいて、高さや位置、下部のパディングを自動調整してくれます。
+
+早速ログイン画面を修正しましょう。
+
+`/src/screens/auth/Login.tsx`を次の通り修正してください。
+
+```diff title="/src/screens/auth/Login.tsx"
+  import {useNavigation} from '@react-navigation/native';
+  import {useFormik} from 'formik';
+  import React, {useCallback} from 'react';
+- import {StyleSheet, View} from 'react-native';
++ import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
+  import {Button, Input} from 'react-native-elements';
+  import * as Yup from 'yup';
+
+  export const Login: React.FC = () => {
+    /* ～省略～ */
+    return (
++     <KeyboardAvoidingView
++       behavior={Platform.select({
++         ios: 'padding',
++         android: undefined,
++       } as const)}
++       style={styles.container}>
+        <View style={styles.form}>
+  
+    /* ～省略～ */
+  
+          <Button
+            disabled={formik.isSubmitting}
+            onPress={() => formik.handleSubmit()}
+            title="ログインする"
+            buttonStyle={styles.button}
+          />
+        </View>
++     </KeyboardAvoidingView>
+    );
+  };
+  
+  const styles = StyleSheet.create({
++   container: {
++     flex: 1,
++   },
+    /* ～省略～ */
+```
+
+`behavior`でキーボードの動作を指定します。
+`Platform.select`を用いることで、iOSとAndroidそれぞれの動作を指定できます。
+ここでは、iOSの場合に下部パディングが調整されるよう指定しています。
+
+修正できたら実行してください。
+仮想キーボードが入力の邪魔にならないよう自動調整されていれば成功です。

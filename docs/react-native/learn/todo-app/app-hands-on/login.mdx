@@ -1,0 +1,235 @@
+---
+title: ログイン画面
+---
+
+## ログイン画面
+
+次はログイン画面を実装します。
+
+ログイン画面には名前とパスワードの入力フォームがあり、入力フォームの検証が必要です。
+独自でフォーム検証機能を用意することも出来ますが、ここでは[Reactの公式ドキュメント](https://ja.reactjs.org/docs/forms.html#fully-fledged-solutions)で紹介されている[Formik](https://formik.org/)を使用します。
+
+次のコマンドでインストールします。
+
+```console
+npm install formik@2.2.6
+```
+
+:::note
+詳細は[Formikのドキュメント](https://formik.org/docs/overview)を参照してください。
+:::
+
+また、バリデータも[Formikのドキュメント](https://formik.org/docs/overview#complementary-packages)で紹介されている[Yup](https://github.com/jquense/yup)を使用します。
+
+次のコマンドでインストールします。
+
+```console
+npm install yup@0.32.9
+```
+
+:::note
+詳細は[YupのGitHub](https://github.com/jquense/yup)を参照してください。
+:::
+
+インストールが完了したらログイン画面を実装しましょう。
+`/src/screens/auth/Login.tsx`を追加してください。
+
+```typescript jsx title="/src/screens/auth/Login.tsx"
+import {useNavigation} from '@react-navigation/native';
+import {useFormik} from 'formik';
+import React, {useCallback} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Button, Input} from 'react-native-elements';
+import * as Yup from 'yup';
+
+export const Login: React.FC = () => {
+  const navigation = useNavigation();
+  const login = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
+
+  const formik = useFormik({
+    initialValues: {name: '', password: ''},
+    validationSchema: Yup.object().shape({
+      name: Yup.string().required('名前を入力してください'),
+      password: Yup.string().required('パスワードを入力してください'),
+    }),
+    validateOnChange: false,
+    onSubmit: login,
+  });
+
+  return (
+    <View style={styles.form}>
+      <Input
+        label="名前"
+        containerStyle={styles.input}
+        autoCapitalize="none"
+        errorMessage={formik.errors.name}
+        onChangeText={formik.handleChange('name')}
+        value={formik.values.name}
+      />
+      <Input
+        label="パスワード"
+        containerStyle={styles.input}
+        errorMessage={formik.errors.password}
+        secureTextEntry
+        onChangeText={formik.handleChange('password')}
+        value={formik.values.password}
+      />
+      <Button
+        disabled={formik.isSubmitting}
+        onPress={() => formik.handleSubmit()}
+        title="ログインする"
+        buttonStyle={styles.button}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  form: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  input: {marginTop: 20, width: '80%'},
+  button: {
+    marginTop: 30,
+  },
+});
+```
+
+上記コードでは、入力テキスト（`Input`）とボタン（`Button`）に[React Native Elements](https://reactnativeelements.com/)を使用しています。
+エラー時のガイドメッセージ表示やボタンのスタイル指定など、コアコンポーネントにない機能が[React Native Elements](https://reactnativeelements.com/)には揃っています。
+それぞれの使い方は公式ドキュメントを確認してください。
+
+- [`Input`](https://reactnativeelements.com/docs/input)
+- [`Button`](https://reactnativeelements.com/docs/button)
+
+:::note
+RN Spoilerからプロジェクトを作成した場合、React Native Elementsがデフォルトでプロジェクトに入っています。
+:::
+
+`Formik`で提供されている`useFormik`フックを用いて入力フォームの検証方法を定義しています。
+
+```typescript jsx
+  /* ～省略～ */
+  const formik = useFormik({
+    initialValues: {name: '', password: ''},
+    validationSchema: Yup.object().shape({
+      name: Yup.string().required('名前を入力してください'),
+      password: Yup.string().required('パスワードを入力してください'),
+    }),
+    validateOnChange: false,
+    onSubmit: login,
+  });
+  /* ～省略～ */
+```
+
+名前とパスワードを必須入力としています。
+バリデーションが成功した場合、`onSubmit`に指定された`login`処理が呼ばれます。
+`login`処理はまだ未実装（前の画面に戻るだけ）です。
+`validateOnChange`に`false`を設定することで、ログインボタン押下時のみ入力値が検証されます。
+
+:::info
+`validateOnChange`のデフォルトは`true`です。
+指定しない場合は入力の都度バリデーションされます。
+:::
+
+では、Welcome画面からログイン画面に遷移できるように修正します。
+`/src/screens/auth/index.tsx`を追加してください。
+
+```typescript jsx title="/src/screens/auth/index.tsx"
+export * from './Login';
+```
+
+次に`/src/screens/index.tsx`を修正してください。
+
+```diff title="/src/screens/index.tsx"
++ export * from './auth';
+  export * from './home';
+  export * from './instructions';
+```
+
+最後に`/src/navigation/RootStackNav.tsx`を修正してください。
+修正量が多いので、次のソースコードで`RootStackNav.tsx`を上書きしてください。
+
+```typescript jsx title="/src/navigation/RootStackNav.tsx"
+import {RouteProp, useNavigation} from '@react-navigation/native';
+import {createStackNavigator, StackNavigationOptions} from '@react-navigation/stack';
+import React from 'react';
+import {Button} from 'react-native-elements';
+import {Instructions, Login, Welcome} from 'screens';
+
+type RootStackParamList = {
+  Welcome: undefined;
+  Login: undefined;
+  Instructions: undefined;
+};
+
+const nav = createStackNavigator<RootStackParamList>();
+const HeaderRight: React.FC = () => {
+  const navigation = useNavigation();
+  return <Button type="clear" onPress={() => navigation.navigate('Login')} title="ログイン" />;
+};
+const createScreenOptions: (props: {
+  route: RouteProp<RootStackParamList, keyof RootStackParamList>;
+}) => StackNavigationOptions = ({route}) => {
+  if (route.name === 'Login') {
+    return {};
+  } else {
+    return {headerRight: () => <HeaderRight />};
+  }
+};
+
+export const RootStackNav: React.FC = () => {
+  return (
+    <nav.Navigator initialRouteName="Welcome" screenOptions={createScreenOptions}>
+      <nav.Screen
+        name="Welcome"
+        component={Welcome}
+        options={{
+          headerTitle: 'Welcome',
+        }}
+      />
+      <nav.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerTitle: 'ログイン',
+        }}
+      />
+      <nav.Screen name="Instructions" component={Instructions} />
+    </nav.Navigator>
+  );
+};
+```
+
+`Navigator`の`screenOptions`でヘッダーのタイトルや書式などが設定できます。
+次のコード箇所を確認ください。
+
+```typescript jsx
+  /* ～省略～ */
+const createScreenOptions: (props: {
+  route: RouteProp<RootStackParamList, keyof RootStackParamList>;
+}) => StackNavigationOptions = ({route}) => {
+  if (route.name === 'Login') {
+    return {};
+  } else {
+    return {headerRight: () => <HeaderRight />};
+  }
+};
+  /* ～省略～ */
+```
+
+上記コードにより、ログイン以外の画面で右上にログイン画面への遷移ボタンが表示されます。
+
+:::note
+`ScreenOptions`の詳細は[React Navigationのドキュメント](https://reactnavigation.org/docs/screen-options/)を参照してください。
+:::
+
+修正できたら実行してください。
+Welcome画面右上のログインから次の画面へ遷移できたら成功です。
+入力フォームの検証が動作しているかも併せて確認してください。
+
+![Login](login.png)
