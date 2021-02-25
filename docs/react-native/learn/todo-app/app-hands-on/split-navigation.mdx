@@ -1,0 +1,147 @@
+---
+title: ナビゲーションの整理
+---
+
+## ナビゲーション定義の分割
+
+いままでの修正で`RootStackNav`のコード量が膨れ上がってしまいました。
+今後の修正に備え、ここでナビゲーション定義を適切な大きさにモジュール分割します。
+
+分割後のモジュールは次のとおりとなります。
+
+- RootStackNav.tsx
+- AuthedStackNav.tsx
+- UnauthedStackNav.tsx
+- types.ts
+
+まずは型定義を`types.ts`に切り出します。
+
+:::info
+型定義を別ファイルに切り出す方法は、React Navigationの公式ドキュメントでも推奨されています。
+
+[Type checking screens](https://reactnavigation.org/docs/typescript/#type-checking-screens)
+
+> We recommend creating a separate types.tsx file where you keep the types and import them in your component files instead of repeating them in each file.
+:::
+
+```typescript jsx title="/src/navigation/types.ts"
+import {NavigatorScreenParams} from '@react-navigation/native';
+
+export type UnauthedStackParamList = {
+  Welcome: undefined;
+  Login: undefined;
+  Instructions: undefined;
+};
+
+export type AuthedStackParamList = {
+  UserSetting: undefined;
+};
+
+export type RootStackParamList = {
+  Authed: NavigatorScreenParams<AuthedStackParamList>;
+  Unauthed: NavigatorScreenParams<UnauthedStackParamList>;
+};
+```
+
+次に`AuthedStackNav`と`UnauthedStackNav`をそれぞれ別モジュールに切り出します。
+
+```typescript jsx title="/src/navigation/AuthedStackNav.tsx"
+import {createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
+import {UserSetting} from 'screens';
+
+import {AuthedStackParamList} from './types';
+
+const nav = createStackNavigator<AuthedStackParamList>();
+export const AuthedStackNav: React.FC = () => {
+  return (
+    <nav.Navigator screenOptions={{headerShown: false}}>
+      <nav.Screen name="UserSetting" component={UserSetting} />
+    </nav.Navigator>
+  );
+};
+```
+
+```typescript jsx title="/src/navigation/UnauthedStackNav.tsx"
+import {RouteProp, useNavigation} from '@react-navigation/native';
+import {createStackNavigator, StackNavigationOptions} from '@react-navigation/stack';
+import React from 'react';
+import {Button} from 'react-native-elements';
+import {Instructions, Login, Welcome} from 'screens';
+
+import {UnauthedStackParamList} from './types';
+
+const nav = createStackNavigator<UnauthedStackParamList>();
+const HeaderRight: React.FC = () => {
+  const navigation = useNavigation();
+  return <Button type="clear" onPress={() => navigation.navigate('Login')} title="ログイン" />;
+};
+const createScreenOptions: (props: {
+  route: RouteProp<UnauthedStackParamList, keyof UnauthedStackParamList>;
+}) => StackNavigationOptions = ({route}) => {
+  if (route.name === 'Login') {
+    return {};
+  } else {
+    return {headerRight: () => <HeaderRight />};
+  }
+};
+
+export const UnauthedStackNav: React.FC = () => {
+  return (
+    <nav.Navigator initialRouteName="Welcome" screenOptions={createScreenOptions}>
+      <nav.Screen
+        name="Welcome"
+        component={Welcome}
+        options={{
+          headerTitle: 'Welcome',
+        }}
+      />
+      <nav.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerTitle: 'ログイン',
+        }}
+      />
+      <nav.Screen name="Instructions" component={Instructions} />
+    </nav.Navigator>
+  );
+};
+```
+
+`/src/navigation/index.ts`を修正します。
+
+``` diff jsx title="/src/navigation/index.ts"
+  export * from './RootStackNav';
++ export * from './UnauthedStackNav';
++ export * from './AuthedRootStackNav';
+```
+
+最後に`RootStackNav`を修正します。
+修正量が多いので、次のソースコードで`RootStackNav.tsx`を上書きしてください。
+
+```typescript jsx title="/src/navigation/RootStackNav.tsx"
+import {createStackNavigator} from '@react-navigation/stack';
+import {useUserContext} from 'contexts/UserContext';
+import React from 'react';
+
+import {AuthedRootStackNav} from './AuthedRootStackNav';
+import {UnauthedStackNav} from './UnauthedStackNav';
+import {RootStackParamList} from './types';
+
+const nav = createStackNavigator<RootStackParamList>();
+export const RootStackNav: React.FC = () => {
+  const userContext = useUserContext();
+  return (
+    <nav.Navigator screenOptions={{headerShown: false}}>
+      {userContext.isLoggedIn ? (
+        <nav.Screen name="Authed" component={AuthedRootStackNav} />
+      ) : (
+        <nav.Screen name="Unauthed" component={UnauthedStackNav} />
+      )}
+    </nav.Navigator>
+  );
+};
+```
+
+修正できたら実行して、動作に問題がないかを確認してください。
