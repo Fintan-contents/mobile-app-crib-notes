@@ -103,6 +103,8 @@ module.exports = {
             'react-native/learn/todo-app/app-hands-on/welcome',
             'react-native/learn/todo-app/app-hands-on/login',
             'react-native/learn/todo-app/app-hands-on/keyboard-avoiding-view',
+            'react-native/learn/todo-app/app-hands-on/auth',
+            'react-native/learn/todo-app/app-hands-on/alert',
             'react-native/learn/todo-app/app-hands-on/split-navigation',
             'react-native/learn/todo-app/app-hands-on/navigation-hook',
           ],
