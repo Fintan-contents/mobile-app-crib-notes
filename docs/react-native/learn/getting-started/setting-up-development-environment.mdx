@@ -1,0 +1,235 @@
+---
+title: 開発環境の構築
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+React Native開発環境の構築手順です。環境構築を進める前にツールのインストール状況を確認してください。該当バージョンのツールが既にインストールされている場合、再インストールは不要です。それ以外の場合は再インストール（アップデート）してください。
+
+## React Native開発環境に必要なツール
+
+ツールのインストール状況とバージョンの確認手順は次の通りです。
+
+### ツールのインストール状況とバージョンの確認手順
+
+- 共通
+
+  - Node.js  
+
+    コマンドラインかターミナルで`node -v`を実行してください。バージョン `v10.x.x` 以降であればOKです。
+
+    ```console
+    $ node -v
+    v14.15.1
+    ```
+
+    エラーが表示された場合、またはバージョンが`v9.x.x`以下の場合はインストールが必要です。
+
+  - Java Development Kit  
+
+    コマンドラインかターミナルで`java -version`を実行してください。バージョン `1.8.x` 以降であればOKです。
+
+    ```console
+    $ java -version
+    openjdk version "1.8.0_275"
+    OpenJDK Runtime Environment (AdoptOpen_JDK)(build 1.8.0_275-b01)
+    OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.275-b01, mixed mode)
+    ```
+
+    上記は`OpenJDK`をインストールしている場合に出力されるメッセージです。JDKと比較して一部メッセージ内容に相違はありますが、バージョンの確認箇所は、`openjdk version "1.8.0_275"`の`"1.8.0_275"`（バージョン）部分になります。
+
+    エラーが表示された場合、またはバージョンが`1.7.x`以下の場合はインストールが必要です。
+
+  - Android Studio  
+
+    Android Studioがインストールされていることを確認してください。インストールされていない場合、インストールが必要です。
+    インストールされている場合、Android SDKのインストール状況も確認してください。確認方法は、[Android SDK](#android-sdk)を参照してください。
+
+  - react-native-cli  
+
+    コマンドラインかターミナルで`npm ls -g --depth=0` を実行して`react-native-cli` がインストール**されていないこと**を確認してください。
+
+  :::caution
+  `react-native-cli`がインストールされていると、アプリ実行に失敗します。
+  詳細については、[react-native-cliについて](/react-native/troubleshooting/react-native-cli-uninstall)を参照してください。
+  :::
+
+- macOS
+
+  - Watchman  
+
+    ターミナルで`watchman -v`を実行してください。  
+
+    ```console
+    $ watchman -v
+    4.9.0
+    ```
+
+    エラーが表示された場合、インストールが必要です。バージョンに関して特に指定はありません。
+
+  - CocoaPods  
+
+    ターミナルで`pod --version`を実行してください。  
+
+    ```console
+    $ pod --version
+    1.10.1
+    ```
+
+    エラーが表示された場合、インストールが必要です。バージョンに関して特に指定はありません。
+
+  - Xcode  
+
+    Xcodeがインストールされていることを確認してください。インストールされている場合、Xcodeを起動してください。起動後のウィンドウにバージョンが表示されています。`12.x` 以降であればOKです。  
+
+    Xcode表示例：`Version 12.3(12C33)`
+
+    Xcodeがインストールされていない場合、またはバージョンが`11.x`以下の場合はインストールが必要です。
+
+### Android SDK
+
+Android開発はAndroid SDKのツール類を使用します。次の手順にそってツールが利用可能な状態かを確認してください。
+SDK Managerにてツールの状況を次の手順にしたがって確認してください。
+
+1. Android Studioを起動
+2. `Configure > SDK Manager > Appearance & Behavior > System Setting > Android SDK`まで移動
+3. `SDK Tools`タブを選択
+4. `Android SDK Platform-Tools`がインストール状態で表示されていることを確認
+
+Android SDK Platform-Toolsがインストールされていない場合はインストールしてください。
+
+つづいて環境変数の`PATH`に以下のパスが含まれていることを確認してください。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  groupId="operating-systems"
+  defaultValue="mac"
+  values={[
+    {label: 'macOS', value: 'mac'},
+    {label: 'Windows', value: 'win'},
+  ]
+}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="mac">
+
+```console
+~/Library/Android/sdk/platform-tools
+```
+
+</TabItem>
+<TabItem value="win">
+
+```console
+%LOCALAPPDATA%\Android\Sdk\platform-tools
+```
+
+</TabItem>
+</Tabs>
+
+環境変数の`PATH`に含まれていなかった場合、追加してください。
+
+## 環境構築
+
+上記を確認した後、[React Nativeの公式ドキュメント](https://reactnative.dev/docs/environment-setup)にしたがい不足しているツールをインストールしてください。公式ドキュメントにはWindowsとmacOS両方の説明があります。環境に応じて参照する内容を選択してください。
+
+:::info
+[React Nativeの公式ドキュメント](https://reactnative.dev/docs/environment-setup)を参照する際は、**React Native CLI Quickstart**タブを選択して、参照してください。
+:::
+
+## 補足事項
+
+### Visual Studio Code  
+
+  開発時に使用するエディタをインストールします。エディタは使い慣れたものなら何でもいいです。特にこだわりがなければ`Visual Studio Code`をお勧めします。[公式サイト](https://azure.microsoft.com/ja-jp/products/visual-studio-code/)の案内に沿って、インストールしてください。エディタ環境が準備されている場合は、この手順をスキップしてください。
+
+### proxy設定  
+
+proxy環境下で開発環境を構築する場合、追加の設定が必要です。次の手順にしたがい設定してください。
+
+- 環境変数  
+
+  環境構築および、実行時等に使用する一部ツール（npmやCocoaPods等）のproxy設定です。次のコマンドで環境変数を設定してください。
+
+  <!-- textlint-disable ja-technical-writing/sentence-length -->
+
+  <Tabs
+    groupId="operating-systems"
+    defaultValue="mac"
+    values={[
+      {label: 'macOS', value: 'mac'},
+      {label: 'Windows', value: 'win'},
+    ]
+  }>
+
+  <!-- textlint-enable ja-technical-writing/sentence-length -->
+
+  <TabItem value="mac">
+
+  `~/.bash_profile`へ、以下の内容を追記してください。
+
+  ```console
+  export http_proxy=http://プロキシアドレス:ポート番号
+  export https_proxy=http://プロキシアドレス:ポート番号
+  ```
+
+  上記追記後、`source ~/.bash_profile`を実行してください。
+  </TabItem>
+  <TabItem value="win">
+
+  ```console
+  setx http_proxy=http://プロキシアドレス:ポート番号
+  setx https_proxy=http://プロキシアドレス:ポート番号
+  ```
+
+  </TabItem>
+  </Tabs>
+
+- Gradle  
+
+  Android開発ではビルドツールにGradleを使用します。Gradleのproxy設定は`gradle.properties`で設定します。
+
+  - 設定内容
+
+    ```console
+    systemProp.http.proxyHost=プロキシアドレス
+    systemProp.http.proxyPort=8080
+    systemProp.https.proxyHost=プロキシアドレス
+    systemProp.https.proxyPort=8080
+    ```
+
+    :::caution
+    プロキシアドレスについて、ネットワークプロトコル（`http://`）は不要です。
+    :::
+
+  - 設定先
+
+    <!-- textlint-disable ja-technical-writing/sentence-length -->
+
+      <Tabs
+        groupId="operating-systems"
+        defaultValue="mac"
+        values={[
+          {label: 'macOS', value: 'mac'},
+          {label: 'Windows', value: 'win'},
+        ]
+      }>
+
+    <!-- textlint-enable ja-technical-writing/sentence-length -->
+
+      <TabItem value="mac">
+
+      `~/.gradle/gradle.properties`配下に`gradle.properties`が存在するか確認してください。
+      </TabItem>
+      <TabItem value="win">
+
+      `C:\Users\%USERNAME%\.gradle\`配下に`gradle.properties`が存在するか確認してください。
+      </TabItem>
+      </Tabs>
+
+    :::caution
+    `gradle.properties`が存在しない場合、新規作成してください。
+    :::
