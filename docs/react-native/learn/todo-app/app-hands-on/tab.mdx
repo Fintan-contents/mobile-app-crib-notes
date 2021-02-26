@@ -1,0 +1,236 @@
+---
+title: Tab
+---
+
+## タブ切替
+
+ToDo一覧画面やタスク登録画面を実装していきます。
+
+まずは[ToDoアプリの仕様](../app-spec.md)に従い、ToDo一覧画面と設定画面がタブ切替できるナビゲーション構成に変更します。
+
+修正イメージは次の通りです。
+
+- ToDo一覧画面（`TodoBoard`）のひな型を追加
+- ToDo一覧画面と設定画面をそれぞれ配置するStackナビゲータ（`TodoStackNav`と`SettingsStackNav`）を追加
+- Stackナビゲータを切り替えるTabナビゲータ（`MainTabNav`）を追加
+- `AuthedStackNav`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置
+- `TodoStackNav`のカスタムフックを用意
+
+![TabNavigation](tab_navigation.png)
+
+では実装していきましょう。
+まずはToDo一覧画面（`TodoBoard`）を定義します。
+次のファイルを追加・修正してください。
+
+- `/src/screens/todo/TodoBoard.tsx`
+- `/src/screens/todo/index.ts`
+- `/src/screens/index.ts`
+
+```typescript jsx title="/src/screens/todo/TodoBoard.tsx"
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+
+export const TodoBoard: React.FC = () => {
+  return <View style={styles.container}>{/* Todo*/}</View>;
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+```
+
+```typescript jsx title="/src/screens/todo/index.ts"
+export * from './TodoBoard';
+```
+
+```diff title="/src/screens/index.ts"
+  export * from './auth';
+  export * from './home';
+  export * from './instructions';
+  export * from './settings';
++ export * from './todo';
+```
+
+つぎにToDo一覧画面と設定画面をそれぞれ配置するStackナビゲータ（`TodoStackNav`と`SettingsStackNav`）を追加します。
+その後、それらを切り替えるTabナビゲータ（`MainTabNav`）を追加します。
+次のファイルを追加・修正してください。
+
+- `/src/navigation/types.ts`
+- `/src/navigation/TodoStackNav.tsx`
+- `/src/navigation/SettingsStackNav.tsx`
+- `/src/navigation/MainTabNav.tsx`
+- `/src/navigation/index.ts.ts`
+
+```diff title="/src/navigation/types.ts"
+  /* ～省略～ */  
+  export type RootStackParamList = {
+    Authed: NavigatorScreenParams<AuthedRootStackParamList>;
+    Unauthed: NavigatorScreenParams<UnauthedRootStackParamList>;
+  };
+  
++ export type MainTabParamList = {
++   Todo: NavigatorScreenParams<TodoStackParamList>;
++   Settings: NavigatorScreenParams<SettingsStackParamList>;
++ };
++ 
++ export type TodoStackParamList = {
++   TodoBoard: undefined;
++ };
++ 
++ export type SettingsStackParamList = {
++   UserSetting: undefined;
++ };
+```
+
+```typescript jsx title="/src/navigation/TodoStackNav.tsx"
+import {createStackNavigator} from '@react-navigation/stack';
+import {TodoStackParamList} from 'navigation/types';
+import React from 'react';
+import {TodoBoard} from 'screens';
+
+const nav = createStackNavigator<TodoStackParamList>();
+export const TodoStackNav: React.FC = () => (
+  <nav.Navigator initialRouteName="TodoBoard">
+    <nav.Screen
+      name="TodoBoard"
+      component={TodoBoard}
+      options={{
+        headerTitle: 'Todoアプリ',
+      }}
+    />
+  </nav.Navigator>
+);
+```
+
+```typescript jsx title="/src/navigation/SettingsStackNav.tsx"
+import {createStackNavigator} from '@react-navigation/stack';
+import {SettingsStackParamList} from 'navigation/types';
+import React from 'react';
+import {UserSetting} from 'screens';
+
+const nav = createStackNavigator<SettingsStackParamList>();
+export const SettingsStackNav: React.FC = () => (
+  <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="UserSetting">
+    <nav.Screen name="UserSetting" component={UserSetting} />
+  </nav.Navigator>
+);
+```
+
+```typescript jsx title="/src/navigation/MainTabNav.tsx"
+import {Ionicons} from '@expo/vector-icons';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {MainTabParamList} from 'navigation/types';
+import React from 'react';
+
+import {SettingsStackNav} from './SettingsStackNav';
+import {TodoStackNav} from './TodoStackNav';
+
+const nav = createBottomTabNavigator<MainTabParamList>();
+export const MainTabNav: React.FC = () => {
+  return (
+    <nav.Navigator initialRouteName="Todo">
+      <nav.Screen
+        name="Todo"
+        component={TodoStackNav}
+        options={{
+          title: 'ホーム',
+          tabBarIcon: ({color}) => <Ionicons name="md-home" size={30} color={color} />,
+        }}
+      />
+      <nav.Screen
+        name="Settings"
+        component={SettingsStackNav}
+        options={{
+          title: '設定',
+          tabBarIcon: ({color}) => <Ionicons name="md-settings" size={30} color={color} />,
+        }}
+      />
+    </nav.Navigator>
+  );
+};
+```
+
+```diff title="/src/navigation/index.ts"
+  export * from './RootStackNav';
+  export * from './UnauthedStackNav';
+  export * from './AuthedRootStackNav';
++ export * from './MainTabNav';
++ export * from './TodoStackNav';
++ export * from './SettingsStackNav';
+```
+
+`AuthedStackNav`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置します。
+
+次のファイルを追加・修正してください。
+
+- `/src/navigation/AuthedStackNav.tsx.tsx`
+- `/src/navigation/types.ts`
+
+```diff title="/src/navigation/AuthedStackNav.tsx"
+  import {createStackNavigator} from '@react-navigation/stack';
++ import {MainTabNav} from 'navigation/MainTabNav';
+  import {AuthedStackParamList} from 'navigation/types';
+  import React from 'react';
+- import {UserSetting} from 'screens';
+  
+  const nav = createStackNavigator<AuthedRootStackParamList>();
+  export const AuthedStackNav: React.FC = () => {
+    return (
+-     <nav.Navigator screenOptions={{headerShown: false}}>
+-       <nav.Screen name="UserSetting" component={UserSetting} />
++     <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main">
++       <nav.Screen name="Main" component={MainTabNav} />
+      </nav.Navigator>
+    );
+  };
+```
+
+```diff title="/src/navigation/types.ts"
+  /* ～省略～ */  
+  export type AuthedRootStackParamList = {
+-   UserSetting: undefined;
++   Main: undefined;
+  };
+  /* ～省略～ */  
+```
+
+後ほどToDo一覧画面で使用する`TodoStackNav`のカスタムフックを用意します。
+
+次のファイルを追加・修正してください。
+
+- `/src/navigation/hooks/TodoStackHooks.tsx`
+- `/src/navigation/hooks/index.ts`
+
+```typescript jsx title="/src/navigation/hooks/TodoStackHooks.tsx"
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import type {CompositeNavigationProp, RouteProp} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthedRootStackParamList, MainTabParamList, RootStackParamList, TodoStackParamList} from 'navigation/types';
+
+type TodoStackParamListKeys = keyof TodoStackParamList;
+
+type TodoStackNavigationProp<T extends TodoStackParamListKeys> = CompositeNavigationProp<
+  StackNavigationProp<TodoStackParamList, T>,
+  CompositeNavigationProp<
+    BottomTabNavigationProp<MainTabParamList>,
+    CompositeNavigationProp<StackNavigationProp<AuthedRootStackParamList>, StackNavigationProp<RootStackParamList>>
+  >
+>;
+
+export const useTodoStackNavigation = <T extends TodoStackParamListKeys>() =>
+  useNavigation<TodoStackNavigationProp<T>>();
+export const useTodoStackRoute = <T extends TodoStackParamListKeys>() => useRoute<RouteProp<TodoStackParamList, T>>();
+```
+
+```diff title="/src/navigation/hooks/index.ts"
+  export * from './AuthedRootStackHooks';
+  export * from './UnauthedRootStackHooks';
++ export * from './TodoStackHooks';
+```
+
+修正できたら実行してください。ToDo一覧画面と設定画面のタブ切替ができたら成功です。
+
+![Tab](tab.png)
