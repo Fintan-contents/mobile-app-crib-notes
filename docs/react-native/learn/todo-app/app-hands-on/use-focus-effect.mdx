@@ -1,0 +1,105 @@
+---
+title: useFocusEffect
+---
+
+[前セクション](./todo-form)ではタスク登録画面を追加しました。
+しかし、現時点では登録したタスクがToDo一覧画面に表示されません。
+ここではその不具合に対応します。
+
+なぜ追加したタスクが表示されないのでしょうか。
+次に示すのはToDo一覧画面のコード箇所です。
+`useEffect`フックを使用して、画面マウント時に`TodoService.getTodos`を呼び出してタスク一覧を取得しています。
+
+```typescript jsx
+  useEffect(() => {
+    let isActive = true;
+    TodoService.getTodos()
+      .then((response) => {
+        if (isActive) {
+          setTodos(response);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      isActive = false;
+    };
+  }, []);
+```
+
+上記の場合、`useEffect`フックの処理は画面マウント時にしか実行されません。
+タスク登録画面が表示されている時も、ToDo一覧画面はスタックの下に隠れて生きてます。
+そのため、（タスク登録画面が破棄されて）ToDo一覧画面が再表示された場合、画面マウント時ではないため`useEffect`フックの処理が動作しません。
+それがToDo一覧画面にタスクが表示されない理由です。
+
+今回の場合、画面にフォーカス移った（画面が再表示された）際にもタスク一覧を取得したいです。
+このような場合のため、React Nativeでは`useFocusEffect`フックが用意されています。
+`useFocusEffect`フックは画面フォーカス時に処理を実行します。
+
+:::note
+詳細は、React Navigation公式ドキュメントの[useFocusEffect](https://reactnavigation.org/docs/use-focus-effect/)を参照してください。
+:::
+
+では修正していきましょう。
+`/src/screens/todo/TodoBoard.tsx`を修正してください。
+
+```diff title="/src/screens/todo/TodoBoard.tsx"
++ import {useFocusEffect} from '@react-navigation/native';
+  import {FilterType, TodoFilter, TodoList} from 'components/parts';
+- import React, {useContext, useEffect, useState} from 'react';
++ import React, {useCallback, useContext, useState} from 'react';
+  import {Alert, StyleSheet, View} from 'react-native';
+  import {Icon, ThemeContext} from 'react-native-elements';
+  import {Todo, TodoService} from 'services';
+  
+  /* ～省略～ */  
+  
+  export const TodoBoard: React.FC = () => {
+    const {theme} = useContext(ThemeContext);
+    const navigation = useTodoStackNavigation<'TodoBoard'>();
+    const [todos, setTodos] = useState<Todo[]>([]);
+    const [filterType, setFilterType] = useState<FilterType>(FilterType.ALL);
+  
+-   useEffect(() => {
++   useFocusEffect(
++     useCallback(() => {
+        let isActive = true;
+  
+        TodoService.getTodos()
+          .then((response) => {
+            if (isActive) {
+              setTodos(response);
+            }
+          })
+          .catch(() => {});
+  
+        return () => {
+          isActive = false;
+        };
+-   }, []);
++     }, []),
++   );
+
+  /* ～省略～ */  
+```
+
+コールバック関数を`useCallback`でラップしている点に注意してください。
+`useFocusEffect`は、画面にフォーカスがある場合にのみ実行されるという点を除き、Reactの`useEffect`フックに似ています。
+最初のレンダリング時（画面にフォーカスがある場合）だけではなく、依存関係が変更された場合にも実行されます。
+`useCallback`でラップしないと、画面フォーカス時のすべてのレンダリングでコールバック関数が実行されてしまいます。
+上記処理の場合、画面がState変更されたタイミングで再レンダリングが走るため、`useCallback`でラップしないと無限に再レンダリングしてしまいます。
+
+また、戻り値に関数を返している点にも注意してください。
+これはクリーンアップ関数と呼ばれるもので、次の場合に実行されます。
+
+- 依存関係が変更されて新しい処理がスケジュールされた
+- 画面がアンマウントされた
+- 画面がフォーカスを失った
+
+ここでは、上記場合に画面Stateを抑止する目的でクリーンアップ関数を活用しています。
+
+:::note
+詳細は、React Navite公式ドキュメントの[Running asynchronous effects](https://reactnavigation.org/docs/use-focus-effect/#running-asynchronous-effects)を参照してください。
+:::
+
+修正できたら実行してください。
+タスク登録画面で登録したタスクがToDo一覧画面に表示できたら成功です。
