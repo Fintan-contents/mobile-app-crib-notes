@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
-import {StyleSheet} from 'react-native';
-import {pushNotificationService} from '../../../backend/notification/PushNotificationService';
+import {Alert, StyleSheet} from 'react-native';
+import pushNotificationService from '../../../backend/notification/PushNotificationService';
 import {Description, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
 
@@ -15,18 +15,24 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
   const [sendTopicName, setSendTopicName] = useState<string>();
 
   const subscribeToTopic = useCallback(() => {
-    if (topicName) {
-      pushNotificationService.subscribeToTopic(topicName).catch((e) => {
+    if (topicName && deviseToken) {
+      pushNotificationService.subscribeToTopic(topicName, deviseToken).catch((e) => {
         console.warn(`fail to subscribe topic [${topicName}]`, e);
       });
     }
-  }, [topicName]);
+  }, [topicName, deviseToken]);
 
   const sendTopic = useCallback(() => {
-    if (deviseToken) {
-      pushNotificationService.sendMessage({data: {token: deviseToken}});
+    if (deviseToken && sendTopicName && topicTitle && topicText) {
+      pushNotificationService.sendTopic({
+        topic: sendTopicName,
+        notification: {title: topicTitle, body: topicText},
+        data: {text: topicText},
+      });
+    } else {
+      Alert.alert('トピック名、タイトル、本文は必須です');
     }
-  }, [deviseToken]);
+  }, [deviseToken, sendTopicName, topicTitle, topicText]);
 
   return (
     <>

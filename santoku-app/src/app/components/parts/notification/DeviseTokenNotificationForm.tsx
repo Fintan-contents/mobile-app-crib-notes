@@ -1,15 +1,25 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {Description, Section, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
+import pushNotificationService from '../../../backend/notification/PushNotificationService';
 
 type Props = {
   deviseToken?: string;
 };
 
 const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
-  const [title, setTitle] = useState('');
-  const [messageText, setMessageText] = useState('');
-  const [messageValue, setMessageValue] = useState('');
+  const [title, setTitle] = useState<string>();
+  const [body, setBody] = useState<string>();
+  const [text, setText] = useState<string>();
+
+  const sendMessage = useCallback(
+    (delay) => {
+      if (deviseToken && title && body && text) {
+        pushNotificationService.sendMessage({token: deviseToken, notification: {title, body}, data: {text}, delay});
+      }
+    },
+    [deviseToken, title, body, text],
+  );
 
   return (
     <>
@@ -31,25 +41,25 @@ const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
         />
         <FormInput
           label="通知メッセージ本文"
-          value={messageText}
-          onChangeText={(value) => setMessageText(value)}
+          value={body}
+          onChangeText={(value) => setBody(value)}
           placeholder="通知メッセージの本文を入力してください"
         />
         <FormInput
           label="(任意) データとしてアプリが受け取る値 (文字列)"
-          value={messageValue}
-          onChangeText={(value) => setMessageValue(value)}
+          value={text}
+          onChangeText={(value) => setText(value)}
           placeholder="データのValueを入力してください"
         />
         <TextButton
           onPress={() => {
-            return true;
+            sendMessage(0);
           }}
           value="この端末にプッシュ通知を送信"
         />
         <TextButton
           onPress={() => {
-            return true;
+            sendMessage(15);
           }}
           value="この端末に15秒後にプッシュ通知を送信"
         />
