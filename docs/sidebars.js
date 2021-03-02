@@ -114,6 +114,7 @@ module.exports = {
             'react-native/learn/todo-app/app-hands-on/modal',
             'react-native/learn/todo-app/app-hands-on/basic-components',
             'react-native/learn/todo-app/app-hands-on/logo',
+            'react-native/learn/todo-app/app-hands-on/exercise',
           ],
         },
       ],
