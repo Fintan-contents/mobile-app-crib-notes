@@ -9,10 +9,10 @@ title: プロジェクトの作成
 
 このコンテンツでは[React Navigation](https://reactnavigation.org/)や[React Native Elements](https://reactnativeelements.com/)などのパッケージを利用します。これらのパッケージがインストールされたプロジェクトを簡単に用意できるよう、[RN Spoiler](https://github.com/ws-4020/rn-spoiler)というテンプレートを用意しています。
 
-次のコマンドを実行して、新規プロジェクトを作成してください。（`<YourAppName>`の部分は、好みのプロジェクト名に変更してください）
+次のコマンドを実行して、新規プロジェクトを作成してください。（`<YourAppName>`の部分は、好みのプロジェクト名に変更してください。このプロジェクトは後ほど[ToDoアプリの実装](../todo-app)で使用します）
 
 ```bash
-npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler <YourAppName>
+npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler#hands-on <YourAppName>
 ```
 
 <!-- TODO: リンク貼るよ -->
@@ -22,7 +22,7 @@ RN Spoilerは、Expoの[expo-template-bare-typescript](https://github.com/expo/e
 [npm](https://www.npmjs.com/)ではなく[Yarn](https://yarnpkg.com/)を利用したい場合は、`--npm`というオプションを削除してください。Yarnがインストールされている場合は、Yarnを利用してパッケージがインストールされます。
 
 ```bash
-npx react-native init --template https://github.com/ws-4020/rn-spoiler <YourAppName>
+npx react-native init --template https://github.com/ws-4020/rn-spoiler#hands-on <YourAppName>
 ```
 
 :::
