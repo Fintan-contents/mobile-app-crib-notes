@@ -87,6 +87,13 @@ React Native開発環境の構築手順です。環境構築を進める前に�
 
     Xcodeがインストールされていない場合、またはバージョンが`11.x`以下の場合はインストールが必要です。
 
+:::caution
+公式手順でiOSアプリを起動しようとしてもビルドエラーになる[issue](https://github.com/facebook/react-native/issues/30836)があります。
+issueがCloseされていない場合、[トラブルシュート](../../troubleshooting/cant-build-in-xcode)を参照して対応するか、`AwesomeProject`のiOSシミュレータの確認をSkipしてください。
+
+学習で利用するテンプレートでは発生しないため、[プロジェクトの作成](./create-project)以降進めることができます。
+:::
+
 ### Android SDK
 
 Android開発はAndroid SDKのツール類を使用します。次の手順にそってツールが利用可能な状態かを確認してください。
