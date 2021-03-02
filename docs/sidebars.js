@@ -112,6 +112,8 @@ module.exports = {
             'react-native/learn/todo-app/app-hands-on/todo-form',
             'react-native/learn/todo-app/app-hands-on/use-focus-effect',
             'react-native/learn/todo-app/app-hands-on/modal',
+            'react-native/learn/todo-app/app-hands-on/basic-components',
+            'react-native/learn/todo-app/app-hands-on/logo',
           ],
         },
       ],

@@ -1,0 +1,140 @@
+---
+title: 共通コンポーネント
+---
+
+ここでは冗長な箇所をリファクタリングしていきます。
+
+## KeyboardAvoidingViewの共通コンポーネント化
+
+現在、`KeyboardAvoidingView`はログイン画面とタスク登録画面の二か所で使用しており、いずれも`behavior`に同様のキーボード動作を指定します。
+ここに追加や変更が生じた場合、変更が複数箇所にまたがり修正漏れなどのリスクが生じます。
+そこで、この箇所を共通コンポーネント化することで上記問題に対処します。
+
+今回作成するコンポーネントは汎用性があるため、[ToDoアプリプロジェクトの準備](../app-project-desc.md)に示すとおり、`components/basics`に作成します。
+次のファイルを追加してください。
+
+- `/src/components/basics/view/KeyboardView.tsx`
+- `/src/components/basics/view/index.tsx`
+- `/src/components/basics/index.tsx`
+
+```typescript jsx title="/src/components/basics/view/KeyboardView.tsx"
+import React, {ComponentProps} from 'react';
+import {KeyboardAvoidingView, Platform, StyleSheet} from 'react-native';
+
+type KeyboardViewProps = ComponentProps<typeof KeyboardAvoidingView>;
+
+const defaultKeyboardAvoidingViewBehavior = Platform.select({
+  ios: 'padding',
+  android: undefined,
+} as const);
+
+export const KeyboardView: React.FC<KeyboardViewProps> = ({
+  children,
+  behavior = defaultKeyboardAvoidingViewBehavior,
+  style,
+  ...props
+}) => {
+  return (
+    <KeyboardAvoidingView behavior={behavior} style={StyleSheet.flatten([styles.container, style])} {...props}>
+      {children}
+    </KeyboardAvoidingView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+```
+
+```typescript jsx title="/src/components/basics/view/index.tsx"
+export * from './KeyboardView';
+```
+
+```typescript jsx title="/src/components/basics/index.tsx"
+export * from './view';
+```
+
+追加が出来たら`KeyboardAvoidingView`を使用している箇所を修正していきます。
+
+次のファイルを修正してください。
+
+- `/src/screens/auth/Login.tsx`
+- `/src/screens/todo/TodoForm.tsx`
+
+```diff title="/src/screens/auth/Login.tsx"
++ import {KeyboardView} from 'components/basics';
+  import {useUserContext} from 'contexts/UserContext';
+  import {useFormik} from 'formik';
+  import React, {useCallback} from 'react';
+- import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
++ import {StyleSheet, View} from 'react-native';
+  import {Button, Input} from 'react-native-elements';
+  import * as Yup from 'yup';
+  
+  export const Login: React.FC = () => {
+  /* ～省略～ */
+  
+    return (
+-     <KeyboardAvoidingView
+-       behavior={Platform.select({
+-         ios: 'padding',
+-         android: undefined,
+-       } as const)}
+-       style={styles.container}>
++     <KeyboardView>
+
+  /* ～省略～ */
+
+-     </KeyboardAvoidingView>
++     </KeyboardView>
+    );
+  };
+  
+  const styles = StyleSheet.create({
+-   container: {
+-     flex: 1,
+-   },
+  /* ～省略～ */
+```
+
+```diff title="/src/screens/todo/TodoForm.tsx"
++ import {KeyboardView} from 'components/basics';
+  import {useFormik} from 'formik';
+  import {useAuthedRootStackNavigation} from 'navigation/hooks';
+  import React, {useCallback, useEffect} from 'react';
+- import {Alert, KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
++ import {Alert, StyleSheet, View} from 'react-native';
+  import {Button, Input, Text} from 'react-native-elements';
+  import {TodoService} from 'services';
+  import * as Yup from 'yup';
+  
+  export const TodoForm: React.FC = () => {
+  /* ～省略～ */
+  
+    return (
+-     <KeyboardAvoidingView
+-       behavior={Platform.select({
+-         ios: 'padding',
+-         android: undefined,
+-       } as const)}
+-       style={styles.container}>
++     <KeyboardView>
+
+  /* ～省略～ */
+
+-     </KeyboardAvoidingView>
++     </KeyboardView>
+    );
+  };
+  
+  const styles = StyleSheet.create({
+-   container: {
+-     flex: 1,
+-   },
+  /* ～省略～ */
+```
+
+修正できたら実行してください。
+以前と変わらず動作できたら成功です。
