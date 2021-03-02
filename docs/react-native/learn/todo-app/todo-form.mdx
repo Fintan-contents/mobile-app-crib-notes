@@ -2,7 +2,7 @@
 title: タスク登録画面
 ---
 
-[ToDoアプリの仕様](../app-spec.md)に従い、タスク登録画面をナビゲーション構成に追加します。
+[ToDoアプリの仕様](app-spec.md)に従い、タスク登録画面をナビゲーション構成に追加します。
 
 修正イメージは次の通りです。
 
@@ -11,7 +11,7 @@ title: タスク登録画面
 - ToDo一覧画面（`TodoBoard`）からタスク登録画面（`TodoForm`）への画面遷移を追加
 - タスク登録画面（`TodoForm`）を実装
 
-![TodoFormNavigation](todo_form_navigation.png)
+![TodoFormNavigation](app-hands-on/todo_form_navigation.png)
 
 :::info
 `TodoStackNav`ナビゲータではなく、なぜ`AuthedStackNav`ナビゲータにタスク登録画面（`TodoForm`）を追加するのでしょうか。
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
 
 :::caution
 現時点では登録したタスクがタスク一覧画面に表示されません。
-次セクションの[useFocusEffect](./use-focus-effect)でその不具合に対応します。
+次セクションの[useFocusEffect](use-focus-effect)でその不具合に対応します。
 :::
 
-![TodoForm](todo-form.png)
+![TodoForm](app-hands-on/todo-form.png)

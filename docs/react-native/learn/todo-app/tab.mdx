@@ -1,12 +1,12 @@
 ---
-title: Tab
+title: Tabナビゲーション
 ---
 
 ## タブ切替
 
 ToDo一覧画面やタスク登録画面を実装していきます。
 
-まずは[ToDoアプリの仕様](../app-spec.md)に従い、ToDo一覧画面と設定画面がタブ切替できるナビゲーション構成に変更します。
+まずは[ToDoアプリの仕様](app-spec.md)に従い、ToDo一覧画面と設定画面がタブ切替できるナビゲーション構成に変更します。
 
 修正イメージは次の通りです。
 
@@ -16,7 +16,7 @@ ToDo一覧画面やタスク登録画面を実装していきます。
 - `AuthedStackNav`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置
 - `TodoStackNav`のカスタムフックを用意
 
-![TabNavigation](tab_navigation.png)
+![TabNavigation](app-hands-on/tab_navigation.png)
 
 では実装していきましょう。
 まずはToDo一覧画面（`TodoBoard`）を定義します。
@@ -233,4 +233,4 @@ export const useTodoStackRoute = <T extends TodoStackParamListKeys>() => useRout
 
 修正できたら実行してください。ToDo一覧画面と設定画面のタブ切替ができたら成功です。
 
-![Tab](tab.png)
+![Tab](app-hands-on/tab.png)
