@@ -27,7 +27,7 @@ type AuthStackNavigationProp<T extends AuthedStackParamListKeys> = CompositeNavi
   StackNavigationProp<RootStackParamList>
 >;
 
-export const useAuthedRootStackNavigation = <T extends AuthedStackParamListKeys>() =>
+export const useAuthedStackNavigation = <T extends AuthedStackParamListKeys>() =>
   useNavigation<AuthStackNavigationProp<T>>();
 export const useAuthedRootStackRoute = <T extends AuthedStackParamListKeys>() =>
   useRoute<RouteProp<AuthedStackParamList, T>>();
@@ -83,8 +83,8 @@ export const useUnauthedStackStackRoute = <T extends UnauthedStackParamListKeys>
 `/src/navigation/hooks/index.ts`を追加してください。
 
 ```typescript jsx title="/src/navigation/hooks/index.ts"
-export * from './AuthedRootStackHooks';
-export * from './UnauthedRootStackHooks';
+export * from './AuthedStackHooks';
+export * from './UnauthedStackHooks';
 ```
 
 カスタムフックが用意できたので、`useNavigation`を使用している箇所を修正していきます。

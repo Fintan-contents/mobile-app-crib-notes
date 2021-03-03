@@ -33,8 +33,8 @@ declare module '*.png' {
 次のファイルを追加・修正してください。
 
 - `/src/components/basics/image/Logo.tsx`
-- `/src/components/basics/image/index.tsx`
-- `/src/components/basics/index.tsx`
+- `/src/components/basics/image/index.ts`
+- `/src/components/basics/index.ts`
 
 ```typescript jsx title="/src/components/basics/image/Logo.tsx"
 import logoImage from 'assets/logo.png';
@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
 });
 ```
 
-```typescript jsx title="/src/components/basics/image/index.tsx"
+```typescript jsx title="/src/components/basics/image/index.ts"
 export * from './Logo';
 ```
 
-```diff title="/src/components/basics/index.tsx"
+```diff title="/src/components/basics/index.ts"
 + export * from './image';
   export * from './view';
 ```

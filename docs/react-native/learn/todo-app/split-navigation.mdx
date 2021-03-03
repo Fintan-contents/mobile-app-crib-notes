@@ -114,7 +114,7 @@ export const UnauthedStackNav: React.FC = () => {
 ``` diff jsx title="/src/navigation/index.ts"
   export * from './RootStackNav';
 + export * from './UnauthedStackNav';
-+ export * from './AuthedRootStackNav';
++ export * from './AuthedStackNav';
 ```
 
 最後に`RootStackNav`を修正します。
@@ -125,7 +125,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useUserContext} from 'contexts/UserContext';
 import React from 'react';
 
-import {AuthedRootStackNav} from './AuthedRootStackNav';
+import {AuthedStackNav} from './AuthedStackNav';
 import {UnauthedStackNav} from './UnauthedStackNav';
 import {RootStackParamList} from './types';
 
@@ -135,7 +135,7 @@ export const RootStackNav: React.FC = () => {
   return (
     <nav.Navigator screenOptions={{headerShown: false}}>
       {userContext.isLoggedIn ? (
-        <nav.Screen name="Authed" component={AuthedRootStackNav} />
+        <nav.Screen name="Authed" component={AuthedStackNav} />
       ) : (
         <nav.Screen name="Unauthed" component={UnauthedStackNav} />
       )}

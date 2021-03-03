@@ -19,9 +19,36 @@ title: 認証制御
 
 次のファイルを追加してください。
 
-- `/src/contexts/UserContext.tsx`
 - `/src/services/AuthService.ts`
 - `/src/services/index.ts`
+- `/src/contexts/UserContext.tsx`
+
+```typescript jsx title="/src/services/AuthService.ts"
+const refreshCsrfToken = async () => {};
+
+const signup = async (userName: string, password: string) => {
+  return Promise.resolve();
+};
+
+const login = async (userName: string, password: string) => {
+  return Promise.resolve();
+};
+
+const logout = async () => {
+  return Promise.resolve();
+};
+
+export const AuthService = {
+  signup,
+  login,
+  logout,
+  refreshCsrfToken,
+};
+```
+
+```typescript jsx title="/src/services/index.ts"
+export * from './AuthService';
+```
 
 ```typescript jsx title="/src/contexts/UserContext.tsx"
 import React, {useContext, useState} from 'react';
@@ -71,33 +98,6 @@ export const UserContextProvider: React.FC = ({children}) => {
 };
 ```
 
-```typescript jsx title="/src/services/AuthService.ts"
-const refreshCsrfToken = async () => {};
-
-const signup = async (userName: string, password: string) => {
-  return Promise.resolve();
-};
-
-const login = async (userName: string, password: string) => {
-  return Promise.resolve();
-};
-
-const logout = async () => {
-  return Promise.resolve();
-};
-
-export const AuthService = {
-  signup,
-  login,
-  logout,
-  refreshCsrfToken,
-};
-```
-
-```typescript jsx title="/src/services/index.ts"
-export * from './AuthService';
-```
-
 ## 認証フロー
 
 React Navigationでは、認証状態に応じてスタック定義を切り替えることができます。
@@ -137,8 +137,8 @@ ToDoアプリでもこれに従い、認証制御を組み込んでいきます�
 次のファイルを追加・修正してください。
 
 - `/src/screens/settings/UserSetting.tsx`
-- `/src/screens/settings/index.tsx`
-- `/src/screens/index.tsx`
+- `/src/screens/settings/index.ts`
+- `/src/screens/index.ts`
 
 ```typescript jsx title="/src/screens/settings/UserSetting.tsx"
 import {useUserContext} from 'contexts/UserContext';
@@ -167,11 +167,11 @@ const styles = StyleSheet.create({
 });
 ```
 
-```typescript jsx title="/src/screens/settings/index.tsx"
+```typescript jsx title="/src/screens/settings/index.ts"
 export * from './UserSetting';
 ```
 
-```diff title="/src/screens/index.tsx"
+```diff title="/src/screens/index.ts"
   export * from './auth';
   export * from './home';
   export * from './instructions';
@@ -193,19 +193,19 @@ import React from 'react';
 import {Button} from 'react-native-elements';
 import {Instructions, Login, UserSetting, Welcome} from 'screens';
 
-type UnauthedRootStackParamList = {
+type UnauthedStackParamList = {
   Welcome: undefined;
   Login: undefined;
   Instructions: undefined;
 };
 
-const nav = createStackNavigator<UnauthedRootStackParamList>();
+const nav = createStackNavigator<UnauthedStackParamList>();
 const HeaderRight: React.FC = () => {
   const navigation = useNavigation();
   return <Button type="clear" onPress={() => navigation.navigate('Login')} title="ログイン" />;
 };
 const createScreenOptions: (props: {
-  route: RouteProp<UnauthedRootStackParamList, keyof UnauthedRootStackParamList>;
+  route: RouteProp<UnauthedStackParamList, keyof UnauthedStackParamList>;
 }) => StackNavigationOptions = ({route}) => {
   if (route.name === 'Login') {
     return {};
@@ -236,11 +236,11 @@ const UnauthedStackNav: React.FC = () => {
   );
 };
 
-type AuthedRootStackParamList = {
+type AuthedStackParamList = {
   UserSetting: undefined;
 };
 
-const authNav = createStackNavigator<AuthedRootStackParamList>();
+const authNav = createStackNavigator<AuthedStackParamList>();
 const AuthedStackNav: React.FC = () => {
   return (
     <authNav.Navigator screenOptions={{headerShown: false}}>
@@ -250,8 +250,8 @@ const AuthedStackNav: React.FC = () => {
 };
 
 type RootStackParamList = {
-  Authed: NavigatorScreenParams<AuthedRootStackParamList>;
-  Unauthed: NavigatorScreenParams<UnauthedRootStackParamList>;
+  Authed: NavigatorScreenParams<AuthedStackParamList>;
+  Unauthed: NavigatorScreenParams<UnauthedStackParamList>;
 };
 
 const rootNav = createStackNavigator<RootStackParamList>();

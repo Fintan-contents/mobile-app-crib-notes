@@ -137,15 +137,15 @@ RN Spoilerからプロジェクトを作成した場合、React Native Elements�
 :::
 
 では、Welcome画面からログイン画面に遷移できるように修正します。
-`/src/screens/auth/index.tsx`を追加してください。
+`/src/screens/auth/index.ts`を追加してください。
 
-```typescript jsx title="/src/screens/auth/index.tsx"
+```typescript jsx title="/src/screens/auth/index.ts"
 export * from './Login';
 ```
 
-次に`/src/screens/index.tsx`を修正してください。
+次に`/src/screens/index.ts`を修正してください。
 
-```diff title="/src/screens/index.tsx"
+```diff title="/src/screens/index.ts"
 + export * from './auth';
   export * from './home';
   export * from './instructions';
