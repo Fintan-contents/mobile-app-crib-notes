@@ -1,22 +1,48 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Container, Description, KeyboardAvoidingView} from '../../basics';
 import DeviseTokenNotificationForm from '../../parts/notification/DeviseTokenNotificationForm';
 import TopicNotificationForm from '../../parts/notification/TopicNotificationForm';
 import {useIsMounted} from '../../../../framework/hooks/useIsMounted';
 import pushNotificationService from '../../../backend/notification/PushNotificationService';
-import messaging from '@react-native-firebase/messaging';
+import messaging, {FirebaseMessagingTypes} from '@react-native-firebase/messaging';
 import {Alert} from 'react-native';
 
 const PushNotification: React.FC = () => {
   const [deviseToken, setDeviseToken] = useState<string>();
   const isMounted = useIsMounted();
+  const [recieveData, setRecieveData] = useState<string>();
+
+  const setRemoteMessage = useCallback(
+    (remoteMessage: FirebaseMessagingTypes.RemoteMessage | null) => {
+      if (remoteMessage && isMounted()) {
+        setRecieveData(JSON.stringify({...remoteMessage.notification, data: remoteMessage.data}));
+      }
+    },
+    [isMounted],
+  );
+
   useEffect(() => {
     if (deviseToken) {
+      messaging().onNotificationOpenedApp(setRemoteMessage);
+      messaging().getInitialNotification().then(setRemoteMessage);
       return messaging().onMessage((message) => {
-        Alert.alert('message recieve ', JSON.stringify({...message.notification, data: message.data}));
+        Alert.alert('受信', JSON.stringify({...message.notification, data: message.data}));
       });
     }
-  }, [deviseToken]);
+  }, [deviseToken, isMounted, setRemoteMessage]);
+
+  useEffect(() => {
+    if (recieveData) {
+      Alert.alert('受信', recieveData, [
+        {
+          text: 'OK',
+          onPress: () => {
+            setRecieveData(undefined);
+          },
+        },
+      ]);
+    }
+  }, [recieveData]);
 
   useEffect(() => {
     if (deviseToken) {

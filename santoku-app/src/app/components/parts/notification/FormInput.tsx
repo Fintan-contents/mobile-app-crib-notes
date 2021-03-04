@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleProp, StyleSheet, TextStyle} from 'react-native';
+import {StyleProp, StyleSheet, TextStyle, Text} from 'react-native';
 import {Input, Item, Label} from 'native-base';
 
 type Props = {
@@ -9,14 +9,18 @@ type Props = {
   placeholder?: string;
   textStyle?: StyleProp<TextStyle>;
   readonly?: boolean;
+  error?: string;
 };
 
-const FormInput: React.FC<Props> = ({label, value, textStyle, onChangeText, placeholder, readonly}) => {
+const FormInput: React.FC<Props> = ({label, value, textStyle, onChangeText, placeholder, readonly, error}) => {
   return (
-    <Item disabled={readonly} stackedLabel>
-      <Label>{label}</Label>
-      <Input value={value} style={readonly ? [textStyle, styles.disableInput] : textStyle} onChangeText={onChangeText} placeholder={placeholder} />
-    </Item>
+    <>
+      <Item disabled={readonly} stackedLabel>
+        <Label>{label}</Label>
+        <Input value={value} style={readonly ? [textStyle, styles.disableInput] : textStyle} onChangeText={onChangeText} placeholder={placeholder} />
+      </Item>
+      <Text style={styles.errorMessage}>{error}</Text>
+    </>
   );
 };
 
@@ -32,6 +36,9 @@ const styles = StyleSheet.create({
   },
   disableInput: {
     backgroundColor: '#EBEBEB',
+  },
+  errorMessage: {
+    color: 'red',
   },
 });
 

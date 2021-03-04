@@ -93,17 +93,4 @@ export const santokuNotificationService: PushNotificationService = {
   sendTopic,
 };
 
-/**
- * BackendにFCMだけがいる場合のサービス.
- */
-export const FCMNotificationService: PushNotificationService = {
-  getToken,
-  subscribeToTopic: (topic, _) => messaging().subscribeToTopic(topic),
-  unsubscribeFromTopic: (topic, _) => messaging().unsubscribeFromTopic(topic),
-  sendMessage: (message) => messaging().sendMessage({notification: message.notification, to: message.token, data: message.data}),
-  sendTopic: (message) => messaging().sendMessage({notification: message.notification, from: message.topic, data: message.data}),
-};
 export default santokuNotificationService;
-
-/* FCMサービスを離床する場合は以下に切り替えると利用側のimportの変更は不要 */
-// export default FCMNotificationService

@@ -13,11 +13,22 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
   const [topicTitle, setTopicTitle] = useState<string>();
   const [topicText, setTopicText] = useState<string>();
   const [sendTopicName, setSendTopicName] = useState<string>();
+  const [topicNameError, setTopicNameError] = useState<string>();
 
   const subscribeToTopic = useCallback(() => {
+    setTopicNameError(undefined);
     if (topicName && deviseToken) {
       pushNotificationService.subscribeToTopic(topicName, deviseToken).catch((e) => {
+        setTopicNameError(`トピック ${topicName} の登録に失敗しました`);
         console.warn(`fail to subscribe topic [${topicName}]`, e);
+      });
+    }
+  }, [topicName, deviseToken]);
+
+  const unsubscribeFromTopic = useCallback(() => {
+    if (topicName && deviseToken) {
+      pushNotificationService.unsubscribeFromTopic(topicName, deviseToken).catch((e) => {
+        console.warn(`fail to unsubscribe topic [${topicName}]`, e);
       });
     }
   }, [topicName, deviseToken]);
@@ -43,14 +54,16 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
         以下の「この端末で購読するトピックを追加」ボタンを押すと、指定したトピック名でFirebaseに購読登録できます。その後に、「指定したトピックにプッシュ通知を送信」ボタンを押すと、そのトピックを購読している端末全てにプッシュ通知が届きます。
       </Description>
       <FormInput
-        label="追加購読するトピック名"
+        label="購読するトピック名(英数字のみ)"
         value={topicName}
         onChangeText={(value) => setTopicName(value)}
-        placeholder="購読したいトピック名を入力してください"
+        placeholder="購読するトピック名を英数字で入力してください"
+        error={topicNameError}
       />
       <TextButton onPress={subscribeToTopic} value="この端末で購読するトピックを追加" />
+      <TextButton onPress={unsubscribeFromTopic} value="この端末で購読するトピックから削除" />
       <FormInput
-        label="通知メッセージの送信先トピック名"
+        label="通知メッセージの送信先トピック名(英数字)"
         value={sendTopicName}
         onChangeText={(value) => setSendTopicName(value)}
         placeholder="メッセージを送信したいトピック名を入力してください"

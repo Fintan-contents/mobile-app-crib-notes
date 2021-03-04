@@ -1,6 +1,12 @@
 import {registerRootComponent} from 'expo';
+import messaging from '@react-native-firebase/messaging';
 
 import App from './src/App';
+
+messaging().setBackgroundMessageHandler((message) => {
+  console.log(message);
+  return Promise.resolve();
+});
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in the Expo client or in a native build,
