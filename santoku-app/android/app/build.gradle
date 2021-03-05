@@ -174,7 +174,6 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            applicationIdSuffix ".release"
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
