@@ -4,8 +4,7 @@ title: プロジェクトの作成
 
 ## React Nativeプロジェクトの作成
 
-<!-- TODO: リンク貼るよ -->
-[アプリを実装する前に](.)で紹介しているコードを簡単に動かすことができるように、プロジェクトを作成します。
+[アプリを実装する前に](../basic-concepts)で紹介しているコードを簡単に動かすことができるように、プロジェクトを作成します。
 
 このコンテンツでは[React Navigation](https://reactnavigation.org/)や[React Native Elements](https://reactnativeelements.com/)などのパッケージを利用します。これらのパッケージがインストールされたプロジェクトを簡単に用意できるよう、[RN Spoiler](https://github.com/ws-4020/rn-spoiler)というテンプレートを用意しています。
 
@@ -15,8 +14,7 @@ title: プロジェクトの作成
 npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler#hands-on <YourAppName>
 ```
 
-<!-- TODO: リンク貼るよ -->
-RN Spoilerは、Expoの[expo-template-bare-typescript](https://github.com/expo/expo/tree/master/templates/expo-template-bare-typescript)をベースにしているので、[Expoとは](.)で紹介しているBare Workflowのアプリとして開発できます。
+RN Spoilerは、Expoの[expo-template-bare-typescript](https://github.com/expo/expo/tree/master/templates/expo-template-bare-typescript)をベースにしているので、このあとの[アプリの実行](./launch-created-app.mdx)で紹介しているExpo Goで動作します。
 
 :::info
 [npm](https://www.npmjs.com/)ではなく[Yarn](https://yarnpkg.com/)を利用したい場合は、`--npm`というオプションを削除してください。Yarnがインストールされている場合は、Yarnを利用してパッケージがインストールされます。
