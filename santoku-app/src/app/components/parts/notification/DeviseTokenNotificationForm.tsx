@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {Description, Section, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
 import pushNotificationService from '../../../backend/notification/PushNotificationService';
+import {Alert} from 'react-native';
 
 type Props = {
   deviseToken?: string;
@@ -14,8 +15,14 @@ const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
 
   const sendMessage = useCallback(
     (delay) => {
-      if (deviseToken && title && body && text) {
+      if (!deviseToken) {
+        Alert.alert('通知を許可してください');
+        return;
+      }
+      if (title && body && text) {
         pushNotificationService.sendMessage({token: deviseToken, notification: {title, body}, data: {text}, delay});
+      } else {
+        Alert.alert('タイトル、本文、データは必須です');
       }
     },
     [deviseToken, title, body, text],
@@ -46,10 +53,10 @@ const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
           placeholder="通知メッセージの本文を入力してください"
         />
         <FormInput
-          label="(任意) データとしてアプリが受け取る値 (文字列)"
+          label="データとしてアプリが受け取る値 (文字列)"
           value={text}
           onChangeText={(value) => setText(value)}
-          placeholder="データのValueを入力してください"
+          placeholder="データを入力してください"
         />
         <TextButton
           onPress={() => {

@@ -17,11 +17,17 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
 
   const subscribeToTopic = useCallback(() => {
     setTopicNameError(undefined);
-    if (topicName && deviseToken) {
+    if (!deviseToken) {
+      Alert.alert('通知を許可してください');
+      return;
+    }
+    if (topicName) {
       pushNotificationService.subscribeToTopic(topicName, deviseToken).catch((e) => {
         setTopicNameError(`トピック ${topicName} の登録に失敗しました`);
         console.warn(`fail to subscribe topic [${topicName}]`, e);
       });
+    } else {
+      setTopicNameError('トピック名は必須です');
     }
   }, [topicName, deviseToken]);
 
@@ -34,7 +40,7 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
   }, [topicName, deviseToken]);
 
   const sendTopic = useCallback(() => {
-    if (deviseToken && sendTopicName && topicTitle && topicText) {
+    if (sendTopicName && topicTitle && topicText) {
       pushNotificationService.sendTopic({
         topic: sendTopicName,
         notification: {title: topicTitle, body: topicText},
@@ -43,7 +49,7 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
     } else {
       Alert.alert('トピック名、タイトル、本文は必須です');
     }
-  }, [deviseToken, sendTopicName, topicTitle, topicText]);
+  }, [sendTopicName, topicTitle, topicText]);
 
   return (
     <>
