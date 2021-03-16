@@ -5,27 +5,27 @@ import pushNotificationService from '../../../backend/notification/PushNotificat
 import {Alert} from 'react-native';
 
 type Props = {
-  deviseToken?: string;
+  deviceToken?: string;
 };
 
-const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
+const DeviceTokenNotificationForm: React.FC<Props> = ({deviceToken}) => {
   const [title, setTitle] = useState<string>();
   const [body, setBody] = useState<string>();
   const [text, setText] = useState<string>();
 
   const sendMessage = useCallback(
     (delay) => {
-      if (!deviseToken) {
+      if (!deviceToken) {
         Alert.alert('通知を許可してください');
         return;
       }
       if (title && body && text) {
-        pushNotificationService.sendMessage({token: deviseToken, notification: {title, body}, data: {text}, delay});
+        pushNotificationService.sendMessage({token: deviceToken, notification: {title, body}, data: {text}, delay});
       } else {
         Alert.alert('タイトル、本文、データは必須です');
       }
     },
-    [deviseToken, title, body, text],
+    [deviceToken, title, body, text],
   );
 
   return (
@@ -39,7 +39,7 @@ const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
         その後に、送信したい内容を入力して「この端末にプッシュ通知を送信」ボタンを押すと、バックエンドサーバー経由でFirebaseのプッシュ通知送信APIが呼び出され、Firebaseからこの端末にプッシュ通知が届きます。
       </Description>
       <Section>
-        <FormInput readonly={true} label="この端末のデバイストークン" value={deviseToken} />
+        <FormInput readonly={true} label="この端末のデバイストークン" value={deviceToken} />
         <FormInput
           label="通知メッセージタイトル"
           value={title}
@@ -75,4 +75,4 @@ const DeviseTokenNotificationForm: React.FC<Props> = ({deviseToken}) => {
   );
 };
 
-export default DeviseTokenNotificationForm;
+export default DeviceTokenNotificationForm;

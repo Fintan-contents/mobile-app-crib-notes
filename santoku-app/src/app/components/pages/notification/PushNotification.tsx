@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Container, Description, KeyboardAvoidingView} from '../../basics';
-import DeviseTokenNotificationForm from '../../parts/notification/DeviseTokenNotificationForm';
+import DeviceTokenNotificationForm from '../../parts/notification/DeviceTokenNotificationForm';
 import TopicNotificationForm from '../../parts/notification/TopicNotificationForm';
 import {useIsMounted} from '../../../../framework/hooks/useIsMounted';
 import pushNotificationService from '../../../backend/notification/PushNotificationService';
@@ -8,7 +8,7 @@ import messaging, {FirebaseMessagingTypes} from '@react-native-firebase/messagin
 import {Alert} from 'react-native';
 
 const PushNotification: React.FC = () => {
-  const [deviseToken, setDeviseToken] = useState<string>();
+  const [deviceToken, setDeviceToken] = useState<string>();
   const isMounted = useIsMounted();
   const [recieveData, setRecieveData] = useState<string>();
 
@@ -22,14 +22,14 @@ const PushNotification: React.FC = () => {
   );
 
   useEffect(() => {
-    if (deviseToken) {
+    if (deviceToken) {
       messaging().onNotificationOpenedApp(setRemoteMessage);
       messaging().getInitialNotification().then(setRemoteMessage);
       return messaging().onMessage((message) => {
         Alert.alert('受信', JSON.stringify({...message.notification, data: message.data}));
       });
     }
-  }, [deviseToken, isMounted, setRemoteMessage]);
+  }, [deviceToken, isMounted, setRemoteMessage]);
 
   useEffect(() => {
     if (recieveData) {
@@ -45,27 +45,27 @@ const PushNotification: React.FC = () => {
   }, [recieveData]);
 
   useEffect(() => {
-    if (deviseToken) {
+    if (deviceToken) {
       messaging().onSendError((event) => console.warn(event));
     }
-  }, [deviseToken]);
+  }, [deviceToken]);
 
   useEffect(() => {
-    if (!deviseToken) {
+    if (!deviceToken) {
       pushNotificationService.getToken().then((token) => {
         if (isMounted()) {
-          setDeviseToken(token);
+          setDeviceToken(token);
         }
       });
     }
-  }, [isMounted, deviseToken]);
+  }, [isMounted, deviceToken]);
 
   return (
     <Container refreshing={false}>
       <KeyboardAvoidingView>
         <Description>指定した端末へプッシュ通知を送信する例と、指定したトピックを購読している端末へプッシュ通知を送信する例を示します。</Description>
-        <DeviseTokenNotificationForm deviseToken={deviseToken} />
-        <TopicNotificationForm deviseToken={deviseToken} />
+        <DeviceTokenNotificationForm deviceToken={deviceToken} />
+        <TopicNotificationForm deviceToken={deviceToken} />
       </KeyboardAvoidingView>
     </Container>
   );

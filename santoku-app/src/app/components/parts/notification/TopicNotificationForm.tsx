@@ -5,10 +5,10 @@ import {Description, TextButton, Title} from '../../basics';
 import FormInput from './FormInput';
 
 type Props = {
-  deviseToken?: string;
+  deviceToken?: string;
 };
 
-const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
+const TopicNotificationForm: React.FC<Props> = ({deviceToken}) => {
   const [topicName, setTopicName] = useState<string>();
   const [topicTitle, setTopicTitle] = useState<string>();
   const [topicText, setTopicText] = useState<string>();
@@ -17,27 +17,27 @@ const TopicNotificationForm: React.FC<Props> = ({deviseToken}) => {
 
   const subscribeToTopic = useCallback(() => {
     setTopicNameError(undefined);
-    if (!deviseToken) {
+    if (!deviceToken) {
       Alert.alert('通知を許可してください');
       return;
     }
     if (topicName) {
-      pushNotificationService.subscribeToTopic(topicName, deviseToken).catch((e) => {
+      pushNotificationService.subscribeToTopic(topicName, deviceToken).catch((e) => {
         setTopicNameError(`トピック ${topicName} の登録に失敗しました`);
         console.warn(`fail to subscribe topic [${topicName}]`, e);
       });
     } else {
       setTopicNameError('トピック名は必須です');
     }
-  }, [topicName, deviseToken]);
+  }, [topicName, deviceToken]);
 
   const unsubscribeFromTopic = useCallback(() => {
-    if (topicName && deviseToken) {
-      pushNotificationService.unsubscribeFromTopic(topicName, deviseToken).catch((e) => {
+    if (topicName && deviceToken) {
+      pushNotificationService.unsubscribeFromTopic(topicName, deviceToken).catch((e) => {
         console.warn(`fail to unsubscribe topic [${topicName}]`, e);
       });
     }
-  }, [topicName, deviseToken]);
+  }, [topicName, deviceToken]);
 
   const sendTopic = useCallback(() => {
     if (sendTopicName && topicTitle && topicText) {
