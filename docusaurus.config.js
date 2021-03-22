@@ -74,11 +74,6 @@ module.exports = {
           label: 'React Native',
           items: [
             {
-              label: 'Guide',
-              to: 'react-native/guide',
-              position: 'left',
-            },
-            {
               label: 'Learn',
               to: 'react-native/learn',
               position: 'left',
@@ -114,12 +109,12 @@ module.exports = {
           title: 'React Native',
           items: [
             {
-              label: 'Guide',
-              to: 'react-native/guide',
-            },
-            {
               label: 'Learn',
               to: 'react-native/learn',
+            },
+            {
+              label: 'Troubleshoot',
+              to: 'react-native/troubleshooting',
             },
           ],
         },

@@ -11,11 +11,6 @@ module.exports = {
     ],
     プッシュ通知: ['doc1', 'doc2', 'doc3'],
   },
-  guide: {
-    About: ['react-native/guide'],
-    環境構築: ['react-native/guide/environment-setup'],
-    画面遷移: ['react-native/guide/screen-transitions'],
-  },
   learn: [
     {
       type: 'doc',
