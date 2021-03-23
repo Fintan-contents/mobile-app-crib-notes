@@ -3,11 +3,13 @@ module.exports = {
     このドキュメントについて: ['reference/index'],
     セキュリティ: ['reference/security/awesome-sites'],
     認証: [
+      'reference/auth/overview',
       'reference/auth/authn-architecture',
       'reference/auth/login-screens',
       'reference/auth/manage-credentials',
       'reference/auth/stateless-authn',
       'reference/auth/webassets-integration',
+      'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
     ],
     プッシュ通知: [
       'reference/notification/overview',

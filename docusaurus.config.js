@@ -161,6 +161,10 @@ module.exports = {
       {
         redirects: [
           {
+            from: '/docs/auth/overview', // string | string[]
+            to: '/reference/auth/overview', // string
+          },
+          {
             from: '/docs/notes-in-mobile-application-development', // string | string[]
             to: '/reference/security/awesome-sites', // string
           },
@@ -183,6 +187,10 @@ module.exports = {
           {
             from: '/docs/auth/stateless-authn', // string | string[]
             to: '/reference/auth/stateless-authn', // string
+          },
+          {
+            from: '/docs/auth/authn-with-backend-using-OIDC-and-device-authn', // string | string[]
+            to: '/reference/auth/authn-with-backend-using-OIDC-and-device-authn', // string
           },
           {
             from: '/docs', // string | string[]
