@@ -6,6 +6,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import DrawerContent from './DrawerContent';
 import StatefulAuthIntegration from './webview/StatefulAuthIntegration';
 import StatelessAuth from './auth/StatelessAuth';
+import BackendAuth from './backendauth/BackendAuth';
 import Top from './top/Top';
 import PushNotification from './notification/PushNotification';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
@@ -82,6 +83,30 @@ const StatelessAuthScreen: React.FC = () => {
   );
 };
 
+const BackendAuthStack = createStackNavigator();
+
+const BackendAuthScreen: React.FC = () => {
+  const {dispatch} = useNavigation();
+  return (
+    <BackendAuthStack.Navigator>
+      <BackendAuthStack.Screen
+        name="BackendAuth"
+        component={BackendAuth}
+        options={{
+          title: 'バックエンド認証 with IDトークン',
+          headerStyle: {backgroundColor: '#9DC6BF'},
+          headerTitleStyle: {fontWeight: 'bold'},
+          headerLeft: () => (
+            <Button transparent>
+              <Icon name="menu" style={styles.icon} onPress={() => dispatch(DrawerActions.openDrawer())} />
+            </Button>
+          ),
+        }}
+      />
+    </BackendAuthStack.Navigator>
+  );
+};
+
 const PushNotificationStack = createStackNavigator();
 
 const PushNotificationScreen: React.FC = () => {
@@ -110,10 +135,11 @@ const Drawer = createDrawerNavigator();
 
 const Navigator: React.FC = () => {
   return (
-    <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+    <Drawer.Navigator drawerContent={DrawerContent}>
       <Drawer.Screen name="TopDrawer" component={TopScreen} />
       <Drawer.Screen name="AuthIntegrationWithWebApps" component={AuthIntegrationWithWebAppsStackScreen} />
       <Drawer.Screen name="StatelessAuth" component={StatelessAuthScreen} />
+      <Drawer.Screen name="BackendAuth" component={BackendAuthScreen} />
       <Drawer.Screen name="PushNotification" component={PushNotificationScreen} />
     </Drawer.Navigator>
   );

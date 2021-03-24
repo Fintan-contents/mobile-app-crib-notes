@@ -50,8 +50,8 @@ class SecureStorageExpoSecureStoreAdapter implements SecureStorageAdapter {
     });
   }
 
-  delete(): Promise<void[]> {
-    return Promise.all(Object.keys(STORED_ITEM_KEYS).map((k) => SecureStore.deleteItemAsync(k)));
+  async delete(): Promise<void[]> {
+    return Promise.all(Object.values(STORED_ITEM_KEYS).map((k) => SecureStore.deleteItemAsync(k)));
   }
 }
 
