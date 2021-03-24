@@ -1,5 +1,6 @@
 ---
-title: 概要
+title: 認証
+sidebar_label: Overview
 ---
 
 ## 認証とは

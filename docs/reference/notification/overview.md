@@ -1,5 +1,6 @@
 ---
-title: 概要
+title: プッシュ通知
+sidebar_label: Overview
 ---
 
 ## プッシュ通知とは
