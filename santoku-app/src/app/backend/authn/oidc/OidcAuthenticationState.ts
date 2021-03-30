@@ -1,4 +1,4 @@
-import { AuthenticationState, NotAuthenticated } from '../AuthenticationState';
+import {AuthenticationState, NotAuthenticated} from '../AuthenticationState';
 
 type OidcAuthenticatedStateProps = {
   readonly accessTokenExpirationDate: string;
@@ -54,7 +54,7 @@ class OidcAuthenticationStateTranslator {
           accessToken: obj.accessToken,
           idToken: obj.idToken,
         },
-        obj.refreshToken
+        obj.refreshToken,
       );
     }
     return new OidcAuthenticated({
@@ -65,4 +65,4 @@ class OidcAuthenticationStateTranslator {
   }
 }
 
-export { OidcAuthenticationStateTranslator, OidcAuthenticated, OidcRefreshableAuthenticated };
+export {OidcAuthenticationStateTranslator, OidcAuthenticated, OidcRefreshableAuthenticated};

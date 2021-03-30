@@ -1,15 +1,15 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { Spinner } from 'native-base';
-import { AuthenticationState, NotAuthenticated } from '../../backend/authn/AuthenticationState';
+import React, {useCallback, useState, useEffect} from 'react';
+import {Spinner} from 'native-base';
+import {AuthenticationState, NotAuthenticated} from '../../backend/authn/AuthenticationState';
 import type {
   StatelessLoginContext,
   OidcAuthCodeTokenClaimCallback,
   OidcLogoutCallback,
   OidcRefreshTokenCallback,
 } from '../../context/StatelessLoginContext';
-import { StatelessLoginProvider } from '../../context/StatelessLoginContext';
-import { OidcAuthenticated, OidcRefreshableAuthenticated } from '../../backend/authn/oidc/OidcAuthenticationState';
-import { OidcAuthCodeFlowAuthenticationUseCase } from '../../backend/authn/oidc/OidcAuthCodeFlowAuthenticationUseCase';
+import {StatelessLoginProvider} from '../../context/StatelessLoginContext';
+import {OidcAuthenticated, OidcRefreshableAuthenticated} from '../../backend/authn/oidc/OidcAuthenticationState';
+import {OidcAuthCodeFlowAuthenticationUseCase} from '../../backend/authn/oidc/OidcAuthCodeFlowAuthenticationUseCase';
 
 const oidc = OidcAuthCodeFlowAuthenticationUseCase.INSTANCE;
 
@@ -18,7 +18,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const WithStatelessLoginContext: React.FC<Props> = ({ children }) => {
+const WithStatelessLoginContext: React.FC<Props> = ({children}) => {
   const [authnState, setAuthnState] = useState<AuthenticationState>(NotAuthenticated);
   const [initialized, setInitialized] = useState<boolean>(false);
 

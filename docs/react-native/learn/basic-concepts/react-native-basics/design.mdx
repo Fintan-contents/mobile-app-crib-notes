@@ -1,0 +1,32 @@
+---
+title: Design
+sidebar_label: Overview
+---
+
+React Nativeでは、JavaScriptを使用してアプリケーションのスタイルを定義します。
+ほとんどのコアコンポーネントには`style` という名前のpropが用意されています。
+
+スタイル名とその設定値は、キャメルケースを使用しているという点を除き、WebのCSSのそれと通常は一致します。
+例えば、`background-color`は`backgroundColor`となります。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+import {PageList} from '../../../../../src/components';
+const overviews = [
+  {
+    title: 'Style',
+    to: 'react-native/learn/basic-concepts/react-native-basics/design/style',
+  },
+  {
+    title: '高さと幅',
+    to: 'react-native/learn/basic-concepts/react-native-basics/design/height-and-width',
+  },
+  {
+    title: 'Flexbox',
+    to: 'react-native/learn/basic-concepts/react-native-basics/design/flexbox',
+  },
+]
+
+<PageList overviews={overviews} colSize={12}/>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->

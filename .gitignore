@@ -99,3 +99,22 @@ dist/
 
 ### Hugo ###
 public
+
+### Docusaurus ###
+# Production
+/build
+
+# Generated files
+.docusaurus
+.cache-loader
+
+# Misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+### Junk ###
+junk.md
+tmp/
+_*[Ss]cratch.*

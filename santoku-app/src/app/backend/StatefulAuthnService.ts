@@ -1,9 +1,9 @@
-import type { Cookie } from '@react-native-community/cookies';
+import type {Cookie} from '@react-native-community/cookies';
 import CookieManager from '@react-native-community/cookies';
 
 import axios from 'axios';
-import { AppConfig } from '../AppConfig';
-import { log } from '../../framework/logging';
+import {AppConfig} from '../AppConfig';
+import {log} from '../../framework/logging';
 
 const SESSION_ID_KEY = 'NABLARCH_SID';
 
@@ -31,7 +31,7 @@ async function getSessionId(): Promise<Cookie> {
   return cookies[SESSION_ID_KEY];
 }
 
-async function login({ userId, password }: LoginCredential): Promise<void> {
+async function login({userId, password}: LoginCredential): Promise<void> {
   try {
     await axios.post(
       `${AppConfig.STATEFUL_AUTH_BASE_URL}/login`,
@@ -43,7 +43,7 @@ async function login({ userId, password }: LoginCredential): Promise<void> {
         headers: {
           'Content-Type': 'application/json',
         },
-      }
+      },
     );
   } catch (e) {
     // 入力チェックエラーのハンドリングはコンポーネントに委ねる

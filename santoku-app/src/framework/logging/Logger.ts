@@ -45,5 +45,5 @@ const DEFAULT_LOGGER_OPTIONS: StrictLoggerOptions = {
   level: 'info',
 };
 
-export type { Logger, LogLevel, LoggerOptions, StrictLoggerOptions, LogMessageSupplier };
-export { LogLevelSet, DEFAULT_LOGGER_OPTIONS };
+export type {Logger, LogLevel, LoggerOptions, StrictLoggerOptions, LogMessageSupplier};
+export {LogLevelSet, DEFAULT_LOGGER_OPTIONS};

@@ -1,0 +1,194 @@
+openapi: 3.0.0
+info:
+  title: santoku-app-backend
+  version: '1.0'
+  description: SantokuApp Backend API
+servers:
+  - url: 'https://santoku-app-functions.azurewebsites.net/api'
+paths:
+  /messages:
+    post:
+      summary: Send notification message to device.
+      operationId: post-messages
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Missing Required Information
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                notification:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    body:
+                      type: string
+                data:
+                  type: object
+                  properties:
+                    text:
+                      type: string
+                delay:
+                  type: number
+                  minimum: 0
+                  maximum: 30
+              required:
+                - token
+            examples:
+              example:
+                value:
+                  token: your-registration-token
+                  notification:
+                    title: Notification title
+                    body: Notification body
+                  data:
+                    text: Text data
+      description: Send notification message to device.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: x-functions-key
+          description: Azure Functions API Key
+          required: true
+    parameters: []
+  /publish:
+    post:
+      summary: Publish notification message to topic.
+      operationId: post-publish
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: x-functions-key
+          description: Azure Functions API Key
+          required: true
+      description: Publish notification message to topic.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                notification:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    body:
+                      type: string
+                data:
+                  type: object
+                  properties:
+                    text:
+                      type: string
+                delay:
+                  type: number
+                  minimum: 0
+                  maximum: 30
+              required:
+                - topic
+            examples:
+              example:
+                value:
+                  topic: topic-name
+                  notification:
+                    title: Notification title
+                    body: Notification body
+                  data:
+                    text: Text data
+  /subscribe:
+    post:
+      summary: Subscribe from topic.
+      operationId: post-subscribe
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      parameters:
+        - schema:
+            type: string
+          in: header
+          required: true
+          name: x-functions-key
+          description: Azure Functions API Key
+      description: Subscribe to topic.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                token:
+                  type: string
+              required:
+                - topic
+                - token
+            examples:
+              example:
+                value:
+                  topic: topic-name
+                  token: your-registration-token
+        description: ''
+  /unsubscribe:
+    post:
+      summary: Unsubscribe to topic.
+      operationId: post-unsubscribe
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: x-functions-key
+          description: Azure Functions API Key
+          required: true
+      description: Subscribe to topic.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                token:
+                  type: string
+              required:
+                - topic
+                - token
+            examples:
+              example:
+                value:
+                  topic: topic-name
+                  token: your-registration-token
+components:
+  schemas: {}

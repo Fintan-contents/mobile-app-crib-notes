@@ -1,15 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import type { StatefulLoginContext, LoginApiAdapter, LogoutApiAdapter } from '../../context/StatefulLoginContext';
-import { StatefulLoginProvider } from '../../context/StatefulLoginContext';
-import type { LoginCredential, SessionId } from '../../backend/StatefulAuthnService';
-import { statefulAuthnService } from '../../backend/StatefulAuthnService';
+import React, {useCallback, useState} from 'react';
+import type {StatefulLoginContext, LoginApiAdapter, LogoutApiAdapter} from '../../context/StatefulLoginContext';
+import {StatefulLoginProvider} from '../../context/StatefulLoginContext';
+import type {LoginCredential, SessionId} from '../../backend/StatefulAuthnService';
+import {statefulAuthnService} from '../../backend/StatefulAuthnService';
 
 type Props = {
   // 子要素必須なので、あえてPropsにて定義
   children: React.ReactNode;
 };
 
-const WithStatefulLoginContext: React.FC<Props> = ({ children }) => {
+const WithStatefulLoginContext: React.FC<Props> = ({children}) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [sessionId, setSessionId] = useState<SessionId>(null);
 

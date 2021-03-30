@@ -1,13 +1,13 @@
 import React from 'react';
-import { KeyboardAvoidingView as RNKeyboardAvoidingView, ScrollView, Platform, StatusBar, ScrollViewProps, StyleSheet } from 'react-native';
-import { useHeaderHeight } from '@react-navigation/stack';
+import {KeyboardAvoidingView as RNKeyboardAvoidingView, ScrollView, Platform, ScrollViewProps, StyleSheet} from 'react-native';
+import {useHeaderHeight} from '@react-navigation/stack';
 
 type Props = {
   children: React.ReactNode;
   scrollViewProps?: ScrollViewProps;
 };
 
-const KeyboardAvoidingView: React.FC<Props> = ({ children, scrollViewProps }) => {
+const KeyboardAvoidingView: React.FC<Props> = ({children, scrollViewProps}) => {
   const headerHeight = useHeaderHeight();
 
   return (
@@ -15,14 +15,13 @@ const KeyboardAvoidingView: React.FC<Props> = ({ children, scrollViewProps }) =>
     <RNKeyboardAvoidingView
       behavior={Platform.select({
         ios: 'padding',
-        android: 'height',
+        android: undefined,
       })}
       style={styles.container}
       keyboardVerticalOffset={Platform.select({
         ios: headerHeight,
-        android: headerHeight + (StatusBar.currentHeight ?? 0),
-      })}
-    >
+        android: undefined,
+      })}>
       {/* 一旦キーボードを表示して非表示にした時に、画面の高さが大幅に下に伸びてしまわないようにScrollViewを設定しておく */}
       <ScrollView {...scrollViewProps}>{children}</ScrollView>
     </RNKeyboardAvoidingView>

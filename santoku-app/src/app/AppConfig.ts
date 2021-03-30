@@ -25,6 +25,8 @@ export const AppConfig = {
   WEB_APP_URI: SecureConfig.get('WEB_APP_URI', false),
   STATEFUL_AUTH_DOMAIN: SecureConfig.get('STATEFUL_AUTH_DOMAIN', false),
   STATEFUL_AUTH_BASE_URL: SecureConfig.get('STATEFUL_AUTH_BASE_URL', false),
+  BACKEND_API_URI: SecureConfig.get('SANTOKU_APP_BACKEND_API_URI', false),
+  BACKEND_API_KEY: SecureConfig.get('SANTOKU_APP_BACKEND_API_KEY', false),
 };
 
 console.debug(`Successfully loaded configurations.\n${JSON.stringify(AppConfig, null, 2)}`);

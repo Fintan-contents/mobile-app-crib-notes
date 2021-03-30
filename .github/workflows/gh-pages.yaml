@@ -1,0 +1,164 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+  pull_request_target:
+    branches:
+      - master
+    paths:
+      - docs/**
+      - src/**
+      - static/**
+      - .editorconfig
+      - .eslintrc.js
+      - .htmltest.yaml
+      - .markdownlint.js
+      - .prettierrc.js
+      - .stylelintrc.js
+      - .textlintrc.js
+      - babel.config.js
+      - docusaurus.config.js
+      - package.json
+      - package-lock.json
+      - prh.yaml
+      - README.md
+      - tsconfig.json
+      - .github/workflows/gh-pages.yaml
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  lint:
+    name: Run lints
+    runs-on: ubuntu-20.04
+    env:
+      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      # Cache '.npm' to speed up clean-install when package-lock.json is updated.
+      # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
+      - name: Cache .npm
+        id: cache-npm
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          # If cache is corrupted, increment prefixed number.
+          key: 1-${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            1-${{ runner.os }}-npm-
+
+      # If package-lock.json matches, node_modules will also match.
+      # So, cache node_modules directly to skip install step.
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          # If cache is corrupted, increment prefixed number.
+          key: 1-${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm clean-install
+
+      - name: Set up reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Lint (textlint)
+        if: always()
+        run: |
+          npm run -s lint:text -- -f checkstyle | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=checkstyle -name=textlint
+
+      - name: Lint (markdownlint)
+        if: always()
+        run: |
+          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' | reviewdog -tee -fail-on-error -reporter=github-pr-review -efm="%t:%f:%l:%c %m" -efm="%t:%f:%l %m" -name=markdownlint
+
+      - name: Lint (ESLint)
+        if: always()
+        run: |
+          npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=rdjson -name=ESLint
+
+      - name: Lint (TypeScript)
+        if: always()
+        run: |
+          npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name=TypeScript
+
+      - name: Lint (stylelint)
+        if: always()
+        uses: reviewdog/action-stylelint@v1
+        # https://github.com/reviewdog/action-stylelint
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          fail_on_error: true
+          # package.jsonでlint:cssに設定しているのと同じ引数を渡す
+          stylelint_input: 'src/**/*.css'
+
+  build-deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      # Cache '.npm' to speed up clean-install when package-lock.json is updated.
+      # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
+      - name: Cache .npm
+        id: cache-npm
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          # If cache is corrupted, increment prefixed number.
+          key: 1-${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            1-${{ runner.os }}-npm-
+
+      # If package-lock.json matches, node_modules will also match.
+      # So, cache node_modules directly to skip install step.
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          # If cache is corrupted, increment prefixed number.
+          key: 1-${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm clean-install
+
+      - name: Build documents
+        run: npm run build
+
+#      - name: Run htmltest
+#        uses: docker://wjdp/htmltest:v0.14.0
+#        with:
+#          args: --conf .htmltest.yaml
+
+      - name: Save artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: mobile-app-crib-notes
+          path: ./build
+          retention-days: 30
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build

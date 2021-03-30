@@ -1,0 +1,43 @@
+.pageList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+}
+
+.pageListRow {
+  margin-top: calc(var(--ifm-spacing-vertical) * -1);
+}
+
+.pageOverviewTitle {
+  color: var(--ifm-link-color);
+}
+
+.pageOverviewContainer {
+  display: flex;
+  margin-top: var(--ifm-spacing-vertical);
+}
+
+.pageOverviewLinkCard {
+  color: var(--ifm-color-content);
+  border: solid var(--ifm-color-gray-300) 1px;
+  border-radius: var(--ifm-pagination-nav-border-radius);
+  box-shadow: none;
+  transition-property: border-color;
+  transition-duration: var(--ifm-button-transition-duration);
+  transition-timing-function: var(--ifm-transition-timing-default);
+  width: 100%;
+}
+
+.pageOverviewLinkCard:hover {
+  color: var(--ifm-color-content);
+  text-decoration: none;
+  border-color: var(--ifm-color-primary-lightest);
+}
+
+.pageOverviewImage {
+  height: 200px;
+  width: 200px;
+  display: block;
+  margin: auto;
+}

@@ -1,8 +1,8 @@
 import * as AppAuth from 'react-native-app-auth';
-import { AuthorizeResult, RefreshResult } from 'react-native-app-auth';
-import { AppConfig } from '../../../AppConfig';
-import { AuthenticationState, NotAuthenticated } from '../AuthenticationState';
-import { OidcAuthenticated, OidcRefreshableAuthenticated } from './OidcAuthenticationState';
+import {AuthorizeResult, RefreshResult} from 'react-native-app-auth';
+import {AppConfig} from '../../../AppConfig';
+import {AuthenticationState, NotAuthenticated} from '../AuthenticationState';
+import {OidcAuthenticated, OidcRefreshableAuthenticated} from './OidcAuthenticationState';
 
 // TODO: Cognito用のクラスを作るとかしたほうがよさそう。
 const config: AppAuth.AuthConfiguration = {
@@ -68,4 +68,4 @@ class OidcAuthCodeFlowAppAuthAdapter implements OidcAuthCodeFlowAdapter {
   }
 }
 
-export { OidcAuthCodeFlowAppAuthAdapter as OidcAuthCodeFlowAdapter };
+export {OidcAuthCodeFlowAppAuthAdapter as OidcAuthCodeFlowAdapter};

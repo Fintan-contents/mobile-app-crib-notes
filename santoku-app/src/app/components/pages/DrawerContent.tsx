@@ -1,7 +1,8 @@
 import React from 'react';
 // ReactNativeを使用したコンポーネントの呼び出し
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import { Container, Content, ListItem } from 'native-base';
+import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {Container, Content, ListItem} from 'native-base';
+import {DrawerContentComponentProps, DrawerContentOptions} from '@react-navigation/drawer';
 
 type MenuProps = {
   to: string;
@@ -14,19 +15,13 @@ const MenuItem: React.FC<MenuProps> = (props) => {
       onPress={() => {
         props.navigation.navigate(props.to);
       }}
-      style={styles.listItem}
-    >
+      style={styles.listItem}>
       <Text style={styles.menuTextStyle}>{props.children}</Text>
     </ListItem>
   );
 };
 
-type Props = {
-  to: string;
-  navigation: any;
-};
-
-const DrawerContent: React.FC<Props> = (props) => {
+const DrawerContent: React.FC<DrawerContentComponentProps<DrawerContentOptions>> = (props) => {
   return (
     <Container style={styles.containerBackgroundStyle}>
       <SafeAreaView style={styles.headerStyle}>
@@ -36,8 +31,7 @@ const DrawerContent: React.FC<Props> = (props) => {
               style={styles.overlayTextStyle}
               onPress={() => {
                 props.navigation.navigate('TopDrawer');
-              }}
-            >
+              }}>
               SantokuApp
             </Text>
           </View>
@@ -49,6 +43,12 @@ const DrawerContent: React.FC<Props> = (props) => {
         </MenuItem>
         <MenuItem {...props} to="StatelessAuth">
           ステートレスな認証
+        </MenuItem>
+        <MenuItem {...props} to="BackendAuth">
+          バックエンド認証 with IDトークン
+        </MenuItem>
+        <MenuItem {...props} to="PushNotification">
+          プッシュ通知
         </MenuItem>
       </Content>
     </Container>
