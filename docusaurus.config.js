@@ -181,6 +181,10 @@ module.exports = {
             to: '/reference/auth/authn-architecture', // string
           },
           {
+            from: '/docs/auth/authn-architecture', // string | string[]
+            to: '/reference/auth/authn-architecture', // string
+          },
+          {
             from: '/docs/webassets-integration', // string | string[]
             to: '/reference/auth/webassets-integration', // string
           },
