@@ -78,6 +78,9 @@ module.exports = {
               to: 'react-native/learn',
               position: 'left',
             },
+            ...(process.env.NODE_ENV === 'development'
+              ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}]
+              : []),
             {
               label: 'Troubleshoot',
               to: 'react-native/troubleshooting',
@@ -85,6 +88,7 @@ module.exports = {
             },
           ],
         },
+        ...(process.env.NODE_ENV === 'development' ? [{label: 'Docusaurus', to: 'docusaurus', position: 'left'}] : []),
         {
           href: `https://github.com/${organization}/mobile-app-crib-notes`,
           position: 'right',
@@ -116,6 +120,9 @@ module.exports = {
               label: 'Troubleshoot',
               to: 'react-native/troubleshooting',
             },
+            ...(process.env.NODE_ENV === 'development'
+              ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}]
+              : []),
           ],
         },
         {

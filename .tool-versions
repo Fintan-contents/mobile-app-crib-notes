@@ -1,4 +1,2 @@
-gohugo 0.74.3
-nodejs 12.18.3
-golang 1.15
-java zulu-11.41.23
+nodejs 14.16.0
+java adoptopenjdk-11.0.10+9

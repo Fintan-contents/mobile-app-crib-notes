@@ -1,0 +1,27 @@
+---
+title: Docusaurus
+sidebar_label: About
+slug: /docusaurus
+---
+
+Docusaurusでのドキュメントの書き方についてのページです。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+import {PageList} from '../../src/components';
+const overviews = [
+  {
+    title: 'Markdown',
+    summary: <>Markdown Syntax</>,
+    to: '/docusaurus/doc1'
+  },
+  {
+    title: 'MDX',
+    summary: <>About MDX</>,
+    to: '/docusaurus/mdx'
+  },
+]
+
+<PageList overviews={overviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->

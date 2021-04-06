@@ -1,7 +1,7 @@
 ---
 id: doc1
-title: Style Guide
-sidebar_label: Style Guide
+title: Markdown Syntax
+sidebar_label: Markdown Syntax
 ---
 
 <!-- markdownlint-disable-file -->
@@ -59,7 +59,9 @@ Strikethrough uses two tildes. ~~Scratch this.~~
 
 ## Links
 
-[I'm an inline-style link](https://www.google.com/)
+[I'm an inline-style link to another document](doc2.md)
+
+[I'm an inline-style link to external page](https://www.google.com/)
 
 [I'm an inline-style link with title](https://www.google.com/ "Google's Homepage")
 
@@ -91,7 +93,7 @@ Reference-style: ![alt text][logo]
 
 Images from any folder can be used by providing path to file. Path should be relative to markdown file.
 
-![img](../static/img/logo.svg)
+![img](../../static/img/logo.svg)
 
 ---
 

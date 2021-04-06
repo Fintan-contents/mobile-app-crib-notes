@@ -1,0 +1,22 @@
+root = true
+
+# https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+
+[*.{ts,tsx,js,jsx,json}]
+
+# インデントにはスペースを利用する。
+indent_style = space
+# インデントサイズは2。
+indent_size = 2
+# タブ文字は8文字幅で表示する。（Tabが紛れていることがわかりやすくなるように）
+tab_width = 8
+# 改行コードはLFに統一する。（batなど一部のファイルの改行コードは.gitattributesで強制的にCRLFに変更されます。）
+end_of_line = lf
+# 文字コードはUTF-8
+charset = utf-8
+# 行末の空白はトリムする。
+trim_trailing_whitespace = true
+# ファイル末尾に改行を入れる。
+insert_final_newline = true
+# 一行の長さは120文字まで。
+max_line_length = 120

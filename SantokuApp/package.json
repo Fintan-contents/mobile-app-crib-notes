@@ -1,0 +1,63 @@
+{
+  "main": "index.js",
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "web": "expo start --web",
+    "start": "react-native start",
+    "test": "jest --detectOpenHandles --runInBand",
+    "lint": "run-s --print-name --continue-on-error lint:*",
+    "lint:es": "eslint --ext .jsx,.js,.tsx,.ts .",
+    "lint:tsc": "tsc --noEmit",
+    "fix": "run-s --print-name --continue-on-error fix:*",
+    "fix:es": "eslint --fix --ext .jsx,.js,.tsx,.ts .",
+    "reset-cache": "node .script/runner.js reset-cache",
+    "reset-cache:all": "node .script/runner.js reset-cache --all",
+    "reset-cache:interactive": "node .script/runner.js reset-cache --interactive"
+  },
+  "dependencies": {
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/bottom-tabs": "~5.11.0",
+    "@react-navigation/drawer": "~5.12.0",
+    "@react-navigation/native": "~5.9.0",
+    "@react-navigation/stack": "~5.14.0",
+    "expo": "~40.0.0",
+    "expo-splash-screen": "~0.8.1",
+    "expo-updates": "~0.4.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "0.63.4",
+    "react-native-elements": "~3.3.0",
+    "react-native-gesture-handler": "~1.8.0",
+    "react-native-reanimated": "~2.0.0",
+    "react-native-safe-area-context": "3.1.9",
+    "react-native-screens": "~2.15.2",
+    "react-native-unimodules": "~0.12.0",
+    "react-native-web": "~0.13.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@types/jest": "<26.0.0",
+    "@types/react": "~16.9.35",
+    "@types/react-dom": "~16.9.8",
+    "@types/react-native": "~0.63.2",
+    "@types/react-test-renderer": "<16.12.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
+    "babel-preset-expo": "8.3.0",
+    "eslint": "^7.18.0",
+    "eslint-config-universe": "^7.0.0",
+    "jest-expo": "^40.0.0",
+    "jest-junit": "^12.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.0",
+    "typescript": "~4.0.0"
+  },
+  "jest-junit": {
+    "suiteNameTemplate": "{filepath}",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}",
+    "ancestorSeparator": " › "
+  },
+  "private": true
+}
