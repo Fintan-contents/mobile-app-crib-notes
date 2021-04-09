@@ -7,8 +7,7 @@
     schedule: ['before 20:00 on sunday'],
   },
   ignorePaths: [
-    'santoku-app/android',
-    'santoku-app/ios'
+    'santoku-app'
   ],
   packageRules: [
     {

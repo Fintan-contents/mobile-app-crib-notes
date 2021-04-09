@@ -5,11 +5,11 @@
 - [Setting up the development environment - React Native](https://reactnative.dev/docs/environment-setup)を参考に開発環境を構築してください。
   - **必ず「React Native CLI Quickstart」というタブをクリック**して、手順を実施してください。
   - インストールするNode.jsのバージョンはLTSバージョンとしてください。
-    - WindowsでChocolateyでインストールする場合は、 `node-lts` パッケージをおすすめします。
-  - 「Development OS」は、開発に利用している OS を選択してください。
-  - （macOS のみ）「Target OS」は、「iOS」「Android」の両方の手順を実施してください。
-  - （macOS のみ）Cocoapodsのバージョンによって`pod install`時にエラーが発生する場合があります。CocoaPodsは[Bundler](https://bundler.io/)を利用して、次の方法でインストールしてください。
-    - `bundle install` （SantokuAppのルートディレクトリで実行してください）
+    - WindowsにChocolateyでインストールする場合は、 `node-lts` パッケージをおすすめします。
+  - 「Development OS」は、開発に利用しているOSを選択してください。
+  - （macOSのみ）「Target OS」は、「iOS」「Android」の両方の手順を実施してください。
+  - （macOSのみ）CocoaPodsのバージョンによっては、`pod install`でエラーとなる場合があります。CocoaPodsは[Bundler](https://bundler.io/)を利用して、次の方法でインストールしてください。
+    - `bundle install`をSantokuAppのルートディレクトリで実行してください。
     - Bundler自体のインストールが必要な場合は、`gem install bundler`でインストールしてください。
     - 以降の`Podfile.lock`の更新には、`npm run pod-install`を実行してください。
 
@@ -26,7 +26,7 @@
 3. ルートディレクトリで`xed ios`と実行して、Xcodeでプロジェクトを開いてください。開くだけで良いようです。
 4. ルートディレクトリで次のコマンドを実行してください。`<device name>`はインストール先のiOSデバイス名です。
    - `npm run ios -- --device='<device name>'`
-   - デバイス名、シミュレータ名の一覧は `xcrun xctrace list devices` で取得することができます。
+   - デバイス名、シミュレータ名の一覧は `xcrun xctrace list devices` で取得できます
 
 > **Note**: Xcodeで一度もプロジェクトを開かずにデバイスにインストールしようとすると、次のようなエラーが発生します。
 >
@@ -41,7 +41,7 @@
 まず、XcodeからApple IDでログインし、開発用の証明書を作成します。
 
 1. Xcodeでアカウントの設定画面を開き、必要ならログインします。
-   - Xcode 12では、「Preferences」＞「Accounts」でアカウントの設定画面を開けます
+   - Xcode 12では、「Preferences」＞「Accounts」でアカウントの設定画面が開きます。
    - ログインする場合、左下の「＋」ボタンをクリックしてログインします。
 2. 利用するApple IDを選択状態にし、右側のチーム一覧で「<自分の氏名> (Personal Team)」と書かれているチームを選択します。
    - Apple Developer Programなどに登録されているユーザの場合、Apple Developer Programのデベロッパー名なども表示されるため、複数のチームが表示されます。

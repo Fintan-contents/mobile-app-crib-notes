@@ -8,21 +8,21 @@ on:
     branches:
       - master
     paths:
-      - santoku-app/**/*.js
-      - santoku-app/**/*.jsx
-      - santoku-app/**/*.ts
-      - santoku-app/**/*.tsx
-      - santoku-app/jest/**
-      - santoku-app/src/**
-      - santoku-app/.editorconfig
-      - santoku-app/.eslintrc.js
-      - santoku-app/babel.config.js
-      - santoku-app/index.js
-      - santoku-app/jest.config.js
-      - santoku-app/metro.config.js
-      - santoku-app/package.json
-      - santoku-app/package-lock.json
-      - santoku-app/tsconfig.json
+      - SantokuApp/**/*.js
+      - SantokuApp/**/*.jsx
+      - SantokuApp/**/*.ts
+      - SantokuApp/**/*.tsx
+      - SantokuApp/jest/**
+      - SantokuApp/src/**
+      - SantokuApp/.editorconfig
+      - SantokuApp/.eslintrc.js
+      - SantokuApp/babel.config.js
+      - SantokuApp/index.js
+      - SantokuApp/jest.config.js
+      - SantokuApp/metro.config.js
+      - SantokuApp/package.json
+      - SantokuApp/package-lock.json
+      - SantokuApp/tsconfig.json
       - .github/workflows/app.yaml
     types:
       - opened
@@ -50,7 +50,7 @@ jobs:
         with:
           path: ~/.npm
           # If cache is corrupted, increment prefixed number.
-          key: 1-${{ runner.os }}-npm-${{ hashFiles('santoku-app/**/package-lock.json') }}
+          key: 1-${{ runner.os }}-npm-${{ hashFiles('SantokuApp/**/package-lock.json') }}
           restore-keys: |
             1-${{ runner.os }}-npm-
 
@@ -60,13 +60,13 @@ jobs:
         id: cache-node-modules
         uses: actions/cache@v2
         with:
-          path: santoku-app/node_modules
+          path: SantokuApp/node_modules
           # If cache is corrupted, increment prefixed number.
-          key: 1-${{ runner.os }}-santoku-app-node-modules-${{ hashFiles('santoku-app/**/package-lock.json') }}
+          key: 1-${{ runner.os }}-SantokuApp-node-modules-${{ hashFiles('SantokuApp/**/package-lock.json') }}
 
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm clean-install --prefix santoku-app
+        run: npm clean-install --prefix SantokuApp
 
       - name: Set up reviewdog
         uses: reviewdog/action-setup@v1
@@ -76,17 +76,17 @@ jobs:
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es --prefix santoku-app | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=eslint -name="ESLint"
+          npm run -s lint:es --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=eslint -name="ESLint"
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc --prefix santoku-app | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name="TypeScript"
+          npm run -s lint:tsc --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name="TypeScript"
 
       - name: Test
         if: always()
         run: |
-          npm run -s test --prefix santoku-app -- --ci --reporters=default --reporters=jest-junit --coverage
+          npm run -s test --prefix SantokuApp -- --ci --reporters=default --reporters=jest-junit --coverage
 
       - name: Report test result
         uses: ashley-taylor/junit-report-annotations-action@master
@@ -94,4 +94,4 @@ jobs:
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           name: Test results
-          path: santoku-app/junit.xml
+          path: SantokuApp/junit.xml
