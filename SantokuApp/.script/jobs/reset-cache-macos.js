@@ -176,8 +176,8 @@ module.exports = [
         args: ['-s', 'clean-install'],
       },
       {
-        command: 'npx',
-        args: ['-q', 'pod-install'],
+        command: 'npm',
+        args: ['-s', 'run', 'pod-install'],
       },
     ],
   },

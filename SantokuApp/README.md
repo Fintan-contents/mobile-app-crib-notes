@@ -8,6 +8,10 @@
     - WindowsでChocolateyでインストールする場合は、 `node-lts` パッケージをおすすめします。
   - 「Development OS」は、開発に利用している OS を選択してください。
   - （macOS のみ）「Target OS」は、「iOS」「Android」の両方の手順を実施してください。
+  - （macOS のみ）Cocoapodsのバージョンによって`pod install`時にエラーが発生する場合があります。CocoaPodsは[Bundler](https://bundler.io/)を利用して、次の方法でインストールしてください。
+    - `bundle install` （SantokuAppのルートディレクトリで実行してください）
+    - Bundler自体のインストールが必要な場合は、`gem install bundler`でインストールしてください。
+    - 以降の`Podfile.lock`の更新には、`npm run pod-install`を実行してください。
 
 ## アプリをビルドしてiOSデバイスにインストールする
 
@@ -51,3 +55,11 @@
 2. 「分類」の「証明書」を選択し、ログインキーチェーンに保存されている証明書の一覧を表示します。
 3. 「Apple Development: <Apple IDのメールアドレス> (xxxxxxxxxx)」という名前の証明書をダブルクリックし、情報を表示します。
 4. 表示された情報の中の「部署」に設定されている文字列がチームIDです。
+
+## Podfile.lockの更新
+
+iOS向けのネイティブモジュールを含むライブラリを依存関係に追加した場合、`pod install`を実行して`Podfile.lock`を更新する必要があります。[pod-install](https://github.com/expo/expo-cli/tree/master/packages/pod-install)を使って更新する手順 (`npx pod-install`) が一般的ですが、pod-installはこのリポジトリでCocoaPodsのインストールに利用している[Bundler](https://bundler.io/)に対応していません。そのため、`npx pod-install`は実行しないでください。
+
+代わりに、npmスクリプトとして`pod-install`というコマンドを用意しているので、`npm run pod-install`を実行してください。
+
+> Note: [Support Gemfile for pod-install](https://github.com/expo/expo-cli/issues/2206) という要望は上がっているのですが、対応されていません。

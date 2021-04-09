@@ -13,7 +13,8 @@
     "fix:es": "eslint --fix --ext .jsx,.js,.tsx,.ts .",
     "reset-cache": "node .script/runner.js reset-cache",
     "reset-cache:all": "node .script/runner.js reset-cache --all",
-    "reset-cache:interactive": "node .script/runner.js reset-cache --interactive"
+    "reset-cache:interactive": "node .script/runner.js reset-cache --interactive",
+    "pod-install": "cd ios && bundle exec pod install"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
