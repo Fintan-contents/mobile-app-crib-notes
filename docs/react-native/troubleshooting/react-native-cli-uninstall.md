@@ -15,22 +15,21 @@ title: react-native-cliについて
 - 確認コマンド
 
   ```bash
-  npm ls -g --depth=0
+  react-native -v
   ```
 
 - 実行例
 
   ```bash
-  $ npm ls -g --depth=0
-  expo-cli@3.28.5
-  npm@6.14.8
-  react-native-cli@2.0.1
-  yarn@1.22.10
+  $ react-native -v
+  react-native-cli: 2.0.1
+  react-native: n/a - not inside a React Native project directory
   ```
+
 
 ### アンインストール
 
-実行結果に`react-native-cli`が含まれている場合は、 **必ずアンインストール**してください。
+実行結果に`react-native-cli`のバージョンが表示された場合、 **必ずアンインストール**してください。
 次のコマンドでアンインストールできます。
 
 - アンインストールコマンド
