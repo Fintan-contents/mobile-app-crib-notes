@@ -37,6 +37,27 @@
 
 CognitoのクライアントIDなど、一部の設定値は暗号化して保存しています。パスワードを教えてもらったら、`.env`ファイルの`REACT_NATIVE_SANTOKU_ENCRYPTION_SECRET`に設定してください。
 
+
+### ダミーのPush通知設定
+
+Push通知用のサンプルを手元で動作させる必要がない場合は、ダミーファイルをコピーしてアプリケーションを立ち上げられるようにしてください。
+
+- iOS
+
+    ```bash
+    cp ios/GoogleService-Info.dummy.plist ios/GoogleService-Info.plist
+    ```
+
+- Android
+
+    ```bash
+    cp android/app/google-services.dummy.json android/app/google-services.json
+    ```
+
+実際にPush通知を確認する場合はRemote通知のためにBackendとの整合性のある設定が必要です。
+Push通知の設定方法は[ガイド](https://fintan-contents.github.io/mobile-app-crib-notes/reference/notification/infrastructure)を参照してください。
+設定方法に関しては、本アプリでもご自身が作成するアプリケーションでも共通です。
+
 ### iOS
 
 1. Podをインストール
@@ -55,18 +76,6 @@ CognitoのクライアントIDなど、一部の設定値は暗号化して保�
     ```bash
     npm run android
     ```
-
-### ダミーのPush通知設定
-
-Push通知用のサンプルを手元で動作させる必要がない場合は、ダミーファイルをコピーしてアプリケーションを立ち上げられるようにしてください。
-
-```bash
-cp ios/GoogleService-Info.dummy.plist ios/GoogleService-Info.plist
-```
-
-実際にPush通知を確認する場合はRemote通知のためにBackendとの整合性のある設定が必要です。
-Push通知の設定方法は[ガイド](../TODO/mobile/crib-notes/link)を参照してください。
-設定方法に関しては、本アプリでもご自身が作成するアプリケーションでも共通です。
 
 ## トラブルシュート
 
