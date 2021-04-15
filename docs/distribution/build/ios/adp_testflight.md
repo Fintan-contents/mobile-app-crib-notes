@@ -3,32 +3,33 @@ title: ADPライセンスのTestFlight
 sidebar_label: TestFlight（ADP）
 ---
 
-
-ADPのApp Store Connectでは[TestFlight](https://developer.apple.com/jp/testflight/)を使ってテストのためにアプリを配信できます。テスト内容や目的に応じて使い分けることができる2つの配信方法が用意されています。
+ADPライセンスの[TestFlight](https://developer.apple.com/jp/testflight/)を使ってテストのためにアプリを配信できます。テスト内容や目的に応じて使い分けることができる2つの配信方法が用意されています。
 
 
 ||内部テスター|外部テスター|
 |-|-|-|
 |テスター数|**最大100人**|**最大10000人**|
 |デバイス登録数|**最大30台/人**|**制限なし**|
-|テスターの招待|**Apple IDをADPのチームに紐付ける必要がある**|**Eメールかパブリックリンク経由**|
+|テスターの招待|**Apple IDをADPのチームに登録**|**Eメールかパブリックリンク経由**|
 |テスト可能なビルド|**1つだけ**|**グループ別に分けられる**|
 |アプリの審査|**不要**|**必要**|
 |フィードバック|スクショとコメント|スクショとコメント|
 |ビルドの有効期限|アップロード後90日間|アップロード後90日間|
 
 
-## 手順概要
-内部テスターと外部テスターともにアプリのアップロードについては同じ手順です。
+## TestFlightを使った配信
+
+TestFlightで配信するにはADPのプロビジョニングプロファイルを利用してリリースビルドしたアプリをApp Store Connectにアップロードします。
+
+インストールするにはテスターの登録するか、公開URLをテスターに伝え、TestFlightアプリからインストールします。
 
 1. アプリをリリースビルド
-2. ビルドしたアプリをApp Store Connectにアップロード
-   a. Xcodeでアップロード
-   b. Xcode以外でアップロード
-3. TestFlight（内部テスター）の設定
-4. TestFlight（外部テスター）の設定
+1. ビルドしたアプリをApp Store Connectにアップロード
+   * Xcodeでアップロード
+   * Xcode以外でアップロード
+1. TestFlightの設定
 
-## 1. アプリのリリースビルド
+## アプリのリリースビルド
 
  - [TestFlightを使用してアプリを配布する（Xcode Help）](https://help.apple.com/xcode/mac/current/#/dev2539d985f)
 
