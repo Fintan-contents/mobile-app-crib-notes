@@ -26,7 +26,6 @@ title: react-native-cliについて
   react-native: n/a - not inside a React Native project directory
   ```
 
-
 ### アンインストール
 
 実行結果に`react-native-cli`のバージョンが表示された場合、 **必ずアンインストール**してください。
