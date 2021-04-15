@@ -14,6 +14,12 @@ const genericOverview = [
     imageUrl: 'img/undraw_docusaurus_mountain.svg',
     summary: <>リファレンス</>,
   },
+  {
+    title: 'Distribution',
+    to: 'distribution',
+    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    summary: <>アプリケーションの配布</>,
+  },
 ];
 
 const reactNativeOverview = [
