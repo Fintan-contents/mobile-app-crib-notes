@@ -77,9 +77,12 @@ Xcode以外のツールでアップロードする場合は、Uploadではなく
 
 ## App Store Connectで配信の準備
 
-[App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev22b9b2174)を参考にベータ版ビルドの輸出コンプライアンスを提出します。
+ビルドしたアプリケーションを[App Store Connect](https://appstoreconnect.apple.com/apps)でTestFlightでアプリを配信できるようにします。
 
-テストが可能になったら[内部テスターの追加 - App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev839fb66e9)を参考に内部テスターを設定してください。ビルドするたびに設定する必要はありません。
+ベータ版ビルドの輸出コンプライアンスを提出します。[App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev22b9b2174)を参考にしてください。
+
+テストが可能になったら内部テスターを設定します。[内部テスターの追加 - App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev839fb66e9)を参考にしてください。
 
 [外部テスターの招待](https://help.apple.com/app-store-connect/?lang=ja#/dev859139543)を参考にベータ版のテストが開始できます。
 
+内部テスター、外部テスターはTestFlightアプリを開いて、ベータ版のアプリケーションをインストールできます。
