@@ -22,7 +22,7 @@ sidebar_label: Overview
 
 - 前提知識
   - [iOSのライセンス](ios_lisence.md)
-- [ユースケース](./usecase/index.md)
+- [ユースケース](./usecase/index.mdx)
   - モバイルアプリケーション開発でよく利用されると想定されるシチュエーションから配布方法を紹介
 - モバイルアプリケーション配布ガイド
   - [ビルド方法](./build/index.md)

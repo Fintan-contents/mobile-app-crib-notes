@@ -3,7 +3,6 @@ title: ADPライセンスのTestFlight
 sidebar_label: TestFlight（ADP）
 ---
 
-
 ADPのApp Store Connectでは[TestFlight](https://developer.apple.com/jp/testflight/)を使ってテストのためにアプリを配信できます。テスト内容や目的に応じて使い分けることができる2つの配信方法が用意されています。
 
 

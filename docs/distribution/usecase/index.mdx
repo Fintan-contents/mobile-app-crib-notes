@@ -1,0 +1,149 @@
+---
+title: よくあるユースケース
+slug: /distribution/usecase
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+モバイルアプリケーション開発時によくあるユースケースについて、利用するライセンスや手順を紹介します。
+
+## 開発中のアプリを開発者のデバイスで動作確認したい
+
+開発中にデバイスで動作確認したいときのアプリのインストール方法を紹介します。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  defaultValue="developerIOS"
+  values={[
+    {label: 'iOS', value: 'developerIOS'},
+    {label: 'Android', value: 'developerAndroid'},
+  ]}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="developerIOS">
+
+iOSでプッシュ通知などのAppの高度な機能を使用するアプリの場合は、ADP・ADEPライセンスの証明書、プロビジョニングプロファイル、デバイスが必要です。USB経由でデバイスにインストールするのが最も簡単ですが、デバイスをADP・ADEPライセンスに登録する必要があります。ADP・ADEPに登録できるiPhoneは契約毎に100台という厳しい制限があるので、できればUSB経由ではなくTestFlightまたはIn-Houseでの配布をおすすめします。
+
+Appの高度な機能を含まない場合は、個人のApple IDに紐づく証明書、プロビジョニングプロファイル、デバイスを使用できます。
+こちらもiOSのAppの高度な機能を含むアプリの場合と同様にTestFlightまたはIn-Houseでも配布できます。
+
+- ADPの[TestFlight](../build/ios/adp_testflight.md)の内部テスターを利用する
+- ADEPの[In-House](../build/ios/adep_in_house.md)で配布
+- [開発者アカウント](../build/ios/developer_account.md)を使用する
+- ADP・ADEPの[AdHoc](../build/ios/adp_local.md)でインストールする
+
+</TabItem>
+<TabItem value="developerAndroid">
+
+AndroidはiOSのようにAppの高度な機能を考慮する必要はありません。 USB経由でデバイスにインストールするのが最も簡単ですが、USB接続が禁止されている場合はAPKファイルでの配布か内部テスト版としての配布が利用できます。APKファイルでの配布は自分たちでサーバを立てるなどして配布する必要がありますが、内部テストであればGoogle Play Console経由で配布できるので簡単です。
+
+- [デバイスにUSB経由](../build/android/local.md)でインストール
+- [APKファイルを配布](../build/android/apk_dist.md)
+- [内部テスト版で配布](../build/android/google_play_test.md)
+
+</TabItem>
+</Tabs>
+
+## お客様にデモを見せたい
+
+開発チームが開発用端末を操作してお客様にデモを見せたい​​​​​​​ケースでは
+デモの前にあらかじめ、開発用デバイスにアプリをインストールしてください。 開発中にデバイスで動作確認する場合と同様です。
+
+iOS
+
+iOSの場合はAppの高度な機能を含むか否かによって配布方法が異なります。
+
+- ADPの[TestFlight(内部テスター)](../build/ios/adp_testflight.md)で配布
+- ADEPの[In-House](../build/ios/adep_in_house.md)で配布
+- [開発者アカウント](../build/ios/developer_account.md)でインストール
+- ADP・ADEPの[AdHoc](../build/ios/adp_local.md)でインストール
+
+Android
+
+- [デバイスにUSB経由](../build/android/local.md)でインストール
+- [APKファイルを配布](../build/android/apk_dist.md)してインストール
+- [内部テスト版](../build/android/google_play_test.md)で配布
+
+## 社内や業務委託先でテストをしたい
+
+iOS
+
+ADEPライセンスでのIn-House配布か、ADPでのTestFlight（内部テスター）の2つが適切です。
+両者はデバイス登録台数制限と配布方法が異なります。プロジェクトの要件に応じて選択してください。
+
+|  |ADPのTestFlight（内部テスター）|ADEPのIn-House配布|
+|:-|:---------------------------|:----------------|
+|テスター登録|Apple IDをADPライセンスに登録する必要がある|不要|
+|テスター人数制限|100人まで|なし|
+|デバイス台数制限|1人につき30台まで|なし|
+|配布方法 | TestFlight経由|自前のHTTPSサーバ経由|
+
+ - [ADPのTestFlight(内部テスター)で配布](../build/ios/adp_testflight.md)
+ - [ADEPのIn-House配布](../build/ios/adep_in_house.md)
+
+Android
+
+APKファイルを自前で配布するか、内部テストまたはクローズドテストが使えます。
+内部テストやクローズドテストはGoogle Play Consoleがアプリを配布してくれるので、配布の仕組みを自前で用意する必要がありません。
+
+ - [Google Play](../build/android/google_play_test.md)でテスト配布
+ - [APKファイルを配布](../build/android/apk_dist.md)
+
+## お客様や関係者に実機でテストをしてもらいたい
+
+iOS
+
+TestFlight(外部テスター)の場合、テスターであるお客様をApp Store Connectのユーザに登録することなく、パブリックリンクを介してお客様のデバイスにアプリを配信できます。もしお客様自身でADP・ADEPライセンスを契約している場合は、そのライセンスを使ってアプリをお客様に配信できます。この場合は、IPAファイルをビルドする時に、お客様の証明書、プロビジョニングプロファイルなどが必要です。
+
+ - ADPの[TestFlight(外部テスター)](../build/ios/adp_testflight.md)で配布
+ - お客様のADPのTestFlight(内部テスター、外部テスター)で配布
+ - お客様のADEPのIn-Houseで配布
+
+Android
+
+お客様のGoogleアカウントに登録しているメールアドレスをテスターとして登録する必要があります。
+
+オープンテストであればGoogle Play経由でアプリを配信できるのでお客様のメールアドレスの登録は不要ですが、Google Playで早期アクセス版アプリとして誰でもインストールできます。
+配布する範囲を制限したい場合は内部テストやクローズテストで配布してください。
+
+ - [内部テスト版](../build/android/google_play_test.md)で配布
+ - [クローズドテスト版](../build/android/google_play_test.md)で配布
+
+## フィールドテストをしたい・ベータリリースしたい
+
+iOS
+
+iOSの場合、TestFlight(外部テスター)ならパブリックリンクで誰でもインストールできます。また外部テスターとしてお客様のメールアドレスを登録して招待コードを送信すれば、お客様側でアプリをインストールできます。
+
+ - ADPの[TestFlight(外部テスター)](../build/ios/adp_testflight.md)で配布
+
+Android
+
+Androidの場合、オープンテストならGoogle Playで早期アクセス版アプリとして誰でもインストールできる状態になります。
+
+ - [オープンテスト](../build/android/google_play_test.md)で配布
+
+## 早見表
+
+### iOS
+
+|ユースケース/配布|[個人でUSB経由](../build/ios/developer_account.md)|[AdHoc](../build/ios/adp_local.md)|[In-House](../build/ios/adep_in_house.md)|[TestFlight(内部)](../build/ios/adp_testflight.md)|[TestFlight(外部)](../build/ios/adp_testflight.md)|
+|:---------|-:-|-:-|-:-|:--|:--|
+|開発中にデバイスで動作確認したい|YES|YES|YES|YES|X|
+|デモを見せたい|YES|YES|YES|YES|X|
+|社内や業務委託先でテストをしたい|X|YES|YES|YES|X|
+|お客様に実機でテストをしてもらいたい|X|YES|X|YES|X|
+|フィールドテストをしたい|X|X|X|X|YES|
+
+### Android
+
+|ユースケース/配布|[USB経由](../build/android/local.md)|[APKファイル配布](../build/android/apk_dist.md)|[内部テスト](../build/android/google_play_test.md)|[クローズテスト](../build/android/google_play_test.md)|[オープンテスト](../build/android/google_play_test.md)|
+|:---------|-:-|-:-|-:-|-:-|-:-|
+|開発中にデバイスで動作確認したい|YES|YES|YES|X|X|
+|デモを見せたい|YES|YES|YES|X|X|
+|社内や業務委託先でテストをしたい|X|YES|YES|YES|X|
+|お客様に実機でテストをしてもらいたい|X|X|YES|YES|X|
+|フィールドテストをしたい|X|X|X|X|YES|
