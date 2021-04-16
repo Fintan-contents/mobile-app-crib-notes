@@ -88,6 +88,16 @@ module.exports = {
             },
           ],
         },
+        {
+          label: 'Topics',
+          items: [
+            {
+              label: 'Distribution',
+              to: 'distribution',
+              position: 'left',
+            },
+          ],
+        },
         ...(process.env.NODE_ENV === 'development' ? [{label: 'Docusaurus', to: 'docusaurus', position: 'left'}] : []),
         {
           href: `https://github.com/${organization}/mobile-app-crib-notes`,

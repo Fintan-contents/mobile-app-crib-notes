@@ -16,6 +16,10 @@ module.exports = {
       'ja-no-mixed-period': {
         allowPeriodMarks: [':::'],
       },
+      'max-kanji-continuous-len': {
+        max: 6,
+        allow: ['業務委託先社員'],
+      },
     },
     'preset-jtf-style': {
       '2.2.1.ひらがなと漢字の使い分け': true,
