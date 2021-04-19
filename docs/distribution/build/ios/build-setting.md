@@ -1,20 +1,25 @@
 ---
-title: プロジェクトのビルド設定
+title: iOSプロジェクトのビルド設定
 ---
 
 アプリケーションの開発を始める前に、開発者のうちの誰かがプロジェクトのビルド設定の担当者となり、プロジェクトのビルド設定します。
 
 ## なぜビルド設定をするのか
 
-AppleはADP・ADEPライセンス利用に関して以下のようなルールを定めております。
-- 組織単位（ライセンス契約単位）で、デバイス登録台数は種類（iPhone、iPadなど）ごとに100台まで
-- Appの高度な機能を使ったアプリの場合、ライセンス利用が必須
+ビルド設定をする目的は、ライセンスによって制限されるリソースや機能を管理することです。
 
-ライセンス運用では、複数プロジェクトでiOSアプリ開発をしても、組織単位のデバイス登録台数上限を超えないよう、不要なデバイス登録を避けるルールを定めるケースもあります。
+AppleはADP・ADEPライセンス利用に関して以下のようなルールを定めております。
+  - 組織単位（ライセンス契約単位）で、デバイス登録台数は種類（iPhone、iPadなど）ごとに100台まで
+  - Appの高度な機能を使ったアプリの場合、ライセンス利用が必須
+
+100台のデバイスが意図せずに登録されてしまうと、実際に高度な機能を手元にあるデバイスで確認したいと思っても登録できません。登録不要なデバイスが必要なデバイスより優先されてしまうことをリスクを下げるためにビルドの設定をしておくのが望ましいです。
+
+ライセンス運用では、複数プロジェクトでiOSアプリを開発するとき、デバイス登録台数上限を超えないよう、不要なデバイス登録を避けるルールを定めるケースもあります。
+たとえば次のようなルールです。
 - Appの高度な機能を使わないアプリの開発では開発者アカウントを使う
-- Appの高度な機能を使うアプリの開発では、アプリのビルド設定で、Appの高度な機能を有効にするかどうかでビルドを分ける
+- Appの高度な機能を使うアプリの開発では、Appの高度な機能を有効にするかどうかでビルドの設定を分ける
   - 無効時のビルドでは、開発者アカウントを使う
-  - 有効時のビルドでは、ライセンスを使う（ADP・ADEPにデバイスを登録し、そのデバイスでアプリの動作検証を実施する）
+  - 有効時のビルドでは、ライセンスを使う（ADP・ADEPにデバイスを登録し、そのデバイスで動作を検証する）
 - 配布時はADP・ADEPライセンスを使う
 
 そのため、Appの高度な機能を使うアプリの開発には少なくとも次の3つのビルド設定が必要になります。
@@ -26,39 +31,41 @@ AppleはADP・ADEPライセンス利用に関して以下のようなルール�
  - 配布用
    - ADP・ADEPライセンスを使う
 
-
 ## ビルド設定で設定するもの
 
-iOSアプリのビルド設定では大きく分けて以下3つを設定できます。
+iOSアプリのビルド設定は大きく分けて次の3つを設定できます。
 
-#### Configuration
+  - [Configuration](#configuration)
+  - [Capability](#capability)
+  - [Schema](#schema)
+
+### Configuration
 
 アプリに紐付けるリソース（プロビジョニングプロファイル、Bundle Identifier）を設定、Capabilityを設定、読み込む設定値ファイルの設定などを設定できます。
 ビルド設定ごとにConfigurationを作成します。
 
-#### Capability
+### Capability
 
 Configurationごとに設定できる項目で、アプリケーションにおいて
 アプリがAppleから提供されるサービスにアクセスするのを許可するために必要な設定です。
 Appの高度な機能（例えばプッシュ通知）を使う場合は、Capabilityでプッシュ通知を選択する必要があります。
 
-#### Schema
+### Schema
 
 Xcodeでビルドするときに、どのConfigurationを選択するかをあらかじめ設定しておくためのものです。
 
-
 ## ビルド設定の例
 
-「なぜビルド設定をするのか」で説明した3パターンごとにビルド設定を切り替えられるようにするための、具体的な例を示します。
-Debug（No. 1）の設定では、開発者ごとに設定値が異なるため、開発者一人ひとりが簡単にビルド設定できるようにするため、ビルド設定値のテンプレートを作成します。
+「なぜビルド設定をするのか」で説明した3パターンのビルド設定を切り替えられるようにするための具体的な例を示します。
+Debug（No.1）の設定は、開発者ごとに設定値が異なるため、開発者一人ひとりが簡単にビルド設定できるようなビルド設定値のテンプレートを作成します。
 
 あくまでも例なので、ビルド設定の名前や細かい設定などはプロジェクトごとに適宜変更してください。
 
-|No.|ビルド設定名|用途|準備するリソース|ビルド設定|備考|
-|-|-|-|-|-|-|
-|1|Debug|開発者が通常の開発時に使う|特になし|ビルド設定ファイルのテンプレートを用意|Appの高度な機能を使うアプリの場合、このビルド設定はAppの高度な機能の検証には使えないので、その場合はNo. 2のビルド設定を使います。また本ビルド設定ではAppの高度な機能を無効にする必要があります。|
-|2|DebugAdvanced|開発者がAppの高度な機能を検証する時に使う |ADP・ADEPチーム開発用|リソースをビルド設定ファイルに紐付け|Appの高度な機能を使わない場合は本ビルド設定は不要です。|
-|3|Release|配布するアプリをビルドする時に使う|ADP・ADEPチーム配布用|リソースをビルド設定ファイルに紐付け|||
+|No.|ビルド設定名|用途|準備するリソース|ビルド設定|
+|-|-|-|-|-|
+|1|Debug|開発者が通常の開発をする|特になし|ビルド設定ファイルのテンプレートを用意|
+|2|DebugAdvanced|開発者がAppの高度な機能を検証する |ADP・ADEPチーム開発用|リソースをビルド設定ファイルに紐付け|
+|3|Release|配布するアプリをビルドする|ADP・ADEPチーム配布用|リソースをビルド設定ファイルに紐付け||
 
 
 このような例の場合は、以下3つのConfigurationを作成し、それぞれに対応するSchemaを作成します。
@@ -76,14 +83,13 @@ Debug（No. 1）の設定では、開発者ごとに設定値が異なるため�
 
 ビルド設定に必要な証明書の秘密鍵、プロビジョニングプロファイルなどは、事前に用意してください。
 
+ADP・ADEPの証明書の秘密鍵をキーチェーンに登録してください。
+Mac端末にダウンロードした証明書をダブルクリックするとキーチェーンアクセスが起動するので追加します。
+
 ## 手順
 
 「ビルド設定の例」を実現するための手順を示します。
 
-
-- 証明書の秘密鍵をキーチェーンに登録
-  - 開発用証明書の秘密鍵をMac端末のキーチェンに登録します
-    - Mac端末にダウンロードした証明書をダブルクリックするとキーチェーンアクセスが起動するので追加をクリックしてください
 - Configurationの設定
   - 1つのビルド設定ごとに1つのConfigurationの設定が必要です。ここではXcodeで`Debug`、`DebugAdvanced`、`Release`の3つのConfigurationを設定します。
 - Schemaの設定
@@ -100,30 +106,24 @@ Debug（No. 1）の設定では、開発者ごとに設定値が異なるため�
 
 - Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定 > Signing & Capabilities > All
 - Automatically manage signingのチェックを外す
-
 - Provisioning Profileのプルダウン > Import Profile… を選択
 - 開発用プロビジョニングプロファイル（Apple Development）を指定
-
 - Bundle Identifierにアプリ管理者から教えてもらったApp IDを指定
 
 ##### トラブルシューティング
   
-###### プロビジョニングプロファイルを選択しても以下のエラーが出る場合
-     - Xcodeを再起動すると解消される可能性があります。再起動の際は必ずXcodeのメニューからQuitを選択してXcodeを一度終了する
-
+  - プロビジョニングプロファイルを選択しても次のエラーが出る場合、Xcodeを再起動すると解消される可能性があります。再起動の際は必ずXcodeのメニューからQuitを選択してXcodeを終了してください。
 ```
 No signing certificate "iOS Development" found
-No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a private key was found.
+No "iOS Development" signing certificate matching team ID "XXXXXXXX" with a private key was found.
 ```
 
-###### プロビジョニングプロファイルを選択してもが出る場合
-
-証明書の秘密鍵がMac端末のキーチェーンに登録できていません。登録してください。
+  - プロビジョニングプロファイルを選択してもが出る場合、証明書の秘密鍵がMac端末のキーチェーンに登録できていません。登録してください。
 
 #### Configuration: DebugAdvancedの作成
 
 - Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info > Configurations > Debugを選択
-- `+` `-` の `+` を選択 >Duplicate “Debug” Configuration`を選択
+- `+` `-` の `+` を選択 > Duplicate “Debug” Configurationを選択
 - 名前に「DebugAdvanced」を指定する
 - Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定
 - Signing & Capabilities > DebugAdvancedを確認しSigningにプロビジョニングプロファイルが設定されていればOK
@@ -131,19 +131,17 @@ No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a pr
 
 ####  Configuration: Debug設定
 
+Appの高度な機能を使うアプリの場合は、CapabilityからAppの高度な機能を除外します。
+
   - Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定
   - Signing & Capabilities > Debugにて以下設定
     - Automatically manage signingのチェックをつける
     - TeamはPersonal Team（個人アカウント）を選択
     - Bundle Identifierはpersonal.${Allで設定したBundle Identifier}.{組織内の誰とも被らないID}を設定
-      - 例：Allがjp.fintan.mobile.SantokuAppならDebugはpersonal.jp.fintan.mobile.SantokuApp.117117
+      - 例：Allが`jp.fintan.mobile.SantokuApp`なら、Debugは`personal.jp.fintan.mobile.SantokuApp.123456`
     - CapabilityからPush Notificationを外す
       - ※このときentitlementsファイルを作るかプロンプトで聞かれますがその時は「はい」を選択してください
-  - 最終的には右図のようになる
   
-Appの高度な機能を使うアプリの場合は、開発者が通常使うビルド設定のCapabilityからAppの高度な機能を除外してください。
-
-
 
 #### Configuration: 設定の確認
 
@@ -153,71 +151,63 @@ Appの高度な機能を使うアプリの場合は、開発者が通常使う�
 - DebugAdvanced
 - Release
 
-
 ### Schemaの設定
 
-
-
-- Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリックすると見れる。本設定を終えると以下のようになる
+Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリックする確認できます。
+本設定を終えると以下のようになります。
   - <<アプリ名>>
     - リリースビルド
     - ConfigurationはRelease
   - <<アプリ名>> Debug
-    - プッシュ通知を無効にしたアプリのデバッグ
+    - Appの高度な機能を無効にしたアプリのデバッグ
     - ConfigurationはDebug
   - <<アプリ名>> DebugAdvanced
     - Appの高度な機能を有効にしたアプリのデバッグ
     - ConfigurationはDebugAdvanced
 
-- Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリック > Edit Scheme... を選択
-- 右図のようにダイアログが開く 
-
-
-- ダイアログ左上を選択し、<<アプリ名>>のSchemaを選択
-
-- <<アプリ名>>のSchema > Run > Infoにて
-  - Build ConfigurationでReleaseを選択
-  - Debug executeのチェックを外す
-
-- Duplicate Schemeをクリック
-- Schema名を <<アプリ名>> Debugにする
-- Run > Infoにて
-  - Build ConfigurationでDebugを選択
-  - Debug executeのチェックをつける
-
-- Duplicate Schemeをクリック
-- Schema名を <<アプリ名>> DebugAdvancedにする
-- Run > Infoにて
-  - Build ConfigurationでDebugAdvancedを選択
-  - Debug executeのチェックをつける
-
+Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリックしてEdit Scheme... を選択します。
+   - ダイアログ左上を選択し、<<アプリ名>>のSchemaを選択
+   - <<アプリ名>>のSchema > Run > Infoにて
+       - Build ConfigurationでReleaseを選択
+       - Debug executeのチェックを外す
+   - Duplicate Schemeをクリック
+   - Schema名を <<アプリ名>> Debugにする
+   - Run > Infoにて
+       - Build ConfigurationでDebugを選択
+       - Debug executeのチェックをつける
+   - Duplicate Schemeをクリック
+   - Schema名を <<アプリ名>> DebugAdvancedにする
+   - Run > Infoにて
+       - Build ConfigurationでDebugAdvancedを選択
+       - Debug executeのチェックをつける
 
 ### ビルド設定ファイルの作成
 
-- Xcode右メニューからプロジェクトフォルダにて右クリック > New File... を選択
-- Configuration Settings Fileを選択 > Nextを選択
+設定したビルドの内容をファイルにします。
 
-  - ファイル名をPersonalAccountを指定
-  - プロジェクト直下（ここではiosフォルダ）配下のアプリ名のフォルダを選択
-  - Targetsに<<アプリ名>>のTargetを指定
-  - Createを選択
-  - 以下のようなファイルが生成されるToDo: 画像見るか実ファイル作成する
-
+  - Xcode右メニューからプロジェクトフォルダにて右クリック > New File... を選択
+  - Configuration Settings Fileを選択 > Nextを選択
+     - ファイル名にPersonalAccountを指定
+     - プロジェクト直下（ここではiosフォルダ）配下のアプリ名のフォルダを選択
+     - Targetsに<<アプリ名>>のTargetを指定
   - ファイルに以下を追記
+    - CODE_SIGN_STYLE: Automatic 
+    - PERSONAL_IDENTIFIER: 誰とも被らない個人のID
+    - DEVELOPMENT_TEAM: 個人アカウントのDEVELOPMENT_TEAM　※
 
-  - CODE_SIGN_STYLE
-    - Automatic 
-  - PERSONAL_IDENTIFIER
-    - 誰とも被らない個人のID
-  - DEVELOPMENT_TEAM
-    - 個人アカウントのDEVELOPMENT_TEAM　※
-
-以下に例を示します。
-```
+```config title="PersonalAccount.xcconfig"
+//
+//  PersonalAccount.xcconfig
+//  Sample
+//
+//
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
 CODE_SIGN_STYLE=Automatic 
 PERSONAL_IDENTIFIER=809890
 DEVELOPMENT_TEAM=8G25XXXX
 ```
+
 
 - ConfigurationのDebugにて上記で作成した設定ファイルを読み込むようにする
   - Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info
@@ -319,4 +309,3 @@ DEVELOPMENT_TEAM=
   - SampleApp/SampleApp.entitlements
   - SampleApp/SampleAppDebug.entitlements
   - SampleApp/SampleAppDebugAdvanced.entitlements
-

@@ -17,4 +17,4 @@ iOSのアプリを開発するときには次の3つのライセンスのいず�
 
 ## Apple Developer Enterprise Program
 
-組織内で利用する場合は[Apple Developer Enterprise Program (ADEP)](https://developer.apple.com/jp/programs/enterprise/)を利用できます。
+社内で利用する場合は[Apple Developer Enterprise Program (ADEP)](https://developer.apple.com/jp/programs/enterprise/)を利用できます。
