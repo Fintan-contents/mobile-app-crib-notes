@@ -71,6 +71,11 @@ module.exports = {
           position: 'left',
         },
         {
+          label: 'Distribution',
+          to: 'distribution',
+          position: 'left',
+        },
+        {
           label: 'React Native',
           items: [
             {
@@ -84,16 +89,6 @@ module.exports = {
             {
               label: 'Troubleshoot',
               to: 'react-native/troubleshooting',
-              position: 'left',
-            },
-          ],
-        },
-        {
-          label: 'Topics',
-          items: [
-            {
-              label: 'Distribution',
-              to: 'distribution',
               position: 'left',
             },
           ],
