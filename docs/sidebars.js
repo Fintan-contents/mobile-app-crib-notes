@@ -41,7 +41,7 @@ module.exports = {
           label: 'iOSアプリ',
           items: [
             'distribution/ios-developer-account',
-            'distribution/ios-ad-hoc',
+            'distribution/ios-develop-certificate',
             'distribution/ios-in-house',
             'distribution/ios-testflight',
           ],

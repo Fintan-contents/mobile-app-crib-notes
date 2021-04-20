@@ -3,7 +3,7 @@ title: 高度なアプリをローカルデバイスにインストール
 sidebar_label: 高度なアプリをローカルで検証
 ---
 
-プロジェクトの[ビルド設定](./build/ios-build-setting.md)でDebugAdvanced（高度なAppの機能）とRelease（リリースビルド）を検証するときはAdHoc Distributionを利用します。リソースをプロジェクトで利用するためにいくつか設定が必要になるので、その手順を紹介します。
+プロジェクトの[ビルド設定](./build/ios-build-setting.md)でDebugAdvanced（高度なAppの機能）とRelease（リリースビルド）を検証するときは開発用証明書を利用してビルドします。リソースをプロジェクトで利用するためにいくつか設定が必要になるので、その手順を紹介します。
 
 ビルドの方法は[iOSアプリのビルド](./build/ios-build)とほとんど同じです。選択するビルド設定やプロビジョニングプロファイルなどが異なります。
 ビルド設定の詳細は[こちら](./build/ios-build-setting.md)を参照してください。
