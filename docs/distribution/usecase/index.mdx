@@ -40,9 +40,9 @@ Appの高度な機能を含まない場合は、個人のApple IDに紐づく証
 
 AndroidはiOSのようにAppの高度な機能を考慮する必要はありません。 USB経由でデバイスにインストールするのが最も簡単ですが、USB接続が禁止されている場合はAPKファイルでの配布か内部テスト版としての配布が利用できます。APKファイルでの配布は自分たちでサーバを立てるなどして配布する必要がありますが、内部テストであればGoogle Play Console経由で配布できるので簡単です。
 
-- [デバイスにUSB経由](../build/android/local.md)でインストール
-- [APKファイルを配布](../build/android/apk_dist.md)
-- [内部テスト版で配布](../build/android/google_play_test.md)
+- [デバイスにUSB経由でインストール](../android-local.md)
+- [APKファイルを配布](../android-apk-dist.md)
+- [内部テスト版で配布](../android-google-play-test.md)
 
 </TabItem>
 </Tabs>
@@ -75,9 +75,9 @@ iOSの場合はAppの高度な機能を含むか否かによって配布方法�
 </TabItem>
 <TabItem value="demoAndroid">
 
-- [デバイスにUSB経由](../build/android/local.md)でインストール
-- [APKファイルを配布](../build/android/apk_dist.md)してインストール
-- [内部テスト版](../build/android/google_play_test.md)で配布
+- [デバイスにUSB経由でインストール](../android-local.md)
+- [APKファイルを配布](../android-apk-dist.md)
+- [内部テスト版で配布](../android-google-play-test.md)
 
 </TabItem>
 </Tabs>
@@ -116,8 +116,8 @@ ADEPライセンスでのIn-House配布か、ADPでのTestFlight（内部テス�
 APKファイルを自前で配布するか、内部テストまたはクローズドテストが使えます。
 内部テストやクローズドテストはGoogle Play Consoleがアプリを配布してくれるので、配布の仕組みを自前で用意する必要がありません。
 
- - [Google Play](../build/android/google_play_test.md)でテスト配布
- - [APKファイルを配布](../build/android/apk_dist.md)
+ - [APKファイルを配布](../android-apk-dist.md)
+ - [Google Playでテスト配布](../android-google-play-test.md)
 
 </TabItem>
 </Tabs>
@@ -151,8 +151,8 @@ TestFlight(外部テスター)の場合、テスターであるお客様をApp S
 オープンテストであればGoogle Play経由でアプリを配信できるのでお客様のメールアドレスの登録は不要ですが、Google Playで早期アクセス版アプリとして誰でもインストールできます。
 配布する範囲を制限したい場合は内部テストやクローズテストで配布してください。
 
- - [内部テスト版](../build/android/google_play_test.md)で配布
- - [クローズドテスト版](../build/android/google_play_test.md)で配布
+ - [内部テスト版で配布](../android-google-play-test.md)
+ - [クローズドテスト版で配布](../android-google-play-test.md)
 
 </TabItem>
 </Tabs>
@@ -181,7 +181,7 @@ iOSの場合、TestFlight(外部テスター)ならパブリックリンクで�
 
 Androidの場合、オープンテストならGoogle Playで早期アクセス版アプリとして誰でもインストールできる状態になります。
 
- - [オープンテスト](../build/android/google_play_test.md)で配布
+ - [オープンテストで配布](../android-google-play-test.md)
 
 </TabItem>
 </Tabs>
@@ -200,7 +200,7 @@ Androidの場合、オープンテストならGoogle Playで早期アクセス�
 
 ### Android
 
-|ユースケース/配布|[USB経由](../build/android/local.md)|[APKファイル配布](../build/android/apk_dist.md)|[内部テスト](../build/android/google_play_test.md)|[クローズテスト](../build/android/google_play_test.md)|[オープンテスト](../build/android/google_play_test.md)|
+|ユースケース/配布|[USB経由](../android-local.md)|[APKファイル配布](../android-apk-dist.md)|[内部テスト](../android-google-play-test.md)|[クローズテスト](../android-google-play-test.md)|[オープンテスト](../android-google-play-test.md)|
 |:---------|-:-|-:-|-:-|-:-|-:-|
 |開発中にデバイスで動作確認したい|YES|YES|YES|X|X|
 |デモを見せたい|YES|YES|YES|X|X|

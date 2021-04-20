@@ -50,9 +50,9 @@ module.exports = {
           type: 'category',
           label: 'Androidアプリ',
           items: [
-            'distribution/build/android/local',
-            'distribution/build/android/apk_dist',
-            'distribution/build/android/google_play_test',
+            'distribution/android-local',
+            'distribution/android-apk-dist',
+            'distribution/android-google-play-test',
           ],
         },
       ],
@@ -63,7 +63,7 @@ module.exports = {
       items: [
         'distribution/build/ios-build',
         'distribution/build/ios-build-setting',
-        'distribution/build/android/overview',
+        'distribution/build/android-build',
       ],
     },
   ],
