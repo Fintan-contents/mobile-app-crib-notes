@@ -1,6 +1,6 @@
 ---
 title: ADPライセンスのTestFlight
-sidebar_label: TestFlight（ADP）
+sidebar_label: TestFlight(ADP)
 ---
 
 ## TestFlightを使った配信
@@ -8,7 +8,6 @@ sidebar_label: TestFlight（ADP）
 ADPライセンスの[TestFlight](https://developer.apple.com/jp/testflight/)を使ってテストのためにアプリを配信できます。テスト内容や目的に応じて使い分けることができる2つのテスターが用意されています。
 
 インストールするにはテスターに登録するか、パブリックリンクをテスターに伝え、TestFlightアプリからインストールします。
-
 
 ||内部テスター|外部テスター|
 |-|-|-|
@@ -29,20 +28,19 @@ TestFlightで配信するにはADPのプロビジョニングプロファイル�
 1. アプリをリリースビルド
 1. ビルドしたアプリをApp Store Connectにアップロード
 1. App Store Connectで配信の準備
-   * 輸出コンプライアンスの提出
-   * テスターの設定
+   - 輸出コンプライアンスの提出
+   - テスターの設定
 
 ### アプリのリリースビルド
 
-アプリのリリースビルドは[iOSのビルド](ios-build)を参照してください。
+アプリのリリースビルドは[iOSのビルド](./build/ios-build)を参照してください。
 
-## ビルドしたアプリをApp Store Connectにアップロード
+### アプリをApp Store Connectにアップロード
 
 ビルドしたアプリをApp Store Connectにアップロードします。
 
 [Xcode Help: Develop and distribute an enterprise app](https://help.apple.com/xcode/mac/current/#/devba5e7054d)  
 [App Store Connectヘルプのアップロードツール](https:todo.todo)
-
 
 Xcodeでアップロードする手順を記載します。
 Xcode以外のツールでアップロードする場合は、UploadではなくExportを選択し、バイナリを保存してください。
@@ -62,7 +60,7 @@ Xcode以外のツールでアップロードする場合は、Uploadではなく
         - altoolを使用するAppバイナリファイルのアップロード
         - Transporterを使用したAppのバイナリファイルのアップロード
 
-## App Store Connectで配信の準備
+### App Store Connectで配信の準備
 
 ビルドしたアプリケーションを[App Store Connect](https://appstoreconnect.apple.com/apps)からTestFlightで配信できるようにします。
 

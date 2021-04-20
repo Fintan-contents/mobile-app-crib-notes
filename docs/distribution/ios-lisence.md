@@ -9,7 +9,12 @@ iOSのアプリを開発するときには次の3つのライセンスのいず�
 
 ## Apple ID個人デベロッパアカウント（開発者アカウント）
 
+Apple IDを個人で利用する場合、Personal Teamを利用します。Personal Teamで開発する場合、開発者アカウントと表記します。
 開発者アカウントは無料で利用できますが、制限（アプリの配布ができない、Appの高度な機能が利用できない）があります。
+
+:::note
+ADPやADEPのリソースを使用してビルドする場合は、ADP・ADEPのTeamにApple IDを登録している必要があります。ADP、ADEPでもApple IDを利用することがありますが、その場合は単純にApple IDと表記します。
+:::
 
 ## Apple Developer Program
 
