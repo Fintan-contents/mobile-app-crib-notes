@@ -11,6 +11,7 @@ on:
       - docs/**
       - src/**
       - static/**
+      - landing-page/**
       - .editorconfig
       - .eslintrc.js
       - .htmltest.yaml
