@@ -61,18 +61,20 @@ ADP、ADEPライセンスを利用したiOSアプリをビルドするための�
 
 ### アプリケーションのID
 
-Apple Developer Webサイトの[登録ページ](https://developer.apple.com/account/resources/identifiers/add/bundleId)でアプリケーションのID（`App ID`）を登録します。
+Apple Developer Webサイト（要ログイン）で作成、確認ができます。
+
+[Apple Developer Webサイトの登録ページ](https://developer.apple.com/account/resources/identifiers/add/bundleId)でアプリケーションのID（`App ID`）を登録します。
 
 このApp IDはプロビジョニングプロファイルの作成とアプリのビルド時に利用します。
 
-作成したApp IDは[一覧](https://developer.apple.com/account/resources/identifiers)で確認できます。
+作成したApp IDは[Apple Developer Webサイトの一覧](https://developer.apple.com/account/resources/identifiers/list/bundleId)で確認できます。
 
 ### プロビジョニングプロファイル
 
-プロビジョニングプロファイルは[登録ページ](https://developer.apple.com/account/resources/profiles/add)で証明書とApp IDを組み合わせて作成します。
+プロビジョニングプロファイルは[Apple Developer Webサイトの登録ページ](https://developer.apple.com/account/resources/profiles/add)で証明書とApp IDを組み合わせて作成します。
 デバイスに直接インストールする開発用証明書やAd-Hoc配布を利用する場合は事前にデバイスも紐付けておく必要があります。
 
-作成したプロビジョニングプロファイルは[一覧](https://developer.apple.com/account/resources/profiles)で確認できます。
+作成したプロビジョニングプロファイルは[Apple Developer Webサイトの一覧](https://developer.apple.com/account/resources/profiles)で確認できます。
 プロビジョニングプロファイルは作成時に選択した証明書をインストールしているMac端末でビルドできます。
 
 #### Ad-Hoc Distributionなどを利用する場合の考慮

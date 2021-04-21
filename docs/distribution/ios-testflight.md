@@ -40,7 +40,7 @@ TestFlightで配信するにはADPのプロビジョニングプロファイル�
 ビルドしたアプリをApp Store Connectにアップロードします。
 
 [Xcode Help: Develop and distribute an enterprise app](https://help.apple.com/xcode/mac/current/#/devba5e7054d)  
-[App Store Connectヘルプのアップロードツール](https:todo.todo)
+[App Store Connectヘルプのアップロードツール](https://help.apple.com/app-store-connect/#/devb1c185036)
 
 Xcodeでアップロードする手順を記載します。
 Xcode以外のツールでアップロードする場合は、UploadではなくExportを選択し、バイナリを保存してください。
@@ -62,7 +62,7 @@ Xcode以外のツールでアップロードする場合は、Uploadではなく
 
 ### App Store Connectで配信の準備
 
-ビルドしたアプリケーションを[App Store Connect](https://appstoreconnect.apple.com/apps)からTestFlightで配信できるようにします。
+ビルドしたアプリケーションを[App Store Connect(要ログイン)](https://appstoreconnect.apple.com/apps)からTestFlightで配信できるようにします。
 
 ベータ版ビルドの輸出コンプライアンスを提出します。[App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev22b9b2174)を参考にしてください。
 

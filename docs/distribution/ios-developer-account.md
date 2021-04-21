@@ -11,7 +11,7 @@ ADP・ADEPに紐付いたデバイスはライセンス毎に台数制限があ�
 
 ## インストール
 
-ADP、ADEPは[Apple Developer Webサイト](https://developer.apple.com/account/)でリソースを作成しますが、開発者アカウントの場合Xcodeで作成します。
+ADP、ADEPは[Apple Developer Webサイト(要ログイン)](https://developer.apple.com/account/)でリソースを作成しますが、開発者アカウントの場合Xcodeで作成します。
 
 デバイスにアプリをインストールし起動する以外は、すべてXcodeにて作業します。
 個人アカウントの証明書が作成できている場合は[開発デバイスの登録](#開発デバイスの登録)から進めてください。
