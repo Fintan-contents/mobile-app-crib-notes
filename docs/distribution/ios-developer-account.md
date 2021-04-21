@@ -53,16 +53,15 @@ ADP、ADEPは[Apple Developer Webサイト(要ログイン)](https://developer.a
 - ビルド設定値ファイルのテンプレート（アプリのルートフォルダ直下の`PersonalAccount.xcconfig.template`）を編集してApple IDの追加
    - `CODE_SIGN_STYLE` は `Automatic` に設定
    - `PERSONAL_IDENTIFIER` は他の人と重複しない値に設定（Bundle Identifierのサフィックスとして利用されます）
-   - `DEVELOPMENT_TEAM` は、個人のApple IDのDEVELOPMENT_TEAM(※)を設定
-      - **(※) 個人のApple IDのDEVELOPMENT_TEAMの確認方法**  
+   - `DEVELOPMENT_TEAM` は、個人のApple IDのDEVELOPMENT_TEAMを設定
+      - **個人のApple IDのDEVELOPMENT_TEAMの確認方法**  
         - 別途Xcodeでサンプルアプリを作成する
         - ConfigurationにてCODE_SIGN_STYLEをAuto Signingに指定し、個人のApple IDでビルドを設定する
         - 設定終了後、サンプルアプリのproject.pbxproj中のDEVELOPMENT_TEAMを確認する → これが個人のApple IDのDEVELOPMENT_TEAM
 
 #### トラブルシュート
 
-以下のようなエラーが出てConfigurationのエラーが消えない
-→ Xcodeを再起動すると解消される可能性があります。再起動の際は必ずXcodeのメニューから`Quit`を選択してXcodeを一度終了してください。
+以下のようなエラーが出てConfigurationのエラーが消えない場合は、Xcodeを再起動すると解消される可能性があります。再起動の際は必ずXcodeのメニューから`Quit`を選択してXcodeを一度終了してください。
 
 ```console
 No signing certificate "iOS Development" found

@@ -34,7 +34,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'アプリケーションの配布',
+      label: 'アプリケーションの配布方法',
       items: [
         {
           type: 'category',

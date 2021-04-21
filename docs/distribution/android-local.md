@@ -27,4 +27,4 @@ Androidのヘルプ：[パソコンと Android デバイス間でファイルを
 
 Androidデベロッパー公式サイト：[Android Debug Bridge（adb） > アプリをインストールする](https://developer.android.com/studio/command-line/adb?hl=ja#move)を参考にしてください。
 
-APKファイルの場所に移動してadb installすればインストールできます。
+APKファイルの場所に移動して`adb install`すればインストールできます。
