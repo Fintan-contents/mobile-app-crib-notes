@@ -65,34 +65,21 @@ React Navigationでは、次のAPIを使用してタブナビゲーションを�
 ```typescript jsx title="/src/App.tsx"
 import {Ionicons} from '@expo/vector-icons';
 import {
-  BottomTabNavigationProp,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {
-  CompositeNavigationProp,
   NavigationContainer,
-  NavigatorScreenParams,
   useNavigation,
 } from '@react-navigation/native';
 import {
   createStackNavigator,
-  StackNavigationProp,
 } from '@react-navigation/stack';
 import * as React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
-type HomeParamList = {
-  Home: undefined;
-  Details: undefined;
-};
-type RootParamList = {
-  HomeStack: NavigatorScreenParams<HomeParamList>;
-  Settings: undefined;
-};
-
-const HomeStack = createStackNavigator<HomeParamList>();
-const RootTab = createBottomTabNavigator<RootParamList>();
+const HomeStack = createStackNavigator();
+const RootTab = createBottomTabNavigator();
 
 const HomeStackScreen: React.FC = () => {
   return (
@@ -134,12 +121,7 @@ export const App: React.FC = () => {
 };
 
 const HomeScreen: React.FC = () => {
-  const navigation = useNavigation<
-    CompositeNavigationProp<
-      StackNavigationProp<HomeParamList, 'Home'>,
-      BottomTabNavigationProp<RootParamList>
-    >
-  >();
+  const navigation = useNavigation();
   return (
     <View style={styles.screen}>
       <Text>Home screen</Text>
