@@ -7,7 +7,7 @@ USB接続をして開発者が直接デバイスにインストールする方�
 
 ## アプリのビルド
 
-アプリのビルドは[Androidアプリのビルド](build/android-build.md)を参照してください。
+アプリのビルドは[Androidアプリのビルド](app-build/android-build.md)を参照してください。
 
 ## USBでデバイスを端末に接続してAPKファイルをダウンロードする  
 

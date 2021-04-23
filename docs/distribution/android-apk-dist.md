@@ -6,7 +6,7 @@ sidebar_label: APKファイルを配布
 Google Play経由ではなく独自配布をするケースではAPKファイルをWebサイトなどで配布し、インストールします。
 （ここではAzureを例にして）クラウドストレージからダウンロードしてインストールする方法を紹介します。
 
-アプリのビルドは[Androidアプリのビルド](build/android-build.md)を参照してください。
+アプリのビルドは[Androidアプリのビルド](app-build/android-build.md)を参照してください。
 
 ## ビルドしたアプリのダウンロード
 

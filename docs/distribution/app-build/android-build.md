@@ -13,7 +13,6 @@ AndroidアプリのビルドはiOSのようにライセンスなどを考慮す�
 Androidアプリをビルドするには[Android Studio ユーザーガイドのApp Bundle をビルドする](https://developer.android.com/studio/build/building-cmdline?hl=ja#build_bundle)、[APK をビルドしてデプロイする](https://developer.android.com/studio/build/building-cmdline?hl=ja#build_apk)
 を参考に作成してください。
 
-
 ## リリースに必要な秘密鍵の管理（Google Play App Signing)
 
 Androidのアプリをリリースするには署名が必要で、それにはリリース用秘密鍵が必要です。
