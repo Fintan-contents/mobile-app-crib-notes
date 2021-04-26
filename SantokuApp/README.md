@@ -11,7 +11,8 @@
   - （macOSのみ）CocoaPodsのバージョンによっては、`pod install`でエラーとなる場合があります。CocoaPodsは[Bundler](https://bundler.io/)を利用して、次の方法でインストールしてください。
     - `bundle install`をSantokuAppのルートディレクトリで実行してください。
     - Bundler自体のインストールが必要な場合は、`gem install bundler`でインストールしてください。
-    - 以降の`Podfile.lock`の更新には、`npm run pod-install`を実行してください。
+    - `npm run pod-install`を実行して、Podsをインストールしてください。
+    - 以降、`Podfile.lock`が更新された場合も`npm run pod-install`を実行してください。
 
 ## アプリをビルドしてiOSデバイスにインストールする
 

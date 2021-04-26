@@ -67,24 +67,8 @@ module.exports = [
     enabled: true,
     commands: [
       {
-        command: 'pod',
-        args: ['cache', 'clean', '--all'],
-        cwd: 'ios',
-      },
-    ],
-  },
-  {
-    name: 'Update CocoaPods dependency',
-    enabled: false,
-    commands: [
-      {
-        command: 'ls',
-        args: ['Pods'],
-        cwd: 'ios',
-      },
-      {
-        command: 'pod',
-        args: ['update'],
+        command: 'bundle',
+        args: ['exec', 'pod', 'cache', 'clean', '--all'],
         cwd: 'ios',
       },
     ],
