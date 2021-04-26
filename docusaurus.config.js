@@ -57,6 +57,9 @@ module.exports = {
       // using user system preferences, instead of the hardcoded defaultMode
       respectPrefersColorScheme: false,
     },
+    prism: {
+      additionalLanguages: ['ruby', 'groovy'],
+    },
     navbar: {
       title: 'Fintan » Mobile App',
       hideOnScroll: true,

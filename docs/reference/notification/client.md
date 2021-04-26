@@ -42,7 +42,7 @@ Firebaseへのアクセスに必要な認証情報ファイルを適切なフォ
 1. google-services.jsonを、React Nativeプロジェクトフォルダ内の`android/app/google-services.json` として配置
 1. `android/build.gradle`ファイルに以下のように追記
 
-    ```gradle title="android/build.gradle" {4}
+    ```groovy title="android/build.gradle" {4}
     buildscript {
       dependencies {
         // ... other dependencies
@@ -54,7 +54,7 @@ Firebaseへのアクセスに必要な認証情報ファイルを適切なフォ
 
 1. `android/app/build.gradle`ファイルに以下のように追記
 
-    ```gradle title="android/app/build.gradle" {2}
+    ```groovy title="android/app/build.gradle" {2}
     apply plugin: 'com.android.application'
     apply plugin: 'com.google.gms.google-services' // <- Add this line
     ```
