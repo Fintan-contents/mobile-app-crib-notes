@@ -15,7 +15,7 @@ React Native開発環境の構築手順です。環境構築を進める前に�
 
 - 共通
 
-  - Node.js  
+  - Node.js
 
     コマンドラインかターミナルで`node -v`を実行してください。バージョン `v10.x.x` 以降であればOKです。
 
@@ -26,7 +26,7 @@ React Native開発環境の構築手順です。環境構築を進める前に�
 
     エラーが表示された場合、またはバージョンが`v9.x.x`以下の場合はインストールが必要です。
 
-  - Java Development Kit  
+  - Java Development Kit
 
     コマンドラインかターミナルで`java -version`を実行してください。バージョン `1.8.x` 以降であればOKです。
 
@@ -41,25 +41,25 @@ React Native開発環境の構築手順です。環境構築を進める前に�
 
     エラーが表示された場合、またはバージョンが`1.7.x`以下の場合はインストールが必要です。
 
-  - Android Studio  
+  - Android Studio
 
     Android Studioがインストールされていることを確認してください。インストールされていない場合、インストールが必要です。
     インストールされている場合、Android SDKのインストール状況も確認してください。確認方法は、[Android SDK](#android-sdk)を参照してください。
 
-  - react-native-cli  
+  - react-native-cli
 
     コマンドラインかターミナルで`react-native -v` を実行して`react-native-cli` のバージョンが**表示されないこと**を確認してください。
 
   :::caution
   `react-native-cli`がインストールされていると、アプリ実行に失敗します。
-  詳細については、[react-native-cliについて](/react-native/troubleshooting/react-native-cli-uninstall)を参照してください。
+  詳細については、[react-native-cliについて](../../troubleshooting/react-native-cli-uninstall.md)を参照してください。
   :::
 
 - macOS
 
-  - Watchman  
+  - Watchman
 
-    ターミナルで`watchman -v`を実行してください。  
+    ターミナルで`watchman -v`を実行してください。
 
     ```console
     $ watchman -v
@@ -68,9 +68,9 @@ React Native開発環境の構築手順です。環境構築を進める前に�
 
     エラーが表示された場合、インストールが必要です。バージョンに関して特に指定はありません。
 
-  - CocoaPods  
+  - CocoaPods
 
-    ターミナルで`pod --version`を実行してください。  
+    ターミナルで`pod --version`を実行してください。
 
     ```console
     $ pod --version
@@ -79,9 +79,9 @@ React Native開発環境の構築手順です。環境構築を進める前に�
 
     エラーが表示された場合、インストールが必要です。バージョンに関して特に指定はありません。
 
-  - Xcode  
+  - Xcode
 
-    Xcodeがインストールされていることを確認してください。インストールされている場合、Xcodeを起動してください。起動後のウィンドウにバージョンが表示されています。`12.x` 以降であればOKです。  
+    Xcodeがインストールされていることを確認してください。インストールされている場合、Xcodeを起動してください。起動後のウィンドウにバージョンが表示されています。`12.x` 以降であればOKです。
 
     Xcode表示例：`Version 12.3(12C33)`
 
@@ -89,9 +89,9 @@ React Native開発環境の構築手順です。環境構築を進める前に�
 
 :::caution
 公式手順でiOSアプリを起動しようとしてもビルドエラーになる[issue](https://github.com/facebook/react-native/issues/30836)があります。
-issueがCloseされていない場合、[トラブルシュート](../../troubleshooting/cant-build-in-xcode)を参照して対応するか、`AwesomeProject`のiOSシミュレータの確認をSkipしてください。
+issueがCloseされていない場合、[トラブルシュート](../../troubleshooting/cant-build-in-xcode.md)を参照して対応するか、`AwesomeProject`のiOSシミュレータの確認をSkipしてください。
 
-学習で利用するテンプレートでは発生しないため、[プロジェクトの作成](./create-project)以降進めることができます。
+学習で利用するテンプレートでは発生しないため、[プロジェクトの作成](./create-project.md)以降進めることができます。
 :::
 
 ### Android SDK
@@ -149,15 +149,15 @@ Android SDK Platform-Toolsがインストールされていない場合はイン
 
 ## 補足事項
 
-### Visual Studio Code  
+### Visual Studio Code
 
   開発時に使用するエディタをインストールします。エディタは使い慣れたものなら何でもいいです。特にこだわりがなければ`Visual Studio Code`をお勧めします。[公式サイト](https://azure.microsoft.com/ja-jp/products/visual-studio-code/)の案内に沿って、インストールしてください。エディタ環境が準備されている場合は、この手順をスキップしてください。
 
-### proxy設定  
+### proxy設定
 
 proxy環境下で開発環境を構築する場合、追加の設定が必要です。次の手順にしたがい設定してください。
 
-- 環境変数  
+- 環境変数
 
   環境構築および、実行時等に使用する一部ツール（npmやCocoaPods等）のproxy設定です。次のコマンドで環境変数を設定してください。
 
@@ -195,7 +195,7 @@ proxy環境下で開発環境を構築する場合、追加の設定が必要で
   </TabItem>
   </Tabs>
 
-- Gradle  
+- Gradle
 
   Android開発ではビルドツールにGradleを使用します。Gradleのproxy設定は`gradle.properties`で設定します。
 

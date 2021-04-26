@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'distribution/ios-lisence',
+      id: 'distribution/ios-license',
     },
     {
       type: 'doc',

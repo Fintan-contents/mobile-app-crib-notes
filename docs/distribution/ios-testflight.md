@@ -33,7 +33,7 @@ TestFlightで配信するにはADPのプロビジョニングプロファイル�
 
 ### アプリのリリースビルド
 
-アプリのリリースビルドは[iOSのビルド](./app-build/ios-build)を参照してください。
+アプリのリリースビルドは[iOSのビルド](./app-build/ios-build.md)を参照してください。
 
 ### アプリをApp Store Connectにアップロード
 

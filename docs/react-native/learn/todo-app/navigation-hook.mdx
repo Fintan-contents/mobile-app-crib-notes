@@ -4,7 +4,7 @@ title: ナビゲーションの型定義
 
 ## useNavigationのカスタムフック
 
-[useNavigationの型定義](../basic-concepts/react-navigation-basics/modal#usenavigationの型定義)にあるとおり、`useNavigation`に"正しい"型を指定することで、型安全にナビゲーション操作できます。
+[useNavigationの型定義](../basic-concepts/react-navigation-basics/modal.mdx#usenavigationの型定義)にあるとおり、`useNavigation`に"正しい"型を指定することで、型安全にナビゲーション操作できます。
 しかしながら、`useNavigation`の型定義は複雑です。
 "正しい"型を指定すれば型安全ですが、各画面に型指定した`useNavigation`フックを宣言した場合、それらをメンテナンスし続けるのは大変（かつ間違っても気づきにくい）です。
 "正しい"型を維持しつつ管理を楽にするため、各画面で宣言するのは避け、ナビゲータ毎のカスタムフックを事前に用意するほうがいいでしょう。

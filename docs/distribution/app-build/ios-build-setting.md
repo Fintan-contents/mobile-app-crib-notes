@@ -208,7 +208,7 @@ Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリ
 // https://help.apple.com/xcode/#/dev745c5c974
 CODE_SIGN_STYLE=Automatic 
 PERSONAL_IDENTIFIER=809890
-DEVELOPMENT_TEAM=8G25XXXX
+DEVELOPMENT_TEAM=XXXXXXXX
 ```
 
 ConfigurationのDebugにて上記で作成した設定ファイルを読み込むようにします。
