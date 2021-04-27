@@ -1,4 +1,7 @@
+// Configuration Options | Renovate docs
+// https://docs.renovatebot.com/configuration-options/
 {
+  addLabels: ['dependencies'],
   commitMessagePrefix: '⬆️: ',
   extends: ['config:base', ':preserveSemverRanges'],
   timezone: 'Asia/Tokyo',
@@ -6,17 +9,16 @@
     enabled: true,
     schedule: ['before 20:00 on sunday'],
   },
-  ignorePaths: [
-    'santoku-app/android',
-    'santoku-app/ios'
-  ],
+  ignorePaths: ['santoku-app'],
   packageRules: [
     {
+      // expo upgradeで更新されるパッケージはRenovateの対象外とします
       groupName: 'Expo upgrade',
       enabled: false,
-      packageNames: [
+      matchPackageNames: [
         '@react-native-community/masked-view',
         'expo',
+        'expo-keep-awake',
         'expo-splash-screen',
         'expo-updates',
         'react',
@@ -38,35 +40,32 @@
       ],
     },
     {
+      // expo upgradeで更新されるパッケージに依存するパッケージは手動で更新する必要があるのでRenovateの対象外とします
       groupName: 'Depends on Expo version',
       enabled: false,
-      packageNames: [
+      matchPackageNames: [
         '@types/jest', // jest-expo -> jest
         '@types/react-test-renderer', // jest-expo -> react-test-renderer
+        'gradle', // expo-template-bare-typescript
       ],
     },
     {
+      // React Navigationの関連パッケージはまとめて更新するようにします
       groupName: 'React Navigation',
-      packagePatterns: ['^@react-navigation/'],
+      matchPackagePrefixes: ['@react-navigation/'],
     },
     {
+      // Docusaurusの関連パッケージはまとめて更新するようにします
       groupName: 'Docusaurus',
-      matchPaths: [
-        '+(package.json)'
-      ],
-      packageNames: [
-        '@mdx-js/react',
-        'clsx',
-        'react',
-        'react-dom',
-      ],
-      packagePatterns: [
-        '^@docusaurus'
-      ]
+      // SantokuAppのReactなどのパッケージとまとめられないように、ルートディレクトリのpackage.jsonだけを対象にしています
+      matchFiles: ['package.json'],
+      matchPackageNames: ['@mdx-js/react', 'clsx', 'react', 'react-dom'],
+      matchPackagePrefixes: ['@docusaurus'],
     },
     {
+      // ツール系のパッケージはまとめて更新するようにします
       groupName: 'Tools',
-      packageNames: [
+      matchPackageNames: [
         '@testing-library/react-native',
         '@typescript-eslint/eslint-plugin',
         '@typescript-eslint/parser',
@@ -78,7 +77,7 @@
         'npm-run-all',
         'prettier',
       ],
-      packagePatterns: ['^markdownlint', '^textlint', '^stylelint'],
+      matchPackagePrefixes: ['markdownlint', 'textlint', 'stylelint'],
     },
   ],
 }

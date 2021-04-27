@@ -1,28 +1,27 @@
 # Add 'iOS' label to any change within the 'ios' directory
 iOS:
-  - santoku-app/ios/**/*
+  - SantokuApp/ios/**/*
 
 # Add 'Android' label to any change within the 'android' directory
 Android:
-  - santoku-app/android/**/*
+  - SantokuApp/android/**/*
 
 # Add 'app' label to any change within the 'src' directory and to the files listed below
 app:
-  - santoku-app/src/**/*
-  - santoku-app/app.json
-  - santoku-app/index.js
+  - SantokuApp/src/**/*
+  - SantokuApp/index.js
 
 # Add 'build' label to any changes to the files listed below
 build:
-  - santoku-app/.script/**/*
-  - santoku-app/.buckconfig
-  - santoku-app/.editorconfig
-  - santoku-app/.eslintrc.js
-  - santoku-app/babel.config.js
-  - santoku-app/metro.config.js
-  - santoku-app/package.json
-  - santoku-app/package-lock.json
-  - santoku-app/tsconfig.json
+  - SantokuApp/.script/**/*
+  - SantokuApp/.buckconfig
+  - SantokuApp/.editorconfig
+  - SantokuApp/.eslintrc.js
+  - SantokuApp/babel.config.js
+  - SantokuApp/metro.config.js
+  - SantokuApp/package.json
+  - SantokuApp/package-lock.json
+  - SantokuApp/tsconfig.json
   - .tool-versions
 
 # Add 'chore' label to any change within the '.github' directory and to the files listed below
@@ -30,8 +29,8 @@ chore:
   # Changes to files within '.github/workflows' should correspond to the 'ci' label
   - any: ['.github/**/*', '!.github/workflows/**/*']
   - .idea/**/*
-  - santoku-app/.gitattributes
-  - santoku-app/.gitignore
+  - SantokuApp/.gitattributes
+  - SantokuApp/.gitignore
   - .editorconfig
   - .gitattributes
   - .gitignore
@@ -47,7 +46,7 @@ doc:
   - docs/**
   - src/**
   - static/**
-  - santoku-app/README.md
+  - SantokuApp/README.md
   - .htmltest.yaml
   - .markdownlint.js
   - .textlintrc.js
@@ -60,6 +59,6 @@ doc:
 
 # Add 'test' label to any change to files within the directories listed below
 test:
-  - santoku-app/jest/**/*
-  - santoku-app/jest.config.js
-  - santoku-app/src/**/*.test.tsx
+  - SantokuApp/jest/**/*
+  - SantokuApp/jest.config.js
+  - SantokuApp/src/**/*.test.tsx

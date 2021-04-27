@@ -19,6 +19,54 @@ module.exports = {
       'reference/notification/client',
     ],
   },
+  distribution: [
+    {
+      type: 'doc',
+      id: 'distribution/index',
+    },
+    {
+      type: 'doc',
+      id: 'distribution/ios-license',
+    },
+    {
+      type: 'doc',
+      id: 'distribution/usecase/index',
+    },
+    {
+      type: 'category',
+      label: 'アプリケーションの配布方法',
+      items: [
+        {
+          type: 'category',
+          label: 'iOSアプリ',
+          items: [
+            'distribution/ios-developer-account',
+            'distribution/ios-develop-certificate',
+            'distribution/ios-in-house',
+            'distribution/ios-testflight',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Androidアプリ',
+          items: [
+            'distribution/android-local',
+            'distribution/android-apk-dist',
+            'distribution/android-google-play-test',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'アプリケーションのビルド',
+      items: [
+        'distribution/app-build/ios-build',
+        'distribution/app-build/ios-build-setting',
+        'distribution/app-build/android-build',
+      ],
+    },
+  ],
   learn: [
     {
       type: 'doc',
@@ -125,4 +173,36 @@ module.exports = {
       'react-native/troubleshooting/cant-build-in-xcode',
     ],
   },
+  ...(process.env.NODE_ENV === 'development'
+    ? {
+        santoku: [
+          {
+            type: 'doc',
+            id: 'react-native/santoku',
+          },
+        ],
+      }
+    : {}),
+  ...(process.env.NODE_ENV === 'development'
+    ? {
+        docusaurus: [
+          {
+            type: 'doc',
+            id: 'docusaurus/index',
+          },
+          {
+            type: 'doc',
+            id: 'docusaurus/doc1',
+          },
+          {
+            type: 'doc',
+            id: 'docusaurus/mdx',
+          },
+          {
+            // TODO: ヘッダリンクの作り方: ['docusaurus/create-link-in-header'],
+            // TODO: 目次の作り方: ['docusaurus/create-sidebar-toc'],
+          },
+        ],
+      }
+    : {}),
 };

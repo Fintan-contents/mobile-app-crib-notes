@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "11111111111",
+    "project_id": "dummy",
+    "storage_bucket": "dummy.dummy.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111111111111:android:0000000000111111111122",
+        "android_client_info": {
+          "package_name": "dummy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111111111111-dummydummydummydummydummydummydu.dummy.dummy.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "Adummydummydummydummydummydummydummyend"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111111111111-dummydummydummydummydummydummydu.dummy.dummy.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "111111111111-dummydummydummydummydummydummydu.dummy.dummy.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dummy"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111111111111:android:0000000000111111111122",
+        "android_client_info": {
+          "package_name": "dummy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111111111111-dummydummydummydummydummydummydu.dummy.dummy.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "Adummydummydummydummydummydummydummyend"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111111111111-dummydummydummydummydummydummydu.dummy.dummy.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "111111111111-dummydummydummydummydummydummydu.dummy.dummy.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dummy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,11 +4,11 @@ title: プロジェクトの作成
 
 ## React Nativeプロジェクトの作成
 
-[アプリを実装する前に](../basic-concepts)で紹介しているコードを簡単に動かすことができるように、プロジェクトを作成します。
+[アプリを実装する前に](../basic-concepts.mdx)で紹介しているコードを簡単に動かすことができるように、プロジェクトを作成します。
 
 このコンテンツでは[React Navigation](https://reactnavigation.org/)や[React Native Elements](https://reactnativeelements.com/)などのパッケージを利用します。これらのパッケージがインストールされたプロジェクトを簡単に用意できるよう、[RN Spoiler](https://github.com/ws-4020/rn-spoiler)というテンプレートを用意しています。
 
-次のコマンドを実行して、新規プロジェクトを作成してください。（`<YourAppName>`の部分は、好みのプロジェクト名に変更してください。このプロジェクトは後ほど[ToDoアプリの実装](../todo-app)で使用します）
+次のコマンドを実行して、新規プロジェクトを作成してください。（`<YourAppName>`の部分は、好みのプロジェクト名に変更してください。このプロジェクトは後ほど[ToDoアプリの実装](../todo-app.md)で使用します）
 
 ```bash
 npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler#hands-on <YourAppName>

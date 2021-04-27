@@ -113,8 +113,8 @@ export const App = () => {
   const [selectedAlignItems, setAlignItems] = useState(0);
   const [selectedAlignContent, setAlignContent] = useState(0);
 
-  const [childrens, setChildrens] = useState(3);
-  const [flexGrow, setflexGrow] = useState(0);
+  const [children, setChildren] = useState(3);
+  const [flexGrow, setFlexGrow] = useState(0);
   const [selectedAlignSelf, setAlignSelf] = useState(0);
 
   return (
@@ -152,17 +152,17 @@ export const App = () => {
         buttons={alignContentOptions}
       />
 
-      <Text>childrens: {childrens}</Text>
+      <Text>children: {children}</Text>
       <Slider
-        value={childrens}
-        onValueChange={setChildrens}
+        value={children}
+        onValueChange={setChildren}
         step={1}
         maximumValue={20}
       />
       <Text>flexGrow: {flexGrow}</Text>
       <Slider
         value={flexGrow}
-        onValueChange={setflexGrow}
+        onValueChange={setFlexGrow}
         step={1}
         maximumValue={10}
       />
@@ -194,7 +194,7 @@ export const App = () => {
             },
           ]}
         />
-        {[...Array(childrens).keys()].map((index) => (
+        {[...Array(children).keys()].map((index) => (
           <View style={styles.item} key={index} />
         ))}
       </View>
@@ -238,9 +238,9 @@ Flexコンテナのレイアウトに使用するプロパティを次に示し�
 
 |プロパティ|デフォルト|オプション|説明|
 |---------|---------|---------|---------|
-|`flexGrow`|0||子要素の伸びる比率|
-|`flexShrink`|1||子要素の縮む比率|
-|`flexBasis`|子要素のサイズ||子要素のベースとなる幅の指定|
+|`flexGrow`|0| |子要素の伸びる比率|
+|`flexShrink`|1| |子要素の縮む比率|
+|`flexBasis`|子要素のサイズ| |子要素のベースとなる幅の指定|
 |`alignSelf`|`auto`|`auto`, `flex-start`, `flex-end`, `center`, `stretch`, `baseline`|子要素自身の垂直方向の揃え|
 
 ## 参考サイト
