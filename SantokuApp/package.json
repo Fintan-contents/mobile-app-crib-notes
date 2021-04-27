@@ -14,7 +14,7 @@
     "reset-cache": "node .script/runner.js reset-cache",
     "reset-cache:all": "node .script/runner.js reset-cache --all",
     "reset-cache:interactive": "node .script/runner.js reset-cache --interactive",
-    "pod-install": "cd ios && bundle exec pod install"
+    "pod-install": "cd ios && bundle exec pod install --repo-update"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
