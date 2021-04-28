@@ -163,6 +163,13 @@ module.exports = {
         'react-native/learn/todo-app/exercise',
       ],
     },
+    {
+      type: 'category',
+      label: '応用編',
+      items: [
+        'react-native/learn/advance/react-navigation-param',
+      ],
+    },
   ],
   troubleshoot: {
     About: ['react-native/troubleshooting'],
