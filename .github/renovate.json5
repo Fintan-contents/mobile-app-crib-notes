@@ -59,8 +59,9 @@
       groupName: 'Docusaurus',
       // SantokuAppのReactなどのパッケージとまとめられないように、ルートディレクトリのpackage.jsonだけを対象にしています
       matchFiles: ['package.json'],
-      matchPackageNames: ['@mdx-js/react', 'clsx', 'react', 'react-dom'],
+      matchPackageNames: ['@mdx-js/react', 'clsx', 'react', 'react-dom', '@tsconfig/docusaurus'],
       matchPackagePrefixes: ['@docusaurus'],
+      allowedVersions: "/^[0-9]+\\\\.[0-9]+\\\\.[0-9]+(-[\\w]+(\\\\.[0-9]{1,5})?)?$/"
     },
     {
       // ツール系のパッケージはまとめて更新するようにします
