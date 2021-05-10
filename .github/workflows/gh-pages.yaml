@@ -6,7 +6,7 @@ on:
       - master
   pull_request:
     branches:
-      - '**'
+      - master
     paths:
       - docs/**
       - src/**
@@ -27,6 +27,7 @@ on:
       - README.md
       - tsconfig.json
       - .github/workflows/gh-pages.yaml
+      - .github/workflows/gh-pages-deploy.yaml
     types:
       - opened
       - synchronize
@@ -34,7 +35,7 @@ on:
 
 jobs:
   lint:
-    name: Run lints
+    name: Lints
     runs-on: ubuntu-20.04
     env:
       REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -79,35 +80,37 @@ jobs:
       - name: Lint (textlint)
         if: always()
         run: |
-          npm run -s lint:text -- -f checkstyle | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=checkstyle -name=textlint
+          npm run -s lint:text -- -f checkstyle | reviewdog -tee -fail-on-error -reporter=github-check -f=checkstyle -name="textlint (GitHub Pages)"
 
       - name: Lint (markdownlint)
         if: always()
         run: |
-          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' | reviewdog -tee -fail-on-error -reporter=github-pr-review -efm="%t:%f:%l:%c %m" -efm="%t:%f:%l %m" -name=markdownlint
+          npm run -s lint:md 2>&1 | sed -e 's/^/e:/' | reviewdog -tee -fail-on-error -reporter=github-check -efm="%t:%f:%l:%c %m" -efm="%t:%f:%l %m" -name="markdownlint (GitHub Pages)"
 
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=rdjson -name=ESLint
+          npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name="ESLint (GitHub Pages)"
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name=TypeScript
+          npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (GitHub Pages)"
 
       - name: Lint (stylelint)
         if: always()
         uses: reviewdog/action-stylelint@v1
         # https://github.com/reviewdog/action-stylelint
         with:
+          name: stylelint (GitHub Pages)
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
+          reporter: github-check
           fail_on_error: true
           # package.jsonでlint:cssに設定しているのと同じ引数を渡す
           stylelint_input: 'src/**/*.css'
 
-  build-deploy:
+  build:
+    name: Build
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -156,10 +159,3 @@ jobs:
           name: mobile-app-crib-notes
           path: ./build
           retention-days: 30
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/master'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build

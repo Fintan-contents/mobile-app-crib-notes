@@ -1,4 +1,4 @@
-name: App
+name: SantokuApp
 
 on:
   push:
@@ -24,6 +24,7 @@ on:
       - SantokuApp/package-lock.json
       - SantokuApp/tsconfig.json
       - .github/workflows/app.yaml
+      - .github/workflows/report.yaml
     types:
       - opened
       - synchronize
@@ -31,7 +32,7 @@ on:
 
 jobs:
   lint-and-test:
-    name: Run lint and test
+    name: Lints, Tests
     runs-on: macos-10.15
     env:
       REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -76,22 +77,22 @@ jobs:
       - name: Lint (ESLint)
         if: always()
         run: |
-          npm run -s lint:es --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=eslint -name="ESLint"
+          cd SantokuApp && npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name="ESLint (SantokuApp)"
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          npm run -s lint:tsc --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name="TypeScript"
+          cd SantokuApp && npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (SantokuApp)"
 
       - name: Test
         if: always()
         run: |
           npm run -s test --prefix SantokuApp -- --ci --reporters=default --reporters=jest-junit --coverage
 
-      - name: Report test result
-        uses: ashley-taylor/junit-report-annotations-action@master
+      - name: Archive workflow results
+        uses: actions/upload-artifact@v2
         if: always()
         with:
-          access-token: ${{ secrets.GITHUB_TOKEN }}
-          name: Test results
-          path: SantokuApp/junit.xml
+          name: workflow-results
+          path: |
+            SantokuApp/jest-junit.xml

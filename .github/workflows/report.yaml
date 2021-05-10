@@ -1,0 +1,22 @@
+name: Report
+
+on:
+  workflow_run:
+    workflows:
+      - SantokuApp
+    types:
+      - completed
+
+jobs:
+  report:
+    name: Report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Jest results
+        uses: dorny/test-reporter@v1
+        with:
+          name: Jest results (${{ github.event.workflow.name }})
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifact: workflow-results
+          path: jest-junit.xml
+          reporter: jest-junit
