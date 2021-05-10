@@ -1,4 +1,5 @@
 {
+  "name": "santoku-app",
   "main": "index.js",
   "scripts": {
     "android": "react-native run-android",
@@ -14,7 +15,9 @@
     "reset-cache": "node .script/runner.js reset-cache",
     "reset-cache:all": "node .script/runner.js reset-cache --all",
     "reset-cache:interactive": "node .script/runner.js reset-cache --interactive",
-    "pod-install": "cd ios && bundle exec pod install --repo-update"
+    "pod-install": "cd ios && bundle exec pod install --repo-update",
+    "postinstall": "run-s postinstall:*",
+    "postinstall:patch-package": "patch-package"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
@@ -52,6 +55,7 @@
     "jest-expo": "^40.0.0",
     "jest-junit": "^12.0.0",
     "npm-run-all": "^4.1.5",
+    "patch-package": "^6.4.7",
     "prettier": "^2.2.0",
     "typescript": "~4.0.0"
   },

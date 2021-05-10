@@ -1,0 +1,13 @@
+diff --git a/node_modules/expo-constants/scripts/get-app-config-android.gradle b/node_modules/expo-constants/scripts/get-app-config-android.gradle
+index 4b632e8..934569c 100644
+--- a/node_modules/expo-constants/scripts/get-app-config-android.gradle
++++ b/node_modules/expo-constants/scripts/get-app-config-android.gradle
+@@ -10,7 +10,7 @@ void runBefore(String dependentTaskName, Task task) {
+   }
+ }
+
+-def expoConstantsDir = ["node", "-e", "console.log(require('path').dirname(require.resolve('expo-constants/package.json')));"].execute([], projectDir).text.trim()
++def expoConstantsDir = ["node", "-e", "console.log(require('path').dirname(require.resolve('expo-constants/package.json')));"].execute(null, projectDir).text.trim()
+
+ def config = project.hasProperty("react") ? project.react : [];
+ def nodeExecutableAndArgs = config.nodeExecutableAndArgs ?: ["node"]
