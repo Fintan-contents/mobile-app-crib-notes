@@ -2,70 +2,232 @@
 title: Modalスクリーン
 ---
 
-タスク登録画面をモーダル画面として表示しましょう。
-モーダルはアニメーションの振る舞いが異なるだけです。
-Stackナビゲータの`mode`属性を`modal`に変更（デフォルトは`card`）することで実現できます。
+「ToDo一覧」から「タスク登録」をモーダル画面として表示します。本セクションで正常系の画面遷移実装が完了します。
+
+![ModalScreen](app-hands-on/screen-transition-modal.png)
+
+モーダルはStackナビゲータの`mode`属性（デフォルトは`card`）を`modal`に変更することで実現できます。
+画面遷移時のアニメーションの振る舞いが変わります。
 
 :::note
 React Navigation公式ドキュメントの[Opening a full-screen modal](https://reactnavigation.org/docs/modal/)に次の記載があります。
 > The modal prop has no effect on Android because full-screen modals don't have any different transition behavior on the platform.
 
 画面遷移アニメーションは、各プラットフォームのネイティブ動作に従います。
-上記とおり、Androidのフルスクリーンモーダルには異なるトランジションが用意されていないため、`mode`属性の変更によるアニメーションの変更はありません。
+上記のとおり、Androidのフルスクリーンモーダルには異なるトランジションが用意されていないため、`mode`属性の変更によるアニメーションの変更はありません。
 :::
 
-では実装していきましょう。
+## 画面を追加
+
+タスク登録画面を追加します。まずは画面遷移を確認できるように、最低限のひな型を実装します。
+
+次のファイルを追加・修正してください。
+
+- `/src/screens/todo/TodoForm.tsx`
+- `/src/screens/todo/index.ts`
+
+```typescript jsx title="/src/screens/todo/TodoForm.tsx"
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Text} from 'react-native-elements';
+
+export const TodoForm: React.FC = () => {
+  return (
+    <View style={styles.container}>
+      <Text h1>タスク登録</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+```
+
+```diff title="/src/screens/todo/index.ts"
+  export * from './TodoBoard';
++ export * from './TodoForm';
+```
+
+## ナビゲーション構成
+
+ToDo一覧からタスク登録画面に遷移できるようにナビゲーション構成を修正します。
+
+修正イメージは次の通りです。
+
+1. `AuthedStackNav`ナビゲータにタスク登録画面（`TodoForm`）を配置
+1. ToDo一覧画面（`TodoBoard`）からタスク登録画面（`TodoForm`）への画面遷移を追加
+
+![TodoFormNavigation](app-hands-on/todo_form_navigation.png)
+
+:::info
+`TodoStackNav`ナビゲータではなく、なぜ`AuthedStackNav`ナビゲータにタスク登録画面（`TodoForm`）を追加するのでしょうか。
+理由としては、タスク登録画面を表示する際にタブバーを非表示にしたいからです。
+`TodoStackNav`ナビゲータにタスク登録画面を追加した場合、下部にタブバーが表示されてしまいます。
+推奨される方法は、タブスタック外側のナビゲータに画面を追加することです。
+詳細は、React Navigation公式ドキュメントの[Hiding tab bar in specific screens](https://reactnavigation.org/docs/hiding-tabbar-in-screens)を参照してください。
+:::
+
+`AuthedStackNav`ナビゲータに`TodoForm`という名前でタスク登録画面を追加します。
+次のファイルを修正してください。
+
+- `/src/navigation/AuthedStackNav.tsx`
+
+```diff title="/src/navigation/AuthedStackNav.tsx"
+  import {createStackNavigator} from '@react-navigation/stack';
+  import React from 'react';
+  import {MainTabNav} from 'navigation/MainTabNav';
++ import {TodoForm} from 'screens';
+  
+  const nav = createStackNavigator();
+  export const AuthedStackNav: React.FC = () => {
+    return (
+-     <nav.Navigator screenOptions={{headerShown: false}}>
++     <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main">
+        <nav.Screen name="Main" component={MainTabNav} />
++       <nav.Screen
++         name="TodoForm"
++         component={TodoForm}
++         options={{
++           headerShown: true,
++         }}
++       />
+      </nav.Navigator>
+    );
+  };
+```
+
+次に、ToDo一覧画面からの画面遷移を追加します。`/src/screens/todo/TodoBoard.tsx`を修正してください。
+
+```diff title="/src/screens/todo/TodoBoard.tsx"
++ import {useNavigation} from '@react-navigation/native';
+  import React from 'react';
+  import {StyleSheet, View} from 'react-native';
+- import {Text} from 'react-native-elements';
++ import {Text, Button} from 'react-native-elements';
+  
+  export const TodoBoard: React.FC = () => {
++   const navigation = useNavigation();
++  
+    return (
+      <View style={styles.container}>
+        <Text h1>Todo</Text>
++       <Button onPress={() => navigation.navigate('TodoForm')} title="タスク登録" />
+      </View>
+    );
+  };
+  /* ～省略～ */
+```
+
+修正できたらToDo一覧からタスク登録画面へ遷移できることを確認してください。
+まだモーダルにしていないため、他のStackナビゲーションと同じアニメーションで遷移します。
+
+## Modalスクリーン
+
+では`TodoForm`がモーダルになるように実装しましょう。
 `AuthedStackNav`ナビゲータに次の修正を加えます。
 
-- Stackナビゲータの`mode`属性を`modal`に変更
-- ヘッダの右にクローズボタンを追加
-- ヘッダの背景を非表示（`headerTransparent`を`true`に設定）
+1. Stackナビゲータの`mode`属性を`modal`に変更
+1. ヘッダの右にクローズボタンを追加
+1. ヘッダの背景を非表示（`headerTransparent`を`true`に設定）
 
-修正量が多いので、次のソースコードで`AuthedStackNav.tsx`を上書きしてください。
+まずは、`AuthedStackNav`ナビゲータの`mode`属性を`modal`に変更します。
 
-```typescript jsx title="/src/navigation/AuthedStackNav.tsx"
-import {Ionicons} from '@expo/vector-icons';
-import {createStackNavigator} from '@react-navigation/stack';
-import {MainTabNav} from 'navigation/MainTabNav';
-import {AuthedStackParamList} from 'navigation/types';
-import React, {useCallback, useContext} from 'react';
-import {Button, ThemeContext} from 'react-native-elements';
-import {TodoForm} from 'screens';
+```diff title="/src/navigation/AuthedStackNav.tsx"
+  import {createStackNavigator} from '@react-navigation/stack';
+  import React from 'react';
+  import {MainTabNav} from 'navigation/MainTabNav';
+  import {TodoForm} from 'screens';
+  
+  const nav = createStackNavigator();
+  export const AuthedStackNav: React.FC = () => {
+    return (
+-     <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main">
++     <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main" mode="modal">
+        <nav.Screen name="Main" component={MainTabNav} />
+        <nav.Screen
+          name="TodoForm"
+          component={TodoForm}
+          options={{
+            headerShown: true,
+          }}
+        />
+      </nav.Navigator>
+    );
+  };
+```
 
-import {useAuthedStackNavigation} from './hooks';
+次に、ヘッダの右にクローズボタンを追加します。
 
-const CloseButton: React.FC = () => {
-  const {theme} = useContext(ThemeContext);
-  const navigation = useAuthedStackNavigation<'TodoForm'>();
-  const onClose = useCallback(() => navigation.goBack(), [navigation]);
+```diff title="/src/navigation/AuthedStackNav.tsx"
++ import {Ionicons} from '@expo/vector-icons';
++ import {useNavigation} from '@react-navigation/native';
+  import {createStackNavigator} from '@react-navigation/stack';
+- import React from 'react';
++ import React, {useCallback, useContext} from 'react';
++ import {Button, ThemeContext} from 'react-native-elements';
+  import {MainTabNav} from 'navigation/MainTabNav';
+  import {TodoForm} from 'screens';
+  
++ const CloseButton: React.FC = () => {
++   const {theme} = useContext(ThemeContext);
++   const navigation = useNavigation();
++   const onClose = useCallback(() => navigation.goBack(), [navigation]);
++ 
++   return (
++     <Button
++       type="clear"
++       icon={<Ionicons name="md-close" color={theme.colors?.primary} size={30} />}
++       onPress={onClose}
++     />
++   );
++ };
++ 
+  const nav = createStackNavigator();
+  export const AuthedStackNav: React.FC = () => {
+    return (
+      <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main" mode="modal">
+        <nav.Screen name="Main" component={MainTabNav} />
+        <nav.Screen
+          name="TodoForm"
+          component={TodoForm}
+          options={{
+            headerShown: true,
++           headerLeft: () => undefined,
++           headerRight: () => <CloseButton />,
+          }}
+        />
+      </nav.Navigator>
+    );
+  };
+```
 
-  return (
-    <Button
-      type="clear"
-      icon={<Ionicons name="md-close" color={theme.colors?.primary} size={30} />}
-      onPress={onClose}
-    />
-  );
-};
+最後に、ヘッダの背景を透明にします。
 
-const nav = createStackNavigator<AuthedStackParamList>();
-export const AuthedStackNav: React.FC = () => {
-  return (
-    <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main" mode="modal">
-      <nav.Screen name="Main" component={MainTabNav} />
-      <nav.Screen
-        name="TodoForm"
-        component={TodoForm}
-        options={{
-          headerShown: true,
-          headerLeft: () => undefined,
-          headerRight: () => <CloseButton />,
-          headerTransparent: true,
-        }}
-      />
-    </nav.Navigator>
-  );
-};
+```diff title="/src/navigation/AuthedStackNav.tsx"
+  /* ～省略～ */  
+  
+  export const AuthedStackNav: React.FC = () => {
+    return (
+      <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main" mode="modal">
+        <nav.Screen name="Main" component={MainTabNav} />
+        <nav.Screen
+          name="TodoForm"
+          component={TodoForm}
+          options={{
+            headerShown: true,
+            headerLeft: () => undefined,
+            headerRight: () => <CloseButton />,
++           headerTransparent: true,
+          }}
+        />
+      </nav.Navigator>
+    );
+  };
 ```
 
 修正できたら実行してください。

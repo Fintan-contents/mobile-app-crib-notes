@@ -78,14 +78,14 @@ export * from './Logo';
 - `/src/screens/home/Welcome.tsx`
 
 ```diff title="/src/screens/home/Welcome.tsx"
+  import {useNavigation} from '@react-navigation/native';
 + import {Logo} from 'components/basics';
-  import {useUnauthedStackNavigation} from 'navigation/hooks';
   import React from 'react';
   import {StyleSheet, View} from 'react-native';
   import {Button, Text} from 'react-native-elements';
   
   export const Welcome: React.FC = () => {
-    const navigation = useUnauthedStackNavigation<'Welcome'>();
+    const navigation = useNavigation();
     return (
       <View style={styles.container}>
 +       <Logo />

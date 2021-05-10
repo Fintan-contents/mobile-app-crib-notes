@@ -20,7 +20,6 @@ todo_app
    │  └─parts
    ├─contexts
    ├─navigation
-   │  └─hooks
    ├─screens
    └─services
 ```
@@ -31,6 +30,5 @@ todo_app
 - components/parts: アプリ機能に特化したコンポーネント
 - contexts: コンテクスト
 - navigation: ナビゲーション定義
-- navigation/hooks: ナビゲーションのカスタムフック
 - screens: 画面
 - services: 外部（APIや内部ストレージなど）と連携するサービスやビジネスロジック

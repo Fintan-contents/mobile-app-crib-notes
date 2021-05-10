@@ -7,7 +7,7 @@ title: ログイン画面
 次はログイン画面を実装します。
 
 ログイン画面には名前とパスワードの入力フォームがあり、入力フォームの検証が必要です。
-独自でフォーム検証機能を用意することも出来ますが、ここでは[Reactの公式ドキュメント](https://ja.reactjs.org/docs/forms.html#fully-fledged-solutions)で紹介されている[Formik](https://formik.org/)を使用します。
+自分でフォーム検証機能を実装することも出来ますが、ここでは[Reactの公式ドキュメント](https://ja.reactjs.org/docs/forms.html#fully-fledged-solutions)で紹介されている[Formik](https://formik.org/)を使用します。
 
 次のコマンドでインストールします。
 
@@ -32,10 +32,11 @@ npm install yup@0.32.9
 :::
 
 インストールが完了したらログイン画面を実装しましょう。
-`/src/screens/auth/Login.tsx`を追加してください。
+
+修正量が多いので、次のソースコードで`/src/screens/auth/Login.tsx`を上書きしてください。
 
 ```typescript jsx title="/src/screens/auth/Login.tsx"
-import {useNavigation} from '@react-navigation/native';
+import {useUserContext} from 'contexts/UserContext';
 import {useFormik} from 'formik';
 import React, {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -43,10 +44,17 @@ import {Button, Input} from 'react-native-elements';
 import * as Yup from 'yup';
 
 export const Login: React.FC = () => {
-  const navigation = useNavigation();
-  const login = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
+  const userContext = useUserContext();
+  
+  const login = useCallback(
+    (values: {name: string; password: string}) => {
+      userContext.login(values.name, values.password).then(
+        () => {},
+        () => {},
+      );
+    },
+    [userContext],
+  );
 
   const formik = useFormik({
     initialValues: {name: '', password: ''},
@@ -136,100 +144,17 @@ RN Spoilerからプロジェクトを作成した場合、React Native Elements�
 指定しない場合は入力の都度バリデーションされます。
 :::
 
-では、Welcome画面からログイン画面に遷移できるように修正します。
-`/src/screens/auth/index.ts`を追加してください。
-
-```typescript jsx title="/src/screens/auth/index.ts"
-export * from './Login';
-```
-
-次に`/src/screens/index.ts`を修正してください。
-
-```diff title="/src/screens/index.ts"
-+ export * from './auth';
-  export * from './home';
-  export * from './instructions';
-```
-
-最後に`/src/navigation/RootStackNav.tsx`を修正してください。
-修正量が多いので、次のソースコードで`RootStackNav.tsx`を上書きしてください。
-
-```typescript jsx title="/src/navigation/RootStackNav.tsx"
-import {RouteProp, useNavigation} from '@react-navigation/native';
-import {createStackNavigator, StackNavigationOptions} from '@react-navigation/stack';
-import React from 'react';
-import {Button} from 'react-native-elements';
-import {Instructions, Login, Welcome} from 'screens';
-
-type RootStackParamList = {
-  Welcome: undefined;
-  Login: undefined;
-  Instructions: undefined;
-};
-
-const nav = createStackNavigator<RootStackParamList>();
-const HeaderRight: React.FC = () => {
-  const navigation = useNavigation();
-  return <Button type="clear" onPress={() => navigation.navigate('Login')} title="ログイン" />;
-};
-const createScreenOptions: (props: {
-  route: RouteProp<RootStackParamList, keyof RootStackParamList>;
-}) => StackNavigationOptions = ({route}) => {
-  if (route.name === 'Login') {
-    return {};
-  } else {
-    return {headerRight: () => <HeaderRight />};
-  }
-};
-
-export const RootStackNav: React.FC = () => {
-  return (
-    <nav.Navigator initialRouteName="Welcome" screenOptions={createScreenOptions}>
-      <nav.Screen
-        name="Welcome"
-        component={Welcome}
-        options={{
-          headerTitle: 'Welcome',
-        }}
-      />
-      <nav.Screen
-        name="Login"
-        component={Login}
-        options={{
-          headerTitle: 'ログイン',
-        }}
-      />
-      <nav.Screen name="Instructions" component={Instructions} />
-    </nav.Navigator>
-  );
-};
-```
-
-`Navigator`の`screenOptions`でヘッダーのタイトルや書式などが設定できます。
-次のコード箇所を確認ください。
-
-```typescript jsx
-  /* ～省略～ */
-const createScreenOptions: (props: {
-  route: RouteProp<RootStackParamList, keyof RootStackParamList>;
-}) => StackNavigationOptions = ({route}) => {
-  if (route.name === 'Login') {
-    return {};
-  } else {
-    return {headerRight: () => <HeaderRight />};
-  }
-};
-  /* ～省略～ */
-```
-
-上記コードにより、ログイン以外の画面で右上にログイン画面への遷移ボタンが表示されます。
+修正できたら実行してください。ログイン画面が下図のように表示されたら成功です。
+入力フォームの検証が動作しているかも併せて確認してください。
 
 :::note
-`ScreenOptions`の詳細は[React Navigationのドキュメント](https://reactnavigation.org/docs/screen-options/)を参照してください。
+iOSシミュレータで仮想キーボードが表示されない場合は、物理キーボードが有効になっている可能性があります。
+メニュー > Hardware > Keyboard > Connect Hardware Keyboardのチェックを外してください。
 :::
 
-修正できたら実行してください。
-Welcome画面右上のログインから次の画面へ遷移できたら成功です。
-入力フォームの検証が動作しているかも併せて確認してください。
+:::caution
+現時点では、iOSで動かした場合、ソフトウェアキーボードが表示されると入力フォームが隠れてしまいます。
+次セクションの[仮想キーボードの制御](keyboard-avoiding-view.mdx)でその不具合に対応します。
+:::
 
 ![Login](app-hands-on/login.png)

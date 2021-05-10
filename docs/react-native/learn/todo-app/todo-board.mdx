@@ -272,6 +272,7 @@ ToDo一覧画面を実装していきます。
 修正量が多いので、次のソースコードで`TodoBoard.tsx`を上書きしてください。
 
 ```typescript jsx title="/src/screens/todo/TodoBoard.tsx"
+import {useNavigation} from '@react-navigation/native';
 import {FilterType, TodoFilter, TodoList} from 'components/parts';
 import React, {useContext, useEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
@@ -289,6 +290,7 @@ const showFilter: ShowFilter = {
 };
 
 export const TodoBoard: React.FC = () => {
+  const navigation = useNavigation();
   const {theme} = useContext(ThemeContext);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filterType, setFilterType] = useState<FilterType>(FilterType.ALL);
@@ -343,7 +345,7 @@ export const TodoBoard: React.FC = () => {
         size={30}
         containerStyle={styles.iconContainerStyle}
         onPress={() => {
-          /* TODO */
+          navigation.navigate('TodoForm')
         }}
       />
     </View>

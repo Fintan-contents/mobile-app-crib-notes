@@ -1,10 +1,36 @@
 ---
-title: 認証制御
+title: 状態に応じたナビゲーション
 ---
+
+ToDo一覧画面へ遷移できるようになりましたが、ただ画面を移動しているだけで認証制御はできていません。
+ユーザの認証状態に応じて画面を切り替えるように修正しましょう。
+
+React Navigationでは、状態に応じてスタック定義を切り替えることができます。
+そのコード例を次に示します。
+
+```typescript jsx
+isSignedIn ? (
+  <>
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="TodoBoard" component={TodoBoardScreen} />
+  </>
+) : (
+  <>
+    <Stack.Screen name="Welcome" component={SignInScreen} />
+    <Stack.Screen name="Login" component={SignUpScreen} />
+  </>
+)
+```
+
+この方法は、React Navigationの公式ドキュメントで紹介されているものです。
+ToDoアプリでもこれに従い、認証制御を組み込んでいきます。
+
+:::info
+認証フローの詳細な説明は、React Navigationの公式ドキュメントにある[Authentication flows](https://reactnavigation.org/docs/auth-flow)を参照してください。
+:::
 
 ## 認証関連の部品
 
-次は認証制御を実装します。
 まずは認証制御に必要な部品を用意します。
 
 :::note
@@ -17,11 +43,12 @@ title: 認証制御
 上記理由から、本ハンズオンでの部品説明は省略します。
 :::
 
-次のファイルを追加してください。
+次のファイルを追加・修正してください。
 
 - `/src/services/AuthService.ts`
 - `/src/services/index.ts`
 - `/src/contexts/UserContext.tsx`
+- `/src/contexts/App.tsx`
 
 ```typescript jsx title="/src/services/AuthService.ts"
 const refreshCsrfToken = async () => {};
@@ -75,17 +102,14 @@ export const UserContextProvider: React.FC = ({children}) => {
 
   const contextValue: ContextValueType = {
     signup: async (userName, password) => {
-      // TODO::エラーハンドリングは未実装
       await AuthService.signup(userName, password);
     },
     login: async (userName, password) => {
-      // TODO::エラーハンドリングは未実装
       await AuthService.login(userName, password);
       await AuthService.refreshCsrfToken();
       setUserName(userName);
     },
     logout: async () => {
-      // TODO::エラーハンドリングは未実装
       await AuthService.logout();
       await AuthService.refreshCsrfToken();
       setUserName('');
@@ -96,211 +120,6 @@ export const UserContextProvider: React.FC = ({children}) => {
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
 };
-```
-
-## 認証フロー
-
-React Navigationでは、認証状態に応じてスタック定義を切り替えることができます。
-そのコード例を次に示します。
-
-```typescript jsx
-isSignedIn ? (
-  <>
-    <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="UserSettings" component={SettingsScreen} />
-  </>
-) : (
-  <>
-    <Stack.Screen name="Welcome" component={SignInScreen} />
-    <Stack.Screen name="Login" component={SignUpScreen} />
-  </>
-)
-```
-
-この方法は、React Navigationの公式ドキュメントで紹介されているものです。
-ToDoアプリでもこれに従い、認証制御を組み込んでいきます。
-
-:::info
-認証フローの詳細な説明は、React Navigationの公式ドキュメントにある[Authentication flows](https://reactnavigation.org/docs/auth-flow)を参照してください。
-:::
-
-修正イメージは次の通りです。
-
-- （今の）`RootStack`を未認証時の画面を定義する`UnauthedStack`に変更
-- 認証時の画面を定義する`AuthedStack`を追加
-- 認証状態によりスタック定義を切り替える`RootStack`をルートに追加
-- 認証時に表示される`UserSettings`画面を定義
-
-![AuthStack](app-hands-on/auth_flows.png)
-
-まずは`UserSettings`画面を定義します。
-次のファイルを追加・修正してください。
-
-- `/src/screens/settings/UserSetting.tsx`
-- `/src/screens/settings/index.ts`
-- `/src/screens/index.ts`
-
-```typescript jsx title="/src/screens/settings/UserSetting.tsx"
-import {useUserContext} from 'contexts/UserContext';
-import React, {useCallback} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button} from 'react-native-elements';
-
-export const UserSetting: React.FC = () => {
-  const userContext = useUserContext();
-
-  const onLogout = useCallback(() => userContext.logout(), [userContext]);
-
-  return (
-    <View style={styles.container} testID="screen/main/setting">
-      <Button type="clear" onPress={onLogout} title="ログアウト" />
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-```
-
-```typescript jsx title="/src/screens/settings/index.ts"
-export * from './UserSetting';
-```
-
-```diff title="/src/screens/index.ts"
-  export * from './auth';
-  export * from './home';
-  export * from './instructions';
-+ export * from './settings';
-```
-
-`UserSettings`画面にはログアウトボタンのみ用意しています。
-ログアウトボタンを押下すると、`userContext.logout()`を呼び出して認証状態を解除します。
-
-次にナビゲーション定義を修正します。
-修正箇所は`/src/navigation/RootStackNav.tsx`です。
-修正量が多いので、次のソースコードで`RootStackNav.tsx`を上書きしてください。
-
-```typescript jsx title="/src/navigation/RootStackNav.tsx"
-import {NavigatorScreenParams, RouteProp, useNavigation} from '@react-navigation/native';
-import {createStackNavigator, StackNavigationOptions} from '@react-navigation/stack';
-import {useUserContext} from 'contexts/UserContext';
-import React from 'react';
-import {Button} from 'react-native-elements';
-import {Instructions, Login, UserSetting, Welcome} from 'screens';
-
-type UnauthedStackParamList = {
-  Welcome: undefined;
-  Login: undefined;
-  Instructions: undefined;
-};
-
-const nav = createStackNavigator<UnauthedStackParamList>();
-const HeaderRight: React.FC = () => {
-  const navigation = useNavigation();
-  return <Button type="clear" onPress={() => navigation.navigate('Login')} title="ログイン" />;
-};
-const createScreenOptions: (props: {
-  route: RouteProp<UnauthedStackParamList, keyof UnauthedStackParamList>;
-}) => StackNavigationOptions = ({route}) => {
-  if (route.name === 'Login') {
-    return {};
-  } else {
-    return {headerRight: () => <HeaderRight />};
-  }
-};
-
-const UnauthedStackNav: React.FC = () => {
-  return (
-    <nav.Navigator initialRouteName="Welcome" screenOptions={createScreenOptions}>
-      <nav.Screen
-        name="Welcome"
-        component={Welcome}
-        options={{
-          headerTitle: 'Welcome',
-        }}
-      />
-      <nav.Screen
-        name="Login"
-        component={Login}
-        options={{
-          headerTitle: 'ログイン',
-        }}
-      />
-      <nav.Screen name="Instructions" component={Instructions} />
-    </nav.Navigator>
-  );
-};
-
-type AuthedStackParamList = {
-  UserSetting: undefined;
-};
-
-const authNav = createStackNavigator<AuthedStackParamList>();
-const AuthedStackNav: React.FC = () => {
-  return (
-    <authNav.Navigator screenOptions={{headerShown: false}}>
-      <authNav.Screen name="UserSetting" component={UserSetting} />
-    </authNav.Navigator>
-  );
-};
-
-type RootStackParamList = {
-  Authed: NavigatorScreenParams<AuthedStackParamList>;
-  Unauthed: NavigatorScreenParams<UnauthedStackParamList>;
-};
-
-const rootNav = createStackNavigator<RootStackParamList>();
-export const RootStackNav: React.FC = () => {
-  const userContext = useUserContext();
-  return (
-    <rootNav.Navigator screenOptions={{headerShown: false}}>
-      {userContext.isLoggedIn ? (
-        <rootNav.Screen name="Authed" component={AuthedStackNav} />
-      ) : (
-        <rootNav.Screen name="Unauthed" component={UnauthedStackNav} />
-      )}
-    </rootNav.Navigator>
-  );
-};
-```
-
-最後にログイン機能を追加します。
-次のファイルを修正してください。
-
-- `/src/screens/auth/Login.tsx`
-- `/src/App.tsx`
-
-```diff title="/src/screens/auth/Login.tsx"
-- import {useNavigation} from '@react-navigation/native';
-+ import {useUserContext} from 'contexts/UserContext';
-  import {useFormik} from 'formik';
-  import React, {useCallback} from 'react';
-  import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
-  import {Button, Input} from 'react-native-elements';
-  import * as Yup from 'yup';
-  
-  export const Login: React.FC = () => {
--   const navigation = useNavigation();
--   const login = useCallback(() => {
--     navigation.goBack();
--   }, [navigation]);
-+   const userContext = useUserContext();
-+ 
-+   const login = useCallback(
-+     (values: {name: string; password: string}) => {
-+       userContext.login(values.name, values.password).then(
-+         () => {},
-+         () => {},
-+       );
-+     },
-+     [userContext],
-+   );
-  /* ～省略～ */  
 ```
 
 ```diff title="/src/App.tsx"
@@ -320,10 +139,189 @@ export const RootStackNav: React.FC = () => {
   };
 ```
 
+## 状態に応じたナビゲーション
+
+次に、ナビゲーション定義を修正します。修正イメージは以下のとおりです。
+
+- （今の）`RootStack`を未認証時の画面を定義する`UnauthedStack`に変更
+- 認証時の画面を定義する`AuthedStack`を追加
+- 認証状態によりスタック定義を切り替える`RootStack`をルートに追加
+
+![AuthStack](app-hands-on/auth_flows.png)
+
+`/src/navigation/RootStackNav.tsx`のファイル名を`UnauthedStack.tsx`に変更し、次のように修正してください。
+
+```diff typescript jsx title="/src/navigation/UnauthedStack.tsx"
+  import {useNavigation} from '@react-navigation/native';
+  import {createStackNavigator} from '@react-navigation/stack';
+  import React from 'react';
+  import {Button} from 'react-native-elements';
+- import {Welcome, Instructions, Login, TodoBoard} from 'screens';
++ import {Welcome, Instructions, Login} from 'screens';
+  
+  const HeaderRight: React.FC = () => {
+    const navigation = useNavigation();
+    return <Button type="clear" onPress={() => navigation.navigate('Login')} title="ログイン" />;
+  };
+  
+  const nav = createStackNavigator();
+- export const RootStackNav: React.FC = () => {
++ export const UnauthedStackNav: React.FC = () => {
+    return (
+      <nav.Navigator
+        initialRouteName={Welcome.name}
+        screenOptions={{
+          headerRight: () => <HeaderRight />
+        }}
+      >
+        <nav.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{
+            headerTitle: 'Welcome',
+          }}
+        />
+        <nav.Screen
+          name="Login"
+          component={Login}
+          options={{
+            headerTitle: 'ログイン',
+            headerRight: undefined,
+          }}
+        />
+-       <nav.Screen
+-         name="TodoBoard"
+-         component={TodoBoard}
+-         options={{
+-           headerTitle: 'Todo',
+-         }}
+-       />
+        <nav.Screen name="Instructions" component={Instructions} />
+      </nav.Navigator>
+    );
+  };
+```
+
+次のファイルを追加・修正してください。
+
+- `/src/navigation/AuthedStackNav.tsx`
+- `/src/navigation/RootStackNav.tsx`
+- `/src/navigation/index.ts`
+
+```typescript jsx title="/src/navigation/AuthedStackNav.tsx"
+import {createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
+import {TodoBoard} from 'screens';
+
+const nav = createStackNavigator();
+export const AuthedStackNav: React.FC = () => {
+  return (
+    <nav.Navigator screenOptions={{headerShown: false}}>
+      <nav.Screen name="Todo" component={TodoBoard} />
+    </nav.Navigator>
+  );
+};
+```
+
+```typescript jsx title="/src/navigation/RootStackNav.tsx"
+import {createStackNavigator} from '@react-navigation/stack';
+import {useUserContext} from 'contexts/UserContext';
+import React from 'react';
+
+import {AuthedStackNav} from './AuthedStackNav';
+import {UnauthedStackNav} from './UnauthedStackNav';
+
+const rootNav = createStackNavigator();
+export const RootStackNav: React.FC = () => {
+  const userContext = useUserContext();
+  return (
+    <rootNav.Navigator screenOptions={{headerShown: false}}>
+      {userContext.isLoggedIn ? (
+        <rootNav.Screen name="Authed" component={AuthedStackNav} />
+      ) : (
+        <rootNav.Screen name="Unauthed" component={UnauthedStackNav} />
+      )}
+    </rootNav.Navigator>
+  );
+};
+```
+
+```diff title="/src/navigation/index.ts"
+  export * from './RootStackNav';
++ export * from './UnauthedStackNav';
++ export * from './AuthedStackNav';
+```
+
+以上で、認証状態に応じたナビゲーション定義への修正が完了しました。
+
+## 認証処理
+
+次は、ログインボタンを修正します。
+
+ボタンを押した際に`userContext.login(userName, password)`を呼び出して認証状態にします。
+`userName`や`password`を入力するフォームはログイン画面の実装で作成するため、今は固定値を渡します。
+
+`/src/screens/auth/Login.tsx`を修正してください。
+
+```diff title="/src/screens/auth/Login.tsx"
+- import {useNavigation} from '@react-navigation/native';
++ import {useUserContext} from 'contexts/UserContext';
+- import React from 'react';
++ import React, {useCallback} from 'react';
+  import {StyleSheet, View} from 'react-native';
+  import {Text, Button} from 'react-native-elements';
+  
+  export const Login: React.FC = () => {
+-   const navigation = useNavigation();
++   const userContext = useUserContext();
++   
++   const login = useCallback(() => {
++       userContext.login('user', 'password');
++     },
++     [userContext],
++   );
+  
+  return (
+    <View style={styles.container}>
+      <Text h1>ログイン</Text>
+-     <Button onPress={() => navigation.navigate('TodoBoard')} title="ログイン" />
++     <Button onPress={login} title="ログイン" />
+    </View>
+  );
+  /* ～省略～ */  
+```
+
+最後に、ToDo一覧画面に`userContext.logout()`を呼びだすログアウトボタンを追加します。
+
+`/src/screens/todo/TodoBoard.tsx`を修正してください。
+
+```diff title="/src/screens/settings/UserSetting.tsx"
++ import {useUserContext} from 'contexts/UserContext';
+- import React from 'react';
++ import React, {useCallback} from 'react';
+  import {StyleSheet, View} from 'react-native';
+- import {Text} from 'react-native-elements';
++ import {Text, Button} from 'react-native-elements';
+
+  export const TodoBoard: React.FC = () => {
++   const userContext = useUserContext();
++ 
++   const onLogout = useCallback(() => userContext.logout(), [userContext]);
++ 
+    return (
+      <View style={styles.container}>
+        <Text h1>Todo</Text>
++       <Button type="clear" onPress={onLogout} title="ログアウト" />
+      </View>
+    );
+  };
+  /* ～省略～ */
+```
+
 修正できたら実行してください。
 次の操作ができたら成功です。
 
-- ログイン画面からログインしてログアウト画面が表示
-- ログアウト画面でログアウトするとWelcome画面が表示
+- ログイン画面からログインしてToDo一覧画面が表示
+- ToDo一覧画面でログアウトするとWelcome画面が表示
 
 ![Logout](app-hands-on/logout.png)

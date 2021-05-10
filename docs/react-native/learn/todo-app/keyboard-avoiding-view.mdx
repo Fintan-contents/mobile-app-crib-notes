@@ -13,14 +13,14 @@ title: 仮想キーボードの制御
 `/src/screens/auth/Login.tsx`を次の通り修正してください。
 
 ```diff title="/src/screens/auth/Login.tsx"
-  import {useNavigation} from '@react-navigation/native';
+  import {useUserContext} from 'contexts/UserContext';
   import {useFormik} from 'formik';
   import React, {useCallback} from 'react';
 - import {StyleSheet, View} from 'react-native';
 + import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
   import {Button, Input} from 'react-native-elements';
   import * as Yup from 'yup';
-
+  
   export const Login: React.FC = () => {
     /* ～省略～ */
     return (
