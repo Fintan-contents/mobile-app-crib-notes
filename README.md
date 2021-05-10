@@ -11,7 +11,7 @@
 ## インストール
 
 ```bash
-npm install
+npm ci
 ```
 
 ## ローカルで表示する
