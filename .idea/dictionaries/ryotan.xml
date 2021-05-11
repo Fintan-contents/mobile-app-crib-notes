@@ -3,9 +3,11 @@
     <words>
       <w>adep</w>
       <w>adoptopenjdk</w>
+      <w>alltargets</w>
       <w>altool</w>
       <w>eresolve</w>
       <w>ffffffffffffffffffffffffffffffff</w>
+      <w>getconf</w>
       <w>hideable</w>
       <w>infima</w>
       <w>infoplist</w>
@@ -28,12 +30,15 @@
       <w>reviewdog</w>
       <w>runpath</w>
       <w>santoku</w>
+      <w>santokuapp</w>
+      <w>simctl</w>
       <w>textlint</w>
       <w>touchables</w>
       <w>tsuyoshicho</w>
       <w>unauthed</w>
       <w>undraw</w>
       <w>urltrademark</w>
+      <w>whoami</w>
       <w>xcscheme</w>
       <w>xcschemes</w>
       <w>xcshareddata</w>

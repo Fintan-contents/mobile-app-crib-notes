@@ -1,0 +1,133 @@
+---
+title: プロダクトフレーバー
+---
+
+プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)で実現していて、`.env.<flavor>`にフレーバーごとの設定値を定義できます。
+
+- DevSantokuApp: `.env.development`
+- SantokuApp: `.env.production`
+
+これらの設定ファイルで定義された設定値は、React Nativeのソースコードから次のようにして取得できます。
+
+```javascript
+import Config from "react-native-config";
+
+Config.SANTOKU_APP_BACKEND_API_URI;
+Config.WEB_APP_URI;
+```
+
+また、ソースコードから取得できるだけでなく、この後で説明するようにビルド設定からも参照できます。
+
+## Gradleでのreact-native-configの設定
+
+react-native-configの設定値は、モジュールの`build.gradle`や`AndroidManifest.xml`でも参照できます。プロダクトフレーバーごとの設定の一部は、この機能を利用してそれらのファイルで設定しています。
+
+Gradleでビルドするときにビルドバリアントとして認識できるように、フレーバー設定を追加しています。
+
+```groovy title="android/app/build.gradle"
+android {
+// ~~~ Snip ~~~
+    flavorDimensions "environment"
+    productFlavors {
+        devSantokuApp {
+            dimension "environment"
+        }
+        santokuApp {
+            dimension "environment"
+        }
+    }
+// ~~~ Snip ~~~
+}
+```
+
+[react-native-configのドキュメント](https://github.com/luggit/react-native-config#android-1)で説明されている通り、フレーバーに対応する設定ファイルを次のように設定しています。
+
+```groovy title="android/app/build.gradle"
+project.ext.envConfigFiles = [
+    santokuApp : ".env.production",
+    devSantokuApp: ".env.development",
+]
+```
+
+:::info
+Android Gradle Pluginではreact-native-configを利用しなくても[プロダクトフレーバーの設定](https://developer.android.com/studio/build/build-variants?hl=ja#product-flavors)が可能です。このアプリでは、iOSアプリでも同じようにプロダクトフレーバーを管理するためにreact-native-configを利用しています。
+:::
+
+### アプリケーションIDの変更
+
+`defaultConfig`の`applicationIdSuffix`を`project.env.get("APP_ID_FLAVOR_SUFFIX")`に設定しています。
+
+`.env.<flavor>`で設定した`APP_ID_FLAVOR_SUFFIX`の値がアプリケーションIDに反映されます。
+
+実際の設定内容は次のようになります。（`applicationIdSuffix`に関係しない箇所は省略しています）
+
+```groovy title="android/app/build.gradle"
+android {
+    defaultConfig {
+        applicationId "jp.fintan.mobile.SantokuApp"
+        applicationIdSuffix project.env.get("APP_ID_FLAVOR_SUFFIX")
+    }
+}
+```
+
+### Androidアプリ名の変更
+
+アプリ一覧画面などでアイコンの下に表示される名前は`AndroidManifest.xml`で設定しています。`.env.<flavor>`の`APP_NAME_HOME`の値で、この名前を設定できます。
+
+実際の設定内容は次のようになります。（アプリ名に関係しない箇所は省略しています）
+
+```xml title="android/app/src/main/AndroidManifest.xml"
+<application android:label="@string/APP_NAME_HOME" >
+```
+
+## Xcodeでのreact-native-configの設定
+
+[react-native-configのドキュメント](https://github.com/luggit/react-native-config#ios-1)で説明されている通り、プロダクトフレーバーはXcodeのSchemeとして用意しています。
+
+Schemeでは、ビルドの前処理としてフレーバーに対応する設定ファイル（`.env.<flavor>`）を`.env`としてコピーする処理を追加しています。
+
+### Bundle Identifierの変更
+
+`project.pbxproj`の`PRODUCT_BUNDLE_IDENTIFIER`の設定値に`${APP_ID_FLAVOR_SUFFIX}`を含めています。`.env.<flavor>`で設定した`APP_ID_FLAVOR_SUFFIX`の値がBundle Identifierに反映されます。
+
+ビルドタイプごとの設定も含みますが、実際の設定内容は次のようになります。（Bundle Identifierに関係しない箇所は省略しています）
+
+```text title="ios/SantokuApp.xcodeproj/project.pbxproj"
+13B07F941A680F5B00A75B9A /* Debug */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "personal.jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.debug.${PERSONAL_IDENTIFIER}";
+  }
+}
+13B07F951A680F5B00A75B9A /* Release */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}";
+  }
+}
+B968B33025FD074500099FE1 /* ReleaseInHouse */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.house";
+  }
+}
+EA57F9FD253824C7003D7604 /* DebugAdvanced */ = {
+  buildSettings = {
+    PRODUCT_BUNDLE_IDENTIFIER = "jp.fintan.mobile.SantokuApp${APP_ID_FLAVOR_SUFFIX}.debugAdvanced";
+  }
+}
+```
+
+### iOSアプリ名の変更
+
+ホーム画面で表示されるアプリケーション名は、`Info.plist`で`CFBundleDisplayName`の値を`${APP_NAME_HOME}`として設定しています。`.env.<flavor>`で設定した`APP_NAME_HOME`の値がホーム画面のアプリケーション名になります。
+
+実際の設定内容は次のようになります。（アプリ名に関係しない箇所は省略しています）
+
+```xml ios/SantokuApp/Info.plist
+<plist version="1.0">
+<dict>
+  <key>CFBundleDisplayName</key>
+  <string>${APP_NAME_HOME}</string>
+</dict>
+</plist>
+```
+
+また、`Debug.plist`でも同じようにアプリ名を設定しています。

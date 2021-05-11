@@ -1,0 +1,231 @@
+---
+title: ビルドバリアント
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## 基本的な考え方
+
+Androidの[ビルドバリアント](https://developer.android.com/studio/build/build-variants)（[ビルドタイプとプロダクトフレーバー](https://developer.android.com/studio/build#build-config)）の考え方を参考にして、React Nativeアプリケーションのビルド設定をしています。
+
+ビルドバリアントはAndroidではGradle、iOSではXcodeのConfigurationで設定し、プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)で設定しています。
+
+ビルドバリアントごとに異なるアプリケーションとしてインストールできるように、アプリケーションID（Android）とBundle Identifier（iOS）を次のルールで設定しています。
+
+```console title="アプリケーションID（Android）とBundle Identifier（iOS）のルール"
+jp.fintan.mobile.SantokuApp<flavorSuffix><typeSuffix>
+```
+
+`<flavorSuffix>`はプロダクトフレーバーごとに、`<typeSuffix>`はビルドタイプごとに設定するサフィックスです。iOSのDebugビルドタイプだけはBundle Identifierの形式が少し異なっています。ビルドタイプについてのドキュメント（[Bundle Identifierのサフィックス](build-type-configurations.mdx#bundle-identifierのサフィックス)）を確認してください。
+
+### ビルドタイプ
+
+ビルドタイプでは、アプリケーションのビルド方法を指定します。主に次にあげる設定を変更しています。
+
+- React Nativeアプリケーションの定数 `__DEV__`
+- アプリケーションID (Android)、Bundle Identifier (iOS) のサフィックス
+- アプリケーションアイコン
+- アプリケーションの署名設定
+- ホットリロードなどの開発機能やFlipperの有効/無効
+- [App Transport Security](https://developer.apple.com/documentation/bundleresources/information_property_list/nsapptransportsecurity)の有効/無効（iOSのみ）
+- 難読化 (R8) の有効/無効（Androidのみ）
+
+どのようにビルドタイプごとの設定をしているかについては、[ビルドタイプ](build-type-configurations.mdx)を参照してください。
+
+このアプリでは、4つのビルドタイプを用意しています。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  groupId="build-type"
+  defaultValue="debug"
+  values={[
+    {label: 'Debug', value: 'debug'},
+    {label: 'DebugAdvanced', value: 'debug-advanced'},
+    {label: 'ReleaseInHouse', value: 'release-in-house'},
+    {label: 'Release', value: 'release'},
+  ]
+}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="debug">
+
+AndroidエミュレータあるいはiOSシミュレータで動作検証したい場合に利用します。
+
+`<typeSuffix>`は`.debug`です。
+
+iOSのAppの高度な機能を含む動作は検証できませんが、USB接続でデバイスにインストールできます。ただし、iOSアプリを実機にインストールする場合は、[README](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/SantokuApp#readme)に書いてある方法で `ios/PersonalAccount.xcconfig` に個人のApple IDを設定する必要があります。
+
+</TabItem>
+
+<TabItem value="debug-advanced">
+
+USB接続でデバイスにインストールして、iOSのAppの高度な機能を含む動作を検証したい場合に利用します。
+
+`<typeSuffix>`は`.debugAdvanced`です。
+
+iOS向けのビルドには、Apple Developer Enterprise Programの開発用プロビジョニングプロファイルと開発用証明書の秘密鍵が必要です。また、インストール先のデバイスのUDIDが、開発用デバイスとして登録してある必要があります。
+
+:::warning
+Apple Developer (Enterprise) Programでは、開発用デバイスはデバイス種別ごとに100台までしか登録できません。大量のデバイスを登録しないように注意してください。
+:::
+
+</TabItem>
+
+<TabItem value="release-in-house">
+
+DeployGateで配布するためのアプリをビルドする場合に利用します。
+
+`<typeSuffix>`は`.house`です。
+
+iOS向けのビルドには、Apple Developer Enterprise Programの開発用プロビジョニングプロファイルと開発用証明書の秘密鍵が必要です。
+
+Android向けのビルドには、署名に利用する鍵を保存してあるキーストアファイルが必要です。
+
+</TabItem>
+
+<TabItem value="release">
+
+TestFlightやGoogle Playのテスト版として配布するためのアプリをビルドする場合に利用します。
+
+`<typeSuffix>`は空文字です。
+
+iOS向けのビルドには、Apple Developer Programの開発用プロビジョニングプロファイルと開発用証明書の秘密鍵が必要です。
+
+Android向けのビルドには、Google Playのアップロード鍵を保存してあるキーストアファイルが必要です。
+
+</TabItem>
+</Tabs>
+
+### プロダクトフレーバー
+
+プロダクトフレーバーでは、アプリケーションの種類を指定します。[Android のドキュメント](https://developer.android.com/studio/build/build-variants)では「有料版」「無料版」といった例が挙げられていますが、「本番環境向け」「ステージング環境向け」といったような環境の指定にも利用できます。主に次にあげる設定を変更しています。
+
+- アプリケーションID (Android)、Bundle Identifier (iOS) のサフィックス
+- アプリケーション名
+- 接続先のホスト名など、アプリケーションの実行環境に関する設定
+
+どのようにプロダクトフレーバーごとの設定をしているかについては、[プロダクトフレーバー](product-flavor-configurations.mdx)を参照してください。
+
+このアプリでは、2つのプロダクトフレーバーを用意しています。プロダクトフレーバー名はXcode Organizerでアプリを選択するときのアプリ名としても表示されるので、プロダクトフレーバー名にアプリ名も含めるようにしています。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  groupId="product-flavor"
+  defaultValue="development"
+  values={[
+    {label: 'DevSantokuApp', value: 'development'},
+    {label: 'SantokuApp', value: 'production'},
+  ]
+}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="development">
+
+開発用に、APIなどの接続先をローカルホストとしているフレーバーです。
+
+`<flavorSuffix>`は`.dev`です。
+
+</TabItem>
+
+<TabItem value="production">
+
+実際のサーバにアクセスする設定をしているフレーバーです。
+
+`<flavorSuffix>`は空文字です。
+
+</TabItem>
+</Tabs>
+
+## 実行時の切替方法
+
+:::info
+`npm run android`や`npm run ios`のみで実行した場合は、ビルドタイプ`Debug`、プロダクトフレーバー`Development`でビルドされて実行されます。
+:::
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+<Tabs
+  groupId="operating-systems"
+  defaultValue="android"
+  values={[
+    {label: 'Android', value: 'android'},
+    {label: 'iOS', value: 'ios'},
+  ]
+}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+<TabItem value="android">
+
+起動時に`variants`と`appIdSuffix`の2つのオプションを渡すと、ビルドタイプとプロダクトフレーバーを指定してAndroidアプリを起動できます。
+
+```bash
+npm run android -- --appId jp.fintan.mobile.SantokuApp --variants "<flavor><Type>" --appIdSuffix "<flavorSuffix><typeSuffix>"
+```
+
+例えばビルドタイプDebug、プロダクトフレーバーDevSantokuAppでアプリを実行するには次のようにしてください。
+
+```bash
+npm run android -- --variant "devSantokuAppDebug" --appIdSuffix "dev.debug"
+```
+
+ビルドタイプRelease、プロダクトフレーバーSantokuAppとするには、次のようにします。
+
+```bash
+npm run android -- --variant "santokuAppRelease" --appIdSuffix ""
+```
+
+:::note
+AndroidのアプリケーションIDとパッケージ名が異なるので、`appIdSuffix`オプションを渡しています。`appIdSuffix`を渡さない場合や間違えている場合は、次のようなエラーが発生します。
+
+```console
+Starting: Intent { cmp=jp.fintan.mobile.santokuapp.dev.debug/jp.fintan.mobile.santokuapp.MainActivity }
+Error type 3
+Error: Activity class {jp.fintan.mobile.santokuapp.dev.debug/jp.fintan.mobile.santokuapp.MainActivity} does not exist.
+```
+
+なお、CLIからのアプリの起動に失敗しているためこのエラーが発生していますが、インストールまでは正常に完了しているので手動であればアプリを起動できます。
+
+:::
+
+:::caution
+`appIdSuffix`オプションはAndroidのパッケージ名に自動的にピリオドを追加します。`flavorSuffix`や`typeSuffix`の設定値はピリオドで始めていますが、次の表のように、`appIdSuffix`に指定する値の先頭には`.`をつけないでください。
+
+| flavorSuffix | typeSuffix | appIdSuffix | アプリケーションID | 起動に成功するかどうか |
+|:------------:|:----------:|:-----------:|:---------------:|:-------------------:|
+| .dev         | .debug     | dev.debug   | jp.fintan.mobile.santokuapp.dev.debug  | ✅ |
+| .dev         | .debug     | .dev.debug  | jp.fintan.mobile.santokuapp..dev.debug | ❌ |
+| .dev         |            | dev         | jp.fintan.mobile.santokuapp.dev        | ✅ |
+|              | .debug     | debug       | jp.fintan.mobile.santokuapp.debug      | ✅ |
+
+:::
+
+</TabItem>
+
+<TabItem value="ios">
+
+起動時に`configuration`でビルドタイプを、`scheme`でプロダクトフレーバーを指定してiOSアプリを起動します。
+
+```bash
+npm run ios -- --scheme "<Flavor>" --configuration "<Type>"
+```
+
+例えばビルドタイプDebug、プロダクトフレーバーDevSantokuAppでアプリを実行するには次のようにしてください。
+
+```bash
+npm run ios -- --scheme "DevSantokuApp" --configuration "Debug"
+```
+
+ビルドタイプをReleaseに変更するには、次のようにします。
+
+```bash
+npm run ios -- --scheme "DevSantokuApp" --configuration "Release"
+```
+
+</TabItem>
+</Tabs>

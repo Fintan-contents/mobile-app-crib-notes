@@ -1,4 +1,4 @@
-package com.santokuapp.generated;
+package jp.fintan.mobile.santokuapp.generated;
 
 import java.util.Arrays;
 import java.util.List;

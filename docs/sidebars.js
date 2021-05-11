@@ -186,6 +186,25 @@ module.exports = {
             type: 'doc',
             id: 'react-native/santoku',
           },
+          {
+            type: 'category',
+            label: 'Development',
+            items: [
+              {
+                type: 'doc',
+                id: 'react-native/santoku/development',
+              },
+              {
+                type: 'category',
+                label: 'ビルド設定',
+                items: [
+                  'react-native/santoku/development/build-variants',
+                  'react-native/santoku/development/build-type-configurations',
+                  'react-native/santoku/development/product-flavor-configurations',
+                ],
+              },
+            ],
+          },
         ],
       }
     : {}),

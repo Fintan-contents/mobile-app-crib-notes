@@ -70,3 +70,7 @@ jest-junit.xml
 
 # Local environmental variables
 ios/PersonalAccount.xcconfig
+
+# react-native-config
+.env
+ios/tmp.xcconfig
