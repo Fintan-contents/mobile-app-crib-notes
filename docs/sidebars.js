@@ -205,6 +205,13 @@ module.exports = {
               },
             ],
           },
+          {
+            type: 'category',
+            label: 'Tools',
+            items: [
+              'react-native/santoku/flipper',
+            ]
+          },
         ],
       }
     : {}),
