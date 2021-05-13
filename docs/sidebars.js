@@ -188,6 +188,11 @@ module.exports = {
           },
           {
             type: 'category',
+            label: 'IDE',
+            items: ['react-native/settings-vscode'],
+          },
+        {
+            type: 'category',
             label: 'Development',
             items: [
               {
