@@ -149,9 +149,9 @@ export const UserContextProvider: React.FC = ({children}) => {
 
 ![AuthStack](app-hands-on/auth_flows.png)
 
-`/src/navigation/RootStackNav.tsx`のファイル名を`UnauthedStack.tsx`に変更し、次のように修正してください。
+`/src/navigation/RootStackNav.tsx`のファイル名を`UnauthedStackNav.tsx`に変更し、次のように修正してください。
 
-```diff typescript jsx title="/src/navigation/UnauthedStack.tsx"
+```diff typescript jsx title="/src/navigation/UnauthedStackNav.tsx"
   import {useNavigation} from '@react-navigation/native';
   import {createStackNavigator} from '@react-navigation/stack';
   import React from 'react';
@@ -295,7 +295,7 @@ export const RootStackNav: React.FC = () => {
 
 `/src/screens/todo/TodoBoard.tsx`を修正してください。
 
-```diff title="/src/screens/settings/UserSetting.tsx"
+```diff title="/src/screens/todo/TodoBoard.tsx"
 + import {useUserContext} from 'contexts/UserContext';
 - import React from 'react';
 + import React, {useCallback} from 'react';
