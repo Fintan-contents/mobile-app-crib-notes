@@ -1,5 +1,5 @@
 diff --git a/node_modules/expo-constants/scripts/get-app-config-android.gradle b/node_modules/expo-constants/scripts/get-app-config-android.gradle
-index 4b632e8..934569c 100644
+index 2453378..1ffd952 100644
 --- a/node_modules/expo-constants/scripts/get-app-config-android.gradle
 +++ b/node_modules/expo-constants/scripts/get-app-config-android.gradle
 @@ -10,7 +10,7 @@ void runBefore(String dependentTaskName, Task task) {
