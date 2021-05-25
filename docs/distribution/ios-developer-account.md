@@ -31,14 +31,14 @@ ADP、ADEPは[Apple Developer Webサイト(要ログイン)](https://developer.a
 
 ### 個人アカウントのApple IDの登録
 
-1. ヘッダー > Xcode > Preferences > Apple IDを開き、左下`+`をクリック
+1. メニューバーの「Xcode」＞「Preferences」＞「Apple ID」を開き、左下`+`をクリック
 1. Apple IDを選択し`Continue`をクリック
 1. Apple IDとパスワードを入力
 1. 登録したApple IDが表示されればOK
 
 ### 個人アカウントの証明書の作成
 
-1. ヘッダー > Xcode > Preferences > Apple IDを開き、Teamの個人IDを選択し、Manage Certificatesをクリック
+1. メニューバーの「Xcode」＞「Preferences」＞「Apple ID」を開き、Teamの個人IDを選択し、「Manage Certificates」をクリック
 1. 左下の+をクリックしApple Developmentをクリックし、自分の開発用端末の証明書を作成する
 1. 自分の開発端末の証明書が表示されているのを確認し、Doneをクリック
 
@@ -75,7 +75,7 @@ No "iOS Development" signing certificate matching team ID "D9MUZCM4X6" with a pr
 アプリ初回起動の場合、ポップアップがでて起動できません。
 起動できるようにするため、エンタープライズデベロッパを信頼してください。
 
-  1. 設定 > 一般 > プロファイルとデバイス管理で、該当するエンタープライズデベロッパを選択
+  1. 設定アプリから「一般」＞「プロファイルとデバイス管理」で、該当するエンタープライズデベロッパを選択
   1. 「XXXを信頼」という青い文字を選択
   1. ポップアップで信頼を選択
 

@@ -21,10 +21,10 @@ Androidのヘルプ：[パソコンと Android デバイス間でファイルを
 
 1. Androidシステム ・ このシステムをUSBで充電中をタップ
 1. その他のオプションを表示しますをタップ
-1. USBの使用 > ファイル転送/Android Autoを選択
+1. 「USBの使用」＞「ファイル転送/Android Auto」を選択
 
 ## USBでデバイスを端末に接続してadbコマンドでインストールする
 
-Androidデベロッパー公式サイト：[Android Debug Bridge（adb） > アプリをインストールする](https://developer.android.com/studio/command-line/adb?hl=ja#move)を参考にしてください。
+[Android Debug Bridge（adb）ドキュメントの「アプリをインストールする」](https://developer.android.com/studio/command-line/adb?hl=ja#move)を参考にしてください。
 
 APKファイルの場所に移動して`adb install`すればインストールできます。

@@ -34,12 +34,12 @@ Google Playではテストのためにアプリを配信できます。テスト
 
 ### 1. Play ConsoleにAPKファイルをアップロード、各種設定
 
-Play Consoleヘルプ：[オープンテスト版、クローズド テスト版、内部テスト版をセットアップする](https://support.google.com/googleplay/android-developer/answer/3131213?hl=ja)にしたがって作業してください。
+Play Consoleヘルプ：[オープンテスト版、クローズド テスト版、内部テスト版をセットアップする](https://support.google.com/googleplay/android-developer/answer/3131213?hl=ja)に従って作業してください。
 
-Play Consoleでアプリを登録した後、内部テストのリリースを作成すると、Play Consoleのダッシュボードに内部テストでアプリを配信するまでに必要な手順の詳細が表示されます。それにしたがって作業してください。
+Play Consoleでアプリを登録した後、内部テストのリリースを作成すると、Play Consoleのダッシュボードに内部テストでアプリを配信するまでに必要な手順の詳細が表示されます。それに従って作業してください。
 
 ### 2. 内部テストで公開したアプリの公開URLをAndroid端末で開きアプリをインストール・起動
 
 ## クローズド テスト
 
-内部テストと同様に、Play Consoleヘルプの[オープンテスト版、クローズド テスト版、内部テスト版をセットアップする](https://support.google.com/googleplay/android-developer/answer/3131213?hl=ja)にしたがって作業してください。
+内部テストと同様に、Play Consoleヘルプの[オープンテスト版、クローズド テスト版、内部テスト版をセットアップする](https://support.google.com/googleplay/android-developer/answer/3131213?hl=ja)に従って作業してください。

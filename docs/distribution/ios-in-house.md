@@ -11,9 +11,9 @@ ADEPのIn-Houseには以下のような制限事項があります。
 
 ### 配布範囲は社内のみ
 
-<!-- textlint-disable ja-technical-writing/sentence-length -->
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 [Apple Developer Enterprise Program](https://developer.apple.com/jp/programs/enterprise/)には「社内用Appのダウンロードを従業員にのみ限定するためのシステム、およびメンバーシップの資格情報やアセットを保護するためのシステムを構築していること」と記載があります。そのため、用意したHTTPSサーバに認証などを設けて、社内の人のみがアクセスできるように制限する必要があります。
-<!-- textlint-enable ja-technical-writing/sentence-length -->
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 ## 配信の準備
 
@@ -68,7 +68,7 @@ In-Houseで配布するアプリケーションをダウンロードして起動
 アプリ初回起動の場合、ポップアップがでて起動できません。
 起動できるようにするため、エンタープライズデベロッパを信頼してください。
 
-  1. 設定 > 一般 > プロファイルとデバイス管理で、該当するエンタープライズデベロッパを選択
+  1. 設定アプリから「一般」＞「プロファイルとデバイス管理」で、該当するエンタープライズデベロッパを選択
   1. 「XXXを信頼」という青い文字を選択
   1. ポップアップで信頼を選択
 

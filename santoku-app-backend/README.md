@@ -81,7 +81,7 @@ SantokuAppが利用するプッシュ通知などのAPIを提供するサンプ�
 
 ### ローカル環境でのテスト実行
 
-1. F5キーを押す、またはメニューのRun > Start Debuggingを選択
+1. F5キーを押す、またはメニューの「Run」＞「Start Debugging」を選択
 2. localhost:7071でサービスが起動されるので、curl等を用いてアクセスを行う
 
 ## ローカル開発環境からAzure Functionsへのデプロイ手順
