@@ -221,6 +221,10 @@ module.exports = {
                   'react-native/santoku/development/product-flavor-configurations',
                 ],
               },
+              {
+                type: 'doc',
+                id: 'react-native/santoku/development/dependency-management',
+              },
             ],
           },
           {
