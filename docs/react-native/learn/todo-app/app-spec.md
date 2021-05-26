@@ -50,8 +50,13 @@ title: ToDoアプリの仕様
 
 ![logout](app-spec/setting.png)
 
-## アプリの前提、制約
+## REST API
 
-ReactとReact Nativeの違いを体験することを主眼としており、現在のバージョンのToDoアプリはバックエンドと接続しません。また、アプリ内にもデータを保存しません。
+ToDoアプリから利用するREST APIの仕様について説明します。
 
-そのため、ToDoの一覧やToDoの更新はできますが、アプリを停止すると初期状態に戻ります。
+> 🚧 作成中 🚧
+
+<!--
+TODO: https://fintan-contents.github.io/spa-restapi-handson/todo-spec/#rest-api のようにREST APIの仕様を説明する。
+      ただ、SPA+RESTハンズオンと違ってこのコンテンツではバックエンドを実装しないので、少し書き方を変えたほうがいいところがあるかも。
+-->

@@ -147,7 +147,7 @@ export const UserContextProvider: React.FC = ({children}) => {
 - 認証時の画面を定義する`AuthedStack`を追加
 - 認証状態によりスタック定義を切り替える`RootStack`をルートに追加
 
-![AuthStack](app-hands-on/auth_flows.png)
+![AuthStack](../app-hands-on/auth_flows.png)
 
 `/src/navigation/RootStackNav.tsx`のファイル名を`UnauthedStackNav.tsx`に変更し、次のように修正してください。
 
@@ -324,4 +324,4 @@ export const RootStackNav: React.FC = () => {
 - ログイン画面からログインしてToDo一覧画面が表示
 - ToDo一覧画面でログアウトするとWelcome画面が表示
 
-![Logout](app-hands-on/logout.png)
+![Logout](../app-hands-on/logout.png)

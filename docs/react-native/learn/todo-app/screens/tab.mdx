@@ -4,7 +4,7 @@ title: Tabナビゲーション
 
 「ToDo一覧」と「設定」のタブ切替を実装していきます。タブ切替はTabナビゲーションで実装します。
 
-![TabNavigation](app-hands-on/screen-transition-tab.png)
+![TabNavigation](../app-hands-on/screen-transition-tab.png)
 
 ## 画面を追加
 
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 1. Stackナビゲータを切り替えるTabナビゲータ（`MainTabNav`）を追加
 1. `RootStackNav`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置
 
-![TabNavigation](app-hands-on/tab_navigation.png)
+![TabNavigation](../app-hands-on/tab_navigation.png)
 
 :::info
 Tabナビゲータに画面（`TodoBoard`や`UserSetting`）を直接設定してもよいですが、
@@ -145,7 +145,7 @@ export const SettingsStackNav: React.FC = () => (
 ```
 
 次に、追加したStackナビゲータを切り替えるTabナビゲータ（`MainTabNav`）を追加します。
-「[アプリの実装前に](../basic-concepts/react-navigation-basics/tab.mdx)」で述べたとおりTabナビゲータは3種類ありますが、
+「[アプリの実装前に](../../basic-concepts/react-navigation-basics/tab.mdx)」で述べたとおりTabナビゲータは3種類ありますが、
 今回は最もシンプルなBottomTabNavigatorを使用します。
 
 次のファイルを追加・修正してください。
@@ -224,4 +224,4 @@ BottomTabNavigatorに指定できるオプションの種類については[公�
 
 修正できたら実行してください。ToDo一覧画面と設定画面のタブ切替ができたら成功です。
 
-![Tab](app-hands-on/tab.png)
+![Tab](../app-hands-on/tab.png)

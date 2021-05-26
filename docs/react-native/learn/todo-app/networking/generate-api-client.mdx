@@ -1,0 +1,32 @@
+---
+title: APIクライアントの作成
+---
+
+ToDoアプリでは各画面で`TodoService`からデータを取得しますが、`TodoService`から直接REST APIを呼びだすのではなく共通的なAPIクライアントを用意します。APIクライアントは、レスポンスのJSONとJavaScriptのクラスとの型変換や共通的なエラー処理を担当します。
+
+## Open APIドキュメントから自動生成
+
+ToDoアプリでは、Open APIドキュメントからAPIクライアントを自動生成します。
+
+> 🚧 作成中 🚧
+
+<!--
+TODO: Open APIドキュメントからAPIクライアントを自動生成するコマンドを紹介する。npxでも良いし、くり返し使うならnpm scriptでも良いかも。
+      Open APIドキュメントをどこかから取ってきて配置するという話も必要か。
+      SPA+RESTのドキュメントをマネしてみてもいいかも。
+      https://fintan-contents.github.io/spa-restapi-handson/todo/frontend/api/#%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%94%9F%E6%88%90
+-->
+
+## APIクライアントの簡単な説明
+
+それでは、自動生成されたAPIクライアントを簡単に見ていきましょう。
+
+> 🚧 作成中 🚧
+
+<!--
+TODO: たぶん、ここでConfigクラスの説明とか、どう修正するかを説明したほうがいい。
+      Middlewareの説明とかは必要ないけど、apisとmodelsの中身くらいは紹介してあげるのがいいんじゃないかな、と。
+      あとは、レスポンスのステータスコードに応じてrejectされるという話も紹介したほうがいい気がする。
+-->
+
+これで、`TodoService`からREST APIを呼びだす準備が整いました。次は、実際に`TodoService`からREST APIを呼び出して、結果を画面に表示してみましょう。
