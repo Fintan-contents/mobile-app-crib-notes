@@ -15,6 +15,7 @@ todo_app
 └─src
    ├─@types
    ├─assets
+   ├─backend
    ├─components
    │  ├─basics
    │  └─parts
@@ -26,6 +27,7 @@ todo_app
 
 - @types: 型定義（`.d.ts`）ファイル
 - assets: アプリにバンドルする画像やその他のファイル
+- backend: バックエンドのREST APIにアクセスする共通のクライアント部品
 - components/basics: 汎用性のあるコンポーネント
 - components/parts: アプリ機能に特化したコンポーネント
 - contexts: コンテクスト
