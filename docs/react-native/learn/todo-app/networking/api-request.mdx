@@ -8,41 +8,94 @@ ToDoアプリからREST APIを呼び出して、サーバから取得したデ�
 
 `TodoService`の各メソッドから、適切なAPIクライアントのメソッドを呼びだすように修正していきます。
 
-> 🚧 作成中 🚧
+共通的な設定をしている`config`と自動生成された`TodosApi`を`backend`からimportします。
 
-<!--
-TODO: たぶん、SPA+RESTのハンズオンで説明されているような内容で十分なのかな？もう少し説明してあげてもいい気もしないでもないけど。
-      https://fintan-contents.github.io/spa-restapi-handson/todo/frontend/api/#%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E3%83%A9%E3%83%83%E3%83%91%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90
--->
+```typescript title="src/service/TodoService.ts"
+import {TodosApi, config} from 'backend';
+```
+
+次に`TodosApi`のインスタンスを作成し、`TodoService`のメソッドから呼びだすように修正します。
+`TodosApi`に`config`を渡すことで、接続先を切り替えられるようにします。
+`TodoService`の3つのメソッドを以下のように修正してください。
+
+```typescript
+const todosApi = new TodosApi(config);
+
+const getTodos = async () => {
+  return await todosApi.getTodos();
+};
+
+const postTodo = async (text: string) => {
+  return await todosApi.postTodo({newTodo: {text}});
+};
+
+const putTodo = async (id: number, completed: boolean) => {
+  return await todosApi.putTodo({todoId: id, todoStatus: {completed}});
+};
+```
+
+ここまではServiceで`type ToDo`を定義していましたが、Open APIドキュメントで定義されているモデルを利用するように修正します。
+また、メソッドを修正すると`TodoService`のダミーデータである`todos`と`id`が不要になるので削除します。
+`TodoService`は以下のような実装になります。
+
+:::note
+画面の実装の演習問題で[タスクの削除](../screens/exercise.mdx#タスクの削除)を実装している場合は削除メソッドもAPIクライアントを呼びだすように修正してください。
+:::
+
+```typescript title="src/service/TodoService.ts"
+import {TodosApi, config} from 'backend';
+
+const todosApi = new TodosApi(config);
+
+export type {Todo} from 'backend';
+
+const getTodos = async () => {
+  return await todosApi.getTodos();
+};
+
+const postTodo = async (text: string) => {
+  return await todosApi.postTodo({newTodo: {text}});
+};
+
+const putTodo = async (id: number, completed: boolean) => {
+  return await todosApi.putTodo({todoId: id, toDoStatus: {completed}});
+};
+
+export const TodoService = {
+  getTodos,
+  postTodo,
+  putTodo,
+};
+```
 
 ## 動作確認
 
-これでToDoアプリから登録したToDoが保存され、アプリを再起動しても、前に登録したToDoが参照できるようになりました。
+これでToDoアプリから登録したタスクが保存され、アプリを再起動しても、前に登録したタスクが参照できるようになりました。
+実際にアプリを動かして、そのようになっていることを確認していきましょう。次の手順でアプリを操作してください。
 
-<!--
-TODO: APIサーバを再起動したらデータが消えるなら、ここで説明しておく必要あるね。
--->
-
-実際に、そのようになっていることを確認していきましょう。次の手順でアプリを操作してください。
-
-> 🚧 作成中 🚧
-
-<!--
-TODO: 起動+ログイン => 一覧① => 登録 => 完了 => アプリ閉じる => 起動+ログイン => 一覧②
-      一覧①: 空（全てを選択しても何も表示されない）
-      一覧②: 完了しているToDoが１件ある
--->
+1. APIサーバを起動
+1. アプリを起動
+1. ログイン
+1. ToDo一覧の「全て」タブで全量（初回は0件）を確認
+1. タスク登録画面からタスクを登録
+1. アプリを閉じる
+1. アプリを起動
+1. ToDo一覧の「全て」タブで登録したタスクがあることを確認
 
 また、自分で起動しているアプリ以外から登録されたデータも参照できるようになっています。次の手順を実施して、他の人がToDoを追加したときの動作を確認してみましょう。
 
-> 🚧 作成中 🚧
+1. APIサーバを起動
+1. アプリを起動
+1. ログイン
+1. ToDo一覧の「全て」タブで全量を確認
+1. curlなどでタスクを登録
+1. 設定タブをタップして、設定画面を表示後、ホームタブをタップ（`useFocusEffect`でデータを再取得するため）
+1. curlなどで登録したタスクが表示される
 
-<!--
-TODO: 起動+ログイン => 一覧① => 登録 => 完了 => curlなどでToDo追加 => 設定 => 一覧②
-      一覧①: 空（全てを選択しても何も表示されない）
-      一覧②: 完了しているToDoが１件と、curlで追加したToDoがある
--->
+```console title="curlでの登録"
+curl http://localhost:9080/api/todos -X POST -d '{"text": "アプリ外からの登録"}' -H "Content-Type: application/json"
+```
 
-これで、REST APIを呼び出せるようになりました。しかし、このままではAPIを呼び出している間も画面が操作可能のままになってしまいますし、ユーザにアプリが処理中であることを伝えられません。
+これで、REST APIを呼びだせるようになりました。しかし、このままではAPIを呼びだしている間も画面が操作可能のままになってしまいますし、ユーザにアプリが処理中であることを伝えられません。
 
-そこで、次はAPIの呼び出し中に画面の一部を操作不可にし、ユーザに処理中であることを伝えるインジケータを表示するように修正します。
+そこで、次はAPIの呼びだし中に画面の一部を操作不可にし、ユーザに処理中であることを伝えるインジケータを表示するように修正します。
