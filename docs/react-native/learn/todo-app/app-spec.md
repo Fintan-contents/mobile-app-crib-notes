@@ -42,7 +42,7 @@ title: ToDoアプリの仕様
 
 ![todo_board_all](app-spec/todo_board_all.png)
 
-### タスク登録
+### ToDo登録
 
 ![add_task](app-spec/add_task.png)
 

@@ -39,7 +39,7 @@ const putTodo = async (id: number, completed: boolean) => {
 `TodoService`は以下のような実装になります。
 
 :::note
-画面の実装の演習問題で[タスクの削除](../screens/exercise.mdx#タスクの削除)を実装している場合は削除メソッドもAPIクライアントを呼びだすように修正してください。
+画面の実装の演習問題で[ToDoの削除](../screens/exercise.mdx#ToDoの削除)を実装している場合は削除メソッドもAPIクライアントを呼びだすように修正してください。
 :::
 
 ```typescript title="src/service/TodoService.ts"
@@ -70,17 +70,17 @@ export const TodoService = {
 
 ## 動作確認
 
-これでToDoアプリから登録したタスクが保存され、アプリを再起動しても、前に登録したタスクが参照できるようになりました。
+これでToDoアプリから登録したToDoが保存され、アプリを再起動しても、前に登録したToDoが参照できるようになりました。
 実際にアプリを動かして、そのようになっていることを確認していきましょう。次の手順でアプリを操作してください。
 
 1. APIサーバを起動
 1. アプリを起動
 1. ログイン
 1. ToDo一覧の「全て」タブで全量（初回は0件）を確認
-1. タスク登録画面からタスクを登録
+1. ToDo登録画面からToDoを登録
 1. アプリを閉じる
 1. アプリを起動
-1. ToDo一覧の「全て」タブで登録したタスクがあることを確認
+1. ToDo一覧の「全て」タブで登録したToDoがあることを確認
 
 また、自分で起動しているアプリ以外から登録されたデータも参照できるようになっています。次の手順を実施して、他の人がToDoを追加したときの動作を確認してみましょう。
 
@@ -88,9 +88,9 @@ export const TodoService = {
 1. アプリを起動
 1. ログイン
 1. ToDo一覧の「全て」タブで全量を確認
-1. curlなどでタスクを登録
+1. curlなどでToDoを登録
 1. 設定タブをタップして、設定画面を表示後、ホームタブをタップ（`useFocusEffect`でデータを再取得するため）
-1. curlなどで登録したタスクが表示される
+1. curlなどで登録したToDoが表示される
 
 ```console title="curlでの登録"
 curl http://localhost:9080/api/todos -X POST -d '{"text": "アプリ外からの登録"}' -H "Content-Type: application/json"

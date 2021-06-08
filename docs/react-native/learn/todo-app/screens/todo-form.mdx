@@ -1,8 +1,8 @@
 ---
-title: タスク登録画面
+title: ToDo登録画面
 ---
 
-タスク登録画面を実装していきます。
+ToDo登録画面を実装していきます。
 
 修正量が多いので、次のソースコードで`TodoForm.tsx`を上書きしてください。
 
@@ -29,7 +29,7 @@ export const TodoForm: React.FC = () => {
   const formik = useFormik({
     initialValues: {task: ''},
     validationSchema: Yup.object().shape({
-      task: Yup.string().required('タスクを入力してください'),
+      task: Yup.string().required('ToDoを入力してください'),
     }),
     validateOnChange: false,
     onSubmit: onAdd,
@@ -62,9 +62,9 @@ export const TodoForm: React.FC = () => {
       } as const)}
       style={styles.container}>
       <View style={styles.form}>
-        <Text h1>タスク登録</Text>
+        <Text h1>ToDo登録</Text>
         <Input
-          placeholder="タスクを入力してください"
+          placeholder="ToDoを入力してください"
           containerStyle={styles.input}
           autoCapitalize="none"
           errorMessage={formik.errors.task}
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-タスク登録画面では変更途中のデータがあった場合、破棄確認ダイアログを表示します。
+ToDo登録画面では変更途中のデータがあった場合、破棄確認ダイアログを表示します。
 次に示すのは、`TodoForm.tsx`でそれを実現しているコード箇所です。
 
 ```typescript jsx
@@ -139,11 +139,11 @@ const styles = StyleSheet.create({
 修正できたら実行してください。
 次の操作ができたら成功です。
 
-- タスク登録画面でタスクが登録できる
-- タスク登録画面で変更途中のデータがあった場合、戻る操作で破棄確認ダイアログが表示される
+- ToDo登録画面でToDoが登録できる
+- ToDo登録画面で変更途中のデータがあった場合、戻る操作で破棄確認ダイアログが表示される
 
 :::caution
-現時点では登録したタスクがタスク一覧画面に表示されません。
+現時点では登録したToDoがToDo一覧画面に表示されません。
 次セクションの[useFocusEffect](use-focus-effect.mdx)でその不具合に対応します。
 :::
 

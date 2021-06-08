@@ -2,7 +2,7 @@
 title: Modalスクリーン
 ---
 
-「ToDo一覧」から「タスク登録」をモーダル画面として表示します。本セクションで正常系の画面遷移実装が完了します。
+「ToDo一覧」から「ToDo登録」をモーダル画面として表示します。本セクションで正常系の画面遷移実装が完了します。
 
 ![ModalScreen](../app-hands-on/screen-transition-modal.png)
 
@@ -19,7 +19,7 @@ React Navigation公式ドキュメントの[Opening a full-screen modal](https:/
 
 ## 画面を追加
 
-タスク登録画面を追加します。まずは画面遷移を確認できるように、最低限のひな型を実装します。
+ToDo登録画面を追加します。まずは画面遷移を確認できるように、最低限のひな型を実装します。
 
 次のファイルを追加・修正してください。
 
@@ -34,7 +34,7 @@ import {Text} from 'react-native-elements';
 export const TodoForm: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text h1>タスク登録</Text>
+      <Text h1>ToDo登録</Text>
     </View>
   );
 };
@@ -55,24 +55,24 @@ const styles = StyleSheet.create({
 
 ## ナビゲーション構成
 
-ToDo一覧からタスク登録画面に遷移できるようにナビゲーション構成を修正します。
+ToDo一覧からToDo登録画面に遷移できるようにナビゲーション構成を修正します。
 
 修正イメージは次の通りです。
 
-1. `AuthedStackNav`ナビゲータにタスク登録画面（`TodoForm`）を配置
-1. ToDo一覧画面（`TodoBoard`）からタスク登録画面（`TodoForm`）への画面遷移を追加
+1. `AuthedStackNav`ナビゲータにToDo登録画面（`TodoForm`）を配置
+1. ToDo一覧画面（`TodoBoard`）からToDo登録画面（`TodoForm`）への画面遷移を追加
 
 ![TodoFormNavigation](../app-hands-on/todo_form_navigation.png)
 
 :::info
-`TodoStackNav`ナビゲータではなく、なぜ`AuthedStackNav`ナビゲータにタスク登録画面（`TodoForm`）を追加するのでしょうか。
-理由としては、タスク登録画面を表示する際にタブバーを非表示にしたいからです。
-`TodoStackNav`ナビゲータにタスク登録画面を追加した場合、下部にタブバーが表示されてしまいます。
+`TodoStackNav`ナビゲータではなく、なぜ`AuthedStackNav`ナビゲータにToDo登録画面（`TodoForm`）を追加するのでしょうか。
+理由としては、ToDo登録画面を表示する際にタブバーを非表示にしたいからです。
+`TodoStackNav`ナビゲータにToDo登録画面を追加した場合、下部にタブバーが表示されてしまいます。
 推奨される方法は、タブスタック外側のナビゲータに画面を追加することです。
 詳細は、React Navigation公式ドキュメントの[Hiding tab bar in specific screens](https://reactnavigation.org/docs/hiding-tabbar-in-screens)を参照してください。
 :::
 
-`AuthedStackNav`ナビゲータに`TodoForm`という名前でタスク登録画面を追加します。
+`AuthedStackNav`ナビゲータに`TodoForm`という名前でToDo登録画面を追加します。
 次のファイルを修正してください。
 
 - `/src/navigation/AuthedStackNav.tsx`
@@ -116,14 +116,14 @@ ToDo一覧からタスク登録画面に遷移できるようにナビゲーシ�
     return (
       <View style={styles.container}>
         <Text h1>Todo</Text>
-+       <Button onPress={() => navigation.navigate('TodoForm')} title="タスク登録" />
++       <Button onPress={() => navigation.navigate('TodoForm')} title="ToDo登録" />
       </View>
     );
   };
   /* ～省略～ */
 ```
 
-修正できたらToDo一覧からタスク登録画面へ遷移できることを確認してください。
+修正できたらToDo一覧からToDo登録画面へ遷移できることを確認してください。
 まだモーダルにしていないため、他のStackナビゲーションと同じアニメーションで遷移します。
 
 ## Modalスクリーン
@@ -233,7 +233,7 @@ ToDo一覧からタスク登録画面に遷移できるようにナビゲーシ�
 修正できたら実行してください。
 次の操作ができたら成功です。
 
-- 下からスライドするアニメーションでタスク登録画面が表示（iOSの場合のみ）
-- タスク登録画面の右上に×ボタンが表示
+- 下からスライドするアニメーションでToDo登録画面が表示（iOSの場合のみ）
+- ToDo登録画面の右上に×ボタンが表示
 
 ![Modal](../app-hands-on/modal.png)
