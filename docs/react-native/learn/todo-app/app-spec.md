@@ -42,6 +42,10 @@ title: ToDoアプリの仕様
 
 ![todo_board_all](app-spec/todo_board_all.png)
 
+### ToDo一覧（アクティビティインジケータ）
+
+![todo_board_all](app-spec/todo_board_all_indicator_block.png)
+
 ### ToDo登録
 
 ![add_task](app-spec/add_task.png)
