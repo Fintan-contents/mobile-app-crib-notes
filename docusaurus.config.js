@@ -37,7 +37,7 @@ module.exports = {
   baseUrl,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'https://fintan.jp/wp-content/themes/fintan-luxeritas-child-theme_2.70/assets/favicon.ico',
+  favicon: 'img/favicon.ico',
   organizationName: organization, // Usually your GitHub org/user name.
   projectName: 'mobile-app-crib-notes', // Usually your repo name.
   noIndex: isDraft,
@@ -61,11 +61,12 @@ module.exports = {
       additionalLanguages: ['ruby', 'groovy'],
     },
     navbar: {
-      title: 'Fintan » Mobile App',
+      title: '» Mobile App',
       hideOnScroll: true,
       logo: {
         alt: 'Fintan Logo',
-        src: 'https://fintan.jp/wp-content/themes/fintan-luxeritas-child-theme_2.70/assets/favicon.ico',
+        src: 'img/fintan-logo-long.svg',
+        href: 'https://fintan.jp',
       },
       items: [
         {
