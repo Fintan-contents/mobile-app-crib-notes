@@ -317,7 +317,11 @@ export const TodoBoard: React.FC = () => {
       return;
     }
     TodoService.putTodo(id, !target.completed)
-      .then((returnedTodo) => setTodos(todos.map((todo) => (todo.id === id ? returnedTodo : todo))))
+      .then((returnedTodo) =>
+        setTodos((prevTodos) => {
+          return prevTodos.map((todo) => (todo.id === id ? returnedTodo : todo));
+        }),
+      )
       .catch(() => {});
   };
 
@@ -378,6 +382,11 @@ Reactのよくある問題として、画面が破棄（アンマウント）さ
 `useEffect`に指定した関数の戻り値で関数を返すと、その関数が画面の破棄（アンマウント）時に実行されます。
 そのなかで`isActive`フラグを`false`に設定しているため、画面が破棄された後に`TodoService.getTodos`メソッドの非同期応答が動作しても、ステートは更新されません。
 詳細は、React公式ドキュメントの[フックでデータの取得をどのように行うのですか？](https://ja.reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks)を参照してください。
+:::
+
+:::info
+`toggleTodoCompletion`では**[関数型の更新](https://ja.reactjs.org/docs/hooks-reference.html#functional-updates)**を利用しています。利用している理由については
+[演習課題](./exercise.mdx#実装の注意点と不具合の確認)を用意しています。
 :::
 
 修正できたら実行してください。
