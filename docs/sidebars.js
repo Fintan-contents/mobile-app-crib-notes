@@ -208,6 +208,24 @@ module.exports = {
           },
           {
             type: 'category',
+            label: 'Application Architecture',
+            items: [
+              {
+                type: 'doc',
+                id: 'react-native/santoku/application-architecture',
+              },
+              {
+                type: 'category',
+                label: 'ナビゲーション',
+                items: [
+                  'react-native/santoku/application-architecture/navigation/overview',
+                  'react-native/santoku/application-architecture/navigation/navigation-pattern',
+                ],
+              },
+            ],
+          },
+          {
+            type: 'category',
             label: 'Development',
             items: [
               {
