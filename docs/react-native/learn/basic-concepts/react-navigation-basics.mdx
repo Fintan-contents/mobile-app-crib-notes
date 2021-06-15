@@ -69,6 +69,11 @@ export const App = () => {
 };
 ```
 
+:::note
+`Root.Navigator`の`initialRouteName`属性に画面名（`Root.Screen`の`name`属性の値）を指定すると、対応する画面が初期表示画面になります。指定しない場合は、最初の`Root.Screen`が初期表示に利用されます。
+例えば上のソースコードでは、最初の`Root.Screen`である`Screen1`が初めに表示されます。
+:::
+
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 <Tabs
