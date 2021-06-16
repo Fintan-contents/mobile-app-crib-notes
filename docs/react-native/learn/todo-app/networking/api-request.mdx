@@ -10,13 +10,13 @@ ToDoアプリからREST APIを呼び出して、サーバから取得したデ�
 
 共通的な設定をしている`config`と自動生成された`TodosApi`を`backend`からimportします。
 
-```typescript title="src/service/TodoService.ts"
+```typescript title="src/services/TodoService.ts"
 import {TodosApi, config} from 'backend';
 ```
 
 次に`TodosApi`のインスタンスを作成し、`TodoService`のメソッドから呼びだすように修正します。
 `TodosApi`に`config`を渡すことで、接続先を切り替えられるようにします。
-`TodoService`の3つのメソッドを以下のように修正してください。
+`TodoService`の3つのメソッドは以下のようになります。
 
 ```typescript
 const todosApi = new TodosApi(config);
@@ -36,13 +36,14 @@ const putTodo = async (id: number, completed: boolean) => {
 
 ここまではServiceで`type ToDo`を定義していましたが、Open APIドキュメントで定義されているモデルを利用するように修正します。
 また、メソッドを修正すると`TodoService`のダミーデータである`todos`と`id`が不要になるので削除します。
-`TodoService`は以下のような実装になります。
+
+`TodoService`を次のソースコードで上書きしてください。
 
 :::note
 画面の実装の演習問題で[ToDoの削除](../screens/exercise.mdx#ToDoの削除)を実装している場合は削除メソッドもAPIクライアントを呼びだすように修正してください。
 :::
 
-```typescript title="src/service/TodoService.ts"
+```typescript title="src/services/TodoService.ts"
 import {TodosApi, config} from 'backend';
 
 const todosApi = new TodosApi(config);
