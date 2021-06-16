@@ -9,14 +9,6 @@ title: Modalスクリーン
 モーダルはStackナビゲータの`mode`属性（デフォルトは`card`）を`modal`に変更することで実現できます。
 画面遷移時のアニメーションの振る舞いが変わります。
 
-:::note
-React Navigation公式ドキュメントの[Opening a full-screen modal](https://reactnavigation.org/docs/modal/)に次の記載があります。
-> The modal prop has no effect on Android because full-screen modals don't have any different transition behavior on the platform.
-
-画面遷移アニメーションは、各プラットフォームのネイティブ動作に従います。
-上記のとおり、Androidのフルスクリーンモーダルには異なるトランジションが用意されていないため、`mode`属性の変更によるアニメーションの変更はありません。
-:::
-
 ## 画面を追加
 
 ToDo登録画面を追加します。まずは画面遷移を確認できるように、最低限のひな型を実装します。

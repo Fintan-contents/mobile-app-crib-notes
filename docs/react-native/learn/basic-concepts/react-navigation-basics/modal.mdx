@@ -50,6 +50,14 @@ const Main = () => {
 `RootStack.Navigator`タグの中で`mode`プロパティに`'modal'`を指定しています。
 これにより、`Modal1`への画面遷移はモーダル表示のアニメーションとなります。
 
+:::note
+React Navigation公式ドキュメントの[Opening a full-screen modal](https://reactnavigation.org/docs/modal/)に次の記載があります。
+> The modal prop has no effect on Android because full-screen modals don't have any different transition behavior on the platform.
+
+画面遷移アニメーションは、各プラットフォームのネイティブ動作に従います。
+上記のとおり、Androidのフルスクリーンモーダルには異なるトランジションが用意されていないため、`mode`属性の変更によるアニメーションの変更はありません。
+:::
+
 ネストされたナビゲータは次のように動作します。
 
 - 各ナビゲータは独自のナビゲーション履歴を保持する
