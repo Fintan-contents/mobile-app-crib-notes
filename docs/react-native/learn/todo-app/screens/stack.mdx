@@ -200,11 +200,19 @@ Stackナビゲーションではオプションを指定することでヘッダ
 +           headerRight: undefined,
           }}
         />
+        <nav.Screen
+          name="TodoBoard"
+          component={TodoBoard}
+          options={{
+            headerTitle: 'Todo',
++           headerRight: undefined,
+          }}
+        />
   /* ～省略～ */
 ```
 
 共通定義は`Navigator`の`screenOptions`に、画面ごとの定義は`Screen`の`options`に定義します。
-今回はログインボタンを共通定義として、ログイン画面のみ表示しないよう設定しました。
+今回はログインボタンを共通定義として、ログイン画面とToDo一覧画面にログインボタンを表示しないよう設定しました。
 
 :::info
 Stackナビゲータに指定できるオプションの種類については[公式ドキュメントのAPI定義](https://reactnavigation.org/docs/stack-navigator#options)を参照してください。
