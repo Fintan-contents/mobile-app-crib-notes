@@ -102,6 +102,10 @@ const styles = StyleSheet.create({
 
 ```
 
+:::note
+`onAdd`では`navigation.goBack()`を呼ぶ前に状態を判定して、画面が表示されている場合だけToDo一覧に戻るように制御しています。
+:::
+
 ToDo登録画面では変更途中のデータがあった場合、破棄確認ダイアログを表示します。
 次に示すのは、`TodoForm.tsx`でそれを実現しているコード箇所です。
 
