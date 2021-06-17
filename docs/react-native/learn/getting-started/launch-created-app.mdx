@@ -9,7 +9,9 @@ import TabItem from '@theme/TabItem';
 
 iOSアプリはiPhoneシミュレータ、AndroidアプリはAndroidエミュレータで起動するのが基本です。また、今回作成したプロジェクトはExpoを利用しているので、Expo Goというアプリでも実行できます。
 
-実行方法の中で紹介しているコマンドは、全てプロジェクトのルートディレクトリ（`package.json`のあるディレクトリ）で実行してください。
+React Nativeアプリの実行方法と仕組みをかんたんに説明します。
+
+実行方法で紹介しているコマンドは、全てプロジェクトのルートディレクトリ（`package.json`のあるディレクトリ）で実行してください。
 
 うまく起動できない場合は、[ハマりがちな落とし穴](../../common-pitfalls.md)を参照してください。
 
@@ -27,6 +29,9 @@ iOSアプリはiPhoneシミュレータ、AndroidアプリはAndroidエミュレ
 
 <TabItem value="expo">
 
+![Image](expo-build.png)
+
+Expo Goを利用する場合、ストア公開されているExpo Goアプリを端末にインストールして使用するため、アプリのビルドは不要です。
 Expo Goは、Expoで作られたアプリをビルドすることなく簡単に実機で動かすことができるアプリです。Expo SDKに含まれないネイティブモジュールを利用していなければ、Bare Workflowのアプリでも実行できます。[App Store](https://apps.apple.com/jp/app/expo-go/id982107779), [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent)からインストールしてください。
 
 Expo Goをインストールしたら、プロジェクトでExpoの開発サーバを起動します。
@@ -44,6 +49,9 @@ Do you want to install it globally [Y/n]?
 ```
 
 :::
+
+`expo start` を実行するとExpoの開発者ツールとMetro Bundlerが起動します。
+開発者ツールに記載されているQRコードを読み取ることで、Expo Goは同一無線ネットワーク内のMetro Bundlerに接続するよう設定されます。そしてMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
 
 ターミナル上、もしくは起動したブラウザの左下に表示されたQRコードをスキャンします。AndroidではExpo Goから、iOSではOSのカメラアプリからQRコードをスキャンしてください。
 
@@ -65,53 +73,26 @@ Expo DevTools is running at http://localhost:19003
 :::
 
 </TabItem>
+
 <TabItem value="android">
 
-`npm run android` と実行することで、Androidのエミュレータ内でアプリが起動します。
+![Image](react-native-android-build.png)
 
-</TabItem>
-<TabItem value="iphone">
-
-`npm run ios` と実行することで、iPhoneのシミュレータ内でアプリが起動します。
-
-</TabItem>
-</Tabs>
-
-## アプリ実行の仕組み
-
-React Nativeアプリ実行の仕組みをかんたんに説明します。
-
-<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
-
-<Tabs
-  defaultValue="rn-build"
-  values={[
-    {label: 'React Native', value: 'rn-build'},
-    {label: 'Expo + React Native', value: 'expo-build'},
-  ]}>
-
-<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
-
-<TabItem value="rn-build">
-
-![Image](react-native-build.png)
-
-起動コマンドを実行するとMetro Bundlerが起動した後、アプリのビルドが始まります。
-
-`react-native run-ios` の場合iOSアプリがビルドされ、シミュレータにインストールされます。  
-`react-native run-android` の場合Androidアプリがビルドされ、エミュレータにインストールされます。
+`npm run android` と実行するとMetro Bundlerが起動した後、アプリのビルドが始まります。
+Androidアプリがビルドされ、エミュレータにインストールされます。
 
 その後、インストールされたアプリがMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
 
 </TabItem>
-<TabItem value="expo-build">
+<TabItem value="iphone">
 
-![Image](expo-build.png)
+![Image](react-native-ios-build.png)
 
-React Nativeのみの場合と異なりストア公開されているExpo Goアプリを端末にインストールして使用するため、アプリのビルドが不要です。
+`npm run ios` と実行するとMetro Bundlerが起動した後、アプリのビルドが始まります。
+iOSアプリがビルドされ、シミュレータにインストールされます。
 
-`expo start` を実行するとExpoの開発者ツールとMetro Bundlerが起動します。
-開発者ツールに記載されているQRコードを読み取ることで、Expo Goは同一無線ネットワーク内のMetro Bundlerに接続するよう設定されます。そしてMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
+その後、インストールされたアプリがMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
 
 </TabItem>
+
 </Tabs>
