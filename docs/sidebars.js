@@ -174,7 +174,7 @@ module.exports = {
             'react-native/learn/todo-app/networking/generate-api-client',
             'react-native/learn/todo-app/networking/api-request',
             'react-native/learn/todo-app/networking/activity-indicator',
-            'react-native/learn/todo-app/networking/improve-usability',
+            'react-native/learn/todo-app/networking/activity-indicator-each-todo',
           ],
         },
       ],
