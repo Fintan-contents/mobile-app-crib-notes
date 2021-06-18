@@ -25,7 +25,7 @@ const overviews = [
   {
     title: '画面の実装',
     to: '/react-native/learn/todo-app/screens/welcome',
-    summary: <>まずは、ToDoアプリの各画面と画面遷移を実装します。この時点ではバックエンドのREST APIは利用せず、データは固定値とします。</>
+    summary: <>まずは、ToDoアプリの各画面と画面遷移を実装します。この時点ではバックエンドのREST APIは利用せず、データは固定値とします。その他に私たちが、理解するのに難しいと感じたReact Navigation（Stack、Modal、Tab）を利用する際のポイントや注意事項を交えた実装方法と、ステートフックと副作用フックを利用したStateの管理方法をより詳しく説明しています。</>
   },
   {
     title: 'REST APIとの接続',
