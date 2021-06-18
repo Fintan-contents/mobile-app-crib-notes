@@ -22,4 +22,4 @@ JavaScriptを用いてプラットフォームのAPIにアクセスし、React�
 |`<TextInput>`|`<EditText>`|`<UITextField>`|`<input type="text">`|
 
 React Nativeには、すぐに使用できる多数のネイティブコンポーネントが初めから用意されています。
-これらをコアコンポーネントと呼びます。
+これらを[コアコンポーネント](https://reactnative.dev/docs/components-and-apis)と呼びます。
