@@ -61,14 +61,19 @@ module.exports = {
       additionalLanguages: ['ruby', 'groovy'],
     },
     navbar: {
-      title: '» Mobile App',
       hideOnScroll: true,
       logo: {
-        alt: 'Fintan Logo',
+        alt: 'Fintan Mobile App',
         src: 'img/fintan-logo-long.svg',
         href: 'https://fintan.jp',
       },
       items: [
+        {
+          label: 'Home',
+          to: '/',
+          activeBaseRegex: `${baseUrl}?$`,
+          position: 'left',
+        },
         {
           label: 'Reference',
           to: 'reference',
