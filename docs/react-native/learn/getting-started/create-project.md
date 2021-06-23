@@ -21,7 +21,7 @@ title: プロジェクトの作成
 :::
 
 ```bash
-npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler#2021.05.0 <YourAppName>
+npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler#{@inject: rnSpoilerTag} <YourAppName>
 ```
 
 RN Spoilerは、Expoの[テンプレート](https://github.com/expo/expo/tree/master/templates)をベースにしているので、このあとの[アプリの実行](./launch-created-app.mdx)で紹介しているExpo Goで動作します。
@@ -30,7 +30,7 @@ RN Spoilerは、Expoの[テンプレート](https://github.com/expo/expo/tree/ma
 [npm](https://www.npmjs.com/)ではなく[Yarn](https://yarnpkg.com/)を利用したい場合は、`--npm`というオプションを削除してください。Yarnがインストールされている場合は、Yarnを利用してパッケージがインストールされます。
 
 ```bash
-npx react-native init --template https://github.com/ws-4020/rn-spoiler#2021.05.0 <YourAppName>
+npx react-native init --template https://github.com/ws-4020/rn-spoiler#{@inject: rnSpoilerTag} <YourAppName>
 ```
 
 :::

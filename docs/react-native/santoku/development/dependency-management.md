@@ -2,8 +2,6 @@
 title: 依存パッケージの管理
 ---
 
-import {RepositoryLink} from '../../../../src/components/RepositoryLink.tsx';
-
 ## 依存パッケージの追加
 
 ### `package.json`と`Podfile.lock`への追加
@@ -36,7 +34,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
 
 依存パッケージのバージョン管理にあたって、まず「`expo upgrade`の対象になるか」を確認します。そのうえで、指定するバージョン範囲をどう指定するかを決める必要があります。
 
-このアプリでは次のように設計しています。具体的な分類については、<RepositoryLink path="/blob/master/.github/renovate.json5">renovate.json5</RepositoryLink>を参照してください。
+このアプリでは次のように設計しています。具体的な分類については、[renovate.json5](https://github.com/{@inject:organization}/blob/master/.github/renovate.json5)を参照してください。
 
 ### expo upgradeに含まれるパッケージ
 
