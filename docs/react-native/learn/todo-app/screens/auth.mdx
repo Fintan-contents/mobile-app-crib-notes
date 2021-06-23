@@ -277,10 +277,9 @@ export const RootStackNav: React.FC = () => {
 +   const userContext = useUserContext();
 +   
 +   const login = useCallback(() => {
-+       userContext.login('user', 'password');
-+     },
-+     [userContext],
-+   );
++     // 後で例外処理を追加するので、今はlintのエラーは無視してください。
++     userContext.login('user', 'password');
++   }, [userContext]);
   
   return (
     <View style={styles.container}>
