@@ -132,7 +132,7 @@ module.exports = {
               ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}]
               : []),
             {
-              label: 'ハマりがちな落とし穴',
+              label: 'Pitfalls',
               to: 'react-native/common-pitfalls',
               position: 'left',
             },
@@ -167,7 +167,7 @@ module.exports = {
               to: 'react-native/learn',
             },
             {
-              label: 'ハマりがちな落とし穴',
+              label: 'Pitfalls',
               to: 'react-native/common-pitfalls',
             },
             ...(process.env.NODE_ENV === 'development'
