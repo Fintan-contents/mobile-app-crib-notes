@@ -182,9 +182,8 @@ Stackナビゲーションではオプションを指定することでヘッダ
 +     <nav.Navigator
 +       initialRouteName={Welcome.name}
 +       screenOptions={{
-+         headerRight: () => <HeaderRight />
-+       }}
-+     >
++         headerRight: () => <HeaderRight />,
++       }}>
         <nav.Screen
           name="Welcome"
           component={Welcome}
