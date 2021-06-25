@@ -10,6 +10,7 @@ on:
 
 jobs:
   triage:
+    # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
     runs-on: ubuntu-20.04
     steps:
       - name: Label according to modified files
