@@ -2,29 +2,36 @@
 title: 前提知識
 ---
 
-React Nativeを用いてアプリを実装するには、JavaScript、TypeScript、Reactの習得が必要です。 これらの習得がまだ出来ていない場合は、最初に基本的な知識を習得した後にReact Nativeの基本へと進んでください。
+React Nativeを用いてアプリを実装するには、JavaScript、TypeScript、Reactの知識が必要です。
 
-ここでは、技術習得にあたり有効なサイトを紹介させて頂きます。
+ToDoアプリの実装例や解説を理解するために参考となるサイトを紹介します。
+用語やコード例でわからないことがあるときは参照してください。
 
-## [JavaScript Primer](https://jsprimer.net/)
+JavaScriptやReactの知識がない方はまず参考サイトで学習してからToDoアプリの実装を進めてください。
+
+## 参考サイト
+
+### JavaScript Primer
 
 Reactを学ぶにはJavaScriptの言語知識が必須です。 JavaScriptを触れたことがない人は、まずはJavaScriptの知識習得からお願いします。
 
-上記サイトは、JavaScriptの文法や機能を一から学べるサイトです。「第一部：基本文法」までの知識があれば、ひとまず充分です。
+[JavaScript Primer](https://jsprimer.net/)は、JavaScriptの文法や機能を一から学べるサイトです。「第一部：基本文法」までの知識があれば、ひとまず充分です。[基本文法の目次](https://jsprimer.net/basic/)を見てわからないことがあれば学習してください。
 
-## [サバイバルTypeScript](https://book.yyts.org/)
+### サバイバルTypeScript
 
 TypeScriptは、JavaScriptに静的型付けを追加したプログラミング言語です。 JavaScriptと上位互換性があり、静的型付けによりコード実行前にエラーを検出できます。 その性質から、開発規模が大きくなるほどその効果を発揮します。
 
-上記サイトは、TypeScriptを最短ルートで実務利用できることを目指したサイトです。 実務レベルに必要な一通りの知識が身に付きます。
+[サバイバルTypeScript](https://book.yyts.org/)は、TypeScriptを最短ルートで実務利用できることを目指したサイトです。 静的型付け言語での実装経験があれば、[ToDoアプリの実装](../todo-app.md)は進められます。
 
-## [React公式サイト](https://ja.reactjs.org/)
+実務レベルに必要な一通りの知識が必要な場合はサバイバルTypeScriptで学習しましょう。[これだけはおさえておきたいTypeScriptの機能](https://book.yyts.org/features)の見出しをみて内容がイメージできれば大丈夫です。
 
-Reactを学ぶには公式サイトが一番お勧めです。
+### React公式サイト
 
-「チュートリアル」からはじめ、「MAIN CONCEPTS」「ADVANCED GUIDESのコンテキスト」「Hooks」あたりを学んでおけば、最低限のReactの知識が身に付きます。
+Reactを学ぶには[React公式サイト](https://ja.reactjs.org/)が一番お勧めです。
+
+Reactを利用したことがない人は「チュートリアル」からはじめてください。「MAIN CONCEPTS」「ADVANCED GUIDESのコンテキスト」「HOOKS」の内容が理解できていれば、最低限のReactの知識が身に付いています。わからない箇所があれば学習してください。
 
 - [チュートリアル](https://ja.reactjs.org/tutorial/tutorial.html)
-- [Main CONCEPTS](https://ja.reactjs.org/docs/hello-world.html)
+- [MAIN CONCEPTS](https://ja.reactjs.org/docs/hello-world.html)
 - [ADVANCED GUIDESのコンテキスト](https://ja.reactjs.org/docs/context.html)
-- [Hooks](https://ja.reactjs.org/docs/hooks-intro.html)
+- [HOOKS](https://ja.reactjs.org/docs/hooks-intro.html)

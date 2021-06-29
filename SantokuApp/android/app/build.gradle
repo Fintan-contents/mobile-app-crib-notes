@@ -78,9 +78,14 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false
+    enableHermes: false,
 ]
 
+project.ext.envConfigFiles = [
+    santokuApp: ".env.production",
+    devSantokuApp: ".env.development",
+]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/expo-constants/scripts/get-app-config-android.gradle"
@@ -99,7 +104,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 
 /**
  * The preferred build flavor of JavaScriptCore.
@@ -132,11 +137,13 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.santokuapp"
+        applicationId "jp.fintan.mobile.SantokuApp"
+        applicationIdSuffix project.env.get("APP_ID_FLAVOR_SUFFIX")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "0.1.0"
+        resValue "string", "build_config_package", "jp.fintan.mobile.santokuapp"
     }
     splits {
         abi {
@@ -153,17 +160,56 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        releaseInHouse {
+            // You must set following properties in gradle.properties for in-house release build
+            if (project.hasProperty('SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE')) {
+                storeFile file(SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE)
+                storePassword SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD
+                keyAlias SANTOKU_APP_IN_HOUSE_KEY_ALIAS
+                keyPassword SANTOKU_APP_IN_HOUSE_KEY_PASSWORD
+            }
+        }
+        release {
+            // You must set following properties in gradle.properties for release build
+            if (project.hasProperty('SANTOKU_APP_UPLOAD_KEYSTORE_FILE')) {
+                storeFile file(SANTOKU_APP_UPLOAD_KEYSTORE_FILE)
+                storePassword SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD
+                keyAlias SANTOKU_APP_UPLOAD_KEY_ALIAS
+                keyPassword SANTOKU_APP_UPLOAD_KEY_PASSWORD
+            }
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            debuggable true
+            applicationIdSuffix ".debug"
+        }
+        debugAdvanced {
+            initWith debug
+            applicationIdSuffix ".debugAdvanced"
+            matchingFallbacks = ["debug"]
+        }
+        releaseInHouse {
+            initWith release
+            signingConfig signingConfigs.releaseInHouse
+            applicationIdSuffix ".house"
+            matchingFallbacks = ["release"]
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+
+    flavorDimensions "environment"
+    productFlavors {
+        devSantokuApp {
+            dimension "environment"
+        }
+        santokuApp {
+            dimension "environment"
         }
     }
 

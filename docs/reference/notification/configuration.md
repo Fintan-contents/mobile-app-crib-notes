@@ -44,7 +44,7 @@ APNs Auth Keyは、Apple Developer Programのアカウント内に最大2つま�
 
 Firebase Cloud Messagingを用いてリモート通知を送信するためには、Firebaseを利用するためのGoogleアカウントが必要です。
 既にGoogleアカウントを持っている場合は、[Firebaseコンソール](https://console.firebase.google.com/)からログインするだけでFirebaseの利用を開始できます。
-持っていない場合はログイン画面の下側にあるアカウント作成を選択し、画面の説明にしたがってGoogleアカウントを作成しましょう。
+持っていない場合はログイン画面の下側にあるアカウント作成を選択し、画面の説明に従ってGoogleアカウントを作成しましょう。
 
 Firebaseのコンソール画面にログインしたら、開発に利用するプロジェクトを1つ作成しましょう。
 

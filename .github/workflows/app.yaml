@@ -1,4 +1,4 @@
-name: App
+name: SantokuApp
 
 on:
   push:
@@ -24,6 +24,7 @@ on:
       - SantokuApp/package-lock.json
       - SantokuApp/tsconfig.json
       - .github/workflows/app.yaml
+      - .github/workflows/report.yaml
     types:
       - opened
       - synchronize
@@ -31,7 +32,8 @@ on:
 
 jobs:
   lint-and-test:
-    name: Run lint and test
+    name: Lints, Tests
+    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-10.15-Readme.md
     runs-on: macos-10.15
     env:
       REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -66,7 +68,8 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm clean-install --prefix SantokuApp
+        run: |
+          npm clean-install --prefix SantokuApp 2>&1 | tee /dev/stderr | test $(grep --count -E '(Error:|gyp ERR!)') -le 0
 
       - name: Set up reviewdog
         uses: reviewdog/action-setup@v1
@@ -74,24 +77,24 @@ jobs:
           reviewdog_version: latest
 
       - name: Lint (ESLint)
-        if: always()
+        continue-on-error: true
         run: |
-          npm run -s lint:es --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=eslint -name="ESLint"
+          cd SantokuApp && npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name="ESLint (SantokuApp)"
 
       - name: Lint (TypeScript)
-        if: always()
+        continue-on-error: true
         run: |
-          npm run -s lint:tsc --prefix SantokuApp | reviewdog -tee -fail-on-error -reporter=github-pr-review -f=tsc -name="TypeScript"
+          cd SantokuApp && npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (SantokuApp)"
 
       - name: Test
-        if: always()
+        continue-on-error: true
         run: |
           npm run -s test --prefix SantokuApp -- --ci --reporters=default --reporters=jest-junit --coverage
 
-      - name: Report test result
-        uses: ashley-taylor/junit-report-annotations-action@master
-        if: always()
+      - name: Archive workflow results
+        uses: actions/upload-artifact@v2
+        continue-on-error: true
         with:
-          access-token: ${{ secrets.GITHUB_TOKEN }}
-          name: Test results
-          path: SantokuApp/junit.xml
+          name: workflow-results
+          path: |
+            SantokuApp/jest-junit.xml

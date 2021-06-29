@@ -15,22 +15,22 @@ todo_app
 └─src
    ├─@types
    ├─assets
+   ├─backend
    ├─components
    │  ├─basics
    │  └─parts
    ├─contexts
    ├─navigation
-   │  └─hooks
    ├─screens
    └─services
 ```
 
 - @types: 型定義（`.d.ts`）ファイル
 - assets: アプリにバンドルする画像やその他のファイル
+- backend: バックエンドのREST APIにアクセスする共通のクライアント部品
 - components/basics: 汎用性のあるコンポーネント
 - components/parts: アプリ機能に特化したコンポーネント
 - contexts: コンテクスト
 - navigation: ナビゲーション定義
-- navigation/hooks: ナビゲーションのカスタムフック
 - screens: 画面
 - services: 外部（APIや内部ストレージなど）と連携するサービスやビジネスロジック

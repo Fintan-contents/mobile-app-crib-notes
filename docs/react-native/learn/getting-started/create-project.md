@@ -10,17 +10,27 @@ title: プロジェクトの作成
 
 次のコマンドを実行して、新規プロジェクトを作成してください。（`<YourAppName>`の部分は、好みのプロジェクト名に変更してください。このプロジェクトは後ほど[ToDoアプリの実装](../todo-app.md)で使用します）
 
+:::note
+プロジェクト名には、ごく一部を除いて記号は利用できません。アルファベットから始まり、英数字のみで構成されたプロジェクト名とすることをおすすめします。
+:::
+
+:::note
+プロジェクトの作成が終わったら`git`で変更履歴を管理できるようにしておくと便利です。（プロジェクトを作成した時点で`.gitignore`も設定されているため、不要なファイルは管理対象外になっています）
+
+動作確認した後などに`git commit`で内容を保存しながら学習を進めていくと、修正内容や「動かなくなってしまった」ときの差分確認に便利です。
+:::
+
 ```bash
-npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler#hands-on <YourAppName>
+npx react-native init --npm --template https://github.com/ws-4020/rn-spoiler#{@inject: rnSpoilerTag} <YourAppName>
 ```
 
-RN Spoilerは、Expoの[expo-template-bare-typescript](https://github.com/expo/expo/tree/master/templates/expo-template-bare-typescript)をベースにしているので、このあとの[アプリの実行](./launch-created-app.mdx)で紹介しているExpo Goで動作します。
+RN Spoilerは、Expoの[テンプレート](https://github.com/expo/expo/tree/master/templates)をベースにしているので、このあとの[アプリの実行](./launch-created-app.mdx)で紹介しているExpo Goで動作します。
 
 :::info
 [npm](https://www.npmjs.com/)ではなく[Yarn](https://yarnpkg.com/)を利用したい場合は、`--npm`というオプションを削除してください。Yarnがインストールされている場合は、Yarnを利用してパッケージがインストールされます。
 
 ```bash
-npx react-native init --template https://github.com/ws-4020/rn-spoiler#hands-on <YourAppName>
+npx react-native init --template https://github.com/ws-4020/rn-spoiler#{@inject: rnSpoilerTag} <YourAppName>
 ```
 
 :::

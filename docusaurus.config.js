@@ -7,6 +7,37 @@ if (!process.env.CI) {
     : 'fintan-contents/mobile-app-crib-notes';
 }
 
+const injector = (options) => {
+  const keys = Object.keys(options);
+  const placeHolders = keys.map((key) => new RegExp('{@inject: *' + key + '}'));
+  return inject;
+  function inject(tree) {
+    if (tree.type === 'root' || tree.type === 'element') {
+      tree.children = tree.children.map(inject);
+      if (tree.tagName === 'a' && tree.properties?.href) {
+        const href = decodeURI(tree.properties.href);
+        if (hasPlaceHolder(href)) {
+          tree.properties.href = encodeURI(replace(href));
+        }
+      }
+    }
+    if (tree.type === 'text' && hasPlaceHolder(tree.value)) {
+      tree.value = replace(tree.value);
+    }
+    return tree;
+  }
+
+  function hasPlaceHolder(value) {
+    return value && value.includes('{@inject:');
+  }
+
+  function replace(value) {
+    return keys.reduce((replaced, key, index) => {
+      return replaced.replace(placeHolders[index], options[key]);
+    }, value);
+  }
+};
+
 // for debug
 console.debug(`GITHUB_REPOSITORY: ${process.env.GITHUB_REPOSITORY}`);
 
@@ -30,6 +61,11 @@ const copyright = `<div class="no-content">
 </div>
 `;
 
+const injectOptions = {
+  organization,
+  rnSpoilerTag: '2021.05.0',
+};
+
 module.exports = {
   title: 'Fintan » Mobile App Development',
   tagline: '',
@@ -37,7 +73,7 @@ module.exports = {
   baseUrl,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'https://fintan.jp/wp-content/themes/fintan-luxeritas-child-theme_2.70/assets/favicon.ico',
+  favicon: 'img/favicon.ico',
   organizationName: organization, // Usually your GitHub org/user name.
   projectName: 'mobile-app-crib-notes', // Usually your repo name.
   noIndex: isDraft,
@@ -61,13 +97,19 @@ module.exports = {
       additionalLanguages: ['ruby', 'groovy'],
     },
     navbar: {
-      title: 'Fintan » Mobile App',
       hideOnScroll: true,
       logo: {
-        alt: 'Fintan Logo',
-        src: 'https://fintan.jp/wp-content/themes/fintan-luxeritas-child-theme_2.70/assets/favicon.ico',
+        alt: 'Fintan Mobile App',
+        src: 'img/fintan-logo-long.svg',
+        href: 'https://fintan.jp',
       },
       items: [
+        {
+          label: 'Home',
+          to: '/',
+          activeBaseRegex: `${baseUrl}?$`,
+          position: 'left',
+        },
         {
           label: 'Reference',
           to: 'reference',
@@ -90,8 +132,8 @@ module.exports = {
               ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}]
               : []),
             {
-              label: 'Troubleshoot',
-              to: 'react-native/troubleshooting',
+              label: 'Pitfalls',
+              to: 'react-native/common-pitfalls',
               position: 'left',
             },
           ],
@@ -125,8 +167,8 @@ module.exports = {
               to: 'react-native/learn',
             },
             {
-              label: 'Troubleshoot',
-              to: 'react-native/troubleshooting',
+              label: 'Pitfalls',
+              to: 'react-native/common-pitfalls',
             },
             ...(process.env.NODE_ENV === 'development'
               ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}]
@@ -162,6 +204,7 @@ module.exports = {
           sidebarPath: require.resolve('./docs/sidebars.js'),
           routeBasePath: '/',
           showLastUpdateTime: true,
+          rehypePlugins: [[injector, injectOptions]],
         },
         blog: false,
         theme: {

@@ -15,7 +15,7 @@ Azureを利用した例としてAzure Blob Storageを利用します。
 リソースに対してベーシック認証をかける機能はありませんが、Shared Access Signatureという機能を使って一定期間で無効となるURLを発行できます。
 詳細はMicrosoft Docs: Azure Storage: [Shared Access Signatures (SAS) でデータの制限付きアクセスを付与する](https://docs.microsoft.com/ja-jp/azure/storage/common/storage-sas-overview)を参照してください。
 
-1. Azure Blob Storageにて、対象のリソースで右クリック > Shared Access Signatureの取得を選択
+1. Azure Blob Storageにて、対象のリソースで右クリックして「Shared Access Signatureの取得」を選択
 2. 公開時間、アクセス権限などを設定
 3. URLが発行されるので、テスターにURLを通知
 4. テスターはAndroidデバイスでAPKファイルをダウンロード

@@ -1,0 +1,106 @@
+---
+title: APIクライアントの作成
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+ToDoアプリでは各画面で`TodoService`からデータを取得しますが、`TodoService`から直接REST APIを呼びだすのではなく共通的なAPIクライアントを用意します。
+APIクライアントは、APIと通信し、JSONとOpen APIドキュメントで定義されているモデルとの型変換や共通的なエラー処理を担当します。
+
+## Open APIドキュメントから自動生成
+
+ToDoアプリでは、Open APIドキュメントからAPIクライアントを自動生成します。
+
+クライアントコードの生成には、[OpenAPI Generator](https://openapi-generator.tech/)を使用します。OpenAPIが提供しているツールで、OpenAPIドキュメントから様々なものを生成できます。TypeScript用のクライアントコードについても様々な実装を生成できますが、ここではtypescript-fetchを使用します。
+
+自動生成で利用するOpenAPIドキュメントは[mobile-app-hands-on-backend](https://github.com/{@inject:organization}/mobile-app-hands-on-backend/tree/main/rest-api-specification)で公開されているものを利用します。
+
+`npx`か、package.jsonに`npm script`を追加してAPIクライアントを自動生成してください。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+<Tabs
+  defaultValue="npx"
+  values={[
+    {label: 'npx', value: 'npx'},
+    {label: 'npm script', value: 'npm-script'},
+  ]}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+<TabItem value="npx">
+
+以下のように`npx`で生成してください。
+
+```console
+npx @openapitools/openapi-generator-cli generate -g typescript-fetch -i https://raw.githubusercontent.com/{@inject: organization}/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
+```
+
+</TabItem>
+
+<TabItem value="npm-script">
+
+まず、ToDoアプリのプロジェクトに`openapi-generator-cli`をインストールします。
+
+```console
+npm install -D @openapitools/openapi-generator-cli
+```
+
+以下の例のように`npm script`に自動生成用のscriptを追加して`npm run api:gen-client`で生成してください。
+
+```diff title="package.json"
+     "reset-cache:all": "node .script/runner.js reset-cache --all",
+-    "reset-cache:interactive": "node .script/runner.js reset-cache --interactive"
++    "reset-cache:interactive": "node .script/runner.js reset-cache --interactive",
++    "api:gen-client": "openapi-generator-cli generate -g typescript-fetch -i https://raw.githubusercontent.com/{@inject: organization}/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true"
+   },
+```
+
+</TabItem>
+
+</Tabs>
+
+## APIクライアントの簡単な説明
+
+それでは、自動生成されたAPIクライアントを簡単に見ていきましょう。
+APIクライアントは`/src/backend/generated-rest-client` に作成されています。
+
+```console
+todo_app
+└─src/backend
+     └─generated-rest-client
+        ├─apis/
+        ├─models/
+        └─runtime.ts
+```
+
+`apis`にはREST APIを呼びだすための部品（`TodosApi.ts`）があり、`models`にはAPI呼び出しのInput,Outputになるモデルが生成されています。
+APIクライアントを利用するとエラーレスポンス（ステータスコードが4xxまたは5xx系）の場合、`Promise.reject` されるため、エラーとしてハンドリングできます。
+
+`runtime.ts`では、すべてのREST APIの呼びだしに共通する機能が実装されています。この中でREST APIへの接続先も定義されているのですが、OpenAPIドキュメントの`server`に指定されている値がデフォルト値として設定されています。
+
+```typescript title="/src/backend/generated-rest-client/runtime.ts"
+export const BASE_PATH = "http://localhost:9080/api".replace(/\/+$/, "");
+```
+
+デフォルトでは接続先が`localhost`となっているため、このままではAPIサーバを起動しているマシン以外のデバイスやAndroidエミュレータなどからアクセスできません。
+
+接続先を変更するために、`backend`ディレクトリに接続先を設定するためのモジュールを追加します。再生成したときに修正漏れが発生しないように、自動生成したファイルは修正しないでください。
+また、自動生成したAPIクライアントや設定モジュールを`TodoService`から利用しやすいように`index.ts`も作成します。
+
+次のようにbackendディレクトリに`config.ts`と`index.ts`を作成してください。
+
+`${端末のIP}`には[APIサーバへの接続確認](./setting-up-local-server.mdx#apiサーバへの接続確認)で確認したIPを設定してください。
+
+```typescript title="/src/backend/config.ts"
+import {Configuration} from './generated-rest-client';
+export const config = new Configuration({basePath: 'http://${端末のIP}:9080/api'});
+```
+
+```typescript title="/src/backend/index.ts"
+export * from './generated-rest-client';
+export * from './config';
+```
+
+これで、`TodoService`からREST APIを呼びだす準備が整いました。次は、実際に`TodoService`からREST APIを呼び出して、結果を画面に表示してみましょう。

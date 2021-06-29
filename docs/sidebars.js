@@ -1,24 +1,38 @@
 module.exports = {
-  reference: {
-    このドキュメントについて: ['reference/index'],
-    セキュリティ: ['reference/security/awesome-sites'],
-    認証: [
-      'reference/auth/overview',
-      'reference/auth/authn-architecture',
-      'reference/auth/login-screens',
-      'reference/auth/manage-credentials',
-      'reference/auth/stateless-authn',
-      'reference/auth/webassets-integration',
-      'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
-    ],
-    プッシュ通知: [
-      'reference/notification/overview',
-      'reference/notification/infrastructure',
-      'reference/notification/configuration',
-      'reference/notification/backend',
-      'reference/notification/client',
-    ],
-  },
+  reference: [
+    {
+      type: 'doc',
+      id: 'reference/index',
+    },
+    {
+      type: 'doc',
+      id: 'reference/security/awesome-sites',
+    },
+    {
+      type: 'category',
+      label: '認証',
+      items: [
+        'reference/auth/overview',
+        'reference/auth/authn-architecture',
+        'reference/auth/login-screens',
+        'reference/auth/manage-credentials',
+        'reference/auth/stateless-authn',
+        'reference/auth/webassets-integration',
+        'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'プッシュ通知',
+      items: [
+        'reference/notification/overview',
+        'reference/notification/infrastructure',
+        'reference/notification/configuration',
+        'reference/notification/backend',
+        'reference/notification/client',
+      ],
+    }
+  ],
   distribution: [
     {
       type: 'doc',
@@ -146,39 +160,101 @@ module.exports = {
         'react-native/learn/todo-app',
         'react-native/learn/todo-app/app-spec',
         'react-native/learn/todo-app/app-project-desc',
-        'react-native/learn/todo-app/welcome',
-        'react-native/learn/todo-app/login',
-        'react-native/learn/todo-app/keyboard-avoiding-view',
-        'react-native/learn/todo-app/auth',
-        'react-native/learn/todo-app/alert',
-        'react-native/learn/todo-app/split-navigation',
-        'react-native/learn/todo-app/navigation-hook',
-        'react-native/learn/todo-app/tab',
-        'react-native/learn/todo-app/todo-board',
-        'react-native/learn/todo-app/todo-form',
-        'react-native/learn/todo-app/use-focus-effect',
-        'react-native/learn/todo-app/modal',
-        'react-native/learn/todo-app/basic-components',
-        'react-native/learn/todo-app/logo',
-        'react-native/learn/todo-app/exercise',
+        {
+          type: 'category',
+          label: '画面の実装',
+          items: [
+            'react-native/learn/todo-app/screens/welcome',
+            'react-native/learn/todo-app/screens/stack',
+            'react-native/learn/todo-app/screens/auth',
+            'react-native/learn/todo-app/screens/tab',
+            'react-native/learn/todo-app/screens/modal',
+            'react-native/learn/todo-app/screens/login',
+            'react-native/learn/todo-app/screens/keyboard-avoiding-view',
+            'react-native/learn/todo-app/screens/alert',
+            'react-native/learn/todo-app/screens/todo-board',
+            'react-native/learn/todo-app/screens/todo-form',
+            'react-native/learn/todo-app/screens/use-focus-effect',
+            'react-native/learn/todo-app/screens/basic-components',
+            'react-native/learn/todo-app/screens/logo',
+            'react-native/learn/todo-app/screens/exercise',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'REST APIとの接続',
+          items: [
+            'react-native/learn/todo-app/networking/setting-up-local-server',
+            'react-native/learn/todo-app/networking/generate-api-client',
+            'react-native/learn/todo-app/networking/api-request',
+            'react-native/learn/todo-app/networking/activity-indicator',
+            'react-native/learn/todo-app/networking/activity-indicator-each-todo',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: '応用編',
+      items: ['react-native/learn/advance/react-navigation-param'],
+    },
+  ],
+  pitfalls: [
+    {
+      type: 'doc',
+      id: 'react-native/common-pitfalls',
+    },
+    {
+      type: 'category',
+      label: 'アプリを実行できない',
+      items: [
+        'react-native/common-pitfalls/overview',
+        'react-native/common-pitfalls/unable-to-load-script',
+        'react-native/common-pitfalls/debug-keystore-not-found',
+        'react-native/common-pitfalls/react-native-cli-uninstall',
+        'react-native/common-pitfalls/cant-build-in-xcode',
       ],
     },
   ],
-  troubleshoot: {
-    About: ['react-native/troubleshooting'],
-    アプリを実行できない: [
-      'react-native/troubleshooting/unable-to-load-script',
-      'react-native/troubleshooting/debug-keystore-not-found',
-      'react-native/troubleshooting/react-native-cli-uninstall',
-      'react-native/troubleshooting/cant-build-in-xcode',
-    ],
-  },
   ...(process.env.NODE_ENV === 'development'
     ? {
         santoku: [
           {
             type: 'doc',
             id: 'react-native/santoku',
+          },
+          {
+            type: 'category',
+            label: 'IDE',
+            items: ['react-native/settings-vscode'],
+          },
+          {
+            type: 'category',
+            label: 'Development',
+            items: [
+              {
+                type: 'doc',
+                id: 'react-native/santoku/development',
+              },
+              {
+                type: 'category',
+                label: 'ビルド設定',
+                items: [
+                  'react-native/santoku/development/build-variants',
+                  'react-native/santoku/development/build-type-configurations',
+                  'react-native/santoku/development/product-flavor-configurations',
+                ],
+              },
+              {
+                type: 'doc',
+                id: 'react-native/santoku/development/dependency-management',
+              },
+            ],
+          },
+          {
+            type: 'category',
+            label: 'Tools',
+            items: ['react-native/santoku/flipper'],
           },
         ],
       }
@@ -197,6 +273,10 @@ module.exports = {
           {
             type: 'doc',
             id: 'docusaurus/mdx',
+          },
+          {
+            type: 'doc',
+            id: 'docusaurus/plugins',
           },
           {
             // TODO: ヘッダリンクの作り方: ['docusaurus/create-link-in-header'],

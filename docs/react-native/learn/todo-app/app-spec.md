@@ -42,7 +42,11 @@ title: ToDoアプリの仕様
 
 ![todo_board_all](app-spec/todo_board_all.png)
 
-### ToDo作成
+### ToDo一覧（アクティビティインジケータ）
+
+![todo_board_all](app-spec/todo_board_all_indicator_block.png)
+
+### ToDo登録
 
 ![add_task](app-spec/add_task.png)
 
@@ -50,8 +54,21 @@ title: ToDoアプリの仕様
 
 ![logout](app-spec/setting.png)
 
-## アプリの前提、制約
+## REST API
 
-ReactとReact Nativeの違いを体験することを主眼としており、現在のバージョンのToDoアプリはバックエンドと接続しません。また、アプリ内にもデータを保存しません。
+ToDoアプリから利用するREST APIの仕様について説明します。
+REST APIでは、URIでリソースを表現し、HTTPメソッドでそれに対する操作を表現します。ここでは「ToDo」をリソースとし、ToDoの集合を`/todos`、集合の中の1つのToDoを`/todos/{id}`として表現します。
+また、機能や画面から、ToDoの属性として次の項目を用意します。
 
-そのため、ToDoの一覧やToDoの更新はできますが、アプリを停止すると初期状態に戻ります。
+- ToDoを識別するためのID
+- ToDoの内容
+- ToDoの状態
+
+ToDoリソースとこれらの属性を操作するために、ToDoアプリでは次のREST APIを利用します。
+
+| HTTPメソッド | パス | 説明 | リクエスト | レスポンス |
+| :--- | :--- | :--- | :--- | :--- |
+| GET | /api/todos | ToDoを全て取得する | - | ToDoの一覧 |
+| POST | /api/todos | ToDoを新しく登録する | ToDoの内容 | 登録したToDo |
+| PUT | /api/todo/{id} | ToDoの状態を更新する | ToDoの状態 | 更新したToDo |
+| DELETE | /api/todo/{id} | ToDoを削除する | - | - |

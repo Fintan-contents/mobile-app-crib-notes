@@ -105,11 +105,11 @@ Mac端末にダウンロードした証明書をダブルクリックすると�
 
 プロビジョニングプロファイルを設定します。
 
-1. Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定 > Signing & Capabilities > All
-1. Automatically manage signingのチェックを外す
-1. Provisioning Profileのプルダウン > Import Profile… を選択
+1. Xcodeの左ペインでプロジェクトをクリック＞「TARGETS」で通常の（TestsやtvOSなどではない）TARGETを指定＞「Signing & Capabilities」＞「All」を選択
+1. 「Automatically manage signing」のチェックを外す
+1. 「Provisioning Profile」のプルダウンで「Import Profile…」を選択
 1. 開発用プロビジョニングプロファイル（Apple Development）を指定
-1. Bundle Identifierにアプリ管理者から教えてもらったApp IDを指定
+1. 「Bundle Identifier」にアプリ管理者から教えてもらったApp IDを指定
 
 ##### トラブルシューティング
   
@@ -124,23 +124,23 @@ No "iOS Development" signing certificate matching team ID "XXXXXXXX" with a priv
 
 #### Configuration:DebugAdvancedの作成
 
-1. Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info > Configurations > Debugを選択
-1. `+` `-` の `+` を選択 > Duplicate “Debug” Configurationを選択
+1. Xcodeの左ペインでプロジェクトをクリック＞「PROJECT」でプロジェクトを選択＞「Info」＞「Configurations」＞「Debug」を選択
+1. `+` `-` の `+` を選択＞「Duplicate “Debug” Configuration」を選択
 1. 名前に「DebugAdvanced」を指定する
-1. Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定
-1. Signing & Capabilities > DebugAdvancedを確認しSigningにプロビジョニングプロファイルが設定されていればOK
+1. 左ペインでプロジェクトをクリック＞「TARGETS」で通常の（TestsやtvOSなどではない）TARGETを指定
+1. 「Signing & Capabilities」＞「DebugAdvanced」を確認しSigningにプロビジョニングプロファイルが設定されていればOK
 
 #### Configuration:Debug設定
 
 Appの高度な機能を使うアプリの場合は、CapabilityからAppの高度な機能を除外します。
 
-   1. Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常の（TestsやtvOSなどではない）TARGETを指定
-   1. Signing & Capabilities > Debugにて以下設定
-      1. Automatically manage signingのチェックをつける
-      1. TeamはPersonal Team（個人アカウント）を選択
-      1. Bundle Identifierはpersonal.${Allで設定したBundle Identifier}.{組織内の誰とも被らないID}を設定
+   1. Xcodeの左ペインでプロジェクトをクリック＞「TARGETS」で通常の（TestsやtvOSなどではない）TARGETを指定
+   1. 「Signing & Capabilities」＞「Debug」にて以下設定
+      1. 「Automatically manage signing」のチェックをつける
+      1. 「Team」で「Personal Team（<<個人アカウント名>>）」を選択
+      1. 「Bundle Identifier」に`personal.${Allで設定したBundle Identifier}.{組織内の誰とも被らないID}`を設定
          - 例：Allが`jp.fintan.mobile.SantokuApp`なら、Debugは`personal.jp.fintan.mobile.SantokuApp.123456`
-      1. CapabilityからPush Notificationを外す  
+      1. 「Capability」から「Push Notification」を外す  
          - ※このときentitlementsファイルを作るかプロンプトで聞かれますがその時は「はい」を選択してください
 
 #### Configuration:設定の確認
@@ -169,30 +169,30 @@ Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリ
 
 Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリックしてEdit Scheme... を選択します。
 
-   1. ダイアログ左上を選択し、<<アプリ名>>のSchemaを選択
-   1. <<アプリ名>>のSchema > Run > Infoにて
-       - Build ConfigurationでReleaseを選択
-       - Debug executeのチェックを外す
-   1. Duplicate Schemeをクリック
+   1. ダイアログ左上を選択し、<<アプリ名>>の「Schema」を選択
+   1. <<アプリ名>>の「Schema」＞「Run」＞「Info」で次のように設定
+       - 「Build Configuration」で「Release」を選択
+       - 「Debug execute」のチェックを外す
+   1. 「Duplicate Scheme」をクリック
    1. Schema名を <<アプリ名>> Debugにする
-   1. Run > Infoにて
-       - Build ConfigurationでDebugを選択
-       - Debug executeのチェックをつける
-   1. Duplicate Schemeをクリック
-   1. Schema名を <<アプリ名>> DebugAdvancedにする
-   1. Run > Infoにて
-       - Build ConfigurationでDebugAdvancedを選択
-       - Debug executeのチェックをつける
+   1. 「Run」＞「Info」で次のように設定
+       - 「Build Configuration」で「Debug」を選択
+       - 「Debug execute」のチェックをつける
+   1. 「Duplicate Scheme」をクリック
+   1. Schema名を「<<アプリ名>> DebugAdvanced」にする
+   1. 「Run」＞「Info」で次のように設定
+       - 「Build Configuration」で「DebugAdvanced」を選択
+       - 「Debug execute」のチェックをつける
 
 ### ビルド設定ファイルの作成
 
 設定したビルドの内容をファイルにします。
 
-  1. Xcode右メニューからプロジェクトフォルダにて右クリック > New File... を選択
-  1. Configuration Settings Fileを選択 > Nextを選択
+  1. Xcodeの左ペインでプロジェクトフォルダを右クリックし、「New File...」を選択
+  1. 「Configuration Settings File」＞「Next」を選択
      - ファイル名にPersonalAccountを指定
      - プロジェクト直下（ここではiosフォルダ）配下のアプリ名のフォルダを選択
-     - Targetsに<<アプリ名>>のTargetを指定
+     - 「Targets」に<<アプリ名>>のTargetを指定
   1. ファイルに以下を追記
      - CODE_SIGN_STYLE: Automatic
      - PERSONAL_IDENTIFIER: 誰とも被らない個人のID
@@ -211,20 +211,20 @@ PERSONAL_IDENTIFIER=809890
 DEVELOPMENT_TEAM=XXXXXXXX
 ```
 
-ConfigurationのDebugにて上記で作成した設定ファイルを読み込むようにします。
+「Configuration」の「Debug」で、上記で作成した設定ファイルを読み込むようにします。
 
-  1. Xcode > 左ペインでプロジェクトをクリック > PROJECTでプロジェクトを選択 > Info
-  1. Configurations > Debugを選択し、アプリ名の右プルダウンを選択先ほど作成した設定ファイルを指定する
+  1. Xcodeの左ペインでプロジェクトをクリック＞「PROJECT」でプロジェクトを選択＞「Info」
+  1. 「Configurations」＞「Debug」を選択し、アプリ名の右プルダウンを選択先ほど作成した設定ファイルを指定する
 
 **※すでに別の設定ファイルが指定されてる場合**既に指定されている設定ファイルに、以下のようなinclude文を追加する。
 
 ```config
-#include "<<アプリ名>>/PersonalAccount.xconfig"
+#include? "<<アプリ名>>/PersonalAccount.xconfig"
 ```
 
 #### ビルドファイルの余計な差分を元に戻す
 
-ビルドファイル`<<アプリ名>>.xcodeproj/project.pbxproj`でDebug Configurationの部分以外の下記項目名の差分は変更前に戻してください。変更前のファイルに元の値があれば値を戻し、項目がなければ項目ごと削除してください。
+ビルドファイル`<<アプリ名>>.xcodeproj/project.pbxproj`で「Debug Configuration」の部分以外の下記項目名の差分は変更前に戻してください。変更前のファイルに元の値があれば値を戻し、項目がなければ項目ごと削除してください。
 
   - DevelopmentTeam
   - PROVISIONING_PROFILE_SPECIFIER
@@ -234,7 +234,7 @@ ConfigurationのDebugにて上記で作成した設定ファイルを読み込�
 
 #### ビルド設定値ファイルの値を、ビルドファイルで読み込むようにする
 
-  - `<<アプリ名>>.xcodeproj/project.pbxproj` のDebug Configurationの部分について、以下3つの項目はビルド設定値ファイルから値を読み込むようにする
+  - `<<アプリ名>>.xcodeproj/project.pbxproj` の「Debug Configuration」の部分について、以下3つの項目はビルド設定値ファイルから値を読み込むようにする
     - CODE_SIGN_STYLE
     - DEVELOPMENT_TEAM
     - PRODUCT_BUNDLE_IDENTIFIER
@@ -272,8 +272,8 @@ ConfigurationのDebugにて上記で作成した設定ファイルを読み込�
         };
 ```
 
-- 手順の最後に、 Xcode > 左ペインでプロジェクトをクリック > TARGETSで通常のTARGET(TestsやtvOSなどついていないTARGET)を指定 > Setting & Capabilities > Debugを確認する
-  - 「ビルド設定値ファイルの作成」の手順実施前と同じようにTeam、Bundle Identifierが設定されていて、エラーが出ていなければOK
+- 手順の最後に、 Xcodeの左ペインでプロジェクトをクリック＞「TARGETS」で通常のTARGET(TestsやtvOSなどついていないTARGET)を指定＞「Setting & Capabilities」＞「Debug」を確認
+  - 「ビルド設定値ファイルの作成」の手順実施前と同じように「Team」、「Bundle Identifier」が設定されていて、エラーが出ていなければOK
 
 #### ビルド設定値ファイルのテンプレート化
 

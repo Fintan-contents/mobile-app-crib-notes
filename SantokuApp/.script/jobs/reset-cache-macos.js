@@ -58,7 +58,7 @@ module.exports = [
       },
       {
         command: 'rm',
-        args: ['-rf', '$(getconf DARWIN_USER_CACHE_DIR)//org.llvm.clang.$(whoami)/ModuleCache'],
+        args: ['-rf', '$(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang.$(whoami)/ModuleCache'],
       },
     ],
   },

@@ -33,7 +33,7 @@ React Navigationの使い方は次の通りです。
 ナビゲーターにはStackの他にも、TabやDrawerなどが用意されています。
 
 ```typescript
-const Root = createStackNavigator<RootParamList>();
+const Root = createStackNavigator();
 ```
 
 ### 2. 画面コンポーネントを作成
@@ -44,7 +44,7 @@ const Root = createStackNavigator<RootParamList>();
 const Screen1: React.FC = () => {
   return (
     <View style={styles.screen}>
-        /* 省略 */
+        /* ～省略～ */
     </View>
   );
 };
@@ -69,7 +69,12 @@ export const App = () => {
 };
 ```
 
-<!-- textlint-disable ja-technical-writing/sentence-length -->
+:::note
+`Root.Navigator`の`initialRouteName`属性に画面名（`Root.Screen`の`name`属性の値）を指定すると、対応する画面が初期表示画面になります。指定しない場合は、最初の`Root.Screen`が初期表示に利用されます。
+例えば上のソースコードでは、最初の`Root.Screen`である`Screen1`が初めに表示されます。
+:::
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 <Tabs
   defaultValue="image"
@@ -78,7 +83,7 @@ export const App = () => {
     {label: 'ソースコード', value: 'source'},
   ]}>
 
-<!-- textlint-enable ja-technical-writing/sentence-length -->
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 <TabItem value="image">
 
@@ -95,18 +100,12 @@ import {
 } from '@react-navigation/native';
 import {
   createStackNavigator,
-  StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Button} from 'react-native-elements';
 
-type RootParamList = {
-  Screen1: undefined;
-  Screen2: undefined;
-};
-
-const Root = createStackNavigator<RootParamList>();
+const Root = createStackNavigator();
 
 export const App = () => {
   return (
@@ -120,9 +119,7 @@ export const App = () => {
 };
 
 const Screen1: React.FC = () => {
-  const navigation = useNavigation<
-    StackNavigationProp<RootParamList, 'Screen1'>
-  >();
+  const navigation = useNavigation();
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Screen 1</Text>
@@ -136,9 +133,7 @@ const Screen1: React.FC = () => {
 };
 
 const Screen2: React.FC = () => {
-  const navigation = useNavigation<
-    StackNavigationProp<RootParamList, 'Screen2'>
-  >();
+  const navigation = useNavigation();
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Screen 2</Text>

@@ -21,7 +21,7 @@ Stackの操作として次のAPIが用意されています。
 
 ![Stack operations](stack_image.png)
 
-<!-- textlint-disable ja-technical-writing/sentence-length -->
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 <Tabs
   defaultValue="image"
@@ -30,7 +30,7 @@ Stackの操作として次のAPIが用意されています。
     {label: 'ソースコード', value: 'source'},
   ]}>
 
-<!-- textlint-enable ja-technical-writing/sentence-length -->
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 <TabItem value="image">
 
@@ -47,8 +47,7 @@ import {
   useNavigationState,
 } from '@react-navigation/native';
 import {
-  createStackNavigator,
-  StackNavigationProp,
+  createStackNavigator, StackNavigationProp,
 } from '@react-navigation/stack';
 import React from 'react';
 import {Text, View, ScrollView, StyleSheet} from 'react-native';
@@ -73,9 +72,7 @@ export const App = () => {
 };
 
 const Screen1: React.FC = () => {
-  const navigation = useNavigation<
-    StackNavigationProp<RootParamList, 'Screen1'>
-  >();
+  const navigation = useNavigation<StackNavigationProp<RootParamList, 'Screen1'>>();
   const state = useNavigationState((state) => state);
 
   return (
@@ -99,9 +96,7 @@ const Screen1: React.FC = () => {
 };
 
 const Screen2: React.FC = () => {
-  const navigation = useNavigation<
-    StackNavigationProp<RootParamList, 'Screen2'>
-  >();
+  const navigation = useNavigation<StackNavigationProp<RootParamList, 'Screen2'>>();
   const state = useNavigationState((state) => state);
 
   return (
