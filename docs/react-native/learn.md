@@ -1,6 +1,7 @@
 ---
-title: About
+title: React Nativeの学習
 hide_table_of_contents: true
+sidebar_label: Overview
 ---
 
 このコンテンツはReact Nativeでのモバイルアプリケーション開発を学習するためのコンテンツです。

@@ -1,24 +1,38 @@
 module.exports = {
-  reference: {
-    このドキュメントについて: ['reference/index'],
-    セキュリティ: ['reference/security/awesome-sites'],
-    認証: [
-      'reference/auth/overview',
-      'reference/auth/authn-architecture',
-      'reference/auth/login-screens',
-      'reference/auth/manage-credentials',
-      'reference/auth/stateless-authn',
-      'reference/auth/webassets-integration',
-      'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
-    ],
-    プッシュ通知: [
-      'reference/notification/overview',
-      'reference/notification/infrastructure',
-      'reference/notification/configuration',
-      'reference/notification/backend',
-      'reference/notification/client',
-    ],
-  },
+  reference: [
+    {
+      type: 'doc',
+      id: 'reference/index',
+    },
+    {
+      type: 'doc',
+      id: 'reference/security/awesome-sites',
+    },
+    {
+      type: 'category',
+      label: '認証',
+      items: [
+        'reference/auth/overview',
+        'reference/auth/authn-architecture',
+        'reference/auth/login-screens',
+        'reference/auth/manage-credentials',
+        'reference/auth/stateless-authn',
+        'reference/auth/webassets-integration',
+        'reference/auth/authn-with-backend-using-OIDC-and-device-authn',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'プッシュ通知',
+      items: [
+        'reference/notification/overview',
+        'reference/notification/infrastructure',
+        'reference/notification/configuration',
+        'reference/notification/backend',
+        'reference/notification/client',
+      ],
+    }
+  ],
   distribution: [
     {
       type: 'doc',
@@ -185,15 +199,23 @@ module.exports = {
       items: ['react-native/learn/advance/react-navigation-param'],
     },
   ],
-  pitfalls: {
-    About: ['react-native/common-pitfalls'],
-    アプリを実行できない: [
-      'react-native/common-pitfalls/unable-to-load-script',
-      'react-native/common-pitfalls/debug-keystore-not-found',
-      'react-native/common-pitfalls/react-native-cli-uninstall',
-      'react-native/common-pitfalls/cant-build-in-xcode',
-    ],
-  },
+  pitfalls: [
+    {
+      type: 'doc',
+      id: 'react-native/common-pitfalls',
+    },
+    {
+      type: 'category',
+      label: 'アプリを実行できない',
+      items: [
+        'react-native/common-pitfalls/overview',
+        'react-native/common-pitfalls/unable-to-load-script',
+        'react-native/common-pitfalls/debug-keystore-not-found',
+        'react-native/common-pitfalls/react-native-cli-uninstall',
+        'react-native/common-pitfalls/cant-build-in-xcode',
+      ],
+    },
+  ],
   ...(process.env.NODE_ENV === 'development'
     ? {
         santoku: [
