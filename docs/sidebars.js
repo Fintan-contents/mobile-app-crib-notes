@@ -253,6 +253,10 @@ module.exports = {
             id: 'docusaurus/mdx',
           },
           {
+            type: 'doc',
+            id: 'docusaurus/plugins',
+          },
+          {
             // TODO: ヘッダリンクの作り方: ['docusaurus/create-link-in-header'],
             // TODO: 目次の作り方: ['docusaurus/create-sidebar-toc'],
           },
