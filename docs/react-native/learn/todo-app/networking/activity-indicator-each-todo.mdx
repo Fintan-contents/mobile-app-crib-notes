@@ -109,11 +109,10 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
    completed: boolean;
 +  processing: boolean;
    toggleTodoCompletion: (id: number) => void;
-   onRemove: (id: number) => void;
  }
  
--export const TodoItem: React.FC<Props> = ({id, text, completed, toggleTodoCompletion, onRemove}) => {
-+export const TodoItem: React.FC<Props> = ({id, text, completed, toggleTodoCompletion, onRemove, processing}) => {
+-export const TodoItem: React.FC<Props> = ({id, text, completed, toggleTodoCompletion}) => {
++export const TodoItem: React.FC<Props> = ({id, text, completed, toggleTodoCompletion, processing}) => {
 ```
 
 `TodoList.tsx`で判定した値を`TodoItem`に渡します。
@@ -147,7 +146,6 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
        <View style={styles.todo}>
          <CheckBox title={text} checked={completed} containerStyle={styles.checkbox} onPress={onToggle} />
        </View>
-       <AntDesign name="delete" size={24} onPress={onDelete} />
 +      {processing && (
 +        <View style={styles.processing}>
 +          <ActivityIndicator animating={processing} size="large" color="white" style={styles.indicator} />

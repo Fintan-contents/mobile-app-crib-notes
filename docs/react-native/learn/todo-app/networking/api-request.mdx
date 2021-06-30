@@ -39,10 +39,6 @@ const putTodo = async (id: number, completed: boolean) => {
 
 `TodoService`を次のソースコードで上書きしてください。
 
-:::note
-画面の実装の演習問題で[ToDoの削除](../screens/exercise.mdx#ToDoの削除)を実装している場合は削除メソッドもAPIクライアントを呼びだすように修正してください。
-:::
-
 ```typescript title="/src/services/TodoService.ts"
 import {TodosApi, config} from 'backend';
 
