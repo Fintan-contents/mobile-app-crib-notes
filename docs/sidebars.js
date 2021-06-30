@@ -94,6 +94,7 @@ module.exports = {
         'react-native/learn/getting-started/setting-up-development-environment',
         'react-native/learn/getting-started/create-project',
         'react-native/learn/getting-started/launch-created-app',
+        'react-native/learn/getting-started/supplement',
       ],
     },
     {
