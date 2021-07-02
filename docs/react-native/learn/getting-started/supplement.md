@@ -2,6 +2,9 @@
 title: 開発環境の補足
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 開発時に使用するエディタやproxy環境下で開発環境を構築する方法を紹介します。
 
 ## Visual Studio Code
