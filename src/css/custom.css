@@ -107,7 +107,7 @@
   flex-wrap: nowrap;
 }
 
-.copyrightText {
+.copyright-text {
   flex-shrink: 1;
   margin-left: var(--ifm-spacing-horizontal);
 }
@@ -117,12 +117,12 @@
     flex-direction: column;
   }
 
-  .copyrightText {
+  .copyright-text {
     margin-left: 0;
   }
 }
 
-.copyrightImage {
+.copyright-image {
   flex-shrink: 0;
 }
 

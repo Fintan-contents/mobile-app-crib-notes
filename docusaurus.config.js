@@ -1,62 +1,25 @@
-const path = require('path');
-const baseUrl = '/mobile-app-crib-notes/';
+const productionOrganization = 'fintan-contents';
+const draftOrganization = 'ws-4020';
+const project = 'mobile-app-crib-notes';
 
-if (!process.env.CI) {
-  process.env.GITHUB_REPOSITORY = __dirname.toLowerCase().includes('ws-4020')
-    ? 'ws-4020/mobile-app-crib-notes'
-    : 'fintan-contents/mobile-app-crib-notes';
-}
-
-const injector = (options) => {
-  const keys = Object.keys(options);
-  const placeHolders = keys.map((key) => new RegExp('{@inject: *' + key + '}'));
-  return inject;
-  function inject(tree) {
-    if (tree.type === 'root' || tree.type === 'element') {
-      tree.children = tree.children.map(inject);
-      if (tree.tagName === 'a' && tree.properties?.href) {
-        const href = decodeURI(tree.properties.href);
-        if (hasPlaceHolder(href)) {
-          tree.properties.href = encodeURI(replace(href));
-        }
-      }
-    }
-    if (tree.type === 'text' && hasPlaceHolder(tree.value)) {
-      tree.value = replace(tree.value);
-    }
-    return tree;
-  }
-
-  function hasPlaceHolder(value) {
-    return value && value.includes('{@inject:');
-  }
-
-  function replace(value) {
-    return keys.reduce((replaced, key, index) => {
-      return replaced.replace(placeHolders[index], options[key]);
-    }, value);
-  }
-};
-
-// for debug
-console.debug(`GITHUB_REPOSITORY: ${process.env.GITHUB_REPOSITORY}`);
-
-const isDraft = !!process.env.GITHUB_REPOSITORY && process.env.GITHUB_REPOSITORY.toLowerCase().startsWith('ws-4020');
-const organization = isDraft ? 'ws-4020' : 'fintan-contents';
+const organization = process.env.GITHUB_REPOSITORY?.toLowerCase()?.startsWith(`${productionOrganization}/`)
+  ? productionOrganization
+  : draftOrganization;
+const isDraft = organization === draftOrganization;
 
 const copyright = `<div class="no-content">
 <div class="copyright">
-  <div class="copyrightImage">
-    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width: 0; height: auto;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+  <div class="copyright-image">
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width: 0; height: auto;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
   </div>
-  <div class="copyrightText">
-    ドキュメントは、<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">クリエイティブ・コモンズ 表示 - 継承 4.0 国際 ライセンス</a
+  <div class="copyright-text">
+    ドキュメントは、<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">クリエイティブ・コモンズ 表示 - 継承 4.0 国際 ライセンス</a
     >の下に提供されており、コードサンプルは<a rel="license" href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a
     >の下に提供されています。
   </div>
 </div>
 <div class="supplementary">
-  <a href="${baseUrl}trademark/" class="footer__link-item">商標について</a>
+  <a href="/${project}/trademark/" class="footer__link-item">商標について</a>
 </div>
 </div>
 `;
@@ -70,16 +33,16 @@ module.exports = {
   title: 'Fintan » Mobile App Development',
   tagline: '',
   url: `https://${organization}.github.io`,
-  baseUrl,
+  baseUrl: `/${project}/`,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: organization, // Usually your GitHub org/user name.
-  projectName: 'mobile-app-crib-notes', // Usually your repo name.
+  projectName: project, // Usually your repo name.
   noIndex: isDraft,
   i18n: {
-    defaultLocale: 'ja-JP',
-    locales: ['ja-JP'],
+    defaultLocale: 'ja',
+    locales: ['ja'],
   },
   themeConfig: {
     hideableSidebar: true,
@@ -107,7 +70,7 @@ module.exports = {
         {
           label: 'Home',
           to: '/',
-          activeBaseRegex: `${baseUrl}?$`,
+          activeBaseRegex: `${project}?$`,
           position: 'left',
         },
         {
@@ -138,7 +101,7 @@ module.exports = {
         },
         ...(process.env.NODE_ENV === 'development' ? [{label: 'Docusaurus', to: 'docusaurus', position: 'left'}] : []),
         {
-          href: `https://github.com/${organization}/mobile-app-crib-notes`,
+          href: `https://github.com/${organization}/${project}`,
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
@@ -200,7 +163,7 @@ module.exports = {
           sidebarPath: require.resolve('./docs/sidebars.js'),
           routeBasePath: '/',
           showLastUpdateTime: true,
-          rehypePlugins: [[injector, injectOptions]],
+          rehypePlugins: [[require('./src/plugins/literal-injector-rehype-plugin'), injectOptions]],
         },
         blog: false,
         theme: {
@@ -257,6 +220,6 @@ module.exports = {
         ],
       },
     ],
-    path.resolve(__dirname, 'src/plugins/medium-zoom-docusaurus-plugin'),
+    './src/plugins/medium-zoom-docusaurus-plugin',
   ],
 };
