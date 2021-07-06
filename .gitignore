@@ -88,9 +88,13 @@ dist/
 !/.idea/codeStyles
 !/.idea/dictionaries
 !/.idea/inspectionProfiles
+!/.idea/jsLinters/eslint.xml
 !/.idea/scopes
 !/.idea/encodings.xml
 !/.idea/google-java-format.xml
+!/.idea/jsLibraryMappings.xml
+!/.idea/misc.xml
+!/.idea/prettier.xml
 !/.idea/vcs.xml
 !/.idea/runConfigurations
 *.iws
