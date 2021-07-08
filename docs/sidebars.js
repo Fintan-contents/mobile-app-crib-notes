@@ -2,7 +2,7 @@ module.exports = {
   reference: [
     {
       type: 'doc',
-      id: 'reference/index',
+      id: 'reference',
     },
     {
       type: 'doc',
@@ -31,12 +31,12 @@ module.exports = {
         'reference/notification/backend',
         'reference/notification/client',
       ],
-    }
+    },
   ],
   distribution: [
     {
       type: 'doc',
-      id: 'distribution/index',
+      id: 'distribution',
     },
     {
       type: 'doc',
@@ -44,7 +44,7 @@ module.exports = {
     },
     {
       type: 'doc',
-      id: 'distribution/usecase/index',
+      id: 'distribution/usecase',
     },
     {
       type: 'category',

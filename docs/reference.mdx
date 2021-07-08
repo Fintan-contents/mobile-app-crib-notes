@@ -1,0 +1,37 @@
+---
+title: リファレンス
+sidebar_label: Overview
+---
+
+Android/iOSのモバイルアプリケーションの開発に必要となる基本的な知識をまとめています。
+
+:::caution attention
+これまでWebアプリケーションを開発していたエンジニアが、モバイルアプリケーションの開発を始めるために調査した内容などをまとめています。そのため、Webとは考え方やアーキテクチャが異なるポイントを重視した内容となっています。
+
+ここでは、モバイルアプリケーションの開発におけるごく一部の側面しか紹介できていません。また、すでに紹介している内容についても、内容を追記する可能性もありますし、プラットフォームの変化などで変更されていく可能性もあります。
+:::
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+import {PageList} from '../src/components';
+const overviews = [
+  {
+    title: 'セキュリティ',
+    summary: <>モバイルアプリケーション開発を始める上で参考になる、セキュリティ関連のガイドや記事を紹介しています。</>,
+    to: '/reference/security/awesome-sites'
+  },
+  {
+    title: '認証',
+    summary: <>モバイルアプリケーションでの認証方式についてまとめています。特に、WebViewとAPIで認証情報を共有する方式やOpenID Connectを用いて認証する場合の方式について紹介しています。</>,
+    to: '/reference/auth/overview'
+  },
+  {
+    title: 'プッシュ通知',
+    summary: <>モバイルアプリケーションでのプッシュ通知（リモートプッシュ）についてまとめています。Firebase Cloud Messagingを利用してプッシュ通知を送受信するためのソースコード例も載せています。</>,
+    to: '/reference/notification/overview'
+  },
+]
+
+<PageList overviews={overviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
