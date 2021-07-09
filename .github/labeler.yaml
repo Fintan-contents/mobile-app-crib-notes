@@ -41,21 +41,18 @@ chore:
 ci:
   - .github/workflows/**/*
 
-# Add 'doc' label to any change within the 'docs' directory
+# Add 'doc' label to any change within the 'website/docs' directory
 doc:
-  - docs/**
-  - src/**
-  - static/**
+  - any: [
+      'website/**',
+      '!website/nginx/**',
+      '!website/.eslintrc.js',
+      '!website/.gitignore',
+      '!website/.prettierrc.js',
+      '!website/.stylelintrc.js',
+      '!website/tsconfig.json',
+    ]
   - SantokuApp/README.md
-  - .htmltest.yaml
-  - .markdownlint.js
-  - .textlintrc.js
-  - babel.config.js
-  - docusaurus.config.js
-  - package.json
-  - package-lock.json
-  - prh.yaml
-  - README.md
 
 # Add 'test' label to any change to files within the directories listed below
 test:

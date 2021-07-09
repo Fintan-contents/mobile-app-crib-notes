@@ -64,8 +64,8 @@
       // Docusaurusの依存パッケージは手動で更新する必要があるのでRenovateの対象外とします
       groupName: 'Docusaurus dependencies',
       enabled: false,
-      // SantokuAppのReactなどのパッケージとまとめられないように、ルートディレクトリのpackage.jsonだけを対象にしています
-      matchFiles: ['package.json'],
+      // SantokuAppのReactなどのパッケージとまとめられないように、website/package.jsonだけを対象にしています
+      matchFiles: ['website/package.json'],
       matchPackageNames: ['@mdx-js/react', 'clsx', 'react', 'react-dom', '@tsconfig/docusaurus'],
     },
     {

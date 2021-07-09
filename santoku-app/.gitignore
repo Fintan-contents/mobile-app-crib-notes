@@ -84,3 +84,9 @@ ios/PersonalAccount.xcconfig
 ### Notification
 **/google-services.json
 **/GoogleService-Info.plist
+
+# Misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
