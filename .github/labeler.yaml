@@ -1,27 +1,27 @@
 # Add 'iOS' label to any change within the 'ios' directory
 iOS:
-  - SantokuApp/ios/**/*
+  - example-app/SantokuApp/ios/**/*
 
 # Add 'Android' label to any change within the 'android' directory
 Android:
-  - SantokuApp/android/**/*
+  - example-app/SantokuApp/android/**/*
 
 # Add 'app' label to any change within the 'src' directory and to the files listed below
 app:
-  - SantokuApp/src/**/*
-  - SantokuApp/index.js
+  - example-app/SantokuApp/src/**/*
+  - example-app/SantokuApp/index.js
 
 # Add 'build' label to any changes to the files listed below
 build:
-  - SantokuApp/.script/**/*
-  - SantokuApp/.buckconfig
-  - SantokuApp/.editorconfig
-  - SantokuApp/.eslintrc.js
-  - SantokuApp/babel.config.js
-  - SantokuApp/metro.config.js
-  - SantokuApp/package.json
-  - SantokuApp/package-lock.json
-  - SantokuApp/tsconfig.json
+  - example-app/SantokuApp/.script/**/*
+  - example-app/SantokuApp/.buckconfig
+  - example-app/SantokuApp/.editorconfig
+  - example-app/SantokuApp/.eslintrc.js
+  - example-app/SantokuApp/babel.config.js
+  - example-app/SantokuApp/metro.config.js
+  - example-app/SantokuApp/package.json
+  - example-app/SantokuApp/package-lock.json
+  - example-app/SantokuApp/tsconfig.json
   - .tool-versions
 
 # Add 'chore' label to any change within the '.github' directory and to the files listed below
@@ -29,8 +29,8 @@ chore:
   # Changes to files within '.github/workflows' should correspond to the 'ci' label
   - any: ['.github/**/*', '!.github/workflows/**/*']
   - .idea/**/*
-  - SantokuApp/.gitattributes
-  - SantokuApp/.gitignore
+  - example-app/SantokuApp/.gitattributes
+  - example-app/SantokuApp/.gitignore
   - .editorconfig
   - .gitattributes
   - .gitignore
@@ -52,10 +52,10 @@ doc:
       '!website/.stylelintrc.js',
       '!website/tsconfig.json',
     ]
-  - SantokuApp/README.md
+  - example-app/SantokuApp/README.md
 
 # Add 'test' label to any change to files within the directories listed below
 test:
-  - SantokuApp/jest/**/*
-  - SantokuApp/jest.config.js
-  - SantokuApp/src/**/*.test.tsx
+  - example-app/SantokuApp/jest/**/*
+  - example-app/SantokuApp/jest.config.js
+  - example-app/SantokuApp/src/**/*.test.tsx
