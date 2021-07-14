@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:111111111111:android:0000000000111111111122",
         "android_client_info": {
-          "package_name": "dummy"
+          "package_name": "jp.fintan.mobile.santokuapp"
         }
       },
       "oauth_client": [
@@ -45,7 +45,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:111111111111:android:0000000000111111111122",
         "android_client_info": {
-          "package_name": "dummy"
+          "package_name": "jp.fintan.mobile.santokuapp.debug"
         }
       },
       "oauth_client": [
