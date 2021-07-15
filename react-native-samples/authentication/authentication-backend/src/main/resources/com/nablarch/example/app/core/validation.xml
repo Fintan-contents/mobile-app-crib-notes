@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- バリデーション機能の設定 -->
+<component-configuration
+        xmlns="http://tis.co.jp/nablarch/component-configuration" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <import file="nablarch/core/validation/charset-definition.xml"/>
+
+  <component name="domainManager" class="com.nablarch.example.app.entity.core.validation.validator.ExampleDomainManager"/>
+
+  <component name="validationStrategy" class="nablarch.common.web.validator.BeanValidationStrategy" />
+
+  <component name="constraintViolationConverterFactory" class="nablarch.core.validation.ee.ItemNamedConstraintViolationConverterFactory" />
+
+</component-configuration>

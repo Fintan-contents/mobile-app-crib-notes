@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- プロダクション用の設定ファイルを読み込み -->
+  <import file="web-component-configuration.xml"/>
+
+  <component name="transactionFactory" class="nablarch.core.db.transaction.JdbcTransactionFactory" />
+  <component class="nablarch.core.db.statement.exception.BasicSqlStatementExceptionFactory" />
+  <component name="connectionFactory" class="nablarch.core.db.connection.BasicDbConnectionFactoryForDataSource">
+    <property name="dialect" ref="dialect" />
+    <property name="dataSource">
+      <component class="org.h2.jdbcx.JdbcDataSource">
+        <property name="user" value="sa" />
+        <property name="password" value="" />
+        <property name="URL" value="jdbc:h2:~/nablarch_test" />
+      </component>
+    </property>
+  </component>
+
+  <component name="statementFactory" class="nablarch.core.db.statement.BasicStatementFactory">
+    <property name="sqlLoader">
+      <component name="sqlLoader" class="nablarch.core.db.statement.BasicSqlLoader">
+        <property name="fileEncoding" value="utf-8" />
+        <property name="extension" value="sql" />
+      </component>
+    </property>
+  </component>
+
+  <component name="dbManager" class="nablarch.core.db.transaction.SimpleDbTransactionManager" >
+    <property name="dbTransactionName" value="subTran"/>
+    <property name="transactionFactory" ref="transactionFactory" />
+    <property name="connectionFactory" ref="connectionFactory" />
+  </component>
+  
+  <component name="daoContextFactory" class="nablarch.common.dao.BasicDaoContextFactory" />
+  
+</component-configuration>

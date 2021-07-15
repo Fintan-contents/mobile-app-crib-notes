@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <component name="sessionStoreHandler" class="nablarch.common.web.session.SessionStoreHandler">
+    <property name="expiration" ref="expiration" />
+  </component>
+
+  <component name="expiration" class="nablarch.common.web.session.DbManagedExpiration">
+    <property name="dbManager">
+      <component class="nablarch.core.db.transaction.SimpleDbTransactionManager">
+        <property name="dbTransactionName" value="expirationTransaction"/>
+      </component>
+    </property>
+  </component>
+</component-configuration>

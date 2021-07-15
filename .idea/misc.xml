@@ -3,7 +3,7 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/santoku-app-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/react-native-samples/push-notification/push-notification-backend/pom.xml" />
       </list>
     </option>
   </component>

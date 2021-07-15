@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+        xmlns="http://tis.co.jp/nablarch/component-configuration"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+  <!--
+   クラス単体テスト、リクエスト単体テスト用のDB設定
+   JNDI登録は煩雑なのでJDBCドライバのDataSourceを直接使用する。
+   -->
+  <import file="nablarch/core/db/connection-factory-datasource.xml"/>
+
+  <!-- データソース設定 -->
+  <component name="dataSource"
+             class="com.zaxxer.hikari.HikariDataSource" autowireType="None">
+    <property name="driverClassName" value="${nablarch.db.jdbcDriver}"/>
+    <property name="jdbcUrl"         value="${nablarch.db.url}"/>
+    <property name="username"        value="${nablarch.db.user}"/>
+    <property name="password"        value="${nablarch.db.password}"/>
+    <property name="maximumPoolSize" value="${nablarch.db.maxPoolSize}"/>
+  </component>
+
+</component-configuration>

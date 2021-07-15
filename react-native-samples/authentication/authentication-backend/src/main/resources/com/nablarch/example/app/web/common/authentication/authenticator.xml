@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+認証用の設定ファイル
+-->
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- 認証モジュールの設定 -->
+  <component name="authenticator"
+      class="com.nablarch.example.app.web.common.authentication.SystemAccountAuthenticator">
+    <property name="dbManager">
+      <component
+          class="nablarch.core.db.transaction.SimpleDbTransactionManager">
+        <property name="dbTransactionName" value="authenticator" />
+        <property name="transactionFactory" ref="transactionFactory" />
+        <property name="connectionFactory" ref="connectionFactory" />
+      </component>
+    </property>
+    <!-- ユーザIDをロックする認証失敗回数 -->
+    <property name="failedCountToLock" value="5" />
+  </component>
+
+</component-configuration>

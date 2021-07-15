@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Nablarchカスタムタグ・hidden暗号化機能の設定 -->
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- Nablarchタグのハンドラの設定ファイル -->
+  <component name="nablarchTagHandler" class="nablarch.common.web.handler.NablarchTagHandler">
+    <property name="path" value="${nablarch.nablarchTagHandler.path}" />
+    <property name="statusCode" value="${nablarch.nablarchTagHandler.statusCode}" />
+  </component>
+
+  <!-- カスタムタグ設定 -->
+  <component name="customTagConfig" class="nablarch.common.web.tag.CustomTagConfig">
+    <property name="elementLabelPattern" value="${nablarch.customTagConfig.elementLabelPattern}" />
+    <property name="useHiddenEncryption" value="${nablarch.customTagConfig.useHiddenEncryption}" />
+    <!--
+    hidden暗号化機能を使用する場合(useHiddenEncryptionプロパティをtrue)に暗号化対象外とするリクエストID（noHiddenEncryptionRequestIds）は、
+    設定時に修正する必要があるファイルを最小化するために、処理方式毎のコンポーネント定義ファイル(web-component-configuration.xml)で定義している。
+    -->
+    <property name="noHiddenEncryptionRequestIds" ref="noHiddenEncryptionRequestIds" />
+    <property name="popupWindowName" value="${nablarch.customTagConfig.popupWindowName}" />
+    <property name="displayMethod" value="${nablarch.customTagConfig.displayMethod}" />
+    <property name="useGetRequest" value="${nablarch.customTagConfig.useGetRequest}" />
+  </component>
+  
+
+</component-configuration>

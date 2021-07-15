@@ -9,7 +9,7 @@
     enabled: true,
     schedule: ['before 20:00 on sunday'],
   },
-  ignorePaths: ['santoku-app'],
+  ignorePaths: ['react-native-samples'],
   packageRules: [
     {
       // expo upgradeで更新されるパッケージはRenovateの対象外とします

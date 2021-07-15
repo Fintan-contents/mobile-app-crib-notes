@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- テーブル定義 -->
+  <import file="nablarch/schema-config.xml" />
+  
+  <!-- jsr310 -->
+  <import file="JSR310.xml" />
+  
+  <!-- 環境設定ファイル -->
+  <config-file file="env.properties" />
+  <config-file file="common.properties" />
+  <config-file file="RegistrationPdfFile.properties" />
+
+  <!-- バリデーション -->
+  <import file="com/nablarch/example/app/core/validation.xml" />
+
+  <!-- パスワード暗号化モジュールの設定 -->
+  <!-- 各PJ固有の設定を読み込む。 -->
+  <import file="com/nablarch/example/app/web/common/authentication/passwordEncryptor.xml" />
+
+  <!-- 認証設定 -->
+  <!-- 各PJ固有の設定を読み込む。 -->
+  <import file="com/nablarch/example/app/web/common/authentication/authenticator.xml" />
+
+  <!-- ユニバーサルDAO機能 -->
+  <import file="nablarch/common/dao.xml" />
+
+  <!-- web固有設定の読み込み -->
+  <!-- データベース設定 -->
+  <import file="nablarch/webui/db-for-webui.xml"/>
+  <import file="db.xml" />
+
+  <!-- Interceptorの実行順定義 -->
+  <import file="nablarch/webui/interceptors.xml" />
+
+  <!-- エラーページ設定 -->
+  <import file="nablarch/webui/error-page-for-webui.xml" />
+
+  <!-- ファイルパス設定 -->
+  <!-- ファイルパス設定はexampleプロジェクト個別カスタマイズした設定を読込む。 -->
+  <import file="com/nablarch/example/app/web/webui/filepath-for-webui.xml" />
+
+  <!-- ファイルアップロード機能設定 -->
+  <import file="nablarch/webui/multipart.xml" />
+
+  <!-- カスタムタグ設定 -->
+  <import file="com/nablarch/example/app/web/webui/nablarch-tag.xml" />
+
+  <!-- 二重サブミット防止機能 -->
+  <import file="com/nablarch/example/app/web/webui/double-submission.xml" />
+  
+  <!-- hidden暗号化機能を使用しないリクエストID -->
+  <list name="noHiddenEncryptionRequestIds">
+  </list>
+
+  <!-- HTTPリクエストマッピング機能 -->
+  <import file="com/nablarch/example/app/web/webui/request-mapper-for-webui.xml" />
+
+  <!-- セッションストア機能 -->
+  <import file="nablarch/webui/session-store.xml" />
+  <import file="com/nablarch/example/app/web/webui/session-store.xml" />
+
+  <!-- Flyway設定 -->
+  <component name="dbMigration" class="com.nablarch.example.system.FlywayExecutor">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="locations" value="${flyway.locations}" />
+    <property name="cleanBeforeMigrate" value="${flyway.cleanBeforeMigrate}"/>
+  </component>
+
+  <!-- ダイアレクト設定 -->
+  <!-- 使用するDBに合わせてダイアレクトを設定すること -->
+  <component name="dialect" class="nablarch.core.db.dialect.H2Dialect" />
+
+  <!-- スレッドコンテキストハンドラ -->
+  <import file="nablarch/webui/threadcontext-for-webui-in-sessionstore.xml"/>
+
+  <!-- CSRF対策 -->
+  <component name="csrfTokenVerificationHandler"
+             class="nablarch.fw.web.handler.CsrfTokenVerificationHandler" />
+
+  <!-- ハンドラキュー構成 -->
+  <component name="webFrontController"
+             class="nablarch.fw.web.servlet.WebFrontController">
+    <property name="handlerQueue">
+      <list>
+        <component class="nablarch.fw.web.handler.HttpCharacterEncodingHandler"/>
+
+        <component class="nablarch.fw.handler.GlobalErrorHandler"/>
+
+        <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler"/>
+
+        <component class="nablarch.fw.web.handler.HttpResponseHandler"/>
+
+        <component class="nablarch.fw.web.handler.SecureHandler" />
+
+        <component-ref name="multipartHandler"/>
+
+        <component-ref name="sessionStoreHandler" />
+
+        <component-ref name="threadContextHandler"/>
+
+        <component class="nablarch.common.web.handler.HttpAccessLogHandler"/>
+
+        <component class="nablarch.fw.web.handler.NormalizationHandler">
+          <property name="normalizers">
+            <list>
+              <component class="nablarch.fw.web.handler.normalizer.TrimNormalizer" />
+              <component class="com.nablarch.example.app.web.handler.DateFormatNormalizer" />
+            </list>
+          </property>
+        </component>
+
+        <component class="nablarch.fw.web.handler.ForwardingHandler"/>
+
+        <component class="nablarch.fw.web.handler.HttpErrorHandler" >
+          <property name="defaultPages">
+            <map>
+              <entry key="4.." value="/WEB-INF/view/common/errorPages/userError.jsp" />
+              <entry key="403" value="/WEB-INF/view/common/errorPages/permissionError.jsp" />
+              <entry key="404" value="/WEB-INF/view/common/errorPages/pageNotFoundError.jsp" />
+              <entry key="413" value="/WEB-INF/view/common/errorPages/requestEntityTooLarge.jsp" />
+              <entry key="5.." value="/WEB-INF/view/common/errorPages/error.jsp" />
+              <entry key="503" value="/WEB-INF/view/common/errorPages/serviceUnavailableError.jsp" />
+            </map>
+          </property>
+        </component>
+
+        <component-ref name="nablarchTagHandler"/>
+
+        <component-ref name="csrfTokenVerificationHandler" />
+
+        <component-ref name="dbConnectionManagementHandler"/>
+
+        <component-ref name="transactionManagementHandler"/>
+
+        <component class="com.nablarch.example.app.web.action.LoginUserPrincipalCheckHandler"/>
+
+        <component class="com.nablarch.example.app.web.handler.ExampleErrorForwardHandler"/>
+
+        <component-ref name="packageMapping"/>
+      </list>
+    </property>
+  </component>
+
+  <component name="jaxrsController"
+             class="nablarch.fw.web.servlet.WebFrontController">
+    <property name="handlerQueue">
+      <list>
+        <component class="nablarch.fw.web.handler.HttpCharacterEncodingHandler"/>
+        <component class="nablarch.fw.handler.GlobalErrorHandler"/>
+        <component class="nablarch.fw.jaxrs.JaxRsResponseHandler">
+          <property name="errorResponseBuilder">
+            <component class="com.nablarch.example.app.web.handler.RestfulErrorResponseBuilder" />
+          </property>
+        </component>
+        <component-ref name="sessionStoreHandler" />
+        <component-ref name="dbConnectionManagementHandler"/>
+        <component-ref name="transactionManagementHandler"/>
+        <component-ref name="jaxrsPackageMapping"/>
+      </list>
+    </property>
+  </component>
+
+  <!-- 初期化が必要なコンポーネント -->
+  <component name="initializer"
+             class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+    <property name="initializeList">
+      <list>
+        <!-- web/session-store.xml:DBストア-->
+        <component-ref name="dbStore" />
+        <component-ref name="expiration" />
+        <component-ref name="tokenManager"/>
+        <component-ref name="packageMapping" />
+        <component-ref name="jaxrsPackageMapping"/>
+        <component-ref name="dbMigration" />
+      </list>
+    </property>
+  </component>
+
+</component-configuration>
