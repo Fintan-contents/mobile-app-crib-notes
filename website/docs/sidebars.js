@@ -5,8 +5,9 @@ module.exports = {
       id: 'reference',
     },
     {
-      type: 'doc',
-      id: 'reference/security/awesome-sites',
+      type: 'category',
+      label: 'セキュリティ',
+      items: ['reference/security/awesome-sites'],
     },
     {
       type: 'category',
@@ -217,73 +218,65 @@ module.exports = {
       ],
     },
   ],
-  ...(process.env.NODE_ENV === 'development'
-    ? {
-        santoku: [
-          {
-            type: 'doc',
-            id: 'react-native/santoku',
-          },
-          {
-            type: 'category',
-            label: 'IDE',
-            items: ['react-native/settings-vscode'],
-          },
-          {
-            type: 'category',
-            label: 'Development',
-            items: [
-              {
-                type: 'doc',
-                id: 'react-native/santoku/development',
-              },
-              {
-                type: 'category',
-                label: 'ビルド設定',
-                items: [
-                  'react-native/santoku/development/build-variants',
-                  'react-native/santoku/development/build-type-configurations',
-                  'react-native/santoku/development/product-flavor-configurations',
-                ],
-              },
-              {
-                type: 'doc',
-                id: 'react-native/santoku/development/dependency-management',
-              },
-            ],
-          },
-          {
-            type: 'category',
-            label: 'Tools',
-            items: ['react-native/santoku/flipper'],
-          },
-        ],
-      }
-    : {}),
-  ...(process.env.NODE_ENV === 'development'
-    ? {
-        docusaurus: [
-          {
-            type: 'doc',
-            id: 'docusaurus/index',
-          },
-          {
-            type: 'doc',
-            id: 'docusaurus/doc1',
-          },
-          {
-            type: 'doc',
-            id: 'docusaurus/mdx',
-          },
-          {
-            type: 'doc',
-            id: 'docusaurus/plugins',
-          },
-          {
-            // TODO: ヘッダリンクの作り方: ['docusaurus/create-link-in-header'],
-            // TODO: 目次の作り方: ['docusaurus/create-sidebar-toc'],
-          },
-        ],
-      }
-    : {}),
+  santoku: [
+    {
+      type: 'doc',
+      id: 'react-native/santoku',
+    },
+    {
+      type: 'category',
+      label: 'Development',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/development',
+        },
+        {
+          type: 'category',
+          label: 'ビルド',
+          items: [
+            'react-native/santoku/development/build-configuration',
+            'react-native/santoku/development/build-configuration/build-variants',
+            'react-native/santoku/development/build-configuration/build-type-configurations',
+            'react-native/santoku/development/build-configuration/product-flavor-configurations',
+          ],
+        },
+        {
+          type: 'category',
+          label: '開発に利用するツール',
+          items: [
+            'react-native/santoku/development/tools',
+            'react-native/santoku/development/tools/vscode',
+            'react-native/santoku/development/tools/flipper',
+          ],
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/development/dependency-management',
+        },
+      ],
+    },
+  ],
+  docusaurus: [
+    {
+      type: 'doc',
+      id: 'docusaurus/index',
+    },
+    {
+      type: 'doc',
+      id: 'docusaurus/doc1',
+    },
+    {
+      type: 'doc',
+      id: 'docusaurus/mdx',
+    },
+    {
+      type: 'doc',
+      id: 'docusaurus/plugins',
+    },
+    {
+      // TODO: ヘッダリンクの作り方: ['docusaurus/create-link-in-header'],
+      // TODO: 目次の作り方: ['docusaurus/create-sidebar-toc'],
+    },
+  ],
 };

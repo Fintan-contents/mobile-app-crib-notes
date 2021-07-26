@@ -9,7 +9,7 @@ title: Xcodeでビルドが失敗する
 [Flipper](https://fbflipper.com/)というツールの依存関係が解消できないために発生することがあります。
 エラーの内容と対処方法を参考にしてください。
 
-またFlipperについては、本サイトでも[Flipperの簡単なガイド](../santoku/flipper.md)がありますので参照してみてください。
+またFlipperについては、本サイトでも[Flipperの簡単なガイド](../santoku/development/tools/flipper.md)がありますので参照してみてください。
 
 ### エラー内容
 

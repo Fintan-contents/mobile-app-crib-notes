@@ -1,0 +1,28 @@
+---
+title: ビルド
+sidebar_label: Overview
+---
+
+このアプリケーションのビルド関連の設定について紹介します。このアプリケーションでは、Androidの[ビルドバリアント](https://developer.android.com/studio/build/build-variants)（[ビルドタイプとプロダクトフレーバー](https://developer.android.com/studio/build#build-config)）の考え方を参考にして、React Nativeアプリケーションのビルド設定をしています。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+import {PageList} from '../../../../src/components';
+const overviews = [
+  {
+    title: 'ビルドバリアント',
+    to: '/react-native/santoku/development/build-configuration/build-variants',
+  },
+  {
+    title: 'ビルドタイプ',
+    to: '/react-native/santoku/development/build-configuration/build-type-configurations',
+  },
+  {
+    title: 'プロダクトフレーバー',
+    to: '/react-native/santoku/development/build-configuration/product-flavor-configurations',
+  }
+]
+
+<PageList overviews={overviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->

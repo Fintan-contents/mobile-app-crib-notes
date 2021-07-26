@@ -1,8 +1,8 @@
 ---
-title: Visual Studio Codeの設定
+title: Visual Studio Code
 ---
 
-ここではVisual Studio Code (以下VS Code) での開発に際して有用なプラグインをご紹介します。
+ここではVisual Studio Code (以下VS Code) での開発で有用なプラグインを紹介します。
 
 ## React Native Tools
 

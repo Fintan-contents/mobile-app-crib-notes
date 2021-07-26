@@ -5,11 +5,11 @@ title: ビルドバリアント
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## 基本的な考え方
+## 基本方針
 
-Androidの[ビルドバリアント](https://developer.android.com/studio/build/build-variants)（[ビルドタイプとプロダクトフレーバー](https://developer.android.com/studio/build#build-config)）の考え方を参考にして、React Nativeアプリケーションのビルド設定をしています。
+このアプリケーションでは、デバッグビルドなどを切り替えるビルドタイプと、接続先の環境などを切り替えるプロダクトフレーバーの組み合わせをビルドバリアントと呼んでいます。
 
-ビルドバリアントはAndroidではGradle、iOSではXcodeのConfigurationで設定し、プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)で設定しています。
+ビルドタイプはAndroidではGradle、iOSではXcodeのConfigurationで設定し、プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)で設定しています。
 
 ビルドバリアントごとに異なるアプリケーションとしてインストールできるように、アプリケーションID（Android）とBundle Identifier（iOS）を次のルールで設定しています。
 
