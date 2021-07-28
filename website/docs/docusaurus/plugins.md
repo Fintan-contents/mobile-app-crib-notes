@@ -48,7 +48,7 @@ keyと値の設定は`docusaurus.config.js`にある`injectOptions`で設定し�
 ```json title="docusaurusu.config.js"
 const injectOptions = {
   organization,
-  rnSpoilerTag: '2021.05.0',
+  rnSpoilerTag: 'v2021.5.0',
 };
 ```
 
