@@ -89,13 +89,11 @@ module.exports = {
             {
               label: 'Learn',
               to: 'react-native/learn',
-              position: 'left',
             },
-            ...(isDraft ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}] : []),
+            ...(isDraft ? [{label: 'Example App', to: 'react-native/santoku'}] : []),
             {
               label: 'Pitfalls',
               to: 'react-native/common-pitfalls',
-              position: 'left',
             },
           ],
         },
