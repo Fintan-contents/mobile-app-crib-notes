@@ -225,6 +225,20 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Decision Records',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions/adr-001-error-handling',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Development',
       items: [
         {

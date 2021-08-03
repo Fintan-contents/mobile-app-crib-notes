@@ -1,0 +1,203 @@
+---
+title: エラーのハンドリング方法
+---
+
+Status: Proposed
+
+<!--
+Proposed: 提案中
+Accepted: 採用
+Rejected: 却下
+Deprecated: 廃止
+-->
+
+## 要約
+
+エラーのハンドリングに関する基本方針を以下とします。
+
+- ユーザ操作や外部通信時などのイベントで発生するエラーにおいて、アプリを運用する上で想定可能なエラーについては個別にエラーをハンドリングする
+- 未処理のエラーが発生した場合は、React Native Firebase Crashlyticsを使用してクラッシュログをFirebase Crashlyticsに送信する
+- 未処理のエラーが発生した場合は、アプリをクラッシュさせる
+
+## コンテキスト
+
+モバイルアプリでは、エラーが発生した場合にエラーの内容と、どのような手順で操作をすればエラーから回復できるかをユーザに伝える事が大切です。また、アプリがクラッシュしてしまった場合は、どのような操作でアプリがクラッシュしたかを特定することも重要です。
+
+ここでは、React Nativeを使用したモバイルアプリにおいて、エラーの発生箇所毎にどのようなハンドリングを実施するべきかを検討します。なお、エラーが発生した場合にログを送信するプロダクトとして、[Firebase Crashlytics](https://firebase.google.com/docs/crashlytics?hl=ja)を使用する前提[^1]とします。Firebase Crashlyticsにログを送信するライブラリとしては[React Native Firebase Crashlytics](https://rnfirebase.io/crashlytics/usage)を使用します。
+
+[^1]: SantokuAppでは、Firebase Crashlyticsを使用する前提としていますが、React Nativeに対応しているプロダクトとしては[Sentry](https://sentry.io/welcome/)などもあります。
+
+## 議論
+
+React Nativeを使用したモバイルアプリでは、発生したエラーをハンドリングしないとアプリがクラッシュします。
+アプリのクラッシュは、ユーザのアプリ離脱率が高くなる一因になります。そのため基本方針として、エラーの発生する可能性がある箇所については個別にエラーを捕捉してエラーの内容と復旧手順を適切にユーザに伝えます。また、必要に応じてFirebase Crashlyticsにエラーログを送信します。
+
+ただし、エラーのハンドリング漏れが発生する可能性はないとは断言できないため、捕捉されなかったエラーをグローバルにハンドリングする方法も検討します。
+
+### エラーの発生箇所とグローバルにハンドリングする方法
+
+エラーが発生する箇所とそれぞれのエラーをグローバルにハンドリングする方法は以下になります。
+
+| エラー発生箇所 | エラーのハンドリング方法 |
+|:--|:--|
+|Reactコンポーネント|・[Error Boundary](https://ja.reactjs.org/docs/error-boundaries.html)<br/>・ErrorUtils|
+|ロジック - 同期処理|・Error Boundary<br/>・ErrorUtils|
+|ロジック - 非同期処理|個別にエラーのハンドリングが必要（※1）|
+|イベントハンドラ - 同期処理|・ErrorUtils|
+|イベントハンドラ - 非同期処理|個別にエラーのハンドリングが必要（※1）|
+|Native Modules - Android（Java）|・[Thread.UncaughtExceptionHandler](https://developer.android.com/reference/java/lang/Thread.UncaughtExceptionHandler?hl=ja)|
+|Native Modules - iOS（Objective-C）|・[NSSetUncaughtExceptionHandler](https://developer.apple.com/documentation/foundation/1409609-nssetuncaughtexceptionhandler?language=objc) + シグナルハンドラ（※2）|
+
+（※1）非同期処理のエラーをハンドリングする方法としては、[rejection-tracking](https://github.com/then/promise)を使用する方法があります。しかし十分な検証ができていない事や、[rejection-trackingのドキュメント](https://github.com/then/promise#unhandled-rejections)において全てのエラーを捕捉することは開発時のみ使用することが推奨されているため、ここには載せていません。
+
+（※2）`NSSetUncaughtExceptionHandler`は[NSException](https://developer.apple.com/documentation/foundation/nsexception?language=objc)を捕捉しますが、独自に作成したエラーオブジェクトなどは捕捉しません。`NSSetUncaughtExceptionHandler`で捕捉できないエラーは、[signal](https://developer.apple.com/documentation/kernel/1591562-signal/)を使用してシグナルハンドラを登録します。
+
+### エラーを捕捉した後に、どのような処理を実施したいか
+
+エラーを捕捉した後に、実施する想定の処理は以下になります。
+
+- エラーログをFirebase Crashlyticsに送信
+- アプリをクラッシュさせない
+- エラーの内容をUIで表示
+- アプリを再起動
+
+アプリが動作するプラットフォームやエラーの発生箇所、エラーハンドリング方法によって実現可否が変わるため、まずはそれらを整理します。
+
+#### 以降の表で使用する凡例
+
+| 凡例 | 概要 |
+|:--|:--|
+| ◎ | 独自に追加実装しなくても実現可能 |
+| ○ | 独自に追加実装することで実現可能 |
+| × | 実現不可、または実現する方法が見つかっていない |
+
+#### Reactコンポーネント/ロジック - 同期処理
+
+| 処理 | Error Boundary | ErrorUtils | React Native Firebase Crashlytics（※1） |
+|:--|:--|:--|:--|
+|エラーログをFirebase Crashlyticsに送信|○|○|◎|
+|アプリをクラッシュさせない|○|○|○|
+|エラーの内容をUIで表示|○|○（※2）|○（※2）|
+|アプリを再起動|○（※3）|○（※4）|○（※4）|
+
+（※1）React Native Firebase CrashlyticsはJavaScriptで発生したエラーのハンドリングにErrorUtilsを使用しています。ErrorUtilsはハンドリングしたい処理をハンドラとして登録できます。そのため、React Native Firebase Crashlyticsに追加で処理を実施したい場合は、独自に作成したハンドラをErrorUtilsに登録することで実現できます。
+
+（※2）ErrorUtilsで捕捉したエラーの内容をUIで表示するには、Native Modulesを呼び出してUIを表示する必要があります。
+
+（※3）Reactコンポーネントツリーの最上位から再構築します。
+
+（※4）JavaScriptのランタイムにバンドルされているモジュールをリロードするか、Androidの場合はActivityを再構築します。
+
+#### イベントハンドラ - 同期処理
+
+| 処理 | ErrorUtils | React Native Firebase Crashlytics（※1） |
+|:--|:--|:--|
+|エラーログをFirebase Crashlyticsに送信|○|◎|
+|アプリをクラッシュさせない|○|○|
+|エラーの内容をUIで表示|○（※2）|○（※2）|
+|アプリを再起動|○（※3）|○（※3）|
+
+（※1）React Native Firebase CrashlyticsはJavaScriptで発生したエラーのハンドリングにErrorUtilsを使用しています。ErrorUtilsはハンドリングしたい処理をハンドラとして登録できます。そのため、React Native Firebase Crashlyticsに追加で処理を実施したい場合は、独自に作成したハンドラをErrorUtilsに登録することで実現できます。
+
+（※2）ErrorUtilsで捕捉したエラーの内容をUIで表示するには、Native Modulesを呼び出してUIを表示する必要があります。
+
+（※3）JavaScriptのランタイムにバンドルされているモジュールをリロードするか、Androidの場合はActivityを再構築します。
+
+#### Native Modules - Android（Java）
+
+| 処理 | `Thread.UncaughtExceptionHandler` | React Native Firebase Crashlytics（※1） |
+|:--|:--|:--|
+|エラーログをFirebase Crashlyticsに送信|○|◎|
+|アプリをクラッシュさせない|○|×|
+|エラーの内容をUIで表示|○|×|
+|アプリを再起動|○（※2）|×|
+
+（※1）React Native Firebase Crashlyticsは、Native Modulesのエラーハンドリングに[Firebase Crashlytics SDK](https://github.com/firebase/firebase-android-sdk/tree/master/firebase-crashlytics)を使用しています。
+
+（※2）Activityを再構築します。
+
+#### Native Modules - iOS（Objective-C）
+
+| 処理 | `NSSetUncaughtExceptionHandler` + シグナルハンドラ | React Native Firebase Crashlytics（※1） |
+|:--|:--|:--|
+|エラーログをFirebase Crashlyticsに送信|○|◎|
+|アプリをクラッシュさせない|○|×|
+|エラーの内容をUIで表示|○|×|
+|アプリを再起動|×|×|
+
+（※1）React Native Firebase Crashlyticsは、Native Modulesのエラーハンドリングに[Firebase Crashlytics SDK](https://github.com/firebase/firebase-ios-sdk/tree/master/Crashlytics)を使用しています。
+
+### エラーを捕捉した後に実施する処理の再検討
+
+これまでの議論の中で、エラーを捕捉した後に実施する処理として、「アプリをクラッシュさせない」を含めていました。アプリがクラッシュすると、ユーザの離脱率が高くなる一因になるためです。しかし調査を進める中で、「アプリをクラッシュさせない」仕様が最善なのかという疑問が湧いてきました。理由としては以下になります。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,jtf-style/4.1.1.句点(。) -->
+
+- ネイティブ言語のみを使用して構築されたアプリや、React Native、React Native Firebase Crashlyticsを使用して構築されたアプリでは、エラーが発生した場合のデフォルトの動作はアプリがクラッシュする
+- アプリのクラッシュを防止しても、「予期しないエラーが発生しました。アプリを再起動してください。」のようなUIを表示してアプリの再起動を促すことしかできない（ユーザの操作としては、アプリがクラッシュした場合とほとんど同等の操作となる）
+- iOSにおいて、signalを受け取ってエラーをハンドリングする方法が適切なのかをAppleのドキュメントからは読み取れない
+
+<!-- textlint-enable ja-technical-writing/sentence-length,jtf-style/4.1.1.句点(。) -->
+
+そのため、エラーを捕捉した後に実施する処理から、「アプリをクラッシュさせない」を削除する方針としました。アプリがクラッシュするため、「エラーの内容をUIで表示」、「アプリを再起動」は実現できなくなります。よって、エラーを捕捉した後の処理としては、「エラーログをFirebase Crashlyticsに送信」のみとなります。
+
+その場合、これまでの調査から独自に追加実装をする必要がないReact Native Firebase Crashlyticsを使用することが最善と判断できます。よって、グローバルにエラーをハンドリングする方法としてはReact Native Firebase Crashlyticsを採用する方針とします。
+
+### React Native Firebase Crashlyticsを使用したJavaScriptのエラーハンドリング
+
+React Native Firebase Crashlyticsは、JavaScriptで発生したエラーのハンドリングにデフォルトでErrorUtilsを使用しています。ただし、[React Native Firebase Crashlyticsのドキュメント](https://rnfirebase.io/crashlytics/usage#crashlytics-javascript-stacktrace-issue-generation)に記載されているように、ErrorUtilsによるハンドリングを無効化できます。その場合は、Firebase Crashlytics SDKによってエラーがハンドリングされます。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+ErrorUtilsを使用したハンドリングの場合、React Native Firebase Crashlyticsが独自にスタックトレースを作成してFirebase Crashlyticsにログを送信します。しかし、送信されたJavaScriptのスタックトレースは以下のように難読化されており、ソースコードとマッピングしないとエラーの発生箇所を特定できません。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+```console
+Fatal Exception: JavaScriptError
+Error has occurred in synchronous process of EventHandler.
+0  ???                            0x0 <unknown> + 857 (main.jsbundle:857:885:857)
+1  ???                            0x0 <unknown> + 679 (main.jsbundle:679:2462:679)
+2  ???                            0x0 value + 231 (main.jsbundle:231:8209:231)
+3  ???                            0x0 value + 231 (main.jsbundle:231:7465:231)
+/* ～省略～ */
+```
+
+上記のスタックトレースとソースコードをマッピングするには工夫が必要であり時間もかかります。その反面、Firebase Crashlyticsのコンソール上ではエラーの発生箇所毎にログがカテゴライズされ非常に見やすいといった良い点もあります。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+一方、JavaScriptで発生したエラーのハンドリングにFirebase Crashlytics SDKを使用した場合、Firebase Crashlyticsに送信されたスタックトレースは以下のように難読化されています。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+```console
+Fatal Exception: RCTFatalException: Unhandled JS Exception:
+Error: Error has occurred in synchronous process of EventHandler.
+Unhandled JS Exception: Error: Error has occurred in synchronous process of EventHandler., stack:
+<unknown>@857:884
+<unknown>@679:2461
+value@231:8208
+value@231:7464
+/* ～省略～ */
+```
+
+上記のスタックトレースは、React Nativeが提供している`metro-symbolicate`を使用することで、容易にスタックトレースとソースコードのマッピングを行うことができます。その反面、Firebase Crashlyticsのコンソール上ではエラーの発生箇所毎にログがカテゴライズされず、視認性の面では劣ります。
+
+ここまでの内容を簡単にまとめます。
+
+| 比較内容 | React Native Firebase Crashlytics（ErrorUtils）によるハンドリング | Firebase Crashlytics SDKによるハンドリング |
+|:--|:--|:--|
+|Firebase Crashlyticsのコンソール上におけるエラーの発生箇所の視認性|○|×|
+|スタックトレースとソースコードのマッピングの容易さ|×|○|
+
+SantokuAppでは、スタックトレースとソースコードのマッピングの容易さを重視して、Firebase Crashlytics SDKを使用してエラーをハンドリングする方法を採用します。
+
+## 決定
+
+- 基本方針として、エラーの発生する可能性がある箇所については個別にエラーをハンドリングする
+  - ユーザにエラーの内容と復旧手順を伝える
+  - 必要に応じてFirebase Crashlyticsにエラーログを送信する
+- 未処理のエラーが発生した場合は、React Native Firebase Crashlyticsを使用してエラーをハンドリングする
+  - アプリをクラッシュさせる
+  - Firebase Crashlyticsにクラッシュログを送信する
