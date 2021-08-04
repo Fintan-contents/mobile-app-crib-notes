@@ -1,0 +1,66 @@
+---
+title: エラーの発生箇所と処理方法
+---
+
+エラーの発生箇所は大きく以下のように分類できます。
+
+- ロジック[^1]
+  - 非同期処理
+  - 同期処理
+- イベントハンドラ
+  - 非同期処理
+  - 同期処理
+- JSX
+- Native Modules
+
+[^1]: useEffect内の処理などを指します。
+
+## 未処理のエラーを処理する方法
+
+未処理のエラーは、Firebase Crashlytics SDKがエラーを捕捉してFirebase Crashlyticsにクラッシュログを送信します。
+
+ただし、ロジックやイベントハンドラの非同期処理で発生したエラーに関しては、Firebase Crashlytics SDKで捕捉できないため、必ず個別にエラー処理を実施してください。
+
+:::caution
+Firebase Crashlyticsにログを送信するタイミングは、アプリを再起動した時になります。即座にログが送信されないことに注意してください。
+:::
+
+## 個別にエラーを処理する方法
+
+### ロジックのエラー処理
+
+ロジックで発生するエラーを個別にハンドリングする場合は、同期処理と非同期処理で対応が変わります。
+
+同期処理は、`try...catch`文で囲んでエラーを捕捉します。
+
+非同期処理は、以下のいずれかの方法でエラーを捕捉します。
+
+- `Promise.catch()`を使用してエラーを捕捉します。
+- `await`式を利用した場合は`try...catch`文で囲んでエラーを捕捉します。
+
+### イベントハンドラのエラー処理
+
+イベントハンドラで発生するエラーを個別にハンドリングする場合は、ロジックの同期処理・非同期処理と同様に`Promise.catch()`、または`try...catch`を利用してエラーを捕捉してください。
+
+### JSXのエラー処理
+
+JSXでエラーが発生した場合は、[Error Boundary](https://ja.reactjs.org/docs/error-boundaries.html)でエラーを捕捉します。該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
+
+JSXのエラーは基本的にプログラムの不具合によるものです。ほとんどのユースケースにおいて、Error Boundaryを使用して個別にエラー処理を実施することはないと思われます。
+
+:::note
+Error Boundaryは、イベントハンドラや非同期処理で発生したエラーを捕捉できません。
+:::
+
+### Native Modulesのエラー処理
+
+Native ModulesはJava（Kotlin）やObjective-C（Swift）、C++などのネイティブ言語を使用したモジュールです。OSが提供しているAPIなどを利用する時に作成します。
+
+Native Modulesで発生するエラーを個別にハンドリングする場合は、言語毎のエラー処理方式に従ってエラーを捕捉してください。
+
+また、Native Modulesで発生したエラーをJavaScript側に伝えたい場面もあります。その場合は、JavaScript側からエラー時に実行したいコールバック関数を受け取るか、Native ModulesからPromiseを返却する方法があります。詳細は、React Nativeのドキュメントを参照してください。
+
+- [Android - Callbacks](https://reactnative.dev/docs/native-modules-android#callbacks)
+- [Android - Promises](https://reactnative.dev/docs/native-modules-android#promises)
+- [iOS - Callbacks](https://reactnative.dev/docs/native-modules-ios#callbacks)
+- [iOS - Promises](https://reactnative.dev/docs/native-modules-ios#promises)
