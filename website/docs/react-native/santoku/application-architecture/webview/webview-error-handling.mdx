@@ -1,0 +1,24 @@
+---
+title: WebViewでページ表示する際に発生するエラーのハンドリング
+---
+
+[React Native WebView](https://github.com/react-native-webview/react-native-webview)を使用してWebページを表示する場合は、[onError](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#onerror)、[onHttpError](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#onhttperror)属性を使用してエラーをハンドリングします。
+
+| 属性名             | 用途                               |
+| :---------------- | :-------------------------------- |
+| `onHttpError`     | WebViewで表示するページを取得する時に、400以上のHTTPステータスコードで返却された場合に呼びだされます。SantokuAppのデフォルトの動作では、エラーの捕捉後に特に処理を実施しません。そのため、Webアプリから返されたエラー画面がそのまま表示されます。<br/>ユーザ向けのエラー画面が返されない場合など、接続先のWebアプリに応じた処理が必要な場合は、個別にエラー処理を実施してください。 |
+| `onError`         | WebViewで表示するページを取得する時に、ネットワークエラーなどが発生した場合に呼びだされます。SantokuAppのデフォルトの動作では、ネットワークの確認を促すダイアログを表示します。また、Firebase Crashlyticsにエラーログを送信します。画面仕様に依存した特別な処理が必要な場合は、個別にエラー処理を実施してください。 |
+
+:::note
+`onHttpError`は、Androidの場合APIレベルが23以上のみ使用できます。
+:::
+
+:::caution
+WebViewで表示するページ内の画像やCSSなどの読み込みに失敗した場合は、`onError`や`onHttpError`ではエラーを捕捉できません。
+:::
+
+:::caution
+iOSの場合デフォルトタイムアウトは60秒です。Androidの場合はデフォルトタイムアウトがありません。
+
+なお、React Native WebViewはタイムアウトを設定できないため、表示するページとの通信を明示的にキャンセルできません。
+:::
