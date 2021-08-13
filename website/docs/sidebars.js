@@ -251,7 +251,7 @@ module.exports = {
           items: [
             'react-native/santoku/application-architecture/error-handling/overview',
             'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
-            'react-native/santoku/application-architecture/error-handling/api-error-handling',
+            'react-native/santoku/application-architecture/http-api/http-api-error-handling',
             'react-native/santoku/application-architecture/webview/webview-error-handling',
           ],
         },
