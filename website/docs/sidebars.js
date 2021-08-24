@@ -235,6 +235,10 @@ module.exports = {
           type: 'doc',
           id: 'react-native/santoku/decisions/adr-001-error-handling',
         },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/decisions/adr-002-http-api-libraries',
+        },
       ],
     },
     {

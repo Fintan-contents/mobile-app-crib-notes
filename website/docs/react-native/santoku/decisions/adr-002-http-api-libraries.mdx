@@ -1,0 +1,72 @@
+---
+title: HTTP通信で使用するライブラリ
+---
+
+Status: Accepted
+
+<!--
+Proposed: 提案中
+Accepted: 採用
+Rejected: 却下
+Superseded: 廃止
+-->
+
+## 要約
+
+SantokuAppでは、HTTP通信に以下のライブラリを使用します。
+
+- axios
+- React Query
+
+## コンテキスト
+
+React Nativeを使用したモバイルアプリでは、HTTPクライアントとして[Fetch API](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API)が使用できます。また、[Frisbee](https://github.com/niftylettuce/frisbee)、[axios](https://github.com/axios/axios)などの[XMLHttpRequest API](https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest)に依存したライブラリも使用可能です。
+ここでは、それらのライブラリをいくつかの観点で比較して、使用するHTTPクライアントを決定します。
+
+また、HTTP APIと通信する際は、エラーのハンドリングやローディング中などの状態を管理する必要があります。そういった課題に対応するため、[React Query](https://react-query.tanstack.com/overview)などのライブラリを使用することも検討していきます。
+
+## 議論
+
+### HTTPクライアントの選定
+
+React Nativeを使用したモバイルアプリで使用可能なライブラリとしては、Fetch APIやFrisbee、axios、superagentなど多くのライブラリが存在します。その中で、チームメンバーの経験が多いのはFetch APIとaxiosでした。そのため、まずはFetch APIとaxiosの2つに絞って比較していきます。
+
+Fetch APIとaxiosは非常に有名で、OSS、商用利用問わず多くのアプリケーションで使用されています。チームメンバーが過去に開発したアプリでも安定して動作しており、安定性やパフォーマンスなどの観点において双方とも問題なさそうです。ドキュメントも充実しており、学習コストはさほど高くありません。ライセンスは双方ともMITライセンスになります。[^1]
+
+[^1]: Fetch APIは、React Nativeに組み込まれているため、React Nativeのライセンスを表記しています。
+
+そのため、ここではFetch APIとaxiosが「SantokuAppで必要としている要件を満たしているか」を観点として比較します。
+
+現時点のSantokuAppでHTTP API通信に必要な要件は以下になります。
+
+| 要件 | Fetch API | axios |
+| :-- | :--------- | :---- |
+| 各種HTTPメソッドのサポート | ○ | ○ |
+| HTTP通信のタイムアウト | △[^2] | △[^2][^3] |
+| HTTP通信のキャンセル | ○ | ○ |
+
+[^2]: HTTP通信をタイムアウトする機能はないですが、HTTP通信のキャンセル機能（[AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)(fetch)や[CancelToken](https://axios-http.com/docs/cancellation)(axios)）を使えば実現可能です。
+[^3]: axiosでは[timeout](https://github.com/axios/axios#request-config)を設定できます。ただし、axiosの`timeout`はAndroidではコネクションタイムアウトのみに使用されるため、コネクション接続後にサーバの応答が遅い場合などはタイムアウトしません。
+
+ほとんど差はなく、採用の決め手になる要因はありませんでした。
+
+しかし、現時点の要件としてはありませんが、今後ファイルのアップロード機能が追加された場合は差が出てきます。axiosは、アップロード中の進捗状況を取得できます。アップロード中の進捗状況を取得できると、プログレスバーなどで視覚的にアップロード状況を伝えることができます。
+
+そのため、追加の可能性がある要件を見据えて、axiosを採用することにします。
+
+### React Queryを使用するか
+
+React Nativeアプリはエラーのハンドリングやローディング状態などの管理が煩雑で、不具合を生みやすいです。React Queryを使用するとそれらの管理が非常に楽になり、効率良く開発ができます。また、HTTPリクエストのキャッシュ管理やページネーション、無限スクロールの対応など多くの便利な機能が搭載されています。
+
+<!-- textlint-disable ja-technical-writing/ja-no-weak-phrase -->
+
+その反面、学習コストは決して低くないように思います。チーム内にはReact Queryの経験者もいないため、開発コストは高くなる可能性もあります。
+
+<!-- textlint-enable ja-technical-writing/ja-no-weak-phrase -->
+
+そういった懸念はありますが、React Queryを使用した場合の方式設計や開発ガイド、共通部品を整備することにより、効率的に開発を進めることができると考えています。よって、SantokuAppではReact Queryを採用することにします。
+
+## 決定
+
+- HTTPクライアントは、axiosを使用する
+- React Queryの機能を使用して、効率的に開発を進める
