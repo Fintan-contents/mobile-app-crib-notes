@@ -233,6 +233,11 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'アプリのライフサイクル管理',
+          items: ['react-native/santoku/application-architecture/life-cycle-managing/initialization'],
+        },
+        {
+          type: 'category',
           label: 'エラーハンドリング',
           items: [
             'react-native/santoku/application-architecture/error-handling/overview',
