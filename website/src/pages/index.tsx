@@ -35,6 +35,12 @@ const reactNativeOverview = [
     imageUrl: 'img/undraw_docusaurus_react.svg',
     summary: <>ハマりがちな落とし穴</>,
   },
+  {
+    title: 'Example Application',
+    to: 'react-native/santoku',
+    imageUrl: 'img/undraw_docusaurus_react.svg',
+    summary: <>サンプルアプリケーション</>,
+  },
 ];
 
 function Home() {
