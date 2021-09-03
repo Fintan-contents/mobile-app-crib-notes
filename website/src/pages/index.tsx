@@ -1,4 +1,3 @@
-import {DocusaurusContext} from '@docusaurus/types';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import clsx from 'clsx';
@@ -44,7 +43,7 @@ const reactNativeOverview = [
 ];
 
 function Home() {
-  const context = useDocusaurusContext() as DocusaurusContext;
+  const context = useDocusaurusContext();
   const {siteConfig} = context;
   return (
     <Layout>
