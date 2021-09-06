@@ -3,7 +3,27 @@ title: ビルド
 sidebar_label: Overview
 ---
 
+## 概要
+
 このアプリケーションのビルド関連の設定について紹介します。このアプリケーションでは、Androidの[ビルドバリアント](https://developer.android.com/studio/build/build-variants)（[ビルドタイプとプロダクトフレーバー](https://developer.android.com/studio/build#build-config)）の考え方を参考にして、React Nativeアプリケーションのビルド設定をしています。
+
+開発中やテスト中はデバッグビルドやリリースビルド、モバイルアプリからの接続先サーバなどを変更してアプリをビルドしたいケースが多くあります。
+
+そのためのビルドの仕組みとして、iOSアプリには「Configuration」や「Scheme」などがあり、Androidには「ビルドタイプ」や「プロダクトフレーバー」などがあります。これらの仕組みを使って柔軟にビルドを設定できるようになっているのですが、どのようにビルド設定を使い分けるかについては開発者に任されています。
+
+設定を追加するたびに設定方法を開発者それぞれで判断していると設定内容の見通しが悪くなりがちなので、このアプリでは、次のような要求を満たせるように方針を整理しています。
+
+- ビルド種類（リリースビルド、デバッグビルドなど）を切り替えることができる
+- 環境（接続先のホスト名など）を切り替えることができる
+- ビルド種類と環境は独立して設定できる
+  - ステージング環境向けのリリースビルド、本番環境向けのデバッグビルドなどを用意できるようにするため
+- どのビルド設定でビルドされたアプリなのかを、簡単に判別できる
+
+:::note
+[Androidのビルドバリアントのドキュメント](https://developer.android.com/studio/build/build-variants#build-types)には、ビルドタイプを利用して接続先ホストを変更する例が記載されています。一方、このアプリでは同じことをするためにプロダクトフレーバーを利用します。このように、ビルドタイプとプロダクトフレーバーのどちらを利用しても同じ設定を実現できることがあります。iOSのConfigurationとSchemeについても同じことが言えます。
+
+どちらの方法で設定するべきかについての混乱を避けるために、このアプリでは明確に設定方針を定めています。
+:::
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
@@ -12,17 +32,50 @@ const overviews = [
   {
     title: 'ビルドバリアント',
     to: '/react-native/santoku/development/build-configuration/build-variants',
+    summary: <>ビルド設定の概要として、ビルドタイプとプロダクトフレーバーそれぞれで変更する設定内容を記載しています。また、ビルドバリアントを指定してアプリをビルド、実行する方法についても記載しています。</>
   },
   {
     title: 'ビルドタイプ',
     to: '/react-native/santoku/development/build-configuration/build-type-configurations',
+    summary: <>リリースビルドやデバッグビルドなどのビルド種類に応じたビルドタイプを準備する方法を記載しています。</>
   },
   {
     title: 'プロダクトフレーバー',
     to: '/react-native/santoku/development/build-configuration/product-flavor-configurations',
+    summary: <>react-native-configを利用して、本番環境用や開発環境用など環境に応じたプロダクトフレーバーを準備する方法を記載しています。</>
   }
 ]
 
 <PageList overviews={overviews} colSize={12} />
 
 <!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+## 用語について
+
+### Androidのビルドタイプとプロダクトフレーバー
+
+Androidでは、ビルドタイプとプロダクトフレーバーはGradleのDSLとしては区別されていますが、用途は明確に区別していないようです。実際、BuildTypeとProductFlavorは多くの設定値を共有しています（VariantDimension）。
+
+- [BuildType \| Android Developers](https://developer.android.com/reference/tools/gradle-api/4.1/com/android/build/api/dsl/BuildType)
+- [ProductFlavor \| Android Developers](https://developer.android.com/reference/tools/gradle-api/4.1/com/android/build/api/dsl/ProductFlavor)
+- [VariantDimension \| Android Developers](https://developer.android.com/reference/tools/gradle-api/4.1/com/android/build/api/dsl/VariantDimension)
+
+このアプリでは、以下のように用途も含めて明確に区別しています。
+
+| 用語              | 用途                                      | 設定方法                              |
+|:------------------|:-----------------------------------------|:------------------------------------|
+| ビルドタイプ        | ビルド種類（リリースやデバッグなど）の設定      | BuildType DSL                       |
+| プロダクトフレーバー | サーバアプリであれば環境変数を利用するような設定 | ProductFlavor DSL（環境別設定ファイル） |
+
+そのため、文脈によってはAndroid Developersのドキュメントとは意味が異なる場合もあるので注意してください。
+
+### iOSのConfigurationとScheme
+
+一般的には、Configurationはアプリのビルド設定を切り替えるために利用し、Schemeはビルド手順を切り替えるために利用できます。
+
+このアプリでは、ビルドタイプの設定にはConfigurationを利用します。プロダクトフレーバーの設定にはSchemeを利用し、あらかじめ用意した環境別の設定ファイルのうちどのファイルを利用するかというビルド手順をSchemeごとに変えています。このようにして、ConfigurationとSchemeでビルドタイプとプロダクトフレーバーの考え方を実現しています。
+
+| 用語              | 用途                                      | 設定方法                   |
+|:------------------|:-----------------------------------------|:-------------------------|
+| ビルドタイプ        | ビルド種類（リリースやデバッグなど）の設定      | Configuration            |
+| プロダクトフレーバー | サーバアプリであれば環境変数を利用するような設定 | Scheme（環境別設定ファイル） |

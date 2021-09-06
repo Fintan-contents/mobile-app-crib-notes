@@ -283,7 +283,9 @@ end
 
 ### App Transport Security
 
-App Transport Security (ATS)の設定はdict形式なので、react-native-configで設定することが出来ません。そのため、次のように設定しています。
+[App Transport Security (ATS)](https://developer.apple.com/documentation/bundleresources/information_property_list/nsapptransportsecurity)は、HTTP通信時にHTTPSの利用を強制する、iOSのセキュリティ機能です。React Nativeでは、Metroを利用してローカル環境で開発しているときはATSを無効にする必要があります。一方、App Storeなどで公開するときには、ATSを有効にする必要があります。
+
+このように、ATSの有効化については接続先環境によって切り替えたい設定です。しかし、App Transport Security (ATS)の設定はdict形式なので、react-native-configでプロダクトフレーバーとして設定することが出来ません。そのため、次のようにビルドタイプとして設定しています。
 
 - ATSの設定以外は`Info.plist`と同じ内容で、`Debug.plist`を追加
 - Debug ConfigurationとDebugAdvanced Configurationで「Info.plist File」の設定項目に`Debug.plist`を設定

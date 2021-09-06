@@ -7,11 +7,16 @@ import TabItem from '@theme/TabItem';
 
 ## 基本方針
 
-このアプリケーションでは、デバッグビルドなどを切り替えるビルドタイプと、接続先の環境などを切り替えるプロダクトフレーバーの組み合わせをビルドバリアントと呼んでいます。
+このアプリケーションでは、デバッグビルドなどを切り替えるビルドタイプと、接続先の環境などを切り替えるプロダクトフレーバーの組み合わせを[ビルドバリアント](https://developer.android.com/studio/build/build-variants)と呼んでいます。
 
-ビルドタイプはAndroidではGradle、iOSではXcodeのConfigurationで設定し、プロダクトフレーバーは[react-native-config](https://github.com/luggit/react-native-config)で設定しています。
+ビルドタイプ、プロダクトフレーバーの設定箇所は次のようになっています。プロダクトフレーバーの設定はアプリ内からも参照できるように [react-native-config](https://github.com/luggit/react-native-config)を利用しています。
 
-ビルドバリアントごとに異なるアプリケーションとしてインストールできるように、アプリケーションID（Android）とBundle Identifier（iOS）を次のルールで設定しています。
+| 用語              | 用途                                                  | Android (Gradle)  | iOS (Xcode)   |
+|:------------------|:-----------------------------------------------------|:------------------|:--------------|
+| ビルドタイプ        | ビルド種類（リリースやデバッグなど）の設定                  | BuildType DSL     | Configuration |
+| プロダクトフレーバー | 環境（本番環境や開発環境）ごとの設定（react-native-config） | ProductFlavor DSL | Scheme        |
+
+また、ビルドバリアントごとに異なるアプリケーションとしてインストールできるように、アプリケーションID（Android）とBundle Identifier（iOS）を次のルールで設定しています。
 
 ```console title="アプリケーションID（Android）とBundle Identifier（iOS）のルール"
 jp.fintan.mobile.SantokuApp<flavorSuffix><typeSuffix>
@@ -56,7 +61,7 @@ AndroidエミュレータあるいはiOSシミュレータで動作検証した�
 
 `<typeSuffix>`は`.debug`です。
 
-iOSのAppの高度な機能を含む動作は検証できませんが、USB接続でデバイスにインストールできます。ただし、iOSアプリを実機にインストールする場合は、[README](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/SantokuApp#readme)に書いてある方法で `ios/PersonalAccount.xcconfig` に個人のApple IDを設定する必要があります。
+iOSのAppの高度な機能を含む動作は検証できませんが、USB接続でデバイスにインストールできます。ただし、iOSアプリを実機にインストールする場合は、[README](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp#readme)に書いてある方法で `ios/PersonalAccount.xcconfig` に個人のApple IDを設定する必要があります。
 
 </TabItem>
 
@@ -66,7 +71,7 @@ USB接続でデバイスにインストールして、iOSのAppの高度な機�
 
 `<typeSuffix>`は`.debugAdvanced`です。
 
-iOS向けのビルドには、Apple Developer Enterprise Programの開発用プロビジョニングプロファイルと開発用証明書の秘密鍵が必要です。また、インストール先のデバイスのUDIDが、開発用デバイスとして登録してある必要があります。
+iOS向けのビルドには、Apple Developer (Enterprise) Programの開発用プロビジョニングプロファイルと開発用証明書の秘密鍵が必要です。また、インストール先のデバイスのUDIDが、開発用デバイスとして登録してある必要があります。
 
 :::warning
 Apple Developer (Enterprise) Programでは、開発用デバイスはデバイス種別ごとに100台までしか登録できません。大量のデバイスを登録しないように注意してください。
