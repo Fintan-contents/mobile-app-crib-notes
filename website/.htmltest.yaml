@@ -1,2 +1,45 @@
+# wjdp/htmltest
+
+# 実行方法
+# docker run -v (pwd)/build:/test/mobile-app-crib-notes -v (pwd)/.htmltest.yaml:/test/.htmltest.yaml --rm wjdp/htmltest --conf .htmltest.yaml
+
 # https://github.com/wjdp/htmltest#wrench-configuration
-DirectoryPath: public
+DirectoryPath: build
+HTTPHeaders:
+  # Range: bytes=0-0を受け取ると416（Invalid Range）を返してくるサイトがある。
+  # https://github.com/wjdp/htmltest/issues/164
+  #   - https://mdxjs.com/
+  #   - https://formik.org/
+  #   - https://rnfirebase.io/
+  Range: bytes=0-
+  Accept: '*/*'
+  # User Agentを指定しないと403や404を返すサイトがある。
+  # https://github.com/wjdp/htmltest/issues/150
+  #   - https://marketplace.visualstudio.com/items
+  #   - https://play.google.com/store/apps/details
+  User-Agent: "bot/0.1"
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreInternalEmptyHash: true
+IgnoreInternalURLs:
+  - '#!'
+IgnoreURLs:
+  - localhost:19002
+  # 認証が必要なURLは無視
+  - https://developer.apple.com/account/resources/identifiers/add/bundleId
+  - https://developer.apple.com/account/resources/profiles
+  - https://developer.apple.com/account/resources/authkeys/list
+  - https://developer.apple.com/account/resources/profiles
+  # 404になってしまうので無視
+  - https://play.google.com/store/apps/details\?id=host.exp.exponent
+  - https://marketplace.visualstudio.com/items\?itemName=msjsdiag.vscode-react-native
+  - https://marketplace.visualstudio.com/items\?itemName=msjsdiag.vscode-react-native
+  - https://marketplace.visualstudio.com/items\?itemName=esbenp.prettier-vscode
+  - https://marketplace.visualstudio.com/items\?itemName=dbaeumer.vscode-eslint
+  - https://marketplace.visualstudio.com/items\?itemName=EditorConfig.EditorConfig
+  - https://marketplace.visualstudio.com/items\?itemName=eamodio.gitlens
+  - https://marketplace.visualstudio.com/items\?itemName=streetsidesoftware.code-spell-checker
+  - https://marketplace.visualstudio.com/items\?itemName=christian-kohler.path-intellisense
+  - https://marketplace.visualstudio.com/items\?itemName=naumovs.color-highlight
+  - https://marketplace.visualstudio.com/items\?itemName=2gua.rainbow-brackets
+  - https://marketplace.visualstudio.com/items\?itemName=yzhang.markdown-all-in-one
+

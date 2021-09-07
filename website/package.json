@@ -5,10 +5,10 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "docusaurus build --out-dir build/mobile-app-crib-notes",
     "swizzle": "docusaurus swizzle",
     "clear": "docusaurus clear",
-    "serve": "cross-env NGINX_PORT=3001 docker run -v $(pwd)/nginx:/etc/nginx/templates -v $(pwd)/build:/usr/share/nginx/html/mobile-app-crib-notes/ --rm -e NGINX_PORT -p 3001:3001 nginx",
+    "serve": "cross-env NGINX_PORT=3001 docker run -v $(pwd)/nginx:/etc/nginx/templates -v $(pwd)/build:/usr/share/nginx/html --rm -e NGINX_PORT -p 3001:3001 nginx",
     "lint": "run-s --print-name --continue-on-error lint:*",
     "lint:text": "textlint \"*.md\" \"*.mdx\" \"!(node_modules|build)/**/*.md\" \"!(node_modules|build)/**/*.mdx\"",
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"**/*.mdx\" \"#node_modules\" \"#build\"",

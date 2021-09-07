@@ -130,11 +130,17 @@ jobs:
 
       - name: Build documents
         run: |
-          npm run build --prefix website
+          npm run build --prefix website -- --out-dir build/mobile-app-crib-notes
+
+      - name: Run htmltest
+        uses: docker://wjdp/htmltest:latest
+        with:
+          args: --conf website/.htmltest.yaml website/build
+        continue-on-error: ${{ github.ref != 'refs/heads/master' }}
 
       - name: Save artifacts
         uses: actions/upload-artifact@v2
         with:
           name: mobile-app-crib-notes
-          path: ./website/build
+          path: ./website/build/mobile-app-crib-notes
           retention-days: 30
