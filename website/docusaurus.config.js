@@ -19,6 +19,7 @@ const copyright = `<div class="no-content">
   </div>
 </div>
 <div class="supplementary">
+  <a href="/${project}/terms-of-use/" class="footer__link-item">当サイトのご利用にあたって</a>
   <a href="/${project}/trademark/" class="footer__link-item">商標について</a>
 </div>
 </div>
@@ -151,6 +152,11 @@ module.exports = {
         },
       ],
       copyright,
+    },
+    // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-google-gtag
+    gtag: {
+      // You can also use your "G-" Measurement ID here.
+      trackingID: isDraft ? 'G-T0BMF70HTK' : 'G-P630FEB9YY',
     },
   },
   presets: [
