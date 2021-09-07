@@ -1,0 +1,109 @@
+---
+title: ディープリンク
+---
+
+Status: Accepted
+
+<!--
+Proposed: 提案中
+Accepted: 採用
+Rejected: 却下
+Superseded: 廃止
+-->
+
+## 要約
+
+ディープリンクの実現方式を複数の方式で議論し、導入するメリットが大きい[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links)を採用します。
+
+## コンテキスト
+
+ディープリンクを実現する方式は、次の3つの方式から選択します。
+
+ - OSの機能（[Universal Links](https://developer.apple.com/ios/universal-links/)、[Android App Links](https://developer.android.com/training/app-links)）を直接利用する
+ - Firebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用する
+ - カスタムURLスキームを利用する
+
+用語は以下のとおりです。
+
+|用語|意味|備考|
+|:--|:--|:--|
+|ディープリンク|URLに紐付いたモバイルアプリケーションを起動する機能||
+|ディープリンクURL|ユーザが開くURLで、OSがドメインとの関連を検証するときに利用するURLです。OSの検証が成功するとアプリケーションに渡されます。|Dynamic Linksではパラメータ部分にコンテンツリンクURLなどを保持します。|
+|コンテンツリンクURL|アプリで表示したいコンテンツをあらわすURLです。（OSの機能だけの場合はディープリンクURLと同じです）|Dynamic Linksではアプリと関連付けていないドメインのURLも渡すことができます。|
+|カスタムURLスキーム|`mailto:`のようにスキームに任意のプレフィックスを指定したURL||
+|App Links|AndroidがOSの機能としてサポートしているディープリンク|[Android App Links](https://developer.android.com/studio/write/app-link-indexing)|
+|Universal Links|iOSのがOSの機能としてサポートしているディープリンク|[iOS Universal Link](https://developer.apple.com/ios/universal-links/)|
+|Dynamic Links|App Links、Universal Linksを拡張したFirebaseの機能|カスタムURLスキームは対象外|
+
+## 議論
+
+ディープリンクの3つの実現方式のうち、カスタムURLスキームには回避できないセキュリティのリスク[^1]があるため、採用は見送りました。
+
+Dynamic LinksとOSの機能を直接利用する場合の違いは以下のとおりです。
+
+|凡例|内容|
+|:--|:------------|
+|○|対応不要|
+|△|軽微な対応が必要|
+|☓|対応が難しい|
+
+|観点|Dynamic Links|OSの機能|
+|:--|:------------|:------|
+|アプリへの導線|○|☓[^2]|
+|アプリケーションの実装|△|☓[^3]|
+|セキュリティ|△|○|
+
+Dynamic LinksはOSの機能と比較すると、アプリへの導線をサポートしている分、セキュリティの対応が必要になります。
+またインストールしていないユーザへの導線のためにウェブサイトを構築する作業が短縮されます。
+
+[^1]:カスタムURLスキームは自由に設定できるため、作成したURLを別のアプリに乗っ取られるリスクがあります。
+[^2]:アプリへの導線はアプリのインストールを促し、インストール後もURLを読み取れる機能です。
+[^3]:[AndroidでディーリンクのURLをLikingで読み取れないというissue](https://github.com/facebook/react-native/issues/25675)があり、適切な回避方法の調査が完了していないためX（対応が難しい）としています。
+
+### アプリへの導線
+
+OSの機能をそのまま利用すると、URLに関連付けられたアプリケーションがインストールされていない場合は、ウェブサイトと判断されてブラウザでアクセスしてしまいます。
+そのため、アプリケーションをインストールしていないユーザ向けに、導線となるウェブサイトを用意する必要があります。
+
+Dynamic Linksでは、未インストールのユーザに対する導線が用意できるので、ウェブサイトを持たないサービスでも簡単にディープリンクを導入できます。
+
+### アプリケーションの実装
+
+ディープリンクURLをReact Nativeで受け取る場合は次のライブラリが利用できます。
+
+ - Dynamic Linksを利用する場合は[React Native Firebase](https://rnfirebase.io/dynamic-links/usage)と[React Native Linking](https://reactnative.dev/docs/linking#handling-deep-links)（併用可能）
+ - OSの機能はReact Native Linking
+
+Dynamic Linksを利用する場合は、どちらかのAPIを利用すれば実装できます。ただし、下記の点を考慮しアプリ起動時にはPlatformを判定して呼び分けます。
+
+ - React Native Firebaseには[iOSで起動時間が短いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があります。そのためReact Native Linkingを利用してディープリンクURLを取得します。
+   - ディープリンクURLに含まれるコンテンツリンクURLを取得するために[resolveLink](https://rnfirebase.io/reference/dynamic-links#resolveLink)を利用します。
+ - React Native Linkingには[AndroidでディーリンクのURLを読み取れないというissue](https://github.com/facebook/react-native/issues/25675)があります。そのためReact Native Firebaseを利用してコンテンツリンクURLを取得します。
+
+OSの機能を直接利用する場合（Dynamic Linksを利用しない場合）、AndroidでLinkingが読み取れないissueの原因の調査が必要です。
+
+### セキュリティ
+
+カスタムURLスキームとは異なり、アプリケーションとURL（ドメイン）の関連付けが正当であることをOSが検証しているため、他のアプリに情報が意図せず共有されることはありません。
+
+#### iOSでの意図しない共有
+
+iOSの場合、Dynamic Linksには受け取ったURLの信頼性を表す[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
+
+matchTypeの値が`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。[^4]
+
+そのため、matchTypeの値が`unique`であるか判定してからURLを処理します。このように対応することで別のユーザがデータを受け取りません。
+
+アプリケーションで利用しているReact Native FirebaseではアプリケーションにmatchTypeが渡されないため、ライブラリにパッチを適用する必要があります。
+
+:::note
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+パッチを適用する対象はiOSのみです。React Native Firebaseに含まれるNative Moduleは、FirebaseのSDKからmatchTypeを受け取っているため、JavaScript Moduleに渡す機能を追加する必要があります。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+:::
+
+[^4]: [iOSで受信する ＞ 6.オプションの警告](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)にあるように、matchTypeの値が`unique`にならないケースがあります。
+
+## 決定
+
+ディープリンクの実現方式として、Dynamic Linksを利用します。
