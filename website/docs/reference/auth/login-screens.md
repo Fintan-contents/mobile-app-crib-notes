@@ -8,7 +8,7 @@ title: ログイン画面の表示パターン
 
 |No.|表示方法|取りうる認証方法の例|
 |-|-|-|
-|1|ネイティブ側に表示する|<ul><li>セッションID</li><li>OpenID Connect（[リソースオーナー・パスワード・クレデンシャルズフロー](./stateless-authn.md#リソースオーナー・パスワード・クレデンシャルズフロー)）</li></ul> |
+|1|ネイティブ側に表示する|<ul><li>セッションID</li><li>OpenID Connect（[リソースオーナー・パスワード・クレデンシャルズフロー](./stateless-authn.md#リソースオーナーパスワードクレデンシャルズフロー)）</li></ul> |
 |2|In-App Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>OpenID Connect（[認可コードフロー + PKCE](./stateless-authn.md#認可コードフロー--pkce)）</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
 |3|Default Browserで認証サービスが用意しているログイン画面を表示する| <ul><li>OpenID Connect（[認可コードフロー + PKCE](./stateless-authn.md#認可コードフロー--pkce)）</li><li>OpenID Connect（ハイブリッドフロー）</li></ul>|
 |~~4~~|~~WebViewに表示する~~|~~OIDC認証~~|

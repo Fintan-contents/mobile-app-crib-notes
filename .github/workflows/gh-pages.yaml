@@ -136,7 +136,6 @@ jobs:
         uses: docker://wjdp/htmltest:latest
         with:
           args: --conf website/.htmltest.yaml website/build
-        continue-on-error: ${{ github.ref != 'refs/heads/master' }}
 
       - name: Save artifacts
         uses: actions/upload-artifact@v2

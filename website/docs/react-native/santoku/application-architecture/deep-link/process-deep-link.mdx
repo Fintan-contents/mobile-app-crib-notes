@@ -8,11 +8,11 @@ title: ディープリンクの処理
 
 React Native Firebase Dynamic LinksではディープリンクURLを取得するための[API](https://rnfirebase.io/dynamic-links/usage#listening-for-dynamic-links)は次の2つがあります。
 
-- [コールドスタート、ウォームスタート](../life-cycle-management/overview.mdx#コールドスタート、ウォームスタート)では[getInitialLink](https://rnfirebase.io/reference/dynamic-links#getInitialLink)でディープリンクURLを取得します。
+- [コールドスタート、ウォームスタート](../life-cycle-management/overview.mdx#コールドスタートウォームスタート)では[getInitialLink](https://rnfirebase.io/reference/dynamic-links#getInitialLink)でディープリンクURLを取得します。
   - iOSでは[不具合に対応するため](./react-native-firebase.mdx)にReact Native Linkingを利用します。
 - [ホットスタート](../life-cycle-management/overview.mdx#ホットスタート)では[onLink](https://rnfirebase.io/reference/dynamic-links#onLink)でディープリンクURLを取得します。
 
-どちらの場合でもディープリンクURLからコンテンツリンクURLを取得し、画面遷移を判定して、コンテンツリンクURLのパラメータを処理します。コンテンツリンクURLのパラメータは[ディープリンクURLの構成](./create-deep-link.mdx#ディープリンクURLの構成)にあるとおり、スクリーンとパラメータを受け取ります。
+どちらの場合でもディープリンクURLからコンテンツリンクURLを取得し、画面遷移を判定して、コンテンツリンクURLのパラメータを処理します。コンテンツリンクURLのパラメータは[ディープリンクURLの構成](./create-deep-link.mdx#ディープリンクurlの構成)にあるとおり、スクリーンとパラメータを受け取ります。
 
 [Universal Linksの警告](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app)にもあるようにコンテンツリンクURLが妥当なURLかどうかを検証して、ユーザに情報を表示するなど安全なアクションにとどめてください。コンテンツリンクURLが想定されない値の場合はアプリケーションで利用しません。
 
@@ -37,7 +37,7 @@ iOS14以降ではクリップボードを読み取るとOSが通知を表示す�
 
 Firebase SDKの設定で[この機能を無効にする](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)こともできますが、インストール後にそのまま起動してディープリンクURLを読み取る機能が利用できません。ドキュメントの警告に記載があるように`matchType`の値が`week`程度になり、このアプリでは`matchType`が`unique`でないディープリンクURLは利用しないためです。[^1]
 
-[^1]:詳しくは[こちら](./react-native-firebase.mdx#他のユーザが開いたディープリンクURLを読み取る可能性がある)を参照してください。
+[^1]: 詳しくは[こちら](./react-native-firebase.mdx#他のユーザが開いたディープリンクurlを読み取る可能性がある)を参照してください。
 
 :::note
 初回起動時にディープリンクから開かれたとしても、クリップボードの値がURL形式であればクリップボードを読み取ります。
