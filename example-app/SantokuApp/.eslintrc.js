@@ -13,5 +13,17 @@ module.exports = {
         project: './tsconfig.json',
       },
     },
+    {
+      // https://github.com/jest-community/eslint-plugin-jest#shareable-configurations
+      extends: ['plugin:jest/recommended'],
+      files: ['*.test.ts', '*.test.tsx'],
+      plugins: ['jest'],
+      rules: {
+        // you should turn the original rule off *only* for test files
+        // https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/unbound-method.md
+        '@typescript-eslint/unbound-method': 'off',
+        'jest/unbound-method': 'error',
+      },
+    },
   ],
 };
