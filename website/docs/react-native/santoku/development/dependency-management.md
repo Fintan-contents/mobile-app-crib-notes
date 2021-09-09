@@ -108,3 +108,5 @@ Podを含むパッケージがアップデートされた場合、`npm run pod-i
 Expoのアップデートには、`expo upgrade`コマンドを利用します。`expo upgrade`でアップデートすると`package.json`と`package-lock.json`が更新されます。
 
 基本的にはPodも更新されるので、`expo upgrade`を実行した後は`npm run pod-install`を実行するようにしてください。
+
+アップデートするExpoのバージョンによって、手順が変わってくるので、詳細は[公式](https://blog.expo.dev/)に公開されている内容を参照してアップデートを実行するようにしてください。

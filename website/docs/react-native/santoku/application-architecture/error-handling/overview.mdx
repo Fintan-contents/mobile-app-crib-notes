@@ -23,3 +23,9 @@ SantokuAppでエラーを捕捉してFirebase Crashlyticsにログを送信す�
 |エラー処理パターン③|Native Moduleでエラーを捕捉しエラー内容をUI表示するには、React NativeのBridgeを経由してエラーをJavaScript Moduleに連携します。エラーを受け取ったJavaScript Moduleはエラー内容をUI表示します。必要に応じて、直接Firebase Crashlytics SDKを使用してFirebase Crashlyticsにエラーログを送信します。|
 |エラー処理パターン④|Native Moduleでエラーを捕捉後、Firebase Crashlytics SDKを使用してFirebase Crashlyticsにエラーログを送信します。エラー内容をUI表示しない場合は、直接Firebase Crashlytics SDKを使用します。|
 |エラー処理パターン⑤|Native Moduleで未処理のエラーは、Firebase Crashlytics SDKに捕捉されます。Firebase Crashlytics SDKはクラッシュログをFirebase Crashlyticsに送信します。|
+
+## 関連する決定事項
+
+- [エラーハンドリング](../../decisions/adr-001-error-handling.mdx)
+- [HTTP通信で使用するライブラリ](../../decisions/adr-002-http-api-libraries.mdx)
+- [HTTP API通信で発生するエラーのハンドリング](../../decisions/adr-003-http-api-error-handling.mdx)
