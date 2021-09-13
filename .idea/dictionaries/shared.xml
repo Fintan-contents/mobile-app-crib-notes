@@ -6,6 +6,7 @@
       <w>alltargets</w>
       <w>altool</w>
       <w>eresolve</w>
+      <w>fastfile</w>
       <w>ffffffffffffffffffffffffffffffff</w>
       <w>getconf</w>
       <w>hideable</w>
@@ -23,6 +24,7 @@
       <w>noreferrer</w>
       <w>onone</w>
       <w>pkce</w>
+      <w>pversion</w>
       <w>qiita</w>
       <w>rdjson</w>
       <w>reactnative</w>
@@ -45,6 +47,7 @@
       <w>xcscheme</w>
       <w>xcschemes</w>
       <w>xcshareddata</w>
+      <w>xcworkspace</w>
       <w>xxxxxxxx</w>
       <w>yourvaultname</w>
     </words>

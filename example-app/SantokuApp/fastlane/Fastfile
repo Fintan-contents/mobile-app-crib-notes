@@ -1,0 +1,82 @@
+import "Fastfile.build_santoku_app_ios"
+
+################################################################################
+# DeployGateへのデプロイに関する注意点
+### Android App Bundle
+# DeployGateのAndroid App Bundleサポートには制限がありますが、Google Playにはaab形式でリリースする必要があるので、
+# DeployGateへのアップロードにもaab形式を利用します。
+#   https://intercom.help/deploygate/ja/articles/4536522
+# - 対象のアプリ（APK形式）が事前にアップロードされていて、アップロード鍵が設定されている必要があります
+# - Dynamic Delivery 等の App Bundle 特有の機能は動作しません
+# - 端末最適化された APKS の配布には対応していません
+################################################################################
+
+platform :ios do
+
+  before_all do |lane|
+    # CocoaPodsの依存パッケージをインストールする
+    # https://docs.fastlane.tools/actions/cocoapods/
+    cocoapods(
+      repo_update: true,
+      podfile: "ios/Podfile",
+      # CI環境ではFlipperをインストールしないので、Podfile.lockに差分が出てしまう
+      deployment: false,
+      silent: false,
+    )
+  end
+
+  desc "Build SantokuApp Release"
+  lane :release do
+    build_santoku_app_ios(flavor: "SantokuApp", build_type: "Release")
+  end
+
+  desc "Build SantokuApp ReleaseInHouse"
+  lane :release_in_house do
+    build_santoku_app_ios(flavor: "SantokuApp", build_type: "ReleaseInHouse")
+  end
+
+  desc "Build DevSantokuApp ReleaseInHouse"
+  lane :dev_release_in_house do
+    build_santoku_app_ios(flavor: "DevSantokuApp", build_type: "ReleaseInHouse")
+  end
+
+  desc "Build SantokuApp DebugAdvanced"
+  lane :debug_advanced do
+    build_santoku_app_ios(flavor: "SantokuApp", build_type: "DebugAdvanced")
+  end
+
+  desc "Build DevSantokuApp DebugAdvanced"
+  lane :dev_debug_advanced do
+    build_santoku_app_ios(flavor: "DevSantokuApp", build_type: "DebugAdvanced")
+  end
+
+end
+
+platform :android do
+
+  desc "Build SantokuApp Release"
+  lane :release do
+    build_android_app(task: "bundle", flavor: "SantokuApp", build_type: "Release", project_dir: "android")
+  end
+
+  desc "Build SantokuApp ReleaseInHouse"
+  lane :release_in_house do
+    build_android_app(task: "bundle", flavor: "SantokuApp", build_type: "ReleaseInHouse", project_dir: "android")
+  end
+
+  desc "Build DevSantokuApp ReleaseInHouse"
+  lane :dev_release_in_house do
+    build_android_app(task: "bundle", flavor: "DevSantokuApp", build_type: "ReleaseInHouse", project_dir: "android")
+  end
+
+  desc "Build SantokuApp DebugAdvanced"
+  lane :debug_advanced do
+    build_android_app(task: "bundle", flavor: "SantokuApp", build_type: "DebugAdvanced", project_dir: "android")
+  end
+
+  desc "Build DevSantokuApp DebugAdvanced"
+  lane :dev_debug_advanced do
+    build_android_app(task: "bundle", flavor: "DevSantokuApp", build_type: "DebugAdvanced", project_dir: "android")
+  end
+
+end
