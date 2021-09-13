@@ -4,22 +4,20 @@ title: エラーの発生箇所と処理方法
 
 エラーの発生箇所は大きく以下のように分類できます。
 
-- ロジック[^1]
+- Reactコンポーネント
+  - JSX
   - 非同期処理
   - 同期処理
 - イベントハンドラ
   - 非同期処理
   - 同期処理
-- JSX
 - Native Modules
-
-[^1]: useEffect内の処理などを指します。
 
 ## 未処理のエラーを処理する方法
 
 未処理のエラーは、Firebase Crashlytics SDKがエラーを捕捉してFirebase Crashlyticsにクラッシュログを送信します。
 
-ただし、ロジックやイベントハンドラの非同期処理で発生したエラーに関しては、Firebase Crashlytics SDKで捕捉できないため、必ず個別にエラー処理を実施してください。
+ただし、非同期処理で発生したエラーに関しては、Firebase Crashlytics SDKで捕捉できないため、必ず個別にエラー処理を実施してください。
 
 :::caution
 Firebase Crashlyticsにログを送信するタイミングは、アプリを再起動した時になります。即座にログが送信されないことに注意してください。
@@ -27,30 +25,132 @@ Firebase Crashlyticsにログを送信するタイミングは、アプリを再
 
 ## 個別にエラーを処理する方法
 
-### ロジックのエラー処理
+### Reactコンポーネントのエラー処理
 
-ロジックで発生するエラーを個別にハンドリングする場合は、同期処理と非同期処理で対応が変わります。
+Reactコンポーネントでは、JSXのレンダリング処理や、コンポーネントのライフサイクルに応じた処理、`useEffect`内の処理などでエラーが発生します。
 
-同期処理は、`try...catch`文で囲んでエラーを捕捉します。
+JSXのレンダリングでエラーが発生した場合は、[Error Boundary](https://ja.reactjs.org/docs/error-boundaries.html)でエラーを捕捉します。該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
+
+```typescript jsx title='Error Boundaryの例'
+const Avator = () => {
+  return (
+    // アバター表示に失敗した場合は、デフォルトのアバターにフォールバックする
+    <AvatorErrorBoundary>
+      <ExternalAvator />
+    </AvatorErrorBoundary>
+  );
+};
+```
+
+JSXのエラーは基本的にプログラムの不具合によるものです。ほとんどのユースケースにおいて、`Error Boundary`を使用して個別にエラー処理を実施することはないと思われます。
+
+:::note
+`Error Boundary`は、イベントハンドラで発生したエラーを捕捉できません。JSX内のイベントハンドラで発生したエラーに関しては、[イベントハンドラのエラー処理](#イベントハンドラのエラー処理)を参照してください。
+:::
+
+JSXのレンダリング以外で発生したエラーをハンドリングする場合は、発生元が非同期処理（Promiseやawaitしている関数）かそれ以外の同期処理かで対応が変わります。
+
+同期処理の場合は、`try...catch`文で囲んでエラーを捕捉します。
+
+```typescript jsx title=try...catchの例
+const Component = () => {
+  useEffect(() => {
+    try {
+      const result = syncFunction();
+      // 正常時の処理
+    } catch(e) {
+      // エラー処理
+    }
+  }, [syncFunction]);
+
+  /* ～省略～ */
+};
+```
 
 非同期処理は、以下のいずれかの方法でエラーを捕捉します。
 
 - `Promise.catch()`を使用してエラーを捕捉します。
 - `await`式を利用した場合は`try...catch`文で囲んでエラーを捕捉します。
 
+```typescript jsx title=Promise.catch()の例
+const Component = () => {
+  useEffect(() => {
+    asyncFunction
+      .then((value) => {
+        // 正常時の処理
+      })
+      .catch((e) => {
+        // エラー処理
+      });
+  }, [asyncFunction]);
+
+  /* ～省略～ */
+};
+```
+
+```typescript jsx title=await式を使用した場合のtry...catchの例
+const Component = () => {
+  useEffect(() => {
+    try {
+      const result = await asyncFunction();
+      // 正常時の処理
+    } catch(e) {
+      // エラー処理
+    }
+  }, [asyncFunction]);
+
+  /* ～省略～ */
+};
+```
+
+:::note
+コンポーネントのライフサイクルに応じた処理や`useEffect`内の処理で発生したエラーも、`Error Boundary`で捕捉できます。しかし、Reactコンポーネントで発生したエラー全てを`Error Boundary`で捕捉してしまうと、個々のエラーに応じた処理を実施することが難しくなります。
+
+そのため、JSXのレンダリング以外で発生したエラーについては`Error Boundary`を使用しないで、個別にエラー処理を実施します。
+:::
+
 ### イベントハンドラのエラー処理
 
 イベントハンドラで発生するエラーを個別にハンドリングする場合は、ロジックの同期処理・非同期処理と同様に`Promise.catch()`、または`try...catch`を利用してエラーを捕捉してください。
 
-### JSXのエラー処理
+```typescript jsx title=try...catchの例
+const Component = () => {
+  const syncEventHandler = useCallback(() => {
+    try {
+      const result = syncFunction();
+      // 正常時の処理
+    } catch(e) {
+      // エラー処理
+    }
+  }, [syncFunction]);
 
-JSXでエラーが発生した場合は、[Error Boundary](https://ja.reactjs.org/docs/error-boundaries.html)でエラーを捕捉します。該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
+  return (
+    <View>
+      <Button onPress={syncEventHandler} />
+    </View>
+  );
+};
+```
 
-JSXのエラーは基本的にプログラムの不具合によるものです。ほとんどのユースケースにおいて、Error Boundaryを使用して個別にエラー処理を実施することはないと思われます。
+```typescript jsx title=Promise.catch()の例
+const Component = () => {
+  const asyncEventHandler = useCallback(() => {
+    asyncFunction
+      .then((value) => {
+        // 正常時の処理
+      })
+      .catch((e) => {
+        // エラー処理
+      });
+  }, [asyncFunction]);
 
-:::note
-Error Boundaryは、イベントハンドラや非同期処理で発生したエラーを捕捉できません。
-:::
+  return (
+    <View>
+      <Button onPress={asyncEventHandler} />
+    </View>
+  );
+};
+```
 
 ### Native Modulesのエラー処理
 
