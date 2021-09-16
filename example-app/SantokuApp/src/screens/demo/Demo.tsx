@@ -32,6 +32,7 @@ export const Demo: React.FC = () => {
         );
       }}
       keyExtractor={(item, index) => item.to + index.toString()}
+      testID="DemoScreen"
     />
   );
 };

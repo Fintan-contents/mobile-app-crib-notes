@@ -10,13 +10,13 @@ export const Home: React.FC = () => {
   const onViewApplicationInformationButtonPress = useCallback(() => navigation.navigate('AppInfo'), [navigation]);
   const onDemoButtonPress = useCallback(() => navigation.navigate('Demo'), [navigation]);
   return (
-    <View style={StyleSheet.flatten([styles.container, {backgroundColor: theme.colors?.primary}])}>
+    <View style={StyleSheet.flatten([styles.container, {backgroundColor: theme.colors?.primary}])} testID="HomeScreen">
       <Text h1 style={styles.textColor}>
         Hello, World!
       </Text>
       <Button title="Go to instructions" onPress={onGoToInstructionButtonPress} />
       <Button title="View application information" onPress={onViewApplicationInformationButtonPress} />
-      <Button title="Demo" onPress={onDemoButtonPress} />
+      <Button title="Demo" onPress={onDemoButtonPress} testID="goToDemoButton" />
     </View>
   );
 };
