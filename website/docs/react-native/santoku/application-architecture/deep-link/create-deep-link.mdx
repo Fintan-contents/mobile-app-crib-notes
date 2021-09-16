@@ -4,12 +4,12 @@ title: ディープリンクの作成
 
 ディープリンクURLの作成には[React Native Firebase Dynamic LinksのAPI](https://rnfirebase.io/dynamic-links/usage#create-a-link)を利用し、共有しやすいように[短いDynamic Link](https://firebase.google.com/docs/dynamic-links/android/create)を使用します。
 
-### ディープリンクURLの構成
+### ディープリンクURLの構成ルール
 
 ディープリンクURLのドメインには、アプリケーションに関連付けたドメインを使用する必要があります。
 またコンテンツリンクURL（`link`）は、以下のように構成を決めて信頼できるURLかどうかを検証します。
 
-本アプリケーションではFireabseの`page.link`ドメインを利用するためディープリンクURLの構成は以下のとおりです。
+本アプリケーションではFireabseの`page.link`ドメインを利用します。ディープリンクURLの構成ルールは以下のとおりです。
 
 |項目|APIのパラメータ|値|本番の設定例|
 |:-------|:-|:--|:---|

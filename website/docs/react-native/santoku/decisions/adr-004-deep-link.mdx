@@ -54,7 +54,7 @@ Dynamic LinksとOSの機能を直接利用する場合の違いは以下のと�
 |セキュリティ|△|○|
 
 Dynamic LinksはOSの機能と比較すると、アプリへの導線をサポートしている分、セキュリティの対応が必要になります。
-またインストールしていないユーザへの導線のためにウェブサイトを構築する作業が短縮されます。
+一方でインストールしていないユーザへの導線のためにウェブサイトを構築する作業が短縮されます。
 
 [^1]:カスタムURLスキームは自由に設定できるため、作成したURLを別のアプリに乗っ取られるリスクがあります。
 [^2]:アプリへの導線はアプリのインストールを促し、インストール後もURLを読み取れる機能です。
@@ -84,11 +84,33 @@ OSの機能を直接利用する場合（Dynamic Linksを利用しない場合�
 
 ### セキュリティ
 
-カスタムURLスキームとは異なり、アプリケーションとURL（ドメイン）の関連付けが正当であることをOSが検証しているため、他のアプリに情報が意図せず共有されることはありません。
+App Links、Universal Linksは、ドメインに配置されたファイルを利用して「アプリケーションとURL（ドメイン）の所有者が同じであること」をOSが検証しています。そのため、カスタムURLスキームで問題となるような、他のアプリに情報が意図せず共有されることはありません。
 
 #### iOSでの意図しない共有
 
-iOSの場合、Dynamic Linksには受け取ったURLの信頼性を表す[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
+Dynamic Linksではアプリをインストールしていないユーザがディープリンクを開いたとき、初回起動時に[URLを読み取る仕組み](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)があります。
+この仕組みにより、OSの機能を拡張して、アプリケーションの初回起動時にディープリンクを読み取ることができます。
+
+この拡張機能を利用すると、iOSでは初回起動時にクリップボードを利用してディープリンクを読み取ります。
+一方で、[iOSのペーストボードの使用を無効に](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)設定しても、初回起動時に読み取ることができます。
+
+:::note
+[公式ドキュメント](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)には、iOSの場合クリップボードを利用するということは記載されています。
+
+しかし、Firebase SDKの[実装](https://github.com/firebase/firebase-ios-sdk/blob/8.7.0/FirebaseDynamicLinks/Sources/FIRDynamicLinkNetworking.m#L190)を見ると、デバイスの情報なども利用してサーバからダイナミックリンクURLを取得しているように見えます。
+
+実際に次のようにアプリを起動すると、クリップボードにディープリンクURLがコピーされていない場合でも、ディープリンクURLを取得できます。
+
+ - アプリをインストールしていないデバイスでディープリンクのURLを開く
+ - iOSでアプリがインストールされてない場合に表示される[プレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)のOpenボタンをタップする
+ - `テキスト`のようなURL形式ではない文字列をクリップボードにコピーする（OpenボタンをタップしたときにディープリンクURLがクリップボードにコピーされているので上書きする）
+ - アプリをインストールして起動する
+
+:::
+
+クリップボードから取得した場合は間違いなくユーザが意図したディープリンクURLと言えますが、それ以外の方法で取得したURLはユーザとは無関係のURLの可能性があります。
+
+これらを区別するために、iOS向けのDynamic Links SDKには受け取ったURLの信頼性を表す[matchType](https://firebase.google.com/docs/reference/swift/firebasedynamiclinks/api/reference/Enums/DLMatchType.html)という項目があります。
 
 matchTypeの値が`unique`でない場合はユーザが意図しないURLをアプリが受け取っている可能性があります。[^4]
 

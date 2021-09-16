@@ -12,7 +12,7 @@ React Native Firebase Dynamic LinksではディープリンクURLを取得する
   - iOSでは[不具合に対応するため](./react-native-firebase.mdx)にReact Native Linkingを利用します。
 - [ホットスタート](../life-cycle-management/overview.mdx#ホットスタート)では[onLink](https://rnfirebase.io/reference/dynamic-links#onLink)でディープリンクURLを取得します。
 
-どちらの場合でもディープリンクURLからコンテンツリンクURLを取得し、画面遷移を判定して、コンテンツリンクURLのパラメータを処理します。コンテンツリンクURLのパラメータは[ディープリンクURLの構成](./create-deep-link.mdx#ディープリンクurlの構成)にあるとおり、スクリーンとパラメータを受け取ります。
+どちらの場合でもディープリンクURLからコンテンツリンクURLを取得し、画面遷移を判定して、コンテンツリンクURLのパラメータを処理します。コンテンツリンクURLのパラメータは[ディープリンクURLの構成](./create-deep-link.mdx#ディープリンクurlの構成ルール)にあるとおり、スクリーンとパラメータを受け取ります。
 
 [Universal Linksの警告](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app)にもあるようにコンテンツリンクURLが妥当なURLかどうかを検証して、ユーザに情報を表示するなど安全なアクションにとどめてください。コンテンツリンクURLが想定されない値の場合はアプリケーションで利用しません。
 

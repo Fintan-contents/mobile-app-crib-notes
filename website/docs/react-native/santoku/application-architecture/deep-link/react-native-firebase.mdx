@@ -9,7 +9,7 @@ React Native Fireabaseで発生する2つの課題に対応します。
 
 ## 他のユーザが開いたディープリンクURLを読み取る可能性がある
 
-Firebase Dynamic Linksは、iOSで初回起動時にディープリンクURLを取得するために[クリップボードを利用するとドキュメントに記載されています](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)。ただし、実際はクリップボードの値だけでなく、デバイス情報なども利用しています。
+Firebase Dynamic Linksは、iOSで初回起動時にディープリンクURLを取得するために[クリップボードを利用するとドキュメントに記載されています](https://firebase.google.com/docs/dynamic-links/operating-system-integrations#ios_integration_flowchart)。ただし、実際はクリップボードの値だけでなく、[デバイス情報なども利用](../../decisions/adr-004-deep-link.mdx#iosでの意図しない共有)しています。
 
 このため、例えばクリップボードが空だったとしてもディープリンクURLを取得できる場合があります。こういった場合は、ユーザ自身が実際に開こうとしたわけではないディープリンクURLが取得されている可能性があります。
 
@@ -19,6 +19,10 @@ Firebase Dynamic Linksは、iOSで初回起動時にディープリンクURLを�
 
 ただし、React Native Firebase Dynamic Linksでは、matchTypeをJavaScript Moduleに渡していないため、アプリケーションが参照できません。
 そのためReact Native Firebase Dynamic Linksに[patch-package](https://www.npmjs.com/package/patch-package)でパッチを適用し、判定できるようにします。
+
+:::note
+Androidの場合は[ドキュメント](https://firebase.google.com/docs/dynamic-links/operating-system-integrations#android_integration_flowchart)のフローにもあるように、Google Play Servicesを経由してIntentでURLを渡すため、デバイス外に情報を持つことはありません。
+:::
 
 ## アプリ起動の時間が短い場合にディープリンクURLを取得できない
 
