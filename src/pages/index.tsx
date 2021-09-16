@@ -11,13 +11,13 @@ const genericOverview = [
   {
     title: 'Reference',
     to: 'reference',
-    imageUrl: 'img/undraw_Bookshelves_re_lxoy.svg',
+    imageUrl: 'img/undraw_Bibliophile_re_xarc.svg',
     summary: <>リファレンス</>,
   },
   {
     title: 'Distribution',
     to: 'distribution',
-    imageUrl: 'img/undraw_Real_time_sync_re_nky7.svg',
+    imageUrl: 'img/undraw_Outer_space_re_u9vd.svg',
     summary: <>アプリケーションの配布</>,
   },
 ];
