@@ -25,11 +25,11 @@
   --ifm-container-width: 1250px;
   --ifm-alert-color: rgba(0, 0, 0, 0.65);
   --font-size-small: 90%;
-  --alert-danger-background-cloor: #ffeff2;
-  --alert-warning-background-cloor: #fff6e4;
-  --alert-info-background-cloor: #f0fbff;
-  --alert-success-background-cloor: #f0fff0;
-  --alert-secondary-background-cloor: #f7f7f8;
+  --alert-danger-background-color: #ffeff2;
+  --alert-warning-background-color: #fff6e4;
+  --alert-info-background-color: #f0fbff;
+  --alert-success-background-color: #f0fff0;
+  --alert-secondary-background-color: #f7f7f8;
   --footer-flex-direction: row;
 }
 
@@ -50,48 +50,15 @@
  * Admonition
  *****************************************************************************/
 .alert--danger {
-  --ifm-alert-background-color: var(--alert-danger-background-cloor);
-  --ifm-alert-border-color: var(--alert-danger-background-cloor);
-}
-
-.alert--danger .admonition-icon svg {
-  --ra-admonition-icon-color: var(--ifm-color-danger);
-}
-
-.alert--warning {
-  --ifm-alert-background-color: var(--alert-warning-background-cloor);
-  --ifm-alert-border-color: var(--alert-warning-background-cloor);
-}
-
-.alert--warning .admonition-icon svg {
-  --ra-admonition-icon-color: var(--ifm-color-warning);
+  --ifm-alert-background-color: var(--alert-danger-background-color);
 }
 
 .alert--info {
-  --ifm-alert-background-color: var(--alert-info-background-cloor);
-  --ifm-alert-border-color: var(--alert-info-background-cloor);
-}
-
-.alert--info .admonition-icon svg {
-  --ra-admonition-icon-color: var(--ifm-color-info);
+  --ifm-alert-background-color: var(--alert-info-background-color);
 }
 
 .alert--success {
-  --ifm-alert-background-color: var(--alert-success-background-cloor);
-  --ifm-alert-border-color: var(--alert-success-background-cloor);
-}
-
-.alert--success .admonition-icon svg {
-  --ra-admonition-icon-color: var(--ifm-color-success);
-}
-
-.alert--secondary {
-  --ifm-alert-background-color: var(--alert-secondary-background-cloor);
-  --ifm-alert-border-color: var(--alert-secondary-background-cloor);
-}
-
-.alert--secondary .admonition-icon svg {
-  --ra-admonition-icon-color: var(--ifm-color-secondary-darkest);
+  --ifm-alert-background-color: var(--alert-success-background-color);
 }
 
 .admonition-icon {
