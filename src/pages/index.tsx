@@ -11,13 +11,13 @@ const genericOverview = [
   {
     title: 'Reference',
     to: 'reference',
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    imageUrl: 'img/undraw_Bibliophile_re_xarc.svg',
     summary: <>リファレンス</>,
   },
   {
     title: 'Distribution',
     to: 'distribution',
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    imageUrl: 'img/undraw_Outer_space_re_u9vd.svg',
     summary: <>アプリケーションの配布</>,
   },
 ];
@@ -26,13 +26,13 @@ const reactNativeOverview = [
   {
     title: 'Learn React Native',
     to: 'react-native/learn',
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    imageUrl: 'img/undraw_studying_s3l7.svg',
     summary: <>学習用コンテンツ</>,
   },
   {
     title: 'Common Pitfalls',
     to: 'react-native/common-pitfalls',
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    imageUrl: 'img/undraw_void_3ggu.svg',
     summary: <>ハマりがちな落とし穴</>,
   },
 ];
