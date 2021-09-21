@@ -56,6 +56,11 @@
       matchPackagePrefixes: ['@react-navigation/'],
     },
     {
+      // React Native Firebaseの関連パッケージはまとめて更新するようにします
+      groupName: 'React Native Firebase',
+      matchPackagePrefixes: ['@react-native-firebase/'],
+    },
+    {
       // Docusaurusの関連パッケージはまとめて更新するようにします
       groupName: 'Docusaurus',
       matchPackagePrefixes: ['@docusaurus'],
