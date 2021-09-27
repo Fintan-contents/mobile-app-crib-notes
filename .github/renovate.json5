@@ -49,6 +49,7 @@
         'jest',
         'gradle', // expo-template-bare-typescript
       ],
+      matchPackagePrefixes: ['com.facebook.flipper'],
     },
     {
       // React Navigationの関連パッケージはまとめて更新するようにします
