@@ -45,7 +45,7 @@
       enabled: false,
       matchPackageNames: [
         '@types/jest', // jest-expo -> jest
-        '@types/react-test-renderer', // jest-expo -> react-test-renderer
+        'react-test-renderer', // jest-expo -> react-test-renderer
         'jest',
         'gradle', // expo-template-bare-typescript
       ],
