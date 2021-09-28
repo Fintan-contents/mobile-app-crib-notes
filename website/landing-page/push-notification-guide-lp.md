@@ -8,9 +8,3 @@ Firebase Cloud Messagingを用いてAndroid、iOS双方に送信する場合の�
 
 React Nativeを利用した実装イメージをつかめるようにサンプルコードも合わせて公開しています。
 ガイドとあわせてご覧ください。
-
----
-
-※ 本コンテンツに含まれるドキュメントは[クリエイティブコモンズ(Creative Commons) 4.0 の「表示—継承」](https://creativecommons.org/licenses/by-sa/4.0/)に準拠しており、コード例は[Apache License 2.0](https://fintan.jp/wp-content/uploads/2018/06/LICENSE.txt)に準拠しています。
-
-※ 本コンテンツ内に記載されている会社名、製品名は、各社の登録商標または商標です。
