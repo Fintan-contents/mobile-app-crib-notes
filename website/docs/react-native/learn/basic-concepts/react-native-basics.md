@@ -1,6 +1,6 @@
 ---
 title: React Nativeの基本
-sidebar_label: Overview
+sidebar_label: 概要
 hide_table_of_contents: true
 ---
 
