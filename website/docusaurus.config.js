@@ -86,7 +86,10 @@ module.exports = {
               label: 'Learn',
               to: 'react-native/learn',
             },
-            ...(isDraft ? [{label: 'Example App', to: 'react-native/santoku'}] : []),
+            {
+              label: 'Example App',
+              to: 'react-native/santoku',
+            },
             {
               label: 'Pitfalls',
               to: 'react-native/common-pitfalls',
@@ -122,10 +125,13 @@ module.exports = {
               to: 'react-native/learn',
             },
             {
+              label: 'Example App',
+              to: 'react-native/santoku',
+            },
+            {
               label: 'Pitfalls',
               to: 'react-native/common-pitfalls',
             },
-            ...(isDraft ? [{label: 'Example App', to: 'react-native/santoku', position: 'left'}] : []),
           ],
         },
         {
