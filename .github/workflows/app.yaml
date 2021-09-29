@@ -8,21 +8,21 @@ on:
     branches:
       - master
     paths:
-      - SantokuApp/**/*.js
-      - SantokuApp/**/*.jsx
-      - SantokuApp/**/*.ts
-      - SantokuApp/**/*.tsx
-      - SantokuApp/jest/**
-      - SantokuApp/src/**
-      - SantokuApp/.editorconfig
-      - SantokuApp/.eslintrc.js
-      - SantokuApp/babel.config.js
-      - SantokuApp/index.js
-      - SantokuApp/jest.config.js
-      - SantokuApp/metro.config.js
-      - SantokuApp/package.json
-      - SantokuApp/package-lock.json
-      - SantokuApp/tsconfig.json
+      - example-app/SantokuApp/**/*.js
+      - example-app/SantokuApp/**/*.jsx
+      - example-app/SantokuApp/**/*.ts
+      - example-app/SantokuApp/**/*.tsx
+      - example-app/SantokuApp/jest/**
+      - example-app/SantokuApp/src/**
+      - example-app/SantokuApp/.editorconfig
+      - example-app/SantokuApp/.eslintrc.js
+      - example-app/SantokuApp/babel.config.js
+      - example-app/SantokuApp/index.js
+      - example-app/SantokuApp/jest.config.js
+      - example-app/SantokuApp/metro.config.js
+      - example-app/SantokuApp/package.json
+      - example-app/SantokuApp/package-lock.json
+      - example-app/SantokuApp/tsconfig.json
       - .github/workflows/app.yaml
       - .github/workflows/report.yaml
     types:
@@ -52,9 +52,9 @@ jobs:
         with:
           path: ~/.npm
           # If cache is corrupted, increment prefixed number.
-          key: 1-${{ runner.os }}-npm-${{ hashFiles('SantokuApp/**/package-lock.json') }}
+          key: 1-${{ runner.os }}-SantokuApp-npm-${{ hashFiles('example-app/SantokuApp/**/package-lock.json') }}
           restore-keys: |
-            1-${{ runner.os }}-npm-
+            1-${{ runner.os }}-SantokuApp-npm-
 
       # If package-lock.json matches, node_modules will also match.
       # So, cache node_modules directly to skip install step.
@@ -62,14 +62,14 @@ jobs:
         id: cache-node-modules
         uses: actions/cache@v2
         with:
-          path: SantokuApp/node_modules
+          path: example-app/SantokuApp/node_modules
           # If cache is corrupted, increment prefixed number.
-          key: 1-${{ runner.os }}-SantokuApp-node-modules-${{ hashFiles('SantokuApp/**/package-lock.json') }}
+          key: 1-${{ runner.os }}-SantokuApp-node-modules-${{ hashFiles('example-app/SantokuApp/**/package-lock.json') }}
 
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: |
-          npm clean-install --prefix SantokuApp 2>&1 | tee /dev/stderr | test $(grep --count -E '(Error:|gyp ERR!)') -le 0
+          npm clean-install --prefix example-app/SantokuApp 2>&1 | tee /dev/stderr | test $(grep --count -E '(Error:|gyp ERR!)') -le 0
 
       - name: Set up reviewdog
         uses: reviewdog/action-setup@v1
@@ -79,17 +79,17 @@ jobs:
       - name: Lint (ESLint)
         continue-on-error: true
         run: |
-          cd SantokuApp && npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name="ESLint (SantokuApp)"
+          cd example-app/SantokuApp && npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name="ESLint (SantokuApp)"
 
       - name: Lint (TypeScript)
         continue-on-error: true
         run: |
-          cd SantokuApp && npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (SantokuApp)"
+          cd example-app/SantokuApp && npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (SantokuApp)"
 
       - name: Test
         continue-on-error: true
         run: |
-          npm run -s test --prefix SantokuApp -- --ci --reporters=default --reporters=jest-junit --coverage
+          npm run -s test --prefix example-app/SantokuApp -- --ci --reporters=default --reporters=jest-junit --coverage
 
       - name: Archive workflow results
         uses: actions/upload-artifact@v2
@@ -97,4 +97,4 @@ jobs:
         with:
           name: workflow-results
           path: |
-            SantokuApp/jest-junit.xml
+            example-app/SantokuApp/jest-junit.xml

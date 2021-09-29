@@ -1,0 +1,34 @@
+---
+title: エラーハンドリング
+sidebar_label: 概要
+---
+
+モバイルアプリでエラーが発生した場合、エラーの内容と回復手順をユーザに伝える事が大切です。何も伝えずにアプリがクラッシュすると、ユーザのアプリ離脱に繋がります。また、エラーを解析するために、どのような操作でアプリがクラッシュしたかなどの操作ログや、発生したエラー情報を収集することも重要です。
+
+React Nativeを使用したモバイルアプリでは、発生したエラーをハンドリングしないとアプリがクラッシュします。
+そのためSantokuAppでは以下を基本方針とします。
+
+- ユーザ操作や外部通信時などのイベントで発生するエラーにおいて、アプリを運用する上で想定可能なエラーについては個別にエラーを捕捉する
+- 個別に捕捉したエラーの内容と復旧手順を適切にユーザに伝える
+
+上記の対応に加え、個別にエラーが捕捉されなかった場合のセーフティネットとして、未処理のエラーを捕捉してFirebase Crashlyticsにクラッシュログを送信します。
+
+## エラーハンドリングの全体像
+
+SantokuAppでエラーを捕捉してFirebase Crashlyticsにログを送信する全体像は以下になります。
+
+![エラーハンドリングアーキテクチャ](error-handling-architecture.drawio.png)
+
+| エラー処理パターン | 処理概要 |
+|:--|:--|
+|エラー処理パターン①|JavaScript Moduleでエラーを捕捉した場合は、エラー内容をUI表示します。また、必要に応じてReact Native Firebase Crashlyticsを経由してFirebase Crashlyticsにエラーログを送信します。|
+|エラー処理パターン②|JavaScript Moduleで未処理のエラーは、React NativeのBridgeを経由して最終的にはFirebase Crashlytics SDKによって捕捉されます。Firebase Crashlytics SDKはクラッシュログをFirebase Crashlyticsに送信します。|
+|エラー処理パターン③|Native Moduleでエラーを捕捉しエラー内容をUI表示するには、React NativeのBridgeを経由してエラーをJavaScript Moduleに連携します。エラーを受け取ったJavaScript Moduleはエラー内容をUI表示します。必要に応じて、直接Firebase Crashlytics SDKを使用してFirebase Crashlyticsにエラーログを送信します。|
+|エラー処理パターン④|Native Moduleでエラーを捕捉後、Firebase Crashlytics SDKを使用してFirebase Crashlyticsにエラーログを送信します。エラー内容をUI表示しない場合は、直接Firebase Crashlytics SDKを使用します。|
+|エラー処理パターン⑤|Native Moduleで未処理のエラーは、Firebase Crashlytics SDKに捕捉されます。Firebase Crashlytics SDKはクラッシュログをFirebase Crashlyticsに送信します。|
+
+## 関連する決定事項
+
+- [グローバルエラーハンドリング](../../decisions/adr-001-error-handling.mdx)
+- [HTTP通信で使用するライブラリ](../../decisions/adr-002-http-api-libraries.mdx)
+- [HTTP API通信で発生するエラーのハンドリング](../../decisions/adr-003-http-api-error-handling.mdx)

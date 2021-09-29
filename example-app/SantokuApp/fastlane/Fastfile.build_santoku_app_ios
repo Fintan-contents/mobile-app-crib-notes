@@ -1,0 +1,65 @@
+# https://docs.fastlane.tools/actions/build_app/
+
+ios_project_base = "ios/SantokuApp"
+workspace = "#{ios_project_base}.xcworkspace"
+
+bundle_identifier_base = "jp.fintan.mobile.SantokuApp"
+
+provisioning_profiles = {
+  "#{bundle_identifier_base}" => "SantokuApp AppStore Distribution",
+  "#{bundle_identifier_base}.house" => "SantokuApp InHouse Distribution",
+  "#{bundle_identifier_base}.dev.house" => "SantokuApp DevInHouse Distribution",
+  "#{bundle_identifier_base}.debugAdvanced" => "SantokuApp DebugAdvanced Distribution",
+  "#{bundle_identifier_base}.dev.debugAdvanced" => "SantokuApp DevDebugAdvanced Distribution",
+}
+
+build_type_options = {
+  DebugAdvanced: {
+    configuration: "DebugAdvanced",
+    export_options: {
+      method: "enterprise",
+      provisioningProfiles: provisioning_profiles,
+    }
+  },
+  ReleaseInHouse: {
+    configuration: "ReleaseInHouse",
+    export_options: {
+      method: "enterprise",
+      provisioningProfiles: provisioning_profiles,
+    }
+  },
+  Release: {
+    configuration: "Release",
+    export_options: {
+      method: "app-store",
+      provisioningProfiles: provisioning_profiles,
+    }
+  },
+}
+
+product_flavor_options = {
+  SantokuApp: {
+    scheme: "SantokuApp",
+  },
+  DevSantokuApp: {
+    scheme: "DevSantokuApp",
+  }
+}
+
+private_lane :build_santoku_app_ios do |options|
+  build_type = options[:build_type]
+  type_options = build_type_options[build_type.to_sym]
+  product_flavor = options[:flavor]
+  flavor_options = product_flavor_options[product_flavor.to_sym]
+
+  build_ios_app({
+                  workspace: workspace,
+                  scheme: flavor_options[:scheme],
+                  configuration: type_options[:configuration],
+                  output_directory: "ios/build",
+                  output_name: "#{product_flavor}#{build_type}.ipa",
+                  export_options: type_options[:export_options],
+                  silent: false,
+                  suppress_xcode_output: false,
+                })
+end

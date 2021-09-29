@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- リクエストマッピング機能の設定 -->
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+    <!-- WEB用のパッケージマッピングの設定 -->
+    <component name="packageMapping"
+               class="nablarch.integration.router.RoutesMapping">
+        <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+        <property name="routes" value="routes.xml"/>
+        <property name="baseUri" value="" />
+        <property name="checkInterval" value="0"/>
+        <property name="methodBinderFactory">
+            <component class="nablarch.integration.router.RoutesMethodBinderFactory" />
+        </property>
+    </component>
+
+    <!-- JAX-RS用のパッケージマッピングの設定 -->
+    <component name="jaxrsPackageMapping"
+               class="nablarch.integration.router.RoutesMapping">
+        <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+        <property name="routes" value="routes.xml"/>
+        <property name="baseUri" value="" />
+        <property name="checkInterval" value="0"/>
+        <property name="methodBinderFactory">
+            <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
+                <property name="handlerList">
+                    <component class="nablarch.integration.jaxrs.jersey.JerseyJaxRsHandlerListFactory" />
+                </property>
+            </component>
+        </property>
+    </component>
+</component-configuration>

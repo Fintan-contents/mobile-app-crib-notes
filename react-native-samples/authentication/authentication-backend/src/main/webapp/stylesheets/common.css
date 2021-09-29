@@ -1,0 +1,607 @@
+﻿@charset "UTF-8";
+/*
+ * common.css
+ *
+ *     ※このCSSファイルに定義されたクラス群は、一例として定義したものです。
+ *       プロジェクトで自由に書き換えるか、不要な場合は削除してかまいません。
+ */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, input, select, textarea {
+  font-size: 12px;
+  font-family: Osaka, "ＭＳ P ゴシック", "MS P Gothic", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+body {
+  color: #222;
+  background: #FFF;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 35px;
+  margin-right: 15px;
+}
+hr {
+  color: #DDDDDD;
+  height: 1px;
+  margin: 3px 0px 3px 0px;
+}
+
+table {
+    border-collapse: separate;
+}
+tr, th, td {
+    border: 1px solid #FFFFFF;
+    padding: 3px;
+    line-height: 18px;
+}
+.table {
+  width: 100%;
+}
+.table th, .table th a  {
+  padding: 1px 6px 1px 6px;
+  font-weight: normal;
+  text-align: left;
+  height: 22px;
+  background: #3F51B5;
+  color: #FFFFFF;
+}
+.table td {
+  padding: 1px 6px 1px 6px;
+  background-color: #E8EAF4;
+  align: left;
+  border-bottom: 1px solid #F0F0EE;
+
+}
+.table td.center, .table th.center {
+  text-align: center;
+}
+/* start ワークフロー（申請/承認状況一覧） */
+td.border-left-top-bottom {
+  border-left:3px solid #00ccff;
+  border-top:3px solid #00ccff;
+  border-bottom:3px solid #00ccff;
+}
+td.border-top-bottom {
+  border-top:3px solid #00ccff;
+  border-bottom:3px solid #00ccff;
+}
+td.border-right-top-bottom {
+  border-right:3px solid #00ccff;
+  border-top:3px solid #00ccff;
+  border-bottom:3px solid #00ccff;
+}
+td.border-left-bottom {
+  border-left:3px solid #00ccff;
+  border-bottom:3px solid #00ccff;
+}
+td.border-bottom {
+  border-bottom:3px solid #00ccff;
+}
+td.border-right-bottom {
+  border-right:3px solid #00ccff;
+  border-bottom:3px solid #00ccff;
+}
+/* end ワークフロー（申請/承認状況一覧） */
+
+.list-table {
+  table-layout: fixed;
+}
+.list-header {
+  padding: 1px 6px 1px 6px;
+  font-weight: normal;
+  text-align: left;
+  height: 30px;
+  background: #3F51B5;
+  color: #FFFFFF;
+  width: 100%;
+  white-space: nowrap;
+}
+.list-header td {
+  font-family: 'MS UI Gothic';
+  color: #FFFFFF;
+  font-size: 13px;
+}
+
+h2 {
+    margin:0;
+    padding: 5px 3px;
+    font-size: 1em;
+    color:red;
+    font-weight: bold;
+}
+tfoot td {
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  text-align: right;
+}
+
+/* -------------------- 入力系項目 -------------------- */
+.input-button {
+    color: #000000;
+    height: 22px;
+    width: 100px;
+    padding: 2px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.buttonLink {
+    font-size:12px;
+    font-weight:bold;
+    color:#000000;
+    display:block;
+    background:#EEEEEE;
+    width:100px;
+    height:18px;
+    padding-top:3px;
+    padding-bottom:0px;
+    text-align:center;
+    border:1px solid;
+    border-color:#aaaaaa #444444 #444444 #aaaaaa;
+    text-decoration:none;
+}
+.input-text,
+.input-range,
+.input-color,
+.input-datetime,
+.input-datetime-local,
+.input-date,
+.input-month,
+.input-week,
+.input-time,
+.input-tel,
+.input-url,
+.input-email,
+.input-search {
+    color: #000000;
+    background-color: #FFFFDD;
+    border: 1px solid #AAAAAA;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 2px;
+}
+.input-number {
+    color: #000000;
+    background-color: #FFFFDD;
+    border: 1px solid #AAAAAA;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 2px;
+    text-align: right;
+}
+
+.input-textarea {
+    color: #000000;
+    background-color: #FFFFDD;
+    border: 1px solid #AAAAAA;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 2px;
+}
+.input-label {
+    color: #000000;
+    background-color: #E8EAF4;
+    border: none;
+}
+.input-file {
+    color: #000000;
+    background-color: #FFFFDD;
+    border: 1px solid #AAAAAA;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 2px;
+    width: 600px;
+}
+.input-select {
+    color: #000000;
+    background-color: #FFFFDD;
+    border: 1px solid #AAAAAA;
+    border-radius: 3px;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+}
+.input-radio {
+    margin: 1px;
+    vertical-align: middle;
+}
+.input-checkbox {
+    margin: 1px;
+    vertical-align: middle;
+}
+/* ----- 入力エラー ----- */
+.input-error {
+    border-color: #FF0000;
+}
+
+/* ----- 項目フォーカス（IE以外） ----- */
+.input-text:focus,
+.input-textarea:focus,
+.input-select:focus,
+.input-radio:focus,
+.input-checkbox:focus,
+.input-file:focus,
+.input-number:focus,
+.input-range:focus,
+.input-color:focus,
+.input-datetime:focus,
+.input-datetime-local:focus,
+.input-date:focus,
+.input-month:focus,
+.input-week:focus,
+.input-time:focus,
+.input-tel:focus,
+.input-url:focus,
+.input-email:focus,
+.input-search:focus {
+    color: #000000;
+    background-color: #FFEECC;
+}
+/* ----- 項目フォーカス（IE専用） ----- */
+.forIE-focus {
+    color: #000000;
+    background-color: #FFEECC;
+}
+
+/* -------------------- IME設定（IEのみ有効） -------------------- */
+.ime-active {
+    ime-mode: active;
+}
+.ime-disabled {
+    ime-mode: disabled;
+}
+
+/* -------------------- メッセージエリア -------------------- */
+.message-area {
+	margin: 20px 0px 20px 30px;
+}
+.message-normal {
+    color: #0000FF;
+}
+.message-error {
+    color: #FF0000;
+}
+.message-info {
+    color: #000000;
+}
+
+
+/* -------------------- フォント -------------------- */
+.font-group {
+    color: #0000FF;
+    font-size: 17px;
+    font-weight: 700;
+    text-shadow: 2px 2px 2px #CCCCFF;
+}
+
+/* -------------------- 項目ラベル -------------------- */
+th.item-required {
+  color: #FFFF00;
+  vertical-align: middle;
+}
+th.item-norequired {
+  color: #FFFFFF;
+  vertical-align: middle;
+}
+
+/* -------------------- パンくずリスト -------------------- */
+div.flow-navigation {
+  float: right;
+  color: #E8EAF4;
+  font-size:18px;
+  font-weight:bold;
+  margin-top:5px;
+  text-align: right;
+}
+ol.flow-navigation {
+  padding: 10px;
+  list-style: none;
+  display: inline-table;
+  table-layout: fixed;
+  background: #0000FF none repeat scroll 0 0;
+  height: 50px;
+  color: white;
+}
+ol.flow-navigation li {
+  float: left;
+  width: 150px;
+  height: 30px;
+  margin-left: -50px;
+  display: table;
+  /* IE 8以下用 */
+  position: relative\9;
+}
+ol.flow-navigation li div.step-name {
+  font-size: 12px;
+  font-weight: normal;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  /* IE 8以下用 */
+  position:absolute\9;
+  top:40%\9;
+  left:10%\9;
+  text-align: center\9;
+  vertical-align: middle\9;
+  margin-left:0em\9;
+  margin-top:-1em\9;
+}
+ol.flow-navigation li div.active-step {
+  font-weight: bold;
+  font-size: 16px;
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  color: white !important;
+  /* IE 8以下用 */
+  position:absolute\9;
+  top:50%\9;
+  left:10%\9;
+  text-align: center\9;
+  vertical-align: middle\9;
+  margin-left:0em\9;
+  margin-top:-1em\9;
+}
+.floatClear {
+    height: 0px;
+    clear: both;
+}
+
+.title {
+  color: blue;
+}
+.title-nav {
+    height: 59px;
+    width: 100%;
+    clear: both;
+    background: #3F51B5;
+    -moz-box-shadow: 3px 3px 10px #888888;
+    -webkit-box-shadow: 3px 3px 10px #888888;
+}
+
+.title-nav span {
+  position: absolute;
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 10px;
+  margin-top: 15px;
+  color: white;
+}
+.search-nav {
+  cellspacing: 0px;
+  cellpadding: 0px;
+  width: 100%;
+  border: 0px;
+  height: 30px;
+  background: #3F51B5;
+  color: #ffffff;
+}
+.search-nav a {
+  color: #ffffff !important;
+  background-color: transparent !important;
+}
+.button-nav {
+  margin-top: 1px;
+  right: 60px;
+  text-align: right;
+  padding: 2px 2px 1px 1px;
+}
+.real-button-block {
+  margin: 0px 2px 2px 2px;
+}
+.link-button-block {
+  margin: 0px 2px 0px 2px;
+}
+.button-block {
+  float: right;
+  width: 104px;
+  height: 24px;
+}
+.sort-nav {
+  text-align: right;
+  margin: 1px;
+  padding: 5px;
+  background-color: #FFFFFF;
+}
+.white-padding {
+  background: white !important;
+}
+.overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+}
+.noscriptMessage {
+    font-size: 12pt;
+    line-height: 30px;
+    width: 500px;
+    margin: 20px;
+    padding: 50px;
+    display: block;
+    background-color: orange;
+}
+
+/* -------------------- jQuery Datepicker -------------------- */
+.ui-datepicker {
+    font-size: 10px;
+}
+.ui-datepicker-trigger {
+    cursor: hand;
+}
+
+/* -------------------- qTip2 -------------------- */
+.qtip-content {
+    font-size: 12px;
+}
+
+/* -------------------- xenlon-ui クラス定義の実装 -------------------- */
+.x_tooltip {
+    padding: 8px;
+    line-height: 170%;
+
+    background: -moz-linear-gradient(top, #EEF, #BBF);
+    background: top left, -o-linear-gradient(#EEF, #BBF);
+    background: -webkit-gradient(linear, left top, left bottom, from(#EEF), to(#BBF));
+    background-color: #BBF;
+
+    border-color: #88F;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+
+    box-shadow: 3px 5px 5px 3px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 3px 5px 5px 3px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 3px 5px 5px 3px rgba(0, 0, 0, 0.15);
+}
+
+.x_calendarImg {
+    margin-right: 5px;
+}
+
+.x_color_row_table_even {
+    background-color: #EEF;
+}
+.x_color_row_table_odd {
+    background-color: #DDE;
+}
+
+.x_pagingTable,
+.x_pagingTable tr,
+.x_pagingTable th,
+.x_pagingTable td {
+    border: #0000FF;
+}
+.x_pagingTable_info {
+  font-family: 'MS UI Gothic';
+  color: #FFFFFF;
+  font-size: 13px;
+}
+.x_displayErrorInfo_table {
+  width: 98%;
+  border: 1px solid #111;
+  table-layout: fixed;
+  word-wrap: break-word;
+  border-collapse: collapse;
+  float: right;
+}
+.x_displayErrorInfo_startSection {
+  background-color: #FF0000;
+  color:#FFFFFF;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.x_displayErrorInfo_table th,
+.x_displayErrorInfo_table tr,
+.x_displayErrorInfo_table td {
+  border: 1px solid #111;
+}
+.x_displayErrorInfo_table th {
+  background-color: #FF89B4;
+  text-align: left;
+  padding: 5px;
+}
+.x_displayErrorInfo_table caption {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  padding: 5px;
+}
+
+.page-title {
+	position: absolute;
+	font-size: 18px;
+	font-weight: bold;
+	padding-left: 15px;
+	margin-top: 5px;
+	color: white;
+}
+section{
+	margin: 20px 0px 20px 10px;
+}
+input.width-300{
+	width: 300px;
+}
+
+input.width-200{
+	width: 200px;
+	float:left;
+}
+
+th.width-250{
+	width:250px;
+}
+
+.required:after{
+	content:"必須";
+	color:#DB8B9A;
+	font-size:8px;
+}
+
+.project-search-list table,
+.client-search-list table{
+	width:100%;
+}
+.project-search-list table th,
+.client-search-list table th{
+	padding: 1px 6px 1px 6px;
+	font-weight: normal;
+	text-align: left;
+	height: 22px;
+	background: #3F51B5;
+	color: #FFFFFF;
+}
+.project-search-list table td,
+.client-search-list table td{
+	padding: 1px 6px 1px 6px;
+	background-color: #E8EAF4;
+	align: left;
+	border-bottom: 1px solid #F0F0EE;
+}
+.next-page-link,
+.prev-page-link,
+.paging,
+.current-page-number,
+.nablarch_pageNumberSubmit,
+.nablarch_pageNumberSubmitWrapper
+.input.width-200{
+	display:inline-block;
+}
+.paging{
+	float:right;
+}
+.page-footer {
+	margin-top: 10px;
+}
+.search-result-count{
+	font-size: 23px;
+	color: #EA8128;
+}
+.search-result-count:after{
+	content:"件";
+	color:#0000FF;
+	font-size:17px;
+	font-weight: 700;
+	text-shadow: 2px 2px 2px #CCCCFF;}
+
+
+.sideMenu{
+	width:90%;
+	margin-left:5%;
+}
+
