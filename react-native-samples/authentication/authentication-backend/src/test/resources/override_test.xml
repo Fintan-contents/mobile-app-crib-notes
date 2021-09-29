@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+        xmlns="http://tis.co.jp/nablarch/component-configuration"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <import file="nablarch/core/date_test.xml"/>
+
+  <!-- トークンをHTTPセッションに保存する -->
+  <component name="tokenManager" class="nablarch.common.web.token.HttpSessionTokenManager"/>
+
+  <!-- CSRF対策の無効化 -->
+  <component name="csrfTokenVerificationHandler"
+             class="com.nablarch.example.app.test.NopHandler" />
+
+</component-configuration>

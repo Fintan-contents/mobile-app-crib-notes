@@ -1,0 +1,26 @@
+body {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, "Arial", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+    font-size: 16px;
+    line-height: 1.42857;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.menu ul {
+    padding-left: 0;
+}
+.menu ul li {
+    list-style: none;
+    padding: 3px 0px 3px 0px;
+    font-size: 15px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.main {
+    margin-top: 70px;
+}
+
+div.modal-content.client {
+  height: 650px;
+}

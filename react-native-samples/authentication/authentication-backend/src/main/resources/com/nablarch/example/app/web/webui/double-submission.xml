@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!--
+    二重サブミット防止機能
+    二重サブミットが発生した際のデフォルトの遷移先パスを指定する
+  -->
+  <component name="doubleSubmissionHandler"
+             class="nablarch.common.web.token.BasicDoubleSubmissionHandler">
+    <!-- 二重サブミットと判定した場合の遷移先のリソースパス -->
+    <property name="path" value="/WEB-INF/view/common/errorPages/doubleSubmissionError.jsp" />
+    <!-- 二重サブミットと判定した場合の遷移先で表示するエラーメッセージのメッセージID -->
+    <property name="messageId" value="${nablarch.doubleSubmissionHandler.messageId}" />
+    <!-- 二重サブミットと判定した場合のレスポンスステータス。デフォルトは400 -->
+    <property name="statusCode" value="400" />
+  </component>
+  
+  <!-- トークンをデータベースに保存する -->
+  <component name="tokenManager" class="nablarch.common.web.token.DbTokenManager">
+    <property name="dbManager">
+      <component class="nablarch.core.db.transaction.SimpleDbTransactionManager">
+        <property name="dbTransactionName" value="tokenTransaction"/>
+      </component>
+    </property>
+  </component>
+  <component name="tokenGenerator" class="nablarch.common.web.token.UUIDV4TokenGenerator" />
+
+</component-configuration>

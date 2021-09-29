@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+        xmlns="http://tis.co.jp/nablarch/component-configuration"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- プロダクションのコンポーネント設定を読み込む -->
+  <import file="web-component-configuration.xml"/>
+
+  <!-- テスティングフレームワークの設定 -->
+  <import file="nablarch/test/master-data-restorer.xml"/>
+  <import file="nablarch/test/test-data.xml"/>
+  <import file="nablarch/test/test-transaction.xml"/>
+  <import file="nablarch/test/http-request-test.xml"/>
+
+  <!-- メインを上書きする設定-->
+  <import file="override_test.xml"/>
+
+  <!-- HTML5の仕様で記述しているため既存のHTMLチェッカを外す -->
+  <component name="httpTestConfiguration" class="nablarch.test.core.http.HttpTestConfiguration">
+    <property name="checkHtml" value="false" />
+  </component>
+
+  <!-- DBの接続設定を定義する -->
+  <component name="dbInfo" class="nablarch.test.core.db.GenericJdbcDbInfo">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="schema" value="PUBLIC"/>
+  </component>
+
+  <!-- テスト用HttpServerにJetty6を定義する -->
+  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty6"/>
+
+</component-configuration>

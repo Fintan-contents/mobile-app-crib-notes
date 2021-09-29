@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- ファイルパス定義 -->
+  <component name="filePathSetting" class="nablarch.core.util.FilePathSetting" autowireType="None">
+    <property name="basePathSettings">
+      <map>
+        <!--出力先ディレクトリ-->
+        <entry key="output" value="${nablarch.filePathSetting.basePathSettings.output}" />
+        <!--アップロード一時ファイルの格納ディレクトリ-->
+        <entry key="uploadFileTmpDir" value="${nablarch.filePathSetting.basePathSettings.uploadFileTmpDir}" />
+        <!--アップロードファイルの格納ディレクトリ-->
+        <entry key="uploadFiles" value="file:./work/input" />
+      </map>
+    </property>
+  </component>
+
+</component-configuration>

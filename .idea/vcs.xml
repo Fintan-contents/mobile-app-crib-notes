@@ -12,6 +12,14 @@
       <list>
         <option value="master" />
         <option value="develop" />
+        <option value="main" />
+      </list>
+    </option>
+  </component>
+  <component name="GithubSharedProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="master" />
       </list>
     </option>
   </component>

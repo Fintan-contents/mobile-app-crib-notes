@@ -9,7 +9,7 @@
     enabled: true,
     schedule: ['before 20:00 on sunday'],
   },
-  ignorePaths: ['santoku-app'],
+  ignorePaths: ['react-native-samples/**'],
   packageRules: [
     {
       // expo upgradeで更新されるパッケージはRenovateの対象外とします
@@ -45,14 +45,21 @@
       enabled: false,
       matchPackageNames: [
         '@types/jest', // jest-expo -> jest
-        '@types/react-test-renderer', // jest-expo -> react-test-renderer
+        'react-test-renderer', // jest-expo -> react-test-renderer
+        'jest',
         'gradle', // expo-template-bare-typescript
       ],
+      matchPackagePrefixes: ['com.facebook.flipper'],
     },
     {
       // React Navigationの関連パッケージはまとめて更新するようにします
       groupName: 'React Navigation',
       matchPackagePrefixes: ['@react-navigation/'],
+    },
+    {
+      // React Native Firebaseの関連パッケージはまとめて更新するようにします
+      groupName: 'React Native Firebase',
+      matchPackagePrefixes: ['@react-native-firebase/'],
     },
     {
       // Docusaurusの関連パッケージはまとめて更新するようにします
@@ -64,8 +71,8 @@
       // Docusaurusの依存パッケージは手動で更新する必要があるのでRenovateの対象外とします
       groupName: 'Docusaurus dependencies',
       enabled: false,
-      // SantokuAppのReactなどのパッケージとまとめられないように、ルートディレクトリのpackage.jsonだけを対象にしています
-      matchFiles: ['package.json'],
+      // SantokuAppのReactなどのパッケージとまとめられないように、website/package.jsonだけを対象にしています
+      matchFiles: ['website/package.json'],
       matchPackageNames: ['@mdx-js/react', 'clsx', 'react', 'react-dom', '@tsconfig/docusaurus'],
     },
     {
