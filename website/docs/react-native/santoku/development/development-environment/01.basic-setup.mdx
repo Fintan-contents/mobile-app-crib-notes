@@ -1,0 +1,23 @@
+---
+title: 基本的なセットアップ
+---
+
+`example-app/SantokuApp`に移動して、以下のコマンドを順番に実行してください。
+
+1. `bundle install`
+2. `npm ci`
+3. `npm run pod-install`
+
+これで、iOSのシミュレータとAndroidのエミュレータでアプリを実行する準備ができます。次のコマンドを実行してアプリが起動することを確認してください。
+
+```bash title=iOSシミュレータで起動する
+npm run ios
+```
+
+```bash title=Androidエミュレータで起動する
+npm run android
+```
+
+:::note
+Android端末をUSB debugした状態でコマンドを実行すると、エミュレータは起動せず、Android端末でアプリが起動します。
+:::

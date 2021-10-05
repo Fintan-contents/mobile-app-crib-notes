@@ -1,0 +1,23 @@
+---
+title: Firebaseの機能を利用する
+---
+
+Firebaseの機能を利用するためには、Firebase SDK用の設定ファイルを配置する必要があります。リポジトリにはダミーのファイルが格納されています。
+
+設定ファイルは、対象OSとビルドバリアントごとにFirebaseコンソールからダウンロードします。それぞれのビルドバリアントは、異なるアプリとしてFirebaseプロジェクトに登録されています。
+
+iOS用には、次の命名ルールで`ios/SantokuApp/Supporting`に設定ファイルを格納します。これらのファイルのうち、ビルド時に指定されたビルドバリアントと対応するファイルが、`ios/GoogleService-Info.plist`としてコピーされます。
+
+```console
+ios/SantokuApp/Supporting/GoogleService-Info.<Scheme>.<Configuration>.plist
+```
+
+Android用には、次の命名ルールで`android/src`に設定ファイルを格納します。
+
+```console
+android/app/src/<variant>/google-services.json
+```
+
+`<variant>`は、ビルドバリアント名を設定します。例えば、ビルドタイプが`ReleaseInHouse`でプロダクトフレーバーが`DevSantokuApp`の場合は、`devSantokuAppReleaseInHouse`となります。先頭の文字は小文字となることに注意してください。
+
+ビルドバリアントの詳細については、[ビルド](../build-configuration.mdx)を参照してください。

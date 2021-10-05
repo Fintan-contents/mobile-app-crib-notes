@@ -1,0 +1,93 @@
+---
+title: 開発環境構築
+sidebar_label: 概要
+---
+
+## 開発に利用するツールのインストールとセットアップ
+
+このアプリの開発を始めるために必要な開発環境の構築手順を紹介しています。
+
+まずは、[開発に利用するツールのインストール](development-environment/00.setting-up-environment.mdx)を参照して、開発環境を準備してください。その後、[基本的なセットアップ](development-environment/01.basic-setup.mdx)を完了すれば、開発を進められるようになるはずです。その他の手順については、必要になり次第実施すれば問題ありません。
+
+:::warning
+手順などで出てくるコマンドは、全て`example-app/SantokuApp`ディレクトリで実行してください。
+:::
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+import {PageList} from '../../../../src/components';
+const overviews = [
+  {
+    title: '開発に利用するツールのインストール',
+    to: '/react-native/santoku/development/development-environment/setting-up-environment',
+    summary: <>このアプリの開発に利用しているツールをインストールしてください。</>,
+  },
+  {
+    title: '基本的なセットアップ',
+    to: '/react-native/santoku/development/development-environment/basic-setup',
+    summary: <>開発中は、基本的にシミュレータやエミュレータ内でアプリを起動して開発していくことになります。この手順を完了すれば、そういった基本的な開発を始めることができます。</>,
+  },
+  {
+    title: 'USB接続でiOS端末にインストール',
+    to: '/react-native/santoku/development/development-environment/setting-up-ios-run-on-device',
+    summary: <>iOSアプリをデバイスにインストールしてテストするために必要な手順です。</>,
+  },
+  {
+    title: 'USB接続でiOS端末にインストール（Appの高度な機能）',
+    to: '/react-native/santoku/development/development-environment/setting-up-ios-advanced-run-on-device',
+    summary: <>プッシュ通知やディープリンクなど、Appの高度な機能と呼ばれる機能をデバイスでテストするために必要な手順です。</>,
+  },
+  {
+    title: 'Firebaseを利用する',
+    to: '/react-native/santoku/development/development-environment/use-firebase',
+    summary: <>アプリをFirebaseと接続するために必要な手順です。デフォルトの状態では、Firebase SDKは呼び出さないように設定されています。</>,
+  },
+];
+
+<PageList overviews={overviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+ビルドタイプとインストール先ごとに必要なセットアップ手順は次のようになります。
+
+| ビルドタイプ                                   | インストール先                  | 必要なセットアップ手順[^1]                                                                                          |
+|:---------------------------------------------|:------------------------------|:----------------------------------------------------------------------------------------------------------------|
+| Debug、DebugAdvanced                         | Androidエミュレータ、Android端末 | -                                                                                                                |
+| ReleaseInHouse、Release                      | Androidエミュレータ、Android端末 | [Androidアプリの配布用ビルドの設定](development-environment/10.setting-up-android-distribution-build.mdx)               |
+| Debug、DebugAdvanced、ReleaseInHouse、Release | iOSシミュレータ                 | -                                                                                                               |
+| Debug                                        | iOS端末                        | [USB接続でiOS端末にインストール](development-environment/02.setting-up-ios-run-on-device.mdx)                          |
+| DebugAdvanced                                | iOS端末                        | [USB接続でiOS端末にインストール（Appの高度な機能）](development-environment/03.setting-up-ios-advanced-run-on-device.mdx) |
+| ReleaseInHouse、Release                      | iOS端末                        | [iOSアプリの配布用ビルドの設定](development-environment/11.setting-up-ios-distribution-build.mdx)                                                 |
+
+[^1]: [基本的なセットアップ](development-environment/01.basic-setup.mdx)は、すべてのビルドタイプでのビルドに必要な手順です。
+
+## 配布用アプリのビルド環境構築
+
+[fastlane](https://docs.fastlane.tools/)を利用して、配布用アプリをビルドできるように設定してあります。ただし、リポジトリ内のリソースだけではビルドできないので、以下の手順に従って準備する必要があります。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+export const v = [
+  {
+    title: 'Androidアプリの配布用ビルドの設定',
+    to: '/react-native/santoku/development/development-environment/setting-up-android-distribution-build',
+    summary: <>配布用のAndroidアプリをビルドするために必要な手順です。</>,
+  },
+  {
+    title: 'iOSアプリの配布用ビルドの設定',
+    to: '/react-native/santoku/development/development-environment/setting-up-ios-distribution-build',
+    summary: <>配布用のiOSアプリをビルドするために必要な手順です。</>,
+  },
+];
+
+<PageList overviews={v} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+ビルドバリアントごとに、アプリをビルドするレーンを用意しています。以下のようなコマンドでfastlaneを実行するとアプリをビルドできます。
+
+```bash
+bundle exec fastlane <Platform: ios/android> <Lane>
+```
+
+用意してあるレーンは、`bundle exec fastlane lanes`を実行すると確認できます。レーンの詳細が確認したい場合は、[Fastfile](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/fastlane/Fastfile)を参照してください。

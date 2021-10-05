@@ -5,6 +5,8 @@
       <w>adoptopenjdk</w>
       <w>alltargets</w>
       <w>altool</w>
+      <w>avdmanager</w>
+      <w>avds</w>
       <w>eresolve</w>
       <w>fastfile</w>
       <w>ffffffffffffffffffffffffffffffff</w>
@@ -33,9 +35,11 @@
       <w>relref</w>
       <w>relying party</w>
       <w>reviewdog</w>
+      <w>ripgrep</w>
       <w>runpath</w>
       <w>santoku</w>
       <w>santokuapp</w>
+      <w>sdkmanager</w>
       <w>simctl</w>
       <w>textlint</w>
       <w>touchables</w>
@@ -44,6 +48,7 @@
       <w>undraw</w>
       <w>urltrademark</w>
       <w>whoami</w>
+      <w>xcpretty</w>
       <w>xcscheme</w>
       <w>xcschemes</w>
       <w>xcshareddata</w>

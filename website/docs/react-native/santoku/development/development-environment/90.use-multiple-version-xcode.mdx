@@ -1,0 +1,23 @@
+---
+title: 異なるバージョンのXcodeを共存させる
+---
+
+Xcode.appのファイル名を変更するだけで、Xcode 12とXcode 13など、異なるバージョンのXcodeを共存させることができます。
+
+過去のバージョンのXcodeは、[Downloads - Apple Developer](https://developer.apple.com/download/all/?q=xcode)からダウンロードできます。ただし、Xcodeの過去バージョンをダウンロードするには、無償のデベロッパアカウントの作成が必要です。デベロッパアカウントを作成してあるApple IDでログインしてからダウンロードしてください。
+
+なお、App StoreからインストールしたXcodeは自動的に最新バージョンにアップデートされます。そのため、Xcodeのバージョンを固定して開発したい場合は、上記のリンクからダウンロードしたファイルを利用することをおすすめします。
+
+React Nativeアプリのビルドに使うコマンドラインツールを切り替える場合は、`xcode-select`を利用します。
+
+* Xcode 11
+  * アプリファイル：`/Applications/Xcode11.app`
+  * コマンドラインツールの切替：`sudo xcode-select -s /Applications/Xcode11.app/Contents/Developer`
+* Xcode 12
+  * アプリファイル：`/Applications/Xcode12.app`
+  * コマンドラインツールの切替：`sudo xcode-select -s /Applications/Xcode12.app/Contents/Developer`
+* Xcode 13
+  * アプリファイル：`/Applications/Xcode13.app`
+  * コマンドラインツールの切替：`sudo xcode-select -s /Applications/Xcode13.app/Contents/Developer`
+* 選択中のXcodeの確認
+  * `xcode-select -p`
