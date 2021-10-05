@@ -28,7 +28,10 @@ beforeEach(() =>
   }),
 );
 
-export default {
+// @react-navigation/nativeのすべてのNamed Exportを列挙するのは大変なので、
+// ES6のexport/import形式ではなく、module.exportsを使ってexportする。
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+module.exports = {
   ...jest.requireActual('@react-navigation/native'),
   useNavigation: () => mock,
 };

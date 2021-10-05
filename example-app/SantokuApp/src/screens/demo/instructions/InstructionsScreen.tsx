@@ -35,7 +35,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 declare const global: {HermesInternal: null | object};
-export const Instructions: React.FC = () => {
+const Screen: React.FC = () => {
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
       <Header />
@@ -114,3 +114,8 @@ const styles = StyleSheet.create({
   },
 });
 /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+
+export const InstructionsScreen = {
+  name: 'Instructions',
+  component: Screen,
+};

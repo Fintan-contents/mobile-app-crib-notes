@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ErrorInEventHandler = {
-  Screen,
-  ScreenName,
+export const ErrorInEventHandlerScreen = {
+  name: ScreenName,
+  component: Screen,
 };

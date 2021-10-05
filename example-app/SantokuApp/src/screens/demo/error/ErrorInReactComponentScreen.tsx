@@ -7,7 +7,7 @@ const Screen = () => {
   return <View>test</View>;
 };
 
-export const ErrorInReactComponent = {
-  Screen,
-  ScreenName,
+export const ErrorInReactComponentScreen = {
+  name: ScreenName,
+  component: Screen,
 };

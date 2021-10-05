@@ -9,7 +9,7 @@ const Screen = () => {
   return null;
 };
 
-export const ErrorInUseEffectSyncProcess = {
-  Screen,
-  ScreenName,
+export const ErrorInUseEffectSyncProcessScreen = {
+  name: ScreenName,
+  component: Screen,
 };

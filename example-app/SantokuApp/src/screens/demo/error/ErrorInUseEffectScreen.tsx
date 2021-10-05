@@ -3,8 +3,8 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
-import {ErrorInUseEffectAsyncProcess} from './ErrorInUseEffectAsyncProcess';
-import {ErrorInUseEffectSyncProcess} from './ErrorInUseEffectSyncProcess';
+import {ErrorInUseEffectAsyncProcessScreen} from './ErrorInUseEffectAsyncProcessScreen';
+import {ErrorInUseEffectSyncProcessScreen} from './ErrorInUseEffectSyncProcessScreen';
 
 const ScreenName = 'ErrorInUseEffect';
 const Screen = () => {
@@ -12,11 +12,11 @@ const Screen = () => {
   return (
     <View style={styles.container}>
       <Button
-        onPress={() => navigation.navigate(ErrorInUseEffectSyncProcess.ScreenName)}
+        onPress={() => navigation.navigate(ErrorInUseEffectSyncProcessScreen.name)}
         title="useEffect内の同期処理でエラー"
       />
       <Button
-        onPress={() => navigation.navigate(ErrorInUseEffectAsyncProcess.ScreenName)}
+        onPress={() => navigation.navigate(ErrorInUseEffectAsyncProcessScreen.name)}
         title="useEffect内の非同期処理でエラー"
       />
     </View>
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ErrorInUseEffect = {
-  Screen,
-  ScreenName,
+export const ErrorInUseEffectScreen = {
+  name: ScreenName,
+  component: Screen,
 };

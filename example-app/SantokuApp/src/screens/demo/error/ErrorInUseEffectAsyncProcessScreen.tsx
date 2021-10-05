@@ -12,7 +12,7 @@ const Screen = () => {
   return null;
 };
 
-export const ErrorInUseEffectAsyncProcess = {
-  Screen,
-  ScreenName,
+export const ErrorInUseEffectAsyncProcessScreen = {
+  name: ScreenName,
+  component: Screen,
 };
