@@ -30,7 +30,7 @@
 		2CBE99D8413DC464B14E20E6 /* Pods-SantokuApp.debugadvanced.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SantokuApp.debugadvanced.xcconfig"; path = "Target Support Files/Pods-SantokuApp/Pods-SantokuApp.debugadvanced.xcconfig"; sourceTree = "<group>"; };
 		3280BADF6F7E2E51C7BC7D30 /* Pods-SantokuApp.releaseinhouse.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SantokuApp.releaseinhouse.xcconfig"; path = "Target Support Files/Pods-SantokuApp/Pods-SantokuApp.releaseinhouse.xcconfig"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-SantokuApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SantokuApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6909A3A526E1EC0000F9111D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6909A3A526E1EC0000F9111D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		699A764226E6E45C00D48F9D /* RCTThrowErrorModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTThrowErrorModule.h; sourceTree = "<group>"; };
 		699A764326E6E48500D48F9D /* RCTThrowErrorModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTThrowErrorModule.m; sourceTree = "<group>"; };
 		6C2E3173556A471DD304B334 /* Pods-SantokuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SantokuApp.debug.xcconfig"; path = "Target Support Files/Pods-SantokuApp/Pods-SantokuApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -59,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				69C8ACE526E7062F00816784 /* Demo */,
-				6909A3A526E1EC0000F9111D /* GoogleService-Info.plist */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -126,6 +125,7 @@
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				6909A3A526E1EC0000F9111D /* GoogleService-Info.plist */,
 				BB2F792C24A3F905000567C9 /* Expo.plist */,
 			);
 			name = Supporting;
@@ -179,9 +179,7 @@
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = S246SVH826;
 						LastSwiftMigration = 1120;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};

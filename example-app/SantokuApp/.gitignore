@@ -65,8 +65,10 @@ ios/PersonalAccount.xcconfig
 ios/tmp.xcconfig
 
 # Firebase
-GoogleService-Info.plist
+GoogleService-Info*.plist
+!ios/SantokuApp/Supporting/GoogleService-Info-Dummy.plist
 google-services.json
+!android/app/google-services.json
 
 # generated
 /generated
