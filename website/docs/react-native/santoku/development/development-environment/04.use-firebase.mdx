@@ -2,22 +2,86 @@
 title: Firebaseの機能を利用する
 ---
 
-Firebaseの機能を利用するためには、Firebase SDK用の設定ファイルを配置する必要があります。リポジトリにはダミーのファイルが格納されています。
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-設定ファイルは、対象OSとビルドバリアントごとにFirebaseコンソールからダウンロードします。それぞれのビルドバリアントは、異なるアプリとしてFirebaseプロジェクトに登録されています。
+Firebaseの機能を利用するためには、Firebase SDK用の設定ファイルを配置する必要があります。リポジトリにはダミーのファイルが格納されています。対象OSとビルドバリアントごとの設定ファイルは、別途入手する必要があります。
 
-iOS用には、次の命名ルールで`ios/SantokuApp/Supporting`に設定ファイルを格納します。これらのファイルのうち、ビルド時に指定されたビルドバリアントと対応するファイルが、`ios/GoogleService-Info.plist`としてコピーされます。
+それぞれのビルドバリアントは、異なるアプリとしてFirebaseプロジェクトに登録されています。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+<Tabs
+  defaultValue="ios"
+  values={[
+    {label: 'iOS', value: 'ios'},
+    {label: 'Android', value: 'android'},
+  ]}>
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+<TabItem value="ios">
+
+iOS用には、次の命名ルールで`ios/SantokuApp/Supporting`に設定ファイルを格納します。これらのファイルのうち、ビルド時に指定されたビルドバリアントと対応するファイルが、`ios/Supporting/GoogleService-Info.plist`としてコピーされます。
 
 ```console
 ios/SantokuApp/Supporting/GoogleService-Info.<Scheme>.<Configuration>.plist
 ```
 
-Android用には、次の命名ルールで`android/src`に設定ファイルを格納します。
+ビルドバリアントごとの設定ファイル名は以下になります。
+
+| ビルドタイプ（Configuration）     | プロダクトフレーバー（Scheme） | 設定ファイル                                              |
+|:-------------------------------|:----------------------------|:--------------------------------------------------------|
+| Debug                          | DevSantokuApp               | なし                                                     |
+| Debug                          | SantokuApp                  | `GoogleService-Info.SantokuApp.Debug.plist`             |
+| DebugAdvanced                  | DevSantokuApp               | `GoogleService-Info.DevSantokuApp.DebugAdvanced.plist`  |
+| DebugAdvanced                  | SantokuApp                  | `GoogleService-Info.SantokuApp.DebugAdvanced.plist`     |
+| ReleaseInHouse                 | DevSantokuApp               | `GoogleService-Info.DevSantokuApp.ReleaseInHouse.plist` |
+| ReleaseInHouse                 | SantokuApp                  | `GoogleService-Info.SantokuApp.ReleaseInHouse.plist`    |
+| Release                        | DevSantokuApp               | `GoogleService-Info.DevSantokuApp.Release.plist`        |
+| Release                        | SantokuApp                  | `GoogleService-Info.SantokuApp.Release.plist`           |
+
+:::note
+以下のどちらかに該当する場合は、ダミーの設定ファイル（`GoogleService-Info.Dummy.plist`）が使用されます。
+
+- ビルドタイプが`Debug`、かつプロダクトフレーバーが`DevSantokuApp`の場合
+- ビルドバリアントごとの設定ファイルを格納しなかった場合
+:::
+
+</TabItem>
+
+<TabItem value="android">
+
+Android用には、次の命名ルールで`android/app/src`に設定ファイルを格納します。
 
 ```console
 android/app/src/<variant>/google-services.json
 ```
 
 `<variant>`は、ビルドバリアント名を設定します。例えば、ビルドタイプが`ReleaseInHouse`でプロダクトフレーバーが`DevSantokuApp`の場合は、`devSantokuAppReleaseInHouse`となります。先頭の文字は小文字となることに注意してください。
+
+ビルドバリアントごとの設定ファイルの格納先は以下になります。
+
+| ビルドタイプ     | プロダクトフレーバー | 設定ファイル                                    |
+|:---------------|:------------------|:----------------------------------------------|
+| Debug          | DevSantokuApp     | なし                                           |
+| Debug          | SantokuApp        | `android/app/src/santokuAppDebug`             |
+| DebugAdvanced  | DevSantokuApp     | `android/app/src/devSantokuAppDebugAdvanced`  |
+| DebugAdvanced  | SantokuApp        | `android/app/src/santokuAppDebugAdvanced`     |
+| ReleaseInHouse | DevSantokuApp     | `android/app/src/devSantokuAppReleaseInHouse` |
+| ReleaseInHouse | SantokuApp        | `android/app/src/santokuAppReleaseInHouse`    |
+| Release        | DevSantokuApp     | `android/app/src/devSantokuAppRelease`        |
+| Release        | SantokuApp        | `android/app/src/santokuAppRelease`           |
+
+:::note
+以下のどちらかに該当する場合は、ダミーの設定ファイル（`src/app/google-services.json`）が使用されます。
+
+- ビルドタイプが`Debug`、かつプロダクトフレーバーが`DevSantokuApp`の場合
+- ビルドバリアントごとのディレクトリに設定ファイルを格納しなかった場合
+:::
+
+</TabItem>
+
+</Tabs>
 
 ビルドバリアントの詳細については、[ビルド](../build-configuration.mdx)を参照してください。

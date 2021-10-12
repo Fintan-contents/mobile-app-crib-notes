@@ -1,0 +1,20 @@
+---
+title: Firebaseの機能を利用する際の注意点
+---
+
+このアプリケーションでは、[開発環境 - Firebaseの機能を利用する](../development-environment/04.use-firebase.mdx)に記載されている設定をすることで、Firebaseの機能を利用できます。
+
+ただし、いくつか注意点があるため、ここではそれらについて説明します。
+
+### Firebaseの設定ファイルがダミーの場合はFirebaseの機能を利用できません
+
+Firebaseの設定ファイルは、以下の場合にダミーの設定ファイルが使用されます。
+
+- ビルドタイプが`Debug`、かつプロダクトフレーバーが`DevSantokuApp`の場合
+- ビルドバリアントごとの設定ファイルを格納しなかった場合
+
+ダミーの設定ファイルが使用された場合は、Firebaseの機能を利用できません。
+
+### ビルドタイプが`Debug`、または`DebugAdvanced`の場合は、アプリクラッシュ時にFirebase Crashlyticsにログを送信できません
+
+ビルドタイプが`Debug`、または`DebugAdvanced`の場合は、React Nativeがアプリで発生したエラーをインターセプトして[LogBox](https://reactnative.dev/docs/debugging#logbox)を表示します。React Nativeがエラーをインターセプトするため、Firebase Crashlytics SDKではエラーを捕捉できず、Firebase Crashlyticsにはログが送信されません。

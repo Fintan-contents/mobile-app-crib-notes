@@ -1,32 +1,25 @@
 ---
-title: Development
-sidebar_label: 目次
-hide_table_of_contents: true
+title: 実装
+sidebar_label: 概要
 ---
+
+このアプリケーションを実装する際の部品の使用方法などについて紹介します。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-import {PageList} from '../../../src/components';
+import {PageList} from '../../../../src/components';
 const overviews = [
   {
-    title: '開発環境構築',
-    to: '/react-native/santoku/development/development-environment',
+    title: 'ビルドバリアントごとのアプリ起動方法',
+    to: '/react-native/santoku/development/implement/app-launch-with-build-variants',
   },
   {
-    title: '実装',
-    to: '/react-native/santoku/development/implement',
+    title: 'Firebaseの機能を利用する際の注意点',
+    to: '/react-native/santoku/development/implement/cautions-on-using-firebase',
   },
   {
-    title: 'ビルド',
-    to: '/react-native/santoku/development/build-configuration',
-  },
-  {
-    title: '開発に利用するツール',
-    to: '/react-native/santoku/development/tools',
-  },
-  {
-    title: '依存パッケージの管理',
-    to: '/react-native/santoku/development/dependency-management',
+    title: '環境設定値の管理',
+    to: '/react-native/santoku/development/implement/configurations',
   }
 ]
 
