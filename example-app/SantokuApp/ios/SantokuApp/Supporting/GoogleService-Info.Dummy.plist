@@ -15,7 +15,7 @@
 	<key>BUNDLE_ID</key>
 	<string>jp.fintan.mobile.SantokuApp.dev.debug</string>
 	<key>PROJECT_ID</key>
-	<string>santoku-app-dummy</string>
+	<string>dummy</string>
 	<key>STORAGE_BUCKET</key>
 	<string>jp.fintan.mobile.SantokuApp.dummy</string>
 	<key>IS_ADS_ENABLED</key>

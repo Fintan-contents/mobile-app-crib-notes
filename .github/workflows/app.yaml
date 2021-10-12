@@ -3,10 +3,10 @@ name: SantokuApp
 on:
   push:
     branches:
-      - master
+      - '*'
   pull_request:
     branches:
-      - master
+      - '*'
     paths:
       - example-app/SantokuApp/**/*.js
       - example-app/SantokuApp/**/*.jsx
