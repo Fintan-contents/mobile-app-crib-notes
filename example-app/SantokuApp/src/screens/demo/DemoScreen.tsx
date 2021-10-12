@@ -4,6 +4,7 @@ import React, {useMemo} from 'react';
 import {DemoLinkItemData} from './DemoLinkItem';
 import {DemoTemplate} from './DemoTemplate';
 import {AppStateScreen} from './app-state';
+import {ConfigScreen} from './config';
 import {ErrorCaseScreen} from './error';
 import {AppInfoScreen} from './info';
 import {InstructionsScreen} from './instructions';
@@ -24,6 +25,10 @@ const demoScreenList = [
   {
     title: 'React Native Instructions',
     to: InstructionsScreen.name,
+  },
+  {
+    title: 'Configuration',
+    to: ConfigScreen.name,
   },
 ];
 

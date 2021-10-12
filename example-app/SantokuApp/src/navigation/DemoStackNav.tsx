@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {
   DemoScreen,
   AppStateScreen,
+  ConfigScreen,
   ErrorCaseScreen,
   ErrorInEventHandlerScreen,
   ErrorInUseEffectScreen,
@@ -34,6 +35,7 @@ export const Screen: React.FC = () => {
       }}>
       <nav.Screen {...AppInfoScreen} />
       <nav.Screen {...AppStateScreen} />
+      <nav.Screen {...ConfigScreen} />
       <nav.Screen {...DemoScreen} />
       <nav.Screen {...ErrorCaseScreen} />
       <nav.Screen {...ErrorInEventHandlerScreen} />
