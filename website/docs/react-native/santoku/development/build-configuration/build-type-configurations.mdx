@@ -266,9 +266,9 @@ end
 - Debug ConfigurationとDebugAdvanced Configurationで「Info.plist File」の設定項目に`Debug.plist`を設定
   - `project.pbxproj`では`INFOPLIST_FILE`という設定項目
 
-| Debug | DebugAdvanced | ReleaseInHouse | Release |
-| ----- | ------------- | -------------- | ------- |
-| 有効（`localhost`を除外） | 有効（`localhost`を除外） | 有効（除外なし） | 有効（除外なし） |
+| Debug | DebugAdvanced | ReleaseInHouse | Release       |
+|:------|:--------------|:---------------|:--------------|
+| 無効   | 無効          | 有効（除外なし）  | 有効（除外なし） |
 
 `project.pbxproj`での実際の設定内容は次のようになります。（plistに関係しない箇所は省略しています）
 
@@ -302,14 +302,8 @@ EA57F9FD253824C7003D7604 /* DebugAdvanced */ = {
 <dict>
   <key>NSAppTransportSecurity</key>
   <dict>
-    <key>NSExceptionDomains</key>
-    <dict>
-      <key>localhost</key>
-      <dict>
-        <key>NSExceptionAllowsInsecureHTTPLoads</key>
-        <true/>
-      </dict>
-    </dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
   </dict>
 </dict>
 </plist>
