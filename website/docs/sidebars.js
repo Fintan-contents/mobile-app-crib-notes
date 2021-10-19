@@ -282,9 +282,18 @@ module.exports = {
         },
         {
           type: 'category',
+          label: '設計',
+          items: [
+            'react-native/santoku/development/design',
+            'react-native/santoku/development/design/message-configuration',
+          ],
+        },
+        {
+          type: 'category',
           label: '実装',
           items: [
             'react-native/santoku/development/implement',
+            'react-native/santoku/development/implement/message-configuration',
             'react-native/santoku/development/implement/app-launch-with-build-variants',
             'react-native/santoku/development/implement/cautions-on-using-firebase',
             'react-native/santoku/development/implement/configurations',
