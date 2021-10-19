@@ -13,6 +13,7 @@ import {
   ErrorInNativeModuleScreen,
   InstructionsScreen,
   AppInfoScreen,
+  MessageScreen,
 } from 'screens';
 
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
@@ -45,6 +46,7 @@ export const Screen: React.FC = () => {
       <nav.Screen {...ErrorInUseEffectScreen} />
       <nav.Screen {...ErrorInUseEffectSyncProcessScreen} />
       <nav.Screen {...InstructionsScreen} />
+      <nav.Screen {...MessageScreen} />
     </nav.Navigator>
   );
 };

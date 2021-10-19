@@ -3,7 +3,9 @@ import {activateKeepAwake} from 'expo-keep-awake';
 import {RootStackNav} from 'navigation';
 import React from 'react';
 
+import {BundledMessagesLoader, loadMessages} from './framework';
 import {firebaseConfig} from './framework/firebase';
+import {log} from './framework/logging';
 
 export const App = () => {
   // 開発中は画面がスリープしないようにしておきます。
@@ -15,6 +17,11 @@ export const App = () => {
     // Firebase Crashlyticsの初期化
     require('@react-native-firebase/crashlytics');
   }
+  // アプリ内で使用するメッセージのロード
+  loadMessages(new BundledMessagesLoader()).catch(() => {
+    // アプリにバンドルしているメッセージのロードは失敗しない想定
+    log.error('Failed to load message.', 'BundledMessagesLoadingFailure');
+  });
 
   return (
     <NavigationContainer>
