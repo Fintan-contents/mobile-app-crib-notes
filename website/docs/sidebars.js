@@ -241,6 +241,15 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'メッセージ管理',
+          items: [
+            'react-native/santoku/application-architecture/message-configuration/overview',
+            'react-native/santoku/application-architecture/message-configuration/load-message',
+            'react-native/santoku/application-architecture/message-configuration/managed-message',
+          ],
+        },
+        {
+          type: 'category',
           label: 'ディープリンク',
           items: [
             'react-native/santoku/application-architecture/deep-link/overview',
