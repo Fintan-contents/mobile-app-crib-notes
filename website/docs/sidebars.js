@@ -272,6 +272,20 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Design',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/screen-list/overview',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Development',
       items: [
         {
