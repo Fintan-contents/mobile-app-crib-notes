@@ -6,6 +6,8 @@ import React from 'react';
 import {BundledMessagesLoader, loadMessages} from './framework';
 import {firebaseConfig} from './framework/firebase';
 import {log} from './framework/logging';
+import {launchedId} from './framework/utilities/id';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 export const App = () => {
   // 開発中は画面がスリープしないようにしておきます。
@@ -15,7 +17,12 @@ export const App = () => {
 
   if (!firebaseConfig.isDummy) {
     // Firebase Crashlyticsの初期化
-    require('@react-native-firebase/crashlytics');
+    // アプリの起動IDを設定
+    launchedId()
+      .then((value) => crashlytics().setAttribute('launchedId', value))
+      .catch(() => {
+        log.error('Failed to get launchedId.', 'LaunchedIdGettingFailure');
+      });
   }
   // アプリ内で使用するメッセージのロード
   loadMessages(new BundledMessagesLoader()).catch(() => {
