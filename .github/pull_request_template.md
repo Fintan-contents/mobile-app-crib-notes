@@ -1,6 +1,7 @@
 ## 📝 プルリクエストのタイトルについて
 
 プルリクエストのタイトルは、先頭に絵文字を付けてもらいたいです。絵文字は[gitmoji](https://gitmoji.dev/)から選んでください。
+絵文字をコピーする際には、：art：のような文字列ではなく、絵文字そのものをコピーして利用してください。
 「<emoji>: Title」のようなフォーマットでお願いします。例: 💄: Lintエラーを修正
 
 <!-- ここまでは、プルリクエストを作成するときには削除してください。 -->
@@ -32,6 +33,17 @@
 - [ ] 実施した動作確認の内容をチェック付きの箇条書きで記載してください
 - [ ] 作業着手前に列挙して TODO リストのようにも使用できます
 - [ ] やり終わったらチェックを付けてください
+
+以下のコマンドのいずれかをこのプルリクエストのコメントとして投稿すると、
+Azure Pipeline上でSantokuAppをビルドしてDeployGateへアップロードできます。
+4種全てのビルドバリアントを対象にする場合はdeploy-all、
+特定のビルドバリアントだけを対象にする場合はdeploy-ビルドバリアント名のコマンドを利用してください。
+
+- /azp run deploy-all
+- /azp run deploy-devSantokuAppDebugAdvanced
+- /azp run deploy-devSantokuAppReleaseInHouse
+- /azp run deploy-santokuAppDebugAdvanced
+- /azp run deploy-santokuAppReleaseInHouse
 
 <!-- 該当するものがなければ、このセクション（この行から「## Otherの前の行まで）を削除してください。 -->
 ## Devices
