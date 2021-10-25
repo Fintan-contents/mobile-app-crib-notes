@@ -250,6 +250,14 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'アプリのログ出力',
+          items: [
+            'react-native/santoku/application-architecture/logging-app/overview',
+            'react-native/santoku/application-architecture/logging-app/logging',
+          ],
+        },
+        {
+          type: 'category',
           label: 'ディープリンク',
           items: [
             'react-native/santoku/application-architecture/deep-link/overview',
