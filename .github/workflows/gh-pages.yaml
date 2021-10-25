@@ -67,27 +67,26 @@ jobs:
       # In the case of reviewdog, the result of the lint error is determined based on the current directory.
       # So, use cd instead of --prefix to move the current directory.
       - name: Lint (textlint)
-        continue-on-error: true
         run: |
           cd website && npm run -s lint:text -- -f checkstyle | reviewdog -tee -fail-on-error -reporter=github-check -f=checkstyle -name="textlint (GitHub Pages)"
 
       - name: Lint (markdownlint)
-        continue-on-error: true
+        if: always()
         run: |
           cd website && npm run -s lint:md 2>&1 | sed -e 's/^/e:/' | reviewdog -tee -fail-on-error -reporter=github-check -efm="%t:%f:%l:%c %m" -efm="%t:%f:%l %m" -name="markdownlint (GitHub Pages)"
 
       - name: Lint (ESLint)
-        continue-on-error: true
+        if: always()
         run: |
           cd website && npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name="ESLint (GitHub Pages)"
 
       - name: Lint (TypeScript)
-        continue-on-error: true
+        if: always()
         run: |
           cd website && npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (GitHub Pages)"
 
       - name: Lint (stylelint)
-        continue-on-error: true
+        if: always()
         run: |
           cd website && npm run -s lint:css | reviewdog -tee -fail-on-error -reporter=github-check -f=stylelint -name="stylelint (GitHub Pages)"
 

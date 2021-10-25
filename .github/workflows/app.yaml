@@ -77,23 +77,22 @@ jobs:
           reviewdog_version: latest
 
       - name: Lint (ESLint)
-        continue-on-error: true
         run: |
           cd example-app/SantokuApp && npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name="ESLint (SantokuApp)"
 
       - name: Lint (TypeScript)
-        continue-on-error: true
+        if: always()
         run: |
           cd example-app/SantokuApp && npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (SantokuApp)"
 
       - name: Test
-        continue-on-error: true
+        if: always()
         run: |
           npm run -s test --prefix example-app/SantokuApp -- --ci --reporters=default --reporters=jest-junit --coverage
 
       - name: Archive workflow results
         uses: actions/upload-artifact@v2
-        continue-on-error: true
+        if: always()
         with:
           name: workflow-results
           path: |
