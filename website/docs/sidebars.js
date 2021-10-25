@@ -282,6 +282,10 @@ module.exports = {
           type: 'doc',
           id: 'react-native/santoku/design/screen-list/overview',
         },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/screen-transitions/overview',
+        }
       ],
     },
     {
