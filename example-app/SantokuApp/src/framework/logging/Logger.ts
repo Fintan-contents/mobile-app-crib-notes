@@ -1,4 +1,5 @@
 import {ConsoleTransport} from './ConsoleTransport';
+import {SimpleLogFormatter} from './SimpleLogFormatter';
 import {Transport} from './Transport';
 
 /**
@@ -7,7 +8,8 @@ import {Transport} from './Transport';
  */
 class Logger {
   private level: number;
-  private transport: Transport;
+  private formatter: LogFormatter;
+  private transports: Transport[];
 
   /**
    * ロガーのコンストラクタです。
@@ -16,7 +18,8 @@ class Logger {
   constructor(options?: LoggerOptions) {
     const mergedOptions = {...DEFAULT_LOGGER_OPTIONS, ...options};
     this.level = LogLevelSet[mergedOptions.level];
-    this.transport = mergedOptions.transport;
+    this.formatter = mergedOptions.formatter;
+    this.transports = mergedOptions.transports;
   }
 
   /**
@@ -40,12 +43,12 @@ class Logger {
   /**
    * traceレベルのログを出力します。
    * @param message ログメッセージ
-   * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  trace(message: string | LogMessageSupplier, errorCode: string): Logger {
+  trace(message: string | LogMessageSupplier): Logger {
     if (this.isLevelEnabled('trace')) {
-      this.transport.trace(resolveMessage(message), errorCode);
+      const formatted = this.formatMessage('trace', message);
+      this.transports.forEach((t) => t.trace(formatted));
     }
     return this;
   }
@@ -53,12 +56,12 @@ class Logger {
   /**
    * debugレベルのログを出力します。
    * @param message ログメッセージ
-   * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  debug(message: string | LogMessageSupplier, errorCode: string): Logger {
+  debug(message: string | LogMessageSupplier): Logger {
     if (this.isLevelEnabled('debug')) {
-      this.transport.debug(resolveMessage(message), errorCode);
+      const formatted = this.formatMessage('debug', message);
+      this.transports.forEach((t) => t.debug(formatted));
     }
     return this;
   }
@@ -66,12 +69,12 @@ class Logger {
   /**
    * infoレベルのログを出力します。
    * @param message ログメッセージ
-   * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  info(message: string | LogMessageSupplier, errorCode: string): Logger {
+  info(message: string | LogMessageSupplier): Logger {
     if (this.isLevelEnabled('info')) {
-      this.transport.info(resolveMessage(message), errorCode);
+      const formatted = this.formatMessage('info', message);
+      this.transports.forEach((t) => t.info(formatted));
     }
     return this;
   }
@@ -79,12 +82,12 @@ class Logger {
   /**
    * warnレベルのログを出力します。
    * @param message ログメッセージ
-   * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  warn(message: string | LogMessageSupplier, errorCode: string): Logger {
+  warn(message: string | LogMessageSupplier): Logger {
     if (this.isLevelEnabled('warn')) {
-      this.transport.warn(resolveMessage(message), errorCode);
+      const formatted = this.formatMessage('warn', message);
+      this.transports.forEach((t) => t.warn(formatted));
     }
     return this;
   }
@@ -97,22 +100,25 @@ class Logger {
    */
   error(message: string | LogMessageSupplier, errorCode: string): Logger {
     if (this.isLevelEnabled('error')) {
-      this.transport.error(resolveMessage(message), errorCode);
+      const formatted = this.formatMessage('error', message, errorCode);
+      this.transports.forEach((t) => t.error(formatted, errorCode));
     }
     return this;
   }
-}
 
-/**
- * 指定された型に応じてメッセージを取得します。
- * @param message ログメッセージ
- * @returns メッセージ
- */
-function resolveMessage(message: string | LogMessageSupplier) {
-  if (typeof message === 'string') {
-    return message;
+  /**
+   * LogFormatterを使用してメッセージをフォーマットします。
+   * @param level ログレベル
+   * @param message ログメッセージ
+   * @param errorCode エラーコード
+   * @returns メッセージ
+   */
+  formatMessage(level: LogLevel, message: string | LogMessageSupplier, errorCode?: string) {
+    if (typeof message === 'string') {
+      return this.formatter.format(level, message, errorCode);
+    }
+    return this.formatter.format(level, message(), errorCode);
   }
-  return message();
 }
 
 /**
@@ -135,11 +141,26 @@ interface LogMessageSupplier {
 }
 
 /**
+ * ログに出力するメッセージのフォーマッタです。
+ */
+interface LogFormatter {
+  /**
+   * メッセージをフォーマットします。
+   * @param level ログレベル
+   * @param message メッセージ
+   * @param errorCode エラーコード
+   * @returns フォーマット後のメッセージ
+   */
+  format(level: LogLevel, message: string, errorCode?: string): string;
+}
+
+/**
  * ロガーに設定できるオプションです。
  */
 type LoggerOptions = {
   level?: LogLevel;
-  transport?: Transport;
+  formatter?: LogFormatter;
+  transports?: Transport[];
 };
 
 /**
@@ -147,7 +168,8 @@ type LoggerOptions = {
  */
 const DEFAULT_LOGGER_OPTIONS: Required<LoggerOptions> = {
   level: 'info',
-  transport: new ConsoleTransport(),
+  formatter: new SimpleLogFormatter(),
+  transports: [new ConsoleTransport()],
 };
 
 /**
@@ -158,5 +180,5 @@ function createLogger(options?: LoggerOptions): Logger {
   return new Logger(options);
 }
 
-export type {LogLevel, LoggerOptions, LogMessageSupplier};
+export type {LogLevel, LoggerOptions, LogMessageSupplier, LogFormatter};
 export {Logger, createLogger, LogLevelSet};
