@@ -28,13 +28,13 @@ title: ログ出力
 
 ## ログ出力先の指定
 
-ログの出力処理は、トランスポートで行われます。  
-ロガーの初期化で複数のトランスポートを指定することで複数の出力先に出力できます。  
+ログの出力処理は、トランスポートで行われます。
+ロガーの初期化で複数のトランスポートを指定することで複数の出力先に出力できます。
 
 ```typescript
   import { createLogger } from 'framework'
   import { SimpleLogFormatter, ConsoleTransport, FirebaseCrashlyticsTransport} from 'framework/Logger'
-  // ... 
+  // ...
   const formatter = new SimpleLogFormatter();
   const consoleTransport = new ConsoleTransport();
   const firebaseCrashlyticsTransport = new FirebaseCrashlyticsTransport();
@@ -44,7 +44,7 @@ title: ログ出力
 
 ### Firebase Crashlyticsについて
 
-アプリのクラッシュの原因究明は、ログが残っていないと困難になり得ます。  
+アプリのクラッシュの原因究明は、ログが残っていないと困難になり得ます。
 FirebaseCrashlyticsTransportでは、クラッシュ発生前のエラー情報を収集できます。
 クラッシュ発生後の次のアプリ起動時にエラーのログ出力情報をFirebase Crashlyticsに送信します。
 
@@ -58,17 +58,17 @@ SimpleLogFormatterでは以下の内容が出力されます。
 
 ```typescript フォーマット出力例
   // Error以外の場合
-  //  [＜タイムスタンプ＞] [＜ログレベル＞] ＜ログのメッセージ内容＞
+  //  [＜ログレベル＞] ＜ログのメッセージ内容＞
   log.info("ロード処理完了")
-  //  -> "[2021-10-23T04:05:06.123+09:00] [info] ロード処理完了"
+  //  -> "[info] ロード処理完了"
 
   // Errorの場合
-  //   [＜タイムスタンプ＞] [＜ログレベル＞] [＜指定したエラーコード＞] ＜ログのメッセージ内容＞
+  //   [＜ログレベル＞] [＜指定したエラーコード＞] ＜ログのメッセージ内容＞
   try {
     /* 中略 */
   } catch {
     log.error("xxx処理例外", "E001XXX")
-    //  -> "[2021-10-23T04:05:06.123+09:00] [error] [E001XXX] xxx処理例外"
+    //  -> "[error] [E001XXX] xxx処理例外"
     /* 中略 */
   }
 ```
