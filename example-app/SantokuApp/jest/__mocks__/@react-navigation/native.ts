@@ -1,10 +1,9 @@
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp} from '@react-navigation/native';
+import type {ParamListBase} from '@react-navigation/routers';
 
-const mock: jest.Mocked<ReturnType<typeof useNavigation>> = {
+const mock: jest.Mocked<NavigationProp<ParamListBase>> = {
   addListener: jest.fn(),
   canGoBack: jest.fn(),
-  dangerouslyGetParent: jest.fn(),
-  dangerouslyGetState: jest.fn(),
   dispatch: jest.fn(),
   getParent: jest.fn(),
   getState: jest.fn(),
