@@ -1,0 +1,36 @@
+---
+title: 非機能要件
+sidebar_label: 概要
+---
+
+サンプルアプリケーションの非機能要件についてまとめたものです。  
+政府公開の[デジタル・ガバメント推進標準ガイドライン][guideline]の「第3編ITマネジメントー第5章　要件定義」にある「ウ　非機能要件の定義」を参考に、非機能要件を定義します。
+ここで定義したものは、[Apple Review Guideline](https://developer.apple.com/jp/app-store/review/guidelines/)と[Google ヘルプ(審査のためにアプリを準備する)](https://support.google.com/googleplay/android-developer/answer/9859455?hl=ja)で定められているルールを遵守しています。  
+
+[guideline]:https://cio.go.jp/sites/default/files/uploads/documents/hyoujun_guideline_20210330.pdf
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+import {PageList} from '../../../../../src/components';
+const dirname = '/react-native/santoku/requirements/non-functional'
+const overviews =[
+  {
+    title: 'ユーザビリティおよびアクセシビリティに関する事項',
+    summary: <>主にユーザの使いやすさや利便性の基準について記載しています。</>,
+    to: `${dirname}/usability`
+  },
+  {
+    title: 'システム方式に関する事項',
+    summary: <>主に採用するシステムアーキテクチャの留意事項について記載しています。</>,
+    to: `${dirname}/system-method`
+  },
+  {
+    title: 'テストに関する事項',
+    summary: <>主に各テストフェーズにおいての実施要綱や基準、実施方法などについて記載しています。</>,
+    to: `${dirname}/test-outline`
+  }
+]
+
+<PageList overviews={overviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
