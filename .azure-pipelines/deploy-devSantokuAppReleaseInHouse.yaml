@@ -14,7 +14,7 @@ pr:
 name: $(date:yyyyMMdd)$(rev:.rr)
 
 extends:
-  template: deploy.yml
+  template: deploy.yaml
   parameters:
     buildVariants:
       - name: 'devSantokuAppReleaseInHouse'

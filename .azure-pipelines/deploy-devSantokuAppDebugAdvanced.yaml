@@ -14,11 +14,11 @@ pr:
 name: $(date:yyyyMMdd)$(rev:.rr)
 
 extends:
-  template: deploy.yml
+  template: deploy.yaml
   parameters:
     buildVariants:
-      - name: 'santokuAppDebugAdvanced'
-        laneName: 'debug_advanced'
+      - name: 'devSantokuAppDebugAdvanced'
+        laneName: 'dev_debug_advanced'
         buildType: 'debugAdvanced'
-        androidAppPath: 'android/app/build/outputs/bundle/santokuAppDebugAdvanced/app-santokuApp-debugAdvanced.aab'
-        iOSAppPath: 'ios/build/SantokuAppDebugAdvanced.ipa'
+        androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
+        iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
