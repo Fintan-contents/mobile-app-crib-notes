@@ -53,9 +53,9 @@ stages:
         vmImage: macOS-11
       steps:
       - task: NodeTool@0
-        displayName: 'Use Node 16.12.0'
+        displayName: 'Use Node.js 16.13.0'
         inputs:
-          versionSpec: '16.12.0'
+          versionSpec: '16.13.0'
       - task: Cache@2
         displayName: Cache npm
         inputs:
@@ -161,9 +161,9 @@ stages:
         inputs:
           script: 'sudo xcode-select --switch /Applications/Xcode_12.5.1.app'
       - task: NodeTool@0
-        displayName: 'Use Node 16.12.0'
+        displayName: 'Use Node.js 16.13.0'
         inputs:
-          versionSpec: '16.12.0'
+          versionSpec: '16.13.0'
       - task: Cache@2
         displayName: Cache npm
         inputs:
