@@ -1,5 +1,5 @@
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {
   DemoScreen,
   AppStateScreen,
@@ -29,10 +29,6 @@ export const Screen: React.FC = () => {
       initialRouteName={DemoScreen.name}
       screenOptions={{
         headerRight: CloseThisNavigatorButton,
-        // このナビゲータはネストして使う想定なので、Insetは取らない。（親のナビゲータですでにInsetを取ってある。）
-        // cf.) https://github.com/software-mansion/react-native-screens/pull/545
-        //      https://github.com/software-mansion/react-native-screens/tree/master/native-stack#headertopinsetenabled-android-only
-        headerTopInsetEnabled: false,
       }}>
       <nav.Screen {...AppInfoScreen} />
       <nav.Screen {...AppStateScreen} />
@@ -55,6 +51,6 @@ export const DemoStackNav = {
   component: Screen,
   name,
   options: {
-    stackPresentation: 'formSheet' as const,
+    presentation: 'formSheet' as const,
   },
 };

@@ -13,7 +13,7 @@ jobs:
   delete-distribution-pages:
     name: Delete DeployGate distribution pages
     # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     env:
       DEPLOYGATE_ORGANIZATION_NAME: ${{ secrets.DEPLOYGATE_ORGANIZATION_NAME }}
       DEPLOYGATE_API_KEY: ${{ secrets.DEPLOYGATE_API_KEY }}

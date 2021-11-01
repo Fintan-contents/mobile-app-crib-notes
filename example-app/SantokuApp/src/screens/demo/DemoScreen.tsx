@@ -1,4 +1,5 @@
-import {NavigationProp, ParamListBase, useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import type {ParamListBase} from '@react-navigation/routers';
 import React, {useMemo} from 'react';
 
 import {DemoLinkItemData} from './DemoLinkItem';

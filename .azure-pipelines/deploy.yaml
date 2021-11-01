@@ -38,47 +38,59 @@ variables:
     value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
   ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
     value: $[ replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '') ]
+- name: npmConfigCache
+  value: '$(Pipeline.Workspace)/.npm'
 
 stages:
-- stage: Android
-  displayName: Android
-  jobs:
-  - job: build_and_deploy
-    displayName: 'build and deploy to DeployGate'
-    pool:
-      vmImage: macOS-11
-    steps:
-    - task: NodeTool@0
-      displayName: 'Use Node 16.12.0'
-      inputs:
-        versionSpec: '16.12.0'
-    - task: Npm@1
-      displayName: 'npm ci'
-      inputs:
-        command: 'ci'
-        workingDir: '$(appDir)'
-        verbose: false
-    - task: DownloadSecureFile@1
-      displayName: 'Download Keystore file for ReleaseInHouse'
-      inputs:
-        secureFile: $(android_ReleaseInHouseKeyStoreSecureFileName)
-    - task: CopyFiles@2
-      displayName: 'Copy Keystore file to: $(appDir)/android/app'
-      inputs:
-        SourceFolder: '$(Agent.TempDirectory)'
-        Contents: $(android_ReleaseInHouseKeyStoreSecureFileName)
-        TargetFolder: '$(appDir)/android/app'
-    - task: CmdLine@2
-      displayName: 'Add gradle.properties settings for ReleaseInHouse'
-      inputs:
-        script: |
-          echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
-          echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=$(android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
-          echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=$(android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
-          echo 'SANTOKU_APP_IN_HOUSE_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
-          echo 'SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=$(android_ReleaseInHouseKeyPassword)' >> gradle.properties
-        workingDirectory: '$(appDir)/android'
-    - ${{ each buildVariant in parameters.buildVariants }}:
+- ${{ each buildVariant in parameters.buildVariants }}:
+  - stage: Android_${{buildVariant.name}}
+    displayName: Android_${{buildVariant.name}}
+    dependsOn: []
+    jobs:
+    - job: build_${{buildVariant.name}}
+      displayName: 'build ${{buildVariant.name}}'
+      pool:
+        vmImage: macOS-11
+      steps:
+      - task: NodeTool@0
+        displayName: 'Use Node.js 16.13.0'
+        inputs:
+          versionSpec: '16.13.0'
+      - task: Cache@2
+        displayName: Cache npm
+        inputs:
+          key: 'npm | "$(Agent.OS)" | $(appDir)/package-lock.json'
+          restoreKeys: |
+            npm | "$(Agent.OS)"
+          path: $(npmConfigCache)
+      - task: CmdLine@2
+        displayName: 'npm ci --cache $(npmConfigCache)'
+        inputs:
+          script: 'npm ci --cache $(npmConfigCache)'
+          workingDirectory: '$(appDir)'
+      - task: DownloadSecureFile@1
+        displayName: 'Download Keystore file for ReleaseInHouse'
+        inputs:
+          secureFile: $(android_ReleaseInHouseKeyStoreSecureFileName)
+        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
+      - task: CopyFiles@2
+        displayName: 'Copy Keystore file to: $(appDir)/android/app'
+        inputs:
+          SourceFolder: '$(Agent.TempDirectory)'
+          Contents: $(android_ReleaseInHouseKeyStoreSecureFileName)
+          TargetFolder: '$(appDir)/android/app'
+        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
+      - task: CmdLine@2
+        displayName: 'Add gradle.properties settings for ReleaseInHouse'
+        inputs:
+          script: |
+            echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
+            echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=$(android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
+            echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=$(android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
+            echo 'SANTOKU_APP_IN_HOUSE_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
+            echo 'SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=$(android_ReleaseInHouseKeyPassword)' >> gradle.properties
+          workingDirectory: '$(appDir)/android'
+        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
       - task: DownloadSecureFile@1
         name: googleServicesJson${{buildVariant.name}}
         displayName: 'Download google-services.json file for ${{buildVariant.name}}'
@@ -107,24 +119,25 @@ stages:
           script: |
             curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.androidAppPath}}" -F "distribution_name=$(branchName)" -F "message=$(Build.Reason) triggered build by $(Build.BuildNumber)"
           workingDirectory: '$(appDir)'
-    - task: PublishPipelineArtifact@1
-      displayName: 'Publish Artifact'
-      inputs:
-        targetPath: '$(appDir)/android/app/build/outputs'
-        artifactType: 'pipeline'
-        artifactName: 'aab'
-        parallel: true
-      condition: succeeded()
-
-- stage: iOS
-  displayName: iOS
-  jobs:
-  - job: build_and_deploy
-    displayName: 'build and deploy to DeployGate'
-    pool:
-      vmImage: macOS-11
-    steps:
-    - ${{ each buildVariant in parameters.buildVariants }}:
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish Artifact'
+        inputs:
+          targetPath: '$(appDir)/android/app/build/outputs'
+          artifactType: 'pipeline'
+          artifactName: '${{buildVariant.name}}.aab'
+          parallel: true
+        condition: succeeded()
+- ${{ each buildVariant in parameters.buildVariants }}:
+  - stage: iOS_${{buildVariant.name}}
+    displayName: iOS_${{buildVariant.name}}
+    dependsOn: []
+    condition: and(succeeded(), ne('${{buildVariant.buildType}}', 'debugAdvanced'))
+    jobs:
+    - job: build_${{buildVariant.name}}
+      displayName: 'build ${{buildVariant.name}}'
+      pool:
+        vmImage: macOS-11
+      steps:
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
         inputs:
@@ -143,26 +156,31 @@ stages:
         displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
         inputs:
           provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileName)
-    - task: CmdLine@2
-      displayName: 'Use Xcode 12.5.1'
-      inputs:
-        script: 'sudo xcode-select --switch /Applications/Xcode_12.5.1.app'
-    - task: NodeTool@0
-      displayName: 'Use Node 16.12.0'
-      inputs:
-        versionSpec: '16.12.0'
-    - task: Npm@1
-      displayName: 'npm ci'
-      inputs:
-        command: ci
-        workingDir: '$(appDir)'
-        verbose: false
-    - task: CmdLine@2
-      displayName: 'bundle install'
-      inputs:
-        script: 'bundle install'
-        workingDirectory: '$(appDir)'
-    - ${{ each buildVariant in parameters.buildVariants }}:
+      - task: CmdLine@2
+        displayName: 'Use Xcode 12.5.1'
+        inputs:
+          script: 'sudo xcode-select --switch /Applications/Xcode_12.5.1.app'
+      - task: NodeTool@0
+        displayName: 'Use Node.js 16.13.0'
+        inputs:
+          versionSpec: '16.13.0'
+      - task: Cache@2
+        displayName: Cache npm
+        inputs:
+          key: 'npm | "$(Agent.OS)" | $(appDir)/package-lock.json'
+          restoreKeys: |
+            npm | "$(Agent.OS)"
+          path: $(npmConfigCache)
+      - task: CmdLine@2
+        displayName: 'npm ci --cache $(npmConfigCache)'
+        inputs:
+          script: 'npm ci --cache $(npmConfigCache)'
+          workingDirectory: '$(appDir)'
+      - task: CmdLine@2
+        displayName: 'bundle install'
+        inputs:
+          script: 'bundle install'
+          workingDirectory: '$(appDir)'
       - task: DownloadSecureFile@1
         displayName: 'Download GoogleServices-Info.plist file for ${{buildVariant.name}}'
         inputs:
@@ -173,6 +191,13 @@ stages:
           SourceFolder: '$(Agent.TempDirectory)'
           Contents: $(${{buildVariant.name}}_GoogleServicesInfoPlistSecureFileName)
           TargetFolder: '$(appDir)/ios/SantokuApp/Supporting'
+      - task: Cache@2
+        displayName: Cache Pods
+        inputs:
+          key: 'pods | "$(Agent.OS)" | $(appDir)/ios/Podfile.lock'
+          restoreKeys: |
+            pods | "$(Agent.OS)"
+          path: $(appDir)/ios/Pods
       - task: CmdLine@2
         displayName: 'Build iOS app for ${{buildVariant.name}}'
         inputs:
@@ -184,11 +209,11 @@ stages:
           script: |
             curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.iOSAppPath}}" -F "distribution_name=$(branchName)" -F "message=$(Build.Reason) triggered build by $(Build.BuildNumber)"
           workingDirectory: '$(appDir)'
-    - task: PublishPipelineArtifact@1
-      displayName: 'Publish Artifact'
-      inputs:
-        targetPath: '$(appDir)/ios/build'
-        artifactType: 'pipeline'
-        artifactName: 'ipa'
-        parallel: true
-      condition: succeeded()
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish Artifact'
+        inputs:
+          targetPath: '$(appDir)/ios/build'
+          artifactType: 'pipeline'
+          artifactName: '${{buildVariant.name}}.ipa'
+          parallel: true
+        condition: succeeded()
