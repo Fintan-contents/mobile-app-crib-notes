@@ -303,6 +303,7 @@ module.exports = {
           items: [
             'react-native/santoku/development/design',
             'react-native/santoku/development/design/message-configuration',
+            'react-native/santoku/development/design/logs',
           ],
         },
         {
