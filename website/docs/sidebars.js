@@ -224,6 +224,10 @@ module.exports = {
       id: 'react-native/santoku',
     },
     {
+      type: 'doc',
+      id: 'react-native/santoku/glossary',
+    },
+    {
       type: 'category',
       label: 'Requirements',
       items: [
