@@ -238,9 +238,7 @@ module.exports = {
         {
           type: 'category',
           label: '機能要件',
-          items: [
-            'react-native/santoku/requirements/functional/overview'
-         ],
+          items: ['react-native/santoku/requirements/functional/overview'],
         },
         {
           type: 'category',
@@ -251,9 +249,9 @@ module.exports = {
             'react-native/santoku/requirements/non-functional/system-method',
             'react-native/santoku/requirements/non-functional/performance',
             'react-native/santoku/requirements/non-functional/test-outline',
-         ],
+          ],
         },
-      ]
+      ],
     },
     {
       type: 'category',
@@ -317,7 +315,7 @@ module.exports = {
         {
           type: 'doc',
           id: 'react-native/santoku/design/screen-transitions/overview',
-        }
+        },
       ],
     },
     {

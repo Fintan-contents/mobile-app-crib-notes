@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.nablarch.archetype</groupId>
+    <artifactId>nablarch-archetype-parent</artifactId>
+    <version>5u18</version>
+  </parent>
+
+  <artifactId>santoku-app-backend</artifactId>
+
+  <groupId>jp.fintan.mobile.santoku</groupId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <properties>
+    <java.version>11</java.version>
+    <jetty.version>9.4.19.v20190610</jetty.version>
+    <version.plugins.failsafe>2.22.2</version.plugins.failsafe>
+    <version.plugins.jib>3.1.4</version.plugins.jib>
+    <!--
+    JibでDockerコンテナを作るときのベースイメージ
+    https://hub.docker.com/layers/tomcat/library/tomcat/9.0.54-jdk11-temurin-focal/images/sha256-0535a04354ac95a35aa6d5cff941720441c8064594c2e07ea955de39fadc7d55?context=explore
+    -->
+    <jib.from.image>tomcat@sha256:0535a04354ac95a35aa6d5cff941720441c8064594c2e07ea955de39fadc7d55</jib.from.image>
+    <jib.to.image>ws4020wip.azurecr.io/santoku-app-backend</jib.to.image>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>sonatype-snapshots</id>
+      <name>Sonatype Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.nablarch.profile</groupId>
+        <artifactId>nablarch-bom</artifactId>
+        <version>5u18</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-bom</artifactId>
+        <version>${jetty.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.6.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.nablarch.configuration</groupId>
+      <artifactId>nablarch-main-default-configuration</artifactId>
+    </dependency>
+
+    <!-- Nablarchテスティングフレームワーク -->
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-testing-rest</artifactId>
+      <!-- JUnit5を使えるようにするため -->
+      <exclusions>
+        <exclusion>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+        </exclusion>
+      </exclusions>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-testing-jetty9</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.configuration</groupId>
+      <artifactId>nablarch-testing-default-configuration</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-fw-jaxrs</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.integration</groupId>
+      <artifactId>nablarch-jersey-adaptor</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.integration</groupId>
+      <artifactId>nablarch-router-adaptor</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-fw-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-fw-web-dbstore</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-core-validation-ee</artifactId>
+      <!-- hibernate validatorのバージョンを上げるため -->
+      <exclusions>
+        <exclusion>
+          <groupId>javax.validation</groupId>
+          <artifactId>validation-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-core-beans</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-common-jdbc</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nablarch.framework</groupId>
+      <artifactId>nablarch-common-dao</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>3.3.1</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>2.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.10.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>6.1.2.Final</version>
+    </dependency>
+
+    <!-- Java11用 -->
+    <dependency>
+      <groupId>com.sun.activation</groupId>
+      <artifactId>javax.activation</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-core</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-servlet</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.el</artifactId>
+      <version>3.0.1-b11</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Flyway -->
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <version>6.4.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.10</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.json</groupId>
+      <artifactId>javax.json-api</artifactId>
+      <version>1.1.4</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.json</artifactId>
+      <version>1.1.4</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.14</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-csv</artifactId>
+      <version>2.11.0</version>
+    </dependency>
+    <!-- Date and Time APIをJacksonで変換 -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>2.11.0</version>
+    </dependency>
+
+    <!-- SLF4Jアダプタ -->
+    <dependency>
+      <groupId>com.nablarch.integration</groupId>
+      <artifactId>slf4j-nablarch-adaptor</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!--  JSONをアサートするライブラリ  -->
+    <dependency>
+      <groupId>org.skyscreamer</groupId>
+      <artifactId>jsonassert</artifactId>
+      <version>1.5.0</version>
+      <scope>test</scope>
+    </dependency>
+    <!--  JSONPath形式でのアサートに使用するライブラリ  -->
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path-assert</artifactId>
+      <version>2.4.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openapi4j</groupId>
+      <artifactId>openapi-operation-validator</artifactId>
+      <version>1.0.7</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.4</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <useManifestOnlyJar>false</useManifestOnlyJar>
+          <argLine>${argLine} -Duser.language=ja -Duser.country=JP</argLine>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <argLine>${argLine} -Duser.language=ja -Duser.country=JP</argLine>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jetty.version}</version>
+        <configuration>
+          <httpConnector>
+            <port>9080</port>
+          </httpConnector>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <configuration>
+          <container>
+            <appRoot>/usr/local/tomcat/webapps/ROOT</appRoot>
+            <ports>
+              <port>8080</port>
+            </ports>
+          </container>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>4.0.4</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs</artifactId>
+            <version>4.0.4</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <!-- チェックを除外するフィルターファイル -->
+          <excludeFilterFile>spotbugs/spotbugs_exclude_for_production.xml</excludeFilterFile>
+        </configuration>
+      </plugin>
+      <!-- 必要に応じてカバレッジを取得できるように設定を入れておく -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>prepare</id>
+            <goals>
+              <goal>prepare-agent</goal>
+              <goal>prepare-agent-integration</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>merge</goal>
+              <goal>report</goal>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <rules>
+            <rule>
+              <element>BUNDLE</element>
+            </rule>
+          </rules>
+          <fileSets>
+            <fileSet>
+              <directory>${project.build.directory}</directory>
+              <includes>
+                <include>*.exec</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.coveo</groupId>
+        <artifactId>fmt-maven-plugin</artifactId>
+        <version>2.12</version>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

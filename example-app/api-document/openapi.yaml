@@ -1,0 +1,911 @@
+openapi: 3.0.3
+info:
+  title: SantokuApp REST API
+  version: 1.0.0
+  description: SantokuAppのREST API。
+  contact: {}
+tags:
+  - name: アカウント
+  - name: 利用規約
+  - name: チーム
+servers:
+  - url: 'http://localhost:9080/api'
+security:
+  - Session: []
+paths:
+  /signup:
+    post:
+      summary: アカウントの登録
+      tags:
+        - アカウント
+      description: |
+        アカウントを登録します。アカウントの登録には、ニックネームとパスワードが必要です。
+      operationId: post-signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountRegistration'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri-reference
+                example: /api/accounts/me
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /login:
+    post:
+      summary: ログインする
+      description: |
+        アカウントIDとパスワードを指定してログインします。
+      tags:
+        - アカウント
+      operationId: post-login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountLogin'
+            examples:
+              example:
+                value:
+                  accountId: 30b65d82-8a64-4a3a-a097-031313f43c69
+                  password: f48ad168-68e7-4393-845e-e936795799d3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountLoginResponse'
+              examples:
+                example:
+                  value:
+                    status: COMPLETE
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /logout:
+    post:
+      summary: ログアウトする
+      description: ''
+      tags:
+        - アカウント
+      operationId: post-logout
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  '/accounts/{accountId}':
+    parameters:
+      - name: accountId
+        in: path
+        description: アカウントのID
+        required: true
+        schema:
+          type: string
+    get:
+      summary: アカウントの取得
+      description: |
+        アカウントIDをキーとして登録されているアカウントを取得する。
+      tags:
+        - アカウント
+      operationId: get-accounts-accountId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+  '/accounts/{accountId}/avatar':
+    parameters:
+      - name: accountId
+        in: path
+        description: アカウントのID
+        required: true
+        schema:
+          type: string
+    get:
+      summary: アバターを取得する
+      description: |
+        アバターを取得する。
+      tags:
+        - アカウント
+      operationId: get-accounts-accountId-avatar
+      responses:
+        '200':
+          description: OK
+          content:
+            image/*:
+              schema:
+                $ref: '#/components/schemas/AvatarImage'
+  /accounts/me:
+    get:
+      summary: ログイン済みアカウントの取得
+      description: |
+        ログイン済みのアカウントを取得する。
+      tags:
+        - アカウント
+      operationId: get-accounts-me
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /accounts/me/avatar:
+    get:
+      summary: ログイン済みアカウントのアバターを取得する
+      description: |
+        ログイン済みアカウントのアバターを取得する。
+      tags:
+        - アカウント
+      operationId: get-accounts-me-avatar
+      responses:
+        '200':
+          description: OK
+          content:
+            image/*:
+              schema:
+                $ref: '#/components/schemas/AvatarImage'
+    put:
+      summary: ログイン済みアカウントのアバターを登録する
+      description: |
+        ログイン済みアカウントのアバターを登録する。
+      tags:
+        - アカウント
+      operationId: put-accounts-me-avatar
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AvatarImage'
+            encoding:
+              avatarImage:
+                contentType: image/*
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri-reference
+              description: アカウントのアバター画像のURL
+  /accounts/me/device-token:
+    post:
+      summary: ログイン済みアカウントのデバイス登録トークンの登録
+      description: |
+        ログイン済みアカウントのデバイス登録トークンを登録する。
+      tags:
+        - アカウント
+      operationId: post-accounts-me-device-token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+  /accounts/me/terms:
+    get:
+      summary: ログイン済みアカウントの利用規約同意状態確認
+      description: |
+        ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。
+      tags:
+        - アカウント
+      operationId: get-accounts-me-terms
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermsOfServiceAgreementStatus'
+    post:
+      summary: ログイン済みアカウントの利用規約同意
+      description: |
+        ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。
+      tags:
+        - アカウント
+      operationId: post-accounts-me-terms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TermsOfServiceAgreementStatus'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermsOfServiceAgreementStatus'
+  /accounts/me/delete:
+    post:
+      summary: ログイン済みアカウント削除
+      description: |
+        ログイン済みアカウントを削除します。
+
+        アカウントの削除にパスワードを要求するので、DELETEメソッドではなくPOSTメソッドを利用しています。
+
+        参考: [4.3.5. DELETE - RFC 7231](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.5)
+
+        > A payload within a DELETE request message has no defined semantics;
+        > sending a payload body on a DELETE request might cause some existing
+        > implementations to reject the request.
+      tags:
+        - アカウント
+      operationId: delete-accounts-me-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountDeletion'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /terms:
+    get:
+      summary: 有効な利用規約の取得
+      description: |
+        有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。
+      tags:
+        - 利用規約
+      security: []
+      operationId: get-terms
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TermsOfService'
+  /teams:
+    post:
+      summary: チーム登録
+      description: |
+        チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。
+      tags:
+        - チーム
+      operationId: get-teams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+  '/teams/{teamId}':
+    parameters:
+      - name: teamId
+        in: path
+        description: チームのID
+        required: true
+        schema:
+          type: string
+    get:
+      summary: チーム取得
+      description: |
+        チームIDを指定して、チームを取得します。
+      tags:
+        - チーム
+      operationId: get-teams-teamId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+  '/teams/{teamId}/invitation-code':
+    parameters:
+      - name: teamId
+        in: path
+        description: チームのID
+        required: true
+        schema:
+          type: string
+    post:
+      summary: 招待コード発行
+      description: |
+        チームの参加に必要な招待コードを発行します。
+      tags:
+        - チーム
+      operationId: post-teams-teamId-invitation-code
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamInvitation'
+  '/teams/{teamId}/join':
+    parameters:
+      - name: teamId
+        in: path
+        description: チームのID
+        required: true
+        schema:
+          type: string
+    post:
+      summary: チーム参加
+      description: |
+        チームに参加します。
+      tags:
+        - チーム
+      operationId: post-teams-teamId-join
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamInvitation'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+  '/teams/{teamId}/timetable-templates':
+    parameters:
+      - name: teamId
+        in: path
+        description: チームのID
+        required: true
+        schema:
+          type: string
+    get:
+      summary: 時間割テンプレート一覧取得
+      description: |
+        時間割テンプレートの一覧を取得します。
+      tags:
+        - チーム
+      operationId: get-teams-teamId-timetable-templates
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: sort
+          description: ソート
+        - schema:
+            type: number
+          in: query
+          name: limit
+          description: 1ページの上限件数
+        - schema:
+            type: number
+          in: query
+          name: page
+          description: 取得するページ番号
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: 時間割テンプレート一覧
+                items:
+                  $ref: '#/components/schemas/TimetableTemplate'
+    post:
+      summary: 時間割テンプレート登録
+      description: |
+        時間割テンプレートを登録します。
+      tags:
+        - チーム
+      operationId: post-teams-teamId-timetable-templates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimetableTemplate'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimetableTemplate'
+  '/teams/{teamId}/timetable-templates/{templateId}':
+    parameters:
+      - name: teamId
+        in: path
+        description: チームのID
+        required: true
+        schema:
+          type: string
+      - name: templateId
+        in: path
+        description: テンプレートのID
+        required: true
+        schema:
+          type: string
+    get:
+      summary: 時間割テンプレート取得
+      description: |
+        時間割テンプレートを取得します。
+      tags:
+        - チーム
+      operationId: get-teams-teamId-timetable-templates-templateId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimetableTemplate'
+    put:
+      summary: 時間割テンプレート更新
+      description: |
+        時間割テンプレートを更新します。
+      tags:
+        - チーム
+      operationId: put-teams-teamId-timetable-templates-templateId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimetableTemplate'
+      responses:
+        '201':
+          description: update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimetableTemplate'
+  '/teams/{teamId}/timetables/{timetableId}':
+    parameters:
+      - schema:
+          type: string
+        name: teamId
+        in: path
+        required: true
+        description: チームID
+      - schema:
+          type: string
+        name: timetableId
+        in: path
+        required: true
+        description: 時間割ID
+    get:
+      summary: 当日の時間割取得
+      description: |
+        当日の時間割を取得します。
+      tags:
+        - チーム
+      operationId: get-teams-teamId-timetables-timetableId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimetableOfDay'
+    put:
+      summary: 今日の時間割開始
+      description: 今日の時間割を開始します。チームメンバーに今日の時間割の開始を通知します。
+      tags:
+        - チーム
+      operationId: put-teams-teamId-timetables-timetableId
+      responses:
+        '201':
+          description: update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimetableOfDay'
+  '/teams/{teamId}/timetables':
+    parameters:
+      - schema:
+          type: string
+        name: teamId
+        in: path
+        required: true
+        description: チームID
+    get:
+      summary: 当日の時間割一覧取得
+      description: |
+        当日の時間割の一覧を取得します。
+      tags:
+        - チーム
+      operationId: get-teams-teamId-timetables
+      parameters:
+        - name: limit
+          in: query
+          description: 上限件数
+          schema:
+            type: number
+        - schema:
+            type: string
+          in: query
+          name: sort
+          description: ソート
+        - schema:
+            type: number
+          in: query
+          name: since
+          description: 検索対象日付From
+        - schema:
+            type: string
+          in: query
+          name: until
+          description: 検索対象日付To
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: 当日の時間割一覧
+                items:
+                  $ref: '#/components/schemas/TimetableOfDay'
+    post:
+      summary: 当日の時間割登録
+      description: 当日の時間割を登録します。
+      tags:
+        - チーム
+      operationId: post-teams-teamId-timetables
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimetableOfDayInput'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimetableOfDay'
+components:
+  schemas:
+    Profile:
+      title: Profile
+      type: object
+      description: プロフィール情報
+      properties:
+        nickname:
+          type: string
+          description: アカウントのニックネーム
+        avatarImageUrl:
+          type: string
+          description: アカウントのアバター画像のURL
+    Account:
+      title: Account
+      description: アカウント
+      allOf:
+        - $ref: '#/components/schemas/AccountProfile'
+        - $ref: '#/components/schemas/AccountJoinedTeam'
+    AccountProfile:
+      title: AccountProfile
+      type: object
+      description: アカウントプロフィール情報
+      properties:
+        accountId:
+          type: string
+          description: アカウントID
+          readOnly: true
+        profile:
+          $ref: '#/components/schemas/Profile'
+      required:
+        - accountId
+        - nickname
+    AccountJoinedTeam:
+      title: AccountJoinedTeam
+      type: object
+      description: アカウントチーム情報
+      properties:
+        defaultTeamId:
+          type: string
+          description: デフォルトのチームID
+        joinedTeamIdList:
+          type: array
+          items:
+            type: string
+          description: 参加済みチームID一覧
+    AccountRegistration:
+      title: AccountRegistration
+      type: object
+      description: アカウントの登録情報
+      properties:
+        nickname:
+          type: string
+          description: アカウントのニックネーム
+        password:
+          type: string
+          description: パスワード
+    AccountLogin:
+      title: AccountLogin
+      type: object
+      description: アカウントのログイン情報
+      properties:
+        accountId:
+          type: string
+          description: アカウントID
+        password:
+          type: string
+          description: パスワード
+    AccountLoginResponse:
+      title: AccountLoginResponse
+      type: object
+      description: アカウントのログイン結果
+      properties:
+        status:
+          type: string
+          enum:
+            - COMPLETE
+      required:
+        - status
+    AccountDeletion:
+      title: AccountDeletion
+      type: object
+      description: アカウント削除
+      properties:
+        password:
+          type: string
+          description: パスワード
+    AvatarImage:
+      title: AvatarImage
+      type: object
+      description: アバター画像
+      properties:
+        avatarImage:
+          type: string
+          format: binary
+          description: アバター画像
+    Device:
+      title: Device
+      type: object
+      description: デバイス情報
+      properties:
+        deviceToken:
+          type: string
+          description: デバイス登録トークン
+    TermsOfService:
+      title: TermsOfService
+      type: object
+      description: 利用規約
+      properties:
+        latestTermsOfServiceVersion:
+          type: string
+          description: 最新の利用規約のバージョン
+        url:
+          type: string
+          description: 利用規約のURL
+    TermsOfServiceAgreementStatus:
+      title: TermsOfServiceAgreementStatus
+      type: object
+      description: 利用規約同意状態
+      properties:
+        hasAgreedValidTermsOfService:
+          type: boolean
+          description: 有効な利用規約に同意済みかどうか
+          readOnly: true
+        agreedTermsOfServiceVersion:
+          type: string
+          description: 同意した利用規約のバージョン
+    Team:
+      title: Team
+      type: object
+      description: チーム
+      properties:
+        teamId:
+          type: string
+          description: チームID
+          readOnly: true
+        teamName:
+          type: string
+          description: チーム名
+        teamMemberList:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamMember'
+          description: チームメンバー
+          readOnly: true
+      x-examples: {}
+    TeamMember:
+      title: TeamMember
+      description: チームメンバー
+      properties:
+        teamMemberAuthority:
+          type: string
+          description: チームメンバー権限
+      allOf:
+        - $ref: '#/components/schemas/AccountProfile'
+      x-examples: {}
+    TeamInvitation:
+      title: TeamInvitation
+      type: object
+      description: チーム招待
+      properties:
+        invitationCode:
+          type: string
+          description: 招待コード
+        expirationDate:
+          type: string
+          description: 有効期限
+          readOnly: true
+    TimetableOfDay:
+      title: TimetableOfDay
+      type: object
+      description: 当日の時間割
+      properties:
+        timetableId:
+          type: string
+          description: 時間割ID
+          readOnly: true
+        timetableName:
+          type: string
+          description: 時間割名
+        timetableDate:
+          type: string
+          description: 当日日付
+          format: date
+        timetableStartedAt:
+          type: string
+          description: 時間割開始日時
+          format: date-time
+        periodList:
+          type: array
+          description: コマ一覧
+          items:
+            $ref: '#/components/schemas/Period'
+    Period:
+      description: 時間割のコマ
+      type: object
+      title: Period
+      properties:
+        timeBoxName:
+          type: string
+          description: コマ名
+        startTime:
+          type: string
+          description: 開始時間
+          format: time
+        endTime:
+          type: string
+          description: 終了時間
+          format: time
+    TimetableTemplate:
+      title: TimetableTemplate
+      type: object
+      description: 時間割テンプレートモデル
+      properties:
+        timetableTemplateId:
+          type: string
+          description: 時間割テンプレートID
+          readOnly: true
+        timetableTemplateName:
+          type: string
+          description: 時間割テンプレート名
+        periodTemplateList:
+          type: array
+          description: コマテンプレート一覧
+          items:
+            $ref: '#/components/schemas/PeriodTemplate'
+    PeriodTemplate:
+      description: コマテンプレートモデル
+      type: object
+      x-examples: {}
+      title: PeriodTemplate
+      properties:
+        timeBoxName:
+          type: string
+          description: コマ名
+        startTime:
+          type: string
+          description: 開始時間
+          format: time
+        endTime:
+          type: string
+          description: 終了時間
+          format: time
+    TimetableOfDayInput:
+      title: TimetableOfDayInput
+      type: object
+      properties:
+        timetableTemplateId:
+          type: string
+          description: 時間割テンプレートID
+        timatebleDate:
+          type: string
+          description: 当日日付
+          format: date
+      description: 当日時間割登録のインプット
+    ErrorResponse:
+      title: Error
+      type: object
+      description: エラーレスポンス
+      properties:
+        code:
+          type: string
+          description: エラーコード
+        message:
+          type: string
+          description: エラーメッセージ
+      required:
+        - code
+        - message
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    PayloadTooLarge:
+      description: Payload Too Large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailable:
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    Session:
+      type: apiKey
+      in: cookie
+      name: NABLARCH_SID
+      description: Cookieに格納されたセッションIDで認証状態を維持します。

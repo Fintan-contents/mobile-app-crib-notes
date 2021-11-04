@@ -176,6 +176,20 @@ module.exports = {
         },
       },
     ],
+    [
+      'redocusaurus',
+      {
+        specs: [
+          {
+            spec: '../example-app/api-document/openapi.yaml',
+            routePath: '/react-native/santoku/design/api-document',
+          },
+        ],
+        theme: {
+          primaryColor: '#3578e5',
+        },
+      },
+    ],
   ],
   plugins: [
     [
