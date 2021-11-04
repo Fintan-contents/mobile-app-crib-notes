@@ -17,16 +17,16 @@ beforeEach(() => {
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
     const app = render(<App />);
-    expect(app.queryByTestId('HomeScreen')).not.toBeNull();
+    expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
     expect(app).toMatchSnapshot();
   });
 
-  it('Demoをタップすると、デモ画面に遷移すること', () => {
+  it('Go to Homeをタップすると、ホーム画面に遷移すること', () => {
     const app = render(<App />);
-    fireEvent.press(app.getByTestId('goToDemoButton'));
+    fireEvent.press(app.getByTestId('goToHomeButton'));
 
-    expect(app.queryByTestId('DemoScreen')).not.toBeNull();
-    // 【動作確認用】 Stackに残っている画面は取得できるので注意。
     expect(app.queryByTestId('HomeScreen')).not.toBeNull();
+    // 【動作確認用】 Stackに残っている画面は取得できるので注意。
+    expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();
   });
 });
