@@ -396,6 +396,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-003-http-api-error-handling',
         'react-native/santoku/decisions/adr-004-deep-link',
         'react-native/santoku/decisions/adr-005-message',
+        'react-native/santoku/decisions/adr-007-auth',
       ],
     },
   ],
