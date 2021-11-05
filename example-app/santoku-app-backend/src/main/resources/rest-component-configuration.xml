@@ -74,7 +74,9 @@
   </component>
 
   <!-- ダイアレクト設定 -->
-  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect"/>
+<!-- 一旦はh2で稼働させるためコメントアウトします。後でPostgreSQLにする予定です。 -->
+<!--  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect"/>-->
+  <component name="dialect" class="nablarch.core.db.dialect.H2Dialect" />
 
   <!-- スレッドコンテキストハンドラ -->
   <component name="threadContextHandler"

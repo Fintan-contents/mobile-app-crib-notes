@@ -107,3 +107,6 @@ gsp-target/
 *.log
 
 .cache/
+
+## H2
+h2

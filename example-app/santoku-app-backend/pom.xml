@@ -22,9 +22,9 @@
     <version.plugins.jib>3.1.4</version.plugins.jib>
     <!--
     JibでDockerコンテナを作るときのベースイメージ
-    https://hub.docker.com/layers/tomcat/library/tomcat/9.0.54-jdk11-temurin-focal/images/sha256-0535a04354ac95a35aa6d5cff941720441c8064594c2e07ea955de39fadc7d55?context=explore
+    https://hub.docker.com/layers/tomcat/library/tomcat/9.0.54-jdk11-temurin-focal/images/sha256-07abec175118a6b3263206462d1c33f4ee6939d89adb68415876cddfcc256400?context=explore
     -->
-    <jib.from.image>tomcat@sha256:0535a04354ac95a35aa6d5cff941720441c8064594c2e07ea955de39fadc7d55</jib.from.image>
+    <jib.from.image>tomcat@sha256:07abec175118a6b3263206462d1c33f4ee6939d89adb68415876cddfcc256400</jib.from.image>
     <jib.to.image>ws4020wip.azurecr.io/santoku-app-backend</jib.to.image>
   </properties>
 
@@ -230,10 +230,20 @@
       <version>6.4.3</version>
     </dependency>
 
+<!-- 一旦はh2で稼働させるためコメントアウトします。後でPostgreSQLにする予定です。 -->
+<!--
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>42.2.10</version>
+      <scope>runtime</scope>
+    </dependency>
+-->
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.200</version>
       <scope>runtime</scope>
     </dependency>
 
