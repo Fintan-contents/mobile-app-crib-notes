@@ -21,6 +21,7 @@
         'expo-keep-awake',
         'expo-splash-screen',
         'expo-updates',
+        'expo-random',
         'react',
         'react-dom',
         'react-native',

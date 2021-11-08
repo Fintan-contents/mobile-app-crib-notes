@@ -41,7 +41,7 @@ describe('Message message', () => {
         });
       },
     });
-    const spy = jest.spyOn(log, 'error');
+    const spy = jest.spyOn(log, 'error').mockImplementation();
     // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
     expect(m('dummyKey')).toEqual('dummyKey');
     expect(spy).toHaveBeenCalledWith('Could not find the message. messageKey=[dummyKey]', 'MessageNotFound');

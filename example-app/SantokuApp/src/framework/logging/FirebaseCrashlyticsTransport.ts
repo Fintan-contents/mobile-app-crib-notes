@@ -15,44 +15,41 @@ class FirebaseCrashlyticsTransport implements Transport {
    * @see {@link https://rnfirebase.io/crashlytics/usage#usage}
    * @see {@link FirebaseCrashlyticsTypes.Module.recordError}
    */
-  log(level: LogLevel, message: string, errorCode: string) {
-    crashlytics().recordError(new Error(`[${level}] [${errorCode}] ${message}`), errorCode);
+  log(level: LogLevel, message: string, errorCode?: string) {
+    // FirebaseCrashlyticsTransportはエラーレベルのログしか出力しないため、errorCodeは必ず存在している想定
+    crashlytics().recordError(new Error(message), errorCode);
   }
 
   /**
-   * Firebase Crashlyticsにtraceログを出力します。
+   * traceログは、Firebase Crashlyticsに出力しません。
    * @param message 出力するメッセージ
-   * @param errorCode エラーコード
    */
-  trace(message: string, errorCode: string) {
-    this.log('trace', message, errorCode);
+  trace(message: string) {
+    // nop
   }
 
   /**
-   * Firebase Crashlyticsにdebugログを出力します。
+   * debugログは、Firebase Crashlyticsに出力しません。
    * @param message 出力するメッセージ
-   * @param errorCode エラーコード
    */
-  debug(message: string, errorCode: string) {
-    this.log('debug', message, errorCode);
+  debug(message: string) {
+    // nop
   }
 
   /**
-   * Firebase Crashlyticsにinfoログを出力します。
+   * infoログは、Firebase Crashlyticsに出力しません。
    * @param message 出力するメッセージ
-   * @param errorCode エラーコード
    */
-  info(message: string, errorCode: string) {
-    this.log('info', message, errorCode);
+  info(message: string) {
+    // nop
   }
 
   /**
-   * Firebase Crashlyticsにwarnログを出力します。
+   * warnログは、Firebase Crashlyticsに出力しません。
    * @param message 出力するメッセージ
-   * @param errorCode エラーコード
    */
-  warn(message: string, errorCode: string) {
-    this.log('warn', message, errorCode);
+  warn(message: string) {
+    // nop
   }
 
   /**

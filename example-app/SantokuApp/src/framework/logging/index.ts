@@ -1,11 +1,11 @@
 import {firebaseConfig} from '../firebase';
 import {FirebaseCrashlyticsTransport} from './FirebaseCrashlyticsTransport';
-import {Logger, createLogger, LoggerOptions} from './Logger';
+import {createLogger, Logger, LoggerOptions} from './Logger';
 
 const log =
   __DEV__ || firebaseConfig.isDummy
-    ? createLogger()
-    : createLogger({level: 'warn', transport: new FirebaseCrashlyticsTransport()});
+    ? createLogger({level: 'trace'})
+    : createLogger({level: 'error', transports: [new FirebaseCrashlyticsTransport()]});
 
 export type {Logger, LoggerOptions};
 export {log, createLogger};

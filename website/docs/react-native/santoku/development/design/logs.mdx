@@ -1,0 +1,26 @@
+---
+title: ログの利用
+---
+
+このアプリケーションでは、リリース後の障害解析を目的として、エラーレベルのログをFirebase Crashlyticsに送信します。
+
+エラーレベルのログには、以下の項目を含めることができます。
+
+- メッセージ
+- エラーコード
+
+Firebase Crashlyticsに記録されるエラーログは、エラーコードを基準にグループ化されます。Firebase Crashlyticsのコンソールでは、グループ化されたエラーコード毎にエラーの発生回数やユーザ数を確認できます。そのため、エラーコードにはグループ化したい単位で値を設定してください。
+
+以下は、エラーログを送信する例です。`log.error`の第一引数がメッセージ、第二引数がエラーコードになります。
+
+```typescript title="起動IDの取得に失敗した場合"
+log.error('Failed to get launchedId.', 'LaunchedIdGettingFailure');
+```
+
+```typescript title="メッセージのロードに失敗した場合"
+log.error('Failed to load message.', 'BundledMessagesLoadingFailure');
+```
+
+:::caution
+一般的に、機密情報はログに含めるべきではありません。ログに含めるメッセージやエラーコードには機密情報を含めないように注意してください。
+:::
