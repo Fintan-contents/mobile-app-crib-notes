@@ -1,0 +1,38 @@
+---
+title: 運用に関する事項
+---
+
+:::caution caution
+ここでは、一般的なシステム運用に関する事項は記載しておりません。主にモバイルアプリケーションとしての運用に関する事項に絞り記載しています。
+:::
+
+運用に関する事項は政府公開の[デジタル・ガバメント推進標準ガイドライン][guideline]に照らし合わせると以下となります。
+>情報システムの運用時間、運用監視、障害復旧、その他の運用管理方針、運用環境等に関する要件を記載する。
+[guideline]:<https://cio.go.jp/sites/default/files/uploads/documents/hyoujun_guideline_20210330.pdf>
+
+本項では、このアプリの運用に関する要件として、以下の事項を定義します。
+
+## 要件内容
+
+- ログ集積の実施について
+- ストア上での評価の扱いについて
+
+### ログ集積の実施について
+
+このアプリでは以下の外部サービスと連携して利用状況やアプリのクラッシュログを集積し、機能改善や問題の解決に使用します。
+
+- [Firebase Crashlytics][Crashlytics]
+- [Google Analytics for Firebase][Analytics]
+
+個人が携行するスマートフォン端末においては、アプリが端末内に出力したログ内容をシステム運用者が直接参照できません。
+そこで[Firebase Crashlytics][Crashlytics]や[Google Analytics for Firebase][Analytics]を利用して端末からレポートを送信し、アプリの改善や問題解決のために使用します。
+なお、この時送信される情報は匿名化がされており、個人が特定される情報はありません。
+また、ログを収集するにあたり、収集する内容と利用目的を利用規約に明記し、ユーザに同意してもらいます。
+
+[Crashlytics]:https://firebase.google.com/products/crashlytics?hl=ja
+[Analytics]:https://firebase.google.com/products/analytics?hl=ja
+
+### ストア上での評価の扱いについて
+
+アプリストア上での評価の取り扱いは、このアプリの発注者が管理するものとします。
+アプリストア上の評価を鑑みて、アプリの信頼性改善や追加機能開発、改善依頼を検討します。こうした役割は発注者側であることから、管理は発注者で行うものとしています。
