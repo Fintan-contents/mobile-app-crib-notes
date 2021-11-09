@@ -15,10 +15,6 @@
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="YOUR-APP-SDK-VERSION-HERE"/>
     <activity
       android:name=".MainActivity"
-      android:label="@string/APP_NAME_HOME"
-      android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode|screenLayout|smallestScreenSize"
-      android:launchMode="singleTask"
-      android:windowSoftInputMode="adjustResize"
       android:theme="@style/Theme.App.SplashScreen"
     >
       <intent-filter>
@@ -26,5 +22,11 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+    <activity
+        android:name=".AppActivity"
+        android:label="@string/APP_NAME_HOME"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode|screenLayout|smallestScreenSize"
+        android:launchMode="singleTask"
+        android:windowSoftInputMode="adjustResize"/>
   </application>
 </manifest>
