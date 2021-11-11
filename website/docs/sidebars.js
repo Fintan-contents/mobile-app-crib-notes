@@ -249,6 +249,7 @@ module.exports = {
             'react-native/santoku/requirements/non-functional/system-method',
             'react-native/santoku/requirements/non-functional/performance',
             'react-native/santoku/requirements/non-functional/compatibility',
+            'react-native/santoku/requirements/non-functional/security',
             'react-native/santoku/requirements/non-functional/test-outline',
             'react-native/santoku/requirements/non-functional/operation',
           ],
