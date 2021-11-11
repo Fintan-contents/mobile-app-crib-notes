@@ -1,8 +1,13 @@
 import '@testing-library/jest-native/extend-expect';
 import {render} from '@testing-library/react-native';
+import {BundledMessagesLoader, loadMessages} from 'framework';
 import React from 'react';
 
 import {TermsOfServiceAgreementScreen} from './TermsOfServiceAgreementScreen';
+
+beforeAll(async () => {
+  await loadMessages(new BundledMessagesLoader());
+});
 
 beforeEach(() => {
   jest.useFakeTimers();

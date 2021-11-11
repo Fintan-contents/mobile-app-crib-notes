@@ -21,4 +21,8 @@ export abstract class AppConfig {
   static get provisioningProfileFlavor(): string {
     return Config.PROVISIONING_PROFILE_FLAVOR;
   }
+
+  static get termsUrl(): string {
+    return Config.TERMS_URL;
+  }
 }

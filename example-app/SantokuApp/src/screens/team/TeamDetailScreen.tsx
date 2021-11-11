@@ -10,7 +10,7 @@ const Screen: React.FC = () => {
   return (
     <View style={styles.container} testID="TeamDetailScreen">
       <Text h2>開発中</Text>
-      <Button title="Go to Demo" onPress={onGoToDemoScreen} />
+      {__DEV__ && <Button title="Go to Demo" onPress={onGoToDemoScreen} />}
     </View>
   );
 };

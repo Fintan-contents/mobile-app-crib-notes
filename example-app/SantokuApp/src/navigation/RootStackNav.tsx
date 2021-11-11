@@ -13,7 +13,7 @@ export const RootStackNav: React.FC = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <nav.Screen {...DemoStackNav} />
+      {__DEV__ && <nav.Screen {...DemoStackNav} />}
       <nav.Screen {...AuthenticatedStackNav} />
       <nav.Screen {...TermsOfServiceAgreementScreen} />
     </nav.Navigator>

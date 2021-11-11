@@ -43,11 +43,11 @@ exports[`App マウントされたときに正常にレンダリングされる�
         color="rgb(0, 122, 255)"
         direction="ltr"
         disableBackButtonMenu={false}
-        hidden={true}
+        hidden={false}
         hideBackButton={false}
         hideShadow={false}
         largeTitleHideShadow={false}
-        title="TermsOfServiceAgreement"
+        title="利用規約"
         titleColor="rgb(28, 28, 30)"
         topInsetEnabled={false}
         translucent={false}
@@ -68,7 +68,6 @@ exports[`App マウントされたときに正常にレンダリングされる�
         <View
           style={
             Object {
-              "alignItems": "center",
               "backgroundColor": "white",
               "flex": 1,
               "justifyContent": "center",
@@ -76,81 +75,154 @@ exports[`App マウントされたときに正常にレンダリングされる�
           }
           testID="TermsOfServiceAgreementScreen"
         >
-          <Text
-            style={
-              Object {
-                "color": "#000000",
-                "fontSize": 51.42857142857143,
-              }
-            }
-          >
-            利用規約
-          </Text>
           <View
             style={
               Array [
                 Object {
-                  "borderRadius": 3,
+                  "flex": 1,
                   "overflow": "hidden",
                 },
-                Object {
-                  "borderRadius": 3,
-                },
                 undefined,
-                false,
               ]
             }
           >
-            <View
-              accessibilityRole="button"
-              accessibilityState={
+            <RNCWebView
+              androidLayerType="software"
+              cacheEnabled={true}
+              injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
+              injectedJavaScriptForMainFrameOnly={true}
+              javaScriptEnabled={true}
+              messagingEnabled={false}
+              onContentProcessDidTerminate={[Function]}
+              onError={[Function]}
+              onHttpError={[Function]}
+              onLoadEnd={[Function]}
+              onLoadingError={[Function]}
+              onLoadingFinish={[Function]}
+              onLoadingProgress={[Function]}
+              onLoadingStart={[Function]}
+              onMessage={[Function]}
+              onScroll={[Function]}
+              onShouldStartLoadWithRequest={[Function]}
+              source={
                 Object {
-                  "busy": false,
-                  "disabled": false,
+                  "uri": "https://www.tis.co.jp/termsofuse/",
                 }
               }
-              accessible={true}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
+              startInLoadingState={true}
+              style={
+                Array [
+                  Object {
+                    "flex": 1,
+                    "overflow": "hidden",
+                  },
+                  Object {
+                    "backgroundColor": "#ffffff",
+                  },
+                  Object {
+                    "flex": 1,
+                  },
+                ]
+              }
+              useSharedProcessPool={true}
+            />
+            <ActivityIndicator
+              animating={true}
+              color="#0000ff"
+              hidesWhenStopped={true}
+              size="large"
               style={
                 Object {
-                  "opacity": 1,
+                  "alignItems": "center",
+                  "display": "flex",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "position": "absolute",
+                  "width": "100%",
                 }
               }
-              testID="goToHomeButton"
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "flex": 0,
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 20,
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "borderRadius": 3,
+                    "overflow": "hidden",
+                  },
+                  Object {
+                    "borderRadius": 3,
+                  },
+                  Object {
+                    "borderRadius": 8,
+                    "width": 90,
+                  },
+                  false,
+                ]
+              }
             >
               <View
+                accessibilityRole="button"
+                accessibilityState={
+                  Object {
+                    "busy": false,
+                    "disabled": true,
+                  }
+                }
+                accessible={true}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#2089dc",
-                    "borderColor": "#2089dc",
-                    "borderRadius": 3,
-                    "borderWidth": 0,
-                    "flexDirection": "row",
-                    "justifyContent": "center",
-                    "padding": 8,
+                    "opacity": 1,
                   }
                 }
               >
-                <Text
+                <View
                   style={
                     Object {
-                      "color": "white",
-                      "fontSize": 18,
-                      "paddingVertical": 1,
-                      "textAlign": "center",
+                      "alignItems": "center",
+                      "backgroundColor": "hsl(208, 8%, 90%)",
+                      "borderColor": "#2089dc",
+                      "borderRadius": 8,
+                      "borderWidth": 0,
+                      "flexDirection": "row",
+                      "height": 50,
+                      "justifyContent": "center",
+                      "padding": 8,
+                      "width": 90,
                     }
                   }
                 >
-                  Go to Home
-                </Text>
+                  <Text
+                    style={
+                      Object {
+                        "color": "hsl(208, 8%, 63%)",
+                        "fontSize": 18,
+                        "paddingVertical": 1,
+                        "textAlign": "center",
+                      }
+                    }
+                  >
+                    同意
+                  </Text>
+                </View>
               </View>
             </View>
           </View>

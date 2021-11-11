@@ -14,7 +14,8 @@ const Screen: React.FC = () => {
       <nav.Screen
         {...HomeStackNav}
         options={{
-          title: 'Home',
+          tabBarAccessibilityLabel: 'Home',
+          tabBarShowLabel: false,
           headerShown: false,
           tabBarIcon: ({color}) => <Ionicons name="md-home" size={30} color={color} />,
         }}
@@ -22,7 +23,8 @@ const Screen: React.FC = () => {
       <nav.Screen
         {...TeamStackNav}
         options={{
-          title: 'Team',
+          tabBarAccessibilityLabel: 'Team',
+          tabBarShowLabel: false,
           headerShown: false,
           tabBarIcon: ({color}) => <MaterialIcons name="groups" size={30} color={color} />,
         }}
