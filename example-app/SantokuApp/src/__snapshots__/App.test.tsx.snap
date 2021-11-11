@@ -79,7 +79,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
           <Text
             style={
               Object {
-                "color": "#242424",
+                "color": "#000000",
                 "fontSize": 51.42857142857143,
               }
             }
