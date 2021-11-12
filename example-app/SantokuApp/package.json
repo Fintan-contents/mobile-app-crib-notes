@@ -22,7 +22,8 @@
     "bundle:android": "mkdirp ./generated && react-native bundle --dev false --sourcemap-output ./generated/index.android.bundle.map --entry-file index.js --bundle-output ./generated/index.android.bundle --platform android",
     "bundle:ios": "mkdirp ./generated && react-native bundle --dev false --sourcemap-output ./generated/index.ios.bundle.map --entry-file index.js --bundle-output ./generated/index.ios.bundle --platform ios",
     "symbolicate:android": "npx metro-symbolicate ./generated/index.android.bundle.map",
-    "symbolicate:ios": "npx metro-symbolicate ./generated/index.ios.bundle.map"
+    "symbolicate:ios": "npx metro-symbolicate ./generated/index.ios.bundle.map",
+    "generate-api": "npx @openapitools/openapi-generator-cli generate -i ../api-document/openapi.yaml -g typescript-axios -o ./src/generated/apI"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
@@ -33,6 +34,7 @@
     "@react-navigation/native": "~6.0.6",
     "@react-navigation/native-stack": "~6.2.5",
     "@react-navigation/stack": "~6.0.11",
+    "axios": "^0.24.0",
     "expo": "^42.0.0",
     "expo-keep-awake": "~9.2.0",
     "expo-random": "~11.2.0",
@@ -52,6 +54,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@openapitools/openapi-generator-cli": "^2.4.14",
     "@testing-library/jest-native": "^4.0.2",
     "@testing-library/react-native": "^8.0.0",
     "@types/jest": "<26.0.0",

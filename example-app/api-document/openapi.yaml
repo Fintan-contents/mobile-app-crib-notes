@@ -13,6 +13,20 @@ servers:
 security:
   - Session: []
 paths:
+  /csrf_token:
+    get: 
+      summary: CSRFトークンの取得
+      tags:
+        - アカウント
+      description: CSRFトークンを取得します。
+      operationId: get-csrf-token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CsrfTokenResponse'
   /signup:
     post:
       summary: アカウントの登録
@@ -593,6 +607,20 @@ paths:
                 $ref: '#/components/schemas/TimetableOfDay'
 components:
   schemas:
+    CsrfTokenResponse:
+      title: CSRF-Token
+      type: object
+      description: CSRFトークンレスポンス
+      properties:
+        csrfTokenValue:
+          type: string
+          description: トークンの値
+        csrfTokenHeaderName:
+          type: string
+          description: トークンのヘッダー名
+        csrfTokenParameterName:
+          type: string
+          description: トークンのパラメータ名        
     Profile:
       title: Profile
       type: object
