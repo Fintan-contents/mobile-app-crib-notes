@@ -14,71 +14,13 @@ import TabItem from '@theme/TabItem';
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 <Tabs
-  defaultValue="android"
+  defaultValue="ios"
   values={[
-    {label: 'Android', value: 'android'},
     {label: 'iOS', value: 'ios'},
+    {label: 'Android', value: 'android'},
   ]}>
 
 <!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
-
-<TabItem value="android">
-
-#### ビルドタイプ：Debug、プロダクトフレーバー：DevSantokuApp
-
-```bash
-npm run android -- --variant "devSantokuAppDebug" --appIdSuffix "dev.debug"
-```
-
-もしくは、以下のように`variant`と`appIdSuffix`を省略できます。
-
-```bash
-npm run android
-```
-
-#### ビルドタイプ：DebugAdvanced、プロダクトフレーバー：DevSantokuApp
-
-```bash
-npm run android -- --variant "devSantokuAppDebugAdvanced" --appIdSuffix "dev.debugAdvanced"
-```
-
-#### ビルドタイプ：ReleaseInHouse、プロダクトフレーバー：DevSantokuApp
-
-```bash
-npm run android -- --variant "devSantokuAppReleaseInHouse" --appIdSuffix "dev.house"
-```
-
-#### ビルドタイプ：Release、プロダクトフレーバー：DevSantokuApp
-
-```bash
-npm run android -- --variant "devSantokuAppRelease" --appIdSuffix "dev"
-```
-
-#### ビルドタイプ：Debug、プロダクトフレーバー：SantokuApp
-
-```bash
-npm run android -- --variant "santokuAppDebug" --appIdSuffix "debug"
-```
-
-#### ビルドタイプ：DebugAdvanced、プロダクトフレーバー：SantokuApp
-
-```bash
-npm run android -- --variant "santokuAppDebugAdvanced" --appIdSuffix "debugAdvanced"
-```
-
-#### ビルドタイプ：ReleaseInHouse、プロダクトフレーバー：SantokuApp
-
-```bash
-npm run android -- --variant "santokuAppReleaseInHouse" --appIdSuffix "house"
-```
-
-#### ビルドタイプ：Release、プロダクトフレーバー：SantokuApp
-
-```bash
-npm run android -- --variant "santokuAppRelease" --appIdSuffix ""
-```
-
-</TabItem>
 
 <TabItem value="ios">
 
@@ -94,28 +36,16 @@ npm run ios -- --scheme "DevSantokuApp" --configuration "Debug"
 npm run ios
 ```
 
-#### ビルドタイプ：`DebugAdvanced`、プロダクトフレーバー：`DevSantokuApp`
-
-```bash
-npm run ios -- --scheme "DevSantokuApp" --configuration "DebugAdvanced"
-```
-
-#### ビルドタイプ：`ReleaseInHouse`、プロダクトフレーバー：`DevSantokuApp`
-
-```bash
-npm run ios -- --scheme "DevSantokuApp" --configuration "ReleaseInHouse"
-```
-
-#### ビルドタイプ：`Release`、プロダクトフレーバー：`DevSantokuApp`
-
-```bash
-npm run ios -- --scheme "DevSantokuApp" --configuration "Release"
-```
-
 #### ビルドタイプ：`Debug`、プロダクトフレーバー：`SantokuApp`
 
 ```bash
 npm run ios -- --scheme "SantokuApp" --configuration "Debug"
+```
+
+#### ビルドタイプ：`DebugAdvanced`、プロダクトフレーバー：`DevSantokuApp`
+
+```bash
+npm run ios -- --scheme "DevSantokuApp" --configuration "DebugAdvanced"
 ```
 
 #### ビルドタイプ：`DebugAdvanced`、プロダクトフレーバー：`SantokuApp`
@@ -124,10 +54,22 @@ npm run ios -- --scheme "SantokuApp" --configuration "Debug"
 npm run ios -- --scheme "SantokuApp" --configuration "DebugAdvanced"
 ```
 
+#### ビルドタイプ：`ReleaseInHouse`、プロダクトフレーバー：`DevSantokuApp`
+
+```bash
+npm run ios -- --scheme "DevSantokuApp" --configuration "ReleaseInHouse"
+```
+
 #### ビルドタイプ：`ReleaseInHouse`、プロダクトフレーバー：`SantokuApp`
 
 ```bash
 npm run ios -- --scheme "SantokuApp" --configuration "ReleaseInHouse"
+```
+
+#### ビルドタイプ：`Release`、プロダクトフレーバー：`DevSantokuApp`
+
+```bash
+npm run ios -- --scheme "DevSantokuApp" --configuration "Release"
 ```
 
 #### ビルドタイプ：`Release`、プロダクトフレーバー：`SantokuApp`
@@ -135,6 +77,68 @@ npm run ios -- --scheme "SantokuApp" --configuration "ReleaseInHouse"
 ```bash
 npm run ios -- --scheme "SantokuApp" --configuration "Release"
 ```
+
+</TabItem>
+
+<TabItem value="android">
+
+<!-- markdownlint-disable MD024 -->
+
+#### ビルドタイプ：`Debug`、プロダクトフレーバー：`DevSantokuApp`
+
+```bash
+npm run android -- --variant "devSantokuAppDebug" --appIdSuffix "dev.debug"
+```
+
+もしくは、以下のように`variant`と`appIdSuffix`を省略できます。
+
+```bash
+npm run android
+```
+
+#### ビルドタイプ：`Debug`、プロダクトフレーバー：`SantokuApp`
+
+```bash
+npm run android -- --variant "santokuAppDebug" --appIdSuffix "debug"
+```
+
+#### ビルドタイプ：`DebugAdvanced`、プロダクトフレーバー：`DevSantokuApp`
+
+```bash
+npm run android -- --variant "devSantokuAppDebugAdvanced" --appIdSuffix "dev.debugAdvanced"
+```
+
+#### ビルドタイプ：`DebugAdvanced`、プロダクトフレーバー：`SantokuApp`
+
+```bash
+npm run android -- --variant "santokuAppDebugAdvanced" --appIdSuffix "debugAdvanced"
+```
+
+#### ビルドタイプ：`ReleaseInHouse`、プロダクトフレーバー：`DevSantokuApp`
+
+```bash
+npm run android -- --variant "devSantokuAppReleaseInHouse" --appIdSuffix "dev.house"
+```
+
+#### ビルドタイプ：`ReleaseInHouse`、プロダクトフレーバー：`SantokuApp`
+
+```bash
+npm run android -- --variant "santokuAppReleaseInHouse" --appIdSuffix "house"
+```
+
+#### ビルドタイプ：`Release`、プロダクトフレーバー：`DevSantokuApp`
+
+```bash
+npm run android -- --variant "devSantokuAppRelease" --appIdSuffix "dev"
+```
+
+#### ビルドタイプ：`Release`、プロダクトフレーバー：`SantokuApp`
+
+```bash
+npm run android -- --variant "santokuAppRelease" --appIdSuffix ""
+```
+
+<!-- markdownlint-enable MD024 -->
 
 </TabItem>
 
