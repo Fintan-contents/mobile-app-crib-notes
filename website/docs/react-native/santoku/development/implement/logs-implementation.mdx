@@ -2,7 +2,7 @@
 title: ログの利用
 ---
 
-## 開発時のデバッグ用途の利用
+## 開発時のデバッグ用途に利用
 
 開発時のデバッグ用途でログを出力します。
 
@@ -31,7 +31,7 @@ WebViewでのエラー発生時とHTTPステータス5xx系のエラー発生時
 ## Firebase Crashlyticsのコンソールに表示されるスタックトレースとソースコードのマッピング
 
 Firebase Crashlyticsコンソールで、送信されたメッセージやスタックトレースが確認できます。
-しかし、次の例で示すようにMinify処理されたソースコードのスタックトレースが表示されるため、元のソースコードとのマッピングがないと直感的にわからない表示となります。  
+しかし、次の例で示すようにMinify処理されたソースコードのスタックトレースが表示されるため、元のソースコードとのマッピングがないと直感的にわからない表示となります。
 
 ```text title="スタックトレースの例"
 Fatal Exception: com.facebook.react.common.JavascriptException: Error: Error has occurred in synchronous process., stack:
@@ -76,7 +76,7 @@ npm run bundle
 
 `［プロジェクトルート］/generated`に、`index.android.bundle.map`, `index.ios.bundle.map`が作成されます。
 
-次に、Firebase Crashlyticsのコンソールに表示されているスタックトレースをコピーして、任意のファイル、ディレクトリに格納します。  
+次に、Firebase Crashlyticsのコンソールに表示されているスタックトレースをコピーして、任意のファイル、ディレクトリに格納します。
 ここでは、`［プロジェクトルート］/stack-trace.txt`に保存すると仮定します。
 
 ### ソースコードとのマッピング
@@ -90,6 +90,8 @@ cat stack-trace.txt | npm run symbolicate:android
 ```sh title="【iOS】の場合"
 cat stack-trace.txt | npm run symbolicate:ios
 ```
+
+（※）`cat`コマンドがインストールされていない場合は、`type`コマンドなどで代用してください。
 
 実行後に、ソースコードの行数と関数名のマッピング解決済みのスタックトレースが標準出力され、エラー発生箇所がわかるようになります。
 
