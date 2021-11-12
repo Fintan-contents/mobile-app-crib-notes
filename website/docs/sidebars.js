@@ -357,6 +357,17 @@ module.exports = {
             },
             {
               type: 'category',
+              label: '画面',
+              items: [
+                {
+                  type: 'category',
+                  label: '共通部',
+                  items: ['react-native/santoku/design/screen-specs/screens/common/bottom-tab/overview'],
+                },
+              ],
+            },
+            {
+              type: 'category',
               label: '共通部品',
               items: [
                 'react-native/santoku/design/screen-specs/common-parts/overview',
