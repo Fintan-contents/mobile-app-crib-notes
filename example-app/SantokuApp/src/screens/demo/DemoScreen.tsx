@@ -5,6 +5,7 @@ import React, {useMemo} from 'react';
 import {DemoLinkItemData} from './DemoLinkItem';
 import {DemoTemplate} from './DemoTemplate';
 import {AppStateScreen} from './app-state';
+import {AuthnScreen} from './authn';
 import {ConfigScreen} from './config';
 import {ErrorCaseScreen} from './error';
 import {AppInfoScreen} from './info';
@@ -40,6 +41,10 @@ const demoScreenList = [
   {
     title: 'Message',
     to: MessageScreen.name,
+  },
+  {
+    title: 'Authentication',
+    to: AuthnScreen.name,
   },
 ];
 

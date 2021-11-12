@@ -6,3 +6,4 @@ export * from './instructions';
 export * from './log';
 export * from './message';
 export * from './DemoScreen';
+export * from './authn';
