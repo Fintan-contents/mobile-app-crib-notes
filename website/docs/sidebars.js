@@ -335,6 +335,14 @@ module.exports = {
               id: 'react-native/santoku/design/screen-specs/overview',
             },
             {
+              type: 'category',
+              label: '画面',
+              items: [
+                'react-native/santoku/design/screen-specs/screens/overview',
+                'react-native/santoku/design/screen-specs/screens/terms-of-service-agreement/overview',
+              ],
+            },
+            {
               type: 'doc',
               id: 'react-native/santoku/design/screen-specs/basic-policy',
             },
