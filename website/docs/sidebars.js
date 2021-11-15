@@ -371,6 +371,7 @@ module.exports = {
               label: '共通部品',
               items: [
                 'react-native/santoku/design/screen-specs/common-parts/overview',
+                'react-native/santoku/design/screen-specs/common-parts/button/overview',
                 'react-native/santoku/design/screen-specs/common-parts/webview/overview',
               ],
             },
