@@ -7,6 +7,8 @@
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest --detectOpenHandles --runInBand",
+    "test:coverage": "jest --detectOpenHandles --runInBand --coverage",
+    "test:report": "jest --detectOpenHandles --runInBand --reporters=default --reporters=jest-junit --coverage",
     "lint": "run-s --print-name --continue-on-error lint:*",
     "lint:es": "eslint --ext .jsx,.js,.tsx,.ts .",
     "lint:tsc": "tsc --noEmit",
