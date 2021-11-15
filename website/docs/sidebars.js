@@ -367,11 +367,13 @@ module.exports = {
               type: 'category',
               label: '画面',
               items: [
+                'react-native/santoku/design/screen-specs/screens/overview',
                 {
                   type: 'category',
                   label: '共通部',
                   items: ['react-native/santoku/design/screen-specs/screens/common/bottom-tab/overview'],
                 },
+                'react-native/santoku/design/screen-specs/screens/splash-screen/overview',
               ],
             },
             {
