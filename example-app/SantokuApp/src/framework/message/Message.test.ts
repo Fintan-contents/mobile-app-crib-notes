@@ -22,13 +22,19 @@ describe('Message message', () => {
     await loadMessages({
       load: async () => {
         return new Promise((resolve) => {
-          // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
-          resolve({'validation.required': '{0}を入力してください。'});
+          resolve({
+            // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
+            'validation.required': '{0}を入力してください。',
+            // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
+            'validation.max': '{0}が長すぎます。{0}は{1}桁以内で入力してください。',
+          });
         });
       },
     });
     // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
     expect(m('validation.required', 'name')).toEqual('nameを入力してください。');
+    // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
+    expect(m('validation.max', 'name', 10)).toEqual('nameが長すぎます。nameは10桁以内で入力してください。');
     // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
     expect(m('validation.required')).toEqual('{0}を入力してください。');
   });
