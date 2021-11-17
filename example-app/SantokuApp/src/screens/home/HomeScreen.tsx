@@ -1,3 +1,4 @@
+import {m} from 'framework';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
 export const HomeScreen = {
   component: Screen,
   name: ScreenName,
-  options: {
-    title: 'ホーム',
-  },
+  options: () => ({
+    title: m('ホーム'),
+  }),
 };

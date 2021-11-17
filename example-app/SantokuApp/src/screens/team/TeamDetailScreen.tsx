@@ -1,3 +1,4 @@
+import {m} from 'framework';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
 export const TeamDetailScreen = {
   component: Screen,
   name: ScreenName,
-  options: {
-    title: 'チーム詳細',
-  },
+  options: () => ({
+    title: m('チーム詳細'),
+  }),
 };

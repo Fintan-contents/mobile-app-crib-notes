@@ -87,9 +87,9 @@ const styles = StyleSheet.create({
 export const TermsOfServiceAgreementScreen = {
   component: Screen,
   name: ScreenName,
-  options: {
+  options: () => ({
     headerShown: true,
-    title: '利用規約',
+    title: m('利用規約'),
     presentation: 'formSheet' as const,
-  },
+  }),
 };
