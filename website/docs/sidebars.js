@@ -336,14 +336,6 @@ module.exports = {
               id: 'react-native/santoku/design/screen-specs/overview',
             },
             {
-              type: 'category',
-              label: '画面',
-              items: [
-                'react-native/santoku/design/screen-specs/screens/overview',
-                'react-native/santoku/design/screen-specs/screens/terms-of-service-agreement/overview',
-              ],
-            },
-            {
               type: 'doc',
               id: 'react-native/santoku/design/screen-specs/basic-policy',
             },
@@ -375,6 +367,7 @@ module.exports = {
                   items: ['react-native/santoku/design/screen-specs/screens/common/bottom-tab/overview'],
                 },
                 'react-native/santoku/design/screen-specs/screens/splash-screen/overview',
+                'react-native/santoku/design/screen-specs/screens/terms-of-service-agreement/overview',
               ],
             },
             {
@@ -383,6 +376,7 @@ module.exports = {
               items: [
                 'react-native/santoku/design/screen-specs/common-parts/overview',
                 'react-native/santoku/design/screen-specs/common-parts/button/overview',
+                'react-native/santoku/design/screen-specs/common-parts/snackbar/overview',
                 'react-native/santoku/design/screen-specs/common-parts/webview/overview',
               ],
             },
