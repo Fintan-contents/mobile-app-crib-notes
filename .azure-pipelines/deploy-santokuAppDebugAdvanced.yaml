@@ -1,0 +1,24 @@
+trigger: none
+
+pr:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - 'example-app/SantokuApp'
+    exclude:
+      - 'example-app/SantokuApp/README.md'
+  drafts: false
+
+name: $(date:yyyyMMdd)$(rev:.rr)
+
+extends:
+  template: deploy.yaml
+  parameters:
+    buildVariants:
+      - name: 'santokuAppDebugAdvanced'
+        laneName: 'debug_advanced'
+        buildType: 'debugAdvanced'
+        androidAppPath: 'android/app/build/outputs/bundle/santokuAppDebugAdvanced/app-santokuApp-debugAdvanced.aab'
+        iOSAppPath: 'ios/build/SantokuAppDebugAdvanced.ipa'

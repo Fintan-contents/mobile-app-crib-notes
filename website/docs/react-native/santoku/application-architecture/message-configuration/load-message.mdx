@@ -1,0 +1,35 @@
+---
+title: メッセージのロード
+---
+
+## メッセージのロードと取得
+
+SantokuAppでは、アプリ内にバンドルしたメッセージをアプリ起動時にロードします。
+ストレージや外部サービスへの入出力が発生しない為、ロードは失敗しない想定となっています。
+メッセージのプレースホルダーは{n}の書式で定義します。nには挿入句の順番を数値で指定します。
+
+```typescript title='アプリ内にバンドルされたメッセージ'
+export const BundledMessages = {
+  'app.task.期限超過タスク{0}件': '期限を超過したタスクが{0}件です。',
+  // {{省略}}
+} as const;
+```
+
+```typescript jsx title='メッセージロード'
+export const App = () => {
+
+  // アプリ内で使用するメッセージのロード
+  loadMessages(new BundledMessagesLoader()).catch(() => {
+    // アプリにバンドルしているメッセージのロードは失敗しない想定
+  });
+
+}
+```
+
+メッセージの取得方法は次の通りです。
+
+```typescript jsx title='メッセージの取得'
+import {m} from 'framework';
+
+console.log(m('app.task.期限超過タスク{0}件', '3')); // => 期限を超過したタスクが3件です。
+```

@@ -1,0 +1,32 @@
+---
+title: 実装
+sidebar_label: 概要
+---
+
+このアプリケーションを実装する際の部品の使用方法などについて紹介します。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+import {PageList} from '../../../../src/components';
+const overviews = [
+  {
+    title: 'メッセージの定義と取得',
+    to: '/react-native/santoku/development/implement/message-configuration',
+  },
+  {
+    title: 'ビルドバリアントごとのアプリ起動方法',
+    to: '/react-native/santoku/development/implement/app-launch-with-build-variants',
+  },
+  {
+    title: 'Firebaseの機能を利用する際の注意点',
+    to: '/react-native/santoku/development/implement/cautions-on-using-firebase',
+  },
+  {
+    title: '環境設定値の管理',
+    to: '/react-native/santoku/development/implement/configurations',
+  }
+]
+
+<PageList overviews={overviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->

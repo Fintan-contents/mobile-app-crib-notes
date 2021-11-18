@@ -21,6 +21,7 @@
         'expo-keep-awake',
         'expo-splash-screen',
         'expo-updates',
+        'expo-random',
         'react',
         'react-dom',
         'react-native',
@@ -48,6 +49,7 @@
         'react-test-renderer', // jest-expo -> react-test-renderer
         'jest',
         'gradle', // expo-template-bare-typescript
+        'com.android.tools.build:gradle', // expo-template-bare-typescript
       ],
       matchPackagePrefixes: ['com.facebook.flipper'],
     },
@@ -84,14 +86,12 @@
         '@typescript-eslint/parser',
         'cross-env',
         'eslint',
-        'eslint-config-universe',
-        'eslint-formatter-rdjson',
         'jest-junit',
         'npm-run-all',
         'patch-package',
         'prettier'
       ],
-      matchPackagePrefixes: ['markdownlint', 'textlint', 'stylelint'],
+      matchPackagePrefixes: ['markdownlint', 'textlint', 'stylelint', 'eslint'],
     },
   ],
 }

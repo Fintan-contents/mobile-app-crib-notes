@@ -56,31 +56,6 @@ android {
 | ----- | ------------- | -------------- | ------- |
 | デバッグ用の署名鍵 | デバッグ用の署名鍵 | インハウス配布用の署名鍵 | Google Play配布用のアップロード鍵 |
 
-「インハウス用の署名鍵」と「Google Play配布用のアップロード鍵」はリポジトリには含まれていません。以下のとおり設定する必要があります。
-
-<!-- TODO: たぶん、ここじゃなくて環境構築手順とかに移動したほうが良い。 -->
-<details>
-<summary>ReleaseInHouseとReleaseでのビルドに必要な設定</summary>
-`ReleaseInHouse`および`Release`でのアプリケーションの署名にはリポジトリに含まれない鍵を利用するため、事前の環境設定が必要になります。
-`~/.gradle/gradle.properties`で次のように利用する鍵を設定してください。
-
-```properties
-SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=<path/to/in-house.keystore>
-SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=*****
-SANTOKU_APP_IN_HOUSE_KEY_ALIAS=*****
-SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=*****
-
-SANTOKU_APP_UPLOAD_KEYSTORE_FILE=<path/to/upload.keystore>
-SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD=*****
-SANTOKU_APP_UPLOAD_KEY_ALIAS=*****
-SANTOKU_APP_UPLOAD_KEY_PASSWORD=*****
-```
-
-- アップロード鍵やインハウス用共有鍵を含むキーストアファイルとパスワードなどの設定値は、別途入手してください。
-- `SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE`、`SANTOKU_APP_UPLOAD_KEYSTORE_FILE`には入手したキーストアファイルへのパスを設定します。`android/app/build.gradle`ファイルからの相対パスもしくは絶対パスを設定してください。
-
-</details>
-
 実際の設定内容は次のようになります。（`signingConfig`に関係しない箇所は省略しています）
 
 ```groovy title="android/app/build.gradle"
@@ -291,9 +266,9 @@ end
 - Debug ConfigurationとDebugAdvanced Configurationで「Info.plist File」の設定項目に`Debug.plist`を設定
   - `project.pbxproj`では`INFOPLIST_FILE`という設定項目
 
-| Debug | DebugAdvanced | ReleaseInHouse | Release |
-| ----- | ------------- | -------------- | ------- |
-| 有効（`localhost`を除外） | 有効（`localhost`を除外） | 有効（除外なし） | 有効（除外なし） |
+| Debug | DebugAdvanced | ReleaseInHouse | Release       |
+|:------|:--------------|:---------------|:--------------|
+| 無効   | 無効          | 有効（除外なし）  | 有効（除外なし） |
 
 `project.pbxproj`での実際の設定内容は次のようになります。（plistに関係しない箇所は省略しています）
 
@@ -327,14 +302,8 @@ EA57F9FD253824C7003D7604 /* DebugAdvanced */ = {
 <dict>
   <key>NSAppTransportSecurity</key>
   <dict>
-    <key>NSExceptionDomains</key>
-    <dict>
-      <key>localhost</key>
-      <dict>
-        <key>NSExceptionAllowsInsecureHTTPLoads</key>
-        <true/>
-      </dict>
-    </dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
   </dict>
 </dict>
 </plist>

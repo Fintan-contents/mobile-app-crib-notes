@@ -186,6 +186,9 @@ android {
             signingConfig signingConfigs.debug
             debuggable true
             applicationIdSuffix ".debug"
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
         }
         debugAdvanced {
             initWith debug

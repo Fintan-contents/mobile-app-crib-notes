@@ -1,0 +1,74 @@
+---
+title: ログ出力
+---
+
+ログ出力は、以下のクラスで構成されます。
+
+- Logger ... ログを出力するAPIを提供するクラスです。`LogFormatter`と`Transport`をインスタンス生成時に指定できます。
+- LogFormatter ... メッセージを出力する際のフォーマットを表すインタフェースです。
+- Transport ... ログの出力先を表すインタフェースです。コンソールやFirebase Crashlyticsを出力先とした実装を用意します。
+
+ログ出力で提供される機能は以下のようになります。
+
+## ログレベルによるログの振り分け
+
+以下のログのレベルを指定して出力を振り分けることができます。
+
+- トレース
+- デバッグ
+- 情報
+- 警告
+- エラー
+
+ログレベルには上記の箇条書きの記載通りに順序があり、ロガーに設定したログレベルより、同じか下のレベルがログとして出力されます。
+例えば、ロガーのログレベルにトレースを指定すると、すべてのログレベルが出力されます。
+ログレベルに警告を指定すると、警告とエラーのみが出力されます。
+
+エラー出力にはエラーコードの指定を必須としています。指定したエラーコード毎にクラッシュレポートがグルーピングされてFirebaseコンソールに表示されるので、エラーの問題究明に役立ちます。
+
+## ログ出力先の指定
+
+ログの出力処理は、トランスポートで行われます。
+ロガーの初期化で複数のトランスポートを指定することで複数の出力先に出力できます。
+
+```typescript
+  import { createLogger } from 'framework'
+  import { SimpleLogFormatter, ConsoleTransport, FirebaseCrashlyticsTransport} from 'framework/Logger'
+  // ...
+  const formatter = new SimpleLogFormatter();
+  const consoleTransport = new ConsoleTransport();
+  const firebaseCrashlyticsTransport = new FirebaseCrashlyticsTransport();
+  // 初期化時に、コンソール出力とFirebase Crashlytics出力するトランスポートを渡す例
+  const log = createLogger({level: 'trace', formatter: formatter, transports: [consoleTransport, firebaseCrashlyticsTransport]});
+```
+
+### Firebase Crashlyticsについて
+
+アプリのクラッシュの原因究明は、ログが残っていないと困難になり得ます。
+FirebaseCrashlyticsTransportでは、クラッシュ発生前のエラー情報を収集できます。
+クラッシュ発生後の次のアプリ起動時にエラーのログ出力情報をFirebase Crashlyticsに送信します。
+
+Firebase Crashlyticsの設定については、[Firebase Crashlyticsの設定](../error-handling/how-to-handle-error#firebase-crashlyticsの設定)を参照してください。
+
+## ログのフォーマット
+
+ロガーはフォーマッタを関連づけることができます。
+フォーマッタでは、出力する内容をラベルをつけたり日時をつけたり加工できます。
+SimpleLogFormatterでは以下の内容が出力されます。
+
+```typescript フォーマット出力例
+  // Error以外の場合
+  //  [＜ログレベル＞] ＜ログのメッセージ内容＞
+  log.info("ロード処理完了")
+  //  -> "[info] ロード処理完了"
+
+  // Errorの場合
+  //   [＜ログレベル＞] [＜指定したエラーコード＞] ＜ログのメッセージ内容＞
+  try {
+    /* 中略 */
+  } catch {
+    log.error("xxx処理例外", "E001XXX")
+    //  -> "[error] [E001XXX] xxx処理例外"
+    /* 中略 */
+  }
+```

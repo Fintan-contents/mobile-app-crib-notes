@@ -1,0 +1,219 @@
+parameters:
+- name: buildVariants
+  type: object
+  default:
+    - name: 'devSantokuAppDebugAdvanced'
+      laneName: 'dev_debug_advanced'
+      buildType: 'debugAdvanced'
+      androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
+      iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
+    - name: 'devSantokuAppReleaseInHouse'
+      laneName: 'dev_release_in_house'
+      buildType: 'releaseInHouse'
+      androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppReleaseInHouse/app-devSantokuApp-releaseInHouse.aab'
+      iOSAppPath: 'ios/build/DevSantokuAppReleaseInHouse.ipa'
+    - name: 'santokuAppDebugAdvanced'
+      laneName: 'debug_advanced'
+      buildType: 'debugAdvanced'
+      androidAppPath: 'android/app/build/outputs/bundle/santokuAppDebugAdvanced/app-santokuApp-debugAdvanced.aab'
+      iOSAppPath: 'ios/build/SantokuAppDebugAdvanced.ipa'
+    - name: 'santokuAppReleaseInHouse'
+      laneName: 'release_in_house'
+      buildType: 'releaseInHouse'
+      androidAppPath: 'android/app/build/outputs/bundle/santokuAppReleaseInHouse/app-santokuApp-releaseInHouse.aab'
+      iOSAppPath: 'ios/build/SantokuAppReleaseInHouse.ipa'
+
+variables:
+- group: android
+- group: apple
+- group: deployGate
+- group: devSantokuAppDebugAdvanced
+- group: devSantokuAppReleaseInHouse
+- group: santokuAppDebugAdvanced
+- group: santokuAppReleaseInHouse
+- name: appDir
+  value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
+- name: branchName
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/') }}:
+    value: $[ replace(variables['Build.SourceBranch'], 'refs/heads/', '') ]
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
+    value: $[ replace(variables['System.PullRequest.SourceBranch'], 'refs/heads/', '') ]
+- name: npmConfigCache
+  value: '$(Pipeline.Workspace)/.npm'
+
+stages:
+- ${{ each buildVariant in parameters.buildVariants }}:
+  - stage: Android_${{buildVariant.name}}
+    displayName: Android_${{buildVariant.name}}
+    dependsOn: []
+    jobs:
+    - job: build_${{buildVariant.name}}
+      displayName: 'build ${{buildVariant.name}}'
+      pool:
+        vmImage: macOS-11
+      steps:
+      - task: NodeTool@0
+        displayName: 'Use Node.js 16.13.0'
+        inputs:
+          versionSpec: '16.13.0'
+      - task: Cache@2
+        displayName: Cache npm
+        inputs:
+          key: 'npm | "$(Agent.OS)" | $(appDir)/package-lock.json'
+          restoreKeys: |
+            npm | "$(Agent.OS)"
+          path: $(npmConfigCache)
+      - task: CmdLine@2
+        displayName: 'npm ci --cache $(npmConfigCache)'
+        inputs:
+          script: 'npm ci --cache $(npmConfigCache)'
+          workingDirectory: '$(appDir)'
+      - task: DownloadSecureFile@1
+        displayName: 'Download Keystore file for ReleaseInHouse'
+        inputs:
+          secureFile: $(android_ReleaseInHouseKeyStoreSecureFileName)
+        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
+      - task: CopyFiles@2
+        displayName: 'Copy Keystore file to: $(appDir)/android/app'
+        inputs:
+          SourceFolder: '$(Agent.TempDirectory)'
+          Contents: $(android_ReleaseInHouseKeyStoreSecureFileName)
+          TargetFolder: '$(appDir)/android/app'
+        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
+      - task: CmdLine@2
+        displayName: 'Add gradle.properties settings for ReleaseInHouse'
+        inputs:
+          script: |
+            echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
+            echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=$(android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
+            echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=$(android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
+            echo 'SANTOKU_APP_IN_HOUSE_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
+            echo 'SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=$(android_ReleaseInHouseKeyPassword)' >> gradle.properties
+          workingDirectory: '$(appDir)/android'
+        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
+      - task: DownloadSecureFile@1
+        name: googleServicesJson${{buildVariant.name}}
+        displayName: 'Download google-services.json file for ${{buildVariant.name}}'
+        inputs:
+          secureFile: $(${{buildVariant.name}}_GoogleServicesJsonSecureFileName)
+      - task: CopyFiles@2
+        displayName: 'Copy google-services.json file to: $(appDir)/android/app/src/${{buildVariant.buildType}}'
+        inputs:
+          SourceFolder: '$(Agent.TempDirectory)'
+          Contents: $(${{buildVariant.name}}_GoogleServicesJsonSecureFileName)
+          TargetFolder: '$(appDir)/android/app/src/${{buildVariant.buildType}}'
+      - task: CmdLine@2
+        displayName: 'Rename google-services.json'
+        inputs:
+          script: |
+            /bin/mv $(${{buildVariant.name}}_GoogleServicesJsonSecureFileName) google-services.json
+          workingDirectory: '$(appDir)/android/app/src/${{buildVariant.buildType}}'
+      - task: CmdLine@2
+        displayName: 'Build Android app for ${{buildVariant.name}}'
+        inputs:
+          script: 'fastlane android ${{buildVariant.laneName}}'
+          workingDirectory: '$(appDir)'
+      - task: CmdLine@2
+        displayName: 'Upload app to DeployGate'
+        inputs:
+          script: |
+            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.androidAppPath}}" -F "distribution_name=$(branchName)" -F "message=$(Build.Reason) triggered build by $(Build.BuildNumber)"
+          workingDirectory: '$(appDir)'
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish Artifact'
+        inputs:
+          targetPath: '$(appDir)/android/app/build/outputs'
+          artifactType: 'pipeline'
+          artifactName: '${{buildVariant.name}}.aab'
+          parallel: true
+        condition: succeeded()
+- ${{ each buildVariant in parameters.buildVariants }}:
+  - stage: iOS_${{buildVariant.name}}
+    displayName: iOS_${{buildVariant.name}}
+    dependsOn: []
+    condition: and(succeeded(), ne('${{buildVariant.buildType}}', 'debugAdvanced'))
+    jobs:
+    - job: build_${{buildVariant.name}}
+      displayName: 'build ${{buildVariant.name}}'
+      pool:
+        vmImage: macOS-11
+      steps:
+      - task: InstallAppleCertificate@2
+        displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
+        inputs:
+          certSecureFile: $(apple_DevelopmentCertificateSecureFileName)
+          certPwd: $(apple_DevelopmentCertificatePassword)
+      - task: InstallAppleCertificate@2
+        displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
+        inputs:
+          certSecureFile: $(apple_DistributionCertificateSecureFileName)
+          certPwd: $(apple_DistributionCertificatePassword)
+      - task: InstallAppleProvisioningProfile@1
+        displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
+        inputs:
+          provProfileSecureFile: $(${{buildVariant.name}}_AppleDevelopmentProvisioningProfileSecureFileName)
+      - task: InstallAppleProvisioningProfile@1
+        displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
+        inputs:
+          provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileName)
+      - task: CmdLine@2
+        displayName: 'Use Xcode 12.5.1'
+        inputs:
+          script: 'sudo xcode-select --switch /Applications/Xcode_12.5.1.app'
+      - task: NodeTool@0
+        displayName: 'Use Node.js 16.13.0'
+        inputs:
+          versionSpec: '16.13.0'
+      - task: Cache@2
+        displayName: Cache npm
+        inputs:
+          key: 'npm | "$(Agent.OS)" | $(appDir)/package-lock.json'
+          restoreKeys: |
+            npm | "$(Agent.OS)"
+          path: $(npmConfigCache)
+      - task: CmdLine@2
+        displayName: 'npm ci --cache $(npmConfigCache)'
+        inputs:
+          script: 'npm ci --cache $(npmConfigCache)'
+          workingDirectory: '$(appDir)'
+      - task: CmdLine@2
+        displayName: 'bundle install'
+        inputs:
+          script: 'bundle install'
+          workingDirectory: '$(appDir)'
+      - task: DownloadSecureFile@1
+        displayName: 'Download GoogleServices-Info.plist file for ${{buildVariant.name}}'
+        inputs:
+          secureFile: $(${{buildVariant.name}}_GoogleServicesInfoPlistSecureFileName)
+      - task: CopyFiles@2
+        displayName: 'Copy GoogleServices-Info.plist file to: $(appDir)/ios/SantokuApp/Supporting'
+        inputs:
+          SourceFolder: '$(Agent.TempDirectory)'
+          Contents: $(${{buildVariant.name}}_GoogleServicesInfoPlistSecureFileName)
+          TargetFolder: '$(appDir)/ios/SantokuApp/Supporting'
+      - task: Cache@2
+        displayName: Cache Pods
+        inputs:
+          key: 'pods | "$(Agent.OS)" | $(appDir)/ios/Podfile.lock'
+          restoreKeys: |
+            pods | "$(Agent.OS)"
+          path: $(appDir)/ios/Pods
+      - task: CmdLine@2
+        displayName: 'Build iOS app for ${{buildVariant.name}}'
+        inputs:
+          script: 'fastlane ios ${{buildVariant.laneName}}'
+          workingDirectory: '$(appDir)'
+      - task: CmdLine@2
+        displayName: 'Upload app to DeployGate'
+        inputs:
+          script: |
+            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.iOSAppPath}}" -F "distribution_name=$(branchName)" -F "message=$(Build.Reason) triggered build by $(Build.BuildNumber)"
+          workingDirectory: '$(appDir)'
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish Artifact'
+        inputs:
+          targetPath: '$(appDir)/ios/build'
+          artifactType: 'pipeline'
+          artifactName: '${{buildVariant.name}}.ipa'
+          parallel: true
+        condition: succeeded()
