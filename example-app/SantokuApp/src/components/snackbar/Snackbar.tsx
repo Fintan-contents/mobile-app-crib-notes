@@ -6,25 +6,62 @@ import {FullWindowOverlay} from './FullWindowOverlay';
 import CompositeAnimation = Animated.CompositeAnimation;
 
 export type SnackbarShowProps = {
+  /**
+   * Displayed message.
+   */
   message: string;
+  /**
+   * Style of message.
+   */
   messageTextStyle?: StyleProp<TextStyle>;
-  top?: number;
-  bottom?: number;
-  right?: number;
-  left?: number;
+  /**
+   * Style to adjust the look of the snackbar.
+   */
   style?: StyleProp<ViewStyle>;
-  animatedContainerStyle?: StyleProp<ViewStyle>;
+  /**
+   * Adjust the position of the snackbar style.
+   */
+  positionStyle?: StyleProp<ViewStyle>;
+  /**
+   * Button text.
+   * Placed to the right of the message.
+   */
   actionText?: string;
+  /**
+   * Function called when the user taps the button.
+   */
   actionHandler?: () => void;
+  /**
+   * Style of Button text.
+   */
   actionTextStyle?: StyleProp<TextStyle>;
+  /**
+   * Time from when the snackbar appears to when it starts to fade-out.
+   */
   autoHideDuration?: number;
+  /**
+   * Snackbar fade-in time.
+   */
   fadeInDuration?: number;
+  /**
+   * Snackbar fade-out time.
+   */
   fadeOutDuration?: number;
+  /**
+   * Fade-out time to close the previously displayed snack bar when displaying a new one.
+   * This is applied when you try to display another snackbar while a snackbar is being displayed.
+   */
   forceFadeOutDuration?: number;
 };
 
 export type SnackbarHideProps = {
+  /**
+   * Specify when to hide the snackbar.
+   */
   hide?: true;
+  /**
+   * Fade-out time when hide is specified.
+   */
   hideFadeOutDuration?: number;
 };
 
@@ -105,7 +142,7 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
 
   React.useEffect(() => {
     if (props.hide) {
-      forceFadeout(props.hideFadeOutDuration ?? props.forceFadeOutDuration);
+      forceFadeout(props.hideFadeOutDuration);
       return;
     }
     if (!props.message) {
@@ -123,10 +160,13 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
 
   const snackbarStyle = StyleSheet.flatten([styles.snackbar, props.style]);
 
-  const animatedViewStyle = StyleSheet.flatten<ViewStyle>([styles.animatedContainer, props.animatedContainerStyle]);
+  const animatedViewStyle = StyleSheet.flatten<ViewStyle>([styles.animatedContainer, props.positionStyle]);
   if (animatedViewStyle?.top === undefined && animatedViewStyle.bottom === undefined) {
     animatedViewStyle.bottom = 20;
   }
+
+  const messageTextStyle = StyleSheet.flatten([styles.messageText, props.messageTextStyle]);
+  const actionTextStyle = StyleSheet.flatten([styles.actionText, props.actionTextStyle]);
 
   return (
     <>
@@ -136,12 +176,12 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
           <Animated.View style={StyleSheet.flatten([{opacity: fadeAnim}, animatedViewStyle])}>
             <View style={snackbarStyle}>
               <View style={styles.messageContainer}>
-                <Text style={styles.messageText}>{visibleSnackbarProps.message}</Text>
+                <Text style={messageTextStyle}>{visibleSnackbarProps.message}</Text>
               </View>
               {visibleSnackbarProps.actionText && visibleSnackbarProps.actionHandler && (
                 <View style={styles.actionContainer}>
                   <TouchableOpacity onPress={visibleSnackbarProps.actionHandler}>
-                    <Text style={styles.actionText}>{visibleSnackbarProps.actionText}</Text>
+                    <Text style={actionTextStyle}>{visibleSnackbarProps.actionText}</Text>
                   </TouchableOpacity>
                 </View>
               )}
@@ -158,6 +198,7 @@ Snackbar.defaultProps = {
   fadeInDuration: 1000,
   fadeOutDuration: 1000,
   forceFadeOutDuration: 300,
+  hideFadeOutDuration: 300,
 };
 
 const styles = StyleSheet.create({

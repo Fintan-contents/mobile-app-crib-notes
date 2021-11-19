@@ -1,12 +1,28 @@
-import React from 'react';
+import {useSnackbar} from 'components/snackbar';
+import {m} from 'framework';
+import React, {useCallback} from 'react';
 
 import {SnackbarTemplate} from './SnackbarTemplate';
-import {useSnackbarDemo} from './useSnackbarDemo';
 
 const ScreenName = 'Snackbar';
 const Screen: React.FC = () => {
-  const {showSnackbar} = useSnackbarDemo();
-  return <SnackbarTemplate testID="SnackbarScreen" showSnackbar={showSnackbar} />;
+  const snackbar = useSnackbar();
+
+  const showSnackbar = useCallback(() => {
+    snackbar.show(m('app.webview.onError'));
+  }, [snackbar]);
+
+  const showSnackbarWithCloseButton = useCallback(() => {
+    snackbar.showWithCloseButton(m('app.webview.onError'));
+  }, [snackbar]);
+
+  return (
+    <SnackbarTemplate
+      testID="SnackbarScreen"
+      showSnackbar={showSnackbar}
+      showSnackbarWithCloseButton={showSnackbarWithCloseButton}
+    />
+  );
 };
 
 export const SnackbarScreen = {
