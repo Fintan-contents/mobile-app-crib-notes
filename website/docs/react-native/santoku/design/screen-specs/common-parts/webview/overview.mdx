@@ -31,7 +31,7 @@ sidebar_label: WebView
 | 番号 | 名称          | 項目種別    | 取得元               | 表示/活性条件                                 |
 |:----|:--------------|:-----------|:--------------------|:--------------------------------------------|
 | O1  | 取得したコンテンツ   | WebView    | -（※1）          | コンテンツ取得に成功した場合のみ表示             |
-| O2  | エラーメッセージ | Snackbar  | メッセージキー：`app.webview.onError`（※2） | React Native WebViewでonErrorが呼び出された、かつ親画面からプロパティ：onErrorが指定されていない場合のみ表示 |
+| O2  | エラーメッセージ | [スナックバー](/react-native/santoku/design/screen-specs/common-parts/snackbar/overview.mdx)  | メッセージキー：`app.webview.onError`（※2） | React Native WebViewでonErrorが呼び出された、かつ親画面からプロパティ：onErrorが指定されていない場合のみ表示 |
 （※1）[React Native WebViewのプロパティ](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#source)で任意のURLを指定できます。<br />
 （※2）親画面から指定されたメッセージがあれば、そちらを優先します。指定がなければデフォルトのメッセージを表示します。
 

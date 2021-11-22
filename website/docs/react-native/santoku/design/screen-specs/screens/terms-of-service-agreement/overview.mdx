@@ -39,12 +39,11 @@ TermsOfServiceAgreement
 ## 表示項目
 
 <!-- TODO 利用規約のURLが決まり次第、取得元に記載 -->
-<!-- TODO 共通部品SnackbarのPRがマージされ次第、項目種別にリンクを貼る -->
 | 番号 | 名称           | 項目種別    | 取得元               | 表示/活性条件                                 |
 |:----|:--------------|:-----------|:--------------------|:--------------------------------------------|
 | O1  | 利用規約本文     | [WebView][]（※1）| （URLが決まり次第記載） |  |
 | O2  | コンテンツ取得エラーメッセージ | ラベル | メッセージキー：`app.ネットワークエラー`<br />パラメータ：`利用規約の取得` | WebViewでonErrorが発生した場合のみ表示 |
-| O3  | 同意エラーメッセージ | Snackbar（※1）| メッセージキー：`app.terms.同意エラー` | 利用規約同意でエラーが発生した場合のみ表示 |
+| O3  | 同意エラーメッセージ | [スナックバー][]（※1）| メッセージキー：`app.terms.同意エラー` | 利用規約同意でエラーが発生した場合のみ表示 |
 （※1）共通部品内の表示条件等は、共通部品の仕様に準拠する。
 
 ## 操作項目
@@ -83,3 +82,4 @@ TermsOfServiceAgreement
 
 <!-- link定義を使う場合は以下に記載する -->
 [WebView]: /react-native/santoku/design/screen-specs/common-parts/webview/overview.mdx
+[スナックバー]: /react-native/santoku/design/screen-specs/common-parts/snackbar/overview.mdx

@@ -9,46 +9,46 @@ sidebar_label: 画面一覧
 
 ## アプリ起動
 
-### スプラッシュスクリーン
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-アプリケーション起動中にアプリのイメージを表示します。
-アカウントの状態、起動パターンによって遷移先の画面が変わります。
+import {PageList} from '../../../../../src/components';
+const overviews = [
+  {
+    title: 'スプラッシュスクリーン',
+    to: '/react-native/santoku/design/screen-specs/screens/splash-screen/overview',
+  },
+];
 
-- イベント
-   - 次の画面へ遷移
+<PageList overviews={overviews} colSize={12} />
 
-- 表示項目
-   - SplashScreen画像
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 ## 利用規約
 
-### 利用規約同意
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-ユーザに利用規約を見せ、同意を求める画面です。
-アプリの利用には、ユーザの利用規約同意が必要です。
+export const terms = [
+  {
+    title: '利用規約同意',
+    to: '/react-native/santoku/design/screen-specs/screens/terms-of-service-agreement/overview',
+  },
+];
 
-- イベント
-  - 利用規約の同意／拒否
+<PageList overviews={terms} colSize={12} />
 
-- 表示項目
-  - 利用規約（WebView）
-  - 同意ボタン
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 ## ボトムタブ
 
-表示項目に記載のタブを切り替えるための、タブバーを表示します。
-タブを切り替える時、それぞれのタブで表示している画面を維持します。（タブを切り替えてから戻ってきても、タブの初期表示画面には遷移しません）
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-<!-- TODO: ホーム画面とチーム画面の作成ができたタイミングで削除する -->
-:::caution
-ホーム画面とチーム画面は今後作成する予定のため、それぞれダミー画面を表示します。
-:::
+export const bottomtabs = [
+  {
+    title: 'ボトムタブ',
+    to: '/react-native/santoku/design/screen-specs/screens/common/bottom-tab/overview',
+  },
+];
 
-- イベント
-  - タブ切り替え
+<PageList overviews={bottomtabs} colSize={12} />
 
-- 表示項目
-  - ホームタブ
-    - 初期表示：ホーム画面
-  - チームタブ
-    - 初期表示：チーム詳細画面
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
