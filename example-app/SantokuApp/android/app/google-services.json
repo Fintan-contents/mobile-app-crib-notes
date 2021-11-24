@@ -1,0 +1,298 @@
+{
+  "project_info": {
+    "project_number": "01234567890",
+    "project_id": "dummy",
+    "storage_bucket": "jp.fintan.mobile.SantokuApp.dummy"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:012345678901:android:9e48867b8af62f8549079b",
+        "android_client_info": {
+          "package_name": "jp.fintan.mobile.SantokuApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "A-dummy-api-key-qb7dBt2Q0l58IqPa8i-BJXn"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "012345678901-sidw5laqvzk01kzyoudm1ng80cqceo1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.fintan.mobile.SantokuApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:012345678901:android:9e48867b8af62f8549079b",
+        "android_client_info": {
+          "package_name": "jp.fintan.mobile.SantokuApp.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "A-dummy-api-key-qb7dBt2Q0l58IqPa8i-BJXn"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "012345678901-sidw5laqvzk01kzyoudm1ng80cqceo1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.fintan.mobile.SantokuApp.dev"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:012345678901:android:9e48867b8af62f8549079b",
+        "android_client_info": {
+          "package_name": "jp.fintan.mobile.SantokuApp.house"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "A-dummy-api-key-qb7dBt2Q0l58IqPa8i-BJXn"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "012345678901-sidw5laqvzk01kzyoudm1ng80cqceo1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.fintan.mobile.SantokuApp.house"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:012345678901:android:9e48867b8af62f8549079b",
+        "android_client_info": {
+          "package_name": "jp.fintan.mobile.SantokuApp.dev.house"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "A-dummy-api-key-qb7dBt2Q0l58IqPa8i-BJXn"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "012345678901-sidw5laqvzk01kzyoudm1ng80cqceo1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.fintan.mobile.SantokuApp.dev.house"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:012345678901:android:9e48867b8af62f8549079b",
+        "android_client_info": {
+          "package_name": "jp.fintan.mobile.SantokuApp.debugAdvanced"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "A-dummy-api-key-qb7dBt2Q0l58IqPa8i-BJXn"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "012345678901-sidw5laqvzk01kzyoudm1ng80cqceo1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.fintan.mobile.SantokuApp.debugAdvanced"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:012345678901:android:9e48867b8af62f8549079b",
+        "android_client_info": {
+          "package_name": "jp.fintan.mobile.SantokuApp.dev.debugAdvanced"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "A-dummy-api-key-qb7dBt2Q0l58IqPa8i-BJXn"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "012345678901-sidw5laqvzk01kzyoudm1ng80cqceo1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.fintan.mobile.SantokuApp.dev.debugAdvanced"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:012345678901:android:9e48867b8af62f8549079b",
+        "android_client_info": {
+          "package_name": "jp.fintan.mobile.SantokuApp.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "A-dummy-api-key-qb7dBt2Q0l58IqPa8i-BJXn"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "012345678901-sidw5laqvzk01kzyoudm1ng80cqceo1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.fintan.mobile.SantokuApp.debug"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:012345678901:android:9e48867b8af62f8549079b",
+        "android_client_info": {
+          "package_name": "jp.fintan.mobile.SantokuApp.dev.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "A-dummy-api-key-qb7dBt2Q0l58IqPa8i-BJXn"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "012345678901-nuc7czo2nz7n2l1ob0guvy32xewi2316.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "012345678901-sidw5laqvzk01kzyoudm1ng80cqceo1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.fintan.mobile.SantokuApp.dev.debug"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

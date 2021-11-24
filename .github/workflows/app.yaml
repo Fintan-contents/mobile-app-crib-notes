@@ -3,10 +3,10 @@ name: SantokuApp
 on:
   push:
     branches:
-      - master
+      - '*'
   pull_request:
     branches:
-      - master
+      - '*'
     paths:
       - example-app/SantokuApp/**/*.js
       - example-app/SantokuApp/**/*.jsx
@@ -33,8 +33,8 @@ on:
 jobs:
   lint-and-test:
     name: Lints, Tests
-    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-10.15-Readme.md
-    runs-on: macos-10.15
+    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
+    runs-on: macos-11
     env:
       REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
@@ -43,6 +43,11 @@ jobs:
         with:
           submodules: true
           fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.0'
 
       # Cache '.npm' to speed up clean-install when package-lock.json is updated.
       # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
@@ -77,23 +82,22 @@ jobs:
           reviewdog_version: latest
 
       - name: Lint (ESLint)
-        continue-on-error: true
         run: |
           cd example-app/SantokuApp && npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name="ESLint (SantokuApp)"
 
       - name: Lint (TypeScript)
-        continue-on-error: true
+        if: always()
         run: |
           cd example-app/SantokuApp && npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (SantokuApp)"
 
       - name: Test
-        continue-on-error: true
+        if: always()
         run: |
           npm run -s test --prefix example-app/SantokuApp -- --ci --reporters=default --reporters=jest-junit --coverage
 
       - name: Archive workflow results
         uses: actions/upload-artifact@v2
-        continue-on-error: true
+        if: always()
         with:
           name: workflow-results
           path: |

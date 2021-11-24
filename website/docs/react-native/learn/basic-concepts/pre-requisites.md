@@ -21,9 +21,9 @@ Reactを学ぶにはJavaScriptの言語知識が必須です。 JavaScriptを触
 
 TypeScriptは、JavaScriptに静的型付けを追加したプログラミング言語です。 JavaScriptと上位互換性があり、静的型付けによりコード実行前にエラーを検出できます。 その性質から、開発規模が大きくなるほどその効果を発揮します。
 
-[サバイバルTypeScript](https://book.yyts.org/)は、TypeScriptを最短ルートで実務利用できることを目指したサイトです。 静的型付け言語での実装経験があれば、[ToDoアプリの実装](../todo-app.md)は進められます。
+[サバイバルTypeScript](https://book.yyts.org/)は、TypeScriptを最短ルートで実務利用できることを目指したサイトです。静的型付け言語での実装経験があれば、[ToDoアプリの実装](../todo-app.md)は進められます。
 
-実務レベルに必要な一通りの知識が必要な場合はサバイバルTypeScriptで学習しましょう。[これだけはおさえておきたいTypeScriptの機能](https://book.yyts.org/features)の見出しをみて内容がイメージできれば大丈夫です。
+実務レベルに必要な一通りの知識が必要な場合はサバイバルTypeScriptで学習しましょう。[読んで学ぶTypeScript](https://book.yyts.org/reference)の見出しをみて内容がイメージできれば大丈夫です。
 
 ### React公式サイト
 

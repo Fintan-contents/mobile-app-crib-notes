@@ -23,6 +23,24 @@ title: エラーの発生箇所と処理方法
 Firebase Crashlyticsにログを送信するタイミングは、アプリを再起動した時になります。即座にログが送信されないことに注意してください。
 :::
 
+### Firebase Crashlyticsの設定
+
+Firebase Crashlyticsの動作設定は、設定ファイルのFirebase.jsonで以下のように記述することで設定できます。
+
+```json title='Firebase.json'
+{
+  "react-native": {
+    "crashlytics_debug_enabled": false,
+    "crashlytics_auto_collection_enabled": true,
+    "crashlytics_ndk_enabled": true,
+    "crashlytics_is_error_generation_on_js_crash_enabled": false,
+    "crashlytics_javascript_exception_handler_chaining_enabled": true
+  }
+}
+```
+
+各パラメーターの定義と効果は、[Crashlytics - Installation and getting started with Crashlytics](https://rnfirebase.io/crashlytics/usage) を参照ください。
+
 ## 個別にエラーを処理する方法
 
 ### Reactコンポーネントのエラー処理

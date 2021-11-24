@@ -1,0 +1,31 @@
+---
+title: Androidアプリの配布用ビルドの設定
+---
+
+Androidアプリの配布用ビルドには、ビルドタイプ`Release`と`ReleaseInHouse`を利用します。
+
+:::note
+ビルドタイプなど、ビルド設定の概要について理解が必要な場合は[ビルド](../build-configuration.mdx)を参照してください。
+:::
+
+ビルドタイプ`Release`と`ReleaseInHouse`には、アプリの配布のために必要なビルドの設定が含まれています。そのため、リポジトリにコミットされているリソースだけでは不足しており、以下のリソースを別途入手する必要があります。
+
+* Google Play用アップロード鍵（`Release`）
+* インハウス用共有鍵（`ReleaseInHouse`）
+
+入手したアップロード鍵、DeployGate配布用鍵を任意のディレクトリに配置してください。その上で、`~/.gradle/gradle.properties`で次のように、署名に利用する鍵を設定してください。
+
+```properties
+SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=<path/to/in-house.keystore>
+SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=*****
+SANTOKU_APP_IN_HOUSE_KEY_ALIAS=*****
+SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=*****
+
+SANTOKU_APP_UPLOAD_KEYSTORE_FILE=<path/to/upload.keystore>
+SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD=*****
+SANTOKU_APP_UPLOAD_KEY_ALIAS=*****
+SANTOKU_APP_UPLOAD_KEY_PASSWORD=*****
+```
+
+* アップロード鍵やインハウス用共有鍵を含むキーストアファイルとパスワードなどの設定値は、別途入手してください。
+* `SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE`、`SANTOKU_APP_UPLOAD_KEYSTORE_FILE`には入手したキーストアファイルへのパスを設定します。`android/app/build.gradle`ファイルからの相対パスもしくは絶対パスを設定してください。

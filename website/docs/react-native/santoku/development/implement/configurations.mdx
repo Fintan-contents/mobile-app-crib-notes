@@ -1,0 +1,41 @@
+---
+title: 環境設定値の管理
+---
+
+このアプリケーションでは、[react-native-config](https://github.com/luggit/react-native-config)を使用して環境ごとに切り替えたい値を定義しています。
+
+環境設定値は、プロダクトフレーバーごとに以下のファイルで管理しています。
+
+- DevSantokuApp: `.env.development`
+- SantokuApp: `.env.production`
+
+プロダクトフレーバーの詳細については、[ビルド - プロダクトフレーバー](../build-configuration/product-flavor-configurations.mdx)を参照してください。
+
+## 環境設定値の定義
+
+プロダクトフレーバーごとの環境設定ファイルに環境設定値を追加します。
+
+```text title=".env.[development/production]"
+SANTOKU_APP_BACKEND_API_URI=http://localhost:9080/api
+```
+
+次に、`src/framework/config/AppConfig.ts`に上記で設定した値を取得するコードを追加します。
+
+```diff jsx title="src/framework/config/AppConfig.ts"
+  export abstract class AppConfig {
+    /* ～省略～ */
++   static get santokuAppBackendApiUri(): string {
++     return Config.SANTOKU_APP_BACKEND_API_URI;
++   }
+  }
+```
+
+## 環境設定値の取得
+
+環境設定値を取得する場合は、`src/framework/config/AppConfig.ts`を使用します。
+
+```typescript title="環境設定値を取得する方法"
+import {AppConfig} from 'framework';
+
+console.log(AppConfig.santokuAppBackendApiUri);
+```

@@ -12,7 +12,7 @@ title: 商標について
 - 「Apple」「iCloud」「Safari」「Keychain」「iOS」「iPhone」「Mac」「macOS」「Xcode」「App Store」は、米国およびその他の国で登録された Apple Inc. の商標です。<!-- textlint-enable -->  
   ※iPhone商標は、アイホン株式会社のライセンスに基づき使用されています。  
   ※iOS商標は、 Cisco Systems, Inc. のライセンスに基づき使用されています。
-- 「Google Chrome」「Android」「Flutter」「Firebase」は、 Google LLCの登録商標です。
+- 「Google Chrome」「Android」「Flutter」「Firebase」「Google Play」は、 Google LLCの登録商標です。
 <!-- textlint-disable ja-technical-writing/sentence-length-->
 - 「Azure」「Windows」は、 Microsoft Corporationの米国およびその他の国におけるMicrosoft Corporationおよび/またはその関連会社の登録商標または商標です。
 <!-- textlint-enable ja-technical-writing/sentence-length-->
