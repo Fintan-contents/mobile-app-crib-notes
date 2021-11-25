@@ -47,5 +47,7 @@
 	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDefault</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Allow DevSantokuApp to use FaceID</string>
 </dict>
 </plist>

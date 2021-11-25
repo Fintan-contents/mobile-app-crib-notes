@@ -10,6 +10,7 @@ import {ConfigScreen} from './config';
 import {ErrorCaseScreen} from './error';
 import {AppInfoScreen} from './info';
 import {InstructionsScreen} from './instructions';
+import {LocalAuthenticationScreen} from './local-authn';
 import {LogScreen} from './log';
 import {MessageScreen} from './message';
 import {SnackbarScreen} from './snackbar';
@@ -50,6 +51,10 @@ const demoScreenList = [
   {
     title: 'Snackbar',
     to: SnackbarScreen.name,
+  },
+  {
+    title: 'Local Authentication',
+    to: LocalAuthenticationScreen.name,
   },
 ];
 

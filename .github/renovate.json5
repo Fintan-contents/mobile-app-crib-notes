@@ -19,6 +19,7 @@
         '@react-native-community/masked-view',
         'expo',
         'expo-keep-awake',
+        'expo-local-authentication',
         'expo-splash-screen',
         'expo-updates',
         'expo-random',
