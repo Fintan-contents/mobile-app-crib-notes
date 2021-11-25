@@ -1,5 +1,6 @@
 import {Ionicons, MaterialIcons} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useInitializeContext} from 'components/initialize';
 import React from 'react';
 
 import {HomeStackNav} from './HomeStackNav';
@@ -9,8 +10,9 @@ const nav = createBottomTabNavigator();
 
 const name = 'MainTabNav';
 const Screen: React.FC = () => {
+  const {navigatorOptions} = useInitializeContext();
   return (
-    <nav.Navigator initialRouteName={HomeStackNav.name}>
+    <nav.Navigator {...navigatorOptions[name]}>
       <nav.Screen
         {...HomeStackNav}
         options={{

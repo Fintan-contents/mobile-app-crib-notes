@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TermsOfServiceAgreement スプラッシュスクリーンを閉じるのに失敗しても何もしないこと 1`] = `
+exports[`TermsOfServiceAgreement マウントされたときに正常にレンダリングされること 1`] = `
 <View
   style={
     Object {

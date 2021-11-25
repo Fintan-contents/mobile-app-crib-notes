@@ -1,4 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useInitializeContext} from 'components/initialize';
 import React from 'react';
 
 import {MainTabNav} from './MainTabNav';
@@ -7,8 +8,10 @@ const nav = createNativeStackNavigator();
 
 const name = 'AuthenticatedStackNav';
 const Screen: React.FC = () => {
+  const {navigatorOptions} = useInitializeContext();
+
   return (
-    <nav.Navigator initialRouteName={MainTabNav.name}>
+    <nav.Navigator {...navigatorOptions[name]}>
       <nav.Screen {...MainTabNav} />
     </nav.Navigator>
   );

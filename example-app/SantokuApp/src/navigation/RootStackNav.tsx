@@ -1,4 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useInitializeContext} from 'components/initialize';
 import React from 'react';
 import {TermsOfServiceAgreementScreen} from 'screens';
 
@@ -6,16 +7,18 @@ import {AuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 
 const nav = createNativeStackNavigator();
-export const RootStackNav: React.FC = () => {
+const name = 'RootStackNav';
+export const RootStackNav: React.FC = (props) => {
+  const {navigatorOptions} = useInitializeContext();
   return (
     <nav.Navigator
-      initialRouteName={TermsOfServiceAgreementScreen.name}
       screenOptions={{
         headerShown: false,
-      }}>
-      {__DEV__ && <nav.Screen {...DemoStackNav} />}
-      <nav.Screen {...AuthenticatedStackNav} />
+      }}
+      {...navigatorOptions[name]}>
       <nav.Screen {...TermsOfServiceAgreementScreen} />
+      <nav.Screen {...AuthenticatedStackNav} />
+      {__DEV__ && <nav.Screen {...DemoStackNav} />}
     </nav.Navigator>
   );
 };

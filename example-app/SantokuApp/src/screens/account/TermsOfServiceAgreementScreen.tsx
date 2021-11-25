@@ -1,8 +1,7 @@
 import {Button} from 'components/button/Button';
 import {WebView} from 'components/webview/WebView';
-import * as SplashScreen from 'expo-splash-screen';
 import {m, AppConfig} from 'framework';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 import {WebView as RNWebView} from 'react-native-webview';
@@ -23,18 +22,6 @@ const Screen: React.FC = () => {
   const onReload = useCallback(() => {
     setIsWebViewError(false);
     webViewRef.current?.reload();
-  }, []);
-
-  // TODO: 本来は起動直後の初期化処理完了タイミングに持っていくべきなので、初期化処理実装時に併せて対応する
-  useEffect(() => {
-    // スプラッシュスクリーンを閉じる前に100ms程度は待たないと、コンポーネントのレンダリングが完了せず画面が一瞬白くなってしまいます。
-    // expo-app-loadingでも200ms待っているので、ここでも200ms待つようにしています。
-    // cf: https://github.com/expo/expo/blob/sdk-41/packages/expo-app-loading/src/AppLoadingNativeWrapper.tsx#L27
-    setTimeout(() => {
-      SplashScreen.hideAsync().catch(() => {
-        /* Ignore error */
-      });
-    }, 200);
   }, []);
 
   return (
