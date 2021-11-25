@@ -9,3 +9,4 @@ export * from './snackbar';
 export * from './local-authn';
 export * from './DemoScreen';
 export * from './button';
+export * from './authentication';

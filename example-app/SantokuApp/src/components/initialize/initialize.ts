@@ -3,9 +3,7 @@ import type crashlyticsModule from '@react-native-firebase/crashlytics';
 import {activateKeepAwake} from 'expo-keep-awake';
 import * as SplashScreen from 'expo-splash-screen';
 
-import {BundledMessagesLoader, loadMessages} from '../../framework';
-import {firebaseConfig} from '../../framework/firebase';
-import {launchedId} from '../../framework/utilities/id';
+import {BundledMessagesLoader, firebaseConfig, launchedId, loadMessages} from '../../framework';
 
 type TermsAgreement = {
   hasAgreedValidTermsOfService: boolean;

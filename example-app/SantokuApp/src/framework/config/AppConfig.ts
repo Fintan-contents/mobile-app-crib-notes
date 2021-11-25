@@ -25,4 +25,8 @@ export abstract class AppConfig {
   static get termsUrl(): string {
     return Config.TERMS_URL;
   }
+
+  static get santokuAppBackendUrl(): string {
+    return Config.SANTOKU_APP_BACKEND_URL;
+  }
 }
