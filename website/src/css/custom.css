@@ -109,7 +109,7 @@
  * Header
  *****************************************************************************/
 .header-github-link:hover {
-  opacity: 60%;
+  opacity: 0.6;
 }
 
 .header-github-link::before {
