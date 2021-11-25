@@ -252,6 +252,7 @@ module.exports = {
             'react-native/santoku/requirements/non-functional/security',
             'react-native/santoku/requirements/non-functional/test-outline',
             'react-native/santoku/requirements/non-functional/operation',
+            'react-native/santoku/requirements/non-functional/maintenance',
             'react-native/santoku/requirements/non-functional/other',
           ],
         },
