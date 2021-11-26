@@ -44,7 +44,7 @@
       <dependency>
         <groupId>com.nablarch.profile</groupId>
         <artifactId>nablarch-bom</artifactId>
-        <version>5u18</version>
+        <version>5u20</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
