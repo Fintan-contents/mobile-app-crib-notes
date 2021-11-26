@@ -154,22 +154,6 @@ exports[`App マウントされたときに正常にレンダリングされる�
             }
           >
             <View
-              accessibilityRole="button"
-              accessibilityState={
-                Object {
-                  "busy": false,
-                  "disabled": false,
-                }
-              }
-              accessible={true}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
               style={
                 Array [
                   Object {
@@ -186,7 +170,6 @@ exports[`App マウントされたときに正常にレンダリングされる�
                   false,
                 ]
               }
-              testID="goToDemoButton"
             >
               <View
                 accessibilityRole="button"
