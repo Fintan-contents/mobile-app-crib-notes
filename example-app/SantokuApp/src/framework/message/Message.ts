@@ -61,7 +61,7 @@ function message(key: MessageKey, ...options: string[]): string {
  */
 function format(message: string, options: string[]): string {
   return options.reduce((message, option, index) => {
-    return message.replace(`{${index}}`, option);
+    return message.replace(new RegExp(`\\{${index}\\}`, 'g'), option);
   }, message);
 }
 
