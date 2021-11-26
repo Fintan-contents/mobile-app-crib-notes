@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.nablarch.archetype</groupId>
     <artifactId>nablarch-archetype-parent</artifactId>
-    <version>5u18</version>
+    <version>5u20</version>
   </parent>
 
   <artifactId>santoku-app-backend</artifactId>
