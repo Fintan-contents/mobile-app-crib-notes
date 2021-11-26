@@ -17,7 +17,7 @@
 
   <properties>
     <java.version>11</java.version>
-    <jetty.version>9.4.19.v20190610</jetty.version>
+    <jetty.version>9.4.44.v20210927</jetty.version>
     <version.plugins.failsafe>2.22.2</version.plugins.failsafe>
     <version.plugins.jib>3.1.4</version.plugins.jib>
     <!--
