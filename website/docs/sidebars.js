@@ -224,6 +224,41 @@ module.exports = {
       id: 'react-native/santoku',
     },
     {
+      type: 'doc',
+      id: 'react-native/santoku/glossary',
+    },
+    {
+      type: 'category',
+      label: 'Requirements',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/requirements',
+        },
+        {
+          type: 'category',
+          label: '機能要件',
+          items: ['react-native/santoku/requirements/functional/overview'],
+        },
+        {
+          type: 'category',
+          label: '非機能要件',
+          items: [
+            'react-native/santoku/requirements/non-functional/overview',
+            'react-native/santoku/requirements/non-functional/usability',
+            'react-native/santoku/requirements/non-functional/system-method',
+            'react-native/santoku/requirements/non-functional/performance',
+            'react-native/santoku/requirements/non-functional/compatibility',
+            'react-native/santoku/requirements/non-functional/security',
+            'react-native/santoku/requirements/non-functional/test-outline',
+            'react-native/santoku/requirements/non-functional/operation',
+            'react-native/santoku/requirements/non-functional/maintenance',
+            'react-native/santoku/requirements/non-functional/other',
+          ],
+        },
+      ],
+    },
+    {
       type: 'category',
       label: 'Application Architecture',
       items: [
@@ -273,8 +308,89 @@ module.exports = {
             'react-native/santoku/application-architecture/error-handling/overview',
             'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
             'react-native/santoku/application-architecture/http-api/http-api-error-handling',
-            'react-native/santoku/application-architecture/webview/webview-error-handling',
           ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Design',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/screen-list/overview',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/screen-transitions/overview',
+        },
+        {
+          type: 'category',
+          label: '画面設計',
+          items: [
+            {
+              type: 'doc',
+              id: 'react-native/santoku/design/screen-specs/overview',
+            },
+            {
+              type: 'doc',
+              id: 'react-native/santoku/design/screen-specs/basic-policy',
+            },
+            {
+              type: 'category',
+              label: '画面設計における定義事項',
+              items: [
+                'react-native/santoku/design/screen-specs/definitions/overview',
+                {
+                  type: 'category',
+                  label: '画面種別',
+                  items: [
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/overview',
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/screen',
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/form-sheet',
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/overlay',
+                  ],
+                },
+              ],
+            },
+            {
+              type: 'category',
+              label: '画面',
+              items: [
+                'react-native/santoku/design/screen-specs/screens/overview',
+                {
+                  type: 'category',
+                  label: '共通部',
+                  items: ['react-native/santoku/design/screen-specs/screens/common/bottom-tab/overview'],
+                },
+                'react-native/santoku/design/screen-specs/screens/splash-screen/overview',
+                'react-native/santoku/design/screen-specs/screens/terms-of-service-agreement/overview',
+              ],
+            },
+            {
+              type: 'category',
+              label: '共通部品',
+              items: [
+                'react-native/santoku/design/screen-specs/common-parts/overview',
+                'react-native/santoku/design/screen-specs/common-parts/button/overview',
+                'react-native/santoku/design/screen-specs/common-parts/snackbar/overview',
+                'react-native/santoku/design/screen-specs/common-parts/webview/overview',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/message-list/overview',
+        },
+        {
+          type: 'category',
+          label: 'コンテキスト設計',
+          items: ['react-native/santoku/design/context/overview', 'react-native/santoku/design/context/theme'],
         },
       ],
     },
@@ -354,6 +470,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-004-deep-link',
         'react-native/santoku/decisions/adr-005-message',
         'react-native/santoku/decisions/adr-006-logging',
+        'react-native/santoku/decisions/adr-007-auth',
       ],
     },
   ],

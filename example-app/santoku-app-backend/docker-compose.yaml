@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:11
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - 5432:5432
+networks:
+  default:
+    name: santoku-app-network

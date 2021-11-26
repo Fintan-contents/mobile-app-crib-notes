@@ -91,3 +91,21 @@ bundle exec fastlane <Platform: ios/android> <Lane>
 ```
 
 用意してあるレーンは、`bundle exec fastlane lanes`を実行すると確認できます。レーンの詳細が確認したい場合は、[Fastfile](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/fastlane/Fastfile)を参照してください。
+
+## CI/CD環境の構築
+
+このアプリを開発する際に構築したCI/CD環境について紹介しています。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+export const cicd = [
+  {
+    title: 'CI/CD環境の構築',
+    to: '/react-native/santoku/development/development-environment/ci-cd',
+    summary: <>このアプリを開発する際に構築したCI/CD環境の構成例です。</>,
+  },
+];
+
+<PageList overviews={cicd} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->

@@ -3,5 +3,8 @@
   This file was created by '@expo/configure-splash-screen' and some of it's content shouldn't be modified by hand
 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:drawable="@color/splashscreen_background"/>
+  <item android:drawable="@color/splashscreen_background" />
+  <item android:drawable="@drawable/splashscreen_footer_background" android:gravity="bottom|fill_horizontal" />
+  <item android:drawable="@drawable/splashscreen_foreground" android:gravity="center" />
+  <item android:drawable="@drawable/splashscreen_footer" android:gravity="right|bottom" />
 </layer-list>

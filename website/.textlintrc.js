@@ -18,7 +18,14 @@ module.exports = {
       },
       'max-kanji-continuous-len': {
         max: 6,
-        allow: ['業務委託先社員'],
+        allow: [
+          '業務委託先社員',
+          '不具合発生状況',
+          '後方互換性評価',
+          '非機能要件定義',
+          '非機能要件評価',
+          '内閣府消費動向調査',
+        ],
       },
     },
     'preset-jtf-style': {

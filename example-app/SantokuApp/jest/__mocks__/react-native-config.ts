@@ -8,4 +8,7 @@ export abstract class Config {
   static get PROVISIONING_PROFILE_FLAVOR() {
     return 'Not Available';
   }
+  static get TERMS_URL() {
+    return 'https://www.tis.co.jp/termsofuse/';
+  }
 }

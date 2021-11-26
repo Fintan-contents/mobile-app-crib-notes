@@ -40,5 +40,7 @@
 	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDefault</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Allow SantokuApp to use FaceID</string>
 </dict>
 </plist>

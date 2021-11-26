@@ -14,7 +14,7 @@
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"**/*.mdx\" \"#node_modules\" \"#build\"",
     "lint:tsc": "tsc --noEmit",
     "lint:css": "stylelint \"src/**/*.css\"",
-    "lint:es": "eslint --ext .jsx,.js,.tsx,.ts src",
+    "lint:es": "eslint --ext .jsx,.js,.tsx,.ts src docs",
     "fix": "run-s --print-name --continue-on-error fix:*",
     "fix:text": "textlint --fix \"*.md\" \"*.mdx\" \"!(node_modules|build)/**/*.md\" \"!(node_modules|build)/**/*.mdx\"",
     "fix:md": "markdownlint-cli2-fix \"**/*.md\" \"**/*.mdx\" \"#node_modules\" \"#build\"",
@@ -33,6 +33,7 @@
     "medium-zoom": "^1.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "redocusaurus": "^0.4.6",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {

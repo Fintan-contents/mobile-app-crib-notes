@@ -1,0 +1,23 @@
+<FindBugsFilter>
+  <Match>
+    <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD"/>
+    <Or>
+      <Class name="~jp\.fintan\.mobile\.santokuapp\.presentation\..*\$.*Response"/>
+    </Or>
+  </Match>
+
+  <!-- 配列の暴露は、業務アプリでは問題にならないケースが殆んどの為チェック対象外 -->
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP"/>
+  </Match>
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP2"/>
+  </Match>
+
+  <!-- try-with-resourcesで誤検知されるため対象外とする -->
+  <!-- 冗長なnullチェックを指摘するものなので、致命的な問題には繋がらないと判断 -->
+  <Match>
+    <Bug pattern="RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE"/>
+  </Match>
+</FindBugsFilter>
+

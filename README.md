@@ -14,4 +14,8 @@
 
 ドキュメントは、<a rel="license" href="https://fintan.jp/?page_id=201" target="_blank">Fintan コンテンツ 使用許諾条項</a>の下に提供されており、コードサンプルは<a rel="license" href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache 2.0 License</a>の下に提供されています。
 
-<!-- textlint-enable -->
+また、一部でMIT Licenseのソースコードを利用させていただいています。
+
+* [extensible-custom-error](https://github.com/necojackarc/extensible-custom-error)
+  * ライセンス： https://github.com/necojackarc/extensible-custom-error/blob/52d56448d9f535835a9ffbc7e447b951555c08c2/README.md
+  * 利用箇所： [ApplicationError.ts](example-app/SantokuApp/src/framework/error/ApplicationError.ts)

@@ -18,7 +18,10 @@
       matchPackageNames: [
         '@react-native-community/masked-view',
         'expo',
+        'expo-crypto',
         'expo-keep-awake',
+        'expo-local-authentication',
+        'expo-secure-store',
         'expo-splash-screen',
         'expo-updates',
         'expo-random',

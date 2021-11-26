@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://tis.co.jp/nablarch/component-configuration"
+  xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <import file="rest-component-configuration.xml" />
+
+  <!-- テスティングフレームワークの設定 -->
+  <import file="nablarch/test/rest-request-test.xml" />
+
+  <!-- テスト用HttpServerにJetty9を定義する -->
+  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty9"/>
+
+  <!-- テスティングフレームワークで使用するリクエスト・レスポンスプロセッサ -->
+  <component name="defaultProcessor" class="nablarch.test.core.http.ComplexRequestResponseProcessor">
+    <property name="processors">
+      <list>
+        <component class="nablarch.test.core.http.NablarchSIDManager" />
+        <component class="jp.fintan.mobile.santokuapp.presentation.restapi.CsrfTokenManager" />
+      </list>
+    </property>
+  </component>
+
+</component-configuration>
