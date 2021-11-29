@@ -2,6 +2,18 @@
 
   <uses-permission android:name="android.permission.INTERNET"/>
 
+  <queries>
+    <!--
+      Support checking for http(s) links via the Linking API
+      https://developer.android.com/training/package-visibility/use-cases#check-browser-available
+    -->
+    <intent>
+      <action android:name="android.intent.action.VIEW"/>
+      <category android:name="android.intent.category.BROWSABLE"/>
+      <data android:scheme="https"/>
+    </intent>
+  </queries>
+
   <application
     android:name=".MainApplication"
     android:label="@string/APP_NAME_HOME"
@@ -10,9 +22,6 @@
     android:allowBackup="false"
     android:theme="@style/AppTheme"
   >
-    <meta-data android:name="expo.modules.updates.ENABLED" android:value="false"/>
-    <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="YOUR-APP-URL-HERE"/>
-    <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="YOUR-APP-SDK-VERSION-HERE"/>
     <activity
       android:name=".MainActivity"
       android:theme="@style/Theme.App.SplashScreen"

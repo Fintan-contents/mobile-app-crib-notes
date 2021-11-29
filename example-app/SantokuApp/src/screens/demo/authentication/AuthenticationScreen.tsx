@@ -20,7 +20,7 @@ const Screen = () => {
         <Input
           placeholder="アカウントIDを入力してください"
           value={accountIdInput}
-          onChangeText={(value) => setAccountIdInput(value)}
+          onChangeText={value => setAccountIdInput(value)}
         />
         <Button onPress={changeAccount} title="アカウント切り替え" />
       </View>

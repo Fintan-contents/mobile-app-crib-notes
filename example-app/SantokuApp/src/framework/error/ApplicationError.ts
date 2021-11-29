@@ -34,7 +34,7 @@ const mergeStackTrace = (stackTraceToMerge?: string, baseStackTrace?: string) =>
 
   const newEntries: string[] = [];
 
-  entriesToMerge?.forEach((entry) => {
+  entriesToMerge?.forEach(entry => {
     if (baseEntries.includes(entry)) {
       return;
     }

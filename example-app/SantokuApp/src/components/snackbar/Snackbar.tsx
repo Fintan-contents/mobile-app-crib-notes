@@ -67,7 +67,7 @@ export type SnackbarHideProps = {
 
 export type SnackbarProps = SnackbarShowProps & SnackbarHideProps;
 
-export const Snackbar: React.FC<SnackbarProps> = (props) => {
+export const Snackbar: React.FC<SnackbarProps> = props => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const fadeInAnimationRef = useRef<CompositeAnimation>();
   const fadeOutAnimationRef = useRef<CompositeAnimation>();
@@ -82,7 +82,7 @@ export const Snackbar: React.FC<SnackbarProps> = (props) => {
     ) => {
       const animation = Animated.timing(fadeAnim, config);
       animationRef.current = animation;
-      animation.start((result) => {
+      animation.start(result => {
         animationRef.current = undefined;
         if (callback) {
           callback(result);

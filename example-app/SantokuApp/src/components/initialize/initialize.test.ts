@@ -20,7 +20,7 @@ describe('hideSplashScreen', () => {
   // rejectされたときにテストを失敗させたいが、明示的にタイマーを進めてテストしたいので、awaitやexpect().resolvesは使えない。
   // 代替手段として、catch内でdone.failを呼び出すことでテストを失敗させる。
   // eslint-disable-next-line jest/no-done-callback
-  it('200ms経ってからスプラッシュスクリーンが閉じられること', async (done) => {
+  it('200ms経ってからスプラッシュスクリーンが閉じられること', async done => {
     hideSplashScreen().catch(() => {
       done.fail(`hideSplashScreen have been rejected, but it shouldn't.`);
     });

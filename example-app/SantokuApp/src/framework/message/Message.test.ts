@@ -9,7 +9,7 @@ describe('Message message', () => {
   test('オプションが存在しないメッセージの取得を検証', async () => {
     await loadMessages({
       load: async () => {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
           // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
           resolve({'msg.error.network': 'network error.'});
         });
@@ -21,7 +21,7 @@ describe('Message message', () => {
   test('オプションが存在するメッセージの取得を検証', async () => {
     await loadMessages({
       load: async () => {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
           resolve({
             // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
             'validation.required': '{0}を入力してください。',
@@ -41,7 +41,7 @@ describe('Message message', () => {
   test('指定されたメッセージキーに該当するメッセージが存在しない場合の検証', async () => {
     await loadMessages({
       load: async () => {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
           // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
           resolve({'msg.error.network': 'network error.'});
         });

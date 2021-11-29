@@ -50,7 +50,7 @@ export const hideSplashScreen = async () => {
   // スプラッシュスクリーンを閉じる前に100ms程度は待たないと、コンポーネントのレンダリングが完了せず画面が一瞬白くなってしまいます。
   // expo-app-loadingでも200ms待っているので、ここでも200ms待つようにしています。
   // cf: https://github.com/expo/expo/blob/sdk-41/packages/expo-app-loading/src/AppLoadingNativeWrapper.tsx#L27
-  await new Promise((resolve) => setTimeout(resolve, 200));
+  await new Promise(resolve => setTimeout(resolve, 200));
   try {
     await SplashScreen.hideAsync();
   } catch (e) {
@@ -124,7 +124,7 @@ const getInitialNavigatorOptions = (initialData: InitialData): NavigatorOptions 
 
 // OpenAPI generatorで生成されたコードを導入するまでの一時的なMock
 export const getAccountMeTerms = async () => {
-  return await new Promise<TermsAgreement>((resolve) =>
+  return await new Promise<TermsAgreement>(resolve =>
     setTimeout(
       () =>
         resolve({

@@ -8,7 +8,7 @@ import {DemoStackNav} from './DemoStackNav';
 
 const nav = createNativeStackNavigator();
 const name = 'RootStackNav';
-export const RootStackNav: React.FC = (props) => {
+export const RootStackNav: React.FC = () => {
   const {navigatorOptions} = useInitializeContext();
   return (
     <nav.Navigator

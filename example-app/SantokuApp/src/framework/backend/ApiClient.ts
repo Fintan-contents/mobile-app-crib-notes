@@ -28,8 +28,8 @@ export class ApiResourceAccessError extends ApiError {}
 
 const instance = axios.create();
 instance.interceptors.response.use(
-  (response) => response,
-  (error) => {
+  response => response,
+  error => {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError<ErrorResponse>;
       if (axiosError.response) {

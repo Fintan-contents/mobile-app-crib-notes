@@ -34,7 +34,7 @@ export const WithInitializeContext: React.FC = ({children}) => {
         setInitialized(true);
         hideSplashScreen().catch(() => {});
       })
-      .catch((e) => {
+      .catch(e => {
         setError(e);
       });
   }, []);

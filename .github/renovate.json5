@@ -16,7 +16,7 @@
       groupName: 'Expo upgrade',
       enabled: false,
       matchPackageNames: [
-        '@react-native-community/masked-view',
+        '@react-native-masked-view/masked-view',
         'expo',
         'expo-crypto',
         'expo-keep-awake',
@@ -33,6 +33,7 @@
         'react-native-safe-area-context',
         'react-native-screens',
         'react-native-unimodules',
+        'react-native-webview',
         'react-native-web',
         '@babel/core',
         '@types/react',
@@ -49,7 +50,7 @@
       enabled: false,
       matchPackageNames: [
         '@types/jest', // jest-expo -> jest
-        'react-test-renderer', // jest-expo -> react-test-renderer
+        'react-test-renderer', // react, jest-expo -> react-test-renderer
         'jest',
         'gradle', // expo-template-bare-typescript
         'com.android.tools.build:gradle', // expo-template-bare-typescript
