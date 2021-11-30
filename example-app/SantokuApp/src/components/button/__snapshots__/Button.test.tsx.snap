@@ -1,0 +1,511 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Buttonが正常にrenderできることを確認 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderRadius": 3,
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 3,
+      },
+      Object {
+        "borderRadius": 8,
+        "width": 90,
+      },
+      Object {
+        "backgroundColor": "#fff",
+        "overflow": "visible",
+        "shadowColor": "rgba(0,0,0, .4)",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 1,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 1,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "busy": false,
+        "disabled": false,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#2089dc",
+          "borderColor": "#2089dc",
+          "borderRadius": 8,
+          "borderWidth": 0,
+          "flexDirection": "row",
+          "height": 50,
+          "justifyContent": "center",
+          "padding": 8,
+          "width": 90,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 18,
+            "paddingVertical": 1,
+            "textAlign": "center",
+          }
+        }
+      >
+        ボタン
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Button Buttonのprops（buttonStyle / containerStyle）が指定通りrenderに反映されることを確認 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderRadius": 3,
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 3,
+      },
+      Object {
+        "borderRadius": 8,
+        "width": 200,
+      },
+      Object {
+        "backgroundColor": "#fff",
+        "overflow": "visible",
+        "shadowColor": "rgba(0,0,0, .4)",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 1,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 1,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "busy": false,
+        "disabled": false,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "red",
+          "borderColor": "#2089dc",
+          "borderRadius": 8,
+          "borderWidth": 0,
+          "flexDirection": "row",
+          "height": 50,
+          "justifyContent": "center",
+          "padding": 8,
+          "width": 150,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 18,
+            "paddingVertical": 1,
+            "textAlign": "center",
+          }
+        }
+      >
+        ボタン
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Button Buttonのサイズ指定がrenderに反映されることを確認: size full 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderRadius": 3,
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 3,
+      },
+      Object {
+        "borderRadius": 8,
+        "width": "100%",
+      },
+      Object {
+        "backgroundColor": "#fff",
+        "overflow": "visible",
+        "shadowColor": "rgba(0,0,0, .4)",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 1,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 1,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "busy": false,
+        "disabled": false,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#2089dc",
+          "borderColor": "#2089dc",
+          "borderRadius": 8,
+          "borderWidth": 0,
+          "flexDirection": "row",
+          "height": 50,
+          "justifyContent": "center",
+          "padding": 8,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 18,
+            "paddingVertical": 1,
+            "textAlign": "center",
+          }
+        }
+      >
+        ボタン
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Button Buttonのサイズ指定がrenderに反映されることを確認: size large 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderRadius": 3,
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 3,
+      },
+      Object {
+        "borderRadius": 8,
+        "width": 260,
+      },
+      Object {
+        "backgroundColor": "#fff",
+        "overflow": "visible",
+        "shadowColor": "rgba(0,0,0, .4)",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 1,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 1,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "busy": false,
+        "disabled": false,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#2089dc",
+          "borderColor": "#2089dc",
+          "borderRadius": 8,
+          "borderWidth": 0,
+          "flexDirection": "row",
+          "height": 50,
+          "justifyContent": "center",
+          "padding": 8,
+          "width": 260,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 18,
+            "paddingVertical": 1,
+            "textAlign": "center",
+          }
+        }
+      >
+        ボタン
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Button Buttonのサイズ指定がrenderに反映されることを確認: size middle 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderRadius": 3,
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 3,
+      },
+      Object {
+        "borderRadius": 8,
+        "width": 160,
+      },
+      Object {
+        "backgroundColor": "#fff",
+        "overflow": "visible",
+        "shadowColor": "rgba(0,0,0, .4)",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 1,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 1,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "busy": false,
+        "disabled": false,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#2089dc",
+          "borderColor": "#2089dc",
+          "borderRadius": 8,
+          "borderWidth": 0,
+          "flexDirection": "row",
+          "height": 50,
+          "justifyContent": "center",
+          "padding": 8,
+          "width": 160,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 18,
+            "paddingVertical": 1,
+            "textAlign": "center",
+          }
+        }
+      >
+        ボタン
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Button Buttonのサイズ指定がrenderに反映されることを確認: size small 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "borderRadius": 3,
+        "overflow": "hidden",
+      },
+      Object {
+        "borderRadius": 3,
+      },
+      Object {
+        "borderRadius": 8,
+        "width": 90,
+      },
+      Object {
+        "backgroundColor": "#fff",
+        "overflow": "visible",
+        "shadowColor": "rgba(0,0,0, .4)",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 1,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 1,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "busy": false,
+        "disabled": false,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#2089dc",
+          "borderColor": "#2089dc",
+          "borderRadius": 8,
+          "borderWidth": 0,
+          "flexDirection": "row",
+          "height": 50,
+          "justifyContent": "center",
+          "padding": 8,
+          "width": 90,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 18,
+            "paddingVertical": 1,
+            "textAlign": "center",
+          }
+        }
+      >
+        ボタン
+      </Text>
+    </View>
+  </View>
+</View>
+`;

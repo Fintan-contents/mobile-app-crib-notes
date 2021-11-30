@@ -7,7 +7,7 @@ export const FullWindowOverlay = (props: {children: React.ReactNode}) => {
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const RNSFullWindowOverlay = require('react-native-screens').FullWindowOverlay as typeof View;
-    return <RNSFullWindowOverlay>{props.children}</RNSFullWindowOverlay>;
+    return <RNSFullWindowOverlay testID="FullWindowOverlay">{props.children}</RNSFullWindowOverlay>;
   }
   return <>{props.children}</>;
 };
