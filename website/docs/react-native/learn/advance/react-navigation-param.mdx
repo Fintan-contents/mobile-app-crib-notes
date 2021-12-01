@@ -135,7 +135,7 @@ const MainStack = createStackNavigator();
 export const App = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator mode="modal" screenOptions={{headerShown: false}}>
+      <RootStack.Navigator screenOptions={{headerShown: false, presentation: 'modal'}}>
         <RootStack.Screen name="MainStack" component={Main} />
         <RootStack.Screen name="Modal1" component={Modal1} />
       </RootStack.Navigator>
