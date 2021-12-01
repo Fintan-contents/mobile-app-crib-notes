@@ -1,15 +1,25 @@
 // Configuration Options | Renovate docs
 // https://docs.renovatebot.com/configuration-options/
 {
-  addLabels: ['dependencies'],
+  addLabels: [
+    'dependencies'
+  ],
   commitMessagePrefix: '⬆️: ',
-  extends: ['config:base', ':preserveSemverRanges'],
+  extends: [
+    'config:base',
+    ':preserveSemverRanges'
+  ],
   timezone: 'Asia/Tokyo',
   lockFileMaintenance: {
     enabled: true,
-    schedule: ['before 20:00 on sunday'],
+    schedule: [
+      'before 20:00 on sunday'
+    ],
   },
-  ignorePaths: ['react-native-samples/**', 'example-app/santoku-app-backend/**'],
+  ignorePaths: [
+    'react-native-samples/**',
+    'example-app/santoku-app-backend/**'
+  ],
   packageRules: [
     {
       // expo upgradeで更新されるパッケージはRenovateの対象外とします
@@ -49,28 +59,45 @@
       groupName: 'Depends on Expo version',
       enabled: false,
       matchPackageNames: [
-        '@types/jest', // jest-expo -> jest
-        'react-test-renderer', // react, jest-expo -> react-test-renderer
+        // jest-expo -> jest
+        '@types/jest',
+        // react, jest-expo -> react-test-renderer
+        'react-test-renderer',
+        // jest-expo -> jest
         'jest',
-        'gradle', // expo-template-bare-typescript
-        'com.android.tools.build:gradle', // expo-template-bare-typescript
+        // expo-template-bare-minimum
+        'gradle',
+        // expo-template-bare-minimum
+        'com.android.tools.build:gradle',
       ],
-      matchPackagePrefixes: ['com.facebook.flipper'],
+      matchPackagePrefixes: [
+        'com.facebook.flipper',
+        // FrescoはReact Nativeのドキュメントに記載のあるバージョンを利用するため、Renovateの対象外とします
+        // （expo-template-bare-minimumの更新で、Frescoのバージョンも更新されていく想定をしています。）
+        // cf: https://reactnative.dev/docs/0.64/image, https://reactnative.dev/docs/image
+        'com.facebook.fresco'
+      ],
     },
     {
       // React Navigationの関連パッケージはまとめて更新するようにします
       groupName: 'React Navigation',
-      matchPackagePrefixes: ['@react-navigation/'],
+      matchPackagePrefixes: [
+        '@react-navigation/'
+      ],
     },
     {
       // React Native Firebaseの関連パッケージはまとめて更新するようにします
       groupName: 'React Native Firebase',
-      matchPackagePrefixes: ['@react-native-firebase/'],
+      matchPackagePrefixes: [
+        '@react-native-firebase/'
+      ],
     },
     {
       // Docusaurusの関連パッケージはまとめて更新するようにします
       groupName: 'Docusaurus',
-      matchPackagePrefixes: ['@docusaurus'],
+      matchPackagePrefixes: [
+        '@docusaurus'
+      ],
       allowedVersions: "/^[0-9]+\\.[0-9]+\\.[0-9]+(-[\\w]+(\\.[0-9]{1,5})?)?$/"
     },
     {
@@ -78,8 +105,19 @@
       groupName: 'Docusaurus dependencies',
       enabled: false,
       // SantokuAppのReactなどのパッケージとまとめられないように、website/package.jsonだけを対象にしています
-      matchFiles: ['website/package.json'],
-      matchPackageNames: ['@mdx-js/react', 'clsx', 'react', 'react-dom', '@tsconfig/docusaurus'],
+      matchFiles: [
+        'website/package.json'
+      ],
+      matchPackageNames: [
+        '@mdx-js/react',
+        '@svgr/webpack',
+        'clsx',
+        'file-loader',
+        'react',
+        'react-dom',
+        'url-loader',
+        '@tsconfig/docusaurus'
+      ],
     },
     {
       // ツール系のパッケージはまとめて更新するようにします
@@ -95,7 +133,12 @@
         'patch-package',
         'prettier'
       ],
-      matchPackagePrefixes: ['markdownlint', 'textlint', 'stylelint', 'eslint'],
+      matchPackagePrefixes: [
+        'markdownlint',
+        'textlint',
+        'stylelint',
+        'eslint'
+      ],
     },
   ],
 }
