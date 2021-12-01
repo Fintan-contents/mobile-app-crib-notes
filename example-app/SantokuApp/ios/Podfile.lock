@@ -657,7 +657,7 @@ SPEC CHECKSUMS:
   EXSecureStore: 919bf7c28472862020d2cd7b59b69aae160b5d40
   EXSplashScreen: 57f329dbf25c5c12800feed79068a056453dc772
   FBLazyVector: c71c5917ec0ad2de41d5d06a5855f6d5eda06971
-  FBReactNativeSpec: 6024a4ecd701cff27d7a779e62a2cda5bd331b52
+  FBReactNativeSpec: 833169fdb77d25ebb7891d8b30f931ebfc70b6b0
   Firebase: 629510f1a9ddb235f3a7c5c8ceb23ba887f0f814
   FirebaseCore: 98b29e3828f0a53651c363937a7f7d92a19f1ba2
   FirebaseCoreDiagnostics: 5daa63f1c1409d981a2d5007daa100b36eac6a34

@@ -17,10 +17,7 @@ export class PasswordNotFoundError extends ApplicationError {}
 async function signup(nickname: string, password: string): Promise<Account> {
   const res = await accountApi.postSignup({nickname, password});
   const accountId = res.data.accountId;
-  await Promise.all([
-    SecureStorageAdapter.saveActiveAccountId(accountId),
-    SecureStorageAdapter.savePassword(accountId, password),
-  ]);
+  await SecureStorageAdapter.savePassword(accountId, password);
   return res.data;
 }
 

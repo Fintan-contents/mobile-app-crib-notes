@@ -13,12 +13,10 @@ describe('AuthnService signup', () => {
       headers: {},
       config: {},
     });
-    const spySecureStorageAdapterSaveActiveAccountId = jest.spyOn(SecureStorageAdapter, 'saveActiveAccountId');
     const spySecureStorageAdapterSavePassword = jest.spyOn(SecureStorageAdapter, 'savePassword');
     const res = await AuthnService.signup('testNickName', 'password123');
     expect(res).toEqual({accountId: '123456789', profile: {nickname: 'testNickName'}});
     expect(spySignupApi).toHaveBeenCalledWith({nickname: 'testNickName', password: 'password123'});
-    expect(spySecureStorageAdapterSaveActiveAccountId).toHaveBeenCalledWith('123456789');
     expect(spySecureStorageAdapterSavePassword).toHaveBeenCalledWith('123456789', 'password123');
   });
 });
