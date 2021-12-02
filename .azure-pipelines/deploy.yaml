@@ -52,6 +52,10 @@ stages:
       pool:
         vmImage: macOS-11
       steps:
+      - task: UseRubyVersion@0
+        inputs:
+          versionSpec: '3.0.x'
+          addToPath: true
       - task: NodeTool@0
         displayName: 'Use Node.js 16.13.0'
         inputs:
@@ -138,6 +142,10 @@ stages:
       pool:
         vmImage: macOS-11
       steps:
+      - task: UseRubyVersion@0
+        inputs:
+          versionSpec: '3.0.x'
+          addToPath: true
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
         inputs:
