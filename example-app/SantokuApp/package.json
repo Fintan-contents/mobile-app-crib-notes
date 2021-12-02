@@ -28,8 +28,8 @@
     "generate-api": "npx @openapitools/openapi-generator-cli generate -i ../api-document/openapi.yaml -g typescript-axios -o ./src/generated/api"
   },
   "dependencies": {
-    "@react-native-firebase/app": "~12.9.0",
-    "@react-native-firebase/crashlytics": "~12.9.0",
+    "@react-native-firebase/app": "~13.0.0",
+    "@react-native-firebase/crashlytics": "~13.0.0",
     "@react-native-masked-view/masked-view": "0.2.5",
     "@react-navigation/bottom-tabs": "~6.0.9",
     "@react-navigation/drawer": "~6.1.8",
