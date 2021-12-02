@@ -74,6 +74,35 @@ OIDCは標準化された仕様を持つ優れた認証方式ですが、次の�
 そのため、アプリではCookieを管理しません。
 :::
 
+#### Fetch APIとCookieベースの認証を組合わせた場合の既知の問題について
+
+React NativeでCookieを扱う場合、[Known Issues with fetch and cookie based authentication](https://reactnative.dev/docs/network#known-issues-with-fetch-and-cookie-based-authentication)の確認が必要です。
+こちらでは、Fetch APIとCookieベースの認証を組合わせた場合における、次の問題が報告されています。
+
+- 以下のオプションがfetchで動作しない
+  - `redirect:manual`
+  - `credentials:omit`
+- Androidで同じ名前のヘッダーを持つと、最新のものだけが表示される
+- `302`によるリダイレクト時に`Set-Cookie`ヘッダが存在すると、少なくともiOSでCookieが正しく設定されない
+
+これらについて、次の環境で動作を検証しました。
+
+- React Native: 0.64.3
+- Android実機、エミュレータ
+- iOS実機、シミュレータ
+
+`redirect`オプションについては、`redirect:follow`、`redirect:error`、`redirect:manual`のいずれを指定しても、302でリダイレクトされました。`redirect`オプションは機能していないようです。
+
+`credentials`オプションについては、`credentials:include`、`credentials:same-origin`のいずれを指定しても、Cookieはバックエンドに送信されました。一方で`credentials:omit`を指定すると、AndroidはCookieが送信されませんでしたが（想定される動作）、iOSは送信されました。さらに確認を進めると、iOSで`credentials:omit`を指定した場合、`Set-Cookie`を無視する動作に見えます。
+
+Androidで同じ名前のヘッダーを持つ場合の問題を検証するため、バックエンドから`Set-Cookie`ヘッダを2つ返しましたが、Android、iOS共にCookie値が正しく設定されました。
+[こちら](https://github.com/facebook/react-native/commit/1a33607)で問題解決されたようです。
+
+リダイレクトされた時に`Set-Cookie`ヘッダが存在しても、Cookieは正しく設定されました。
+
+これらのことから、いくつかの不具合は既に解消しています。
+[Fetch APIの仕様](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API)通りに実装が提供されているわけではないようですが、通常のモバイルアプリとして開発を進める分には問題ないでしょう。
+
 #### 端末認証
 
 モバイルアプリの場合、Webアプリケーションとは異なり、端末の紛失や盗難といったセキュリティリスクがあります。
