@@ -1,6 +1,6 @@
 import {
   ActiveAccountIdNotFoundError,
-  AuthnService,
+  AuthenticationService,
   csrfToken,
   generatePassword,
   PasswordNotFoundError,
@@ -17,9 +17,8 @@ export const useAuthentication = () => {
     try {
       await csrfToken();
       const password = await generatePassword();
-      const res = await AuthnService.signup('demoNickname', password);
+      const res = await AuthenticationService.signup('demoNickname', password);
       setAccountId(res.accountId);
-      await csrfToken();
       alert(`アカウントIDは${res.accountId}です`);
     } catch (e) {
       if (e instanceof ApiResponseError) {
@@ -33,7 +32,7 @@ export const useAuthentication = () => {
   const changeAccount = useCallback(async () => {
     try {
       await csrfToken();
-      const res = await AuthnService.changeAccount(accountIdInput);
+      const res = await AuthenticationService.changeAccount(accountIdInput);
       await csrfToken();
       alert(`ログイン成功しました state=${res.status}`);
     } catch (e) {
@@ -51,7 +50,7 @@ export const useAuthentication = () => {
 
   const canAutoLogin = useCallback(async () => {
     try {
-      const res = await AuthnService.canAutoLogin();
+      const res = await AuthenticationService.canAutoLogin();
       alert(res ? '自動ログイン可能です' : '自動ログインできません');
     } catch (e) {
       alert(e);
@@ -61,7 +60,7 @@ export const useAuthentication = () => {
   const autoLogin = useCallback(async () => {
     try {
       await csrfToken();
-      const res = await AuthnService.autoLogin();
+      const res = await AuthenticationService.autoLogin();
       await csrfToken();
       alert(`自動ログイン成功しました state=${res.status}`);
     } catch (e) {
@@ -83,7 +82,7 @@ export const useAuthentication = () => {
 
   const logout = useCallback(async () => {
     try {
-      await AuthnService.logout();
+      await AuthenticationService.logout();
       alert(`ログアウト成功しました`);
     } catch (e) {
       if (e instanceof ApiResponseError) {

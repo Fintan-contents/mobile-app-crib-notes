@@ -87,7 +87,7 @@ async function logout(): Promise<void> {
   return SecureStorageAdapter.deleteActiveAccountId();
 }
 
-export const AuthnService = {
+export const AuthenticationService = {
   signup,
   changeAccount,
   canAutoLogin,
