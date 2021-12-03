@@ -9,7 +9,7 @@ describe('SecureStorageAdapter saveActiveAccountId', () => {
     await SecureStorageAdapter.saveActiveAccountId('1234567890');
 
     expect(spy).toHaveBeenCalledWith('activeAccountId', '1234567890', {
-      keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+      keychainAccessible: SecureStore.WHEN_UNLOCKED,
     });
   });
 });
@@ -21,7 +21,7 @@ describe('SecureStorageAdapter savePassword', () => {
     await SecureStorageAdapter.savePassword('1234567890', 'password');
 
     expect(spySecureStore).toHaveBeenCalledWith('abcdef_password', 'password', {
-      keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+      keychainAccessible: SecureStore.WHEN_UNLOCKED,
     });
     expect(spyCrypto).toHaveBeenCalledWith('1234567890');
   });
