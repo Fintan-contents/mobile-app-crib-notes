@@ -1,6 +1,7 @@
 export * from './app-state';
 export * from './config';
 export * from './error';
+export * from './http-api';
 export * from './info';
 export * from './instructions';
 export * from './log';

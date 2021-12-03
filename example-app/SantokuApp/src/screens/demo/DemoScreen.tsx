@@ -9,6 +9,7 @@ import {AuthenticationScreen} from './authentication';
 import {ButtonScreen} from './button';
 import {ConfigScreen} from './config';
 import {ErrorCaseScreen} from './error';
+import {HttpApiScreen} from './http-api';
 import {AppInfoScreen} from './info';
 import {InstructionsScreen} from './instructions';
 import {LocalAuthenticationScreen} from './local-authn';
@@ -60,6 +61,10 @@ const demoScreenList = [
   {
     title: 'Authentication',
     to: AuthenticationScreen.name,
+  },
+  {
+    title: 'HttpApi',
+    to: HttpApiScreen.name,
   },
 ];
 
