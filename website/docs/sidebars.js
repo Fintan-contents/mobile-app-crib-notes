@@ -471,6 +471,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-005-message',
         'react-native/santoku/decisions/adr-006-logging',
         'react-native/santoku/decisions/adr-007-auth',
+        'react-native/santoku/decisions/adr-008-push-notification',
       ],
     },
   ],
