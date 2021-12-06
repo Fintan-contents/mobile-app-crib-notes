@@ -15,3 +15,11 @@ Xcode 13から、`xcodebuild`の実行時に常に`destination`が適切に指�
 > --- xcodebuild: WARNING: Using the first of multiple matching destinations:
 
 動作には特に問題はなかったですが、警告を放置するのは問題があるのでパッチを当てて対応しています。
+
+## Podfile.lockにdiffが出ないようにするパッチ
+
+React Native 0.64.3ではReact Nativeに含まれるPodのpodspecの内容が`pod install`した環境によって異なるという問題があります。この問題のため、`Podfile.lock`の内容も環境によって異なるものになってしまいます。
+
+[Diff in Podfile.lock when runs in different machines](https://github.com/facebook/react-native/issues/31121#issuecomment-802182459)
+
+[このコミット](https://github.com/facebook/react-native/commit/bdfe2a51791046c4e6836576e08655431373ed67)で解決されているので、内容をパッチとして取り込んでいます。
