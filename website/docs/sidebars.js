@@ -224,10 +224,6 @@ module.exports = {
       id: 'react-native/santoku',
     },
     {
-      type: 'doc',
-      id: 'react-native/santoku/glossary',
-    },
-    {
       type: 'category',
       label: 'Requirements',
       items: [
@@ -360,7 +356,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: '画面設計',
+          label: '画面仕様',
           items: [
             {
               type: 'doc',
@@ -372,7 +368,7 @@ module.exports = {
             },
             {
               type: 'category',
-              label: '画面設計における定義事項',
+              label: '画面仕様における定義事項',
               items: [
                 'react-native/santoku/design/screen-specs/definitions/overview',
                 {
@@ -488,6 +484,10 @@ module.exports = {
           id: 'react-native/santoku/development/dependency-management',
         },
       ],
+    },
+    {
+      type: 'doc',
+      id: 'react-native/santoku/glossary',
     },
     {
       type: 'category',
