@@ -25,3 +25,24 @@ title: サインアップ
 | ④ | アカウント情報の登録 | バックエンドは、生成したアカウントIDとアプリから受け取ったパスワードなどを用いてアカウント情報をデータストアに保存します。 |
 | ⑤ | アカウント情報の返却 | バックエンドはアプリにアカウント情報を返却します。|
 | ⑥ | ログイン資格情報の保存 | アプリは、受け取ったアカウント情報からアカウントIDを取得し、パスワードと共にログイン資格情報としてセキュアストレージに保存します。 |
+
+## 利用方法
+
+サインアップは`AuthenticationService`の`signup`メソッドを使用します。このメソッドを使用する前に、バックエンドからCSRFトークンを取得する必要があります。
+
+```typescript title="サインアップの利用方法"
+import {AuthenticationService, csrfToken, generatePassword} from 'framework';
+
+const signup = useCallback(async () => {
+  try {
+    // CSRFトークンの取得
+    await csrfToken();
+    // パスワードの自動生成
+    const password = await generatePassword();
+    // サインアップ
+    const res = await AuthenticationService.signup('[nickName]', password);
+  } catch (e) {
+    // エラー処理
+  }
+}, []);
+```

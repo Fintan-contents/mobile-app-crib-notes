@@ -18,3 +18,19 @@ title: ログアウト
 | ② | ログアウト | バックエンドは、ログアウト処理（セッションIDの破棄）をします。 |
 | ③ | ログアウト結果の返却 | バックエンドはログアウト処理の結果をアプリに返却します。 |
 | ④ | ログアウトしたアカウントIDの破棄 | アプリは、ログイン中のアカウントIDとして保存していたアカウントIDを、セキュアストレージから破棄します。 |
+
+## 利用方法
+
+ログアウトは`AuthenticationService`の`logout`メソッドを使用します。
+
+```typescript title="ログアウトの利用方法"
+import {AuthenticationService} from 'framework';
+
+const logout = useCallback(async () => {
+  try {
+    await AuthenticationService.logout();
+  } catch (e) {
+    // エラー処理
+  }
+}, []);
+```
