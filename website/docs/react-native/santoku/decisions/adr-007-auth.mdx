@@ -14,7 +14,7 @@ Superseded: 廃止
 ## 要約
 
 - 認証手段としてCookieベースの認証を採用します。
-- アプリ起動時に端末認証を要求することで、モバイル端末の紛失や盗難リスクに対応します。
+- ログイン時（自動ログインを含む）に端末認証を要求することで、モバイル端末の紛失や盗難リスクに対応します。
 - 自動サインアップや自動ログインにより、アプリの利便性を向上させます。
 
 ## コンテキスト
@@ -74,6 +74,9 @@ OIDCは標準化された仕様を持つ優れた認証方式ですが、次の�
 そのため、アプリではCookieを管理しません。
 :::
 
+React NativeでCookieを扱う場合、[Known Issues with fetch and cookie based authentication](https://reactnative.dev/docs/network#known-issues-with-fetch-and-cookie-based-authentication)の確認が必要です。
+こちらについては、[React NativeでCookieを扱う場合の懸念点について](#react-nativeでcookieを扱う場合の懸念点について)に調査結果を纏めていますので参考にしてください。
+
 #### 端末認証
 
 モバイルアプリの場合、Webアプリケーションとは異なり、端末の紛失や盗難といったセキュリティリスクがあります。
@@ -81,7 +84,7 @@ OIDCは標準化された仕様を持つ優れた認証方式ですが、次の�
 端末認証は、PINコード（またはパスコード）、指紋や顔の特徴などを用いて、ユーザが端末の所持者であることを認証します。
 これにより、所持者以外が不正に端末を利用することを防げます。
 
-このアプリでも、アプリ起動時に端末認証を要求することで、上記リスクに対応します。
+このアプリでも、ログイン時に端末認証を要求することで、上記リスクに対応します。
 
 ### サインアップ
 
@@ -204,7 +207,7 @@ CSRFは、Cookieの特性を利用した攻撃手法です。
 
 このアプリでは、次の方式でモバイル端末の紛失や盗難リスクに対応します。
 
-- アプリ起動時の端末認証
+- ログイン時（自動ログインを含む）の端末認証
 - 端末内の安全な場所に秘密情報（ログイン資格情報）を保存
 
 ただし、モバイル端末の紛失や盗難リスクは、このアプリのみに留まりません。
@@ -235,8 +238,184 @@ CSRFは、Cookieの特性を利用した攻撃手法です。
 OIDCは優れた認証方式ですが、他のプロジェクトでの参考のし易さを第一としてCookieベースの認証を採用します。
 
 モバイルアプリの場合、端末の紛失や盗難といったセキュリティリスクがあります。
-そこで、アプリ起動時に端末認証を要求することで、モバイル端末の紛失や盗難リスクに対応します。
+そこで、ログイン時（自動ログインを含む）に端末認証を要求することで、モバイル端末の紛失や盗難リスクに対応します。
 
 セキュリティとユーザの利便性は相反しやすい品質特性です。
 このアプリではユーザの利便性を優先し、自動サインアップや自動ログインを採用します。
 サインアップ時に作成した「アカウントID + パスワード」を、ログイン資格情報として端末内の安全な場所に保存することで、自動ログインを実現します。
+
+## 付録
+
+### React NativeでCookieを扱う場合の懸念点について
+
+React NativeでCookieを扱う場合、[Known Issues with fetch and cookie based authentication](https://reactnative.dev/docs/network#known-issues-with-fetch-and-cookie-based-authentication)の確認が必要です。
+こちらでは、Fetch APIとCookieベースの認証を組合わせた場合における、次の問題が報告されています。
+
+- 以下のオプションがfetchで動作しない
+  - `redirect:manual`
+  - `credentials:omit`
+- Androidで同じ名前のレスポンスヘッダーを受け取ると、最後に与えられたものだけが使用される
+- `302`によるリダイレクト時に`Set-Cookie`ヘッダが存在すると、少なくともiOSでCookieが正しく設定されない
+
+このアプリではHTTP通信にaxiosを使います。
+そのため、上記問題についてFetch APIとaxiosの双方で動作検証しました。
+使用した環境は次の通りです。
+
+- React Native: 0.64.3
+- Android実機、エミュレータ
+- iOS実機、シミュレータ
+
+検証方法は次の通りです。
+
+- 2つの`Set-Cookie`とHTTPステータス302を返すバックエンドAPI（以下、リダイレクト元API）を用意する
+- リダイレクト先のバックエンドAPI（以下、リダイレクト先API）を用意する
+- Fetch APIでリダイレクト元APIにアクセスする
+  - `redirect`オプションを指定した場合
+  - `credentials`オプションを指定した場合
+  - `302`によるリダイレクト時に`Set-Cookie`ヘッダが存在した場合
+  - 同じ名前のレスポンスヘッダー（今回は`Set-Cookie`を使用）を受け取った場合
+
+- axiosでリダイレクト元APIにアクセスする
+  - `maxRedirects`オプションを指定した場合
+  - `withCredentials`オプションを指定した場合
+  - `302`によるリダイレクト時に`Set-Cookie`ヘッダが存在した場合
+  - 同じ名前のレスポンスヘッダー（今回は`Set-Cookie`を使用）を受け取った場合
+
+:::info
+Fetch APIの`redirect`、および`credentials`オプションの詳細は、次のリンクをご確認ください。
+
+- [WindowOrWorkerGlobalScope.fetch()](https://developer.mozilla.org/ja/docs/Web/API/fetch)
+- [Request.credentials](https://developer.mozilla.org/ja/docs/Web/API/Request/credentials)
+:::
+
+:::info
+axiosの`maxRedirects`、および`withCredentials`オプションの詳細は、次のリンクをご確認ください。
+
+- [Request Config](https://axios-http.com/docs/req_config)
+:::
+
+検証結果は次の通りです。
+
+#### Fetch API
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2" colspan="2" width="28%">検証内容</th>
+      <th colspan="2" width="36%">Android</th>
+      <th colspan="2" width="36%">iPhone</th>
+    </tr>
+    <tr>
+      <th width="18%">実機</th>
+      <th width="18%">エミュレータ</th>
+      <th width="18%">実機</th>
+      <th width="18%">シミュレータ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">redirect</td>
+      <td>follow</td>
+      <td colspan="4" rowspan="3">302応答でリダイレクトされ、リダイレクト先APIのリソースが応答として返却される。</td>
+    </tr>
+    <tr>
+      <td>error</td>
+    </tr>
+    <tr>
+      <td>manual</td>
+    </tr>
+    <tr>
+      <td rowspan="3">credentials</td>
+      <td>include</td>
+      <td colspan="4" rowspan="2">Cookieが送られる。</td>
+    </tr>
+    <tr>
+      <td>same-origin</td>
+    </tr>
+    <tr>
+      <td>omit</td>
+      <td colspan="2">Cookieが送られない。</td>
+      <td colspan="2">Cookieが送られる。</td>
+    </tr>
+    <tr>
+      <td colspan="2">302によるリダイレクト時にSet-Cookieヘッダが存在した場合</td>
+      <td colspan="4">Cookieが正しく設定される。</td>
+    </tr>
+    <tr>
+      <td colspan="2">レスポンスヘッダーで2つのSet-Cookieを受け取った場合</td>
+      <td colspan="4">2つとも正しく設定される。</td>
+    </tr>
+  </tbody>
+</table>
+
+#### axios
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2" colspan="2" width="28%">検証内容</th>
+      <th colspan="2" width="36%">Android</th>
+      <th colspan="2" width="36%">iPhone</th>
+    </tr>
+    <tr>
+      <th width="18%">実機</th>
+      <th width="18%">エミュレータ</th>
+      <th width="18%">実機</th>
+      <th width="18%">シミュレータ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">maxRedirects</td>
+      <td>0</td>
+      <td rowspan="3" colspan="4">302応答でリダイレクトされ、リダイレクト先APIのリソースが応答として返却される。</td>
+    </tr>
+    <tr>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td rowspan="2">withCredentials</td>
+      <td>true</td>
+      <td colspan="4">Cookieが送られる。</td>
+    </tr>
+    <tr>
+      <td>false</td>
+      <td colspan="2">Cookieが送られない。</td>
+      <td colspan="2">Cookieが送られる。</td>
+    </tr>
+    <tr>
+      <td colspan="2">302によるリダイレクト時にSet-Cookieヘッダが存在した場合</td>
+      <td colspan="4">Cookieが正しく設定される。</td>
+    </tr>
+    <tr>
+      <td colspan="2">レスポンスヘッダーで2つのSet-Cookieを受け取った場合</td>
+      <td colspan="4">2つとも正しく設定される。</td>
+    </tr>
+  </tbody>
+</table>
+
+#### 検証結果の考察
+
+以下、検証結果の考察です。
+
+`redirect`オプションについて、どのオプションを指定しても302応答でリダイレクトされ、リダイレクト先APIのリソースが返ってきました。
+`redirect`オプションは機能していないようです。
+`maxRedirects`オプションも同様に機能していないようです。
+
+`credentials`オプションについて、`credentials:include`、`credentials:same-origin`ではCookieがバックエンドに送信されました。
+一方で`credentials:omit`を指定すると、AndroidはCookieが送信されませんでしたが（想定される動作）、iOSは送信されました。
+`withCredentials`オプションも同様の動作に見えます。
+
+Androidで同じ名前のヘッダーを持つ場合の問題を検証するため、リダイレクト元APIから`Set-Cookie`ヘッダを2つ返しましたが、Android、iOS共にCookie値が正しく設定されました。
+[こちら](https://github.com/facebook/react-native/commit/1a33607)で問題が解決されたようです。
+
+リダイレクトされた時に`Set-Cookie`ヘッダが存在しても、Cookieは正しく設定されました。
+
+これらのことから、報告されていた問題のうち後者2つについては既に解消しています。
+fetchの一部オプションに対応していない問題については、報告のとおり、[Fetch APIの仕様](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API)通りに実装が提供されているわけではなさそうです。
+このアプリでは、バックエンドAPIのリダイレクトを無視したいケースがないので、redirectオプションやmaxRedirectオプションの影響は受けません。
+credentialsオプションやwithCredentialsオプションについても、モバイルアプリという特性上クロスオリジンを意識する必要はありません。リクエスト先のドメインによって発行されたCookieを送信できれば問題ないでしょう。
+よって、Cookie-basedの認証を採用して開発を進めても問題ないと判断します。
