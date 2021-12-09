@@ -34,13 +34,13 @@ export const TodoBoard: React.FC = () => {
 
 +      setLoading(true);
        TodoService.getTodos()
-         .then((response) => {
+         .then(response => {
            if (isActive) {
              setTodos(response);
            }
          })
 -        .catch(() => {});
-+        .catch((error) => {
++        .catch(error => {
 +          console.log(error);
 +        })
 +        .finally(() => {
@@ -163,8 +163,8 @@ Middlewareとは、特定の処理に対して共通的に行いたい処理（�
 ``` typescript jsx title="/src/backend/config.ts"
 import {Configuration, Middleware} from './generated-rest-client';
 const waitResponse: Middleware = {
-  post: async (context) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+  post: async context => {
+    await new Promise(resolve => setTimeout(resolve, 3000));
     return Promise.resolve(context.response);
   },
 };
