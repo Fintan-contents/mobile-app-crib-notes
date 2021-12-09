@@ -332,6 +332,28 @@ module.exports = {
           id: 'react-native/santoku/test-planning/test-all-planning',
         },
         {
+          type: 'category',
+          label: 'テスト観点',
+          items: [
+            'react-native/santoku/test-planning/test-type/overview',
+            {
+              type: 'category',
+              label: '機能テスト',
+              items: [
+                'react-native/santoku/test-planning/test-type/functional-testing',
+                'react-native/santoku/test-planning/test-type/functional-testing/layout-test',
+                'react-native/santoku/test-planning/test-type/functional-testing/operation-event',
+                'react-native/santoku/test-planning/test-type/functional-testing/display-content',
+                'react-native/santoku/test-planning/test-type/functional-testing/validation-check',
+                'react-native/santoku/test-planning/test-type/functional-testing/terminal-os',
+                'react-native/santoku/test-planning/test-type/functional-testing/use-case',
+              ],
+            },
+            'react-native/santoku/test-planning/test-type/configuration-test',
+            'react-native/santoku/test-planning/test-type/performance-test',
+          ],
+        },
+        {
           type: 'doc',
           id: 'react-native/santoku/test-planning/test-variation',
         },
