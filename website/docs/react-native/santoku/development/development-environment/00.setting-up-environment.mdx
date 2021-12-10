@@ -2,34 +2,24 @@
 title: 開発に利用するツールのインストール
 ---
 
-:::danger
-`react-native-cli`がインストールされている場合は、**必ずアンインストールしてください**。`react-native-cli`は不要になっているのですが、なぜか古い記事を参照してインストールし、チュートリアルでもハマるというケースがかなり多いです。
+## 基本的なツールのインストール
 
-`npm run ios`や`npm run android`でエラーが出るときは、まず`react-native-cli`がインストールされて**いない**ことを確認してください。
+[開発環境の構築](/react-native/learn/getting-started/setting-up-development-environment.mdx)の手順に従って、React Nativeアプリの開発に最低限必要なツールのインストール、セットアップを完了してください。
 
-* コマンドラインで`react-native --version`を実行して、コマンドが見つからないというエラーが発生することを確認する。
-* コマンドが実行できてしまう場合は、`npm uninstall -g react-native-cli`を実行し、`react-native-cli`をアンインストールする。
-* 最終的に、コマンドラインで`react-native --version`を実行して、コマンドが見つからないというエラーが発生するようになったことを確認する。
-:::
+## プロジェクトで利用しているツールのインストール
 
-## インストールするツール
+最低限必要なツールに加えて、このアプリの開発には次のツールを利用しているので、インストールしてください。[Homebrew (macOS)](https://brew.sh/)や[Scoop (Windows)](https://scoop.sh/)などを利用してインストールすることをおすすめします。
 
-以下のツールは、React Nativeでのアプリ開発に必要となるので、必ずインストールしてください。XcodeとAndroid Studio以外のツールは、[Homebrew (macOS)](https://brew.sh/)や[Scoop (Windows)](https://scoop.sh/)などを利用してインストールすることをおすすめします。
-
-| OS             | ツール                | バージョン                                             | その他                                                                                                              |
-|:---------------|:---------------------|:-----------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------|
-| macOS, Windows | Node.js              | [アクティブLTS](https://nodejs.org/ja/about/releases/) | `npm`は7系に更新（`npm i -g npm@7`）                                                                                  |
-| macOS, Windows | Java Development Kit | 11                                                   | ディストリビューションにはこだわりなし                                                                                    |
-| macOS, Windows | Android Studio       | 最新                                                  | [Android SDKのコマンドラインツール](#android-sdkのコマンドラインツール)、[Android仮想デバイスの作成](#android仮想デバイスの作成) |
-| macOS          | Xcode                | 13                                                   | [異なるバージョンのXcodeを共存させる](90.use-multiple-version-xcode.mdx)                                                 |
-| macOS          | Bundler              | CocoaPods, fastlaneのバージョン管理、実行                | [Ruby, Bundlerのインストール](#ruby-bundlerのインストール)                                                              |
+| OS    | ツール   | バージョン                              | その他                                                 |
+|:------|:--------|:--------------------------------------|:-------------------------------------------------------|
+| macOS | Bundler | CocoaPods, fastlaneのバージョン管理、実行 | [Ruby, Bundlerのインストール](#ruby-bundlerのインストール) |
 
 これらに加えて、少し便利に開発するために次のツールも導入してください。ドキュメント内の手順は、これらのツールがインストールされていることを前提にしています。
 
-| OS    | ツール      | 用途                                                        | おすすめのインストール方法                                |
-|:------|:-----------|:-----------------------------------------------------------|:------------------------------------------------------|
-| macOS | watchman   | ファイルシステムの変更監視（React Nativeアプリのビルド高速化など）  | Homebrew                                              |
-| macOS | ios-deploy | `npm run ios -- --device '<dev>'`で、アプリを端末にインストール | Homebrew                                              |
+| OS    | ツール      | 用途                                                        | おすすめのインストール方法 |
+|:------|:-----------|:-----------------------------------------------------------|:-----------------------|
+| macOS | watchman   | ファイルシステムの変更監視（React Nativeアプリのビルド高速化など）  | Homebrew               |
+| macOS | ios-deploy | `npm run ios -- --device '<dev>'`で、アプリを端末にインストール | Homebrew               |
 
 IDEは好みのものを利用していますが、主に以下のいずれかです。
 
@@ -43,54 +33,6 @@ IDEは好みのものを利用していますが、主に以下のいずれか�
 | ツール                                                 | 備考                                                       |
 |:------------------------------------------------------|:----------------------------------------------------------|
 | [diagrams.net（旧draw.io）](https://www.diagrams.net/) | 画像はすべて編集可能なPNG画像（Editable Bitmap Image）として作成 |
-
-### Android SDKのコマンドラインツール
-
-Android Studioをインストールした後、Android SDKに含まれる各種コマンドラインツールを使えるように設定する必要があります。
-
-Android StudioでSDK Managerを開き、SDK Toolsタブで以下のツールにチェックが付いていることを確認してください。チェックが付いていない場合は、チェックを付けて「Apply」もしくは「OK」を押してインストールしてください。
-
-* Android SDK Command-line Tools (latest)
-* Android SDK Platform-Tools
-* Android Emulator
-
-次に、[環境変数`ANDROID_SDK_ROOT`、`ANDROID_HOME`](https://developer.android.com/studio/command-line/variables)を設定します。
-
-| 環境変数            | 設定例（macOS）           | 設定例（Windows）               |
-|:-------------------|:------------------------|:------------------------------|
-| `ANDROID_SDK_ROOT` | `~/Library/Android/sdk` | `~\AppData\Local\Android\Sdk` |
-| `ANDROID_HOME`[^1] | `$ANDROID_SDK_ROOT`     | `%ANDROID_SDK_ROOT%`          |
-
-[^1]: `ANDROID_HOME`という環境変数はすでに非推奨となっています。そのため、設定しなくても基本的に問題ないはずですが、メンテナンスされていないツールがこの環境変数を参照している可能性などもあるので、念のため設定しています。
-
-最後に、各コマンドラインツールのディレクトリを`PATH`に追加します。
-
-| コマンドラインツール                                                                                    | 設定例（macOS）                                |
-|:----------------------------------------------------------------------------------------------------|:----------------------------------------------|
-| [Android SDK プラットフォーム ツール](https://developer.android.com/studio/command-line#tools-platform) | `$ANDROID_SDK_ROOT/platform-tools`            |
-| [Android SDK コマンドライン ツール](https://developer.android.com/studio/command-line#tools-sdk)        | `$ANDROID_SDK_ROOT/cmdline-tools/latest/bin` |
-| [Android エミュレータ](https://developer.android.com/studio/command-line#tools-emulator)              | `$ANDROID_SDK_ROOT/emulator`                  |
-
-:::danger warning
-**`$ANDROID_SDK_ROOT/tools`が`PATH`に含まれている場合、`PATH`から削除してください。**古いバージョンのAndroid Studioをインストールしていた場合や、インストール方法を紹介した古い記事などを参照してインストールした場合に、特に注意してください。分かりづらいエラーが発生してハマる人が多発しています。
-:::
-
-これでコマンドラインツールの設定が完了しているはずです。次のコマンドを実行して、正常に完了することを確認してください。
-
-* `sdkmanager --list_installed`
-  * インストール済みのSDKコンポーネントが表示されます。
-* `avdmanager list avd`
-  * 作成済みの仮想デバイスの詳細が表示されます。
-* `adb devices`
-  * 起動中のエミュレータや、USBで接続しているAndroid端末が表示されます。
-* `emulator -list-avds`
-  * 作成済みの仮想デバイスが表示されます。
-
-### Android仮想デバイスの作成
-
-[仮想デバイスを作成して管理する \| Android デベロッパー](https://developer.android.com/studio/run/managing-avds#createavd)を参照して、Androidアプリの開発中に使う仮想デバイスを作成してください。
-
-仮想デバイスは簡単に追加や削除ができるので、初回セットアップ時にはAVD Managerで「Recommended」に表示されているシステムイメージを利用するのが良いです。
 
 ### Ruby, Bundlerのインストール
 

@@ -4,7 +4,7 @@ import {Button, Input, Text} from 'react-native-elements';
 
 import {useAuthentication} from './useAuthentication';
 
-const ScreenName = 'Authn';
+const ScreenName = 'Authentication';
 const Screen = () => {
   const {accountId, accountIdInput, setAccountIdInput, signup, changeAccount, canAutoLogin, autoLogin, logout} =
     useAuthentication();

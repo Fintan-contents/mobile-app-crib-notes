@@ -164,3 +164,14 @@ const styles = StyleSheet.create({
 
 </TabItem>
 </Tabs>
+
+:::info
+React Navigation v6から、`navigation.navigate`の引数などに対する型チェックがデフォルトで有効になっています。そのため、あらかじめ定義された画面名やパラメータ以外を`navigation.navigate`に渡すと、TypeScriptの型チェックでエラーが発生します。
+
+ただし、この学習コンテンツでは、以下の理由から型チェックを実質的に無効化して利用しています[^1]。
+
+* React Navigationで利用する型定義はTypeScriptの型システムに精通していないと理解が難しい
+* 型定義を作成し型チェックが通っても、利用方法が誤っていると実行時にエラーが発生する可能性は残る
+:::
+
+[^1]: [プロジェクトの作成](../getting-started/create-project.md)で作成したプロジェクトでは、React Navigationの型チェックをv5と同等にするための型を`src/@types/react-navigation.d.ts`で定義しています。この型定義では、画面名やパラメータとして任意の文字列やオブジェクトを渡すことができるように設定しています。このため、学習コンテンツではReact Navigationの型チェックが実質的に無効になっています。詳細は、[Specifying default types for useNavigation, Link, ref etc](https://reactnavigation.org/docs/typescript/#specifying-default-types-for-usenavigation-link-ref-etc)を参照してください。

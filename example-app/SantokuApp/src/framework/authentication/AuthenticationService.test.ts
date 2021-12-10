@@ -1,10 +1,10 @@
-import {AuthnService} from '.';
+import {AuthenticationService} from '.';
 import {AccountLoginResponseStatusEnum} from '../../generated/api';
 import {accountApi} from '../backend';
 import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
-describe('AuthnService signup', () => {
+describe('AuthenticationService signup', () => {
   test('サインアップAPIを呼び出して、クレデシャルをセキュアストレージに格納しているかの検証', async () => {
     const spySignupApi = jest.spyOn(accountApi, 'postSignup').mockResolvedValue({
       data: {accountId: '123456789', profile: {nickname: 'testNickName'}},
@@ -14,14 +14,14 @@ describe('AuthnService signup', () => {
       config: {},
     });
     const spySecureStorageAdapterSavePassword = jest.spyOn(SecureStorageAdapter, 'savePassword');
-    const res = await AuthnService.signup('testNickName', 'password123');
+    const res = await AuthenticationService.signup('testNickName', 'password123');
     expect(res).toEqual({accountId: '123456789', profile: {nickname: 'testNickName'}});
     expect(spySignupApi).toHaveBeenCalledWith({nickname: 'testNickName', password: 'password123'});
     expect(spySecureStorageAdapterSavePassword).toHaveBeenCalledWith('123456789', 'password123');
   });
 });
 
-describe('AuthnService changeAccount', () => {
+describe('AuthenticationService changeAccount', () => {
   const spyLoginApi = jest.spyOn(accountApi, 'postLogin').mockResolvedValue({
     data: {status: AccountLoginResponseStatusEnum.Complete},
     status: 200,
@@ -36,7 +36,7 @@ describe('AuthnService changeAccount', () => {
 
   test('セキュアストレージからパスワードを取得してログインAPIを呼び出しているかの検証', async () => {
     const spySecureStorageAdapter = jest.spyOn(SecureStorageAdapter, 'loadPassword').mockResolvedValue('password123');
-    const res = await AuthnService.changeAccount('123456789');
+    const res = await AuthenticationService.changeAccount('123456789');
     expect(res).toEqual({status: AccountLoginResponseStatusEnum.Complete});
     expect(spyLoginApi).toHaveBeenCalledWith({accountId: '123456789', password: 'password123'});
     expect(spySecureStorageAdapter).toHaveBeenCalledWith('123456789');
@@ -44,12 +44,12 @@ describe('AuthnService changeAccount', () => {
 
   test('セキュアストレージからパスワードを取得できなかった場合の検証', async () => {
     jest.spyOn(SecureStorageAdapter, 'loadPassword').mockResolvedValue(null);
-    const changeAccount = AuthnService.changeAccount('123456789');
+    const changeAccount = AuthenticationService.changeAccount('123456789');
     await expect(changeAccount).rejects.toThrowError(PasswordNotFoundError);
   });
 });
 
-describe('AuthnService autoLogin', () => {
+describe('AuthenticationService autoLogin', () => {
   const spyLoginApi = jest.spyOn(accountApi, 'postLogin').mockResolvedValue({
     data: {status: AccountLoginResponseStatusEnum.Complete},
     status: 200,
@@ -69,7 +69,7 @@ describe('AuthnService autoLogin', () => {
   test('セキュアストレージからクレデンシャルを取得してログインAPIを呼び出しているかの検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue('password123');
-    const res = await AuthnService.autoLogin();
+    const res = await AuthenticationService.autoLogin();
     expect(res).toEqual({status: AccountLoginResponseStatusEnum.Complete});
     expect(spyLoginApi).toHaveBeenCalledWith({accountId: '123456789', password: 'password123'});
     expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
@@ -78,19 +78,19 @@ describe('AuthnService autoLogin', () => {
 
   test('セキュアストレージからアクティブなアカウントIDを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
-    const autoLogin = AuthnService.autoLogin();
+    const autoLogin = AuthenticationService.autoLogin();
     await expect(autoLogin).rejects.toThrowError(ActiveAccountIdNotFoundError);
   });
 
   test('セキュアストレージかパスワードを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
-    const autoLogin = AuthnService.autoLogin();
+    const autoLogin = AuthenticationService.autoLogin();
     await expect(autoLogin).rejects.toThrowError(PasswordNotFoundError);
   });
 });
 
-describe('AuthnService canAutoLogin', () => {
+describe('AuthenticationService canAutoLogin', () => {
   const spySecureStorageAdapterLoadActiveAccountId = jest.spyOn(SecureStorageAdapter, 'loadActiveAccountId');
   const spySecureStorageAdapterLoadPassword = jest.spyOn(SecureStorageAdapter, 'loadPassword');
 
@@ -102,7 +102,7 @@ describe('AuthnService canAutoLogin', () => {
   test('セキュアストレージからクレデンシャルを取得できる場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue('password123');
-    const res = await AuthnService.canAutoLogin();
+    const res = await AuthenticationService.canAutoLogin();
     expect(res).toBeTruthy();
     expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
     expect(spySecureStorageAdapterLoadPassword).toHaveBeenCalledWith('123456789');
@@ -111,7 +111,7 @@ describe('AuthnService canAutoLogin', () => {
   test('セキュアストレージからアクティブなアカウントIDを取得できない場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
-    const res = await AuthnService.canAutoLogin();
+    const res = await AuthenticationService.canAutoLogin();
     expect(res).toBeFalsy();
     expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
     expect(spySecureStorageAdapterLoadPassword).not.toHaveBeenCalled();
@@ -120,14 +120,14 @@ describe('AuthnService canAutoLogin', () => {
   test('セキュアストレージからパスワードを取得できない場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
-    const res = await AuthnService.canAutoLogin();
+    const res = await AuthenticationService.canAutoLogin();
     expect(res).toBeFalsy();
     expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
     expect(spySecureStorageAdapterLoadPassword).toHaveBeenCalledWith('123456789');
   });
 });
 
-describe('AuthnService refresh', () => {
+describe('AuthenticationService refresh', () => {
   const spyLoginApi = jest.spyOn(accountApi, 'postLogin').mockResolvedValue({
     data: {status: AccountLoginResponseStatusEnum.Complete},
     status: 200,
@@ -147,7 +147,7 @@ describe('AuthnService refresh', () => {
   test('セキュアストレージからクレデンシャルを取得してログインAPIを呼び出しているかの検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue('password123');
-    const res = await AuthnService.refresh();
+    const res = await AuthenticationService.refresh();
     expect(res).toEqual({status: AccountLoginResponseStatusEnum.Complete});
     expect(spyLoginApi).toHaveBeenCalledWith({accountId: '123456789', password: 'password123'});
     expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
@@ -156,19 +156,19 @@ describe('AuthnService refresh', () => {
 
   test('セキュアストレージからアクティブなアカウントIDを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
-    const refresh = AuthnService.refresh();
+    const refresh = AuthenticationService.refresh();
     await expect(refresh).rejects.toThrowError(ActiveAccountIdNotFoundError);
   });
 
   test('セキュアストレージかパスワードを取得できなかった場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue(null);
-    const refresh = AuthnService.refresh();
+    const refresh = AuthenticationService.refresh();
     await expect(refresh).rejects.toThrowError(PasswordNotFoundError);
   });
 });
 
-describe('AuthnService logout', () => {
+describe('AuthenticationService logout', () => {
   const spyLogoutApi = jest.spyOn(accountApi, 'postLogout').mockResolvedValue({
     data: undefined,
     status: 200,
@@ -183,7 +183,7 @@ describe('AuthnService logout', () => {
     spySecureStorageAdapterDeleteActiveAccountId.mockClear();
   });
   test('ログアウトAPIを呼び出して、セキュアストレージからアクティブアカウントを削除しているかの検証', async () => {
-    await AuthnService.logout();
+    await AuthenticationService.logout();
     expect(spyLogoutApi).toHaveBeenCalled();
     expect(spySecureStorageAdapterDeleteActiveAccountId).toHaveBeenCalled();
   });

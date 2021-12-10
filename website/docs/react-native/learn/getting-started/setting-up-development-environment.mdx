@@ -5,108 +5,102 @@ title: 開発環境の構築
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-React Native開発環境の構築手順です。環境構築を進める前にツールのインストール状況を確認してください。該当バージョンのツールが既にインストールされている場合、再インストールは不要です。それ以外の場合は再インストール（アップデート）してください。
+:::danger
+`react-native-cli`がインストールされている場合は、**必ずアンインストールしてください**。`react-native-cli`は不要になっていますが、古い記事を参照してインストールしてしまい、このコンテンツをすすめる中でトラブルを引き起こすケースがしばしば見られます。
 
-## React Native開発環境に必要なツール
+`npm run ios`や`npm run android`でエラーが出るときは、まず`react-native-cli`がインストールされて**いない**ことを確認してください。
 
-ツールのインストール状況とバージョンの確認手順は次の通りです。
-
-### ツールのインストール状況とバージョンの確認手順
-
-- 共通
-
-  - Node.js
-
-    コマンドラインかターミナルで`node -v`を実行してください。バージョン `v12.x.x` 以降であればOKです。
-
-    ```console
-    $ node -v
-    v14.15.1
-    ```
-
-    エラーが表示された場合、またはバージョンが`v11.x.x`以下の場合はインストールが必要です。
-
-  - Java Development Kit
-
-    コマンドラインかターミナルで`java -version`を実行してください。バージョン `1.8.x` 以降であればOKです。
-
-    ```console
-    $ java -version
-    openjdk version "1.8.0_275"
-    OpenJDK Runtime Environment (AdoptOpen_JDK)(build 1.8.0_275-b01)
-    OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.275-b01, mixed mode)
-    ```
-
-    上記は`OpenJDK`をインストールしている場合に出力されるメッセージです。JDKと比較して一部メッセージ内容に相違はありますが、バージョンの確認箇所は、`openjdk version "1.8.0_275"`の`"1.8.0_275"`（バージョン）部分になります。
-
-    エラーが表示された場合、またはバージョンが`1.7.x`以下の場合はインストールが必要です。
-
-  - Android Studio
-
-    Android Studioがインストールされていることを確認してください。インストールされていない場合、インストールが必要です。
-    インストールされている場合、Android SDKのインストール状況も確認してください。確認方法は、[Android SDK](#android-sdk)を参照してください。
-
-  - react-native-cli
-
-    コマンドラインかターミナルで`react-native -v` を実行して`react-native-cli` のバージョンが**表示されないこと**を確認してください。
-
-  :::caution
-  `react-native-cli`がインストールされていると、アプリ実行に失敗します。
-  詳細については、[react-native-cliについて](../../common-pitfalls/react-native-cli-uninstall.md)を参照してください。
-  :::
-
-- macOS
-
-  - Watchman
-
-    ターミナルで`watchman -v`を実行してください。
-
-    ```console
-    $ watchman -v
-    4.9.0
-    ```
-
-    エラーが表示された場合、インストールが必要です。バージョンに関して特に指定はありません。
-
-  - CocoaPods
-
-    ターミナルで`pod --version`を実行してください。
-
-    ```console
-    $ pod --version
-    1.10.1
-    ```
-
-    エラーが表示された場合、インストールが必要です。バージョンに関して特に指定はありません。
-
-  - Xcode
-
-    Xcodeがインストールされていることを確認してください。インストールされている場合、Xcodeを起動してください。起動後のウィンドウにバージョンが表示されています。`12.x` 以降であればOKです。
-
-    Xcode表示例：`Version 12.3(12C33)`
-
-    Xcodeがインストールされていない場合、またはバージョンが`11.x`以下の場合はインストールが必要です。
-
-:::caution
-公式手順でiOSアプリを起動しようとしてもビルドエラーになる[issue](https://github.com/facebook/react-native/issues/30836)があります。
-issueがCloseされていない場合、[Xcodeでビルドが失敗する](../../common-pitfalls/cant-build-in-xcode.md)を参照して対応するか、`AwesomeProject`のiOSシミュレータの確認をSkipしてください。
-
-学習で利用するテンプレートでは発生しないため、[プロジェクトの作成](./create-project.md)以降進めることができます。
+* コマンドラインで`react-native --version`を実行して、コマンドが見つからないというエラーが発生することを確認する。
+* コマンドが実行できてしまう場合は、`npm uninstall -g react-native-cli`を実行し、`react-native-cli`をアンインストールする。
+* 最終的に、コマンドラインで`react-native --version`を実行して、コマンドが見つからないというエラーが発生するようになったことを確認する。
 :::
 
-### Android SDK
+## インストールするツール
 
-Android開発はAndroid SDKのツール類を使用します。次の手順にそってツールが利用可能な状態かを確認してください。
-SDK Managerにてツールの状況を次の手順に従って確認してください。
+以下のツールは、React Nativeでのアプリ開発に必要となるので、必ずインストールしてください。XcodeとAndroid Studio以外のツールは、[Homebrew (macOS)](https://brew.sh/)や[Scoop (Windows)](https://scoop.sh/)などを利用してインストールすることをおすすめします。
 
-1. Android Studioを起動
-2. `Configure > SDK Manager > Appearance & Behavior > System Setting > Android SDK`まで移動
-3. `SDK Tools`タブを選択
-4. `Android SDK Platform-Tools`がインストール状態で表示されていることを確認
+| OS             | ツール                | バージョン                                             | その他                                                                                                                                                |
+|:---------------|:---------------------|:-----------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| macOS, Windows | Node.js              | [アクティブLTS](https://nodejs.org/ja/about/releases/) | Node.js 12以降であれば学習には問題ないはずですが、このコンテンツはアクティブLTSを前提にして書かれています。                                                         |
+| macOS, Windows | Java Development Kit | 11                                                   | ディストリビューションにはこだわりなし                                                                                                                     |
+| macOS, Windows | Android Studio       | 最新                                                  | インストール後に[Android仮想デバイスの作成](#android仮想デバイスの作成)と[Android SDKのコマンドラインツールの設定](#android-sdkのコマンドラインツールの設定)が必要です。 |
+| macOS          | Xcode                | 13                                                   | [異なるバージョンのXcodeを共存させる](../../santoku/development/development-environment/90.use-multiple-version-xcode.mdx)                                |
+| macOS          | CocoaPods            | 最新                                                  | [Ruby, CocoaPodsのインストール](#ruby-cocoapodsのインストール)                                                                                           |
 
-Android SDK Platform-Toolsがインストールされていない場合はインストールしてください。
+これらに加えて、少し便利に開発するために次のツールも導入してください。ドキュメント内の手順は、これらのツールがインストールされていることを前提にしています。
 
-つづいて環境変数の`PATH`に以下のパスが含まれていることを確認してください。
+| OS    | ツール      | 用途                                                        | おすすめのインストール方法                                |
+|:------|:-----------|:-----------------------------------------------------------|:------------------------------------------------------|
+| macOS | watchman   | ファイルシステムの変更監視（React Nativeアプリのビルド高速化など）  | Homebrew                                              |
+
+IDEは好みのものを利用していますが、主に以下のいずれかです。
+
+| ツール              |
+|:-------------------|
+| Visual Studio Code |
+| IntelliJ IDEA      |
+
+### Android仮想デバイスの作成
+
+[仮想デバイスを作成して管理する \| Android デベロッパー](https://developer.android.com/studio/run/managing-avds#createavd)を参照して、Androidアプリの開発中に使う仮想デバイスを作成してください。
+
+仮想デバイスは簡単に追加や削除ができるので、初回セットアップ時にはAVD Managerで「Recommended」に表示されているシステムイメージを利用するのが良いです。
+
+### Android SDKのコマンドラインツールの設定
+
+Android Studioをインストールした後、Android SDKに含まれる各種コマンドラインツールを使えるように設定する必要があります。
+
+Android StudioでSDK Managerを開き、SDK Toolsタブで以下のツールにチェックが付いていることを確認してください。チェックが付いていない場合は、チェックを付けて「Apply」もしくは「OK」を押してインストールしてください。
+
+* Android SDK Command-line Tools (latest)
+* Android SDK Platform-Tools
+* Android Emulator
+
+次に、[環境変数`ANDROID_SDK_ROOT`、`ANDROID_HOME`](https://developer.android.com/studio/command-line/variables)を設定します。
+
+| 環境変数            | 設定例（macOS）           | 設定例（Windows）               |
+|:-------------------|:------------------------|:------------------------------|
+| `ANDROID_SDK_ROOT` | `~/Library/Android/sdk` | `~\AppData\Local\Android\Sdk` |
+| `ANDROID_HOME`[^1] | `$ANDROID_SDK_ROOT`     | `%ANDROID_SDK_ROOT%`          |
+
+[^1]: `ANDROID_HOME`という環境変数はすでに非推奨となっています。そのため、設定しなくても基本的に問題ないはずですが、メンテナンスされていないツールがこの環境変数を参照している可能性などもあるので、念のため設定しています。
+
+最後に、各コマンドラインツールのディレクトリを`PATH`に追加します。
+
+| コマンドラインツール                                                                                    | 設定例（macOS）                                |
+|:----------------------------------------------------------------------------------------------------|:----------------------------------------------|
+| [Android SDK プラットフォーム ツール](https://developer.android.com/studio/command-line#tools-platform) | `$ANDROID_SDK_ROOT/platform-tools`            |
+| [Android SDK コマンドライン ツール](https://developer.android.com/studio/command-line#tools-sdk)        | `$ANDROID_SDK_ROOT/cmdline-tools/latest/bin` |
+| [Android エミュレータ](https://developer.android.com/studio/command-line#tools-emulator)              | `$ANDROID_SDK_ROOT/emulator`                  |
+
+:::danger warning
+**`$ANDROID_SDK_ROOT/tools`が`PATH`に含まれている場合、`PATH`から削除してください。**古いバージョンのAndroid Studioをインストールしていた場合や、インストール方法を紹介した古い記事などを参照してインストールした場合に、特に注意してください。分かりづらいエラーが発生して解決できないというケースがしばしば見られます。
+:::
+
+これでコマンドラインツールの設定が完了しているはずです。次のコマンドを実行して、正常に完了することを確認してください。
+
+* `sdkmanager --list_installed`
+  * インストール済みのSDKコンポーネントが表示されます。
+* `avdmanager list avd`
+  * 作成済みの仮想デバイスの詳細が表示されます。
+* `adb devices`
+  * 起動中のエミュレータや、USBで接続しているAndroid端末が表示されます。
+* `emulator -list-avds`
+  * 作成済みの仮想デバイスが表示されます。
+
+### Ruby, CocoaPodsのインストール
+
+macOSには、デフォルトでRubyがインストールされているので、`sudo gem install cocoapods`を実行することで[CocoaPods](https://cocoapods.org)をインストールできます。
+
+システム全体にBundlerをインストールするのは避けたい場合や、開発に特権ユーザを利用したくない場合はシステムとは別のRubyをインストールし、その中にBundlerをインストールしてください。[asdf-vm](https://asdf-vm.com/)などのツールを利用すると、システムとは別のRubyを簡単にインストールできます。
+
+## プロキシ設定
+
+プロキシ環境下で開発する場合は、各ツールにプロキシの設定が必要です。
+
+### 環境変数でのプロキシ設定
+
+npmやCocoaPodsなど多くのツールは環境変数に設定したプロキシ設定を利用します。以下の方法でプロキシを設定してください。
 
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
@@ -123,28 +117,37 @@ Android SDK Platform-Toolsがインストールされていない場合はイン
 
 <TabItem value="mac">
 
+`~/.bash_profile`に、以下の内容を追記してください。
+
 ```console
-~/Library/Android/sdk/platform-tools
+export http_proxy=http://プロキシアドレス:ポート番号
+export https_proxy=http://プロキシアドレス:ポート番号
 ```
 
+この設定を追記した後`source ~/.bash_profile`を実行すると、プロキシ設定が反映されるようになります。
 </TabItem>
 <TabItem value="win">
 
 ```console
-%LOCALAPPDATA%\Android\Sdk\platform-tools
+setx http_proxy http://プロキシアドレス:ポート番号
+setx https_proxy http://プロキシアドレス:ポート番号
 ```
 
 </TabItem>
 </Tabs>
 
-環境変数の`PATH`に含まれていなかった場合、追加してください。
+### Gradleのプロキシ設定
 
-## 環境構築
+AndroidアプリのビルドはGradleで行われます。Gradleのプロキシ設定には環境変数の設定値は反映されないので、個別に設定する必要があります。
 
-上記を確認した後、[React Nativeの公式ドキュメント](https://reactnative.dev/docs/environment-setup)にしたがい不足しているツールをインストールしてください。公式ドキュメントにはWindowsとmacOS両方の説明があります。環境に応じて参照する内容を選択してください。
+```properties
+systemProp.http.proxyHost=プロキシアドレス
+systemProp.http.proxyPort=8080
+systemProp.https.proxyHost=プロキシアドレス
+systemProp.https.proxyPort=8080
+```
 
-:::info
-[React Nativeの公式ドキュメント](https://reactnative.dev/docs/environment-setup)を参照する際は、**React Native CLI Quickstart**タブを選択して、参照してください。
-:::
+この設定内容を、次のファイルに追記してください。ファイルが存在しない場合は作成してください。
 
-ここまでで、環境構築に関連する説明は終了です。その他にVisual Studio Codeやproxy設定を[開発環境の補足](./supplement.md)として紹介していますので、環境を構築する上で必要な方は参照してください。
+* macOS: `$HOME/.gradle/gradle.properties`
+* Windows: `%USERPROFILE%\.gradle\gradle.properties`

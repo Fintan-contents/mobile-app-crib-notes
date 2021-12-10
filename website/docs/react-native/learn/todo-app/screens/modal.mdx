@@ -6,7 +6,7 @@ title: Modalスクリーン
 
 ![ModalScreen](../app-hands-on/screen-transition-modal.png)
 
-モーダルはStackナビゲータの`mode`属性（デフォルトは`card`）を`modal`に変更することで実現できます。
+モーダルはStackナビゲータの`screenOptions.presentation`属性（デフォルトは`card`）を`modal`に変更することで実現できます。
 画面遷移時のアニメーションの振る舞いが変わります。
 
 ## 画面を追加
@@ -123,11 +123,11 @@ ToDo一覧からToDo登録画面に遷移できるようにナビゲーション
 では`TodoForm`がモーダルになるように実装しましょう。
 `AuthedStackNav`ナビゲータに次の修正を加えます。
 
-1. Stackナビゲータの`mode`属性を`modal`に変更
+1. Stackナビゲータの`screenOptions.presentation`属性を`modal`に変更
 1. ヘッダの右にクローズボタンを追加
 1. ヘッダの背景を非表示（`headerTransparent`を`true`に設定）
 
-まずは、`AuthedStackNav`ナビゲータの`mode`属性を`modal`に変更します。
+まずは、`AuthedStackNav`ナビゲータの`screenOptions.presentation`属性を`modal`に変更します。
 
 ```diff title="/src/navigation/AuthedStackNav.tsx"
   import {createStackNavigator} from '@react-navigation/stack';
@@ -139,7 +139,7 @@ ToDo一覧からToDo登録画面に遷移できるようにナビゲーション
   export const AuthedStackNav: React.FC = () => {
     return (
 -     <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main">
-+     <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main" mode="modal">
++     <nav.Navigator screenOptions={{headerShown: false, presentation: 'modal'}} initialRouteName="Main">
         <nav.Screen name="Main" component={MainTabNav} />
         <nav.Screen
           name="TodoForm"
@@ -182,7 +182,7 @@ ToDo一覧からToDo登録画面に遷移できるようにナビゲーション
   const nav = createStackNavigator();
   export const AuthedStackNav: React.FC = () => {
     return (
-      <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main" mode="modal">
+      <nav.Navigator screenOptions={{headerShown: false, presentation: 'modal'}} initialRouteName="Main">
         <nav.Screen name="Main" component={MainTabNav} />
         <nav.Screen
           name="TodoForm"
@@ -205,7 +205,7 @@ ToDo一覧からToDo登録画面に遷移できるようにナビゲーション
   
   export const AuthedStackNav: React.FC = () => {
     return (
-      <nav.Navigator screenOptions={{headerShown: false}} initialRouteName="Main" mode="modal">
+      <nav.Navigator screenOptions={{headerShown: false, presentation: 'modal'}} initialRouteName="Main">
         <nav.Screen name="Main" component={MainTabNav} />
         <nav.Screen
           name="TodoForm"

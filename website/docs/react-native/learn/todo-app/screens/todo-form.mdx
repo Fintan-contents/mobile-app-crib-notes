@@ -38,7 +38,7 @@ export const TodoForm: React.FC = () => {
   });
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('beforeRemove', (event) => {
+    const unsubscribe = navigation.addListener('beforeRemove', event => {
       if (!formik.dirty || formik.isSubmitting) {
         return;
       }
@@ -111,7 +111,7 @@ ToDo登録画面では変更途中のデータがあった場合、破棄確認�
 
 ```typescript jsx
   useEffect(() => {
-    const unsubscribe = navigation.addListener('beforeRemove', (event) => {
+    const unsubscribe = navigation.addListener('beforeRemove', event => {
       if (!formik.dirty || formik.isSubmitting) {
         return;
       }

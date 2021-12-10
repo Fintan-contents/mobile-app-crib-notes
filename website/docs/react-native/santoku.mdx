@@ -4,7 +4,9 @@ sidebar_label: はじめに
 hide_table_of_contents: true
 ---
 
-ExpoのBare Workflowを利用して、React Nativeで開発しているサンプルアプリケーションについてのドキュメントです。
+モバイルアプリの開発は短期間での開発が要求される傾向にあります。そのため、技術選定や方式設計など、開発準備を十分に行う時間を確保できないことが多いと感じています。
+
+そこで、React Nativeアプリの開発をスムーズに進行できるよう、アプリ開発現場で役立つドキュメント類および、[ソースコード](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp)を公開しています。これらは時間割共有アプリを題材として、実際の開発プロセスに沿った形で作成しています。
 
 :::caution attention
 サンプルアプリケーションの開発手法はウォーターフォールモデルを採用しています。その理由は以下のとおりです。
@@ -13,46 +15,43 @@ ExpoのBare Workflowを利用して、React Nativeで開発しているサンプ
 - ウォーターフォールモデルに沿って各工程ごとの成果物を一通り作成し、その後に各成果物の効果を振り返ることで、モバイルアプリの開発を成功させるために最低限必要な成果物を見極めたい
 :::
 
-:::caution attention
-React Nativeでモバイルアプリを開発したときに、初めにきちんと検討するべきだったとふりかえったテーマをまとめています。
-
-基本的なテーマから順番に取り組んでいるので、現時点ではプロジェクトで必要になるであろうテーマのごく一部しかカバーできていません。今後も新しいテーマを追加し、内容を充実させていきたいと考えています。
-
-また、すでに紹介しているテーマについても、内容を追記する可能性もありますし、プラットフォームやフレームワークの変化などで変更されていく可能性もあります。
-:::
-
 <!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
 import {PageList} from '../../src/components';
 const overviews = [
   {
-    title: 'Glossary',
-    summary: '用語集',
-    to: '/react-native/santoku/glossary',
-  },
-  {
     title: 'Requirements',
-    summary: '要件定義',
+    summary: 'このアプリの機能要件と非機能要件を定義しています。特にモバイルアプリの非機能要件を重点的に扱っています。',
     to: '/react-native/santoku/requirements',
   },
   {
     title: 'Application Architecture',
-    summary: 'アプリケーションのアーキテクチャ',
+    summary: 'このアプリの方式設計です。モバイルアプリを開発したときに、初めにきちんと検討するべきだったとふりかえったテーマから順にまとめています。',
     to: '/react-native/santoku/application-architecture',
   },
   {
+    title: 'Test Planning',
+    summary: 'このアプリのテスト計画です。モバイルアプリ特有の観点に重点を置いて、テストの目的やプロセスを定義しています。',
+    to: '/react-native/santoku/test-planning',
+  },
+  {
     title: 'Design',
-    summary: '設計',
+    summary: 'このアプリの外部設計です。画面遷移図や画面仕様、API仕様などの外部設計工程で必要なドキュメント類をまとめています。',
     to: '/react-native/santoku/design',
   },
   {
     title: 'Development',
-    summary: '開発ガイド',
+    summary: 'このアプリの開発ガイドです。このアプリの開発者を対象として、各種ルールや開発ノウハウについてまとめています。',
     to: '/react-native/santoku/development',
   },
   {
+    title: 'Glossary',
+    summary: 'このアプリの用語集です。このアプリで使用する用語と意味の統一を目的としています。',
+    to: '/react-native/santoku/glossary',
+  },
+  {
     title: 'Decision Record',
-    summary: 'アーキテクチャや機能設計に関する判断の記録',
+    summary: 'このアプリのアーキテクチャや機能設計に関する判断の記録です。実際に方式を設計する際に、このサンプルアプリケーションをより有効に活用できるよう、設計した方式だけでなく検討過程も記録しています。',
     to: '/react-native/santoku/decisions',
   },
 ]

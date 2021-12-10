@@ -27,22 +27,22 @@ export const TodoBoard: React.FC = () => {
 /* ～省略～ */
 
   const toggleTodoCompletion = (id: number) => {
-    const target = todos.find((todo) => todo.id === id);
+    const target = todos.find(todo => todo.id === id);
     if (!target) {
       return;
     }
-+   setProcessingTodos((prevs) => [id, ...prevs]);
++   setProcessingTodos(prevs => [id, ...prevs]);
     TodoService.putTodo(id, !target.completed)
-      .then((returnedTodo) =>
-        setTodos((prevTodos) => {
-          return prevTodos.map((todo) => (todo.id === id ? returnedTodo : todo));
+      .then(returnedTodo =>
+        setTodos(prevTodos => {
+          return prevTodos.map(todo => (todo.id === id ? returnedTodo : todo));
         }),
       )
 -     .catch(() => {});
 +     .catch(() => {})
 +     .finally(() => {
-+       setProcessingTodos((prevs) => {
-+         return prevs.filter((processedId) => processedId !== id);
++       setProcessingTodos(prevs => {
++         return prevs.filter(processedId => processedId !== id);
 +       });
 +     });
   };

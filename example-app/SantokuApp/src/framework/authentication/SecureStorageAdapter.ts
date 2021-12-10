@@ -7,17 +7,20 @@ const STORED_ITEM_KEYS = {
   PASSWORD: 'password',
 } as const;
 
+// https://github.com/ws-4020/mobile-app-crib-notes/pull/640#issuecomment-984500781
+const KEY_CHAIN_ACCESSIBILITY = SecureStore.WHEN_UNLOCKED;
+
 /**
  * 指定されたアカウントIDを、アクティブなアカウントとしてセキュアストレージに格納します。
  * セキュアストレージに格納する際のオプションとして、以下を指定します。
- * ・keychainAccessible: {@link SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY}
+ * ・keychainAccessible: {@link SecureStore.WHEN_UNLOCKED}
  *
  * @param accountId アカウントID
  * @see {@link https://docs.expo.dev/versions/latest/sdk/securestore/#constants}
  */
 function saveActiveAccountId(accountId: string): Promise<void> {
   return SecureStore.setItemAsync(STORED_ITEM_KEYS.ACTIVE_ACCOUNT_ID, accountId, {
-    keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+    keychainAccessible: KEY_CHAIN_ACCESSIBILITY,
   });
 }
 
@@ -26,7 +29,7 @@ function saveActiveAccountId(accountId: string): Promise<void> {
  * 指定されたアカウントIDをSHA256でハッシュ化して、その値をキーとしてセキュアストレージに格納します。
  *
  * セキュアストレージに格納する際のオプションとして、以下を指定します。
- * ・keychainAccessible: {@link SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY}
+ * ・keychainAccessible: {@link SecureStore.WHEN_UNLOCKED}
  *
  * @param accountId アカウントID
  * @param password パスワード
@@ -36,7 +39,7 @@ async function savePassword(accountId: string, password: string): Promise<void> 
   // ログインに利用するような項目は平文で保存しないでハッシュ化します。
   const hash = await sha256(accountId);
   return SecureStore.setItemAsync(`${hash}_${STORED_ITEM_KEYS.PASSWORD}`, password, {
-    keychainAccessible: SecureStore.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+    keychainAccessible: KEY_CHAIN_ACCESSIBILITY,
   });
 }
 

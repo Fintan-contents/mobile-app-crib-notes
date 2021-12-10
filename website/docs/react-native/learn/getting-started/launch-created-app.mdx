@@ -93,6 +93,30 @@ iOSアプリがビルドされ、シミュレータにインストールされ�
 
 その後、インストールされたアプリがMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
 
+:::info
+2021-12-01時点では、`npm run ios`を実行すると以下のような警告ログが出力されてしまいます。起動に影響はないので無視してください。
+
+```console
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, id:dvtdevice-DVTiOSDeviceSimulatorPlaceholder-iphonesimulator:placeholder, name:Any iOS Simulator Device }
+{ platform:iOS Simulator, id:29115F30-1E4B-4263-A5EA-DD6DF9F2CF7A, OS:12.4, name:iPhone 5s }
+{ platform:iOS Simulator, id:F7A6B7F6-379F-4EF8-B791-B3723E8E9C19, OS:12.4, name:iPhone 6 }
+{ platform:iOS Simulator, id:C2A9EE34-85DD-4710-A659-97F3B96F8805, OS:12.4, name:iPhone 6 Plus }
+{ platform:iOS Simulator, id:8375252E-D370-429D-938D-DFD395C6A8A2, OS:12.4, name:iPhone 6s }
+{ platform:iOS Simulator, id:F6EB14F2-4925-41ED-A091-F480558C43CD, OS:12.4, name:iPhone 6s Plus }
+〜〜 以下略 〜〜
+```
+
+ログの最後に次のように「Successfully launched the app」が出力されていれば、問題ありません。
+
+```console
+info Installing "/Users/<username>/Library/Developer/Xcode/DerivedData/HandsOnApp-fvysoqvesrnotndxtrkjefuwnhbo/Build/Products/Debug-iphonesimulator/HandsOnApp.app"
+info Launching "personal.org.name.HandsOnApp."
+success Successfully launched the app on the simulator
+```
+
+:::
+
 </TabItem>
 
 </Tabs>

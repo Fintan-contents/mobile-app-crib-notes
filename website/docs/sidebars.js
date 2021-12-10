@@ -95,7 +95,6 @@ module.exports = {
         'react-native/learn/getting-started/setting-up-development-environment',
         'react-native/learn/getting-started/create-project',
         'react-native/learn/getting-started/launch-created-app',
-        'react-native/learn/getting-started/supplement',
       ],
     },
     {
@@ -224,10 +223,6 @@ module.exports = {
       id: 'react-native/santoku',
     },
     {
-      type: 'doc',
-      id: 'react-native/santoku/glossary',
-    },
-    {
       type: 'category',
       label: 'Requirements',
       items: [
@@ -276,6 +271,18 @@ module.exports = {
         },
         {
           type: 'category',
+          label: '認証',
+          items: [
+            'react-native/santoku/application-architecture/auth/overview',
+            'react-native/santoku/application-architecture/auth/signup',
+            'react-native/santoku/application-architecture/auth/login',
+            'react-native/santoku/application-architecture/auth/logout',
+            'react-native/santoku/application-architecture/auth/local-auth',
+            'react-native/santoku/application-architecture/auth/credential-management',
+          ],
+        },
+        {
+          type: 'category',
           label: 'メッセージ管理',
           items: [
             'react-native/santoku/application-architecture/message-configuration/overview',
@@ -314,6 +321,46 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Test Planning',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/test-all-planning',
+        },
+        {
+          type: 'category',
+          label: 'テスト観点',
+          items: [
+            'react-native/santoku/test-planning/test-type/overview',
+            {
+              type: 'category',
+              label: '機能テスト',
+              items: [
+                'react-native/santoku/test-planning/test-type/functional-testing',
+                'react-native/santoku/test-planning/test-type/functional-testing/layout-test',
+                'react-native/santoku/test-planning/test-type/functional-testing/operation-event',
+                'react-native/santoku/test-planning/test-type/functional-testing/display-content',
+                'react-native/santoku/test-planning/test-type/functional-testing/validation-check',
+                'react-native/santoku/test-planning/test-type/functional-testing/terminal-os',
+                'react-native/santoku/test-planning/test-type/functional-testing/use-case',
+              ],
+            },
+            'react-native/santoku/test-planning/test-type/configuration-test',
+            'react-native/santoku/test-planning/test-type/performance-test',
+          ],
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/test-variation',
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Design',
       items: [
         {
@@ -330,7 +377,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: '画面設計',
+          label: '画面仕様',
           items: [
             {
               type: 'doc',
@@ -342,7 +389,7 @@ module.exports = {
             },
             {
               type: 'category',
-              label: '画面設計における定義事項',
+              label: '画面仕様における定義事項',
               items: [
                 'react-native/santoku/design/screen-specs/definitions/overview',
                 {
@@ -458,6 +505,10 @@ module.exports = {
           id: 'react-native/santoku/development/dependency-management',
         },
       ],
+    },
+    {
+      type: 'doc',
+      id: 'react-native/santoku/glossary',
     },
     {
       type: 'category',
