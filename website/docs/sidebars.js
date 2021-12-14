@@ -262,6 +262,10 @@ module.exports = {
           id: 'react-native/santoku/application-architecture',
         },
         {
+          type: 'doc',
+          id: 'react-native/santoku/application-architecture/system-configuration/overview',
+        },
+        {
           type: 'category',
           label: 'アプリのライフサイクル管理',
           items: [
