@@ -26,6 +26,9 @@ IgnoreDirectoryMissingTrailingSlash: true
 IgnoreInternalEmptyHash: true
 IgnoreInternalURLs:
   - '#!'
+  # Redocで表示しているページはSPAなので生成されるHTMLにはidは出力されていない。
+  # htmltestではstaticなチェックしかできず、hash does not existになってしまうので無視する。
+  - /mobile-app-crib-notes/react-native/santoku/design/api-document#operation/get-accounts-me-terms
 IgnoreURLs:
   - localhost:19002
   # 認証が必要なURLは無視
