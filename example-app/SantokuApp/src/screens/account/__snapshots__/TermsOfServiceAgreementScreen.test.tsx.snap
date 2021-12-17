@@ -25,6 +25,7 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
     <RNCWebView
       androidLayerType="software"
       cacheEnabled={true}
+      decelerationRate={0.998}
       injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
       injectedJavaScriptForMainFrameOnly={true}
       javaScriptEnabled={true}
