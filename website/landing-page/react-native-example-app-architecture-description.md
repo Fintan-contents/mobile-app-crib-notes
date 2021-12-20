@@ -33,6 +33,26 @@
 
 ## 更新履歴
 
+### 2022/01/12
+
+#### 🌱 新規コンテンツ（2022/01/12）
+
+- 認証
+  - アプリケーション方式
+    - [認証方式](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/overview)
+    - [サインアップ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/signup)
+    - [ログイン](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/login)
+    - [ログアウト](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/logout)
+    - [端末認証](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/local-auth)
+    - [ログイン資格情報の管理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/credential-management)
+  - Decision Records
+    - [認証方式の方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-007-auth)
+- 単体テスト
+  - テスト計画
+    - [単体テスト計画](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/test-planning/ut-planning/)
+  - 開発ガイド
+    - [エミュレータ／シミュレータの作成](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/test/create-emulator-simulator/)
+
 ### 2021/12/22
 
 #### 🌱 新規コンテンツ（2021/12/22）
