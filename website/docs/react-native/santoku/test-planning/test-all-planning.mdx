@@ -71,21 +71,22 @@ title: 全体テスト計画
 
 単体テストの[テスト工程定義](#単体テスト)に従い、以下の観点をテスト対象とします。
 
-- ユーザ操作と画面遷移に関する観点
-- 端末やOSに関する観点
-- 画面デザインと表示データに関する観点
-- バリデーションに関する観点
+- [レイアウト](/react-native/santoku/test-planning/test-type/functional-testing/layout-test.mdx)
+- [操作やイベント](/react-native/santoku/test-planning/test-type/functional-testing/operation-event.mdx)
+- [表示内容](/react-native/santoku/test-planning/test-type/functional-testing/display-content.mdx)
+- [バリデーション](/react-native/santoku/test-planning/test-type/functional-testing/validation-check.mdx)
+- [端末やOS](/react-native/santoku/test-planning/test-type/functional-testing/terminal-os.mdx)
+- [ユースケース](/react-native/santoku/test-planning/test-type/functional-testing/use-case.mdx)（画面単位や機能単位のユースケース）
 
 #### 結合テスト工程
 
 結合テストの[テスト工程定義](#結合テスト)に従い、以下の観点をテスト対象とします。
 
-- このアプリの利用シナリオを想定したテスト観点
-- 端末やOSに関する観点
-  - OSバージョン毎のバリエーションを検証する観点
-  - レイアウトバリエーション毎の画面表示を検証する観点
-  - ネイティブ機能毎のバリエーションを検証する観点
-- 機能毎に応答時間の測定とアプリ利用中のCPU／メモリ使用率を確認して問題がないかを検証する観点
+- [ユースケース](/react-native/santoku/test-planning/test-type/functional-testing/use-case.mdx)（複数機能の連携や、複数画面にまたがるユースケース）
+- [OSバリエーション](/react-native/santoku/test-planning/test-type/configuration-test.mdx#osバリエーション)
+- [レイアウトバリエーション](/react-native/santoku/test-planning/test-type/configuration-test.mdx#レイアウトバリエーション)
+- [ネイティブ機能バリエーション](/react-native/santoku/test-planning/test-type/configuration-test.mdx#ネイティブ機能バリエーション)
+- [性能](/react-native/santoku/test-planning/test-type/performance-test.mdx)
 
 ### デバイス
 
