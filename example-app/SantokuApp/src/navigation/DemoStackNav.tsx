@@ -15,6 +15,11 @@ import {
   AppInfoScreen,
   LogScreen,
   MessageScreen,
+  ButtonScreen,
+  SnackbarScreen,
+  LocalAuthenticationScreen,
+  AuthenticationScreen,
+  HttpApiScreen,
 } from 'screens';
 
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
@@ -45,6 +50,11 @@ export const Screen: React.FC = () => {
       <nav.Screen {...InstructionsScreen} />
       <nav.Screen {...LogScreen} />
       <nav.Screen {...MessageScreen} />
+      <nav.Screen {...ButtonScreen} />
+      <nav.Screen {...SnackbarScreen} />
+      <nav.Screen {...LocalAuthenticationScreen} />
+      <nav.Screen {...AuthenticationScreen} />
+      <nav.Screen {...HttpApiScreen} />
     </nav.Navigator>
   );
 };

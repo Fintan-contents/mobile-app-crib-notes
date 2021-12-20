@@ -16,7 +16,7 @@ export const useAppStateHistory = () => {
   const saveEvent = useCallback(
     (event: AppStateEvent, next: AppStateStatus) => {
       if (isMounted()) {
-        setAppStateHistory((history) => {
+        setAppStateHistory(history => {
           return [...history, {event, timestamp: new Date(), state: next}];
         });
       }
@@ -42,9 +42,9 @@ export const useAppStateHistory = () => {
 
   const registerEventListeners = useCallback(() => {
     const states: AppStateEvent[] = ['focus', 'blur', 'change', 'memoryWarning'];
-    const unregisterEventListeners = states.map((event) => registerEventListener(event));
+    const unregisterEventListeners = states.map(event => registerEventListener(event));
     return () => {
-      unregisterEventListeners.forEach((unregister) => unregister?.());
+      unregisterEventListeners.forEach(unregister => unregister?.());
     };
   }, [registerEventListener]);
 

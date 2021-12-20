@@ -53,9 +53,11 @@ buck-out/
 # Expo
 .expo/
 web-build/
+dist/
 
 # Jest
 jest-junit.xml
+/coverage
 
 # Local environmental variables
 ios/PersonalAccount.xcconfig

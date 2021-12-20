@@ -22,7 +22,7 @@ const copyright = `<div class="no-content">
 
 const injectOptions = {
   organization,
-  rnSpoilerTag: 'v2021.5.0',
+  rnSpoilerTag: 'v2021.12.0',
 };
 
 module.exports = {
@@ -173,6 +173,20 @@ module.exports = {
         blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+      },
+    ],
+    [
+      'redocusaurus',
+      {
+        specs: [
+          {
+            spec: '../example-app/api-document/openapi.yaml',
+            routePath: '/react-native/santoku/design/api-document',
+          },
+        ],
+        theme: {
+          primaryColor: '#3578e5',
         },
       },
     ],

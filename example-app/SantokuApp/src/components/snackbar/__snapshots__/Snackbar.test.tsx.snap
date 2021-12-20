@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snackbar Snackbarが正常にrenderできることを確認: render直後 1`] = `
+Array [
+  <Text
+    testID="text"
+  >
+    test
+  </Text>,
+  <View
+    testID="FullWindowOverlay"
+  >
+    <View
+      style={
+        Object {
+          "bottom": 20,
+          "flex": 1,
+          "minHeight": 48,
+          "opacity": 0,
+          "paddingHorizontal": 10,
+          "position": "absolute",
+          "width": "100%",
+        }
+      }
+      testID="snackbarAnimatedView"
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#393939",
+            "borderRadius": 5,
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+          }
+        }
+        testID="snackbarStyleView"
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "paddingLeft": 20,
+              "paddingRight": 10,
+              "paddingVertical": 20,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "white",
+              }
+            }
+          >
+            テストメッセージ
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>,
+]
+`;
+
+exports[`Snackbar Snackbarが正常にrenderできることを確認: フェードアウト後 1`] = `
+<Text
+  testID="text"
+>
+  test
+</Text>
+`;
+
+exports[`Snackbar Snackbarが正常にrenderできることを確認: フェードイン後 1`] = `
+Array [
+  <Text
+    testID="text"
+  >
+    test
+  </Text>,
+  <View
+    testID="FullWindowOverlay"
+  >
+    <View
+      style={
+        Object {
+          "bottom": 20,
+          "flex": 1,
+          "minHeight": 48,
+          "opacity": 1,
+          "paddingHorizontal": 10,
+          "position": "absolute",
+          "width": "100%",
+        }
+      }
+      testID="snackbarAnimatedView"
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#393939",
+            "borderRadius": 5,
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+          }
+        }
+        testID="snackbarStyleView"
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "paddingLeft": 20,
+              "paddingRight": 10,
+              "paddingVertical": 20,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "white",
+              }
+            }
+          >
+            テストメッセージ
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>,
+]
+`;

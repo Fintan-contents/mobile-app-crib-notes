@@ -6,7 +6,7 @@ import {MessagesLoader} from './Message';
  */
 class BundledMessagesLoader implements MessagesLoader {
   load() {
-    return new Promise<BundledMessagesType>((resolve) => resolve(bundledMessages));
+    return new Promise<BundledMessagesType>(resolve => resolve(bundledMessages));
   }
 }
 

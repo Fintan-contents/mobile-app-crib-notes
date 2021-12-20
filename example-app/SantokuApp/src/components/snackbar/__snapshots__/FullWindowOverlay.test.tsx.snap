@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FullWindowOverlay Android環境で子要素を含めて正常にrenderできることを確認 1`] = `
+<Text
+  testID="text"
+>
+  test
+</Text>
+`;
+
+exports[`FullWindowOverlay iOS環境で子要素を含めて正常にrenderできることを確認 1`] = `
+<View
+  testID="FullWindowOverlay"
+>
+  <Text
+    testID="text"
+  >
+    test
+  </Text>
+</View>
+`;

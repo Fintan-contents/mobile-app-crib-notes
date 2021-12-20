@@ -11,7 +11,7 @@ export const useMessage = () => {
       },
       {
         name: 'validation.required',
-        value: m('validation.required', m('チーム名')),
+        value: m('validation.required', m('チーム詳細')),
       },
       {
         name: 'msg.error.ネットワーク',

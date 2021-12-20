@@ -1,0 +1,13 @@
+diff --git a/node_modules/expo-splash-screen/android/src/main/java/expo/modules/splashscreen/SplashScreenImageResizeMode.kt b/node_modules/expo-splash-screen/android/src/main/java/expo/modules/splashscreen/SplashScreenImageResizeMode.kt
+index 7785727..9b57e82 100644
+--- a/node_modules/expo-splash-screen/android/src/main/java/expo/modules/splashscreen/SplashScreenImageResizeMode.kt
++++ b/node_modules/expo-splash-screen/android/src/main/java/expo/modules/splashscreen/SplashScreenImageResizeMode.kt
+@@ -8,7 +8,7 @@ enum class SplashScreenImageResizeMode(
+ ) {
+   CONTAIN(ImageView.ScaleType.FIT_CENTER, "contain"),
+   COVER(ImageView.ScaleType.CENTER_CROP, "cover"),
+-  NATIVE(ImageView.ScaleType.CENTER, "native");
++  NATIVE(ImageView.ScaleType.FIT_XY, "native");
+ 
+   companion object {
+     @JvmStatic

@@ -1,0 +1,78 @@
+---
+title: 端末認証
+---
+
+このアプリでは、モバイル端末の紛失や盗難リスクに対応するため、PINコードやユーザの生体属性を使用して、ユーザが端末の所有者であることを確認する端末認証を実施します。端末認証を実施するタイミングは以下です。
+
+- アプリ起動後に自動ログインする直前
+- ログイン画面でアカウントIDを入力してログインする直前
+
+なお、端末認証を実現するためのライブラリとしてExpoの[LocalAuthentication](https://docs.expo.dev/versions/latest/sdk/local-authentication/)を利用します。
+
+## 機能
+
+端末認証として提供する機能は以下になります。
+
+| 機能 | 概要 |
+|:--|:--|
+| 生体属性の登録確認 | 端末に指紋や顔、虹彩のデータが登録されているかを確認します。 |
+| 生体認証 | 登録されている生体属性を用いて認証します。 |
+
+### 生体属性の登録確認
+
+端末に指紋や顔、虹彩のデータが登録されているかを確認します。登録されている場合は`true`を返却し、登録されていない場合は`false`を返却します。
+
+```typescript jsx title='生体属性の登録確認の例'
+const isEnrolled = await LocalAuthentication.isEnrolled();
+```
+
+どの生体属性が登録されているか（例えば、指紋データが登録されているか）も確認できます。
+
+```typescript jsx title='生体属性の登録確認の例'
+// 指紋認証がサポートされているかどうか
+const isSupported = await LocalAuthentication.isFingerPrintSupported();
+```
+
+```typescript jsx title='生体属性の登録確認の例'
+// 顔認証がサポートされているかどうか
+const isSupported = await LocalAuthentication.isFacialSupported();
+```
+
+```typescript jsx title='生体属性の登録確認の例'
+// 虹彩認証がサポートされているかどうか
+const isSupported = await LocalAuthentication.isIrisSupported();
+```
+
+:::note
+どの生体属性を登録できるかは端末によって違います。
+
+例えば、iPhone8では指紋のデータを登録できますが、顔のデータは登録できません。一方、iPhone11では顔のデータは登録できますが、指紋のデータは登録できません。虹彩データに関しては、Androidの一部機種のみサポートしています。
+
+そのため、特定の生体属性のみ認証するような仕組みは避けた方が良いでしょう。
+:::
+
+### 生体認証
+
+端末に登録されている生体属性を利用して、端末の所有者であるかを確認します。
+
+生体認証には、いくつかのオプション項目を指定できます。詳細は、[LocalAuthenticationOptions](https://docs.expo.dev/versions/latest/sdk/local-authentication/#localauthenticationoptions)を参照してください。
+
+このアプリでは、`disableDeviceFallback`を`false`に設定して、生体認証に失敗した場合などのフォールバックとしてPINコード（パスコード）による認証も許可します。
+
+```typescript jsx title='生体認証の例'
+const result = await LocalAuthentication.authenticate({
+  cancelLabel: 'キャンセル',
+  promptMessage: '生体認証',
+  fallbackLabel: 'パスコードで認証',
+  disableDeviceFallback: false,
+});
+```
+
+:::caution
+Androidでは、`disableDeviceFallback`を`true`にして生体認証のフォールバックを無効にした場合、`cancelLabel`設定する必要があります。設定しないと以下のようなエラーが発生します。
+
+```console
+Negative text must be set and non-empty.
+```
+
+:::

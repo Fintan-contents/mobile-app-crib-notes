@@ -141,7 +141,7 @@ jobs:
         # 同じPull Requestの中で、「新規ファイルの追加」と「追加した新規ファイルへの外部リンクの追加」をしてしまうと、htmltestでNot Foundエラーになってしまいます。
         # Fintan-contentsへのPRでは普通にこの状況が発生するので、htmltestをスキップします。
         if: ${{ !(github.repository_owner == 'Fintan-contents' && github.event_name == 'pull_request') }}
-        uses: docker://wjdp/htmltest:latest
+        uses: docker://wjdp/htmltest:v0.15.0
         with:
           args: --conf website/.htmltest.yaml website/build
 

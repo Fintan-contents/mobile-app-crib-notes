@@ -1,0 +1,31 @@
+---
+title: テスト観点
+sidebar_label: 概要
+---
+
+非機能要件「テストに関する事項」の[テスト種別](../../requirements/non-functional/test-outline.mdx#テスト種別)ごとにテスト観点をまとめています。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+import {PageList} from '../../../../../src/components';
+const overviews = [
+  {
+    title: '機能テスト',
+    to: '/react-native/santoku/test-planning/test-type/functional-testing',
+    summary: <>各種テスト観点（画面の表示結果や画面内操作の結果など）をまとめています</>,
+  },
+  {
+    title: '構成テスト',
+    to: '/react-native/santoku/test-planning/test-type/configuration-test',
+    summary: <>OSバージョンや端末解像度ごとに実施が必要なテスト観点をまとめています</>,
+  },
+    {
+    title: '性能テスト',
+    to: '/react-native/santoku/test-planning/test-type/performance-test',
+    summary: <>アプリの応答時間やCPU・メモリ使用率のテスト観点をまとめています</>,
+  },
+];
+
+<PageList overviews={overviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->

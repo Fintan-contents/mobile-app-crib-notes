@@ -13,3 +13,4 @@ export const ScreenStackHeaderRightView = View;
 export const ScreenStackHeaderLeftView = View;
 export const ScreenStackHeaderTitleView = View;
 export const ScreenStackHeaderCenterView = View;
+export const FullWindowOverlay = View;
