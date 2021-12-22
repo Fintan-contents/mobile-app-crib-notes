@@ -233,6 +233,10 @@ module.exports = {
             to: '/reference/auth/authn-with-backend-using-OIDC-and-device-authn', // string
           },
           {
+            from: '/react-native/santoku/test-planning/test-point/overview', // string | string[]
+            to: '/react-native/santoku/test-planning/test-type/overview', // string
+          },
+          {
             from: '/docs', // string | string[]
             to: '/reference', // string
           },
