@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithSnackbar useSnackbarのhideで、Snackbarが消えることを確認 1`] = `
+<Text
+  testID="text"
+>
+  test
+</Text>
+`;
+
+exports[`WithSnackbar useSnackbarのshowWithCloseButtonで、ボタン付きSnackbarが正常に表示されることを確認 1`] = `
+Array [
+  <Text
+    testID="text"
+  >
+    test
+  </Text>,
+  <View
+    testID="FullWindowOverlay"
+  >
+    <View
+      style={
+        Object {
+          "bottom": 20,
+          "flex": 1,
+          "minHeight": 48,
+          "opacity": 0,
+          "paddingHorizontal": 10,
+          "position": "absolute",
+          "width": "100%",
+        }
+      }
+      testID="snackbarAnimatedView"
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#393939",
+            "borderRadius": 5,
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+          }
+        }
+        testID="snackbarStyleView"
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "paddingLeft": 20,
+              "paddingRight": 10,
+              "paddingVertical": 20,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "red",
+              }
+            }
+          >
+            テストメッセージ
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flex": 0,
+              "justifyContent": "flex-end",
+              "paddingLeft": 10,
+              "paddingRight": 20,
+              "paddingVertical": 20,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#85A3F1",
+                }
+              }
+            >
+              閉じる
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>,
+]
+`;
+
+exports[`WithSnackbar useSnackbarのshowで、Snackbarが正常に表示されることを確認 1`] = `
+Array [
+  <Text
+    testID="text"
+  >
+    test
+  </Text>,
+  <View
+    testID="FullWindowOverlay"
+  >
+    <View
+      style={
+        Object {
+          "bottom": 20,
+          "flex": 1,
+          "minHeight": 48,
+          "opacity": 0,
+          "paddingHorizontal": 10,
+          "position": "absolute",
+          "width": "100%",
+        }
+      }
+      testID="snackbarAnimatedView"
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#393939",
+            "borderRadius": 5,
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+          }
+        }
+        testID="snackbarStyleView"
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "paddingLeft": 20,
+              "paddingRight": 10,
+              "paddingVertical": 20,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "blue",
+              }
+            }
+          >
+            テストメッセージ
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>,
+]
+`;

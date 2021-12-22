@@ -93,7 +93,7 @@ const postTodo = async (text: string) => {
 };
 
 const putTodo = async (id: number, completed: boolean) => {
-  const target = todos.find((todo) => todo.id === id);
+  const target = todos.find(todo => todo.id === id);
   if (!target) {
     return Promise.reject(new Error('not found'));
   }
@@ -234,7 +234,7 @@ export const TodoList: React.FC<Props> = ({todos, contentContainerStyle, toggleT
           toggleTodoCompletion={toggleTodoCompletion}
         />
       )}
-      keyExtractor={(todo) => String(todo.id)}
+      keyExtractor={todo => String(todo.id)}
     />
   );
 };
@@ -283,8 +283,8 @@ type ShowFilter = {
 
 const showFilter: ShowFilter = {
   [FilterType.ALL]: () => true,
-  [FilterType.INCOMPLETE]: (todo) => !todo.completed,
-  [FilterType.COMPLETED]: (todo) => todo.completed,
+  [FilterType.INCOMPLETE]: todo => !todo.completed,
+  [FilterType.COMPLETED]: todo => todo.completed,
 };
 
 export const TodoBoard: React.FC = () => {
@@ -297,7 +297,7 @@ export const TodoBoard: React.FC = () => {
     let isActive = true;
 
     TodoService.getTodos()
-      .then((response) => {
+      .then(response => {
         if (isActive) {
           setTodos(response);
         }
@@ -310,14 +310,14 @@ export const TodoBoard: React.FC = () => {
   }, []);
 
   const toggleTodoCompletion = (id: number) => {
-    const target = todos.find((todo) => todo.id === id);
+    const target = todos.find(todo => todo.id === id);
     if (!target) {
       return;
     }
     TodoService.putTodo(id, !target.completed)
-      .then((returnedTodo) =>
-        setTodos((prevTodos) => {
-          return prevTodos.map((todo) => (todo.id === id ? returnedTodo : todo));
+      .then(returnedTodo =>
+        setTodos(prevTodos => {
+          return prevTodos.map(todo => (todo.id === id ? returnedTodo : todo));
         }),
       )
       .catch(() => {});

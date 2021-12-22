@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources>
+  <string name="expo_splash_screen_resize_mode">native</string>
+  <!--
+    Avoid image shifting occurs when the splash screen changes from theme background to ImageView shown by expo-splash-screen
+    cf.) https://github.com/expo/expo/tree/master/packages/expo-splash-screen#-optional-customize-statusbar-1
+  -->
+  <string name="expo_splash_screen_status_bar_translucent">true</string>
+</resources>

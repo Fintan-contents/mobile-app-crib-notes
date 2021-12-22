@@ -1,0 +1,5 @@
+# 環境変数から取得した値で設定値を上書きするための設定。
+# 詳しくは以下のNablarch解説書を参照すること。
+# https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/libraries/repository.html#os
+nablarch.core.repository.di.config.externalize.OsEnvironmentVariableExternalizedLoader
+jp.fintan.mobile.santokuapp.system.nablarch.di.SantokuAppComponentDefinitionLoader

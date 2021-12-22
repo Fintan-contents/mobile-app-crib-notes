@@ -95,7 +95,6 @@ module.exports = {
         'react-native/learn/getting-started/setting-up-development-environment',
         'react-native/learn/getting-started/create-project',
         'react-native/learn/getting-started/launch-created-app',
-        'react-native/learn/getting-started/supplement',
       ],
     },
     {
@@ -225,6 +224,37 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Requirements',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/requirements',
+        },
+        {
+          type: 'category',
+          label: '機能要件',
+          items: ['react-native/santoku/requirements/functional/overview'],
+        },
+        {
+          type: 'category',
+          label: '非機能要件',
+          items: [
+            'react-native/santoku/requirements/non-functional/overview',
+            'react-native/santoku/requirements/non-functional/usability',
+            'react-native/santoku/requirements/non-functional/system-method',
+            'react-native/santoku/requirements/non-functional/performance',
+            'react-native/santoku/requirements/non-functional/compatibility',
+            'react-native/santoku/requirements/non-functional/security',
+            'react-native/santoku/requirements/non-functional/test-outline',
+            'react-native/santoku/requirements/non-functional/operation',
+            'react-native/santoku/requirements/non-functional/maintenance',
+            'react-native/santoku/requirements/non-functional/other',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'Application Architecture',
       items: [
         {
@@ -232,11 +262,27 @@ module.exports = {
           id: 'react-native/santoku/application-architecture',
         },
         {
+          type: 'doc',
+          id: 'react-native/santoku/application-architecture/system-configuration/overview',
+        },
+        {
           type: 'category',
           label: 'アプリのライフサイクル管理',
           items: [
             'react-native/santoku/application-architecture/life-cycle-management/overview',
             'react-native/santoku/application-architecture/life-cycle-management/initialization',
+          ],
+        },
+        {
+          type: 'category',
+          label: '認証',
+          items: [
+            'react-native/santoku/application-architecture/auth/overview',
+            'react-native/santoku/application-architecture/auth/signup',
+            'react-native/santoku/application-architecture/auth/login',
+            'react-native/santoku/application-architecture/auth/logout',
+            'react-native/santoku/application-architecture/auth/local-auth',
+            'react-native/santoku/application-architecture/auth/credential-management',
           ],
         },
         {
@@ -273,8 +319,129 @@ module.exports = {
             'react-native/santoku/application-architecture/error-handling/overview',
             'react-native/santoku/application-architecture/error-handling/how-to-handle-error',
             'react-native/santoku/application-architecture/http-api/http-api-error-handling',
-            'react-native/santoku/application-architecture/webview/webview-error-handling',
           ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Test Planning',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/test-all-planning',
+        },
+        {
+          type: 'category',
+          label: 'テスト観点',
+          items: [
+            'react-native/santoku/test-planning/test-type/overview',
+            {
+              type: 'category',
+              label: '機能テスト',
+              items: [
+                'react-native/santoku/test-planning/test-type/functional-testing',
+                'react-native/santoku/test-planning/test-type/functional-testing/layout-test',
+                'react-native/santoku/test-planning/test-type/functional-testing/operation-event',
+                'react-native/santoku/test-planning/test-type/functional-testing/display-content',
+                'react-native/santoku/test-planning/test-type/functional-testing/validation-check',
+                'react-native/santoku/test-planning/test-type/functional-testing/terminal-os',
+                'react-native/santoku/test-planning/test-type/functional-testing/use-case',
+              ],
+            },
+            'react-native/santoku/test-planning/test-type/configuration-test',
+            'react-native/santoku/test-planning/test-type/performance-test',
+          ],
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/test-variation',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Design',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/screen-list/overview',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/screen-transitions/overview',
+        },
+        {
+          type: 'category',
+          label: '画面仕様',
+          items: [
+            {
+              type: 'doc',
+              id: 'react-native/santoku/design/screen-specs/overview',
+            },
+            {
+              type: 'doc',
+              id: 'react-native/santoku/design/screen-specs/basic-policy',
+            },
+            {
+              type: 'category',
+              label: '画面仕様における定義事項',
+              items: [
+                'react-native/santoku/design/screen-specs/definitions/overview',
+                {
+                  type: 'category',
+                  label: '画面種別',
+                  items: [
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/overview',
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/screen',
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/form-sheet',
+                    'react-native/santoku/design/screen-specs/definitions/screen-type/overlay',
+                  ],
+                },
+              ],
+            },
+            {
+              type: 'category',
+              label: '画面',
+              items: [
+                'react-native/santoku/design/screen-specs/screens/overview',
+                {
+                  type: 'category',
+                  label: '共通部',
+                  items: ['react-native/santoku/design/screen-specs/screens/common/bottom-tab/overview'],
+                },
+                'react-native/santoku/design/screen-specs/screens/splash-screen/overview',
+                'react-native/santoku/design/screen-specs/screens/terms-of-service-agreement/overview',
+              ],
+            },
+            {
+              type: 'category',
+              label: '共通部品',
+              items: [
+                'react-native/santoku/design/screen-specs/common-parts/overview',
+                'react-native/santoku/design/screen-specs/common-parts/button/overview',
+                'react-native/santoku/design/screen-specs/common-parts/snackbar/overview',
+                'react-native/santoku/design/screen-specs/common-parts/webview/overview',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/design/message-list/overview',
+        },
+        {
+          type: 'category',
+          label: 'コンテキスト設計',
+          items: ['react-native/santoku/design/context/overview', 'react-native/santoku/design/context/theme'],
         },
       ],
     },
@@ -344,6 +511,10 @@ module.exports = {
       ],
     },
     {
+      type: 'doc',
+      id: 'react-native/santoku/glossary',
+    },
+    {
       type: 'category',
       label: 'Decision Records',
       items: [
@@ -354,6 +525,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-004-deep-link',
         'react-native/santoku/decisions/adr-005-message',
         'react-native/santoku/decisions/adr-006-logging',
+        'react-native/santoku/decisions/adr-007-auth',
       ],
     },
   ],

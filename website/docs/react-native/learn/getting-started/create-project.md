@@ -36,7 +36,7 @@ npx react-native init --template https://github.com/ws-4020/rn-spoiler#{@inject:
 :::
 
 :::info
-Node.js 15系で初めて`npx react-native init ...`を実行すると、次のように不足しているパッケージをインストールするかと聞かれます。`react-native`をインストールしようとしていれば問題ないので、エンターキーを押して実行してください。
+初めて`npx react-native init ...`を実行すると、次のように不足しているパッケージをインストールするかと聞かれます。`react-native`をインストールしようとしていれば問題ないので、エンターキーを押して実行してください。
 
 ```console
 Need to install the following packages:
@@ -46,8 +46,8 @@ Ok to proceed? (y)
 
 :::
 
-:::caution
-npm 7で`peerDependencies`の扱いが変更された影響で、npm 7でRN Spoilerをテンプレートとしてプロジェクトを作成すると次のようなエラーが発生します。
+:::info
+RN Spoilerをテンプレートとしてプロジェクトを作成したときに、次のようなエラーで異常終了してしまうことがあります。
 
 ```console
 npm ERR! code ERESOLVE

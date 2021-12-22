@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- テーブル定義 -->
+  <import file="nablarch/schema-config.xml"/>
+
+  <!-- 精査に使用する文字集合定義 -->
+  <import file="nablarch/core/validation/charset-definition.xml"/>
+
+  <!-- ファイルアップロード機能設定 -->
+  <import file="nablarch/webui/multipart.xml"/>
+
+  <!-- BeanValidation実装クラス -->
+  <component name="validationStrategy" class="nablarch.common.web.validator.BeanValidationStrategy"/>
+
+  <!-- セッションストア機能 -->
+  <import file="nablarch/webui/session-store.xml"/>
+
+  <!-- 環境設定ファイル -->
+  <config-file file="common.config"/>
+  <config-file file="env.config"/>
+
+  <!-- データベース設定 -->
+  <import file="nablarch/core/db-base.xml"/>
+  <import file="nablarch/core/db/connection-factory-datasource.xml"/>
+  <component name="dataSource"
+      class="com.zaxxer.hikari.HikariDataSource" autowireType="None">
+    <property name="driverClassName" value="${nablarch.db.jdbcDriver}"/>
+    <property name="jdbcUrl" value="${nablarch.db.url}"/>
+    <property name="username" value="${nablarch.db.user}"/>
+    <property name="password" value="${nablarch.db.password}"/>
+    <property name="maximumPoolSize" value="${nablarch.db.maxPoolSize}"/>
+    <property name="minimumIdle" value="${nablarch.db.minimumIdle}"/>
+    <property name="connectionTimeout" value="${nablarch.db.connectionTimeout}"/>
+    <property name="idleTimeout" value="${nablarch.db.idleTimeout}"/>
+    <property name="maxLifetime" value="${nablarch.db.maxLifetime}"/>
+    <property name="validationTimeout" value="${nablarch.db.validationTimeout}"/>
+  </component>
+
+  <!--パッケージマッピングの設定 -->
+  <component name="packageMapping" class="nablarch.integration.router.PathOptionsProviderRoutesMapping">
+    <property name="pathOptionsProvider">
+      <component class="nablarch.integration.router.jaxrs.JaxRsPathOptionsProvider">
+        <property name="applicationPath" value="${nablarch.webApi.applicationPath}"/>
+        <property name="basePackage" value="${nablarch.commonProperty.basePackage}"/>
+      </component>
+    </property>
+    <property name="methodBinderFactory">
+      <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
+        <property name="handlerList">
+          <component class="jp.fintan.mobile.santokuapp.system.nablarch.jaxrs.BodyConvertHandlerListFactory">
+            <property name="preHandlers">
+              <list>
+                <component class="jp.fintan.mobile.santokuapp.system.nablarch.handler.LoginCheckHandler"/>
+              </list>
+            </property>
+          </component>
+        </property>
+      </component>
+    </property>
+    <property name="delegateFactory">
+      <component class="nablarch.fw.handler.SystemRepositoryDelegateFactory"/>
+    </property>
+  </component>
+
+  <!-- Flyway設定 -->
+  <component name="dbMigration" class="jp.fintan.mobile.santokuapp.system.nablarch.FlywayExecutor">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="locations" value="${flyway.locations}"/>
+    <property name="cleanBeforeMigrate" value="${flyway.cleanBeforeMigrate}"/>
+  </component>
+
+  <!-- ダイアレクト設定 -->
+<!-- 一旦はh2で稼働させるためコメントアウトします。後でPostgreSQLにする予定です。 -->
+<!--  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect"/>-->
+  <component name="dialect" class="nablarch.core.db.dialect.H2Dialect" />
+
+  <!-- スレッドコンテキストハンドラ -->
+  <component name="threadContextHandler"
+      class="nablarch.common.handler.threadcontext.ThreadContextHandler">
+    <property name="attributes">
+      <list>
+        <!-- ユーザーID(セッションストアから取得) -->
+        <component class="nablarch.common.web.handler.threadcontext.UserIdAttributeInSessionStore">
+          <property name="sessionKey" value="user.id"/>
+        </component>
+
+        <!-- リクエストID -->
+        <component class="jp.fintan.mobile.santokuapp.system.nablarch.threadcontext.RequestIdAttribute"/>
+
+        <!-- 内部リクエストID -->
+        <component class="nablarch.common.handler.threadcontext.InternalRequestIdAttribute"/>
+
+        <!-- 言語 -->
+        <component class="nablarch.common.web.handler.threadcontext.LanguageAttributeInHttpCookie">
+          <property name="defaultLanguage" value="${nablarch.languageAttribute.defaultLanguage}"/>
+          <property name="supportedLanguages" value="${nablarch.languageAttribute.supportedLanguages}"/>
+          <property name="cookieMaxAge" value="${nablarch.languageAttribute.cookieMaxAge}"/>
+        </component>
+
+        <!-- 実行時ID -->
+        <component name="executionIdAttribute" class="nablarch.common.handler.threadcontext.ExecutionIdAttribute"/>
+
+        <!-- タイムゾーン -->
+        <component class="nablarch.common.handler.threadcontext.TimeZoneAttribute">
+          <property name="defaultTimeZone" value="${nablarch.timeZoneAttribute.defaultTimeZone}"/>
+        </component>
+
+        <!-- HTTPメソッド -->
+        <component class="jp.fintan.mobile.santokuapp.system.nablarch.threadcontext.HttpMethodAttribute"/>
+
+        <!-- セッションID -->
+        <component class="jp.fintan.mobile.santokuapp.system.nablarch.threadcontext.SessionIdAttribute"/>
+      </list>
+    </property>
+  </component>
+
+  <component name="csrfTokenVerificationHandler" class="nablarch.fw.web.handler.CsrfTokenVerificationHandler">
+    <property name="verificationFailureHandler">
+      <component class="jp.fintan.mobile.santokuapp.system.nablarch.handler.csrf.CsrfTokenVerificationFailureHandler"/>
+    </property>
+  </component>
+
+  <!-- CORS設定 -->
+  <component name="cors" class="nablarch.fw.jaxrs.cors.BasicCors">
+    <property name="allowOrigins">
+      <component class="nablarch.core.repository.di.config.StringListComponentFactory">
+        <property name="values" value="${cors.origins}"/>
+      </component>
+    </property>
+  </component>
+
+  <!-- ヘルスチェックエンドポイントハンドラ -->
+  <component name="healthCheck" class="nablarch.fw.web.handler.HealthCheckEndpointHandler">
+    <property name="healthCheckers">
+      <list>
+        <!-- DBのヘルスチェック -->
+        <component class="nablarch.fw.web.handler.health.DbHealthChecker">
+          <property name="dataSource" ref="dataSource"/>
+          <property name="dialect" ref="dialect"/>
+        </component>
+      </list>
+    </property>
+  </component>
+
+  <!-- セッションストアハンドラ（有効期限をDBで管理する） -->
+  <component name="sessionStoreHandler" class="nablarch.common.web.session.SessionStoreHandler">
+    <property name="sessionManager" ref="sessionManager"/>
+    <property name="cookieName" value="${nablarch.sessionStoreHandler.cookieName}"/>
+    <property name="cookiePath" value="${nablarch.sessionStoreHandler.cookiePath}"/>
+    <property name="cookieSecure" value="${nablarch.sessionStoreHandler.cookieSecure}"/>
+    <property name="expiration" ref="dbExpiration" />
+  </component>
+  <component name="dbExpiration" class="nablarch.common.web.session.DbManagedExpiration">
+    <!-- データベースへのトランザクション制御を行うクラス -->
+    <property name="dbManager">
+      <component class="nablarch.core.db.transaction.SimpleDbTransactionManager">
+        <property name="dbTransactionName" value="expirationTransaction"/>
+      </component>
+    </property>
+  </component>
+
+  <!-- ハンドラキュー構成 -->
+  <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
+    <property name="handlerQueue">
+      <list>
+        <component class="nablarch.fw.web.handler.HttpCharacterEncodingHandler"/>
+
+        <component class="nablarch.fw.handler.GlobalErrorHandler"/>
+
+        <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler"/>
+
+        <component class="nablarch.fw.jaxrs.JaxRsResponseHandler">
+          <property name="errorResponseBuilder">
+            <component class="jp.fintan.mobile.santokuapp.system.nablarch.jaxrs.JaxRsUnknownErrorResponseBuilder"/>
+          </property>
+          <property name="responseFinishers">
+            <list>
+              <!-- CORSレスポンス -->
+              <component class="nablarch.fw.jaxrs.cors.CorsResponseFinisher">
+                <property name="cors" ref="cors"/>
+              </component>
+            </list>
+          </property>
+        </component>
+
+        <!-- セキュリティ関連のレスポンスヘッダを設定するため追加 -->
+        <component class="nablarch.fw.web.handler.SecureHandler"/>
+
+        <!--
+        マルチパートリクエストハンドラはリクエストボディをパースしてファイルへ保存を行う。
+        CSRFを防ぐためにはCSRFトークンの検証後にマルチパートリクエストハンドラが実行される必要がある。
+        CSRFトークン検証ハンドラはセッションストアを使用しているためセッション変数保存ハンドラの後に実行される必要がある。
+        以上のことからこれらのハンドラは次の順番にならなくてはいけない。
+        1. セッション変数保存ハンドラ
+        2. CSRFトークン検証ハンドラ
+        3. マルチパートリクエストハンドラ
+
+        セッション変数保存ハンドラの制約について、解説書には"マルチパートリクエストハンドラより後ろに配置すること"とある。
+        https://nablarch.github.io/docs/5u18/doc/application_framework/application_framework/handlers/web/SessionStoreHandler.html#session-store-handler-constraint
+        そのため、ハンドラを前述の順番にすることはできないように見える。
+        ただし、これはHIDDENストアを使用するときの制約である。
+        本アプリケーションではHIDDENストアを使用していない。
+        以上のことから、セッション変数保存ハンドラの制約を無視して前述の順番通りにハンドラを設定している。
+        -->
+        <component-ref name="sessionStoreHandler"/>
+
+        <component-ref name="threadContextHandler"/>
+
+        <!-- CORSハンドラ -->
+        <component class="nablarch.fw.jaxrs.CorsPreflightRequestHandler">
+          <property name="cors" ref="cors"/>
+        </component>
+
+        <!-- ヘルスチェックエンドポイントハンドラ -->
+        <component class="nablarch.fw.RequestHandlerEntry">
+          <property name="requestPattern" value="/api/health"/>
+          <property name="handler" ref="healthCheck"/>
+        </component>
+
+        <!-- CSRFトークンの発行や検証を行うために追加 -->
+        <component-ref name="csrfTokenVerificationHandler"/>
+
+        <!-- ファイルアップロード用に追加 -->
+        <component class="jp.fintan.mobile.santokuapp.system.nablarch.handler.MultipartErrorHandler">
+          <property name="multipartHandler" ref="multipartHandler"/>
+        </component>
+
+        <component-ref name="dbConnectionManagementHandler"/>
+
+        <component-ref name="transactionManagementHandler"/>
+
+        <component class="jp.fintan.mobile.santokuapp.system.nablarch.handler.RestApiErrorResponseHandler"/>
+
+        <component-ref name="packageMapping"/>
+      </list>
+    </property>
+  </component>
+
+  <!-- 初期化が必要なコンポーネント -->
+  <component name="initializer" class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+    <property name="initializeList">
+      <list>
+        <component-ref name="packageMapping"/>
+        <component-ref name="dbMigration"/>
+        <component-ref name="dbStore"/>
+        <component-ref name="dbExpiration"/>
+      </list>
+    </property>
+  </component>
+
+  <component name="disposer" class="nablarch.core.repository.disposal.BasicApplicationDisposer">
+    <property name="disposableList">
+      <list>
+        <component class="nablarch.core.repository.disposal.DisposableAdaptor">
+          <property name="target" ref="dataSource"/>
+        </component>
+      </list>
+    </property>
+  </component>
+
+  <!-- Hibernate Validatorのプロパティを使っておきたいため、とりあえず定義 -->
+  <component name="messageInterpolator"
+      class="org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator"/>
+
+</component-configuration>

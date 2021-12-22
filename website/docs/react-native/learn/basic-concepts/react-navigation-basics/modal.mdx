@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 モーダルは、メインコンテンツを一時的にブロックして別のコンテンツを表示します。ポップアップと似たような性質を持ち、通常の画面遷移とは異なる方法でコンテンツを表示します。
 
 モーダル画面のナビゲータ定義にも`StackNavigator`を用います。
-`StackNavigator`の`mode`プロパティに`'modal'`を指定すると、モーダル表示の画面アニメーションが実現できます。
+`StackNavigator`の`screenOptions.presentation`プロパティに`'modal'`を指定すると、モーダル表示の画面アニメーションが実現できます。
 
 ## ネストされたナビゲータ
 
@@ -28,7 +28,7 @@ const MainStack = createStackNavigator();
 export const App = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator mode="modal" screenOptions={{headerShown: false}}>
+      <RootStack.Navigator screenOptions={{headerShown: false, presentation: 'modal'}}>
         <RootStack.Screen name="MainStack" component={Main} />
         <RootStack.Screen name="Modal1" component={Modal1} />
       </RootStack.Navigator>
@@ -46,7 +46,7 @@ const Main = () => {
 };
 ```
 
-`RootStack.Navigator`タグの中で`mode`プロパティに`'modal'`を指定しています。
+`RootStack.Navigator`タグの中で`screenOptions.presentation`プロパティに`'modal'`を指定しています。
 これにより、`Modal1`への画面遷移はモーダル表示のアニメーションとなります。
 
 :::note
@@ -54,7 +54,7 @@ React Navigation公式ドキュメントの[Opening a full-screen modal](https:/
 > The modal prop has no effect on Android because full-screen modals don't have any different transition behavior on the platform.
 
 画面遷移アニメーションは、各プラットフォームのネイティブ動作に従います。
-上記のとおり、Androidのフルスクリーンモーダルには異なるトランジションが用意されていないため、`mode`属性の変更によるアニメーションの変更はありません。
+上記のとおり、Androidのフルスクリーンモーダルには異なるトランジションが用意されていないため、`presentation`属性の変更によるアニメーションの変更はありません。
 :::
 
 ネストされたナビゲータは次のように動作します。
@@ -99,7 +99,7 @@ const MainStack = createStackNavigator();
 export const App = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator mode="modal" screenOptions={{headerShown: false}}>
+      <RootStack.Navigator screenOptions={{headerShown: false, presentation: 'modal'}}>
         <RootStack.Screen name="MainStack" component={Main} />
         <RootStack.Screen name="Modal1" component={Modal1} />
       </RootStack.Navigator>
@@ -186,3 +186,9 @@ const styles = StyleSheet.create({
 
 </TabItem>
 </Tabs>
+
+:::info
+React Navigation v5では、画面単位ではモーダル表示を設定できず、モーダル表示のために専用のナビゲータが必要でした。v6で導入された[`Group`](https://reactnavigation.org/docs/group/)を使うことで、モーダル表示の画面と非モーダル表示の画面を、両方とも同じナビゲータの中に配置できます。
+
+`Group`を使ったモーダル表示の方法については、[Opening a full-screen modal \| React Navigation](https://reactnavigation.org/docs/modal/)を参照してください。
+:::
