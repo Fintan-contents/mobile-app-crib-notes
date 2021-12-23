@@ -1,4 +1,4 @@
-# React Nativeの学習用コンテンツ
+# React Nativeの学習
 
 Reactを利用したWebアプリの開発経験者がReact Nativeを利用したモバイルアプリケーション開発を学習するための[React Nativeの学習用コンテンツ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn)を公開しています。
 
