@@ -1,9 +1,11 @@
 import '@testing-library/jest-native/extend-expect';
-import 'react-native';
 import {render, waitFor} from '@testing-library/react-native';
 import React from 'react';
+import {DevSettings} from 'react-native';
 
 import {App} from './App';
+
+jest.spyOn(DevSettings, 'addMenuItem').mockImplementation(() => {});
 
 beforeEach(() => {
   // 画面遷移時のアニメーションが、コンポーネントのアンマウント後にステートを更新してしまうようで、
