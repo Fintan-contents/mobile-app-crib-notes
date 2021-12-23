@@ -1,4 +1,5 @@
-import React, {createContext, useContext, useEffect, useMemo, useState} from 'react';
+import {createUseContextAndProvider} from 'framework/utilities';
+import React, {useEffect, useMemo, useState} from 'react';
 
 import {initialize, hideSplashScreen, NavigatorOptions} from './initialize';
 
@@ -7,19 +8,12 @@ type InitializeContextValue = {
   navigatorOptions: NavigatorOptions;
 };
 
-const defaultInitializeContextValue: InitializeContextValue = {
-  initialized: false,
-  navigatorOptions: {},
-};
+const [useInitializeContext, InitializeContextProvider] = createUseContextAndProvider<InitializeContextValue>();
 
-export const InitializeContext = createContext<InitializeContextValue>(defaultInitializeContextValue);
-
-export const WithInitializeContext: React.FC = ({children}) => {
+const WithInitializeContext: React.FC = ({children}) => {
   const [error, setError] = useState<unknown>();
-  const [initialized, setInitialized] = useState<boolean>(defaultInitializeContextValue.initialized);
-  const [navigatorOptions, setNavigatorOptions] = useState<NavigatorOptions>(
-    defaultInitializeContextValue.navigatorOptions,
-  );
+  const [initialized, setInitialized] = useState<boolean>(false);
+  const [navigatorOptions, setNavigatorOptions] = useState<NavigatorOptions>({});
   const contextValue = useMemo(() => {
     return {
       initialized,
@@ -47,12 +41,10 @@ export const WithInitializeContext: React.FC = ({children}) => {
   }, [error]);
 
   if (initialized) {
-    return <InitializeContext.Provider value={contextValue}>{children}</InitializeContext.Provider>;
+    return <InitializeContextProvider value={contextValue}>{children}</InitializeContextProvider>;
   } else {
     return null;
   }
 };
 
-export const useInitializeContext = () => {
-  return useContext(InitializeContext);
-};
+export {useInitializeContext, WithInitializeContext};
