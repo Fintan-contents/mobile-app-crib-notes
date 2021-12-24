@@ -1,7 +1,7 @@
 import * as Random from 'expo-random';
 
 function toNumberAlphabet(n: number): string {
-  return (n % 36).toString(36);
+  return (n % 32).toString(32);
 }
 
 /**
