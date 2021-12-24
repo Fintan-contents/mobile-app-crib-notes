@@ -1,9 +1,10 @@
+import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback} from 'react';
 import {NativeModules, StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
 const {ThrowErrorModule} = NativeModules;
-const ScreenName = 'ErrorInNativeModules';
+const ScreenName = 'ErrorInNativeModule';
 const Screen = () => {
   const throwErrorInSyncProcess = useCallback(async () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ErrorInNativeModuleScreen = {
+export const ErrorInNativeModuleScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

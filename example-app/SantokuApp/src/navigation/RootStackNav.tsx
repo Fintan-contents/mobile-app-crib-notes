@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useInitializeContext} from 'components/initialize';
 import React, {useEffect} from 'react';
@@ -7,16 +7,18 @@ import {TermsOfServiceAgreementScreen} from 'screens';
 
 import {AuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
+import {RootStackParamList} from './types';
 
-const nav = createNativeStackNavigator();
+const nav = createNativeStackNavigator<RootStackParamList>();
 const name = 'RootStackNav';
+
 export const RootStackNav: React.FC = () => {
   const {navigatorOptions} = useInitializeContext();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     DevSettings.addMenuItem('Go to Demo', () => {
-      navigation.navigate(DemoStackNav.name);
+      navigation.navigate('DemoStackNav', {screen: 'Demo'});
     });
   }, [navigation]);
 

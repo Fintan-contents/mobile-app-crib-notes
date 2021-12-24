@@ -1,4 +1,5 @@
 import {Button} from 'components/button/Button';
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 
@@ -24,7 +25,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const ButtonScreen = {
+export const ButtonScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {

@@ -1,3 +1,4 @@
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Input, Text} from 'react-native-elements';
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const AuthenticationScreen = {
+export const AuthenticationScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

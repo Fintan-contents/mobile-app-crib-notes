@@ -20,11 +20,13 @@ import {
   LocalAuthenticationScreen,
   AuthenticationScreen,
   HttpApiScreen,
+  NavigationScreen,
 } from 'screens';
 
+import {DemoStackParamList, RootStackParamList} from './types';
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
 
-const nav = createNativeStackNavigator();
+const nav = createNativeStackNavigator<DemoStackParamList>();
 
 const name = 'DemoStackNav';
 export const Screen: React.FC = () => {
@@ -55,11 +57,12 @@ export const Screen: React.FC = () => {
       <nav.Screen {...LocalAuthenticationScreen} />
       <nav.Screen {...AuthenticationScreen} />
       <nav.Screen {...HttpApiScreen} />
+      <nav.Screen {...NavigationScreen} />
     </nav.Navigator>
   );
 };
 
-export const DemoStackNav = {
+export const DemoStackNav: NativeStackScreenConfig<RootStackParamList, typeof name> = {
   component: Screen,
   name,
   options: {

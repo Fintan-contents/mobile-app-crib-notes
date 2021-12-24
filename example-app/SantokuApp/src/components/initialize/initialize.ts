@@ -2,6 +2,7 @@
 import type crashlyticsModule from '@react-native-firebase/crashlytics';
 import {activateKeepAwake} from 'expo-keep-awake';
 import * as SplashScreen from 'expo-splash-screen';
+import {AppNavigatorOptions} from 'navigation/types';
 
 import {BundledMessagesLoader, firebaseConfig, launchedId, loadMessages} from '../../framework';
 
@@ -12,12 +13,6 @@ type TermsAgreement = {
 
 type InitialData = {
   terms?: TermsAgreement;
-};
-
-export type NavigatorOptions = {
-  [navigatorName: string]: {
-    initialRouteName?: string;
-  };
 };
 
 export const initialize = async () => {
@@ -91,7 +86,7 @@ const loadInitialDataAsync = async (): Promise<InitialData> => {
   };
 };
 
-const getInitialNavigatorOptions = (initialData: InitialData): NavigatorOptions => {
+const getInitialNavigatorOptions = (initialData: InitialData): AppNavigatorOptions => {
   // TODO: 未認証状態ならログイン画面へ
   // TODO: チーム未参加状態ならチーム新規登録画面へ
   // TODO: 通知パラメータがあればそれに応じた画面へ

@@ -1,3 +1,4 @@
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, View, ScrollView, TextInput} from 'react-native';
 import {Button, ButtonGroup, CheckBox, Divider, Text} from 'react-native-elements';
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const HttpApiScreen = {
+export const HttpApiScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

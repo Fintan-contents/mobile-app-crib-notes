@@ -1,3 +1,4 @@
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {View} from 'react-native';
 
@@ -7,7 +8,7 @@ const Screen = () => {
   return <View>test</View>;
 };
 
-export const ErrorInReactComponentScreen = {
+export const ErrorInReactComponentScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

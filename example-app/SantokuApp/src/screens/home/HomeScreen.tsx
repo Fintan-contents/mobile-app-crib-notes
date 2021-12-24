@@ -1,4 +1,5 @@
 import {m} from 'framework';
+import {HomeStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
 });
 
 // Navigatorに登録する情報
-export const HomeScreen = {
+export const HomeScreen: NativeStackScreenConfig<HomeStackParamList, typeof ScreenName> = {
   component: Screen,
   name: ScreenName,
   options: () => ({

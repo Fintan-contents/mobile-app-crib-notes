@@ -1,11 +1,12 @@
 import {createUseContextAndProvider} from 'framework/utilities';
+import {AppNavigatorOptions} from 'navigation/types';
 import React, {useEffect, useMemo, useState} from 'react';
 
-import {initialize, hideSplashScreen, NavigatorOptions} from './initialize';
+import {initialize, hideSplashScreen} from './initialize';
 
 type InitializeContextValue = {
   initialized: boolean;
-  navigatorOptions: NavigatorOptions;
+  navigatorOptions: AppNavigatorOptions;
 };
 
 const [useInitializeContext, InitializeContextProvider] = createUseContextAndProvider<InitializeContextValue>();
@@ -13,7 +14,7 @@ const [useInitializeContext, InitializeContextProvider] = createUseContextAndPro
 const WithInitializeContext: React.FC = ({children}) => {
   const [error, setError] = useState<unknown>();
   const [initialized, setInitialized] = useState<boolean>(false);
-  const [navigatorOptions, setNavigatorOptions] = useState<NavigatorOptions>({});
+  const [navigatorOptions, setNavigatorOptions] = useState<AppNavigatorOptions>({});
   const contextValue = useMemo(() => {
     return {
       initialized,
@@ -23,7 +24,7 @@ const WithInitializeContext: React.FC = ({children}) => {
 
   useEffect(() => {
     initialize()
-      .then((navigatorOptions: NavigatorOptions) => {
+      .then((navigatorOptions: AppNavigatorOptions) => {
         setNavigatorOptions(navigatorOptions);
         setInitialized(true);
         hideSplashScreen().catch(() => {});

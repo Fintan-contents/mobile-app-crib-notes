@@ -1,4 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
@@ -7,8 +8,9 @@ import {ErrorInUseEffectAsyncProcessScreen} from './ErrorInUseEffectAsyncProcess
 import {ErrorInUseEffectSyncProcessScreen} from './ErrorInUseEffectSyncProcessScreen';
 
 const ScreenName = 'ErrorInUseEffect';
-const Screen = () => {
-  const navigation = useNavigation();
+type Props = NativeStackScreenProps<DemoStackParamList, typeof ScreenName>;
+
+const Screen: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Button
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ErrorInUseEffectScreen = {
+export const ErrorInUseEffectScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

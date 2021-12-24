@@ -1,19 +1,21 @@
 import {Button} from 'components/button/Button';
 import {WebView} from 'components/webview/WebView';
 import {m, AppConfig} from 'framework';
+import {RootStackParamList} from 'navigation/types';
 import React, {useCallback, useRef, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 import {WebView as RNWebView} from 'react-native-webview';
-import {useNavigateToAuthenticatedStackScreen} from 'screens/useNavigateToScreen';
+import {useNavigateToRootStackScreen} from 'screens/useNavigateToScreen';
 
 const ScreenName = 'TermsOfServiceAgreement';
+
 const Screen: React.FC = () => {
   const [buttonDisable, setButtonDisable] = useState(true);
   const [isWebViewError, setIsWebViewError] = useState(false);
   const webViewRef = useRef<RNWebView>(null);
 
-  const onGoToHomeScreen = useNavigateToAuthenticatedStackScreen('Home');
+  const onGoToHomeScreen = useNavigateToRootStackScreen('AuthenticatedStackNav');
 
   const onWebViewError = useCallback(() => {
     setIsWebViewError(true);
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TermsOfServiceAgreementScreen = {
+export const TermsOfServiceAgreementScreen: NativeStackScreenConfig<RootStackParamList, typeof ScreenName> = {
   component: Screen,
   name: ScreenName,
   options: () => ({
