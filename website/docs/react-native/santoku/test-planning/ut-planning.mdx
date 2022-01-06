@@ -50,11 +50,11 @@ title: 単体テスト計画
 
   テスティングフレームワークには[Jest](https://jestjs.io/ja/) 、テスト用のライブラリには[React Native Testing Library](https://callstack.github.io/react-native-testing-library/)を利用します。
 
-#### テストコードの作成
+:::note info
+今回は[React Nativeの公式ドキュメントで取り上げられているツール](https://reactnative.dev/docs/testing-overview)を選択しました。
+そのため、他のテスティングフレームワークおよびテスト用ライブラリとの比較検討を実施していません。
 
-自動テストと分類されたテストケースに基づいて、テストコードを作成します。REST APIのような外部と連携する箇所は、Jestのモック機能で対処します。
-
-#### 自動テストの実施
+:::
 
 下記コマンドで自動テストを実施します。
 
@@ -105,6 +105,18 @@ const Context = React.createContext<ContextType>({
 - モックサーバ
 
   モックサーバには[Mockoon](https://mockoon.com/)を利用します。
+
+:::note info
+stubby4nodeやSwaggerなど他のモックサーバに比べ次の機能が充実していたため、今回Mockoonを選択しました。
+
+- テストデータが作りやすい
+- ホットリロードに対応している
+- 条件によってレスポンスを動的に変更でき、エラーケースや応答結果で分岐する処理がテストしやすい
+- レスポンス応答の遅延時間を指定できる
+
+モックサーバは年々新しい候補が増えるため、厳密な比較検討を行っておりません。
+プロジェクトの特性に応じて最適なモックサーバを選択してください。
+:::
 
 - エミュレータ／シミュレータ
 
