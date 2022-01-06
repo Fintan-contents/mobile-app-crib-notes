@@ -15,6 +15,7 @@ title: 商標について
 - 「Google Chrome」「Android」「Flutter」「Firebase」「Google Play」「Pixel」は、 Google LLCの登録商標です。
 - Androidロボットは、Googleが作成および提供している作品から複製または変更したものであり、[クリエイティブ・コモンズ表示][cclink] 3.0ライセンスに記載された条件に従って使用しています。
 [cclink]:<https://creativecommons.org/licenses/by/3.0/>
+- 「Amazon Cognito」「Amazon Pinpoint」は、米国および/またはその他の諸国における、Amazon.com, Inc. またはその関連会社の商標です。
 <!-- textlint-disable ja-technical-writing/sentence-length-->
 - 「Azure」「Windows」は、 Microsoft Corporationの米国およびその他の国におけるMicrosoft Corporationおよび/またはその関連会社の登録商標または商標です。
 <!-- textlint-enable ja-technical-writing/sentence-length-->
@@ -28,5 +29,6 @@ title: 商標について
 - 「Galaxy」は、Samsung Electronics Co., Ltd. の商標または登録商標です。
 - 「ZenFone」は、ASUSTeK Computer Inc. の登録商標です。
 - 「QRコード」は、株式会社デンソーウェーブの商標または登録商標です。
+- 「1Password」は、米国およびその他の諸国における、AgileBits, Inc. の商標または登録商標です。
 
 ※ その他、本サイトに記載されている会社名、商品・サービス名は、各社の商標または登録商標です。
