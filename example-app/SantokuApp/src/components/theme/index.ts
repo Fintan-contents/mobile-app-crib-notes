@@ -1,2 +1,1 @@
-export {useAppTheme} from './useAppTheme';
-export {AppThemeContext, WithAppTheme} from './AppThemeContext';
+export {useAppTheme, WithAppTheme} from './AppThemeContext';

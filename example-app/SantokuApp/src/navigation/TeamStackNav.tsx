@@ -3,7 +3,9 @@ import {useInitializeContext} from 'components/initialize';
 import React from 'react';
 import {TeamDetailScreen} from 'screens';
 
-const nav = createNativeStackNavigator();
+import {MainTabParamList, TeamStackParamList} from './types';
+
+const nav = createNativeStackNavigator<TeamStackParamList>();
 
 const name = 'TeamStackNav';
 const Screen: React.FC = () => {
@@ -15,7 +17,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const TeamStackNav = {
+export const TeamStackNav: TabScreenConfig<MainTabParamList, typeof name> = {
   component: Screen,
   name,
 };

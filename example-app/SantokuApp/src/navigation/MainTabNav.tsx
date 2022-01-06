@@ -5,8 +5,9 @@ import React from 'react';
 
 import {HomeStackNav} from './HomeStackNav';
 import {TeamStackNav} from './TeamStackNav';
+import {AuthenticatedStackParamList, MainTabParamList} from './types';
 
-const nav = createBottomTabNavigator();
+const nav = createBottomTabNavigator<MainTabParamList>();
 
 const name = 'MainTabNav';
 const Screen: React.FC = () => {
@@ -35,7 +36,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const MainTabNav = {
+export const MainTabNav: NativeStackScreenConfig<AuthenticatedStackParamList, typeof name> = {
   component: Screen,
   name,
   options: {

@@ -261,6 +261,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TermsOfServiceAgreementStatus'
+        '400':
+          $ref: '#/components/responses/BadRequest'
   /accounts/me/delete:
     post:
       summary: ログイン済みアカウント削除

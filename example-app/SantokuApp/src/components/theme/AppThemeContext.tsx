@@ -1,4 +1,5 @@
-import React, {createContext, useMemo} from 'react';
+import {createUseContextAndProvider} from 'framework/utilities';
+import React, {useMemo} from 'react';
 import {ColorSchemeName, useColorScheme} from 'react-native';
 import {ThemeProvider} from 'react-native-elements';
 
@@ -7,7 +8,7 @@ import {getReactNativeElementsTheme} from './ReactNativeElementsTheme';
 
 const getAppTheme = (colorScheme: ColorSchemeName) => (colorScheme === 'dark' ? darkModeAppTheme : lightModeAppTheme);
 
-const AppThemeContext = createContext<AppTheme>(lightModeAppTheme);
+const [useAppTheme, AppThemeContextProvider] = createUseContextAndProvider<AppTheme>();
 
 const WithAppTheme: React.FC = ({children}) => {
   const colorScheme = useColorScheme();
@@ -15,10 +16,10 @@ const WithAppTheme: React.FC = ({children}) => {
   const reactNativeElementsTheme = useMemo(() => getReactNativeElementsTheme(appTheme), [appTheme]);
 
   return (
-    <AppThemeContext.Provider value={appTheme}>
+    <AppThemeContextProvider value={appTheme}>
       <ThemeProvider theme={reactNativeElementsTheme}>{children}</ThemeProvider>
-    </AppThemeContext.Provider>
+    </AppThemeContextProvider>
   );
 };
 
-export {AppThemeContext, WithAppTheme};
+export {useAppTheme, WithAppTheme, AppThemeContextProvider};

@@ -1,5 +1,6 @@
 import {useSnackbar} from 'components/snackbar';
 import {m} from 'framework';
+import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback} from 'react';
 
 import {SnackbarTemplate} from './SnackbarTemplate';
@@ -25,7 +26,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const SnackbarScreen = {
+export const SnackbarScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {

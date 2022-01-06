@@ -1,3 +1,4 @@
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 
 import {ConfigTemplate} from './ConfigTemplate';
@@ -9,7 +10,7 @@ const Screen: React.FC = () => {
   return <ConfigTemplate testID="ConfigScreen" items={info} keyExtractor={infoKeyExtractor} />;
 };
 
-export const ConfigScreen = {
+export const ConfigScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {

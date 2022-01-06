@@ -1,5 +1,6 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import type {ParamListBase} from '@react-navigation/routers';
+import {NavigationProp} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {DemoStackParamList} from 'navigation/types';
 import React, {useMemo} from 'react';
 
 import {DemoLinkItemData} from './DemoLinkItem';
@@ -15,9 +16,15 @@ import {InstructionsScreen} from './instructions';
 import {LocalAuthenticationScreen} from './local-authn';
 import {LogScreen} from './log';
 import {MessageScreen} from './message';
+import {NavigationScreen} from './navigation';
 import {SnackbarScreen} from './snackbar';
 
-const demoScreenList = [
+type ScreenList = {
+  title: string;
+  to: keyof DemoStackParamList;
+};
+
+const demoScreenList: ScreenList[] = [
   {
     title: 'Application Information',
     to: AppInfoScreen.name,
@@ -66,9 +73,13 @@ const demoScreenList = [
     title: 'HttpApi',
     to: HttpApiScreen.name,
   },
+  {
+    title: 'Navigation',
+    to: NavigationScreen.name,
+  },
 ];
 
-const addOnPressHandlerToItems = (navigation: NavigationProp<ParamListBase>) => (demo: {title: string; to: string}) => {
+const addOnPressHandlerToItems = (navigation: NavigationProp<DemoStackParamList>) => (demo: ScreenList) => {
   return {
     ...demo,
     onPress: () => navigation.navigate(demo.to),
@@ -78,13 +89,14 @@ const addOnPressHandlerToItems = (navigation: NavigationProp<ParamListBase>) => 
 const keyExtractor = (item: DemoLinkItemData, index: number) => item.to + index.toString();
 
 const name = 'Demo';
-const Screen: React.FC = () => {
-  const navigation = useNavigation();
+type Props = NativeStackScreenProps<DemoStackParamList, typeof name>;
+
+const Screen: React.FC<Props> = ({navigation}) => {
   const demoItems = useMemo(() => demoScreenList.map(addOnPressHandlerToItems(navigation)), [navigation]);
   return <DemoTemplate testID="DemoScreen" items={demoItems} keyExtractor={keyExtractor} />;
 };
 
-export const DemoScreen = {
+export const DemoScreen: NativeStackScreenConfig<DemoStackParamList, typeof name> = {
   component: Screen,
   name,
   options: {

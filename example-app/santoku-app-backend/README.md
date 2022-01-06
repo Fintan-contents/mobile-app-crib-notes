@@ -85,6 +85,44 @@ Dockerイメージは次のコマンドでDockerレジストリにプッシュ�
 > ./mvnw clean package jib:build
 > ```
 
+## FCM（Firebase Cloud Messaging）への接続手順
+
+### Firebase Admin SDKで利用するService Account Credentials Fileの取得
+
+1. Firebaseのコンソール画面にログイン
+2. プロジェクトを選択し、プロジェクトの設定画面を開く
+3. サービスアカウントのタブを開き、「新しい秘密鍵の生成」ボタンを押す
+4. 「キーを生成」ボタンを押し、Service Account Credentials Fileをダウンロード
+
+### Azure Key Vault（日本語名：キーコンテナー）の作成と設定
+
+1. Azure Portal上でKey Vaultを新規作成
+    - Resource group, Key vault name, Region以外はデフォルトで構わない
+2. Key Vault画面の左側タブからSecretsを選択し、「Generate/Import」を選択
+3. 名前は適切な値、値にFirebaseコンソールからダウンロードしたService Account Credentials FileのJSONを入力して作成
+4. 作成したシークレットの詳細画面を開き、Secret Identifierの項目をコピーして控えておく
+
+### App Serviceへ環境変数を設定
+
+1. App Serviceのシステム割り当てマネージドIDを有効化
+    1. App Serviceの画面を開き、左側タブからIDを選択
+    2. 状態をOnしてシステム割り当てマネージドIDを有効化
+        - これによりApp ServiceがAzure Active Directoryに登録され、他サービスがこのリソースに対するアクセスを制御できる
+2. App ServiceからKeyVaultへのアクセスを許可する
+    1. 作成したKey Vaultの画面を開き、左側タブからAccess policiesを選択
+    2. Add Access Policyを押す
+    3. Configure from template (optional)は空のまま
+    4. Secret permissionsでGetのみにチェックを入れる
+    5. Select principalで、App Service名で検索して出てきたものを選んでSelectボタンを押す
+    6. Addボタンを押して保存
+3. App ServiceのConfigurationで環境変数を追加
+    1. 作成したApp Serviceの画面を開き、左側タブからConfigurationを選択
+    2. Application settingsのタブで、New application settingを押す
+    3. Nameには"FIREBASE_SERVICE_ACCOUNT"を、Valueには"@Microsoft.KeyVault(SecretUri=先ほど控えておいたSecretIdentifierのURL)"を入力してOKを押す
+        - Valueの例： `@Microsoft.KeyVault(SecretUri=https://yourvaultname.vault.azure.net/secrets/FirebaseServiceAccount/ffffffffffffffffffffffffffffffff)`
+4. App Serviceを再起動（再起動するまでKeyVaultを読み込めないことがあったため）
+    1. 作成したApp Serviceの画面を開き、画面上部にあるRestartを押す
+
 ## 静的解析
 
 ### Spotbugs
