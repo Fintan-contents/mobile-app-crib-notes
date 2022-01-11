@@ -17,9 +17,11 @@ export const RootStackNav: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   useEffect(() => {
-    DevSettings.addMenuItem('Go to Demo', () => {
-      navigation.navigate('DemoStackNav', {screen: 'Demo'});
-    });
+    if (__DEV__) {
+      DevSettings.addMenuItem('Go to Demo', () => {
+        navigation.navigate('DemoStackNav', {screen: 'Demo'});
+      });
+    }
   }, [navigation]);
 
   return (
