@@ -27,7 +27,7 @@ export const useAuthentication = () => {
       }
       alert(e);
     }
-  }, [setAccountId]);
+  }, []);
 
   const changeAccount = useCallback(async () => {
     try {

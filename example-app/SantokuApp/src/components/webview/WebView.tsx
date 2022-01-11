@@ -85,6 +85,9 @@ WebView.defaultProps = {
   // https://github.com/react-native-webview/react-native-webview/issues/1915
   androidLayerType: 'software',
   startInLoadingState: true,
+  // iOSでスクロールしたときに滑らかにスクロールするようにしておく。
+  // https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#decelerationrate
+  decelerationRate: 'normal',
   renderLoading: () => <ActivityIndicator style={styles.indicator} size="large" color="#0000ff" />,
 };
 

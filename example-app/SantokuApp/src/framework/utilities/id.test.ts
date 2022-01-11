@@ -10,7 +10,7 @@ describe('launchedId', () => {
     const id = await launchedId();
     expect(spy).toHaveBeenCalledWith(32);
     expect(id).toHaveLength(32);
-    expect(id).toMatch(/^[0-9a-z]+$/);
+    expect(id).toMatch(/^[0-9a-v]+$/);
   });
 });
 
@@ -22,6 +22,6 @@ describe('generatePassword', () => {
     const id = await generatePassword();
     expect(spy).toHaveBeenCalledWith(16);
     expect(id).toHaveLength(16);
-    expect(id).toMatch(/^[0-9a-z]+$/);
+    expect(id).toMatch(/^[0-9a-v]+$/);
   });
 });

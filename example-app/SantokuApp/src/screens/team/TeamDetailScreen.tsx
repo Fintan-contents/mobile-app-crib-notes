@@ -1,4 +1,5 @@
 import {m} from 'framework';
+import {TeamStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const TeamDetailScreen = {
+export const TeamDetailScreen: NativeStackScreenConfig<TeamStackParamList, typeof ScreenName> = {
   component: Screen,
   name: ScreenName,
   options: () => ({

@@ -1,3 +1,4 @@
+import {act} from '@testing-library/react-hooks';
 import {render, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import {Text, TextStyle, ViewStyle} from 'react-native';
@@ -37,12 +38,16 @@ describe('Snackbar', () => {
     expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(0);
     expect(renderResult).toMatchSnapshot('render直後');
 
-    jest.advanceTimersByTime(FADE_IN_DURATION);
+    act(() => {
+      jest.advanceTimersByTime(FADE_IN_DURATION);
+    });
     expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(1);
     expect(renderResult).toMatchSnapshot('フェードイン後');
 
-    jest.advanceTimersByTime(AUTO_HIDE_DURATION + FADE_OUT_DURATION);
-    expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(0);
+    act(() => {
+      jest.advanceTimersByTime(AUTO_HIDE_DURATION + FADE_OUT_DURATION);
+    });
+    expect(queryByTestId('snackbarAnimatedView')).toBeNull();
     expect(renderResult).toMatchSnapshot('フェードアウト後');
   });
 

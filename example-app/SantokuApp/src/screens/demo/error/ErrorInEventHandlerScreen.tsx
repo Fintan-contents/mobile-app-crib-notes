@@ -1,3 +1,4 @@
+import {DemoStackParamList} from 'navigation/types';
 import React, {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ErrorInEventHandlerScreen = {
+export const ErrorInEventHandlerScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

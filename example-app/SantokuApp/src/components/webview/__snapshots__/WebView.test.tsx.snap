@@ -15,6 +15,7 @@ exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
   <RNCWebView
     androidLayerType="software"
     cacheEnabled={true}
+    decelerationRate={0.998}
     injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
     injectedJavaScriptForMainFrameOnly={true}
     javaScriptEnabled={true}

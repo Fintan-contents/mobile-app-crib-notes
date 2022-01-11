@@ -262,6 +262,10 @@ module.exports = {
           id: 'react-native/santoku/application-architecture',
         },
         {
+          type: 'doc',
+          id: 'react-native/santoku/application-architecture/system-configuration/overview',
+        },
+        {
           type: 'category',
           label: 'アプリのライフサイクル管理',
           items: [
@@ -330,6 +334,10 @@ module.exports = {
         {
           type: 'doc',
           id: 'react-native/santoku/test-planning/test-all-planning',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/ut-planning',
         },
         {
           type: 'category',
@@ -489,6 +497,14 @@ module.exports = {
             'react-native/santoku/development/build-configuration/build-variants',
             'react-native/santoku/development/build-configuration/build-type-configurations',
             'react-native/santoku/development/build-configuration/product-flavor-configurations',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'テスト',
+          items: [
+            'react-native/santoku/development/test',
+            'react-native/santoku/development/test/create-emulator-simulator',
           ],
         },
         {

@@ -1,5 +1,6 @@
 import {m} from 'framework';
-import React, {useContext, useMemo, useState} from 'react';
+import {createUseContextAndProvider} from 'framework/utilities';
+import React, {useMemo, useState} from 'react';
 
 import {Snackbar, SnackbarHideProps, SnackbarProps, SnackbarShowProps} from './Snackbar';
 
@@ -36,17 +37,9 @@ type SnackbarContextType = {
   hide: (hideProps?: SnackbarHideContextProps) => void;
 };
 
-const SnackbarContext = React.createContext<SnackbarContextType>({
-  show: () => {},
-  showWithCloseButton: () => {},
-  hide: () => {},
-});
+const [useSnackbar, SnackbarContextProvider] = createUseContextAndProvider<SnackbarContextType>();
 
-export function useSnackbar() {
-  return useContext(SnackbarContext);
-}
-
-export function WithSnackbar(props: {initialState?: SnackbarShowProps; children: React.ReactNode}) {
+function WithSnackbar(props: {initialState?: SnackbarShowProps; children: React.ReactNode}) {
   const [state, setState] = useState<SnackbarProps>(
     props.initialState ?? {
       message: '',
@@ -75,8 +68,10 @@ export function WithSnackbar(props: {initialState?: SnackbarShowProps; children:
     [],
   );
   return (
-    <SnackbarContext.Provider value={snackbarContext}>
+    <SnackbarContextProvider value={snackbarContext}>
       <Snackbar {...state}>{props.children}</Snackbar>
-    </SnackbarContext.Provider>
+    </SnackbarContextProvider>
   );
 }
+
+export {useSnackbar, WithSnackbar};

@@ -109,12 +109,12 @@ export const Snackbar: React.FC<SnackbarProps> = props => {
           useNativeDriver: true,
         };
         animationStart(fadeOutAnimationRef, fadeOutAnimationConfig, () => {
-          if (!barrierFadeOutAnimationRef) {
+          if (!barrierFadeOutAnimationRef.current) {
             setVisibleSnackbarProps(undefined);
           }
         });
       } else {
-        if (!barrierFadeOutAnimationRef) {
+        if (!barrierFadeOutAnimationRef.current) {
           setVisibleSnackbarProps(undefined);
         }
       }
@@ -130,8 +130,6 @@ export const Snackbar: React.FC<SnackbarProps> = props => {
       };
 
       barrierFadeOutAnimationRef.current?.stop();
-      fadeInAnimationRef.current?.stop();
-      fadeOutAnimationRef.current?.stop();
 
       animationStart(barrierFadeOutAnimationRef, barrierFadeOutAnimationConfig, ({finished}) => {
         if (finished) {
@@ -139,6 +137,8 @@ export const Snackbar: React.FC<SnackbarProps> = props => {
           callback?.();
         }
       });
+      fadeInAnimationRef.current?.stop();
+      fadeOutAnimationRef.current?.stop();
     },
     [animationStart],
   );

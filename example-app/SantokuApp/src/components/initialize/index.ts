@@ -1,1 +1,1 @@
-export {InitializeContext, WithInitializeContext, useInitializeContext} from './InitializeContext';
+export {WithInitializeContext, useInitializeContext} from './InitializeContext';
