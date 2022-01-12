@@ -93,10 +93,17 @@ export const useAuthentication = () => {
     }
   }, []);
 
+  const copyAccountIdInput = useCallback(() => {
+    if (accountId) {
+      setAccountIdInput(accountId);
+    }
+  }, [accountId]);
+
   return {
     accountId,
     accountIdInput,
     setAccountIdInput,
+    copyAccountIdInput,
     signup,
     changeAccount,
     canAutoLogin,

@@ -57,3 +57,14 @@ describe('SecureStorageAdapter deleteActiveAccountId', () => {
     expect(spy).toHaveBeenCalledWith('activeAccountId');
   });
 });
+
+describe('SecureStorageAdapter deletePassword', () => {
+  test('アカウントIDをハッシュ化してSecureStore.deleteItemAsyncに正しく引数を渡しているかの確認', async () => {
+    const spySecureStore = jest.spyOn(SecureStore, 'deleteItemAsync');
+    const spyCrypto = jest.spyOn(Crypto, 'sha256').mockReturnValue(Promise.resolve('abcdef'));
+    await SecureStorageAdapter.deletePassword('1234567890');
+
+    expect(spySecureStore).toHaveBeenCalledWith('abcdef_password');
+    expect(spyCrypto).toHaveBeenCalledWith('1234567890');
+  });
+});
