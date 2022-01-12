@@ -176,15 +176,28 @@ describe('AuthenticationService logout', () => {
     headers: {},
     config: {},
   });
+  const spySecureStorageAdapterLoadActiveAccountId = jest.spyOn(SecureStorageAdapter, 'loadActiveAccountId');
   const spySecureStorageAdapterDeleteActiveAccountId = jest.spyOn(SecureStorageAdapter, 'deleteActiveAccountId');
+  const spySecureStorageAdapterDeletePassword = jest.spyOn(SecureStorageAdapter, 'deletePassword');
 
   beforeEach(() => {
     spyLogoutApi.mockClear();
+    spySecureStorageAdapterLoadActiveAccountId.mockClear();
     spySecureStorageAdapterDeleteActiveAccountId.mockClear();
+    spySecureStorageAdapterDeletePassword.mockClear();
   });
   test('ログアウトAPIを呼び出して、セキュアストレージからアクティブアカウントを削除しているかの検証', async () => {
+    spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     await AuthenticationService.logout();
     expect(spyLogoutApi).toHaveBeenCalled();
     expect(spySecureStorageAdapterDeleteActiveAccountId).toHaveBeenCalled();
+    expect(spySecureStorageAdapterDeletePassword).toHaveBeenCalledWith('123456789');
+  });
+  test('ログインしたアカウントIDがnullの場合はセキュアストレージの削除が呼ばれないことを確認', async () => {
+    spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue(null);
+    await AuthenticationService.logout();
+    expect(spyLogoutApi).toHaveBeenCalled();
+    expect(spySecureStorageAdapterDeleteActiveAccountId).not.toHaveBeenCalled();
+    expect(spySecureStorageAdapterDeletePassword).not.toHaveBeenCalled();
   });
 });

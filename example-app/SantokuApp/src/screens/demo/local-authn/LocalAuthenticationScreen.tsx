@@ -1,10 +1,11 @@
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
 import {useLocalAuthentication} from './useLocalAuthentication';
 
-const ScreenName = 'Local Authentication';
+const ScreenName = 'LocalAuthentication';
 const Screen = () => {
   const {
     isEnrolled,
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const LocalAuthenticationScreen = {
+export const LocalAuthenticationScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

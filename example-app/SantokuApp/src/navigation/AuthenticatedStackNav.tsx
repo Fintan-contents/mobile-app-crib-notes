@@ -3,8 +3,9 @@ import {useInitializeContext} from 'components/initialize';
 import React from 'react';
 
 import {MainTabNav} from './MainTabNav';
+import {AuthenticatedStackParamList, RootStackParamList} from './types';
 
-const nav = createNativeStackNavigator();
+const nav = createNativeStackNavigator<AuthenticatedStackParamList>();
 
 const name = 'AuthenticatedStackNav';
 const Screen: React.FC = () => {
@@ -17,7 +18,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const AuthenticatedStackNav = {
+export const AuthenticatedStackNav: NativeStackScreenConfig<RootStackParamList, typeof name> = {
   component: Screen,
   name,
 };

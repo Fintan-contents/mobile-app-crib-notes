@@ -24,6 +24,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 import {ScrollView, StyleSheet, View, Text} from 'react-native';
 import {
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
 });
 /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 
-export const InstructionsScreen = {
+export const InstructionsScreen: NativeStackScreenConfig<DemoStackParamList, 'Instructions'> = {
   name: 'Instructions',
   component: Screen,
 };

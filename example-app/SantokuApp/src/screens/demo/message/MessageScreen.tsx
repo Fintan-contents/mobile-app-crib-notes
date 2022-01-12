@@ -1,3 +1,4 @@
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 
 import {MessageTemplate} from './MessageTemplate';
@@ -9,7 +10,7 @@ const Screen: React.FC = () => {
   return <MessageTemplate testID="MessageScreen" items={info} keyExtractor={infoKeyExtractor} />;
 };
 
-export const MessageScreen = {
+export const MessageScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {

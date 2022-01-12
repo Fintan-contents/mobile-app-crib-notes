@@ -1,3 +1,4 @@
+import {DemoStackParamList} from 'navigation/types';
 import {useEffect} from 'react';
 
 const ScreenName = 'ErrorInUseEffectSyncProcess';
@@ -9,7 +10,7 @@ const Screen = () => {
   return null;
 };
 
-export const ErrorInUseEffectSyncProcessScreen = {
+export const ErrorInUseEffectSyncProcessScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
 };

@@ -8,7 +8,8 @@ describe('Home', () => {
   let app: RenderAPI;
 
   beforeEach(() => {
-    app = render(<HomeScreen.component />);
+    const Screen = HomeScreen.component as React.FC;
+    app = render(<Screen />);
   });
 
   it('マウントされたときに正常にレンダリングされること', () => {
