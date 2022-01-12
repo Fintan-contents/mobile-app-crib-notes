@@ -69,10 +69,22 @@ function deleteActiveAccountId(): Promise<void> {
   return SecureStore.deleteItemAsync(STORED_ITEM_KEYS.ACTIVE_ACCOUNT_ID);
 }
 
+/**
+ * セキュアストレージから指定されたアカウントIDに該当するパスワードを削除します。
+ * @param accountId アカウントID
+ * @returns セキュアストレージに存在する場合はパスワードの文字列、存在しない場合はnull
+ */
+async function deletePassword(accountId: string): Promise<void> {
+  // ログインに利用するような項目は平文で保存しないでハッシュ化します。
+  const hash = await sha256(accountId);
+  return SecureStore.deleteItemAsync(`${hash}_${STORED_ITEM_KEYS.PASSWORD}`);
+}
+
 export const SecureStorageAdapter = {
   saveActiveAccountId,
   savePassword,
   loadActiveAccountId,
   loadPassword,
   deleteActiveAccountId,
+  deletePassword,
 };

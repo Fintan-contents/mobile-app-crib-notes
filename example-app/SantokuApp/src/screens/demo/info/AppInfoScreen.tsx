@@ -1,3 +1,4 @@
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 
 import {AppInfoTemplate} from './AppInfoTemplate';
@@ -9,7 +10,7 @@ const Screen: React.FC = () => {
   return <AppInfoTemplate testID="AppInfoScreen" items={info} keyExtractor={infoKeyExtractor} />;
 };
 
-export const AppInfoScreen = {
+export const AppInfoScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {

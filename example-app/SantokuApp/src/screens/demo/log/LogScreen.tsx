@@ -1,3 +1,4 @@
+import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
 
 import {LogTemplate} from './LogTemplate';
@@ -18,7 +19,7 @@ const Screen: React.FC = () => {
   );
 };
 
-export const LogScreen = {
+export const LogScreen: NativeStackScreenConfig<DemoStackParamList, typeof ScreenName> = {
   name: ScreenName,
   component: Screen,
   options: {
