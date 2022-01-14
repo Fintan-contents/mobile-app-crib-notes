@@ -59,7 +59,7 @@ module.exports = {
       hideOnScroll: true,
       logo: {
         alt: 'Fintan Mobile App',
-        src: 'img/fintan-logo-long.svg',
+        src: 'img/fintan-logo.jpg',
         href: 'https://fintan.jp',
       },
       items: [
