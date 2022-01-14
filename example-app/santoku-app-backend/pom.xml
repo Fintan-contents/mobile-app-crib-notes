@@ -173,6 +173,12 @@
       <version>6.1.5.Final</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.google.firebase</groupId>
+      <artifactId>firebase-admin</artifactId>
+      <version>8.1.0</version>
+    </dependency>
+
     <!-- Java11用 -->
     <dependency>
       <groupId>com.sun.activation</groupId>

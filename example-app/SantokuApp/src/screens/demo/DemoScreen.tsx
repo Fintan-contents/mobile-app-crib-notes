@@ -17,6 +17,7 @@ import {LocalAuthenticationScreen} from './local-authn';
 import {LogScreen} from './log';
 import {MessageScreen} from './message';
 import {NavigationScreen} from './navigation';
+import {PushNotificationScreen} from './push-notification';
 import {SnackbarScreen} from './snackbar';
 
 type ScreenList = {
@@ -76,6 +77,10 @@ const demoScreenList: ScreenList[] = [
   {
     title: 'Navigation',
     to: NavigationScreen.name,
+  },
+  {
+    title: 'PushNotification',
+    to: PushNotificationScreen.name,
   },
 ];
 

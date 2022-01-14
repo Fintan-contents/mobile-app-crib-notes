@@ -11,6 +11,7 @@ const mockNonDummySettings = {
   delete: jest.fn(),
   utils: jest.fn(),
   crashlytics: jest.fn(),
+  messaging: jest.fn(),
 };
 
 const mockDummySettings = {
@@ -22,6 +23,7 @@ const mockDummySettings = {
   delete: jest.fn(),
   utils: jest.fn(),
   crashlytics: jest.fn(),
+  messaging: jest.fn(),
 };
 
 describe('Firebase Config', () => {
