@@ -84,7 +84,11 @@ function refresh(): Promise<AccountLoginResponse> {
  */
 async function logout(): Promise<void> {
   await accountApi.postLogout();
-  return SecureStorageAdapter.deleteActiveAccountId();
+  const accountId = await SecureStorageAdapter.loadActiveAccountId();
+  if (accountId) {
+    await SecureStorageAdapter.deleteActiveAccountId();
+    await SecureStorageAdapter.deletePassword(accountId);
+  }
 }
 
 export const AuthenticationService = {

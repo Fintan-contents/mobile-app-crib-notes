@@ -58,10 +58,10 @@ Android StudioでSDK Managerを開き、SDK Toolsタブで以下のツールに�
 
 次に、[環境変数`ANDROID_SDK_ROOT`、`ANDROID_HOME`](https://developer.android.com/studio/command-line/variables)を設定します。
 
-| 環境変数            | 設定例（macOS）           | 設定例（Windows）               |
-|:-------------------|:------------------------|:------------------------------|
-| `ANDROID_SDK_ROOT` | `~/Library/Android/sdk` | `~\AppData\Local\Android\Sdk` |
-| `ANDROID_HOME`[^1] | `$ANDROID_SDK_ROOT`     | `%ANDROID_SDK_ROOT%`          |
+| 環境変数            | 設定例（macOS）                  | 設定例（Windows）                              |
+|:-------------------|:----------------------------|:------------------------------------------|
+| `ANDROID_SDK_ROOT` | `$HOME/Library/Android/sdk` | `%USERPROFILE%\AppData\Local\Android\Sdk` |
+| `ANDROID_HOME`[^1] | `$ANDROID_SDK_ROOT`         | `%ANDROID_SDK_ROOT%`                      |
 
 [^1]: `ANDROID_HOME`という環境変数はすでに非推奨となっています。そのため、設定しなくても基本的に問題ないはずですが、メンテナンスされていないツールがこの環境変数を参照している可能性などもあるので、念のため設定しています。
 
@@ -76,6 +76,20 @@ Android StudioでSDK Managerを開き、SDK Toolsタブで以下のツールに�
 :::danger warning
 **`$ANDROID_SDK_ROOT/tools`が`PATH`に含まれている場合、`PATH`から削除してください。**古いバージョンのAndroid Studioをインストールしていた場合や、インストール方法を紹介した古い記事などを参照してインストールした場合に、特に注意してください。分かりづらいエラーが発生して解決できないというケースがしばしば見られます。
 :::
+
+macOSでの`~/.zshrc`への設定例は次のようになります。
+
+```bash
+# Android CLI environment variables
+#   https://developer.android.com/studio/command-line/variables
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+
+# Android CLI PATHs
+#   https://developer.android.com/studio/command-line
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+```
 
 これでコマンドラインツールの設定が完了しているはずです。次のコマンドを実行して、正常に完了することを確認してください。
 
