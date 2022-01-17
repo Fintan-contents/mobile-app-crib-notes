@@ -314,6 +314,17 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'プッシュ通知',
+          items: [
+            'react-native/santoku/application-architecture/push-notification/overview',
+            'react-native/santoku/application-architecture/push-notification/register-token',
+            'react-native/santoku/application-architecture/push-notification/delete-token',
+            'react-native/santoku/application-architecture/push-notification/send-push-notification',
+            'react-native/santoku/application-architecture/push-notification/receive-push-notification',
+          ],
+        },
+        {
+          type: 'category',
           label: 'エラーハンドリング',
           items: [
             'react-native/santoku/application-architecture/error-handling/overview',
@@ -538,6 +549,9 @@ module.exports = {
         'react-native/santoku/decisions/adr-005-message',
         'react-native/santoku/decisions/adr-006-logging',
         'react-native/santoku/decisions/adr-007-auth',
+        'react-native/santoku/decisions/adr-008-push-notification',
+        'react-native/santoku/decisions/adr-009-push-notification-fcm',
+        'react-native/santoku/decisions/adr-010-push-notification-contents',
       ],
     },
   ],

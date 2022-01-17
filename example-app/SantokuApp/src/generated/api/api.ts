@@ -51,6 +51,12 @@ export interface Account {
      * @memberof Account
      */
     'joinedTeamIdList'?: Array<string>;
+    /**
+     * アカウントに紐づくデバイストークン（デバイストークンの更新期限を超過しているものは除く）
+     * @type {Array<string>}
+     * @memberof Account
+     */
+    'deviceTokens': Array<string>;
 }
 /**
  * アカウント削除
@@ -64,6 +70,19 @@ export interface AccountDeletion {
      * @memberof AccountDeletion
      */
     'password'?: string;
+}
+/**
+ * アカウント紐づくデバイストークン
+ * @export
+ * @interface AccountDeviceTokens
+ */
+export interface AccountDeviceTokens {
+    /**
+     * アカウントに紐づくデバイストークン（デバイストークンの更新期限を超過しているものは除く）
+     * @type {Array<string>}
+     * @memberof AccountDeviceTokens
+     */
+    'deviceTokens': Array<string>;
 }
 /**
  * アカウントチーム情報
@@ -200,19 +219,6 @@ export interface CsrfTokenResponse {
      * @memberof CsrfTokenResponse
      */
     'csrfTokenParameterName': string;
-}
-/**
- * デバイス情報
- * @export
- * @interface Device
- */
-export interface Device {
-    /**
-     * デバイス登録トークン
-     * @type {string}
-     * @memberof Device
-     */
-    'deviceToken'?: string;
 }
 /**
  * エラーレスポンス
@@ -490,6 +496,25 @@ export interface TimetableTemplate {
      */
     'periodTemplateList'?: Array<PeriodTemplate>;
 }
+/**
+ * 更新するデバイス登録トークン
+ * @export
+ * @interface UpdateDeviceToken
+ */
+export interface UpdateDeviceToken {
+    /**
+     * 登録するデバイス登録トークン
+     * @type {string}
+     * @memberof UpdateDeviceToken
+     */
+    'newDeviceToken'?: string;
+    /**
+     * 削除するデバイス登録トークン
+     * @type {string}
+     * @memberof UpdateDeviceToken
+     */
+    'oldDeviceToken'?: string;
+}
 
 /**
  * AccountApi - axios parameter creator
@@ -702,13 +727,13 @@ export const AccountApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * ログイン済みアカウントのデバイス登録トークンを登録する。 
-         * @summary ログイン済みアカウントのデバイス登録トークンの登録
-         * @param {Device} [device] 
+         * ログイン済みアカウントのデバイス登録トークンを更新する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの更新
+         * @param {UpdateDeviceToken} [updateDeviceToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postAccountsMeDeviceToken: async (device?: Device, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postAccountsMeDeviceToken: async (updateDeviceToken?: UpdateDeviceToken, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/accounts/me/device-token`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -730,7 +755,7 @@ export const AccountApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(device, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateDeviceToken, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -992,14 +1017,14 @@ export const AccountApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * ログイン済みアカウントのデバイス登録トークンを登録する。 
-         * @summary ログイン済みアカウントのデバイス登録トークンの登録
-         * @param {Device} [device] 
+         * ログイン済みアカウントのデバイス登録トークンを更新する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの更新
+         * @param {UpdateDeviceToken} [updateDeviceToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postAccountsMeDeviceToken(device?: Device, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Device>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postAccountsMeDeviceToken(device, options);
+        async postAccountsMeDeviceToken(updateDeviceToken?: UpdateDeviceToken, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postAccountsMeDeviceToken(updateDeviceToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1124,14 +1149,14 @@ export const AccountApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getAccountsMeTerms(options).then((request) => request(axios, basePath));
         },
         /**
-         * ログイン済みアカウントのデバイス登録トークンを登録する。 
-         * @summary ログイン済みアカウントのデバイス登録トークンの登録
-         * @param {Device} [device] 
+         * ログイン済みアカウントのデバイス登録トークンを更新する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの更新
+         * @param {UpdateDeviceToken} [updateDeviceToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postAccountsMeDeviceToken(device?: Device, options?: any): AxiosPromise<Device> {
-            return localVarFp.postAccountsMeDeviceToken(device, options).then((request) => request(axios, basePath));
+        postAccountsMeDeviceToken(updateDeviceToken?: UpdateDeviceToken, options?: any): AxiosPromise<void> {
+            return localVarFp.postAccountsMeDeviceToken(updateDeviceToken, options).then((request) => request(axios, basePath));
         },
         /**
          * ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。 
@@ -1262,15 +1287,15 @@ export class AccountApi extends BaseAPI {
     }
 
     /**
-     * ログイン済みアカウントのデバイス登録トークンを登録する。 
-     * @summary ログイン済みアカウントのデバイス登録トークンの登録
-     * @param {Device} [device] 
+     * ログイン済みアカウントのデバイス登録トークンを更新する。 
+     * @summary ログイン済みアカウントのデバイス登録トークンの更新
+     * @param {UpdateDeviceToken} [updateDeviceToken] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountApi
      */
-    public postAccountsMeDeviceToken(device?: Device, options?: AxiosRequestConfig) {
-        return AccountApiFp(this.configuration).postAccountsMeDeviceToken(device, options).then((request) => request(this.axios, this.basePath));
+    public postAccountsMeDeviceToken(updateDeviceToken?: UpdateDeviceToken, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).postAccountsMeDeviceToken(updateDeviceToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -7,7 +7,7 @@ import {SecureStorageAdapter} from './SecureStorageAdapter';
 describe('AuthenticationService signup', () => {
   test('サインアップAPIを呼び出して、クレデシャルをセキュアストレージに格納しているかの検証', async () => {
     const spySignupApi = jest.spyOn(accountApi, 'postSignup').mockResolvedValue({
-      data: {accountId: '123456789', profile: {nickname: 'testNickName'}},
+      data: {accountId: '123456789', profile: {nickname: 'testNickName'}, deviceTokens: []},
       status: 200,
       statusText: 'ok',
       headers: {},
@@ -15,7 +15,7 @@ describe('AuthenticationService signup', () => {
     });
     const spySecureStorageAdapterSavePassword = jest.spyOn(SecureStorageAdapter, 'savePassword');
     const res = await AuthenticationService.signup('testNickName', 'password123');
-    expect(res).toEqual({accountId: '123456789', profile: {nickname: 'testNickName'}});
+    expect(res).toEqual({accountId: '123456789', profile: {nickname: 'testNickName'}, deviceTokens: []});
     expect(spySignupApi).toHaveBeenCalledWith({nickname: 'testNickName', password: 'password123'});
     expect(spySecureStorageAdapterSavePassword).toHaveBeenCalledWith('123456789', 'password123');
   });

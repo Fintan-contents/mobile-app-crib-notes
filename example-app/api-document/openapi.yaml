@@ -209,9 +209,9 @@ paths:
               description: アカウントのアバター画像のURL
   /accounts/me/device-token:
     post:
-      summary: ログイン済みアカウントのデバイス登録トークンの登録
+      summary: ログイン済みアカウントのデバイス登録トークンの更新
       description: |
-        ログイン済みアカウントのデバイス登録トークンを登録する。
+        ログイン済みアカウントのデバイス登録トークンを更新する。
       tags:
         - Account 
       operationId: post-accounts-me-device-token
@@ -219,14 +219,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Device'
+              $ref: '#/components/schemas/UpdateDeviceToken'
       responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Device'
+        '204':
+          description: No Content
   /accounts/me/terms:
     get:
       summary: ログイン済みアカウントの利用規約同意状態確認
@@ -649,6 +645,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/AccountProfile'
         - $ref: '#/components/schemas/AccountJoinedTeam'
+        - $ref: '#/components/schemas/AccountDeviceTokens'
     AccountProfile:
       title: AccountProfile
       type: object
@@ -676,6 +673,18 @@ components:
           items:
             type: string
           description: 参加済みチームID一覧
+    AccountDeviceTokens:
+      title: AccountDeviceTokens
+      type: object
+      description: アカウント紐づくデバイストークン
+      properties:
+        deviceTokens:
+          type: array
+          items:
+            type: string
+          description: アカウントに紐づくデバイストークン（デバイストークンの更新期限を超過しているものは除く）
+      required:
+        - deviceTokens
     AccountRegistration:
       title: AccountRegistration
       type: object
@@ -726,14 +735,17 @@ components:
           type: string
           format: binary
           description: アバター画像
-    Device:
-      title: Device
+    UpdateDeviceToken:
+      title: UpdateDeviceToken
       type: object
-      description: デバイス情報
+      description: 更新するデバイス登録トークン
       properties:
-        deviceToken:
+        newDeviceToken:
           type: string
-          description: デバイス登録トークン
+          description: 登録するデバイス登録トークン
+        oldDeviceToken:
+          type: string 
+          description: 削除するデバイス登録トークン
     TermsOfService:
       title: TermsOfService
       type: object

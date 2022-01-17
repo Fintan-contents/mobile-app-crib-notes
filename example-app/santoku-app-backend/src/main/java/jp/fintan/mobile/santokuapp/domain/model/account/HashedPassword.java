@@ -1,20 +1,14 @@
 package jp.fintan.mobile.santokuapp.domain.model.account;
 
-import java.util.Objects;
+import jp.fintan.mobile.santokuapp.domain.model.core.StringValue;
 
-public class HashedPassword {
-
-  private final String value;
+public class HashedPassword extends StringValue {
 
   public HashedPassword(String value) {
-    this.value = Objects.requireNonNull(value);
-  }
-
-  public String value() {
-    return value;
+    super(value);
   }
 
   public boolean matches(HashedPassword other) {
-    return value.equals(other.value);
+    return value().equals(other.value());
   }
 }
