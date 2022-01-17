@@ -252,6 +252,7 @@ useEffect(() => {
 
 - `messaging().setBackgroundMessageHandler`
     - アプリを起動していない、または非アクティブな場合にバックグラウンドでメッセージを処理する
+    - iOSの場合、APNsペイロード内の`content-available`が`true`に設定されている場合のみ処理が呼ばれる
 - `messaging().onNotificationOpenedApp`
     - アプリが起動しているが非アクティブな場合に、通知領域に表示されたメッセージをタップしてアプリがアクティブになったタイミングでメッセージを処理する
 - `messaging().getInitialNotification`
