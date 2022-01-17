@@ -40,8 +40,8 @@
 - 認証
   - アプリケーション方式
     - [認証方式](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/overview)
-    - [サインアップ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/signup)
-    - [ログイン](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/login)
+    - [匿名サインアップ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/signup)
+    - [自動ログイン](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/login)
     - [ログアウト](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/logout)
     - [端末認証](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/local-auth)
     - [ログイン資格情報の管理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/auth/credential-management)
