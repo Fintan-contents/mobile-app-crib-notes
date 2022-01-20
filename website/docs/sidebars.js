@@ -332,6 +332,10 @@ module.exports = {
             'react-native/santoku/application-architecture/http-api/http-api-error-handling',
           ],
         },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/application-architecture/cache-management/overview',
+        },
       ],
     },
     {
@@ -552,6 +556,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-008-push-notification',
         'react-native/santoku/decisions/adr-009-push-notification-fcm',
         'react-native/santoku/decisions/adr-010-push-notification-contents',
+        'react-native/santoku/decisions/adr-011-cache-management',
       ],
     },
   ],
