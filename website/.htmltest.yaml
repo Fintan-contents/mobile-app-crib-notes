@@ -54,5 +54,7 @@ IgnoreURLs:
   - https://marketplace.visualstudio.com/items\?itemName=yzhang.markdown-all-in-one
   # 403になってしまうので無視
   - https://blog.expo.dev/
+# タイムアウトでビルドが失敗するので、外部リンクのエラーは警告とし手動で問題ないかを確認とする。
+IgnoreExternalBrokenLinks: true
 # タイムアウトでビルドが失敗すると困るので、余裕を持って長めに設定しておく。
 ExternalTimeout: 60
