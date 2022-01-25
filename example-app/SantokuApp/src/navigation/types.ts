@@ -45,6 +45,7 @@ export type DemoStackParamList = {
   HttpApi: undefined;
   Navigation: undefined;
   PushNotification: undefined;
+  Cache: undefined;
 };
 
 export type AppNavigatorOptions = {

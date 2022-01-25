@@ -22,6 +22,7 @@ import {
   HttpApiScreen,
   NavigationScreen,
   PushNotificationScreen,
+  CacheScreen,
 } from 'screens';
 
 import {DemoStackParamList, RootStackParamList} from './types';
@@ -60,6 +61,7 @@ export const Screen: React.FC = () => {
       <nav.Screen {...HttpApiScreen} />
       <nav.Screen {...NavigationScreen} />
       <nav.Screen {...PushNotificationScreen} />
+      <nav.Screen {...CacheScreen} />
     </nav.Navigator>
   );
 };

@@ -8,6 +8,7 @@ import {DemoTemplate} from './DemoTemplate';
 import {AppStateScreen} from './app-state';
 import {AuthenticationScreen} from './authentication';
 import {ButtonScreen} from './button';
+import {CacheScreen} from './cache';
 import {ConfigScreen} from './config';
 import {ErrorCaseScreen} from './error';
 import {HttpApiScreen} from './http-api';
@@ -81,6 +82,10 @@ const demoScreenList: ScreenList[] = [
   {
     title: 'PushNotification',
     to: PushNotificationScreen.name,
+  },
+  {
+    title: 'Cache',
+    to: CacheScreen.name,
   },
 ];
 
