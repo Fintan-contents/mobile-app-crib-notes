@@ -2,7 +2,7 @@
 title: プッシュ通知の受信
 ---
 
-iOSアプリの場合はAPNsから、Androidアプリの場合はATLからそれぞれプッシュ通知を受信します。
+iOSやiPadOSアプリの場合はAPNsから、Androidアプリの場合はATLからそれぞれプッシュ通知を受信します。
 
 ## プッシュ通知受信時の処理フロー
 
@@ -28,11 +28,11 @@ iOSアプリの場合はAPNsから、Androidアプリの場合はATLからそれ
 `onMessage`で受け取った通知内容をスナックバーでアプリ上に表示します。その他、通知内容に応じた処理があれば行いますが、画面遷移などユーザの操作を妨げる処理は行わないこととします。
 
 :::note
-iOSの場合、フォアグラウンド（非アクティブ）の場合でも`onMessage`に設定した処理が呼ばれます。
+iOSやiPadOSの場合、フォアグラウンド（非アクティブ）の場合でも`onMessage`に設定した処理が呼ばれます。
 つまり、[通知センター](https://support.apple.com/ja-jp/HT201925#control-center)、[コントロールセンター](https://support.apple.com/ja-jp/HT202769)を開いているときや、[Appスイッチャー](https://support.apple.com/en-us/HT202070)を表示している時にも通知内容はスナックバーでアプリ上に表示されます。
 画面が隠れている状態で通知内容が表示されるため、ユーザが通知に気づかない恐れがあります。そのため、ユーザの確認が必要な内容は通知以外でお知らせする必要があります。
 
-Androidの場合、[通知ドロワー](https://developer.android.com/guide/topics/ui/notifiers/notifications?hl=ja#bar-and-drawer)を開いたときでも（アプリの状態に反して）`onMessage`に設定した処理が呼ばれます。一方で、アプリ切り替え中はバックグラウンドの状態となります。iOSと動きが異なるため注意してください。
+Androidの場合、[通知ドロワー](https://developer.android.com/guide/topics/ui/notifiers/notifications?hl=ja#bar-and-drawer)を開いたときでも（アプリの状態に反して）`onMessage`に設定した処理が呼ばれます。一方で、アプリ切り替え中はバックグラウンドの状態となります。iOSやiPadOSと動きが異なるため注意してください。
 :::
 
 ### フォアグラウンド以外の場合
@@ -41,7 +41,8 @@ Androidの場合、[通知ドロワー](https://developer.android.com/guide/topi
 アプリはプッシュ通知を受信した時点では何も行いません。
 
 :::note
-フォアグラウンド以外の状態でプッシュ通知を受信すると、`BackgroundMessageHandler`に設定した処理が動作します。iOSの場合、APNsペイロード内の`content-available`が`true`に設定されている場合のみ、`BackgroundMessageHandler`の処理が呼ばれることに注意してください。
+フォアグラウンド以外の状態でプッシュ通知を受信すると、`BackgroundMessageHandler`に設定した処理が動作します。
+iOSやiPadOSの場合、APNsペイロード内の`content-available`が`true`に設定されている場合のみ、この処理が呼ばれることに注意してください。
 詳細は、[アプリがアクティブでない時にメッセージを受信した場合の処理](../../../../reference/notification/client.md#アプリがアクティブでない時にメッセージを受信した場合の処理)を参照してください。
 :::
 
