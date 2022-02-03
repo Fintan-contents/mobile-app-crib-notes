@@ -19,7 +19,7 @@ security:
   - Session: []
 paths:
   /csrf_token:
-    get: 
+    get:
       summary: CSRFトークンの取得
       tags:
         - System
@@ -36,7 +36,7 @@ paths:
     post:
       summary: アカウントの登録
       tags:
-        - Account 
+        - Account
       description: |
         アカウントを登録します。アカウントの登録には、ニックネームとパスワードが必要です。
       operationId: post-signup
@@ -66,7 +66,7 @@ paths:
       description: |
         アカウントIDとパスワードを指定してログインします。
       tags:
-        - Account 
+        - Account
       operationId: post-login
       requestBody:
         content:
@@ -98,7 +98,7 @@ paths:
       summary: ログアウトする
       description: ''
       tags:
-        - Account 
+        - Account
       operationId: post-logout
       responses:
         '204':
@@ -120,7 +120,7 @@ paths:
       description: |
         アカウントIDをキーとして登録されているアカウントを取得する。
       tags:
-        - Account 
+        - Account
       operationId: get-accounts-accountId
       responses:
         '200':
@@ -142,7 +142,7 @@ paths:
       description: |
         アバターを取得する。
       tags:
-        - Account 
+        - Account
       operationId: get-accounts-accountId-avatar
       responses:
         '200':
@@ -157,7 +157,7 @@ paths:
       description: |
         ログイン済みのアカウントを取得する。
       tags:
-        - Account 
+        - Account
       operationId: get-accounts-me
       responses:
         '200':
@@ -174,7 +174,7 @@ paths:
       description: |
         ログイン済みアカウントのアバターを取得する。
       tags:
-        - Account 
+        - Account
       operationId: get-accounts-me-avatar
       responses:
         '200':
@@ -188,7 +188,7 @@ paths:
       description: |
         ログイン済みアカウントのアバターを登録する。
       tags:
-        - Account 
+        - Account
       operationId: put-accounts-me-avatar
       requestBody:
         content:
@@ -207,19 +207,35 @@ paths:
                 type: string
                 format: uri-reference
               description: アカウントのアバター画像のURL
-  /accounts/me/device-token:
+  /accounts/me/device-token/add:
     post:
-      summary: ログイン済みアカウントのデバイス登録トークンの更新
+      summary: ログイン済みアカウントのデバイス登録トークンの登録・更新
       description: |
-        ログイン済みアカウントのデバイス登録トークンを更新する。
+        ログイン済みアカウントのデバイス登録トークンを登録・更新する。
       tags:
-        - Account 
-      operationId: post-accounts-me-device-token
+        - Account
+      operationId: post-accounts-me-device-token-add
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateDeviceToken'
+              $ref: '#/components/schemas/AddDeviceToken'
+      responses:
+        '204':
+          description: No Content
+  /accounts/me/device-token/remove:
+    post:
+      summary: ログイン済みアカウントのデバイス登録トークンの削除
+      description: |
+        ログイン済みアカウントのデバイス登録トークンを削除する。
+      tags:
+        - Account
+      operationId: post-accounts-me-device-token-remove
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveDeviceToken'
       responses:
         '204':
           description: No Content
@@ -229,7 +245,7 @@ paths:
       description: |
         ログイン済みアカウントの有効な利用規約に同意しているかの状態を取得します。
       tags:
-        - Account 
+        - Account
       operationId: get-accounts-me-terms
       responses:
         '200':
@@ -243,7 +259,7 @@ paths:
       description: |
         ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。
       tags:
-        - Account 
+        - Account
       operationId: post-accounts-me-terms
       requestBody:
         content:
@@ -273,7 +289,7 @@ paths:
         > sending a payload body on a DELETE request might cause some existing
         > implementations to reject the request.
       tags:
-        - Account 
+        - Account
       operationId: delete-accounts-me-delete
       requestBody:
         content:
@@ -295,7 +311,7 @@ paths:
       description: |
         有効な利用規約を取得します。このAPIの呼び出しには認証情報は不要です。
       tags:
-        - Terms 
+        - Terms
       security: []
       operationId: get-terms
       responses:
@@ -623,11 +639,11 @@ components:
           description: トークンのヘッダー名
         csrfTokenParameterName:
           type: string
-          description: トークンのパラメータ名        
+          description: トークンのパラメータ名
       required:
-        - csrfTokenValue 
-        - csrfTokenHeaderName 
-        - csrfTokenParameterName 
+        - csrfTokenValue
+        - csrfTokenHeaderName
+        - csrfTokenParameterName
     Profile:
       title: Profile
       type: object
@@ -735,16 +751,21 @@ components:
           type: string
           format: binary
           description: アバター画像
-    UpdateDeviceToken:
-      title: UpdateDeviceToken
+    AddDeviceToken:
+      title: AddDeviceToken
       type: object
-      description: 更新するデバイス登録トークン
+      description: 登録・更新するデバイス登録トークン
       properties:
-        newDeviceToken:
+        deviceToken:
           type: string
-          description: 登録するデバイス登録トークン
-        oldDeviceToken:
-          type: string 
+          description: 登録・更新するデバイス登録トークン
+    RemoveDeviceToken:
+      title: RemoveDeviceToken
+      type: object
+      description: 削除するデバイス登録トークン
+      properties:
+        deviceToken:
+          type: string
           description: 削除するデバイス登録トークン
     TermsOfService:
       title: TermsOfService

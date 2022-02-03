@@ -37,8 +37,8 @@ export const usePushNotification = () => {
 
   const registerFcmToken = useCallback(async () => {
     try {
-      await accountApi.postAccountsMeDeviceToken({newDeviceToken: token});
-      alert('FCM登録トークンをバックエンドに登録しました');
+      await accountApi.postAccountsMeDeviceTokenAdd({deviceToken: token});
+      alert('FCM登録トークンをバックエンドに新規登録または更新しました');
     } catch (e) {
       if (e instanceof ApiResponseError) {
         alert(e.response.data.message);
@@ -50,7 +50,7 @@ export const usePushNotification = () => {
 
   const removeFcmToken = useCallback(async () => {
     try {
-      await accountApi.postAccountsMeDeviceToken({oldDeviceToken: token});
+      await accountApi.postAccountsMeDeviceTokenRemove({deviceToken: token});
       alert('FCM登録トークンをバックエンドから削除しました');
     } catch (e) {
       if (e instanceof ApiResponseError) {

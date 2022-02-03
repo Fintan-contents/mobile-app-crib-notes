@@ -40,10 +40,41 @@ public class MyAccountDeviceTokenAction {
     }
   }
 
+  @POST
+  @Path("/add")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void add(ExecutionContext context, UpdateDeviceTokenRequest requestBody) {
+    AccountId accountId = loginAccountIdSupplier.supply();
+
+    if (requestBody.deviceToken != null) {
+      accountDeviceTokenService.deleteDevice(accountId, new DeviceToken(requestBody.deviceToken));
+      accountDeviceTokenService.registerDevice(accountId, new DeviceToken(requestBody.deviceToken));
+    }
+  }
+
+  @POST
+  @Path("/remove")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void remove(ExecutionContext context, DeleteDeviceTokenRequest requestBody) {
+    AccountId accountId = loginAccountIdSupplier.supply();
+
+    if (requestBody.deviceToken != null) {
+      accountDeviceTokenService.deleteDevice(accountId, new DeviceToken(requestBody.deviceToken));
+    }
+  }
+
   public static class DeviceTokenRequest {
 
     public String newDeviceToken;
 
     public String oldDeviceToken;
+  }
+
+  public static class UpdateDeviceTokenRequest {
+    public String deviceToken;
+  }
+
+  public static class DeleteDeviceTokenRequest {
+    public String deviceToken;
   }
 }

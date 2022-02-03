@@ -183,6 +183,19 @@ export interface AccountRegistration {
     'password'?: string;
 }
 /**
+ * 登録・更新するデバイス登録トークン
+ * @export
+ * @interface AddDeviceToken
+ */
+export interface AddDeviceToken {
+    /**
+     * 登録・更新するデバイス登録トークン
+     * @type {string}
+     * @memberof AddDeviceToken
+     */
+    'deviceToken'?: string;
+}
+/**
  * アバター画像
  * @export
  * @interface AvatarImage
@@ -307,6 +320,19 @@ export interface Profile {
      * @memberof Profile
      */
     'avatarImageUrl'?: string;
+}
+/**
+ * 削除するデバイス登録トークン
+ * @export
+ * @interface RemoveDeviceToken
+ */
+export interface RemoveDeviceToken {
+    /**
+     * 削除するデバイス登録トークン
+     * @type {string}
+     * @memberof RemoveDeviceToken
+     */
+    'deviceToken'?: string;
 }
 /**
  * チーム
@@ -495,25 +521,6 @@ export interface TimetableTemplate {
      * @memberof TimetableTemplate
      */
     'periodTemplateList'?: Array<PeriodTemplate>;
-}
-/**
- * 更新するデバイス登録トークン
- * @export
- * @interface UpdateDeviceToken
- */
-export interface UpdateDeviceToken {
-    /**
-     * 登録するデバイス登録トークン
-     * @type {string}
-     * @memberof UpdateDeviceToken
-     */
-    'newDeviceToken'?: string;
-    /**
-     * 削除するデバイス登録トークン
-     * @type {string}
-     * @memberof UpdateDeviceToken
-     */
-    'oldDeviceToken'?: string;
 }
 
 /**
@@ -727,14 +734,14 @@ export const AccountApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * ログイン済みアカウントのデバイス登録トークンを更新する。 
-         * @summary ログイン済みアカウントのデバイス登録トークンの更新
-         * @param {UpdateDeviceToken} [updateDeviceToken] 
+         * ログイン済みアカウントのデバイス登録トークンを登録・更新する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの登録・更新
+         * @param {AddDeviceToken} [addDeviceToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postAccountsMeDeviceToken: async (updateDeviceToken?: UpdateDeviceToken, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/accounts/me/device-token`;
+        postAccountsMeDeviceTokenAdd: async (addDeviceToken?: AddDeviceToken, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/accounts/me/device-token/add`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -755,7 +762,43 @@ export const AccountApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateDeviceToken, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(addDeviceToken, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * ログイン済みアカウントのデバイス登録トークンを削除する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの削除
+         * @param {RemoveDeviceToken} [removeDeviceToken] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postAccountsMeDeviceTokenRemove: async (removeDeviceToken?: RemoveDeviceToken, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/accounts/me/device-token/remove`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Session required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(removeDeviceToken, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1017,14 +1060,25 @@ export const AccountApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * ログイン済みアカウントのデバイス登録トークンを更新する。 
-         * @summary ログイン済みアカウントのデバイス登録トークンの更新
-         * @param {UpdateDeviceToken} [updateDeviceToken] 
+         * ログイン済みアカウントのデバイス登録トークンを登録・更新する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの登録・更新
+         * @param {AddDeviceToken} [addDeviceToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postAccountsMeDeviceToken(updateDeviceToken?: UpdateDeviceToken, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postAccountsMeDeviceToken(updateDeviceToken, options);
+        async postAccountsMeDeviceTokenAdd(addDeviceToken?: AddDeviceToken, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postAccountsMeDeviceTokenAdd(addDeviceToken, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ログイン済みアカウントのデバイス登録トークンを削除する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの削除
+         * @param {RemoveDeviceToken} [removeDeviceToken] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postAccountsMeDeviceTokenRemove(removeDeviceToken?: RemoveDeviceToken, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postAccountsMeDeviceTokenRemove(removeDeviceToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1149,14 +1203,24 @@ export const AccountApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getAccountsMeTerms(options).then((request) => request(axios, basePath));
         },
         /**
-         * ログイン済みアカウントのデバイス登録トークンを更新する。 
-         * @summary ログイン済みアカウントのデバイス登録トークンの更新
-         * @param {UpdateDeviceToken} [updateDeviceToken] 
+         * ログイン済みアカウントのデバイス登録トークンを登録・更新する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの登録・更新
+         * @param {AddDeviceToken} [addDeviceToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postAccountsMeDeviceToken(updateDeviceToken?: UpdateDeviceToken, options?: any): AxiosPromise<void> {
-            return localVarFp.postAccountsMeDeviceToken(updateDeviceToken, options).then((request) => request(axios, basePath));
+        postAccountsMeDeviceTokenAdd(addDeviceToken?: AddDeviceToken, options?: any): AxiosPromise<void> {
+            return localVarFp.postAccountsMeDeviceTokenAdd(addDeviceToken, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ログイン済みアカウントのデバイス登録トークンを削除する。 
+         * @summary ログイン済みアカウントのデバイス登録トークンの削除
+         * @param {RemoveDeviceToken} [removeDeviceToken] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postAccountsMeDeviceTokenRemove(removeDeviceToken?: RemoveDeviceToken, options?: any): AxiosPromise<void> {
+            return localVarFp.postAccountsMeDeviceTokenRemove(removeDeviceToken, options).then((request) => request(axios, basePath));
         },
         /**
          * ログイン済みアカウントにおいて、指定された利用規約のバージョンに同意します。 
@@ -1287,15 +1351,27 @@ export class AccountApi extends BaseAPI {
     }
 
     /**
-     * ログイン済みアカウントのデバイス登録トークンを更新する。 
-     * @summary ログイン済みアカウントのデバイス登録トークンの更新
-     * @param {UpdateDeviceToken} [updateDeviceToken] 
+     * ログイン済みアカウントのデバイス登録トークンを登録・更新する。 
+     * @summary ログイン済みアカウントのデバイス登録トークンの登録・更新
+     * @param {AddDeviceToken} [addDeviceToken] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountApi
      */
-    public postAccountsMeDeviceToken(updateDeviceToken?: UpdateDeviceToken, options?: AxiosRequestConfig) {
-        return AccountApiFp(this.configuration).postAccountsMeDeviceToken(updateDeviceToken, options).then((request) => request(this.axios, this.basePath));
+    public postAccountsMeDeviceTokenAdd(addDeviceToken?: AddDeviceToken, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).postAccountsMeDeviceTokenAdd(addDeviceToken, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ログイン済みアカウントのデバイス登録トークンを削除する。 
+     * @summary ログイン済みアカウントのデバイス登録トークンの削除
+     * @param {RemoveDeviceToken} [removeDeviceToken] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountApi
+     */
+    public postAccountsMeDeviceTokenRemove(removeDeviceToken?: RemoveDeviceToken, options?: AxiosRequestConfig) {
+        return AccountApiFp(this.configuration).postAccountsMeDeviceTokenRemove(removeDeviceToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
