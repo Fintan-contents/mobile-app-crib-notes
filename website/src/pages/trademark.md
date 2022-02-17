@@ -9,7 +9,7 @@ title: 商標について
 ### 各社の商標または登録商標
 
 <!-- textlint-disable -->
-- 「Apple」「Appleのロゴ」「iCloud」「Safari」「Keychain」「iOS」「iPhone」「Mac」「macOS」「watchOS」「tvOS」「Xcode」「App Store」「Instruments」「Objective-C」「Swift」は、米国およびその他の国で登録された Apple Inc. の商標です。<!-- textlint-enable -->  
+- 「Apple」「Appleのロゴ」「iCloud」「Safari」「Keychain」「iOS」「iPadOS」「iPhone」「Mac」「macOS」「watchOS」「tvOS」「Xcode」「App Store」「Instruments」「Objective-C」「Swift」は、米国およびその他の国で登録された Apple Inc. の商標です。<!-- textlint-enable -->
   ※iPhone商標は、アイホン株式会社のライセンスに基づき使用されています。  
   ※iOS商標は、 Cisco Systems, Inc. のライセンスに基づき使用されています。
 - 「Google Chrome」「Android」「Flutter」「Firebase」「Google Play」「Pixel」は、 Google LLCの登録商標です。
