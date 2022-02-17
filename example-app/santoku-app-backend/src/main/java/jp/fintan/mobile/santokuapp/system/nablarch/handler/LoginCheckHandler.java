@@ -23,6 +23,7 @@ public class LoginCheckHandler implements Handler<HttpRequest, Object> {
     // ホワイトリストにないリクエストかつ未認証の場合は、エラーを返却する。
     whitePatterns
         .add("/api/sandbox/fetch_test/**", HttpMethod.ALL)
+        .add("/api/sandbox/push-notification/**", HttpMethod.ALL)
         .add("/api/signup", HttpMethod.POST)
         .add("/api/login", HttpMethod.POST)
         .add("/api/system/messages", HttpMethod.GET)

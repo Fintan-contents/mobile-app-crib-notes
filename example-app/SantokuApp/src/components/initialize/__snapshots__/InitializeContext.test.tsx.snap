@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`WithInitializeContext WithInitialContextを子要素を含めて正常にrenderできること 1`] = `
-<Text
-  testID="test"
->
-  test
-</Text>
-`;

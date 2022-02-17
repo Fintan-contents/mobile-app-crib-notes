@@ -12,3 +12,12 @@ CREATE TABLE password
   PRIMARY KEY (account_id),
   FOREIGN KEY (account_id) REFERENCES account (account_id)
 );
+
+CREATE TABLE account_device_token
+(
+  account_id VARCHAR(255) NOT NULL,
+  device_token   VARCHAR(255)  NOT NULL,
+  created_at TIMESTAMP NOT NULL,
+  PRIMARY KEY (account_id, device_token),
+  FOREIGN KEY (account_id) REFERENCES account (account_id)
+);

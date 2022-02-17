@@ -10,6 +10,7 @@ const mock = (name?: string): ReturnType<typeof firebase.app> => {
     delete: jest.fn(),
     utils: jest.fn(),
     crashlytics: jest.fn(),
+    messaging: jest.fn(),
   };
 };
 

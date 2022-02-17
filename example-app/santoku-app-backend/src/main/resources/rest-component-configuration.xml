@@ -74,9 +74,9 @@
   </component>
 
   <!-- ダイアレクト設定 -->
-<!-- 一旦はh2で稼働させるためコメントアウトします。後でPostgreSQLにする予定です。 -->
-<!--  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect"/>-->
-  <component name="dialect" class="nablarch.core.db.dialect.H2Dialect" />
+  <!-- 一旦はh2で稼働させるためコメントアウトします。後でPostgreSQLにする予定です。 -->
+  <!--  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect"/>-->
+  <component name="dialect" class="nablarch.core.db.dialect.H2Dialect"/>
 
   <!-- スレッドコンテキストハンドラ -->
   <component name="threadContextHandler"
@@ -122,6 +122,9 @@
     <property name="verificationFailureHandler">
       <component class="jp.fintan.mobile.santokuapp.system.nablarch.handler.csrf.CsrfTokenVerificationFailureHandler"/>
     </property>
+    <property name="verificationTargetMatcher">
+      <component class="jp.fintan.mobile.santokuapp.system.nablarch.csrf.CsrfTokenVerificationTargetMatcher"/>
+    </property>
   </component>
 
   <!-- CORS設定 -->
@@ -152,7 +155,7 @@
     <property name="cookieName" value="${nablarch.sessionStoreHandler.cookieName}"/>
     <property name="cookiePath" value="${nablarch.sessionStoreHandler.cookiePath}"/>
     <property name="cookieSecure" value="${nablarch.sessionStoreHandler.cookieSecure}"/>
-    <property name="expiration" ref="dbExpiration" />
+    <property name="expiration" ref="dbExpiration"/>
   </component>
   <component name="dbExpiration" class="nablarch.common.web.session.DbManagedExpiration">
     <!-- データベースへのトランザクション制御を行うクラス -->
@@ -162,6 +165,8 @@
       </component>
     </property>
   </component>
+
+  <component name="firebaseInitializer" class="jp.fintan.mobile.santokuapp.system.nablarch.FirebaseInitializer"/>
 
   <!-- ハンドラキュー構成 -->
   <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
@@ -248,6 +253,7 @@
         <component-ref name="dbMigration"/>
         <component-ref name="dbStore"/>
         <component-ref name="dbExpiration"/>
+        <component-ref name="firebaseInitializer"/>
       </list>
     </property>
   </component>

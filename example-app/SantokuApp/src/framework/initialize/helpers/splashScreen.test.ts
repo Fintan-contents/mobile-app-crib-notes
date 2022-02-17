@@ -1,16 +1,6 @@
 import {waitFor} from '@testing-library/react-native';
 
-import {initialize, hideSplashScreen} from './initialize';
-
-describe('initialize', () => {
-  it('navigatorOptionsが返されること', async () => {
-    await expect(initialize()).resolves.toEqual({
-      RootStackNav: {
-        initialRouteName: 'TermsOfServiceAgreement',
-      },
-    });
-  });
-});
+import {hideSplashScreen} from './splashScreen';
 
 describe('hideSplashScreen', () => {
   beforeEach(() => {

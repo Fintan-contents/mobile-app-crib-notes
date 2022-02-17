@@ -33,6 +33,32 @@
 
 ## 更新履歴
 
+### 2022/02/17
+
+#### 🌱 新規コンテンツ（2022/02/17）
+
+- プッシュ通知
+  - アプリケーション方式
+    - [プッシュ通知](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/push-notification/overview)
+    - [登録トークンの登録・更新](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/push-notification/register-token)
+    - [登録トークンの削除](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/push-notification/delete-token)
+    - [プッシュ通知の送信](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/push-notification/send-push-notification)
+    - [プッシュ通知の受信](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/push-notification/receive-push-notification)
+  - Decision Records
+    - [プッシュ通知方式の方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-008-push-notification)
+    - [FCMを用いたプッシュ通知方式の管理方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-009-push-notification-fcm)
+    - [プッシュ通知の内容に関する方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-010-push-notification-contents)
+- キャッシュ
+  - アプリケーション方式
+    - [キャッシュの取り扱い](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/cache-management/overview)
+  - Decision Records
+    - [キャッシュの取り扱いに関する方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-011-cache-management)
+
+#### 🌿 更新コンテンツ（2022/02/17）
+
+- アプリケーション方式
+  - [アプリのライフサイクル管理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/overview)
+
 ### 2022/01/12
 
 #### 🌱 新規コンテンツ（2022/01/12）
