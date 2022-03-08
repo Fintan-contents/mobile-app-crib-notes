@@ -1,0 +1,13 @@
+CREATE SEQUENCE sandbox_todo_id
+    INCREMENT BY 1
+    MAXVALUE 9223372036854775807
+    START WITH 1
+    NO CYCLE;
+
+CREATE TABLE sandbox_todo
+(
+  id BIGINT NOT NULL,
+  title VARCHAR(50) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);

@@ -83,3 +83,7 @@ export class ApplicationError extends Error {
     this.stack = mergeStackTrace(this.stack, stackTraceSoFar);
   }
 }
+
+export function isApplicationError(error: any): error is ApplicationError {
+  return error !== null && typeof error === 'object' && error instanceof ApplicationError;
+}

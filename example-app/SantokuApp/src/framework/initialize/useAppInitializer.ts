@@ -1,5 +1,6 @@
 import messaging from '@react-native-firebase/messaging';
 import {activateKeepAwake} from 'expo-keep-awake';
+import {refreshCsrfToken, setRefreshSessionInterceptor} from 'framework/backend';
 import {useCallback, useMemo, useState} from 'react';
 
 import {
@@ -38,6 +39,7 @@ const loadInitialData = async () => {
   // TODO: キャッシュの削除
 
   // バックエンドから初期データを取得
+  // この時点ではReact QueryのQueryClientProviderはマウントされていないため、useQueryは使わずにデータを取得する
   const account = await loadInitialDataAsync();
   return {
     notification,
@@ -53,7 +55,12 @@ export const useAppInitializer: () => AppInitializer = () => {
 
   const initialize = useCallback(async () => {
     await initializeCoreFeatures();
+    // CsrfTokenを取得し、AxiosInstanceのデフォルトヘッダに設定
+    await refreshCsrfToken();
+    // AxiosInstanceに401の時のリトライ処理を追加
+    setRefreshSessionInterceptor();
 
+    // 初期データの読み込み
     const initialData = Object.freeze(await loadInitialData());
 
     // TODO: 読み込んだ初期データをFirebase Crashlyticsの設定に反映

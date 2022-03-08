@@ -11,4 +11,10 @@ export abstract class Config {
   static get TERMS_URL() {
     return 'https://www.tis.co.jp/termsofuse/';
   }
+  static get SANTOKU_APP_BACKEND_URL() {
+    return 'http://localhost:9080';
+  }
+  static get REQUEST_TIMEOUT() {
+    return undefined;
+  }
 }

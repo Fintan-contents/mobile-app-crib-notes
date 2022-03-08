@@ -3,7 +3,9 @@
   "main": "index.js",
   "scripts": {
     "android": "react-native run-android --appId jp.fintan.mobile.SantokuApp --variant devSantokuAppDebug --appIdSuffix dev.debug",
+    "android:debugAdvanced": "react-native run-android --appId jp.fintan.mobile.SantokuApp --variant devSantokuAppDebugAdvanced --appIdSuffix dev.debugAdvanced",
     "ios": "react-native run-ios --scheme DevSantokuApp --configuration Debug",
+    "ios:debugAdvanced": "react-native run-ios --scheme DevSantokuApp --configuration DebugAdvanced",
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest --detectOpenHandles --runInBand",
@@ -25,9 +27,10 @@
     "bundle:ios": "mkdirp ./generated && react-native bundle --dev false --sourcemap-output ./generated/index.ios.bundle.map --entry-file index.js --bundle-output ./generated/index.ios.bundle --platform ios",
     "symbolicate:android": "npx metro-symbolicate ./generated/index.android.bundle.map",
     "symbolicate:ios": "npx metro-symbolicate ./generated/index.ios.bundle.map",
-    "generate-api": "npx @openapitools/openapi-generator-cli generate -i ../api-document/openapi.yaml -g typescript-axios -o ./src/generated/api"
+    "orval": "npx orval --config ./orval.config.ts"
   },
   "dependencies": {
+    "@react-native-community/netinfo": "6.0.2",
     "@react-native-firebase/app": "~13.1.0",
     "@react-native-firebase/crashlytics": "~13.1.0",
     "@react-native-firebase/messaging": "~13.1.0",
@@ -56,11 +59,11 @@
     "react-native-screens": "~3.8.0",
     "react-native-url-polyfill": "^1.3.0",
     "react-native-web": "0.17.1",
-    "react-native-webview": "11.13.0"
+    "react-native-webview": "11.13.0",
+    "react-query": "^3.34.8"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "@openapitools/openapi-generator-cli": "^2.4.14",
     "@testing-library/jest-native": "^4.0.2",
     "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/react-native": "^9.0.0",
@@ -78,6 +81,7 @@
     "jest-expo": "^43.0.0",
     "jest-junit": "^13.0.0",
     "npm-run-all": "^4.1.5",
+    "orval": "^6.6.1",
     "patch-package": "^6.4.7",
     "prettier": "^2.4.0",
     "react-test-renderer": "17.0.1",

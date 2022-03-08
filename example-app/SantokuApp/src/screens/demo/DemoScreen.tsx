@@ -19,6 +19,7 @@ import {LogScreen} from './log';
 import {MessageScreen} from './message';
 import {NavigationScreen} from './navigation';
 import {PushNotificationScreen} from './push-notification';
+import {ReactQueryDemoScreen} from './react-query';
 import {SnackbarScreen} from './snackbar';
 
 type ScreenList = {
@@ -86,6 +87,10 @@ const demoScreenList: ScreenList[] = [
   {
     title: 'Cache',
     to: CacheScreen.name,
+  },
+  {
+    title: 'ReactQuery',
+    to: ReactQueryDemoScreen.name,
   },
 ];
 

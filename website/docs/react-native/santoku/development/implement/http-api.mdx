@@ -1,0 +1,644 @@
+---
+title: HTTP APIの呼び出し
+---
+
+このアプリケーションでは、バックエンドサーバが提供するREST APIを用いてデータの参照・更新・削除などを行います。
+その際には、[Orval](https://orval.dev/)というツールを用いてOpenAPI Specificationから自動生成したコードを用いてリクエストを送信します。
+ここではその使い方について説明します。
+
+## Backend APIの呼び出し
+
+### クライアント側コードの自動生成
+
+クライアント側のコードを自動生成するためには、まずバックエンドAPIの仕様に沿ったOpenAPI定義ファイルを用意する必要があります。
+OpenAPI定義ファイルを作成したら、それに合わせてOrval実行時のInputとOutputに関する設定ファイルを作成します。
+このアプリでは、以下のように設定します。
+
+| Key                          | 概要 | 今回設定する値 |
+|:-----------------------------|:-----|:--------------|
+| input.target                 | OpenAPI定義ファイルのPathを指定 | ../api-document/openapi.yaml |
+| output.target                | 自動生成するコードのうち、メインとなるファイルを出力するPathを指定 | src/generated/backend/api.ts |
+| output.schemas               | 自動生成するコードのうち、Modelファイルを出力するPathを指定 | src/generated/backend/model |
+| output.client                | 自動生成するコードの中でどのHTTP Clientライブラリを利用するかを指定 | react-query |
+| output.mode                  | 自動生成するコードをどの粒度でファイル分割するかを指定 | tags-split |
+| output.prettier              | 自動生成されたコードにprettierを適用するかを指定 | true |
+| output.clean                 | 自動生成の際に古い自動生成コードを削除するかを指定 | true |
+| output.override.mutator.path | デフォルトのAxiosInstanceをカスタマイズしたい場合に、CustomInstanceが定義されているファイルのPath | src/framework/backend/customInstance.ts |
+| output.override.mutator.name | 上記ファイル内でexportしているCustomInstanceのfunction名 | backendCustomInstance |
+
+また、無限スクロールの実現のため、バックエンドAPIの中にuseQueryの代わりにuseInfiniteQueryを利用したいAPIがある場合は、
+さらに以下の設定を追加します。
+
+| Key                          | 概要 | 今回設定する値 |
+|:-----------------------------|:-----|:--------------|
+| output.override.operations.<対象APIのOperationId>.query.useQuery | useQueryを用いたHookを生成するかどうか | false |
+| output.override.operations.<対象APIのOperationId>.query.useInfinite | useQueryの代わりにuseInfiniteQueryを使うかどうか | true |
+| output.override.operations.<対象APIのOperationId>.query.useInfiniteQueryParam | API呼び出し時にuseInfiniteQueryのnextPageParamの値を設定するクエリパラメータ名 | cursor (対象APIのクエリパラメータ名） |
+
+設定が終わったら、以下のコマンドでOrvalを実行し、クライアント側コードを自動生成します。
+
+```bash
+// このアプリでは npm run orval でも実行できるようにpackage.jsonに設定済み
+npx orval --config ./orval.config.ts
+```
+
+後からAPI仕様に変更があった場合は、OpenAPI Specificationのファイルを更新した上で同じコマンドを実行します。
+
+### 自動生成されたコードの利用
+
+Orvalを実行すると、OpenAPI Specification内に記載した各APIに対して、OperationIdに対応する名前のCustom Hookが自動生成されます。
+例えばOperationIdがget-csrf-tokenの場合、useGetCsrfTokenという名前のCustom Hookが自動生成されます。
+
+このアプリでは、自動生成されたCustom Hookを直接importして各所で用いるのではなく、
+必要に応じてカスタマイズした上で提供できるサービス層を設けるものとします。
+サービス層では、自動生成されたCustom Hookをもとに、API呼び出しの成功時の処理やエラー時の処理を追加したCustom Hookを提供します。
+カスタマイズする必要のないAPI呼び出しについては自動生成されたCustom Hookをimportしてそのままexportします。
+
+自動生成されたCustom Hookは、APIのHTTPメソッドやOrval設定によって3種類に分けられます。
+それぞれがReact QueryのuseQuery, useInfiniteQuery, useMutationの3種類に対応しています。
+それぞれの使い方は以下のとおりです。
+
+#### データ取得 (useQuery)
+
+HTTPメソッドがGETのAPIに対しては、基本的にはuseQueryをベースとしたCustom Hookが自動生成されます。
+第一引数にはクエリパラメータ、第二引数にはオプションを設定できます。
+指定できるオプションや戻り値は、React Queryの[useQuery](https://react-query.tanstack.com/reference/useQuery)とほぼ同様です。
+利用時のコード例は以下のようになります。
+
+```typescript
+import React from 'react';
+import {View, Text, Button} from 'react-native';
+import {useGetAccountsMe} from 'service/backend';
+
+const SampleScreen: React.FC = () => {
+  // 以下のようなResponseBodyが返ってくるAPIの場合の例
+  // {"nickname": "NickName"}
+  const {isLoading, isError, data: axiosResponse, refetch} = useGetAccountsMe();
+
+  if (isLoading) {
+    return (
+      <View>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View>
+        <Text>アカウント情報の取得に失敗しました。</Text>
+        <Button title="再取得" onPress={() => refetch()} />
+      </View>
+    );
+  }
+
+  return (
+    <View>
+      <Text>{axiosResponse.data.nickname}</Text>
+    </View>
+  );
+}
+```
+
+#### 無限スクロール用データ取得 (useInfiniteQuery)
+
+OrvalのConfigファイル内でuseInfinite:trueに設定したAPIに対しては、useInfiniteQueryをベースとしたCustom Hookが自動生成されます。
+第一引数にはクエリパラメータ、第二引数にはオプションを設定できます。
+指定できるオプションや戻り値は、React Queryの[useInfiniteQuery](https://react-query.tanstack.com/reference/useInfiniteQuery)とほぼ同様です。
+利用時のコード例は以下のようになります。
+
+```typescript
+import React from 'react';
+import {View, Text, Button} from 'react-native';
+import {useListTodoByCursorInfinite} from 'service/backend';
+
+const SampleScreen: React.FC = () => {
+  // 以下のようなResponseBodyが返ってくるAPIの場合の例
+  // {"hasNext": true, "nextCursor": 20, "content": {"title": "Todo Title"}}
+  const {isLoading, isSuccess, isError, data, refetch} =
+    useListTodoByCursorInfinite(undefined, {
+      query: {
+        getNextPageParam: lastPage => {
+          return lastPage.nextCursor;
+        },
+      },
+    });
+
+  const todos = useMemo(() => {
+    if (isSuccess && data) {
+      // data.pagesには、各クエリに対するレスポンスが配列で格納されている
+      return data.pages.map(axiosResponse => axiosResponse.data.content).flat();
+    } else {
+      return [];
+    }
+  }, [isSuccess, data]);
+
+  if (isLoading) {
+    return (
+      <View>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View>
+        <Text>TODO一覧の取得に失敗しました。</Text>
+        <Button title="再取得" onPress={() => refetch()} />
+      </View>
+    );
+  }
+
+  return (
+    <View>
+      {todos.map(todo => {
+        return <Text>{todo.title}</Text>;
+      })}
+    </View>
+  );
+}
+```
+
+#### データ更新・削除 (useMutation)
+
+HTTPメソッドがPOST, PUT, DELETEなどのAPIに対しては、useMutationをベースとしたCustom Hookが自動生成されます。
+基本的な使い方や指定できるオプションは、React Queryの[useMutation](https://react-query.tanstack.com/reference/useMutation)とほぼ同様です。
+
+```typescript
+import axios from 'axios';
+import {LocalStorageError} from 'framework';
+import {isApplicationError} from 'framework/error/ApplicationError';
+import {ErrorResponse} from 'generated/backend/model';
+import React, {useCallback, useState} from 'react';
+import {View} from 'react-native';
+import {Input, Button} from 'react-native-elements';
+import {usePostTodo} from 'service/backend';
+
+const SampleScreen: React.FC = () => {
+  const [title, setTitle] = useState<string>();
+  const postTodo = usePostTodo();
+
+  const onSubmit = useCallback(async () => {
+    if (title) {
+      try {
+        const response = await postTodo.mutateAsync({data: {title}});
+        // 成功時の処理
+        const todo = response.data;
+        navigation.replace(EditTodoDemoScreen.name, {todoId: todo.id});
+      } catch (e) {
+        // 失敗時の処理
+        // catch節に入った時点でグローバルエラーハンドリングは実施済み
+        // ここでは個別のエラーハンドリングを行う
+        if (axios.isAxiosError(error)) {
+          const statusCode = error.response?.status;
+          const data = error.response?.data as ErrorResponse | undefined;
+          const errorMessage = data?.message ?? '不明なエラーが発生しました';
+          if (statusCode === 400) {
+            // 400（Bad Request）はグローバルエラーハンドリング対象外
+            // 個別にエラーハンドリングする
+            alert(errorMessage);
+          }
+        }
+        if (isApplicationError(error)) {
+          // ApplicationErrorを継承したエラーはグローバルエラーハンドリング対象外
+            // 個別にエラーハンドリングする
+          if (error instanceof LocalStorageError) {
+            alert('ローカルストレージへの保存に失敗しました');
+            return;
+          }
+        }
+      }
+    }
+  }, [title, postTodo]);
+
+  return (
+    <View>
+      <Input label="Title" onChangeText={value => setTitle(value)}>
+        {title}
+      </Input>
+      <View>
+        <Button title="Submit" onPress={onSubmit}} loading={postTodo.isLoading} />
+      </View>
+    </View>
+  );
+};
+```
+
+データを更新しても、それ以前に取得したクエリのキャッシュデータは残ったままです。
+クエリのキャッシュデータは、マウントされている全ての画面で利用されなくなった後、さらにcacheTime（デフォルト5分）が経過するまではそのまま利用されます。
+このアプリではstaleTimeを0に設定しているため、こうしたデータはReact Queryによる次のrefetchのタイミングで更新されます。
+しかし古いクエリキャッシュはなるべくすぐに無効化・更新することが望ましいです。
+
+React Queryでは、クエリキャッシュを無効化する方法として、InvalidateとResetが用意されています。
+Invalidateの場合は、古いデータを画面表示したまま、最新データを取得します。
+Resetの場合は、古いデータを削除して画面表示されないようにした上で、最新データを取得します。
+このアプリでは、更新系のAPI呼び出し成功時にResetを用いて関連する古いクエリキャッシュを無効化するよう、サービス層のCustom HookでonSuccessの処理を追加します。
+
+### エラーハンドリング
+
+このアプリでは、HTTP API通信に関するグローバルエラーハンドリングと個別のエラーハンドリングを以下のように実装します。
+
+#### グローバルエラーハンドリング
+
+グローバルエラーハンドリングは、QueryCache/MutationCacheのオプション内で指定するonErrorを用いて実装します。
+QueryCache/MutationCacheのオプション内で指定するonErrorは、他のonErrorの指定によって上書きされず、常に実行されます。
+
+グローバルエラーハンドリングでは、以下のようなエラーに対する処理を行います。
+
+- API呼び出しに対する応答ステータスコードが4xx、5xx番台だった場合の共通処理
+  - 例： 429 Too Many Requests応答が返ってきた場合に、アクセスが集中しているためしばらく時間をおいてアクセスしてほしい旨をスナックバーで表示
+- 予期せぬエラーだった場合の処理
+  - 例： Firebase Clashlyticsへエラーログを記録した上で、予期せぬエラーが発生したことをスナックバーで表示
+
+個別にエラー処理を実施するためグローバルエラーハンドリングが不要な場合は、以下のいずれかで無効化できるようにしています。
+
+- サービス層で、queryOptionsとして```{meta: {disableGlobalErrorHandler: true}}```を指定したCustom Hookを用意して利用する
+- useQueryやuseMutationに渡す非同期関数内で、ApplicationErrorを継承したエラーをthrowする
+
+#### 個別のAPI呼び出しに関するエラーハンドリング
+
+個別のAPI呼び出しに関するエラーハンドリングは、以下のいずれかで実装します。
+
+- useQuery, useMutationのオプション内で指定するonError
+- useQuery, useMutationのResultとして取得できるisError, errorを見ての処理
+- mutateAsyncを呼び出した箇所でのtry/catch処理
+
+上記の中から、画面描画への反映が必要かどうかなどエラー処理の内容を考慮して適切なものを選択します。
+
+## 各場面に応じたコード例
+
+次の各場面に応じたコード例を示します。
+
+- 初期表示時にデータを取得する
+- Pull To Refreshで画面を更新する
+- ユーザ操作のタイミングでデータを取得する
+- インクリメンタルサーチ（逐次検索）
+- 複数のクエリを連結して検索する
+- FlatListを用いて無限スクロールを実現する
+
+### 初期表示時にデータを取得する
+
+初期表示時にデータを取得する場合のコード例です。
+
+```typescript
+const SampleScreen: React.FC = () => {
+  const {isLoading, isRefetching, isError, data: axiosResponse, refetch} = useGetAccountsMe();
+  return (
+    <SafeAreaView>
+      <ScrollView>
+        {isError && <Text>アカウント情報の取得に失敗しました。</Text>}
+        {isLoading && <ActivityIndicator size="large" color="blue" />}
+        {axiosResponse && <Text>{axiosResponse.data.accountId}</Text>}
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+```
+
+Reac Queryのデフォルト動作では、画面がマウントされた際に自動的にクエリを実行します。
+その後クエリの状態が変更されるたびに、画面を再レンダリングします。
+それぞれの画面の状態に応じて画面レンダリングを定義します。
+
+### Pull To Refreshで画面を更新する
+
+Pull To Refreshで画面を更新する場合のコード例です。
+
+```typescript
+const SampleScreen: React.FC = () => {
+  const {isLoading, isRefetching, isError, data: axiosResponse, refetch} = useGetAccountsMe();
+  return (
+    <SafeAreaView>
+      <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}>
+        {isError && <Text>アカウント情報の取得に失敗しました。</Text>}
+        {isLoading && <ActivityIndicator size="large" color="blue" />}
+        {axiosResponse && <Text>{axiosResponse.data.accountId}</Text>}
+      </ScrollView>
+      <View>
+        <Text>※画面下方向へのスワイプで画面が更新されます。</Text>
+      </View>
+    </SafeAreaView>
+  );
+};
+```
+
+Pull To Refresh操作には、ScrollViewのrefreshControlを用います。
+onRefreshでReact Queryのrefetch関数を呼びだすことで、データを再取得します。
+データの再取得はバックグラウンドで実行され、取得完了までは取得済みのデータが表示されます。
+再取得中の状態はisRefetchingで判断します。
+このフラグは、`isFetching && !isLoading`と同じです。
+
+### ユーザ操作のタイミングでデータを取得する
+
+ユーザ操作のタイミングでデータを取得する場合のコード例の一部です。
+
+```typescript
+const SampleScreen: React.FC = () => {
+  const [inputPage, setInputPage] = useState('');
+  const [params, setParams] = useState<ListTodoParams>();
+  const {isFetching, isError, data} = useListTodo(params, {
+    query: {
+      enabled: params !== undefined,
+    },
+  });
+  const search = useCallback(() => {
+    const page = Number(inputPage);
+    if (Number.isInteger(page) && page > 0) {
+      setParams({page});
+    }
+  }, [inputPage]);
+  // :
+  // (省略)
+}
+```
+
+<!-- textlint-disable prh -->
+
+検索条件を入力して検索ボタンを押下すると、データを取得して検索結果をリスト表示します。
+ここでは、ページ番号を検索条件として用いています。
+useListTodoのenabledオプションを用いて、検索条件がない場合はクエリを無効にします。
+これにより、初期表示時に自動的にクエリが実行されるのを防ぎます。
+検索ボタンの押下で検索条件を設定します。
+このタイミングでクエリが有効となりデータを取得します。
+
+<!-- textlint-enable prh -->
+
+画面レンダリングを含めた全体のコード例はこちらです。
+
+```typescript
+const SampleScreen: React.FC = () => {
+  const [inputPage, setInputPage] = useState('');
+  const [params, setParams] = useState<ListTodoParams>();
+  const {isFetching, isError, data} = useListTodo(params, {
+    query: {
+      enabled: params !== undefined,
+    },
+  });
+  const search = useCallback(() => {
+    const page = Number(inputPage);
+    if (Number.isInteger(page) && page > 0) {
+      setParams({page});
+    }
+  }, [inputPage]);
+
+  const todos = data?.data.content;
+  return (
+    <SafeAreaView>
+      <View>
+        <Input placeholder="ページ番号" value={inputPage} onChangeText={setInputPage} />
+        <View>
+          <Button title="検索" onPress={search} />
+        </View>
+        {isFetching && <ActivityIndicator />}
+        {isError && <Text>TODO一覧の取得に失敗しました。</Text>}
+        {!isFetching && todos && todos.length === 0 && <Text>TODO一覧の検索結果が0件です。</Text>}
+        {!isFetching &&
+          todos &&
+          todos.map(todo => {
+            return <Text key={todo.id}>{todo.title}</Text>;
+          })}
+      </View>
+    </SafeAreaView>
+  );
+};
+```
+
+データ取得中のインジケータ表示の条件にisFetchingを使っていることに注意してください。
+検索条件が変わった場合、React Queryはキャッシュがある場合はそのデータを返し、バックグラウンドでクエリを実行します。
+その場合、isLoadingではなくisFetchingで判断しないと、以前の検索結果が表示されます。
+isLoadingはまだキャッシュがないかつクエリ実行中にtrueとなります。
+一方で、isFetchingはキャッシュの有無に関係なくクエリ実行中はtrueとなります。
+ページング表示する画面などにおいては、キャッシュがあれば表示し、なければインジケータを表示するためにisLoadingを用いた方がいいでしょう。
+画面の仕様に応じて、適宜使い分けてください。
+
+### インクリメンタルサーチ（逐次検索）
+
+検索ボックスに文字が入力されたタイミングで逐次検索する場合のコード例です。
+考え方は、ユーザ操作のタイミングでデータを取得する場合と同じです。
+検索バーへの入力に応じてクエリのパラメータを変更します。
+
+```typescript
+const SampleScreen: React.FC = () => {
+  const [inputPage, setInputPage] = useState('');
+  const page = Number(inputPage);
+  const enabled = Number.isInteger(page) && page > 0;
+  const {isFetching, isError, data} = useListTodo(params, {
+    query: {
+      enabled
+    },
+  });
+  const todos = data?.data.content;
+  return (
+    <SafeAreaView>
+      <View>
+        <SearchBar placeholder="ページ番号" value={inputPage} onChangeText={setInputPage} />
+        {isFetching && <ActivityIndicator />}
+        {isError && <Text>TODO一覧の取得に失敗しました。</Text>}
+        {todos && todos.length === 0 && <Text>TODO一覧の検索結果が0件です。</Text>}
+        {todos?.map(todo => {
+          return <Text key={todo.id}>{todo.title}</Text>;
+        })}
+      </View>
+    </SafeAreaView>
+  );
+};
+```
+
+上記コードの場合、入力のたびに大量のAPIが実行されるので非効率です。
+Debounceを施すことで無駄なAPI実行を防ぐことができます。
+Debounceとは、連続して大量に繰り返されるイベントが指定時間内に何度発生しても最後の1回だけを実行するものです。
+次のカスタムフックを用いることでDebounceを実現できます。
+
+```typescript
+const useDebounce = <T,>(state: T, timeout: number) => {
+  const [value, setValue] = useState(state);
+  const timerId = useRef<ReturnType<typeof setTimeout>>();
+  useEffect(() => {
+    timerId.current = setTimeout(() => {
+      setValue(state);
+      timerId.current = undefined;
+    }, timeout);
+    return () => {
+      if (timerId.current) {
+        clearTimeout(timerId.current);
+      }
+    };
+  }, [state, timeout]);
+  return value;
+};
+```
+
+このカスタムフックを用いてインクリメンタルサーチのコードを修正します。
+これにより、最後の入力から500ミリ秒経過した時点でデータを取得します。
+
+```typescript
+  const [inputPage, setInputPage] = useState('');
+  const inputPageDebounce = useDebounce(inputPage, 500);
+  const page = Number(inputPageDebounce);
+```
+
+#### 複数のクエリを連結して検索する
+
+複数のクエリを連結して検索する場合のコード例です。
+ここでは次の条件で複数のクエリを連結します。
+
+  - 商品取得APIの呼び出しで商品を取得
+  - 取得した商品の商品種別に応じて異なるAPIで割引率を取得
+  - 取得した商品の価格と割引率を用いて金額計算APIを呼びだす
+
+クエリのenabledに呼出し条件を定義することで、どちらかのクエリが実行されます。
+商品と（いずれかのAPI呼び出しで取得した）割引率が取得できたタイミングで金額計算APIを呼び出します。
+
+```typescript
+const useDependentQueryDemo = () => {
+  // 並列クエリ
+  // 商品取得APIを呼び出した後、商品種別に応じて異なるAPIで割引率を取得する
+  // その後、商品の価格と割引率を入力として金額計算APIを呼び出す
+  const itemQuery = useQuery<Item>(['item'], () => getItem(1));
+
+  const itemType0Query = useQuery<ItemRate>(['itemType0', itemQuery.data],
+    () => getItemType0(itemQuery.data!), {
+      enabled: itemQuery.isSuccess && itemQuery.data.type === 0,
+    });
+  const itemType1Query = useQuery<ItemRate>(['itemType1', itemQuery.data],
+    () => getItemType1(itemQuery.data!), {
+      enabled: itemQuery.isSuccess && itemQuery.data.type === 1,
+    });
+
+  const rate =
+    itemQuery.isSuccess && itemType0Query.isSuccess
+      ? itemType0Query.data.rate
+      : itemQuery.isSuccess && itemType1Query.isSuccess
+      ? itemType1Query.data.rate
+      : undefined;
+  const amountReq = itemQuery.data && rate ? {price: itemQuery.data.price, rate} : undefined;
+  const amountQuery = useQuery(['amount', amountReq], () => getAmount(amountReq!), {
+    enabled: !!amountReq,
+  });
+  // :
+  // (省略)
+}
+```
+
+並列でクエリを実行した場合、画面描画のためにクエリのstatusを統合します。
+
+```typescript
+  // 並列で実行したクエリの総合的な結果をもとに画面描画を切り替える場合はそれぞれのクエリのstatusを統合する
+  const queryResults = [itemQuery, itemType0Query, itemType1Query, amountQuery];
+  const isIdle = queryResults.every(query => query.isIdle);
+  const isLoading = queryResults.some(query => query.isLoading);
+  const isRefetching = queryResults.some(query => query.isRefetching);
+  const isSuccess = queryResults.every(query => query.isSuccess);
+  const isError = queryResults.some(query => query.isError);
+```
+
+上記コードから分かる通り、React Queryで複数のクエリを連結するのはやや複雑です。
+条件が複雑になる場合や、複数のAPIをループで呼びだす場合などは、非同期関数に纏めたほうが分かりやすいです。
+次のコードは、上記例を非同期関数に書き換えたものです。
+非同期関数に纏めることで、コードがシンプルになります。
+
+```typescript
+const getItemInfo = async (id: number) => {
+  const item = await getItem(id);
+  const itemType = item.type === 0 ? await getItemType0({id: item.id}) : await getItemType1({id: item.id});
+  const amount = await getAmount({price: item.price, rate: itemType.rate});
+  return {
+    ...item,
+    rate: itemType.rate,
+    amount,
+  };
+};
+
+const useDependentQueryDemo = () => {
+  // 並列クエリ
+  // 商品取得APIを呼び出した後、商品種別に応じて異なるAPIで割引率を取得する
+  // その後、商品の価格と割引率を入力として金額計算APIを呼び出す
+  const query = useQuery(['itemInfo'], () => getItemInfo(1));
+
+  return {
+    ...query,
+    result: query.data,
+  };
+};
+
+export {useDependentQueryDemo2};
+```
+
+### FlatListを用いて無限スクロールを実現する
+
+FlatListを用いて無限スクロールを実現する場合のコード例です。
+無限スクロールのように大量のリストを表示する場合、パフォーマンスを理由としてFlatListを使用します。
+
+```typescript
+const SampleScreen: React.FC = () => {
+  const {
+    isLoading,
+    isRefetching,
+    isFetchingNextPage,
+    isSuccess,
+    isError,
+    data,
+    hasNextPage,
+    refetch,
+    fetchNextPage,
+  } = useListTodoByCursorInfinite(undefined, {
+    query: {
+      getNextPageParam: lastPage => {
+        return lastPage.data.nextCursor;
+      },
+    },
+  });
+
+  const todos = useMemo(() => {
+    if (isSuccess && data) {
+      // data.pagesには、各クエリに対するレスポンスが配列で格納されている
+      return data.pages.map(axiosResponse => axiosResponse.data.content).flat();
+    } else {
+      return [];
+    }
+  }, [isSuccess, data]);
+
+  const renderItem = useCallback(({item: todo}: {item: Todo}) =>
+    <Text>{todo.title}</Text>, []);
+  const renderFooter = useCallback(() =>
+    (isFetchingNextPage ? <LoadingIndicator /> : null), [isFetchingNextPage]);
+
+  return (
+    <SafeAreaView>
+      <View>
+        {isError && <Text>List Todo APIの呼び出しに失敗しました。</Text>}
+        {isLoading && <ActivityIndicator />}
+        {isSuccess && !todos && <Text>Todoが登録されていません。</Text>}
+        {isSuccess && todos && (
+          <FlatList
+            data={todos}
+            renderItem={renderItem}
+            refreshing={isRefetching && !isFetchingNextPage}
+            onRefresh={refetch}
+            onEndReached={() => {
+              if (hasNextPage) {
+                fetchNextPage().catch(() => {});
+              }
+            }}
+            maxToRenderPerBatch={20}
+            ListFooterComponent={renderFooter}
+          />
+        )}
+      </View>
+    </SafeAreaView>
+  );
+}
+```
+
+FlatListのonEndReachedでReact QueryのfetchNextPage関数を呼びだすことで、リストの末尾へスクロールした際にデータを追加取得します。
+データの追加取得中は、ListFooterComponentに指定したインジケータが表示されます。
+FlatListのonRefreshでReact Queryのrefetch関数を呼びだすことで、Pull To Refresh操作でデータを再取得ができます。
+refreshingの条件に注意してください。isRefetchingのみだとデータの追加読込み時も対象となるため、`isRefetching && !isFetchingNextPage`の条件で再読み込みと判断します。
+maxToRenderPerBatchはスクロールでレンダリングされる項目量です。
+APIに指定する最大取得件数（limit）と合わせておくといいでしょう。
+
+## その他の外部サービスの呼び出し
+
+Orvalによって自動生成されるのは、バックエンドAPIへのリクエスト用のCustom Hookのみです。
+その他の外部サービスを利用する際には、各外部サービスが提供するSDKを別途利用します。
+外部サービスがSDKを提供していない場合は、その外部サービスのOpenAPI Specificationを作成した上でOrvalによる自動生成を別途行います。

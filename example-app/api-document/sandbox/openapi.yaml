@@ -1,0 +1,301 @@
+openapi: 3.0.3
+info:
+  title: SantokuApp Sandbox REST API
+  version: 1.0.0
+  description: SantokuApp Sandbox REST API
+  contact: {}
+tags: []
+servers:
+  - url: 'http://localhost:9080/api/sandbox'
+security:
+  - Session: []
+paths:
+  /todos:
+    get:
+      summary: List todo
+      description: List todo
+      tags: []
+      operationId: list-todo
+      parameters:
+        - name: page
+          in: query
+          description: ページ番号
+          schema:
+            type: number
+        - name: size
+          in: query
+          description: ページサイズ
+          schema:
+            type: number
+        - name: sort
+          in: query
+          description: ソート順
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTodoResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    post:
+      summary: Create todo
+      description: Create todo
+      tags: []
+      operationId: post-todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoRegistration'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /todos/infinite:
+    get:
+      summary: List todo by cursor
+      description: List todo by cursor
+      tags: []
+      operationId: list-todo-by-cursor
+      parameters:
+        - name: cursor
+          in: query
+          description: |-
+            取得開始位置
+            TodoIdを指定し、指定したIdの次のアイテムから取得
+          schema:
+            type: number
+        - name: limit
+          in: query
+          description: 最大取得件数
+          schema:
+            type: number
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTodoInfiniteResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  '/todos/{todoId}':
+    parameters:
+      - name: todoId
+        in: path
+        description: Todo ID
+        required: true
+        schema:
+          type: number
+    get:
+      summary: Get todo
+      description: Get todo
+      tags: []
+      operationId: get-todo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      summary: Update todo
+      description: Update todo
+      tags: []
+      operationId: put-todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoRegistration'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete todo
+      description: Delete todo
+      tags: []
+      operationId: delete-todo
+      responses:
+        '204':
+          description: No Content
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Todo:
+      title: Todo
+      type: object
+      description: Todo
+      properties:
+        id:
+          type: number
+          description: Todo Id
+        title:
+          type: string
+          description: Todo title
+        description:
+          type: string
+          description: Todo description
+      required:
+        - id
+        - title
+        - description
+    TodoRegistration:
+      title: TodoRegistration
+      type: object
+      description: TodoRegistration
+      properties:
+        title:
+          type: string
+          description: Todo title
+        description:
+          type: string
+          description: Todo description
+      required:
+        - title
+        - description
+    ListTodoResponse:
+      title: ListTodoResponse
+      type: object
+      description: ListTodoResponse
+      properties:
+        number:
+          type: number
+          description: Current page number
+        size:
+          type: number
+          description: Page size
+        sort:
+          type: string
+          description: Sort key
+        numberOfElements:
+          type: number
+          description: Number of current page elements.
+          nullable: true
+        totalElements:
+          type: number
+          description: Total elements
+        totalPages:
+          type: number
+          description: Total pages
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Todo'
+        empty:
+          type: boolean
+          description: Whether the content is empty
+        first:
+          type: boolean
+          description: Whether this page is the first page
+        last:
+          type: boolean
+          description: Whether this page is the last page
+      required:
+        - currentPage
+        - nextPage
+        - data
+    ListTodoInfiniteResponse:
+      title: ListTodoInfiniteResponse
+      type: object
+      description: ListTodoInfiniteResponse
+      properties:
+        hasNext:
+          type: boolean
+          description: Whether the next data exists
+        nextCursor:
+          type: number
+          description: Next cursor
+          nullable: true
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Todo'
+      required:
+        - hasNext
+        - nextCursor
+        - content
+    ErrorResponse:
+      title: Error
+      type: object
+      description: Error Response
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+      required:
+        - code
+        - message
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    PayloadTooLarge:
+      description: Payload Too Large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServiceUnavailable:
+      description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    Session:
+      type: apiKey
+      in: cookie
+      name: NABLARCH_SID
+      description: Nablarch session id

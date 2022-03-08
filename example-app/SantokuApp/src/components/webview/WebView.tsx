@@ -1,4 +1,4 @@
-import {useSnackbar} from 'components/snackbar';
+import {useSnackbar} from 'components/overlay';
 import {m} from 'framework';
 import React, {useCallback, useState} from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';

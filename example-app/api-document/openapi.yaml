@@ -328,7 +328,7 @@ paths:
         チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。
       tags:
         - Team
-      operationId: get-teams
+      operationId: post-teams
       requestBody:
         content:
           application/json:
