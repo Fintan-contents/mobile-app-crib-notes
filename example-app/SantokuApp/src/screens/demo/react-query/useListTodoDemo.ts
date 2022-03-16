@@ -38,11 +38,11 @@ export const useListTodoDemo = ({navigation}: ListTodoDemoScreenProps) => {
   }, [navigation]);
 
   const resetQueries = useCallback(async () => {
-    await queryClient.resetQueries();
+    await queryClient.resetQueries(`/todos/infinite`);
   }, [queryClient]);
 
   const invalidateQueries = useCallback(async () => {
-    await queryClient.invalidateQueries();
+    await queryClient.invalidateQueries(`/todos/infinite`);
   }, [queryClient]);
 
   return {

@@ -68,8 +68,8 @@ const Screen: React.FC<ListTodoDemoScreenProps> = props => {
       <View style={styles.header}>
         <Text h4>Todo List (InfiniteQuery)</Text>
         <Text>Query Status: {status}</Text>
-        <Text>isRefetching: {String(isRefetching)}</Text>
-        <Text>isFetchingNextPage: {String(isFetchingNextPage)}</Text>
+        <Text>isRefetching: {isRefetching.toString()}</Text>
+        <Text>isFetchingNextPage: {isFetchingNextPage.toString()}</Text>
       </View>
       <View style={styles.body}>
         {isError && <Text>List Todo APIの呼び出しに失敗しました。</Text>}

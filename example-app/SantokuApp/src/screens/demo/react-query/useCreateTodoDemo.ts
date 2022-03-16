@@ -22,9 +22,8 @@ const useCreateTodoDemo = ({navigation, route}: CreateTodoDemoScreenProps) => {
   const onSubmit = useCallback(() => {
     if (title && description) {
       loadingOverlay.setVisible(true);
-      const data = {title, description};
       postTodo
-        .mutateAsync({data})
+        .mutateAsync({data: {title, description}})
         .then(data => {
           const todo = data.data;
           navigation.replace(EditTodoDemoScreen.name, {todoId: todo.id});
