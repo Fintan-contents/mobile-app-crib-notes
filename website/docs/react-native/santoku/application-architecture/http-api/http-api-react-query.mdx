@@ -33,25 +33,25 @@ React Queryには多数のオプションが用意されています。
 
 ### クエリのデフォルトオプション
 
-|オプション|設定値|説明|
-|:--|:--|:--|
-|queryFn||[Default Query Function](https://react-query.tanstack.com/guides/default-query-function)で紹介されているとおり、デフォルトのクエリ関数を定義出来ます。|
-|retry|`false`|クエリ失敗時のリトライ回数です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は3です。このアプリでは、[HTTP API 通信のリトライ](./http-api-error-handling.mdx#http-api通信のリトライ)に従いリトライはユーザ自身の判断とします。`false`をデフォルト値として設定します（リトライしません）。|
-|retryOnMount||マウント時にリトライするかどうかを示します。デフォルト値は`true`です。|
-|retryDelay||リトライ時の遅延間隔を示します。デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。|
-|staleTime||クエリが「新しい」ものから「古くなる」までの期間です。クエリが「新しい」限り、クエリは取得済みのデータを返すため、ネットワークリクエストは発生しません。クエリが「古い」場合、クエリは取得済みのデータを返し、特定の条件下にてバックグラウンドで再フェッチします。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は0です（フェッチ後すぐ古くなる）。|
-|cacheTime||未使用なクエリを削除するまでの期間です。クエリを使用するすべてのコンポーネントがアンマウントされると、そのクエリは未使用となります。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は5分です。|
-|refetchOnMount||マウント時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。|
-|refetchOnWindowFocus||ウィンドウフォーカス時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。|
-|refetchOnReconnect||再接続時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。|
-|structuralSharing||デフォルト（`true`）では、クエリ結果のデータの中身が変更されていない場合、データの参照が変更されません。これによりアプリのパフォーマンス向上が望めます。|
+|オプション|デフォルト値|設定値|説明|
+|:--|:--|:--|:--|
+|queryFn|||[Default Query Function](https://react-query.tanstack.com/guides/default-query-function)で紹介されているとおり、デフォルトのクエリ関数を定義出来ます。|
+|retry|3|`false`|クエリ失敗時のリトライ回数です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は3です。このアプリでは、[HTTP API 通信のリトライ](./http-api-error-handling.mdx#http-api通信のリトライ)に従いリトライはユーザ自身の判断とします。`false`をデフォルト値として設定します（リトライしません）。|
+|retryOnMount|`true`||マウント時にリトライするかどうかを示します。デフォルト値は`true`です。|
+|retryDelay|Exponential Backoff||リトライ時の遅延間隔を示します。デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。|
+|staleTime|0||クエリが「新しい」ものから「古くなる」までの期間です。クエリが「新しい」限り、クエリは取得済みのデータを返すため、ネットワークリクエストは発生しません。クエリが「古い」場合、クエリは取得済みのデータを返し、特定の条件下にてバックグラウンドで再フェッチします。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は0です（フェッチ後すぐ古くなる）。|
+|cacheTime|5 &ast; 60 &ast; 1000||未使用なクエリを削除するまでの期間です。クエリを使用するすべてのコンポーネントがアンマウントされると、そのクエリは未使用となります。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は5分です。|
+|refetchOnMount|`true`||マウント時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。|
+|refetchOnWindowFocus|`true`||ウィンドウフォーカス時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。|
+|refetchOnReconnect|`true`||再接続時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。|
+|structuralSharing|`true`||デフォルト（`true`）では、クエリ結果のデータの中身が変更されていない場合、データの参照が変更されません。これによりアプリのパフォーマンス向上が望めます。|
 
 ### ミューテーションのデフォルトオプション
 
-|オプション|設定値|説明|
-|:--|:--|:--|
-|retry||ミューテーション失敗時のリトライ回数です。デフォルト値は0です。|
-|retryDelay||リトライ時の遅延間隔を示します。デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。|
+|オプション|デフォルト値|設定値|説明|
+|:--|:--|:--|:--|
+|retry|0||ミューテーション失敗時のリトライ回数です。デフォルト値は0です。|
+|retryDelay|Exponential Backoff||リトライ時の遅延間隔を示します。デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。|
 
 ## クエリーキーの管理
 
