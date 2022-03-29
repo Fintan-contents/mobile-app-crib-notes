@@ -6,7 +6,7 @@ import {WebView} from './WebView';
 
 const mockedShowWithCloseButton = jest.fn();
 
-jest.mock('components/snackbar', () => ({
+jest.mock('components/overlay', () => ({
   useSnackbar: () => ({
     showWithCloseButton: mockedShowWithCloseButton,
   }),

@@ -14,8 +14,8 @@ export const useMessage = () => {
         value: m('validation.required', m('チーム詳細')),
       },
       {
-        name: 'msg.error.ネットワーク',
-        value: m('msg.error.ネットワーク'),
+        name: 'fw.error.通信エラー',
+        value: m('fw.error.通信エラー'),
       },
     ],
     infoKeyExtractor,

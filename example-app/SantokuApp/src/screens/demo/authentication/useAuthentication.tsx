@@ -1,73 +1,29 @@
-import {
-  ActiveAccountIdNotFoundError,
-  AuthenticationService,
-  csrfToken,
-  generatePassword,
-  PasswordNotFoundError,
-} from 'framework';
-import {useCallback, useState} from 'react';
-
-import {ApiResponseError} from '../../../framework/backend';
+import {useLoadingOverlay} from 'components/overlay';
+import {ActiveAccountIdNotFoundError, AuthenticationService, generatePassword, PasswordNotFoundError} from 'framework';
+import {isApplicationError} from 'framework/error/ApplicationError';
+import {useCallback, useEffect, useState} from 'react';
 
 export const useAuthentication = () => {
   const [accountId, setAccountId] = useState<string>();
   const [accountIdInput, setAccountIdInput] = useState('');
+  const loadingOverlay = useLoadingOverlay();
+  const mutationSignup = AuthenticationService.useSignup();
+  const mutationChangeAccount = AuthenticationService.useChangeAccount();
+  const mutationAutoLogin = AuthenticationService.useAutoLogin();
+  const mutationLogout = AuthenticationService.useLogout();
 
-  const signup = useCallback(async () => {
-    try {
-      await csrfToken();
-      const password = await generatePassword();
-      const res = await AuthenticationService.signup('demoNickname', password);
-      setAccountId(res.accountId);
-      alert(`アカウントIDは${res.accountId}です`);
-    } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
-        return;
-      }
-      alert(e);
-    }
-  }, []);
+  const isProcessing =
+    mutationSignup.isLoading ||
+    mutationChangeAccount.isLoading ||
+    mutationAutoLogin.isLoading ||
+    mutationLogout.isLoading;
 
-  const changeAccount = useCallback(async () => {
-    try {
-      await csrfToken();
-      const res = await AuthenticationService.changeAccount(accountIdInput);
-      await csrfToken();
-      alert(`ログイン成功しました state=${res.status}`);
-    } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
-        return;
-      }
-      if (e instanceof PasswordNotFoundError) {
-        alert('アカウントIDに紐づくパスワードが見つかりません');
-        return;
-      }
-      alert(e);
-    }
-  }, [accountIdInput]);
+  useEffect(() => {
+    loadingOverlay.setVisible(isProcessing);
+  }, [isProcessing, loadingOverlay]);
 
-  const canAutoLogin = useCallback(async () => {
-    try {
-      const res = await AuthenticationService.canAutoLogin();
-      alert(res ? '自動ログイン可能です' : '自動ログインできません');
-    } catch (e) {
-      alert(e);
-    }
-  }, []);
-
-  const autoLogin = useCallback(async () => {
-    try {
-      await csrfToken();
-      const res = await AuthenticationService.autoLogin();
-      await csrfToken();
-      alert(`自動ログイン成功しました state=${res.status}`);
-    } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
-        return;
-      }
+  const handleError = useCallback((e: unknown) => {
+    if (isApplicationError(e)) {
       if (e instanceof ActiveAccountIdNotFoundError) {
         alert('自動ログイン可能なアカウントIDが見つかりません');
         return;
@@ -80,18 +36,52 @@ export const useAuthentication = () => {
     }
   }, []);
 
+  const signup = useCallback(async () => {
+    try {
+      const password = await generatePassword();
+      const account = await mutationSignup.mutateAsync({nickname: 'demoNickname', password});
+      setAccountId(account.accountId);
+      alert(`アカウントIDは${account.accountId}です`);
+    } catch (e) {
+      handleError(e);
+    }
+  }, [mutationSignup, handleError]);
+
+  const changeAccount = useCallback(async () => {
+    try {
+      const accountLoginResponse = await mutationChangeAccount.mutateAsync({accountId: accountIdInput});
+      alert(`ログイン成功しました state=${accountLoginResponse.status}`);
+    } catch (e) {
+      handleError(e);
+    }
+  }, [mutationChangeAccount, accountIdInput, handleError]);
+
+  const canAutoLogin = useCallback(async () => {
+    try {
+      const res = await AuthenticationService.canAutoLogin();
+      alert(res ? '自動ログイン可能です' : '自動ログインできません');
+    } catch (e) {
+      handleError(e);
+    }
+  }, [handleError]);
+
+  const autoLogin = useCallback(async () => {
+    try {
+      const accountLoginResponse = await mutationAutoLogin.mutateAsync();
+      alert(`自動ログイン成功しました state=${accountLoginResponse.status}`);
+    } catch (e) {
+      handleError(e);
+    }
+  }, [mutationAutoLogin, handleError]);
+
   const logout = useCallback(async () => {
     try {
-      await AuthenticationService.logout();
+      await mutationLogout.mutateAsync();
       alert(`ログアウト成功しました`);
     } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
-        return;
-      }
-      alert(e);
+      handleError(e);
     }
-  }, []);
+  }, [mutationLogout, handleError]);
 
   const copyAccountIdInput = useCallback(() => {
     if (accountId) {

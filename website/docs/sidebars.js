@@ -304,6 +304,14 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'HTTP API通信',
+          items: [
+            'react-native/santoku/application-architecture/http-api/overview',
+            'react-native/santoku/application-architecture/http-api/http-api-react-query',
+          ],
+        },
+        {
+          type: 'category',
           label: 'ディープリンク',
           items: [
             'react-native/santoku/application-architecture/deep-link/overview',
@@ -502,6 +510,7 @@ module.exports = {
             'react-native/santoku/development/implement/app-launch-with-build-variants',
             'react-native/santoku/development/implement/cautions-on-using-firebase',
             'react-native/santoku/development/implement/configurations',
+            'react-native/santoku/development/implement/http-api',
           ],
         },
         {
@@ -557,6 +566,8 @@ module.exports = {
         'react-native/santoku/decisions/adr-009-push-notification-fcm',
         'react-native/santoku/decisions/adr-010-push-notification-contents',
         'react-native/santoku/decisions/adr-011-cache-management',
+        'react-native/santoku/decisions/adr-012-http-api',
+        'react-native/santoku/decisions/adr-013-react-query',
       ],
     },
   ],

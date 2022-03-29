@@ -1,5 +1,8 @@
-import {Account, AccountLoginResponse} from '../../generated/api';
-import {accountApi} from '../backend';
+import {useMutation} from 'react-query';
+
+import {postLogin, postLogout, postSignup} from '../../generated/backend/account/account';
+import {Account, AccountLoginResponse} from '../../generated/backend/model';
+import {refreshCsrfToken} from '../backend';
 import {ApplicationError} from '../error/ApplicationError';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
@@ -15,10 +18,20 @@ export class PasswordNotFoundError extends ApplicationError {}
  * @returns アカウント
  */
 async function signup(nickname: string, password: string): Promise<Account> {
-  const res = await accountApi.postSignup({nickname, password});
+  const res = await postSignup({nickname, password});
   const accountId = res.data.accountId;
   await SecureStorageAdapter.savePassword(accountId, password);
   return res.data;
+}
+
+/**
+ * サインアップします。
+ * @param nickname ニックネーム
+ * @param password パスワード
+ * @returns アカウント
+ */
+function useSignup() {
+  return useMutation((arg: {nickname: string; password: string}) => signup(arg.nickname, arg.password));
 }
 
 /**
@@ -35,14 +48,25 @@ async function changeAccount(accountId: string): Promise<AccountLoginResponse> {
 }
 
 /**
+ * アカウントを切り替えます。
+ * @param accountId アカウントID
+ * @returns アカウントの切り替え結果
+ */
+function useChangeAccount() {
+  return useMutation((arg: {accountId: string}) => changeAccount(arg.accountId));
+}
+
+/**
  * ログインします。
  * @param accountId アカウントID
  * @param password パスワード
  * @returns アカウントの切り替え結果
  */
 async function login(accountId: string, password: string): Promise<AccountLoginResponse> {
-  const res = await accountApi.postLogin({accountId, password});
+  const res = await postLogin({accountId, password});
+  await refreshCsrfToken();
   await SecureStorageAdapter.saveActiveAccountId(accountId);
+
   return res.data;
 }
 
@@ -56,6 +80,14 @@ async function autoLogin(): Promise<AccountLoginResponse> {
     throw new ActiveAccountIdNotFoundError('There is no auto-login enabled account.');
   }
   return changeAccount(accountId);
+}
+
+/**
+ * 自動ログインします。
+ * @returns アカウントのログイン結果
+ */
+function useAutoLogin() {
+  return useMutation(() => autoLogin());
 }
 
 /**
@@ -80,10 +112,19 @@ function refresh(): Promise<AccountLoginResponse> {
 }
 
 /**
+ * ログイン資格情報を再取得します。
+ * @returns アカウントのログイン結果
+ */
+function useRefresh() {
+  return useMutation(() => refresh());
+}
+
+/**
  * ログアウトします。
  */
 async function logout(): Promise<void> {
-  await accountApi.postLogout();
+  await postLogout();
+  await refreshCsrfToken();
   const accountId = await SecureStorageAdapter.loadActiveAccountId();
   if (accountId) {
     await SecureStorageAdapter.deleteActiveAccountId();
@@ -91,11 +132,18 @@ async function logout(): Promise<void> {
   }
 }
 
+/**
+ * ログアウトします。
+ */
+function useLogout() {
+  return useMutation(() => logout());
+}
+
 export const AuthenticationService = {
-  signup,
-  changeAccount,
+  useSignup,
+  useChangeAccount,
   canAutoLogin,
-  autoLogin,
-  refresh,
-  logout,
+  useAutoLogin,
+  useRefresh,
+  useLogout,
 };

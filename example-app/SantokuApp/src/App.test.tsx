@@ -4,6 +4,7 @@ import React from 'react';
 import {DevSettings} from 'react-native';
 
 import {App} from './App';
+import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from './framework/backend/customInstance';
 
 jest.spyOn(DevSettings, 'addMenuItem').mockImplementation(() => {});
 
@@ -16,6 +17,13 @@ beforeEach(() => {
 
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
+    jest.spyOn(BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, 'get').mockResolvedValue({
+      status: 200,
+      data: {
+        csrfTokenHeaderName: 'X-CSRF-TOKEN',
+        csrfTokenValue: 'dummy',
+      },
+    });
     const app = render(<App />);
     await waitFor(() => {
       expect(app.queryByTestId('TermsOfServiceAgreementScreen')).not.toBeNull();

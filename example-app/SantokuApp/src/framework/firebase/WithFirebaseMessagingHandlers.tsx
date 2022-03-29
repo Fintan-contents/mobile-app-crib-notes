@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useCallback, useEffect} from 'react';
 
-import {useSnackbar} from '../../components/snackbar';
+import {useSnackbar} from '../../components/overlay';
 import {AuthenticatedStackNav} from '../../navigation/AuthenticatedStackNav';
 import {HomeStackNav} from '../../navigation/HomeStackNav';
 import {MainTabNav} from '../../navigation/MainTabNav';
