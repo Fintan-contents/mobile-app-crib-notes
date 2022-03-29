@@ -40,7 +40,7 @@
     "@react-navigation/native": "~6.0.6",
     "@react-navigation/native-stack": "~6.2.5",
     "@react-navigation/stack": "~6.0.11",
-    "axios": "^0.24.0",
+    "axios": "^0.26.0",
     "expo": "^43.0.0",
     "expo-crypto": "~10.0.3",
     "expo-keep-awake": "~10.0.0",
