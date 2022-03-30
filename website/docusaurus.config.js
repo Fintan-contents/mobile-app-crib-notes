@@ -166,6 +166,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./docs/sidebars.js'),
+          breadcrumbs: false,
           routeBasePath: '/',
           showLastUpdateTime: true,
           rehypePlugins: [[require('./src/plugins/literal-injector-rehype-plugin'), injectOptions]],
@@ -182,7 +183,7 @@ module.exports = {
         specs: [
           {
             spec: '../example-app/api-document/openapi.yaml',
-            routePath: '/react-native/santoku/design/api-document',
+            route: '/react-native/santoku/design/api-document',
           },
         ],
         theme: {
