@@ -22,6 +22,7 @@ Array [
     >
       <View
         enabled={true}
+        isNativeStack={true}
         onAppear={[Function]}
         onDisappear={[Function]}
         onDismissed={[Function]}
@@ -46,7 +47,6 @@ Array [
           disableBackButtonMenu={false}
           hidden={false}
           hideBackButton={false}
-          hideShadow={false}
           largeTitleHideShadow={false}
           title="利用規約"
           titleColor="rgb(28, 28, 30)"
