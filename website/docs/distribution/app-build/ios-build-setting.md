@@ -10,8 +10,8 @@ title: iOSプロジェクトのビルド設定
 
 AppleはADP・ADEPライセンス利用に関して以下のようなルールを定めております。
 
-  - 組織単位（ライセンス契約単位）で、デバイス登録台数は種類（iPhone、iPadなど）ごとに100台まで
-  - Appの高度な機能を使ったアプリの場合、ライセンス利用が必須
+- 組織単位（ライセンス契約単位）で、デバイス登録台数は種類（iPhone、iPadなど）ごとに100台まで
+- Appの高度な機能を使ったアプリの場合、ライセンス利用が必須
 
 100台のデバイスが意図せずに登録されてしまうと、実際に高度な機能を手元にあるデバイスで確認したいと思っても登録できません。登録不要なデバイスが必要なデバイスより優先されてしまうことをリスクを下げるためにビルドの設定をしておくのが望ましいです。
 
@@ -26,20 +26,20 @@ AppleはADP・ADEPライセンス利用に関して以下のようなルール�
 
 そのため、Appの高度な機能を使うアプリの開発には少なくとも次の3つのビルド設定が必要になります。
 
- - 開発用 - Appの高度な機能を使わない（または無効にした）ビルド
-   - 開発者アカウントを使う
- - 開発用 - Appの高度な機能を有効にしたビルド
-   - ADP・ADEPライセンスを使う
- - 配布用
-   - ADP・ADEPライセンスを使う
+- 開発用 - Appの高度な機能を使わない（または無効にした）ビルド
+  - 開発者アカウントを使う
+- 開発用 - Appの高度な機能を有効にしたビルド
+  - ADP・ADEPライセンスを使う
+- 配布用
+  - ADP・ADEPライセンスを使う
 
 ## ビルド設定で設定するもの
 
 iOSアプリのビルド設定は大きく分けて次の3つを設定できます。
 
-  - [Configuration](#configuration)
-  - [Capability](#capability)
-  - [Schema](#schema)
+- [Configuration](#configuration)
+- [Capability](#capability)
+- [Schema](#schema)
 
 ### Configuration
 
@@ -113,14 +113,14 @@ Mac端末にダウンロードした証明書をダブルクリックすると�
 
 ##### トラブルシューティング
   
-  - プロビジョニングプロファイルを選択しても次のエラーが出る場合、Xcodeを再起動すると解消される可能性があります。再起動の際は必ずXcodeのメニューからQuitを選択してXcodeを終了してください。
+- プロビジョニングプロファイルを選択しても次のエラーが出る場合、Xcodeを再起動すると解消される可能性があります。再起動の際は必ずXcodeのメニューからQuitを選択してXcodeを終了してください。
 
 ```console
 No signing certificate "iOS Development" found
 No "iOS Development" signing certificate matching team ID "XXXXXXXX" with a private key was found.
 ```
 
-  - プロビジョニングプロファイルを選択してもが出る場合、証明書の秘密鍵がMac端末のキーチェーンに登録できていません。登録してください。
+- プロビジョニングプロファイルを選択してもが出る場合、証明書の秘密鍵がMac端末のキーチェーンに登録できていません。登録してください。
 
 #### Configuration:DebugAdvancedの作成
 
@@ -157,15 +157,15 @@ Appの高度な機能を使うアプリの場合は、CapabilityからAppの高�
 Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリックする確認できます。
 本設定を終えると以下のようになります。
 
-  - <<アプリ名>>
-    - リリースビルド
-    - ConfigurationはRelease
-  - <<アプリ名>> Debug
-    - Appの高度な機能を無効にしたアプリのデバッグ
-    - ConfigurationはDebug
-  - <<アプリ名>> DebugAdvanced
-    - Appの高度な機能を有効にしたアプリのデバッグ
-    - ConfigurationはDebugAdvanced
+- <<アプリ名>>
+  - リリースビルド
+  - ConfigurationはRelease
+- <<アプリ名>> Debug
+  - Appの高度な機能を無効にしたアプリのデバッグ
+  - ConfigurationはDebug
+- <<アプリ名>> DebugAdvanced
+  - Appの高度な機能を有効にしたアプリのデバッグ
+  - ConfigurationはDebugAdvanced
 
 Schemaの一覧はXcode左上再生ボタンと停止ボタンの右側をクリックしてEdit Scheme... を選択します。
 
@@ -226,18 +226,18 @@ DEVELOPMENT_TEAM=XXXXXXXX
 
 ビルドファイル`<<アプリ名>>.xcodeproj/project.pbxproj`で「Debug Configuration」の部分以外の下記項目名の差分は変更前に戻してください。変更前のファイルに元の値があれば値を戻し、項目がなければ項目ごと削除してください。
 
-  - DevelopmentTeam
-  - PROVISIONING_PROFILE_SPECIFIER
-  - DEVELOPMENT_TEAM
-  - CODE_SIGN_IDENTITY
-  - ProvisioningStyle
+- DevelopmentTeam
+- PROVISIONING_PROFILE_SPECIFIER
+- DEVELOPMENT_TEAM
+- CODE_SIGN_IDENTITY
+- ProvisioningStyle
 
 #### ビルド設定値ファイルの値を、ビルドファイルで読み込むようにする
 
-  - `<<アプリ名>>.xcodeproj/project.pbxproj` の「Debug Configuration」の部分について、以下3つの項目はビルド設定値ファイルから値を読み込むようにする
-    - CODE_SIGN_STYLE
-    - DEVELOPMENT_TEAM
-    - PRODUCT_BUNDLE_IDENTIFIER
+- `<<アプリ名>>.xcodeproj/project.pbxproj` の「Debug Configuration」の部分について、以下3つの項目はビルド設定値ファイルから値を読み込むようにする
+  - CODE_SIGN_STYLE
+  - DEVELOPMENT_TEAM
+  - PRODUCT_BUNDLE_IDENTIFIER
 
 修正イメージはつぎのとおりです。
 
@@ -279,8 +279,8 @@ DEVELOPMENT_TEAM=XXXXXXXX
 
 設定値ファイル`PersonalAccount.xcconfig`を`PersonalAccount.xcconfig.template`に名前変更し、中身も以下のようにします。
 
-  - PERSONAL_IDENTIFIERの値を削除
-  - DEVELOPMENT_TEAMの値を削除
+- PERSONAL_IDENTIFIERの値を削除
+- DEVELOPMENT_TEAMの値を削除
 
 ```config
 //
@@ -305,12 +305,12 @@ DEVELOPMENT_TEAM=
 今までの手順によって、以下のようにファイルが変更・追加されています。これらをリポジトリに反映してください。
 以下はアプリ名が`SampleApp`の場合です。
 
-  - 変更
-    - SampleApp.xcodeproj/project.pbxproj
-    - SampleApp.xcodeproj/xcshareddata/xcschemes/SampleApp.xcscheme
-  - 追加
-    - SampleApp.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
-    - SampleApp/PersonalAccount.xcconfig.template
-    - SampleApp/SampleApp.entitlements
-    - SampleApp/SampleAppDebug.entitlements
-    - SampleApp/SampleAppDebugAdvanced.entitlements
+- 変更
+  - SampleApp.xcodeproj/project.pbxproj
+  - SampleApp.xcodeproj/xcshareddata/xcschemes/SampleApp.xcscheme
+- 追加
+  - SampleApp.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+  - SampleApp/PersonalAccount.xcconfig.template
+  - SampleApp/SampleApp.entitlements
+  - SampleApp/SampleAppDebug.entitlements
+  - SampleApp/SampleAppDebugAdvanced.entitlements

@@ -66,7 +66,7 @@ Xcode以外のツールでアップロードする場合は、Uploadではなく
 
 ベータ版ビルドの輸出コンプライアンスを提出します。[App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev22b9b2174)を参考にしてください。
 
- - ADPのチームにいるメンバーがテストする場合、内部テスターを設定します。[内部テスターの追加 - App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev839fb66e9)を参考にしてください。
- - チーム外も含めたメンバーでテストする場合、外部テスターを設定します。[外部テスターの招待](https://help.apple.com/app-store-connect/?lang=ja#/dev859139543)を参考にしてください。
+- ADPのチームにいるメンバーがテストする場合、内部テスターを設定します。[内部テスターの追加 - App Store Connect ヘルプ](https://help.apple.com/app-store-connect/?lang=ja#/dev839fb66e9)を参考にしてください。
+- チーム外も含めたメンバーでテストする場合、外部テスターを設定します。[外部テスターの招待](https://help.apple.com/app-store-connect/?lang=ja#/dev859139543)を参考にしてください。
 
 内部テスター、外部テスターは[TestFlightアプリ](https://apps.apple.com/jp/app/testflight/id899247664)を開いて、ベータ版のアプリケーションをインストールできます。
