@@ -7,6 +7,7 @@ import jp.fintan.mobile.santokuapp.application.*;
 import jp.fintan.mobile.santokuapp.application.service.authentication.AuthorizationException;
 import jp.fintan.mobile.santokuapp.application.service.authentication.CredentialNotFoundException;
 import jp.fintan.mobile.santokuapp.presentation.restapi.RestApiException;
+import jp.fintan.mobile.santokuapp.sandbox.application.TodoNotFoundException;
 import jp.fintan.mobile.santokuapp.system.nablarch.web.RestApiErrorResponseBuilder;
 import nablarch.core.log.Logger;
 import nablarch.core.log.LoggerManager;
@@ -35,6 +36,7 @@ public class RestApiErrorResponseHandler implements Handler<Object, Object> {
     map.put(
         InvalidTokenException.class, new Response(HttpResponse.Status.NOT_FOUND, "token.invalid"));
     map.put(AccountNotFoundException.class, new Response(Status.BAD_REQUEST, "request"));
+    map.put(TodoNotFoundException.class, new Response(Status.NOT_FOUND, "sandbox.todo.notfound"));
   }
 
   @Override

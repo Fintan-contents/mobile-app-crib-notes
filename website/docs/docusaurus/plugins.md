@@ -40,8 +40,8 @@ JSXを利用することでコンポーネントから`siteConfig`などグロ�
 
 ### ユースケース例
 
- - あるリポジトリのtagを参照するためのURLにtag名を含めるが、tagを一括で更新したい。
- - siteConfigの変数を埋め込みたい。
+- あるリポジトリのtagを参照するためのURLにtag名を含めるが、tagを一括で更新したい。
+- siteConfigの変数を埋め込みたい。
 
 keyと値の設定は`docusaurus.config.js`にある`injectOptions`で設定します。
 

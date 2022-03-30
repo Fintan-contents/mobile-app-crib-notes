@@ -1,16 +1,17 @@
 import messaging from '@react-native-firebase/messaging';
 import axios, {AxiosError} from 'axios';
+import {ErrorResponse} from 'generated/backend/model';
 import {useCallback, useState} from 'react';
+import {usePostAccountsMeDeviceToken} from 'service/backend';
 
-import {accountApi, AppConfig} from '../../../framework';
-import {ApiResponseError} from '../../../framework/backend';
-import {ErrorResponse} from '../../../generated/api';
+import {AppConfig} from '../../../framework';
 
 type AuthStatusType = 'NOT_DETERMINED' | 'DENIED' | 'AUTHORIZED' | 'PROVISIONAL';
 
 export const usePushNotification = () => {
   const [authStatus, setAuthStatus] = useState<AuthStatusType>();
   const [token, setToken] = useState<string>();
+  const postAccountsMeDeviceToken = usePostAccountsMeDeviceToken();
 
   const requestUserPermission = useCallback(async () => {
     const authStatus = await messaging().requestPermission();
@@ -37,29 +38,35 @@ export const usePushNotification = () => {
 
   const registerFcmToken = useCallback(async () => {
     try {
-      await accountApi.postAccountsMeDeviceTokenAdd({deviceToken: token});
-      alert('FCM登録トークンをバックエンドに新規登録または更新しました');
+      await postAccountsMeDeviceToken.mutateAsync({data: {newDeviceToken: token}});
+      alert('FCM登録トークンをバックエンドに登録しました');
     } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
-        return;
+      if (axios.isAxiosError(e)) {
+        const axiosError = e as AxiosError<ErrorResponse>;
+        if (axiosError.response) {
+          alert(axiosError.response.data.message);
+          return;
+        }
+        alert(e);
       }
-      alert(e);
     }
-  }, [token]);
+  }, [postAccountsMeDeviceToken, token]);
 
   const removeFcmToken = useCallback(async () => {
     try {
-      await accountApi.postAccountsMeDeviceTokenRemove({deviceToken: token});
+      await postAccountsMeDeviceToken.mutateAsync({data: {oldDeviceToken: token}});
       alert('FCM登録トークンをバックエンドから削除しました');
     } catch (e) {
-      if (e instanceof ApiResponseError) {
-        alert(e.response.data.message);
-        return;
+      if (axios.isAxiosError(e)) {
+        const axiosError = e as AxiosError<ErrorResponse>;
+        if (axiosError.response) {
+          alert(axiosError.response.data.message);
+          return;
+        }
+        alert(e);
       }
-      alert(e);
     }
-  }, [token]);
+  }, [postAccountsMeDeviceToken, token]);
 
   const notifyMessageToAll = useCallback(async () => {
     try {

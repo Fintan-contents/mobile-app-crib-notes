@@ -33,6 +33,20 @@
 
 ## 更新履歴
 
+### 2022/03/31
+
+#### 🌱 新規コンテンツ（2022/03/31）
+
+- HTTP API通信
+  - アプリケーション方式
+    - [HTTP API通信](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/http-api/overview)
+    - [React Queryを用いたHTTP API通信](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/http-api/http-api-react-query)
+  - Decision Records
+    - [HTTP API通信に関する方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-012-http-api)
+    - [React Queryを用いた開発方針](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-013-react-query)
+  - 開発ガイド
+    - [HTTP APIの呼び出し](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/http-api)
+
 ### 2022/02/17
 
 #### 🌱 新規コンテンツ（2022/02/17）

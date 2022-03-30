@@ -51,13 +51,13 @@ ADP、ADEPは[Apple Developer Webサイト(要ログイン)](https://developer.a
 ### Xcodeでの個人アカウントの紐付け
 
 - ビルド設定値ファイルのテンプレート（アプリのルートフォルダ直下の`PersonalAccount.xcconfig.template`）を編集してApple IDの追加
-   - `CODE_SIGN_STYLE` は `Automatic` に設定
-   - `PERSONAL_IDENTIFIER` は他の人と重複しない値に設定（Bundle Identifierのサフィックスとして利用されます）
-   - `DEVELOPMENT_TEAM` は、個人のApple IDのDEVELOPMENT_TEAMを設定
-      - **個人のApple IDのDEVELOPMENT_TEAMの確認方法**  
-        - 別途Xcodeでサンプルアプリを作成する
-        - ConfigurationにてCODE_SIGN_STYLEをAuto Signingに指定し、個人のApple IDでビルドを設定する
-        - 設定終了後、サンプルアプリのproject.pbxproj中のDEVELOPMENT_TEAMを確認する → これが個人のApple IDのDEVELOPMENT_TEAM
+  - `CODE_SIGN_STYLE` は `Automatic` に設定
+  - `PERSONAL_IDENTIFIER` は他の人と重複しない値に設定（Bundle Identifierのサフィックスとして利用されます）
+  - `DEVELOPMENT_TEAM` は、個人のApple IDのDEVELOPMENT_TEAMを設定
+    - **個人のApple IDのDEVELOPMENT_TEAMの確認方法**  
+      - 別途Xcodeでサンプルアプリを作成する
+      - ConfigurationにてCODE_SIGN_STYLEをAuto Signingに指定し、個人のApple IDでビルドを設定する
+      - 設定終了後、サンプルアプリのproject.pbxproj中のDEVELOPMENT_TEAMを確認する → これが個人のApple IDのDEVELOPMENT_TEAM
 
 #### トラブルシュート
 

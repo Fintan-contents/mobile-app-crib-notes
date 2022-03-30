@@ -1,0 +1,159 @@
+---
+title: HTTP API通信に関する方針
+---
+
+Status: Accepted
+
+<!--
+Proposed: 提案中
+Accepted: 採用
+Rejected: 却下
+Superseded: 廃止
+-->
+
+## 要約
+
+- React NativeにてHTTP API通信を実装するための方針を検討します。
+- HTTPクライアントとReduxなどの状態管理ライブラリを用いる案はいくつかの理由により採用しません。
+- データフェッチ用ライブラリを比較検討し、React Queryを採用します。
+
+## コンテキスト
+
+多くのモバイルアプリはリモート上のサーバと連携することで各種機能を実現します。
+このアプリにおいても、REST APIを用いてバックエンドサーバと連携します。
+
+React Native公式ドキュメントの[Networking](https://reactnative.dev/docs/network)にあるとおり、React NativeではFetch APIやXMLHttpRequest APIが用意されております。これらを用いることでHTTP API通信を実現できます。
+以下のコードは、Fetch APIの使用例です。レスポンスから取得した映画のタイトルを画面に一覧表示しています。
+
+```typescript
+const Screen = () => {
+  const [data, setData] = useState<ResponseData>({movies: []});
+
+  useEffect(() => {
+    fetch('https://reactnative.dev/movies.json')
+      .then((response) => response.json())
+      .then((json: ResponseData) => setData(json))
+      .catch(() => {});
+  }, []);
+
+  return (
+    <View>
+      {data.movies.map((item) => (
+        <View key={item.id}>
+          <Text>{item.title}</Text>
+        </View>
+      ))}
+    </View>
+  );
+};
+```
+
+このコードは一見正しく（運が良ければ）正常に動作します。
+しかしながら、プロダクトコードとしては多くの考慮が足りていません。
+
+- 再フェッチの仕組みが用意されていない（コンポーネントマウント時のみフェッチされる）
+- ローディング状態時は画面が真っ白となる
+- サーバへのリクエストがエラーになった際、画面表示への反映やリトライ処理などが行われない
+- 通信中にコンポーネントがアンマウントされた場合のキャンセル処理がない
+
+:::note
+上記を考慮したデータ取得の方法は、（React公式ドキュメント「[パフォーマンス最適化](https://ja.reactjs.org/docs/hooks-faq.html#performance-optimizations)」のヒント欄で紹介されている）[こちらの記事](https://www.robinwieruch.de/react-hooks-fetch-data/)をご覧ください。
+:::
+
+これらに対応したデータ取得処理を実装すると、多くのコード記述が必要となります。
+これらは定型コード（ボイラープレートコード）となるため、適切な共通化が必要です。
+
+また、バックエンドデータを適切に扱うには、上記に加え次の考慮が必要となります。
+
+- バックエンドデータの特性に応じた管理
+  - データは知らない誰かに変更される可能性がある
+  - データは「古くなり」または「時代遅れ」となる可能性がある
+- ページングや無限スクロールへの対応
+  - 膨大なデータからアプリ内で必要なデータのみを取得し表示する
+- キャッシング
+  - パフォーマンスへの考慮
+  - オフライン対応
+- 再フェッチやポーリング
+  - 「古い」データを「新しく」する
+
+ここでは、上記課題解消を目的として、このアプリで利用するHTTP API通信方式について検討します。
+
+## 議論
+
+### HTTP API通信実装に向けた技術選定
+
+このアプリでHTTP API通信を実装するにあたり、次の2つの案があります。
+
+- HTTP API通信にはFetch APIやaxiosなどのHTTPクライアントを利用し、その非同期状態や取得したバックエンドデータはReduxなどの状態管理ライブラリを用いて管理
+- キャッシュデータの管理や再フェッチなどの機能を持つデータフェッチ用ライブラリの導入
+
+HTTPクライアントと状態管理ライブラリを用いる案は、次の理由により採用しないこととします。
+
+1. Reduxなどの状態管理ライブラリはクライアントの状態を管理するものであり、バックエンドデータのキャッシュ管理に用いるのは不適切。
+2. キャッシュデータの有効期限管理や再フェッチ、ポーリングなど、必要な機能を自前で実装する必要がある。
+
+データフェッチ用ライブラリを導入するにあたり、いくつかの候補を挙げて比較検討します。
+Reactの有名なデータフェッチ用ライブラリとしては次のものがあります。
+
+- React Query
+- SWR
+- RTK Query
+- Apollo Client
+- URQL
+
+React Query、SWRは、Reactフックを用いたデータフェッチ用ライブラリです。
+いずれのライブラリもHTTP API通信をフックで宣言的に記述でき、通信状態に応じたレンダリング定義が可能となります。
+RTK Queryは、Reduxアプリのデータフェッチを簡素化するのに役立ちます。
+Apollo Client、URQLは、GraphQLを使用したデータフェッチ用ライブラリです。
+
+このアプリはREST APIを用いるため、React Query、SWRは導入候補となります。
+一方、ReduxやGraphQLを使用していないため、RTK Query、Apollo Client、URQLは導入候補から外します。
+
+上記理由により、React Query、SWRに絞り比較しました。
+比較結果は次のとおりです。
+
+|                | React Query      | SWR                |
+| :------------- | :--------------- | :----------------- |
+| ライセンス     | MIT License      | MIT License        |
+| 開発母体       | 個人             | Vercel Inc.        |
+| 人気           | 25k star(GitHub) | 20.8k star(GitHub) |
+| 機能数         | ◎                | △                  |
+| コードの記述量 | 〇               | 〇                 |
+
+#### ライセンス
+
+ライセンスはいずれもMIT Licenseです。
+
+#### 開発母体
+
+開発母体はReact Queryが個人開発なのに対し、SWRはNext.jsの開発元として有名なVercelが開発しています。
+SWRのほうが開発母体として安定性を感じます。
+
+#### 人気
+
+人気はGitHubのスターで確認する限りは同じくらいに見えます。
+
+#### 機能数
+
+機能数はReact Query公式ドキュメントが用意している[比較資料](https://react-query.tanstack.com/comparison)を参考にしました。
+（React Query公式ドキュメントの為）React Query側に有利に書かれている懸念はありますが、内容を確認する限り公平性は保てているようです。
+比較資料にあるとおり、機能数はSWRのほうが少ないです。バンドルサイズや公式ドキュメントの量もそれを裏付けているように見えます。
+
+React QueryにありSWRにはない、いくつかの機能は次の通りです。
+
+- `Devtools`
+- ミューテーションフック（`Mutation Hooks`）
+- 自動ガーベージコレクション（`Auto Garbage Collection`）と有効期間の設定（`Stale Time Configuration`）
+
+React QueryのDevtoolsは魅力的な機能ですが、React Nativeではサポートされていません。
+React Queryはミューテーションフックを用意しており、更新時の非同期状態も管理できます。
+SWRは標準でその機能が用意されてません。
+自動ガーベージコレクションと有効期間の設定は、クエリをキャッシュして管理する機能です。
+これらは`staleTime`と`cacheTime`で設定できます。
+`staleTime`と`cacheTime`の詳細は[Caching Examples](https://react-query.tanstack.com/guides/caching)を参照してください。
+SWRはこの機能を備えていないようです。
+
+## 決定
+
+HTTP API通信を実装するにあたり、いくつかのデータフェッチ用ライブラリを比較検討しました。
+検討の結果、機能の充実度を主な理由としてReact Queryを採用します。
