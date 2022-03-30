@@ -19,9 +19,9 @@ Superseded: 廃止
 
 ディープリンクを実現する方式は、次の3つの方式から選択します。
 
- - OSの機能（[Universal Links](https://developer.apple.com/ios/universal-links/)、[Android App Links](https://developer.android.com/training/app-links)）を直接利用する
- - Firebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用する
- - カスタムURLスキームを利用する
+- OSの機能（[Universal Links](https://developer.apple.com/ios/universal-links/)、[Android App Links](https://developer.android.com/training/app-links)）を直接利用する
+- Firebaseの[Dynamic Links](https://firebase.google.com/docs/dynamic-links)を利用する
+- カスタムURLスキームを利用する
 
 用語は以下のとおりです。
 
@@ -71,14 +71,14 @@ Dynamic Linksでは、未インストールのユーザに対する導線が用�
 
 ディープリンクURLをReact Nativeで受け取る場合は次のライブラリが利用できます。
 
- - Dynamic Linksを利用する場合は[React Native Firebase](https://rnfirebase.io/dynamic-links/usage)と[React Native Linking](https://reactnative.dev/docs/linking#handling-deep-links)（併用可能）
- - OSの機能はReact Native Linking
+- Dynamic Linksを利用する場合は[React Native Firebase](https://rnfirebase.io/dynamic-links/usage)と[React Native Linking](https://reactnative.dev/docs/linking#handling-deep-links)（併用可能）
+- OSの機能はReact Native Linking
 
 Dynamic Linksを利用する場合は、どちらかのAPIを利用すれば実装できます。ただし、下記の点を考慮しアプリ起動時にはPlatformを判定して呼び分けます。
 
- - React Native Firebaseには[iOSで起動時間が短いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があります。そのためReact Native Linkingを利用してディープリンクURLを取得します。
-   - ディープリンクURLに含まれるコンテンツリンクURLを取得するために[resolveLink](https://rnfirebase.io/reference/dynamic-links#resolveLink)を利用します。
- - React Native Linkingには[AndroidでディーリンクのURLを読み取れないというissue](https://github.com/facebook/react-native/issues/25675)があります。そのためReact Native Firebaseを利用してコンテンツリンクURLを取得します。
+- React Native Firebaseには[iOSで起動時間が短いと読み取れないissue](https://github.com/invertase/react-native-firebase/issues/2660)があります。そのためReact Native Linkingを利用してディープリンクURLを取得します。
+  - ディープリンクURLに含まれるコンテンツリンクURLを取得するために[resolveLink](https://rnfirebase.io/reference/dynamic-links#resolveLink)を利用します。
+- React Native Linkingには[AndroidでディーリンクのURLを読み取れないというissue](https://github.com/facebook/react-native/issues/25675)があります。そのためReact Native Firebaseを利用してコンテンツリンクURLを取得します。
 
 OSの機能を直接利用する場合（Dynamic Linksを利用しない場合）、AndroidでLinkingが読み取れないissueの原因の調査が必要です。
 
@@ -101,10 +101,10 @@ Dynamic Linksではアプリをインストールしていないユーザがデ�
 
 実際に次のようにアプリを起動すると、クリップボードにディープリンクURLがコピーされていない場合でも、ディープリンクURLを取得できます。
 
- - アプリをインストールしていないデバイスでディープリンクのURLを開く
- - iOSでアプリがインストールされてない場合に表示される[プレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)のOpenボタンをタップする
- - `テキスト`のようなURL形式ではない文字列をクリップボードにコピーする（OpenボタンをタップしたときにディープリンクURLがクリップボードにコピーされているので上書きする）
- - アプリをインストールして起動する
+- アプリをインストールしていないデバイスでディープリンクのURLを開く
+- iOSでアプリがインストールされてない場合に表示される[プレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)のOpenボタンをタップする
+- `テキスト`のようなURL形式ではない文字列をクリップボードにコピーする（OpenボタンをタップしたときにディープリンクURLがクリップボードにコピーされているので上書きする）
+- アプリをインストールして起動する
 
 :::
 
