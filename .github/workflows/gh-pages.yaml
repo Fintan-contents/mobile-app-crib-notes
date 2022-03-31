@@ -42,7 +42,7 @@ jobs:
       # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
       - name: Cache .npm
         id: cache-npm
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           # If cache is corrupted, increment prefixed number.
@@ -54,7 +54,7 @@ jobs:
       # So, cache node_modules directly to skip install step.
       - name: Cache node_modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: website/node_modules
           # If cache is corrupted, increment prefixed number.
@@ -110,7 +110,7 @@ jobs:
       # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
       - name: Cache .npm
         id: cache-npm
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           # If cache is corrupted, increment prefixed number.
@@ -122,7 +122,7 @@ jobs:
       # So, cache node_modules directly to skip install step.
       - name: Cache node_modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: website/node_modules
           # If cache is corrupted, increment prefixed number.
