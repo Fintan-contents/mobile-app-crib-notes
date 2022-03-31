@@ -146,7 +146,7 @@ jobs:
           args: --conf website/.htmltest.yaml website/build
 
       - name: Save artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mobile-app-crib-notes
           path: ./website/build/mobile-app-crib-notes
