@@ -17,7 +17,6 @@
     ],
   },
   ignorePaths: [
-    'react-native-samples/**',
     'example-app/santoku-app-backend/**'
   ],
   packageRules: [

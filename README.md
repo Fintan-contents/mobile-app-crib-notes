@@ -8,7 +8,6 @@
 
 * `website`: GitHub Pagesで公開しているページのソースコード（Docusaurus）
 * `example-app`: サンプルアプリケーションのソースコード（React Native）
-* `react-native-samples`: GitHub Pagesで「リファレンス」として紹介しているコンテンツのソースコード例（React Native）
 
 ## ライセンス
 

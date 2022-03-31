@@ -7,7 +7,7 @@ title: クライアントアプリの実装
 クライアントアプリからFirebaseのAPIを呼びだすためには、Firebase SDKを利用します。
 Firebase SDKはAndroid, iOS, Web向けのものが提供されています。
 
-サンプルアプリとして公開している[santoku-app](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/react-native-samples/santoku-app)ではReact Nativeを利用しています。
+[公開しているサンプルアプリケーション](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp)ではReact Nativeを利用しています。
 そのため、本ガイドでは[React Native Firebase](https://rnfirebase.io/)というライブラリを利用して間接的にFirebase SDKを利用する例について解説します。
 
 ### React Native Firebaseのインストール
