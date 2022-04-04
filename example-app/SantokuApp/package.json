@@ -31,9 +31,9 @@
   },
   "dependencies": {
     "@react-native-community/netinfo": "6.0.2",
-    "@react-native-firebase/app": "~13.1.0",
-    "@react-native-firebase/crashlytics": "~13.1.0",
-    "@react-native-firebase/messaging": "~13.1.0",
+    "@react-native-firebase/app": "~14.7.0",
+    "@react-native-firebase/crashlytics": "~14.7.0",
+    "@react-native-firebase/messaging": "~14.7.0",
     "@react-native-masked-view/masked-view": "0.2.5",
     "@react-navigation/bottom-tabs": "~6.2.0",
     "@react-navigation/core": "~6.1.0",

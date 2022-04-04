@@ -30,6 +30,8 @@ const mock: Omit<
   sendMessage: jest.fn(),
   subscribeToTopic: jest.fn(),
   unsubscribeFromTopic: jest.fn(),
+  getDidOpenSettingsForNotification: jest.fn(),
+  setOpenSettingsForNotificationsHandler: jest.fn,
 };
 
 Object.defineProperty(__mocks, 'messaging', {value: mock});
