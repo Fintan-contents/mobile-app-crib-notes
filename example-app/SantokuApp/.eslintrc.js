@@ -4,7 +4,7 @@
 module.exports = {
   root: true,
   // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
-  extends: ['universe/native'],
+  extends: ['universe/native', 'plugin:react-hooks/recommended'],
   overrides: [
     {
       files: ['*.ts', '*.tsx', '*.d.ts'],
