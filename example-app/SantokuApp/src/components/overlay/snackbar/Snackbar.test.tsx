@@ -104,6 +104,77 @@ describe('Snackbar', () => {
     });
   });
 
+  it('Snackbarの表示後に同一のpropsを指定した場合、Snackbarが表示されないことを確認', () => {
+    const props = {
+      message: 'テストメッセージ',
+      messageTextStyle: {color: 'white'},
+      style: {backgroundColor: 'aqua'},
+      positionStyle: {minHeight: 60},
+      actionText: 'close',
+      actionHandler: jest.fn(),
+      actionTextStyle: {color: 'red'},
+      autoHideDuration: 100,
+      fadeInDuration: 200,
+      fadeOutDuration: 300,
+      forceFadeOutDuration: 400,
+      timestamp: Date.now(),
+    };
+    const renderResult = render(
+      <Snackbar {...props}>
+        <ChildComponent />
+      </Snackbar>,
+    );
+
+    expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
+
+    act(() => {
+      jest.advanceTimersByTime(FADE_IN_DURATION + AUTO_HIDE_DURATION + FADE_OUT_DURATION);
+    });
+
+    renderResult.update(
+      <Snackbar {...props}>
+        <ChildComponent />
+      </Snackbar>,
+    );
+
+    expect(renderResult.queryByText('テストメッセージ')).toBeNull();
+  });
+
+  it('Snackbarの表示後にTimestamp以外同一のpropsを指定した場合、Snackbarが表示されることを確認', () => {
+    const props = {
+      message: 'テストメッセージ',
+      messageTextStyle: {color: 'white'},
+      style: {backgroundColor: 'aqua'},
+      positionStyle: {minHeight: 60},
+      actionText: 'close',
+      actionHandler: jest.fn(),
+      actionTextStyle: {color: 'red'},
+      autoHideDuration: 100,
+      fadeInDuration: 200,
+      fadeOutDuration: 300,
+      forceFadeOutDuration: 400,
+    };
+    const renderResult = render(
+      <Snackbar {...props} timestamp={Date.now()}>
+        <ChildComponent />
+      </Snackbar>,
+    );
+
+    expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
+
+    act(() => {
+      jest.advanceTimersByTime(FADE_IN_DURATION + AUTO_HIDE_DURATION + FADE_OUT_DURATION);
+    });
+
+    renderResult.update(
+      <Snackbar {...props} timestamp={Date.now()}>
+        <ChildComponent />
+      </Snackbar>,
+    );
+
+    expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
+  });
+
   it('Snackbar表示中にpropsでhideを指定した場合、Snackbarが消えることを確認', async () => {
     const renderResult = render(
       <Snackbar message="テストメッセージ">

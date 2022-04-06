@@ -49,12 +49,14 @@ function WithSnackbar(props: {initialState?: SnackbarShowProps; children: React.
     () => ({
       show: (message: string, showProps?: SnackbarShowContextProps) => {
         setState({
+          timestamp: Date.now(),
           ...showProps,
           message,
         });
       },
       showWithCloseButton: (message: string, showProps?: SnackbarShowCloseButtonContextProps) => {
         setState({
+          timestamp: Date.now(),
           ...showProps,
           actionText: m('閉じる'),
           actionHandler: snackbarContext.hide,

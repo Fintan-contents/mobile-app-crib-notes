@@ -52,6 +52,10 @@ export type SnackbarShowProps = {
    * This is applied when you try to display another snackbar while a snackbar is being displayed.
    */
   forceFadeOutDuration?: number;
+  /**
+   * Timestamp
+   */
+  timestamp?: number;
 };
 
 export type SnackbarHideProps = {
@@ -93,7 +97,20 @@ export const Snackbar: React.FC<SnackbarProps> = props => {
   );
 
   const show = useCallback(() => {
-    setVisibleSnackbarProps(props);
+    setVisibleSnackbarProps({
+      actionHandler: props.actionHandler,
+      actionText: props.actionText,
+      actionTextStyle: props.actionTextStyle,
+      autoHideDuration: props.autoHideDuration,
+      fadeInDuration: props.fadeInDuration,
+      fadeOutDuration: props.fadeOutDuration,
+      forceFadeOutDuration: props.forceFadeOutDuration,
+      message: props.message,
+      messageTextStyle: props.messageTextStyle,
+      positionStyle: props.positionStyle,
+      style: props.style,
+      timestamp: props.timestamp,
+    });
 
     const fadeInAnimationConfig = {
       toValue: 1,
@@ -119,7 +136,21 @@ export const Snackbar: React.FC<SnackbarProps> = props => {
         }
       }
     });
-  }, [props, animationStart]);
+  }, [
+    animationStart,
+    props.actionHandler,
+    props.actionText,
+    props.actionTextStyle,
+    props.autoHideDuration,
+    props.fadeInDuration,
+    props.fadeOutDuration,
+    props.forceFadeOutDuration,
+    props.message,
+    props.messageTextStyle,
+    props.positionStyle,
+    props.style,
+    props.timestamp,
+  ]);
 
   const forceFadeout = useCallback(
     (fadeOutDuration?: number, callback?: () => void) => {
@@ -160,7 +191,7 @@ export const Snackbar: React.FC<SnackbarProps> = props => {
       return;
     }
     show();
-  }, [props, show, forceFadeout]);
+  }, [show, forceFadeout, props.hide, props.message, props.hideFadeOutDuration, props.forceFadeOutDuration]);
 
   const snackbarStyle = StyleSheet.flatten([styles.snackbar, props.style]);
 
