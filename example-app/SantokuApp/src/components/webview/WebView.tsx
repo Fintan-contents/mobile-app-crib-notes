@@ -1,9 +1,17 @@
-import {useSnackbar} from 'components/overlay';
-import {m} from 'framework';
-import React, {useCallback, useState} from 'react';
+import {m} from 'framework/message';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {WebView as RNWebView, WebViewProps} from 'react-native-webview';
-import {WebViewErrorEvent, WebViewNavigationEvent, WebViewScrollEvent} from 'react-native-webview/lib/WebViewTypes';
+import {
+  WebViewErrorEvent,
+  WebViewNavigationEvent,
+  WebViewProgressEvent,
+  WebViewScrollEvent,
+  WebViewSource,
+  WebViewSourceUri,
+} from 'react-native-webview/lib/WebViewTypes';
+
+import {useSnackbar} from '../overlay';
 
 type Props = WebViewProps & {
   /**
@@ -24,15 +32,70 @@ type Props = WebViewProps & {
   onScrollEndOnce?: () => void;
 };
 
+const isUriSource = (source?: WebViewSource): source is WebViewSourceUri => {
+  return source !== undefined && 'uri' in source;
+};
+
+/**
+ * WebViewでページを表示するコンポーネント。
+ * react-native-webviewで提供されるイベントに、以下の2つのイベントを追加しています。
+ * - onScrollEnd: スクロールがページの終端に移動する度に発生
+ * - onScrollEndOnce: スクロールがページの終端に移動した最初の1回のみ発生
+ *
+ * 動作確認中に発生した以下の事象に対応しています。
+ * - 発生OS
+ *   - iOS
+ * - 発生事象
+ *   - URIが変わった直後にonLoadStart->onLoadEnd->onScroll->onScrollの順で発火し、1回目のonScrollで渡されるcontentOffsetが、URIが変わる前のページのcontentOffsetになっている。
+ *     そのため、URIが変わる前のページで終端までスクロールしていた場合、1回目のonScrollで終端までスクロールされていると判定されてしまい、onScrollEnd/onScrollOnceイベントが発生してしまう。
+ *     なお、2回目のonScrollで渡されるcontentOffsetは0になっている
+ * - 対応方法
+ *   - 1回目のonScrollでonScrollEnd/onScrollEndOnceイベントが発生しないように、URIが変わったかどうかを状態として持ち、
+ *     URIが変わった直後の、オフセットが0ではないスクロールイベントでは、onScrollEnd/onScrollEndOnceは発生させない。
+ *
+ * - 発生OS
+ *   - Android
+ * - 発生事象
+ *   - onLoadEndがページのロードが完了する前に呼び出される不具合がある。（https://github.com/react-native-webview/react-native-webview/issues/2345）
+ * - 対応方法
+ *   - onLoadProgressイベント発生時に、progressが1になったらページロードが完了したと判定する。
+ *
+ * なお、本コンポーネントには以下の制約事項があります。
+ * - 対象OS
+ *   - Android
+ * - 制約事項
+ *   - スクロールが存在しないページでは、onScrollEnd/onScrollEndOnceイベントは発生しません。
+ *
+ */
 export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props, ref) {
   const [loadEnd, setLoadEnd] = useState(false);
   const [scrollEndCalled, setScrollEndCalled] = useState(false);
-  const {onScrollEnd, onScrollEndOnce, ...webViewProps} = props;
   const snackbar = useSnackbar();
+  const {onScrollEnd, onScrollEndOnce, onLoadStart, onLoadProgress, onError, errorMessage, ...webViewProps} = props;
+
+  const [isUriChanged, setIsUriChanged] = useState(false);
+  const uri = isUriSource(props.source) ? props.source.uri : undefined;
+  useEffect(() => {
+    setIsUriChanged(true);
+  }, [uri]);
+
+  // uriが変わった時にWebViewがページを再ロードした場合の対応
+  // なお、WebViewで表示しているページ内リンクでページ遷移した場合は、onLoadStartイベントは再発行されません
+  const handleLoadStart = useCallback(
+    (event: WebViewNavigationEvent) => {
+      setLoadEnd(false);
+      setScrollEndCalled(false);
+      onLoadStart?.(event);
+    },
+    [onLoadStart],
+  );
 
   const handleScroll = useCallback(
     (event: WebViewScrollEvent) => {
-      if ((onScrollEnd || onScrollEndOnce) && loadEnd) {
+      if (isUriChanged && event.nativeEvent.contentOffset.y > 0) {
+        // URLが変わった直後の、オフセットが0ではないスクロールイベントでは、onScrollEndは発生させない。
+        setIsUriChanged(false);
+      } else if ((onScrollEnd || onScrollEndOnce) && loadEnd) {
         // 小数点の誤差があるため、1px分は丸め誤差として扱う
         const scrollY = event.nativeEvent.contentOffset.y + event.nativeEvent.layoutMeasurement.height + 1;
         if (event.nativeEvent.contentSize.height <= scrollY) {
@@ -46,26 +109,30 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
 
       props.onScroll?.(event);
     },
-    [loadEnd, scrollEndCalled, onScrollEnd, onScrollEndOnce, props],
+    [isUriChanged, loadEnd, scrollEndCalled, onScrollEnd, onScrollEndOnce, props],
   );
 
-  const handleLoadEnd = useCallback(
-    (event: WebViewNavigationEvent | WebViewErrorEvent) => {
-      setLoadEnd(true);
-      props.onLoadEnd?.(event);
+  const handleLoadProgress = useCallback(
+    (event: WebViewProgressEvent) => {
+      if (event.nativeEvent.progress === 1) {
+        setLoadEnd(true);
+      } else {
+        setLoadEnd(false);
+      }
+      onLoadProgress?.(event);
     },
-    [props],
+    [onLoadProgress],
   );
 
   const handleError = useCallback(
     (event: WebViewErrorEvent) => {
-      if (props.onError) {
-        props.onError(event);
+      if (onError) {
+        onError(event);
       } else {
-        snackbar.showWithCloseButton(props.errorMessage ?? m('app.webview.onError'));
+        snackbar.showWithCloseButton(errorMessage ?? m('app.webview.onError'));
       }
     },
-    [props, snackbar],
+    [errorMessage, onError, snackbar],
   );
 
   return (
@@ -73,7 +140,8 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
       {...webViewProps}
       style={styles.container}
       onScroll={handleScroll}
-      onLoadEnd={handleLoadEnd}
+      onLoadStart={handleLoadStart}
+      onLoadProgress={handleLoadProgress}
       onError={handleError}
       ref={ref}
     />

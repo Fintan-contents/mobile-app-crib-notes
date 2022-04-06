@@ -98,7 +98,8 @@ Array [
                 onContentProcessDidTerminate={[Function]}
                 onError={[Function]}
                 onHttpError={[Function]}
-                onLoadEnd={[Function]}
+                onLoadProgress={[Function]}
+                onLoadStart={[Function]}
                 onLoadingError={[Function]}
                 onLoadingFinish={[Function]}
                 onLoadingProgress={[Function]}
