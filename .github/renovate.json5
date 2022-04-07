@@ -25,15 +25,21 @@
       groupName: 'Expo upgrade',
       enabled: false,
       matchPackageNames: [
+        '@babel/core',
+        '@react-native-community/netinfo',
         '@react-native-masked-view/masked-view',
+        '@types/react',
+        '@types/react-native',
+        'babel-preset-expo',
         'expo',
         'expo-crypto',
         'expo-keep-awake',
         'expo-local-authentication',
+        'expo-random',
         'expo-secure-store',
         'expo-splash-screen',
-        'expo-updates',
-        'expo-random',
+        'jest',
+        'jest-expo',
         'react',
         'react-dom',
         'react-native',
@@ -41,16 +47,9 @@
         'react-native-reanimated',
         'react-native-safe-area-context',
         'react-native-screens',
-        'react-native-unimodules',
-        'react-native-webview',
         'react-native-web',
-        '@babel/core',
-        '@types/react',
-        '@types/react-dom',
-        '@types/react-native',
-        'babel-preset-expo',
-        'jest-expo',
-        'typescript',
+        'react-native-webview',
+        'typescript'
       ],
     },
     {
@@ -62,8 +61,6 @@
         '@types/jest',
         // react, jest-expo -> react-test-renderer
         'react-test-renderer',
-        // jest-expo -> jest
-        'jest',
         // expo-template-bare-minimum
         'gradle',
         // expo-template-bare-minimum

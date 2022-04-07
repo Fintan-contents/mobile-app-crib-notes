@@ -50,6 +50,7 @@ stages:
     - job: build_${{buildVariant.name}}
       displayName: 'build ${{buildVariant.name}}'
       pool:
+        # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
         vmImage: macOS-11
       steps:
       - task: UseRubyVersion@0
@@ -57,9 +58,9 @@ stages:
           versionSpec: '3.0.x'
           addToPath: true
       - task: NodeTool@0
-        displayName: 'Use Node.js 16.13.0'
+        displayName: 'Use Node.js 16.14.2'
         inputs:
-          versionSpec: '16.13.0'
+          versionSpec: '16.14.2'
       - task: Cache@2
         displayName: Cache npm
         inputs:
@@ -140,6 +141,7 @@ stages:
     - job: build_${{buildVariant.name}}
       displayName: 'build ${{buildVariant.name}}'
       pool:
+        # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
         vmImage: macOS-11
       steps:
       - task: UseRubyVersion@0
@@ -165,13 +167,13 @@ stages:
         inputs:
           provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileName)
       - task: CmdLine@2
-        displayName: 'Use Xcode 13.1'
+        displayName: 'Use Xcode 13.2.1'
         inputs:
-          script: 'sudo xcode-select --switch /Applications/Xcode_13.1.app'
+          script: 'sudo xcode-select --switch /Applications/Xcode_13.2.1.app'
       - task: NodeTool@0
-        displayName: 'Use Node.js 16.13.0'
+        displayName: 'Use Node.js 16.14.2'
         inputs:
-          versionSpec: '16.13.0'
+          versionSpec: '16.14.2'
       - task: Cache@2
         displayName: Cache npm
         inputs:

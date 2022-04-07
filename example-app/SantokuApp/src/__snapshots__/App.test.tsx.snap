@@ -1,7 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App マウントされたときに正常にレンダリングされること 1`] = `
-Array [
+<View
+  style={
+    Object {
+      "bottom": 0,
+      "left": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+    }
+  }
+>
   <RNCSafeAreaProvider
     onInsetsChange={[Function]}
     style={
@@ -233,9 +243,9 @@ Array [
         </View>
       </View>
     </View>
-  </RNCSafeAreaProvider>,
+  </RNCSafeAreaProvider>
   <View
     testID="FullWindowOverlay"
-  />,
-]
+  />
+</View>
 `;

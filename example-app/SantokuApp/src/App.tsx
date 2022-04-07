@@ -1,5 +1,6 @@
 import React from 'react';
-import {Platform} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {AppWithInitialization} from './AppWithInitialization';
 import {WithOverlay} from './components/overlay';
@@ -21,12 +22,14 @@ export const App = ({isHeadless}: AppProperties) => {
   }
 
   return (
-    <WithAppTheme>
-      <WithOverlay>
-        <WithReactQuery>
-          <AppWithInitialization />
-        </WithReactQuery>
-      </WithOverlay>
-    </WithAppTheme>
+    <GestureHandlerRootView style={StyleSheet.absoluteFill}>
+      <WithAppTheme>
+        <WithOverlay>
+          <WithReactQuery>
+            <AppWithInitialization />
+          </WithReactQuery>
+        </WithOverlay>
+      </WithAppTheme>
+    </GestureHandlerRootView>
   );
 };
