@@ -1,3 +1,3 @@
-import {useGetCsrfToken} from 'generated/backend/system/system';
+import {useGetCsrfToken, getAppUpdates} from 'generated/backend/system/system';
 
-export {useGetCsrfToken};
+export {useGetCsrfToken, getAppUpdates};

@@ -1,3 +1,4 @@
+import {Platform} from 'react-native';
 import {Config} from 'react-native-config';
 
 /**
@@ -33,5 +34,12 @@ export abstract class AppConfig {
   static get requestTimeout(): number | undefined {
     const timeout = Number(Config.REQUEST_TIMEOUT);
     return isNaN(timeout) ? undefined : timeout;
+  }
+
+  static get storeUrl(): string | undefined {
+    return Platform.select({
+      ios: Config.APP_STORE_APP_URL,
+      android: Config.GOOGLE_PLAY_APP_URL,
+    });
   }
 }

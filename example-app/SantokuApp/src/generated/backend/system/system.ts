@@ -6,7 +6,7 @@
  * OpenAPI spec version: 1.0.0
  */
 import {useQuery, UseQueryOptions, QueryFunction, UseQueryResult, QueryKey} from 'react-query';
-import type {CsrfTokenResponse} from '.././model';
+import type {CsrfTokenResponse, AppUpdatesResponse, BadRequestResponse} from '.././model';
 import {backendCustomInstance, ErrorType} from '../../../framework/backend/customInstance';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,10 +17,10 @@ type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...a
  * @summary CSRFトークンの取得
  */
 export const getCsrfToken = () => {
-  return backendCustomInstance<CsrfTokenResponse>({url: `/csrf_token`, method: 'get'});
+  return backendCustomInstance<CsrfTokenResponse>({url: `/system/csrf-token`, method: 'get'});
 };
 
-export const getGetCsrfTokenQueryKey = () => [`/csrf_token`];
+export const getGetCsrfTokenQueryKey = () => [`/system/csrf-token`];
 
 export const useGetCsrfToken = <TData = AsyncReturnType<typeof getCsrfToken>, TError = ErrorType<unknown>>(options?: {
   query?: UseQueryOptions<AsyncReturnType<typeof getCsrfToken>, TError, TData>;
@@ -32,6 +32,49 @@ export const useGetCsrfToken = <TData = AsyncReturnType<typeof getCsrfToken>, TE
   const queryFn: QueryFunction<AsyncReturnType<typeof getCsrfToken>> = () => getCsrfToken();
 
   const query = useQuery<AsyncReturnType<typeof getCsrfToken>, TError, TData>(queryKey, queryFn, queryOptions);
+
+  return {
+    queryKey,
+    ...query,
+  };
+};
+
+/**
+ * 指定されたアプリの種別・バージョン番号に対し、アップデートが必要かどうかの判断結果を返します。
+
+サーバに設定されたバージョン番号と指定されたバージョン番号の比較でアップデートの要否が決定します。
+大小比較はセマンティックバージョニングのルールに沿って実施されます。
+実際に存在するバージョン番号かどうかは判断結果に影響しません。
+
+次の場合はHTTPステータスコード404（Not Found）を応答します。
+- iosまたはandroid以外の種別が指定された場合
+- セマンティックバージョンとして認識されないバージョン番号が指定された場合
+
+ * @summary アプリ更新情報の取得
+ */
+export const getAppUpdates = (type: 'ios' | 'android', version: string) => {
+  return backendCustomInstance<AppUpdatesResponse>({url: `/system/app-updates/${type}/${version}`, method: 'get'});
+};
+
+export const getGetAppUpdatesQueryKey = (type: 'ios' | 'android', version: string) => [
+  `/system/app-updates/${type}/${version}`,
+];
+
+export const useGetAppUpdates = <TData = AsyncReturnType<typeof getAppUpdates>, TError = ErrorType<BadRequestResponse>>(
+  type: 'ios' | 'android',
+  version: string,
+  options?: {query?: UseQueryOptions<AsyncReturnType<typeof getAppUpdates>, TError, TData>},
+): UseQueryResult<TData, TError> & {queryKey: QueryKey} => {
+  const {query: queryOptions} = options || {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetAppUpdatesQueryKey(type, version);
+
+  const queryFn: QueryFunction<AsyncReturnType<typeof getAppUpdates>> = () => getAppUpdates(type, version);
+
+  const query = useQuery<AsyncReturnType<typeof getAppUpdates>, TError, TData>(queryKey, queryFn, {
+    enabled: !!(type && version),
+    ...queryOptions,
+  });
 
   return {
     queryKey,

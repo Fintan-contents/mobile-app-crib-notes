@@ -23,6 +23,54 @@
 //   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //   THE SOFTWARE.
 
+export class ApplicationError extends Error {
+  constructor();
+  constructor(cause: unknown);
+  constructor(message: string);
+  constructor(message: string, cause: unknown);
+  constructor(messageOrCause?: unknown, cause?: unknown) {
+    if (typeof messageOrCause === 'string') {
+      super(messageOrCause);
+    } else {
+      super();
+    }
+
+    let errorToWrap;
+    if (messageOrCause instanceof Error) {
+      errorToWrap = messageOrCause;
+      this._cause = messageOrCause;
+    } else if (cause instanceof Error) {
+      errorToWrap = cause;
+      this._cause = cause;
+    }
+
+    // Align with Object.getOwnPropertyDescriptor(Error.prototype, 'name')
+    Object.defineProperty(this, 'name', {
+      configurable: true,
+      enumerable: false,
+      value: this.constructor.name,
+      writable: true,
+    });
+
+    const stackTraceSoFar = errorToWrap ? errorToWrap.stack : undefined;
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, this.constructor);
+    }
+    this.stack = mergeStackTrace(this.stack, stackTraceSoFar);
+  }
+
+  private readonly _cause?: Error;
+
+  get cause() {
+    return this._cause;
+  }
+}
+
+export function isApplicationError(error?: any): error is ApplicationError {
+  return error != null && typeof error === 'object' && error instanceof ApplicationError;
+}
+
 // Helper function to merge stack traces
 const mergeStackTrace = (stackTraceToMerge?: string, baseStackTrace?: string) => {
   if (!baseStackTrace) {
@@ -44,46 +92,3 @@ const mergeStackTrace = (stackTraceToMerge?: string, baseStackTrace?: string) =>
 
   return [...newEntries, ...baseEntries].join('\n');
 };
-
-export class ApplicationError extends Error {
-  constructor(message: string);
-  constructor(message: string, cause?: unknown);
-  constructor(cause: unknown);
-  constructor(messageOrCause: unknown, cause?: unknown) {
-    if (typeof messageOrCause === 'string') {
-      super(messageOrCause);
-    } else if (messageOrCause instanceof Error) {
-      super(messageOrCause.message);
-    } else if (!messageOrCause) {
-      super();
-    } else {
-      super(String(messageOrCause));
-    }
-
-    let errorToWrap;
-    if (messageOrCause instanceof Error) {
-      errorToWrap = messageOrCause;
-    } else if (cause instanceof Error) {
-      errorToWrap = cause;
-    }
-
-    // Align with Object.getOwnPropertyDescriptor(Error.prototype, 'name')
-    Object.defineProperty(this, 'name', {
-      configurable: true,
-      enumerable: false,
-      value: this.constructor.name,
-      writable: true,
-    });
-
-    const stackTraceSoFar = errorToWrap ? errorToWrap.stack : undefined;
-
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor);
-    }
-    this.stack = mergeStackTrace(this.stack, stackTraceSoFar);
-  }
-}
-
-export function isApplicationError(error: any): error is ApplicationError {
-  return error !== null && typeof error === 'object' && error instanceof ApplicationError;
-}

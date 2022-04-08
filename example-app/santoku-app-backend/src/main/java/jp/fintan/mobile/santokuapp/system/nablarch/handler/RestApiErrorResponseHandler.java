@@ -35,6 +35,8 @@ public class RestApiErrorResponseHandler implements Handler<Object, Object> {
         new Response(HttpResponse.Status.FORBIDDEN, "credential.notfound"));
     map.put(
         InvalidTokenException.class, new Response(HttpResponse.Status.NOT_FOUND, "token.invalid"));
+    map.put(
+        InvalidAppVersionException.class, new Response(HttpResponse.Status.NOT_FOUND, "version.invalid"));
     map.put(AccountNotFoundException.class, new Response(Status.BAD_REQUEST, "request"));
     map.put(TodoNotFoundException.class, new Response(Status.NOT_FOUND, "sandbox.todo.notfound"));
   }

@@ -1,21 +1,52 @@
 import messaging from '@react-native-firebase/messaging';
+import * as Application from 'expo-application';
 import {activateKeepAwake} from 'expo-keep-awake';
 import {refreshCsrfToken, setRefreshSessionInterceptor} from 'framework/backend';
+import {resolveErrorMessage} from 'framework/error/resolveErrorMessage';
+import {sendErrorLog} from 'framework/error/sendErrorLog';
 import {useCallback, useMemo, useState} from 'react';
+import {Platform} from 'react-native';
 
 import {
   hideSplashScreen,
   initializeFirebaseCrashlyticsAsync,
   loadBundledMessagesAsync,
   loadInitialDataAsync,
+  checkAppUpdates,
+  isUpdateRequiredError,
+  UpdateRequiredError,
+  isInitialDataError,
 } from './helpers';
 import {AppInitialData} from './types';
 
 export interface AppInitializer {
   initialize: () => Promise<void>;
-  isInitialized: boolean;
-  initialData?: Readonly<AppInitialData>;
+  initializationResult: InitializationResult;
 }
+
+type Initializing = {
+  code: 'Initializing';
+};
+type InitializeSuccessResult = {
+  code: 'Success';
+  data: AppInitialData;
+};
+type InitializeUpdateRequiredResult = {
+  code: 'UpdateRequired';
+  message: string;
+  supportedVersion: string;
+};
+type InitializeFailedResult = {
+  code: 'Failed';
+  title: string;
+  message: string;
+};
+
+type InitializationResult =
+  | Initializing
+  | InitializeSuccessResult
+  | InitializeUpdateRequiredResult
+  | InitializeFailedResult;
 
 const initializeCoreFeatures = async () => {
   // 開発中は画面がスリープしないように設定
@@ -35,7 +66,12 @@ const loadInitialData = async () => {
   const notification = (await messaging().getInitialNotification()) ?? undefined;
 
   // TODO: ディープリンクから起動した場合のパラメータ取得
-  // TODO: 強制アップデート対象バージョンかどうかの確認
+
+  const appUpdates = await checkAppUpdates(Platform.OS, Application.nativeApplicationVersion);
+  if (appUpdates.updateRequired) {
+    throw new UpdateRequiredError(appUpdates.message, appUpdates.supportedVersion);
+  }
+
   // TODO: キャッシュの削除
 
   // バックエンドから初期データを取得
@@ -48,10 +84,7 @@ const loadInitialData = async () => {
 };
 
 export const useAppInitializer: () => AppInitializer = () => {
-  const [initializationState, setInitializationState] = useState<{
-    isInitialized: boolean;
-    initialData?: AppInitialData;
-  }>({isInitialized: false});
+  const [initializationResult, setInitializationResult] = useState<InitializationResult>({code: 'Initializing'});
 
   const initialize = useCallback(async () => {
     await initializeCoreFeatures();
@@ -61,19 +94,31 @@ export const useAppInitializer: () => AppInitializer = () => {
     setRefreshSessionInterceptor();
 
     // 初期データの読み込み
-    const initialData = Object.freeze(await loadInitialData());
+    try {
+      const data = Object.freeze(await loadInitialData());
 
-    // TODO: 読み込んだ初期データをFirebase Crashlyticsの設定に反映
+      // TODO: 読み込んだ初期データをFirebase Crashlyticsの設定に反映
 
-    setInitializationState({isInitialized: true, initialData});
-    await hideSplashScreen();
+      setInitializationResult({code: 'Success', data});
+      await hideSplashScreen();
+    } catch (e) {
+      if (isUpdateRequiredError(e)) {
+        setInitializationResult({code: 'UpdateRequired', message: e.message, supportedVersion: e.supportedVersion});
+      } else if (isInitialDataError(e)) {
+        const {title, message} = resolveErrorMessage(e.cause);
+        sendErrorLog(e.cause);
+        setInitializationResult({code: 'Failed', title, message});
+      } else {
+        throw e;
+      }
+    }
   }, []);
 
   return useMemo(
     () => ({
       initialize,
-      ...initializationState,
+      initializationResult,
     }),
-    [initializationState, initialize],
+    [initializationResult, initialize],
   );
 };

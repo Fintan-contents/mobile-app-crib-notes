@@ -18,7 +18,7 @@ servers:
 security:
   - Session: []
 paths:
-  /csrf_token:
+  /system/csrf-token:
     get:
       summary: CSRFトークンの取得
       tags:
@@ -32,6 +32,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CsrfTokenResponse'
+  '/system/app-updates/{type}/{version}':
+    parameters:
+      - schema:
+          type: string
+          enum:
+            - ios
+            - android
+        name: type
+        in: path
+        required: true
+        description: アプリの種別
+      - schema:
+          type: string
+        name: version
+        in: path
+        required: true
+        description: アプリのバージョン番号
+    get:
+      summary: アプリ更新情報の取得
+      operationId: get-app-updates
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUpdatesResponse'
+              examples: {}
+        '404':
+          $ref: '#/components/responses/BadRequest'
+      description: |
+        指定されたアプリの種別・バージョン番号に対し、アップデートが必要かどうかの判断結果を返します。
+
+        サーバに設定されたバージョン番号と指定されたバージョン番号の比較でアップデートの要否が決定します。
+        大小比較はセマンティックバージョニングのルールに沿って実施されます。
+        実際に存在するバージョン番号かどうかは判断結果に影響しません。
+
+        次の場合はHTTPステータスコード404（Not Found）を応答します。
+        - iosまたはandroid以外の種別が指定された場合
+        - セマンティックバージョンとして認識されないバージョン番号が指定された場合
+      tags:
+        - System
   /signup:
     post:
       summary: アカウントの登録
@@ -207,35 +249,19 @@ paths:
                 type: string
                 format: uri-reference
               description: アカウントのアバター画像のURL
-  /accounts/me/device-token/add:
+  /accounts/me/device-token:
     post:
-      summary: ログイン済みアカウントのデバイス登録トークンの登録・更新
+      summary: ログイン済みアカウントのデバイス登録トークンの更新
       description: |
-        ログイン済みアカウントのデバイス登録トークンを登録・更新する。
+        ログイン済みアカウントのデバイス登録トークンを更新する。
       tags:
         - Account
-      operationId: post-accounts-me-device-token-add
+      operationId: post-accounts-me-device-token
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddDeviceToken'
-      responses:
-        '204':
-          description: No Content
-  /accounts/me/device-token/remove:
-    post:
-      summary: ログイン済みアカウントのデバイス登録トークンの削除
-      description: |
-        ログイン済みアカウントのデバイス登録トークンを削除する。
-      tags:
-        - Account
-      operationId: post-accounts-me-device-token-remove
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RemoveDeviceToken'
+              $ref: '#/components/schemas/UpdateDeviceToken'
       responses:
         '204':
           description: No Content
@@ -644,6 +670,24 @@ components:
         - csrfTokenValue
         - csrfTokenHeaderName
         - csrfTokenParameterName
+    AppUpdatesResponse:
+      title: AppUpdatesResponse
+      type: object
+      description: アプリ更新情報のレスポンス
+      properties:
+        updateRequired:
+          type: boolean
+          description: アップデートが必要かどうか
+        supportedVersion:
+          type: string
+          description: サポートバージョン番号
+        message:
+          type: string
+          description: メッセージ
+      required:
+        - updateRequired
+        - supportedVersion
+        - message
     Profile:
       title: Profile
       type: object
@@ -751,20 +795,15 @@ components:
           type: string
           format: binary
           description: アバター画像
-    AddDeviceToken:
+    UpdateDeviceToken:
       title: AddDeviceToken
       type: object
-      description: 登録・更新するデバイス登録トークン
+      description: 更新するデバイス登録トークン
       properties:
-        deviceToken:
+        newDeviceToken:
           type: string
-          description: 登録・更新するデバイス登録トークン
-    RemoveDeviceToken:
-      title: RemoveDeviceToken
-      type: object
-      description: 削除するデバイス登録トークン
-      properties:
-        deviceToken:
+          description: 登録するデバイス登録トークン
+        oldDeviceToken:
           type: string
           description: 削除するデバイス登録トークン
     TermsOfService:

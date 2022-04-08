@@ -3,32 +3,35 @@ import {useSnackbar} from 'components/overlay';
 import {m, log} from 'framework';
 import {isApplicationError} from 'framework/error/ApplicationError';
 import {RequestTimeoutError} from 'framework/error/RequestTimeoutError';
-import {ErrorResponse} from 'generated/backend/model';
+import {sendErrorLog} from 'framework/error/sendErrorLog';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
-import {Mutation, Query, QueryKey} from 'react-query';
 
-const useBaseErrorHandler = () => {
+const outDebugLog = (error: unknown) => {
+  try {
+    if (axios.isAxiosError(error)) {
+      log.debug(
+        `
+Backend API Request Error:
+req.url=[${error.config.url ?? ''}]
+req.method=[${error.config.method ?? ''}]
+req.headers=[${JSON.stringify(error.config.headers, null, 2)}]
+req.body=[${JSON.stringify(error.config.data, null, 2)}]
+res.status=[${error.response?.status ?? ''}]
+res.statusText=[${error.response?.statusText ?? ''}]
+res.headers=[${JSON.stringify(error.response?.headers, null, 2)}]
+res.body=[${JSON.stringify(error.response?.data, null, 2)}]
+`,
+      );
+    } else {
+      const errorMessage = error instanceof Error ? error.message : 'unknown';
+      log.debug(`UnexpectedError: message=[${errorMessage}]`);
+    }
+  } catch (e) {}
+};
+
+export const useDefaultGlobalErrorHandler = () => {
   const snackbar = useSnackbar();
-
-  const sendErrorLog = useCallback((error: unknown) => {
-    try {
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          const status = error.response.status;
-          const statusText = error.response.statusText;
-          const data = error.response.data as ErrorResponse | undefined;
-          const errorCode = data?.code ?? 'NoErrorCode';
-          const errorMessage = data?.message ?? 'NoErrorMessage';
-          log.error(`Backend API Request Error (${status} ${statusText}): [${errorCode}] ${errorMessage}`, errorCode);
-        } else {
-          log.error('Backend API Request Error: Could not receive response from server.', 'AxiosError');
-        }
-      } else {
-        log.error('Backend API Request Error: Unexpected error.', 'UnexpectedRequestError');
-      }
-    } catch (e) {}
-  }, []);
 
   const showRequireLoginDialog = useCallback(() => {
     // TODO: 認証機能の組み込みが終わったら、ダイアログから認証済状態を解除してログイン画面へ遷移できるようにする
@@ -65,11 +68,12 @@ const useBaseErrorHandler = () => {
       snackbar.show(m('fw.error.予期せぬ通信エラー'));
       sendErrorLog(error);
     },
-    [snackbar, sendErrorLog],
+    [snackbar],
   );
 
   return useCallback(
     (error: unknown) => {
+      outDebugLog(error);
       if (isApplicationError(error)) {
         // ApplicationErrorは呼出し元で処理する
         return;
@@ -77,7 +81,7 @@ const useBaseErrorHandler = () => {
       if (axios.isCancel(error)) {
         // Timeout以外の理由でcancelされた場合 (cancelQueries呼び出し時など)
         // デフォルトの動作としては特に処理を実施しない
-      } else if (axios.isAxiosError(error)) {
+      } else if (error && axios.isAxiosError(error)) {
         const statusCode = error.response?.status;
         switch (statusCode) {
           case 400: // Bad Request
@@ -138,29 +142,3 @@ const useBaseErrorHandler = () => {
     ],
   );
 };
-
-const useDefaultGlobalQueryErrorHandler = () => {
-  const defaultErrorHandler = useBaseErrorHandler();
-  return useCallback(
-    (error: unknown, query: Query<unknown, unknown, unknown, QueryKey>) => {
-      if (!query.meta?.disableGlobalErrorHandler) {
-        defaultErrorHandler(error);
-      }
-    },
-    [defaultErrorHandler],
-  );
-};
-
-const useDefaultGlobalMutationErrorHandler = () => {
-  const defaultErrorHandler = useBaseErrorHandler();
-  return useCallback(
-    (error: unknown, variables: unknown, context: unknown, mutation: Mutation<unknown, unknown, unknown, unknown>) => {
-      if (!mutation.meta?.disableGlobalErrorHandler) {
-        defaultErrorHandler(error);
-      }
-    },
-    [defaultErrorHandler],
-  );
-};
-
-export {useDefaultGlobalQueryErrorHandler, useDefaultGlobalMutationErrorHandler};

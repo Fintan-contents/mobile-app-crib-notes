@@ -1,7 +1,8 @@
 import {useMemo} from 'react';
 import {MutationCache, QueryCache} from 'react-query';
 
-import {useDefaultGlobalMutationErrorHandler, useDefaultGlobalQueryErrorHandler} from './useDefaultGlobalErrorHandler';
+import {useDefaultGlobalMutationErrorHandler} from './useDefaultGlobalMutationErrorHandler';
+import {useDefaultGlobalQueryErrorHandler} from './useDefaultGlobalQueryErrorHandler';
 
 const useDefaultQueryCache = () => {
   const defaultQueryErrorHandler = useDefaultGlobalQueryErrorHandler();
