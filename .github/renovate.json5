@@ -61,6 +61,8 @@
         '@types/jest',
         // react, jest-expo -> react-test-renderer
         'react-test-renderer',
+        // react-test-renderer -> @types/react-test-renderer
+        '@types/react-test-renderer',
         // expo-template-bare-minimum
         'gradle',
         // expo-template-bare-minimum
