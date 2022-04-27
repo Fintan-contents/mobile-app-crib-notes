@@ -35,6 +35,7 @@ import {
   GetAccountsMeDemoScreen,
   SearchFormTodoDemoScreen,
   SearchBarTodoDemoScreen,
+  PickerScreen,
 } from 'screens';
 
 import {DemoStackParamList, RootStackParamList} from './types';
@@ -86,6 +87,7 @@ export const Screen: React.FC = () => {
       <nav.Screen {...GetAccountsMeDemoScreen} />
       <nav.Screen {...SearchFormTodoDemoScreen} />
       <nav.Screen {...SearchBarTodoDemoScreen} />
+      <nav.Screen {...PickerScreen} />
     </nav.Navigator>
   );
 };

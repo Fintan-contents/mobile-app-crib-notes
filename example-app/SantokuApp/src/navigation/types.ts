@@ -44,6 +44,7 @@ export type DemoStackParamList = {
   Authentication: undefined;
   HttpApi: undefined;
   Navigation: undefined;
+  Picker: undefined;
   PushNotification: undefined;
   Cache: undefined;
   ListTodoDemo: undefined;

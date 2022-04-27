@@ -18,6 +18,7 @@ import {LocalAuthenticationScreen} from './local-authn';
 import {LogScreen} from './log';
 import {MessageScreen} from './message';
 import {NavigationScreen} from './navigation';
+import {PickerScreen} from './picker';
 import {PushNotificationScreen} from './push-notification';
 import {ReactQueryDemoScreen} from './react-query';
 import {SnackbarScreen} from './snackbar';
@@ -91,6 +92,10 @@ const demoScreenList: ScreenList[] = [
   {
     title: 'ReactQuery',
     to: ReactQueryDemoScreen.name,
+  },
+  {
+    title: 'Picker',
+    to: PickerScreen.name,
   },
 ];
 
