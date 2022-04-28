@@ -23,15 +23,15 @@ export type PickerContainerProps = Omit<Reanimated.AnimateProps<ViewProps>, 'ent
   exiting?: BaseAnimationBuilder | Keyframe;
 };
 
-export const DEFAULT_SLIDE_IN_DURATION = 300;
-export const DEFAULT_SLIDE_OUT_DURATION = 300;
-export const DEFAULT_ENTERING = SlideInDown.duration(DEFAULT_SLIDE_IN_DURATION);
-export const DEFAULT_EXITING = SlideOutDown.duration(DEFAULT_SLIDE_OUT_DURATION);
+export const PICKER_CONTAINER_DEFAULT_SLIDE_IN_DURATION = 300;
+export const PICKER_CONTAINER_DEFAULT_SLIDE_OUT_DURATION = 300;
+export const PICKER_CONTAINER_DEFAULT_ENTERING = SlideInDown.duration(PICKER_CONTAINER_DEFAULT_SLIDE_IN_DURATION);
+export const PICKER_CONTAINER_DEFAULT_EXITING = SlideOutDown.duration(PICKER_CONTAINER_DEFAULT_SLIDE_OUT_DURATION);
 
 export const PickerContainer: React.FC<PickerContainerProps> = ({
   isVisible,
-  entering = DEFAULT_ENTERING,
-  exiting = DEFAULT_EXITING,
+  entering = PICKER_CONTAINER_DEFAULT_ENTERING,
+  exiting = PICKER_CONTAINER_DEFAULT_EXITING,
   enteringCallback,
   exitingCallback,
   style,

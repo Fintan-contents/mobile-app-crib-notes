@@ -3,7 +3,7 @@ import React from 'react';
 import {ViewProps} from 'react-native';
 import Reanimated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
 
-import {DEFAULT_ENTERING, DEFAULT_EXITING, PickerContainer} from './PickerContainer';
+import {PICKER_CONTAINER_DEFAULT_ENTERING, PICKER_CONTAINER_DEFAULT_EXITING, PickerContainer} from './PickerContainer';
 
 // If advancing a timer changes the state of a component, the timer must be run within an act.
 // However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
@@ -34,8 +34,8 @@ describe('PickerContainer only with required props', () => {
     // Animated.Viewのentering/exitingをテストで実行することができなかったため、entering/exitingにデフォルトアニメーションが設定されていることのみを確認する。
     expect(sut).toMatchSnapshot('AnimatedView with visible.');
     expect(animatedView).not.toBeNull();
-    expect(animatedViewProps.entering).toBe(DEFAULT_ENTERING);
-    expect(animatedViewProps.exiting).toBe(DEFAULT_EXITING);
+    expect(animatedViewProps.entering).toBe(PICKER_CONTAINER_DEFAULT_ENTERING);
+    expect(animatedViewProps.exiting).toBe(PICKER_CONTAINER_DEFAULT_EXITING);
 
     //////////////////////////////////////////////////////////////////////////////////
     // 非表示にする

@@ -1,6 +1,5 @@
+import {Item, YearMonth, YearMonthUtil} from 'components/picker';
 import React, {useCallback, useMemo, useState} from 'react';
-
-import {Item} from '../../../components/picker/SelectPicker';
 
 type Item1Type = {
   a: string;
@@ -25,6 +24,7 @@ const items3 = [
 ];
 
 const placeholder = 'please select...';
+const unselectedItemForYearMonthPicker = {value: undefined, label: placeholder, color: 'grey'};
 
 export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
@@ -68,9 +68,31 @@ export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
   // Items3
   //////////////////////////////////////////////////////////////////////////////////
-  const [items3Key, setItems3Key] = useState<React.Key | undefined>('1');
+  const [items3Key, setItems3Key] = useState<React.Key>();
   const onSelectedItemChangeForItem3 = useCallback((_, __, key?: React.Key) => {
     setItems3Key(key);
+  }, []);
+
+  //////////////////////////////////////////////////////////////////////////////////
+  // YearMonthPicker
+  //////////////////////////////////////////////////////////////////////////////////
+  const maximumYearMonth = YearMonthUtil.now();
+  const minimumYearMonth = YearMonthUtil.addMonth(maximumYearMonth, -60);
+  const [yearMonth, setYearMonth] = useState<YearMonth>();
+  const [yearMonthCanceledKey, setYearMonthCanceledKey] = useState<YearMonth>();
+  const onSelectedItemChangeForYearMonth = useCallback((yearMonth?: YearMonth) => setYearMonth(yearMonth), []);
+  const onDismissForYearMonthPicker = useCallback((yearMonth?: YearMonth) => {
+    setYearMonthCanceledKey(yearMonth);
+  }, []);
+  const onDeleteForYearMonthPicker = useCallback(() => {
+    setYearMonth(undefined);
+    setYearMonthCanceledKey(undefined);
+  }, []);
+  const onCancelForYearMonthPicker = useCallback(() => {
+    setYearMonth(yearMonthCanceledKey);
+  }, [yearMonthCanceledKey]);
+  const onDoneForYearMonthPicker = useCallback((yearMonth?: YearMonth) => {
+    setYearMonthCanceledKey(yearMonth);
   }, []);
 
   return {
@@ -89,6 +111,15 @@ export const usePickerScreenUseCase = () => {
     items3,
     items3Key,
     onSelectedItemChangeForItem3,
+    maximumYearMonth,
+    minimumYearMonth,
+    yearMonth,
+    onSelectedItemChangeForYearMonth,
+    unselectedItem: unselectedItemForYearMonthPicker,
+    onDismissForYearMonthPicker,
+    onDeleteForYearMonthPicker,
+    onCancelForYearMonthPicker,
+    onDoneForYearMonthPicker,
     placeholder,
   };
 };

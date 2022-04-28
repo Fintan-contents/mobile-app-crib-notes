@@ -5,11 +5,11 @@ import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react
 
 import {usePickerBackdropUseCase} from './usePickerBackdropUseCase';
 
-export const DEFAULT_COLOR = 'rgba(0,0,0,0.4)';
-export const DEFAULT_FADE_IN_DURATION = 300;
-export const DEFAULT_FADE_OUT_DURATION = 150;
-export const DEFAULT_ENTERING = FadeIn.duration(DEFAULT_FADE_IN_DURATION);
-export const DEFAULT_EXITING = FadeOut.duration(DEFAULT_FADE_OUT_DURATION);
+export const PICKER_BACKDROP_DEFAULT_COLOR = 'rgba(0,0,0,0.4)';
+export const PICKER_BACKDROP_DEFAULT_FADE_IN_DURATION = 300;
+export const PICKER_BACKDROP_DEFAULT_FADE_OUT_DURATION = 150;
+export const PICKER_BACKDROP_DEFAULT_ENTERING = FadeIn.duration(PICKER_BACKDROP_DEFAULT_FADE_IN_DURATION);
+export const PICKER_BACKDROP_DEFAULT_EXITING = FadeOut.duration(PICKER_BACKDROP_DEFAULT_FADE_OUT_DURATION);
 
 export type PickerBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
   isVisible: boolean;
@@ -37,8 +37,8 @@ export type PickerBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'ente
 export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
   isVisible,
   onPress,
-  entering = DEFAULT_ENTERING,
-  exiting = DEFAULT_EXITING,
+  entering = PICKER_BACKDROP_DEFAULT_ENTERING,
+  exiting = PICKER_BACKDROP_DEFAULT_EXITING,
   enteringCallback,
   exitingCallback,
   pressableProps: {style: pressableStyle, ...pressableProps} = {},
@@ -95,6 +95,6 @@ const styles = StyleSheet.create({
   },
   backdrop: {
     flex: 1,
-    backgroundColor: DEFAULT_COLOR,
+    backgroundColor: PICKER_BACKDROP_DEFAULT_COLOR,
   },
 });
