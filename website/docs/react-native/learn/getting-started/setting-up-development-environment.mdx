@@ -104,9 +104,11 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 
 ### Ruby, CocoaPodsのインストール
 
-macOSには、デフォルトでRubyがインストールされているので、`sudo gem install cocoapods`を実行することで[CocoaPods](https://cocoapods.org)をインストールできます。
+macOSには、デフォルトでRubyがインストールされているので、`sudo gem install cocoapods`を実行することで[CocoaPods](https://cocoapods.org)をインストールできます。[^2]
 
 システム全体にBundlerをインストールするのは避けたい場合や、開発に特権ユーザを利用したくない場合はシステムとは別のRubyをインストールし、その中にBundlerをインストールしてください。[asdf-vm](https://asdf-vm.com/)などのツールを利用すると、システムとは別のRubyを簡単にインストールできます。
+
+[^2]:M1アーキテクチャを使用したMacでCocoaPodsをインストールする場合は、React Native公式のドキュメントに記載されている[Note for Mac M1 users](https://reactnative.dev/docs/environment-setup#cocoapods)を参照してください。
 
 ## プロキシ設定
 
