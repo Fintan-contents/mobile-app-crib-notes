@@ -10,6 +10,14 @@ import {YearMonthPicker} from './YearMonthPicker.ios';
 import {YearMonthUtil} from './YearMonthUtil';
 
 describe('YearMonthPicker only with required props', () => {
+  beforeAll(() => {
+    const mockDate = new Date(2022, 3);
+    jest.useFakeTimers('modern');
+    jest.setSystemTime(mockDate);
+  });
+  afterAll(() => {
+    jest.useRealTimers();
+  });
   it('renders successfully if invisible', () => {
     const now = YearMonthUtil.now();
     const sut = render(

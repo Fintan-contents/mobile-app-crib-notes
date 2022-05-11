@@ -8,6 +8,14 @@ import {YearMonthPicker} from './YearMonthPicker.android';
 import {YearMonthUtil} from './YearMonthUtil';
 
 describe('YearMonthPicker only with required props', () => {
+  beforeAll(() => {
+    const mockDate = new Date(2022, 3);
+    jest.useFakeTimers('modern');
+    jest.setSystemTime(mockDate);
+  });
+  afterAll(() => {
+    jest.useRealTimers();
+  });
   it('renders successfully', () => {
     const now = YearMonthUtil.now();
     const sut = render(
