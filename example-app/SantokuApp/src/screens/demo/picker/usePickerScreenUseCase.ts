@@ -32,8 +32,8 @@ export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
   const [items1Key, setItems1Key] = useState<React.Key>();
   const [items1CanceledKey, setItems1CanceledKey] = useState<React.Key>();
-  const onSelectedItemChangeForItem1 = useCallback((_, __, key?: React.Key) => {
-    setItems1Key(key);
+  const onSelectedItemChangeForItem1 = useCallback((selectedItem?: Item<Item1Type>) => {
+    setItems1Key(selectedItem?.key);
   }, []);
   const items1InputValue = useMemo(
     () => items1.find(item => item.key === items1Key)?.inputLabel ?? placeholder,
@@ -61,16 +61,16 @@ export const usePickerScreenUseCase = () => {
     () => items2.find(item => item.value === items2Value)?.inputLabel ?? placeholder,
     [items2Value],
   );
-  const onSelectedItemChangeForItem2 = useCallback((_, value?: string | undefined, __?) => {
-    setItems2Value(value);
+  const onSelectedItemChangeForItem2 = useCallback((selectedItem?: Item<string>) => {
+    setItems2Value(selectedItem?.value);
   }, []);
 
   //////////////////////////////////////////////////////////////////////////////////
   // Items3
   //////////////////////////////////////////////////////////////////////////////////
   const [items3Key, setItems3Key] = useState<React.Key>();
-  const onSelectedItemChangeForItem3 = useCallback((_, __, key?: React.Key) => {
-    setItems3Key(key);
+  const onSelectedItemChangeForItem3 = useCallback((selectedItem?: Item<string>) => {
+    setItems3Key(selectedItem?.key);
   }, []);
 
   //////////////////////////////////////////////////////////////////////////////////

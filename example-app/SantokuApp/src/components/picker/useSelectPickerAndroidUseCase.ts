@@ -7,9 +7,9 @@ export const useSelectPickerAndroidUseCase = <ItemT extends unknown>(props: Sele
   const {getSelectedItem, inputValue} = useSelectPickerUseCase<ItemT>(props);
   const {onSelectedItemChange, onDone} = props;
   const onValueChange = useCallback(
-    (key: React.Key, index: number) => {
+    (key: React.Key) => {
       const selectedItem = getSelectedItem(key);
-      onSelectedItemChange?.(index, selectedItem?.value, key);
+      onSelectedItemChange?.(selectedItem);
       onDone?.(selectedItem);
     },
     [getSelectedItem, onDone, onSelectedItemChange],

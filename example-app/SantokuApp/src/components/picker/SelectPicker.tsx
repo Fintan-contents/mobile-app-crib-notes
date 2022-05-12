@@ -36,17 +36,17 @@ export type SelectPickerProps<ItemT> = {
   /**
    * 選択されたアイテムのKey
    */
-  selectedItemKey: React.Key | undefined;
+  selectedItemKey?: React.Key;
   /**
    * アイテムが選択された場合に呼び出される関数
    */
-  onSelectedItemChange?: (itemIndex: number, itemValue?: ItemT, itemKey?: React.Key) => void;
+  onSelectedItemChange?: (selectedItem?: Item<ItemT>) => void;
   /**
    * PickerBackdropをタップして閉じた場合に呼び出される関数
    *
    * @platform ios
    */
-  onDismiss?: (selectedItem: Item<ItemT> | undefined) => void;
+  onDismiss?: (selectedItem?: Item<ItemT>) => void;
   /**
    * DeleteLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
@@ -54,7 +54,7 @@ export type SelectPickerProps<ItemT> = {
    *
    * @platform ios
    */
-  onDelete?: (selectedItem: Item<ItemT> | undefined) => void;
+  onDelete?: (selectedItem?: Item<ItemT>) => void;
   /**
    * CancelLabelがタップされた場合に呼び出される関数
    * タップ後、SelectPickerは自動で閉じます。
@@ -62,7 +62,7 @@ export type SelectPickerProps<ItemT> = {
    *
    * @platform ios
    */
-  onCancel?: (selectedItem: Item<ItemT> | undefined) => void;
+  onCancel?: (selectedItem?: Item<ItemT>) => void;
   /**
    * [iOS]
    * DoneLabelがタップされた場合に呼び出される関数
@@ -72,7 +72,7 @@ export type SelectPickerProps<ItemT> = {
    * [Android]
    * アイテムが選択された場合に呼び出される関数
    */
-  onDone?: (selectedItem: Item<ItemT> | undefined) => void;
+  onDone?: (selectedItem?: Item<ItemT>) => void;
   /**
    * プレースホルダ
    */

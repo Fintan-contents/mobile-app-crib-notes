@@ -42,9 +42,9 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
     [items],
   );
   const onValueChange = useCallback(
-    (key: React.Key | ItemT, index: number) => {
+    (key: React.Key | ItemT) => {
       const selectedItem = getSelectedItem(key);
-      onSelectedItemChange?.(index, selectedItem?.value, selectedItem?.key);
+      onSelectedItemChange?.(selectedItem);
     },
     [getSelectedItem, onSelectedItemChange],
   );
