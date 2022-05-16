@@ -1,54 +1,106 @@
 import React from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {Pressable, StyleSheet, TextInput, View} from 'react-native';
 
+import {DefaultPickerAccessory} from './DefaultPickerAccessory';
+import {PickerBackdrop} from './PickerBackdrop';
+import {PickerContainer} from './PickerContainer';
 import {SelectPickerProps} from './SelectPicker';
 import {SelectPickerItems} from './SelectPickerItems';
-import {useSelectPickerAndroidUseCase} from './useSelectPickerAndroidUseCase';
+import {useSelectPickerIOSUseCase} from './useSelectPickerIOSUseCase';
 
-type SelectPickerPropsAndroid<ItemT> = Omit<
-  SelectPickerProps<ItemT>,
-  | 'onDismiss'
-  | 'onDelete'
-  | 'onCancel'
-  | 'pickerAccessoryComponent'
-  | 'pickerItemsComponent'
-  | 'pickerItemsContainerProps'
-  | 'pickerBackdropProps'
-  | 'pickerContainerProps'
-  | 'pickerAccessoryProps'
->;
+export type SelectPickerPropsIOS<ItemT> = SelectPickerProps<ItemT>;
 
-export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsAndroid<ItemT>) => {
-  const {inputValue, onValueChange} = useSelectPickerAndroidUseCase<ItemT>(props);
-  const {items, selectedItemKey, placeholder, textInputProps, keyExtractor, textInputComponent, pickerProps} = props;
+export const SelectPicker = <ItemT extends unknown>(props: SelectPickerPropsIOS<ItemT>) => {
+  const {
+    isVisible,
+    inputValue,
+    handleBackdropPress,
+    pickerBackdropEntering,
+    pickerBackdropExiting,
+    pickerContainerEntering,
+    pickerContainerExiting,
+    onValueChange,
+    open,
+    handleDelete,
+    handleCancel,
+    handleDone,
+  } = useSelectPickerIOSUseCase<ItemT>(props);
+  const {
+    items,
+    selectedItemKey,
+    placeholder,
+    textInputProps,
+    keyExtractor,
+    pickerAccessoryComponent,
+    pickerItemsComponent,
+    textInputComponent,
+    pickerItemsContainerProps: {style: pickerItemsContainerStyle, ...pickerItemsContainerProps} = {},
+    pickerProps,
+    pickerBackdropProps: {entering: backdropEntering, exiting: backdropExiting, ...pickerBackdropProps} = {},
+    pickerContainerProps: {
+      entering: containerEntering,
+      exiting: containerExiting,
+      style: pickerContainerStyle,
+      ...pickerContainerProps
+    } = {},
+    pickerAccessoryProps,
+  } = props;
 
   return (
-    <View>
-      {textInputComponent ? (
-        textInputComponent
-      ) : (
-        // テキスト入力とスタイルを合わせるために、TextではなくTextInputを使用する
-        <TextInput placeholder={placeholder} value={inputValue} editable={false} {...textInputProps} />
-      )}
-      <SelectPickerItems
-        selectedValue={selectedItemKey}
-        items={items}
-        onValueChange={onValueChange}
-        keyExtractor={keyExtractor}
-        style={styles.headlessPicker}
-        {...pickerProps}
-      />
-    </View>
+    <>
+      <PickerBackdrop
+        isVisible={isVisible}
+        onPress={handleBackdropPress}
+        entering={pickerBackdropEntering}
+        exiting={pickerBackdropExiting}
+        {...pickerBackdropProps}>
+        <PickerContainer
+          isVisible={isVisible}
+          entering={pickerContainerEntering}
+          exiting={pickerContainerExiting}
+          style={StyleSheet.flatten([styles.pickerContainer, pickerContainerStyle])}
+          {...pickerContainerProps}>
+          {pickerAccessoryComponent ? (
+            pickerAccessoryComponent
+          ) : (
+            <DefaultPickerAccessory
+              onDelete={handleDelete}
+              onCancel={handleCancel}
+              onDone={handleDone}
+              {...pickerAccessoryProps}
+            />
+          )}
+          <View {...pickerItemsContainerProps}>
+            {pickerItemsComponent ? (
+              pickerItemsComponent
+            ) : (
+              <SelectPickerItems
+                selectedValue={selectedItemKey}
+                items={items}
+                onValueChange={onValueChange}
+                keyExtractor={keyExtractor}
+                {...pickerProps}
+              />
+            )}
+          </View>
+        </PickerContainer>
+      </PickerBackdrop>
+      <Pressable onPress={open} testID="pressableContainer">
+        <View pointerEvents="box-only">
+          {textInputComponent ? (
+            textInputComponent
+          ) : (
+            // テキスト入力とスタイルを合わせるために、TextではなくTextInputを使用する
+            <TextInput placeholder={placeholder} value={inputValue} editable={false} {...textInputProps} />
+          )}
+        </View>
+      </Pressable>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  headlessPicker: {
-    opacity: 0,
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    color: 'transparent',
-    backgroundColor: 'transparent',
+  pickerContainer: {
+    backgroundColor: 'white',
   },
 });
