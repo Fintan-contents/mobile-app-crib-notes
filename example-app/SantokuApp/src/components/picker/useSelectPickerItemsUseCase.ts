@@ -1,6 +1,5 @@
 import React, {useCallback, useMemo, useRef} from 'react';
-import {NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
-import Animated from 'react-native-reanimated';
+import {FlatList, NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 
 import {Item} from './SelectPicker';
 import {useListMiddleIndex} from './useListMiddleIndex';
@@ -12,7 +11,7 @@ type SelectPickerItemsUseCaseTypes = {
   itemHeight: number;
   preferredNumVisibleRows: number;
   onValueChange?: (itemValue: React.Key, itemIndex: number) => void;
-  scrollView: React.MutableRefObject<Animated.ScrollView | undefined>;
+  flatListRef: React.RefObject<FlatList | undefined>;
 };
 
 export const useSelectPickerItemsUseCase = ({
@@ -21,7 +20,7 @@ export const useSelectPickerItemsUseCase = ({
   itemHeight,
   preferredNumVisibleRows,
   onValueChange,
-  scrollView,
+  flatListRef,
 }: SelectPickerItemsUseCaseTypes) => {
   const middleIndex = useListMiddleIndex({itemHeight, listSize: items.length});
 
@@ -68,12 +67,9 @@ export const useSelectPickerItemsUseCase = ({
 
   const scrollToOffset = useCallback(
     (index: number, animated: boolean) => {
-      // TODO: 理由
-      // @ts-expect-error for some reason scrollToOffset isn't recognized
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      scrollView.current?.scrollToOffset({offset: index * itemHeight, animated});
+      flatListRef.current?.scrollToOffset({offset: index * itemHeight, animated});
     },
-    [itemHeight, scrollView],
+    [itemHeight, flatListRef],
   );
 
   const scrollToIndex = useCallback(

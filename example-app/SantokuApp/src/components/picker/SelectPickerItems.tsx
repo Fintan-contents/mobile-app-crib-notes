@@ -7,7 +7,7 @@ import {Item} from './SelectPicker';
 
 export type SelectPickerItemsProps = PickerProps<React.Key> & {
   items: Item<React.Key>[];
-  keyExtractor?: ((item: React.Key, index: number) => React.Key) | undefined;
+  keyExtractor?: ((item: Item<React.Key>, index: number) => string) | undefined;
 
   // android
   initialValue?: React.Key;

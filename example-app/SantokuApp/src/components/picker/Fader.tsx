@@ -1,18 +1,10 @@
-import _ from 'lodash';
 import React, {useMemo} from 'react';
-import {Image, ImageProps, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
+
+import gradientBottomImage from './assets/gradientBottom.png';
+import gradientTopImage from './assets/gradientTop.png';
 
 export enum FaderPosition {
-  /**
-   * @deprecated please use START instead
-   */
-  LEFT = 'LEFT',
-  START = 'START',
-  /**
-   * @deprecated please use END instead
-   */
-  RIGHT = 'RIGHT',
-  END = 'END',
   TOP = 'TOP',
   BOTTOM = 'BOTTOM',
 }
@@ -38,75 +30,37 @@ export type FaderProps = {
 
 const DEFAULT_FADE_SIZE = 50;
 
-/**
- * @description: A gradient fading overlay to render on top of overflowing content (like scroll component)
- * @example: https://github.com/wix/react-native-ui-lib/blob/master/demo/src/screens/componentScreens/FaderScreen.tsx
- * @gif: https://github.com/wix/react-native-ui-lib/blob/master/demo/showcase/Fader/Fader.gif?raw=true
- */
 export const Fader: React.FC<FaderProps> = props => {
-  const {
-    size = DEFAULT_FADE_SIZE,
-    position = FaderPosition.END,
-    visible,
-    // tintColor = Colors.$backgroundDefault,
-  } = props;
+  const {size = DEFAULT_FADE_SIZE, position = FaderPosition.TOP, visible} = props;
 
   const styles = useMemo(() => {
-    let containerStyle, imageStyle, imageSource;
     switch (position) {
-      case FaderPosition.LEFT:
-      case FaderPosition.START:
-        containerStyle = {...staticStyles.containerLeft, width: size};
-        imageStyle = {height: '100%', width: size};
-        imageSource = require('./gradientLeft.png');
-        break;
-      case FaderPosition.RIGHT:
-      case FaderPosition.END:
-        containerStyle = {...staticStyles.containerRight, width: size};
-        imageStyle = {height: '100%', width: size};
-        imageSource = require('./gradientRight.png');
-        break;
       case FaderPosition.TOP:
-        containerStyle = {...staticStyles.containerTop, height: size};
-        imageStyle = {height: size, width: '100%'};
-        imageSource = require('./gradientTop.png');
-        break;
-      case FaderPosition.BOTTOM:
-        containerStyle = {
-          ...staticStyles.containerBottom,
-          height: size,
+        return {
+          containerStyle: {...staticStyles.containerTop, height: size},
+          imageStyle: {height: size, width: '100%'},
+          imageSource: gradientTopImage,
         };
-        imageStyle = {height: size, width: '100%'};
-        imageSource = require('./gradientBottom.png');
-        break;
+      case FaderPosition.BOTTOM:
+        return {
+          containerStyle: {
+            ...staticStyles.containerBottom,
+            height: size,
+          },
+          imageStyle: {height: size, width: '100%'},
+          imageSource: gradientBottomImage,
+        };
     }
-
-    return {
-      containerStyle,
-      imageStyle,
-      imageSource,
-    };
   }, [size, position]);
 
   return (
     <View pointerEvents="none" style={styles.containerStyle}>
-      {(visible || _.isUndefined(visible)) && (
-        <Image
-          // supportRTL
-          source={styles.imageSource}
-          // tintColor={tintColor}
-          style={styles.imageStyle}
-          resizeMode="stretch"
-        />
+      {(visible || visible === undefined) && (
+        <Image source={styles.imageSource} style={styles.imageStyle} resizeMode="stretch" />
       )}
     </View>
   );
 };
-
-Fader.displayName = 'Fader';
-Fader.position = FaderPosition;
-
-export default Fader;
 
 const staticStyles = StyleSheet.create({
   containerTop: {
@@ -118,15 +72,5 @@ const staticStyles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-  },
-  containerLeft: {
-    position: 'absolute',
-    left: 0,
-    height: '100%',
-  },
-  containerRight: {
-    position: 'absolute',
-    right: 0,
-    height: '100%',
   },
 });

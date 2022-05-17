@@ -17,12 +17,12 @@ export type WheelPickerItemType = {
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
-export const WheelPickerItem: React.FC<WheelPickerItemType> = ({
+export const SelectPickerItem: React.FC<WheelPickerItemType> = ({
   value,
   index,
   offset,
-  activeColor = 'black',
-  inactiveColor = 'grey',
+  activeColor = '#000000',
+  inactiveColor = '#999999',
   itemHeight,
   selectItem,
 }) => {

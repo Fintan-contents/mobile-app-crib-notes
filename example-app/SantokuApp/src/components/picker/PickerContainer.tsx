@@ -45,13 +45,15 @@ export const PickerContainer: React.FC<PickerContainerProps> = ({
     <>
       {isVisible && (
         <View style={styles.container} pointerEvents="box-none">
-          <Reanimated.View
-            style={style}
-            entering={entering.withCallback(composedEnteringCallback)}
-            exiting={exiting.withCallback(composedExitingCallback)}
-            pointerEvents="box-none"
-            {...animatedViewProps}>
-            {children}
+          <Reanimated.View>
+            <Reanimated.View
+              style={style}
+              entering={entering.withCallback(composedEnteringCallback)}
+              exiting={exiting.withCallback(composedExitingCallback)}
+              pointerEvents="box-none"
+              {...animatedViewProps}>
+              {children}
+            </Reanimated.View>
           </Reanimated.View>
         </View>
       )}

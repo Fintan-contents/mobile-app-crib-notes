@@ -1,21 +1,21 @@
-import React, {useCallback, useMemo, useRef} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {FlatList, FlatListProps, ListRenderItemInfo, StyleSheet, View} from 'react-native';
-import Animated, {useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
+import Reanimated, {useAnimatedRef, useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
 
-import Fader, {FaderPosition} from './Fader';
+import {Fader, FaderPosition} from './Fader';
 import {Item} from './SelectPicker';
+import {SelectPickerItem} from './SelectPickerItem';
 import {SelectPickerItemsProps} from './SelectPickerItems';
-import {WheelPickerItem} from './WheelPickerItem';
 import {useSelectPickerItemsUseCase} from './useSelectPickerItemsUseCase';
 
-const AnimatedFlatList = Animated.createAnimatedComponent<FlatListProps<Item<React.Key>>>(FlatList);
+const AnimatedFlatList = Reanimated.createAnimatedComponent<FlatListProps<Item<React.Key>>>(FlatList);
 
 const Separator: React.FC<{height: number}> = React.memo(({height}) => {
   const separatorHeightStyle = useMemo(() => ({height}), [height]);
   return <View pointerEvents="none" style={StyleSheet.flatten([styles.separators, separatorHeightStyle])} />;
 });
 
-const defaultKeyExtractor = (itemValue: React.Key, index: number) => `${itemValue}.${index}`;
+const defaultKeyExtractor = (item: Item<React.Key>, index: number) => `${String(item.key ?? item.value)}.${index}`;
 
 const FADER_SIZE = 60;
 const FaderTop: React.FC = () => <Fader visible position={FaderPosition.TOP} size={FADER_SIZE} />;
@@ -32,7 +32,7 @@ export const SelectPickerItems = ({
   preferredNumVisibleRows = 5,
   ...rest
 }: SelectPickerItemsProps) => {
-  const scrollView = useRef<Animated.ScrollView>();
+  const flatListRef = useAnimatedRef<FlatList>();
   const offset = useSharedValue(0);
   const scrollHandler = useAnimatedScrollHandler(e => {
     offset.value = e.contentOffset.y;
@@ -45,8 +45,10 @@ export const SelectPickerItems = ({
       itemHeight,
       preferredNumVisibleRows,
       onValueChange,
-      scrollView,
+      flatListRef,
     });
+
+  const itemsHeightStyle = useMemo(() => ({height}), [height]);
 
   const contentContainerStyle = useMemo(() => {
     return [
@@ -59,7 +61,7 @@ export const SelectPickerItems = ({
   const renderItem = useCallback(
     (info: ListRenderItemInfo<Item<React.Key>>) => {
       return (
-        <WheelPickerItem
+        <SelectPickerItem
           value={info.item.label}
           offset={offset}
           index={info.index}
@@ -72,19 +74,16 @@ export const SelectPickerItems = ({
   );
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} pointerEvents="box-none">
       <AnimatedFlatList
-        // testID={`${testID}.list`}
         data={items}
-        // @ts-ignore reanimated2
         keyExtractor={keyExtractor ?? defaultKeyExtractor}
-        height={height}
+        style={StyleSheet.flatten([itemsHeightStyle, styles.items])}
         onScroll={scrollHandler}
         onMomentumScrollEnd={handleValueChange}
         showsVerticalScrollIndicator={false}
         onLayout={scrollToPassedIndex}
-        // @ts-ignore
-        ref={scrollView}
+        ref={flatListRef}
         contentContainerStyle={contentContainerStyle}
         snapToInterval={itemHeight}
         renderItem={renderItem}
@@ -104,6 +103,9 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  items: {
+    width: '100%',
   },
   separators: {
     position: 'absolute',
