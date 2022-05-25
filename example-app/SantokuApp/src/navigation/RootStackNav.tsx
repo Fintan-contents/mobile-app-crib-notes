@@ -1,36 +1,50 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
+import {AccountContext, useAccountContext} from 'context/useAccountContext';
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
-import {TermsOfServiceAgreementScreen} from 'screens';
+import {LoginScreen, ProfileRegistrationScreen} from 'screens';
 
 import {AppInitialData} from '../framework/initialize/types';
 import {AuthenticatedStackNav, useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 import {RootStackParamList} from './types';
+import {useDefaultScreenOptions} from './useDefaultScreenOptions';
 
 const nav = createNativeStackNavigator<RootStackParamList>();
 
-const screenOptions: NativeStackNavigationOptions = {
+const invisibleHeaderOptions: NativeStackNavigationOptions = {
   headerShown: false,
 };
 
-const getInitialRouteName = (initialData: AppInitialData) => {
-  if (!initialData.account.terms?.hasAgreedValidTermsOfService) {
-    return TermsOfServiceAgreementScreen.name;
+const getInitialRouteName = (account: AccountContext) => {
+  if (account.isLoggedIn) {
+    return AuthenticatedStackNav.name;
   }
-  return AuthenticatedStackNav.name;
+  return LoginScreen.name;
 };
 
 const useRootStackNavigator = (initialData: AppInitialData) => {
-  const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
+  const account = useAccountContext();
+  const initialRouteName = useMemo(() => getInitialRouteName(account), [account]);
   const authenticatedStackNav = useAuthenticatedStackNav(initialData);
+  const defaultScreenOptions = useDefaultScreenOptions();
 
   return (
-    <nav.Navigator screenOptions={screenOptions} initialRouteName={initialRouteName}>
-      <nav.Screen {...TermsOfServiceAgreementScreen} />
-      <nav.Screen {...authenticatedStackNav} />
-      <nav.Screen {...DemoStackNav} />
+    <nav.Navigator screenOptions={defaultScreenOptions} initialRouteName={initialRouteName}>
+      {account.isLoggedIn ? (
+        <nav.Group screenOptions={invisibleHeaderOptions}>
+          <nav.Screen {...authenticatedStackNav} />
+        </nav.Group>
+      ) : (
+        <>
+          <nav.Screen {...LoginScreen} />
+          <nav.Screen {...ProfileRegistrationScreen} />
+        </>
+      )}
+      <nav.Group screenOptions={invisibleHeaderOptions}>
+        <nav.Screen {...DemoStackNav} />
+      </nav.Group>
     </nav.Navigator>
   );
 };

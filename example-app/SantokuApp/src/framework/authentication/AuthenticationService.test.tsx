@@ -106,6 +106,7 @@ describe('AuthenticationService autoLogin', () => {
       expect(spyRefreshCsrfToken).toHaveBeenCalled();
       expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
       expect(spySecureStorageAdapterLoadPassword).toHaveBeenCalledWith('123456789');
+      expect(__mocks.crashlytics.setUserId).toHaveBeenCalledWith('123456789');
     });
   });
 
@@ -254,6 +255,7 @@ describe('AuthenticationService logout', () => {
       expect(spyRefreshCsrfToken).toHaveBeenCalled();
       expect(spySecureStorageAdapterDeleteActiveAccountId).toHaveBeenCalled();
       expect(spySecureStorageAdapterDeletePassword).toHaveBeenCalledWith('123456789');
+      expect(__mocks.crashlytics.setUserId).toHaveBeenCalledWith('');
     });
   });
   test('ログインしたアカウントIDがnullの場合はセキュアストレージの削除が呼ばれないことを確認', async () => {

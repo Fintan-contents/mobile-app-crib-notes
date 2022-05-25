@@ -21,5 +21,29 @@ export const getReactNativeElementsTheme = (appTheme: AppTheme) => {
         color: colors.textStrong,
       },
     },
+    Input: {
+      style: {
+        fontSize: 17,
+        color: colors.text,
+        includeFontPadding: false,
+      },
+      labelStyle: {
+        fontSize: 15,
+        fontWeight: 'normal',
+        color: colors.text,
+      },
+      containerStyle: {
+        paddingHorizontal: 0,
+      },
+      inputContainerStyle: {
+        borderBottomColor: colors.borderStrong,
+        borderBottomWidth: 2,
+      },
+      errorStyle: {
+        fontSize: 12,
+        color: colors.error,
+        includeFontPadding: false,
+      },
+    },
   };
 };

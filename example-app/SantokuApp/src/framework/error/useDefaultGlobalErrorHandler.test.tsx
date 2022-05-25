@@ -1,14 +1,24 @@
-import {renderHook} from '@testing-library/react-hooks';
+import {renderHook, WrapperComponent} from '@testing-library/react-hooks';
 import {AxiosError} from 'axios';
 import {useSnackbar, WithSnackbar} from 'components/overlay';
-import {loadBundledMessagesAsync} from 'framework/initialize/helpers';
+import {WithAccountContext} from 'context/WithAccountContext';
+import {AccountData, loadBundledMessagesAsync} from 'framework/initialize/helpers';
 import React from 'react';
 import {Alert} from 'react-native';
 
+import {useAccountContextOperation} from '../../context/useAccountContextOperation';
+import {AuthenticationService} from '../authentication';
 import {useDefaultGlobalErrorHandler} from './useDefaultGlobalErrorHandler';
 
 jest.mock('components/overlay/snackbar/WithSnackbar');
+jest.mock('context/useAccountContextOperation');
 jest.mock('framework/logging');
+
+jest.useFakeTimers();
+
+const wrapper: WrapperComponent<React.ProviderProps<AccountData>> = ({children, value}) => {
+  return <WithAccountContext accountData={value}>{children}</WithAccountContext>;
+};
 
 describe('useDefaultGlobalErrorHandler', () => {
   const mockSnackbarShow = jest.fn();
@@ -34,7 +44,10 @@ describe('useDefaultGlobalErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper,
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
     expect(mockSnackbarShow).not.toBeCalled();
@@ -47,12 +60,26 @@ describe('useDefaultGlobalErrorHandler', () => {
       isAxiosError: true,
       toJSON: () => {},
     } as unknown as AxiosError;
+    const spyClientLogout = jest.spyOn(AuthenticationService, 'clientLogout').mockImplementation(() => {
+      return Promise.resolve();
+    });
+    const logout = jest.fn();
+    (useAccountContextOperation as jest.Mock).mockImplementation(() => {
+      return {logout};
+    });
     const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    const {result: errorHandler, waitFor} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper,
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
-    errorHandler.current(axiosError);
+    await waitFor(() => {
+      errorHandler.current(axiosError);
+    });
     expect(mockSnackbarShow).not.toBeCalled();
+    expect(spyClientLogout).toHaveBeenCalled();
+    expect(logout).toHaveBeenCalled();
     expect(spyAlert).toBeCalledWith(
       '再ログインが必要です',
       'セッションの有効期限が切れました。再度ログインしてください。',
@@ -68,7 +95,10 @@ describe('useDefaultGlobalErrorHandler', () => {
     } as unknown as AxiosError;
     const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper,
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
     expect(mockSnackbarShow).not.toBeCalled();
@@ -86,7 +116,10 @@ describe('useDefaultGlobalErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper,
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
     expect(mockSnackbarShow).not.toBeCalled();
@@ -101,13 +134,16 @@ describe('useDefaultGlobalErrorHandler', () => {
     } as unknown as AxiosError;
     const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper,
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
     expect(mockSnackbarShow).not.toBeCalled();
     expect(spyAlert).toBeCalledWith(
-      'アプリケーションの更新が必要です',
-      'アプリケーションのバージョンが古いためこの機能を利用できません。ストアからアップデートを実施してください。',
+      'アプリの更新が必要です',
+      'アプリのバージョンが古いためこの機能を利用できません。ストアからアップデートを実施してください。',
     );
   });
 
@@ -119,7 +155,10 @@ describe('useDefaultGlobalErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper,
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
     expect(mockSnackbarShow).toBeCalledWith(
@@ -135,7 +174,10 @@ describe('useDefaultGlobalErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper,
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
     expect(mockSnackbarShow).toBeCalledWith(
@@ -151,7 +193,10 @@ describe('useDefaultGlobalErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper,
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
     expect(mockSnackbarShow).toBeCalledWith(
@@ -167,7 +212,10 @@ describe('useDefaultGlobalErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper,
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
     expect(mockSnackbarShow).toBeCalledWith(
@@ -177,7 +225,10 @@ describe('useDefaultGlobalErrorHandler', () => {
 
   test('nullの場合に予期せぬエラーのスナックバーを表示', async () => {
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper,
+      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(null);
     expect(mockSnackbarShow).toBeCalledWith(

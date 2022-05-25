@@ -4,13 +4,15 @@ import React from 'react';
 import {TeamDetailScreen} from 'screens';
 
 import {MainTabParamList, TeamStackParamList} from './types';
+import {useLogoutButton} from './useLogoutButton';
 
 const nav = createNativeStackNavigator<TeamStackParamList>();
 
 const ScreenName = 'TeamStackNav';
 const Screen: React.FC = () => {
+  const {LogoutButton} = useLogoutButton();
   return (
-    <nav.Navigator>
+    <nav.Navigator screenOptions={{headerRight: LogoutButton}}>
       <nav.Screen {...TeamDetailScreen} />
     </nav.Navigator>
   );

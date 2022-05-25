@@ -7,6 +7,7 @@ module.exports = {
     '<rootDir>/jest/setup/react-native.js',
     '<rootDir>/jest/setup/react-native-gesture-handler.js',
     '<rootDir>/jest/setup/react-native-reanimated.js',
+    '<rootDir>/jest/setup/react-native-safe-area-context.js',
     '<rootDir>/jest/setup/react-query.js',
   ],
 };

@@ -1,3 +1,5 @@
+import crashlytics from '@react-native-firebase/crashlytics';
+import axios from 'axios';
 import {useMutation} from 'react-query';
 
 import {postLogin, postLogout, postSignup} from '../../generated/backend/account/account';
@@ -5,6 +7,7 @@ import {Account, AccountLoginResponse} from '../../generated/backend/model';
 import {refreshCsrfToken} from '../backend';
 import {ApplicationError} from '../error/ApplicationError';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
+import {UnauthorizedError} from './UnauthorizedError';
 
 /** アクティブなアカウントIDがセキュアストレージに存在しない場合に送出するエラー */
 export class ActiveAccountIdNotFoundError extends ApplicationError {}
@@ -26,8 +29,6 @@ async function signup(nickname: string, password: string): Promise<Account> {
 
 /**
  * サインアップします。
- * @param nickname ニックネーム
- * @param password パスワード
  * @returns アカウント
  */
 function useSignup() {
@@ -49,7 +50,6 @@ async function changeAccount(accountId: string): Promise<AccountLoginResponse> {
 
 /**
  * アカウントを切り替えます。
- * @param accountId アカウントID
  * @returns アカウントの切り替え結果
  */
 function useChangeAccount() {
@@ -63,11 +63,29 @@ function useChangeAccount() {
  * @returns アカウントの切り替え結果
  */
 async function login(accountId: string, password: string): Promise<AccountLoginResponse> {
-  const res = await postLogin({accountId, password});
-  await refreshCsrfToken();
-  await SecureStorageAdapter.saveActiveAccountId(accountId);
+  try {
+    const res = await postLogin({accountId, password});
+    await refreshCsrfToken();
+    await SecureStorageAdapter.saveActiveAccountId(accountId);
+    await crashlytics().setUserId(accountId);
 
-  return res.data;
+    return res.data;
+  } catch (e) {
+    if (axios.isAxiosError(e)) {
+      if (e.response?.status === 401) {
+        throw new UnauthorizedError(e);
+      }
+    }
+    throw e;
+  }
+}
+
+/**
+ * ログインします。
+ * @returns アカウントの切り替え結果
+ */
+function useLogin() {
+  return useMutation(async (arg: {accountId: string; password: string}) => login(arg.accountId, arg.password));
 }
 
 /**
@@ -125,11 +143,19 @@ function useRefresh() {
 async function logout(): Promise<void> {
   await postLogout();
   await refreshCsrfToken();
+  await clientLogout();
+}
+
+/**
+ * クライアント側のログアウト処理を実施します。
+ */
+async function clientLogout(): Promise<void> {
   const accountId = await SecureStorageAdapter.loadActiveAccountId();
   if (accountId) {
     await SecureStorageAdapter.deleteActiveAccountId();
     await SecureStorageAdapter.deletePassword(accountId);
   }
+  await crashlytics().setUserId('');
 }
 
 /**
@@ -140,10 +166,13 @@ function useLogout() {
 }
 
 export const AuthenticationService = {
+  autoLogin,
+  canAutoLogin,
+  clientLogout,
   useSignup,
   useChangeAccount,
-  canAutoLogin,
   useAutoLogin,
   useRefresh,
+  useLogin,
   useLogout,
 };

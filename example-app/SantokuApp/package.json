@@ -30,6 +30,7 @@
     "orval": "npx orval --config ./orval.config.ts"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/netinfo": "7.1.3",
     "@react-native-firebase/app": "~14.9.0",
     "@react-native-firebase/crashlytics": "~14.9.0",

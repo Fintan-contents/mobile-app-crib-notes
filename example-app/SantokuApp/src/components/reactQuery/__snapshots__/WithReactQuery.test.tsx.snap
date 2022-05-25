@@ -1,9 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WithReactQuery 子要素を正常にrenderできること 1`] = `
-<Text
-  testID="test"
->
-  test
-</Text>
+Array [
+  <Text
+    testID="test"
+  >
+    test
+  </Text>,
+  ";",
+]
 `;

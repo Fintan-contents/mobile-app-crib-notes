@@ -7,16 +7,20 @@ import {sendErrorLog} from 'framework/error/sendErrorLog';
 import {useCallback, useMemo, useState} from 'react';
 import {Platform} from 'react-native';
 
+import {AuthenticationService, isUnauthorizedError} from '../authentication';
+import {enhanceValidator} from '../validator';
 import {
+  AccountData,
+  checkAppUpdates,
   hideSplashScreen,
   initializeFirebaseCrashlyticsAsync,
-  loadBundledMessagesAsync,
-  loadInitialDataAsync,
-  checkAppUpdates,
-  isUpdateRequiredError,
-  UpdateRequiredError,
   isInitialDataError,
+  isUpdateRequiredError,
+  loadBundledMessagesAsync,
+  loadInitialAccountDataAsync,
+  UpdateRequiredError,
 } from './helpers';
+import {autoLogin} from './helpers/autoLogin';
 import {AppInitialData} from './types';
 
 export interface AppInitializer {
@@ -29,7 +33,7 @@ type Initializing = {
 };
 type InitializeSuccessResult = {
   code: 'Success';
-  data: AppInitialData;
+  data: {accountData: AccountData; initialData: AppInitialData};
 };
 type InitializeUpdateRequiredResult = {
   code: 'UpdateRequired';
@@ -58,9 +62,11 @@ const initializeCoreFeatures = async () => {
   await initializeFirebaseCrashlyticsAsync();
   // アプリ内で使用するメッセージのロード
   await loadBundledMessagesAsync();
+  // メッセージのロード後にYupの設定をする必要がある
+  enhanceValidator();
 };
 
-const loadInitialData = async () => {
+const loadData = async () => {
   // アプリ未起動の間に届いた通知メッセージの取得
   // このアプリでは初期画面の決定に利用するのみで、それ以外の個別の処理は行わない
   const notification = (await messaging().getInitialNotification()) ?? undefined;
@@ -73,13 +79,26 @@ const loadInitialData = async () => {
   }
 
   // TODO: キャッシュの削除
+  const initialData = {notification};
+  if (!(await AuthenticationService.canAutoLogin())) {
+    return {accountData: {}, initialData};
+  }
+
+  try {
+    await autoLogin();
+  } catch (e) {
+    if (isUnauthorizedError(e)) {
+      return {accountData: {}, initialData};
+    }
+    throw e;
+  }
 
   // バックエンドから初期データを取得
   // この時点ではReact QueryのQueryClientProviderはマウントされていないため、useQueryは使わずにデータを取得する
-  const account = await loadInitialDataAsync();
+  const accountData = await loadInitialAccountDataAsync();
   return {
-    notification,
-    account,
+    accountData,
+    initialData,
   };
 };
 
@@ -95,9 +114,7 @@ export const useAppInitializer: () => AppInitializer = () => {
 
     // 初期データの読み込み
     try {
-      const data = Object.freeze(await loadInitialData());
-
-      // TODO: 読み込んだ初期データをFirebase Crashlyticsの設定に反映
+      const data = await loadData();
 
       setInitializationResult({code: 'Success', data});
       await hideSplashScreen();

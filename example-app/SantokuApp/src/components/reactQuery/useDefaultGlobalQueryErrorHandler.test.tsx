@@ -1,6 +1,7 @@
 import {renderHook} from '@testing-library/react-hooks';
 import {AxiosError} from 'axios';
 import {useSnackbar, WithSnackbar} from 'components/overlay';
+import {WithAccountContext} from 'context/WithAccountContext';
 import {loadBundledMessagesAsync} from 'framework/initialize/helpers';
 import React from 'react';
 import {Query, QueryKey} from 'react-query';
@@ -9,6 +10,11 @@ import {useDefaultGlobalQueryErrorHandler} from './useDefaultGlobalQueryErrorHan
 
 jest.mock('components/overlay/snackbar/WithSnackbar');
 jest.mock('framework/logging');
+
+const Wrapper: React.FC = ({children}) => {
+  const accountData = {account: {accountId: '123456789', deviceTokens: []}};
+  return <WithAccountContext accountData={accountData}>{children}</WithAccountContext>;
+};
 
 describe('useDefaultGlobalQueryErrorHandler', () => {
   const query = {} as unknown as Query<unknown, unknown, unknown, QueryKey>;
@@ -35,7 +41,7 @@ describe('useDefaultGlobalQueryErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler(), {wrapper: Wrapper});
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError, query);
     expect(mockSnackbarShow).toBeCalledWith(
@@ -52,7 +58,7 @@ describe('useDefaultGlobalQueryErrorHandler', () => {
       toJSON: () => {},
     } as unknown as AxiosError;
     await loadBundledMessagesAsync();
-    const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler());
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler(), {wrapper: Wrapper});
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError, query);
     expect(mockSnackbarShow).not.toBeCalled();

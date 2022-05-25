@@ -1,25 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Home マウントされたときに正常にレンダリングされること 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
-  testID="HomeScreen"
->
-  <Text
+Array [
+  <View
     style={
       Object {
-        "color": "#242424",
-        "fontSize": 43.714285714285715,
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
       }
     }
+    testID="HomeScreen"
   >
-    開発中
-  </Text>
-</View>
+    <Text
+      style={
+        Object {
+          "color": "#242424",
+          "fontSize": 43.714285714285715,
+        }
+      }
+    >
+      開発中
+    </Text>
+  </View>,
+  <View
+    testID="FullWindowOverlay"
+  />,
+]
 `;

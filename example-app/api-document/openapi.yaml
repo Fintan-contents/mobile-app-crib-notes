@@ -811,24 +811,29 @@ components:
       type: object
       description: 利用規約
       properties:
-        latestTermsOfServiceVersion:
+        version:
           type: string
           description: 最新の利用規約のバージョン
         url:
           type: string
           description: 利用規約のURL
+      required:
+        - version
+        - url
     TermsOfServiceAgreementStatus:
       title: TermsOfServiceAgreementStatus
       type: object
       description: 利用規約同意状態
       properties:
-        hasAgreedValidTermsOfService:
+        hasAgreed:
           type: boolean
           description: 有効な利用規約に同意済みかどうか
           readOnly: true
-        agreedTermsOfServiceVersion:
+        agreedVersion:
           type: string
           description: 同意した利用規約のバージョン
+      required:
+        - agreedVersion
     Team:
       title: Team
       type: object

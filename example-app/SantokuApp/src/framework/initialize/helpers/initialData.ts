@@ -1,32 +1,33 @@
-type TermsAgreement = {
-  hasAgreedValidTermsOfService: boolean;
-  agreedTermsOfServiceVersion: string;
+import {Account, TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
+import {getAccountsMe, getAccountsMeTerms, getTerms} from 'service';
+
+import {InitialDataError} from './initialDataError';
+
+type Terms = {
+  termsAgreementStatus?: TermsOfServiceAgreementStatus;
+  termsOfService?: TermsOfService;
 };
 
-export type InitialData = {
-  terms?: TermsAgreement;
+export type AccountData = {
+  account?: Account;
+  terms?: Terms;
 };
 
-const loadInitialDataAsync = async (): Promise<InitialData> => {
-  // 利用規約同意状態を取得
-  const terms = await getAccountMeTerms();
-  return {
-    terms,
-  };
+const loadInitialAccountDataAsync = async (): Promise<AccountData> => {
+  try {
+    const account = (await getAccountsMe()).data;
+    const termsAgreementStatus = (await getAccountsMeTerms()).data;
+    let termsOfService;
+    if (!termsAgreementStatus.hasAgreed) {
+      termsOfService = (await getTerms()).data;
+    }
+    return {
+      account,
+      terms: {termsAgreementStatus, termsOfService},
+    };
+  } catch (e) {
+    throw new InitialDataError('Failed to load initial account data.', e);
+  }
 };
 
-// OpenAPI generatorで生成されたコードを導入するまでの一時的なMock
-const getAccountMeTerms = async () => {
-  return await new Promise<TermsAgreement>(resolve =>
-    setTimeout(
-      () =>
-        resolve({
-          hasAgreedValidTermsOfService: false,
-          agreedTermsOfServiceVersion: '1.0.0',
-        }),
-      100,
-    ),
-  );
-};
-
-export {loadInitialDataAsync};
+export {loadInitialAccountDataAsync};

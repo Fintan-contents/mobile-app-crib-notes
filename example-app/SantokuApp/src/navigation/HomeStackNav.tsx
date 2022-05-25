@@ -4,13 +4,15 @@ import React from 'react';
 import {HomeScreen} from 'screens';
 
 import {HomeStackParamList, MainTabParamList} from './types';
+import {useLogoutButton} from './useLogoutButton';
 
 const nav = createNativeStackNavigator<HomeStackParamList>();
 
 const ScreenName = 'HomeStackNav';
 const Screen: React.FC = () => {
+  const {LogoutButton} = useLogoutButton();
   return (
-    <nav.Navigator>
+    <nav.Navigator screenOptions={{headerRight: LogoutButton}}>
       <nav.Screen {...HomeScreen} />
     </nav.Navigator>
   );

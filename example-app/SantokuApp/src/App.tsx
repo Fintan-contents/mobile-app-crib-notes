@@ -1,10 +1,10 @@
 import React from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {AppWithInitialization} from './AppWithInitialization';
 import {WithOverlay} from './components/overlay';
-import {WithReactQuery} from './components/reactQuery';
 import {WithAppTheme} from './components/theme';
 
 type AppProperties = {
@@ -23,13 +23,13 @@ export const App = ({isHeadless}: AppProperties) => {
 
   return (
     <GestureHandlerRootView style={StyleSheet.absoluteFill}>
-      <WithAppTheme>
-        <WithOverlay>
-          <WithReactQuery>
+      <SafeAreaProvider>
+        <WithAppTheme>
+          <WithOverlay>
             <AppWithInitialization />
-          </WithReactQuery>
-        </WithOverlay>
-      </WithAppTheme>
+          </WithOverlay>
+        </WithAppTheme>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 };

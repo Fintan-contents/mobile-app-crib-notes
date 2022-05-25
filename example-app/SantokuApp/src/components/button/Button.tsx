@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {Button as RNEButton, ButtonProps} from 'react-native-elements';
+import {Button as RNEButton, ButtonProps as RNEButtonProps} from 'react-native-elements';
 
 const buttonWidthSizes = {
   small: 90,
@@ -11,14 +11,14 @@ const buttonWidthSizes = {
 
 type ButtonSizeType = keyof typeof buttonWidthSizes;
 
-type Props = ButtonProps & {
+export type ButtonProps = RNEButtonProps & {
   /**
    * Button width size.
    */
   size?: ButtonSizeType;
 };
 
-export const Button: React.FC<Props> = props => {
+export const Button: React.FC<ButtonProps> = props => {
   const {size, ...buttonProps} = props;
   const widthStyle = {width: buttonWidthSizes[size ?? 'small']};
   const buttonStyle = StyleSheet.flatten([styles.button, widthStyle, buttonProps.buttonStyle]);
