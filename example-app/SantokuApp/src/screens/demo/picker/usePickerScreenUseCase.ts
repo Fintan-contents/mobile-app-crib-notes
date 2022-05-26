@@ -1,5 +1,5 @@
 import {Item, YearMonth, YearMonthUtil} from 'components/picker';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
 
 type Item1Type = {
   a: string;
@@ -8,30 +8,25 @@ const items1: Item<Item1Type>[] = [
   {value: {a: '1'}, label: 'test1', key: '1', inputLabel: 'テスト1'},
   {value: {a: '2'}, label: 'test2', key: '2', inputLabel: 'テスト2'},
   {value: {a: '3'}, label: 'test3', key: '3', inputLabel: 'テスト3'},
-];
-
-const items2: Item<string>[] = [
-  {value: '', label: 'please select...', color: 'grey'},
-  {value: '1', label: 'test1', inputLabel: 'テスト1'},
-  {value: '2', label: 'test2', inputLabel: 'テスト2'},
-  {value: '3', label: 'test3', inputLabel: 'テスト3'},
-];
-
-const items3 = [
-  {value: '1', label: 'test1', key: '1', inputLabel: 'テスト1'},
-  {value: '2', label: 'test2', key: '2', inputLabel: 'テスト2'},
-  {value: '3', label: 'test3', key: '3', inputLabel: 'テスト3'},
+  {value: {a: '4'}, label: 'test4', key: '4', inputLabel: 'テスト4'},
+  {value: {a: '5'}, label: 'test5', key: '5', inputLabel: 'テスト5'},
+  {value: {a: '6'}, label: 'test6', key: '6', inputLabel: 'テスト6'},
+  {value: {a: '7'}, label: 'test7', key: '7', inputLabel: 'テスト7'},
+  {value: {a: '8'}, label: 'test8', key: '8', inputLabel: 'テスト8'},
+  {value: {a: '9'}, label: 'test9', key: '9', inputLabel: 'テスト9'},
+  {value: {a: '10'}, label: 'test10', key: '10', inputLabel: 'テスト10'},
+  {value: {a: '11'}, label: 'test11', key: '11', inputLabel: 'テスト11'},
 ];
 
 const placeholder = 'please select...';
-const unselectedItemForYearMonthPicker = {value: undefined, label: placeholder, color: 'grey'};
 
 export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
   // Items1
   //////////////////////////////////////////////////////////////////////////////////
   const [items1Key, setItems1Key] = useState<React.Key>();
-  const [items1CanceledKey, setItems1CanceledKey] = useState<React.Key>();
+  // キャンセルをタップした時に、Pickerを開く前の値に戻せるようにRefで保持しておく
+  const items1CanceledKey = useRef<React.Key>();
   const onSelectedItemChangeForItem1 = useCallback((selectedItem?: Item<Item1Type>) => {
     setItems1Key(selectedItem?.key);
   }, []);
@@ -39,45 +34,29 @@ export const usePickerScreenUseCase = () => {
     () => items1.find(item => item.key === items1Key)?.inputLabel ?? placeholder,
     [items1Key],
   );
-  const onDismissForItem1 = useCallback((selectedItem: Item<Item1Type> | undefined) => {
-    setItems1CanceledKey(selectedItem?.key);
+  const onDismissForItem1 = useCallback((selectedItem?: Item<Item1Type>) => {
+    items1CanceledKey.current = selectedItem?.key;
   }, []);
   const onDeleteForItem1 = useCallback(() => {
     setItems1Key(undefined);
-    setItems1CanceledKey(undefined);
+    items1CanceledKey.current = undefined;
   }, []);
   const onCancelForItem1 = useCallback(() => {
-    setItems1Key(items1CanceledKey);
+    setItems1Key(items1CanceledKey.current);
   }, [items1CanceledKey]);
-  const onDoneForItem1 = useCallback((selectedItem: Item<Item1Type> | undefined) => {
-    setItems1CanceledKey(selectedItem?.key);
-  }, []);
-
-  //////////////////////////////////////////////////////////////////////////////////
-  // Items2
-  //////////////////////////////////////////////////////////////////////////////////
-  const [items2Value, setItems2Value] = useState<string>();
-  const items2InputValue = useMemo(
-    () => items2.find(item => item.value === items2Value)?.inputLabel ?? placeholder,
-    [items2Value],
-  );
-  const onSelectedItemChangeForItem2 = useCallback((selectedItem?: Item<string>) => {
-    setItems2Value(selectedItem?.value);
-  }, []);
-
-  //////////////////////////////////////////////////////////////////////////////////
-  // Items3
-  //////////////////////////////////////////////////////////////////////////////////
-  const [items3Key, setItems3Key] = useState<React.Key>();
-  const onSelectedItemChangeForItem3 = useCallback((selectedItem?: Item<string>) => {
-    setItems3Key(selectedItem?.key);
+  const onDoneForItem1 = useCallback((selectedItem?: Item<Item1Type>) => {
+    items1CanceledKey.current = selectedItem?.key;
   }, []);
 
   //////////////////////////////////////////////////////////////////////////////////
   // YearMonthPicker
   //////////////////////////////////////////////////////////////////////////////////
-  const maximumYearMonth = YearMonthUtil.now();
-  const minimumYearMonth = YearMonthUtil.addMonth(maximumYearMonth, -60);
+  // 再レンダリング時に毎回YearMonthが変わらないようにRefで保持する
+  // Refで保持しているため、PickerScreenを開いている間は、maximumYearMonth/minimumYearMonthは変わらない
+  // 一旦前の画面に戻って、再度PickerScreenを開くと、maximumYearMonth/minimumYearMonthは更新される
+  const maximumYearMonth = useRef(YearMonthUtil.now()).current;
+  // maximumYearMonthの5年前をminimumYearMonthとする
+  const minimumYearMonth = useRef(YearMonthUtil.addMonth(maximumYearMonth, -60)).current;
   const [yearMonth, setYearMonth] = useState<YearMonth>();
   const [yearMonthCanceledKey, setYearMonthCanceledKey] = useState<YearMonth>();
   const onSelectedItemChangeForYearMonth = useCallback((yearMonth?: YearMonth) => setYearMonth(yearMonth), []);
@@ -104,18 +83,10 @@ export const usePickerScreenUseCase = () => {
     onDeleteForItem1,
     onCancelForItem1,
     onDoneForItem1,
-    items2,
-    items2Value,
-    items2InputValue,
-    onSelectedItemChangeForItem2,
-    items3,
-    items3Key,
-    onSelectedItemChangeForItem3,
     maximumYearMonth,
     minimumYearMonth,
     yearMonth,
     onSelectedItemChangeForYearMonth,
-    unselectedItem: unselectedItemForYearMonthPicker,
     onDismissForYearMonthPicker,
     onDeleteForYearMonthPicker,
     onCancelForYearMonthPicker,

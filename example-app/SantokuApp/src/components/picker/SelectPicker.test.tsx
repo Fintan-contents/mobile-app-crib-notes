@@ -4,7 +4,7 @@ import {TextInputProps, View, ViewProps} from 'react-native';
 
 import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
-import {SelectPicker} from './SelectPicker.ios';
+import {Item, SelectPicker} from './SelectPicker';
 import {SelectPickerItemsProps} from './SelectPickerItems';
 
 describe('SelectPicker only with required props', () => {
@@ -84,7 +84,7 @@ describe('SelectPicker with all props', () => {
     const onDelete = jest.fn();
     const onCancel = jest.fn();
     const onDone = jest.fn();
-    const keyExtractor = jest.fn((value: string, index: number) => `${value}-${index}`);
+    const keyExtractor = jest.fn((item: Item<string>, index: number) => `${String(item.key ?? item.value)}-${index}`);
     const sut = render(
       <SelectPicker
         items={items}
@@ -141,8 +141,8 @@ describe('SelectPicker with all props', () => {
     const textInput = sut.getByTestId('textInput');
     const textInputProps = textInput.props as TextInputProps;
     expect(textInputProps.style).toEqual({color: 'red'});
-    expect(keyExtractor).toHaveBeenNthCalledWith(1, '1', 0);
-    expect(keyExtractor).toHaveBeenNthCalledWith(2, '2', 1);
+    expect(keyExtractor).toHaveBeenNthCalledWith(1, {value: '1', label: 'test1'}, 0);
+    expect(keyExtractor).toHaveBeenNthCalledWith(2, {value: '2', label: 'test2'}, 1);
 
     // assert pickerBackdrop
     const pickerBackdrop = sut.getByTestId('pickerBackdrop');

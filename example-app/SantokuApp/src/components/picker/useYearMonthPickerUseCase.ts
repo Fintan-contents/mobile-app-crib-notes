@@ -3,7 +3,6 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {ApplicationError} from '../../framework/error/ApplicationError';
 import {PICKER_BACKDROP_DEFAULT_ENTERING, PICKER_BACKDROP_DEFAULT_EXITING} from './PickerBackdrop';
 import {PICKER_CONTAINER_DEFAULT_ENTERING, PICKER_CONTAINER_DEFAULT_EXITING} from './PickerContainer';
-import {Item} from './SelectPicker';
 import {YearMonth} from './YearMonth';
 import {YearMonthPickerProps} from './YearMonthPicker';
 import {YearMonthUtil} from './YearMonthUtil';
@@ -14,7 +13,8 @@ export const useYearMonthPickerUseCase = ({
   selectedValue,
   maximumYearMonth,
   minimumYearMonth,
-  unselectItem,
+  yearSuffixLabel,
+  monthSuffixLabel,
   onSelectedItemChange,
   onDismiss,
   onDelete,
@@ -24,7 +24,6 @@ export const useYearMonthPickerUseCase = ({
   pickerContainerProps: {entering: containerEntering, exiting: containerExiting} = {},
   itemColor,
   itemFontFamily,
-  itemStyle,
 }: YearMonthPickerProps) => {
   if (YearMonthUtil.isFuture(minimumYearMonth, maximumYearMonth)) {
     throw new ApplicationError('Maximum yearMonth must be greater than or equal to minimum yearMonth.');
@@ -51,14 +50,36 @@ export const useYearMonthPickerUseCase = ({
   const yearItems = useMemo(() => {
     const maximumYear = maximumYearMonth.year;
     const minimumYear = minimumYearMonth.year;
-    const items: Item<number | undefined>[] = [...Array<number>(maximumYear - minimumYear + 1)].map(
-      (_, index: number) => {
-        const y = minimumYear + index;
-        return {value: y, label: String(y), color: itemColor, fontFamily: itemFontFamily, style: itemStyle};
-      },
-    );
-    return unselectItem ? [unselectItem].concat(items) : items;
-  }, [itemColor, itemFontFamily, itemStyle, maximumYearMonth.year, minimumYearMonth.year, unselectItem]);
+    return [...Array<number>(maximumYear - minimumYear + 1)].map((_, index: number) => {
+      const y = minimumYear + index;
+      return {value: y, label: String(y), color: itemColor, fontFamily: itemFontFamily};
+    });
+  }, [itemColor, itemFontFamily, maximumYearMonth.year, minimumYearMonth.year]);
+
+  const monthItems = useMemo(() => {
+    const maximumYear = maximumYearMonth.year;
+    const minimumYear = minimumYearMonth.year;
+    const maximumMonth = maximumYearMonth.month;
+    const minimumMonth = minimumYearMonth.month;
+    if (maximumYear === minimumYear) {
+      return [...Array<number>(maximumMonth - minimumMonth + 1)].map((_, index: number) => {
+        const m = minimumMonth + index;
+        return {value: m, label: String(m), color: itemColor, fontFamily: itemFontFamily};
+      });
+    }
+    return [...Array<number>(12)].map((_, index: number) => {
+      const m = index + 1;
+      return {value: m, label: String(m), color: itemColor, fontFamily: itemFontFamily};
+    });
+  }, [
+    itemColor,
+    itemFontFamily,
+    maximumYearMonth.month,
+    maximumYearMonth.year,
+    minimumYearMonth.month,
+    minimumYearMonth.year,
+  ]);
+
   const selectedYear = selectedValue?.year;
   const selectedMonth = selectedValue?.month;
 
@@ -75,6 +96,14 @@ export const useYearMonthPickerUseCase = ({
       return yearMonth;
     },
     [maximumYearMonth, minimumYearMonth],
+  );
+
+  const selectedLabel = useMemo(
+    () =>
+      selectedYear && selectedMonth
+        ? `${selectedYear}${yearSuffixLabel ?? ''}${selectedMonth}${monthSuffixLabel ?? ''}`
+        : undefined,
+    [monthSuffixLabel, selectedMonth, selectedYear, yearSuffixLabel],
   );
 
   const onValueChangeYear = useCallback(
@@ -119,7 +148,9 @@ export const useYearMonthPickerUseCase = ({
     isVisible,
     selectedYear,
     selectedMonth,
+    selectedLabel,
     yearItems,
+    monthItems,
     getSelectedYearMonth,
     onValueChangeYear,
     onValueChangeMonth,

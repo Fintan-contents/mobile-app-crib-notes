@@ -45,13 +45,19 @@ export const PickerContainer: React.FC<PickerContainerProps> = ({
     <>
       {isVisible && (
         <View style={styles.container} pointerEvents="box-none">
-          <Reanimated.View
-            style={style}
-            entering={entering.withCallback(composedEnteringCallback)}
-            exiting={exiting.withCallback(composedExitingCallback)}
-            pointerEvents="box-none"
-            {...animatedViewProps}>
-            {children}
+          {/*
+            entering/exitingに設定するアニメーションがSlideInXXXの場合、正常に動作しなかったため、Reanimated.Viewを二つ重ねてます
+            https://github.com/software-mansion/react-native-reanimated/issues/3245
+          */}
+          <Reanimated.View>
+            <Reanimated.View
+              style={style}
+              entering={entering.withCallback(composedEnteringCallback)}
+              exiting={exiting.withCallback(composedExitingCallback)}
+              pointerEvents="box-none"
+              {...animatedViewProps}>
+              {children}
+            </Reanimated.View>
           </Reanimated.View>
         </View>
       )}

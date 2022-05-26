@@ -18,18 +18,10 @@ const Screen: React.FC = () => {
     onDeleteForItem1,
     onCancelForItem1,
     onDoneForItem1,
-    items2,
-    items2Value,
-    items2InputValue,
-    onSelectedItemChangeForItem2,
-    items3,
-    items3Key,
-    onSelectedItemChangeForItem3,
     maximumYearMonth,
     minimumYearMonth,
     yearMonth,
     onSelectedItemChangeForYearMonth,
-    unselectedItem,
     onDismissForYearMonthPicker,
     onDeleteForYearMonthPicker,
     onCancelForYearMonthPicker,
@@ -39,7 +31,7 @@ const Screen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text>■deleteLabel/cancelLabel/doneLabelを指定(iOS only)</Text>
+      <Text>■SelectPicker</Text>
       <SelectPicker
         selectedItemKey={items1Key}
         onSelectedItemChange={onSelectedItemChangeForItem1}
@@ -51,23 +43,6 @@ const Screen: React.FC = () => {
         pickerAccessoryProps={{deleteLabel: m('消去'), cancelLabel: m('キャンセル'), doneLabel: m('完了')}}
         textInputComponent={<Input placeholder={placeholder} value={items1InputValue} editable={false} />}
       />
-      <Text>■Android Picker mode: dropdown(Android only)</Text>
-      <SelectPicker
-        selectedItemKey={items2Value}
-        onSelectedItemChange={onSelectedItemChangeForItem2}
-        items={items2}
-        placeholder={placeholder}
-        pickerProps={{mode: 'dropdown'}}
-        textInputComponent={<Input placeholder={placeholder} value={items2InputValue} editable={false} />}
-      />
-      <View style={styles.space} />
-      <Text>■Android Picker mode: dialog(Android only)</Text>
-      <SelectPicker
-        selectedItemKey={items3Key}
-        onSelectedItemChange={onSelectedItemChangeForItem3}
-        items={items3}
-        textInputProps={{style: styles.selectPicker3TextInputStyle}}
-      />
       <View style={styles.space} />
       <Text>■YearMonthPicker</Text>
       <YearMonthPicker
@@ -77,7 +52,6 @@ const Screen: React.FC = () => {
         yearSuffixLabel={m('年')}
         monthSuffixLabel={m('月')}
         placeholder={placeholder}
-        unselectItem={unselectedItem}
         onSelectedItemChange={onSelectedItemChangeForYearMonth}
         onDismiss={onDismissForYearMonthPicker}
         onDelete={onDeleteForYearMonthPicker}

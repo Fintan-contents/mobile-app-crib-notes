@@ -6,7 +6,7 @@ import {ApplicationError} from '../../framework/error/ApplicationError';
 import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
 import {SelectPickerItemsProps} from './SelectPickerItems';
-import {YearMonthPicker} from './YearMonthPicker.ios';
+import {YearMonthPicker} from './YearMonthPicker';
 import {YearMonthUtil} from './YearMonthUtil';
 
 describe('YearMonthPicker only with required props', () => {

@@ -1,13 +1,20 @@
-import {PickerProps} from '@react-native-picker/picker';
-import {log} from 'framework/logging';
 import React from 'react';
-import {Platform, StyleProp, TextInputProps as RNETextInputProps, TextStyle, ViewProps} from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputProps as RNETextInputProps,
+  View,
+  ViewProps,
+} from 'react-native';
 
-import {DefaultPickerAccessoryProps} from './DefaultPickerAccessory';
-import {PickerBackdropProps} from './PickerBackdrop';
-import {PickerContainerProps} from './PickerContainer';
-import {Item} from './SelectPicker';
+import {DefaultPickerAccessory, DefaultPickerAccessoryProps} from './DefaultPickerAccessory';
+import {PickerBackdrop, PickerBackdropProps} from './PickerBackdrop';
+import {PickerContainer, PickerContainerProps} from './PickerContainer';
+import {SelectPickerItems, SelectPickerItemsProps} from './SelectPickerItems';
 import {RequiredYearMonth, YearMonth} from './YearMonth';
+import {useYearMonthPickerUseCase} from './useYearMonthPickerUseCase';
 
 type TextInputProps = Omit<RNETextInputProps, 'value' | 'editable'>;
 export type YearMonthPickerProps = {
@@ -32,44 +39,26 @@ export type YearMonthPickerProps = {
    */
   monthSuffixLabel?: string;
   /**
-   * 未選択を表すアイテムのラベル
-   * @platform android
-   */
-  unselectItem?: Item<number | undefined>;
-  /**
    * アイテムが選択された場合に呼び出される関数
    */
   onSelectedItemChange?: (yearMonth?: YearMonth) => void;
   /**
    * PickerBackdropをタップして閉じた場合に呼び出される関数
-   *
-   * @platform ios
    */
   onDismiss?: (yearMonth?: YearMonth) => void;
   /**
    * DeleteLabelがタップされた場合に呼び出される関数
    * タップ後、YearMonthPickerは自動で閉じます。
-   * なお、pickerAccessoryComponentを指定した場合は使用されません。
-   *
-   * @platform ios
    */
   onDelete?: (yearMonth?: YearMonth) => void;
   /**
    * CancelLabelがタップされた場合に呼び出される関数
    * タップ後、YearMonthPickerは自動で閉じます。
-   * なお、pickerAccessoryComponentを指定した場合は使用されません。
-   *
-   * @platform ios
    */
   onCancel?: (yearMonth?: YearMonth) => void;
   /**
-   * [iOS]
    * DoneLabelがタップされた場合に呼び出される関数
    * タップ後、YearMonthPickerは自動で閉じます。
-   * なお、pickerAccessoryComponentを指定した場合は使用されません。
-   *
-   * [Android]
-   * アイテムが選択された場合に呼び出される関数
    */
   onDone?: (yearMonth?: YearMonth) => void;
   /**
@@ -78,7 +67,6 @@ export type YearMonthPickerProps = {
   placeholder?: string;
   /**
    * 選択されたアイテムを表示するテキストコンポーネントのProps
-   * なお、textInputComponentを指定した場合は使用されません。
    */
   textInputProps?: TextInputProps;
   /**
@@ -87,26 +75,18 @@ export type YearMonthPickerProps = {
   pickerItemsContainerProps?: ViewProps;
   /**
    * PickerのProps
-   * なお、pickerItemsComponentを指定した場合は使用されません。
    */
-  pickerProps?: Omit<PickerProps<Date>, 'selectedValue' | 'onValueChange'>;
+  pickerProps?: Omit<SelectPickerItemsProps<YearMonth>, 'items' | 'selectedValue' | 'onValueChange' | 'keyExtractor'>;
   /**
    * PickerBackdropのProps
-   *
-   * @platform ios
    */
   pickerBackdropProps?: Omit<PickerBackdropProps, 'isVisible' | 'onPress'>;
   /**
    * PickerContainerのProps
-   *
-   * @platform ios
    */
   pickerContainerProps?: Omit<PickerContainerProps, 'isVisible'>;
   /**
    * PickerAccessoryのProps
-   * なお、pickerAccessoryComponentを指定した場合は使用されません。
-   *
-   * @platform ios
    */
   pickerAccessoryProps?: Omit<DefaultPickerAccessoryProps, 'onDelete' | 'onCancel' | 'onDone'>;
   /**
@@ -117,22 +97,111 @@ export type YearMonthPickerProps = {
    * アイテムのFontFamily
    */
   itemFontFamily?: string;
-  /**
-   * アイテムに指定するスタイル
-   * 以下のプロパティのみ使用できます。
-   * - 'color'
-   * - 'backgroundColor'
-   * - 'fontSize'
-   * - 'fontFamily'
-   *
-   * @platform android
-   */
-  itemStyle?: StyleProp<Pick<TextStyle, 'color' | 'backgroundColor' | 'fontSize' | 'fontFamily'>>;
 };
 
 export const YearMonthPicker = (props: YearMonthPickerProps) => {
-  React.useEffect(() => {
-    log.warn(`YearMonthPicker is not supported on: ${Platform.OS}`);
-  }, []);
-  return null;
+  const {
+    isVisible,
+    selectedYear,
+    selectedMonth,
+    yearItems,
+    monthItems,
+    onValueChangeYear,
+    onValueChangeMonth,
+    selectedLabel,
+    pickerBackdropEntering,
+    pickerBackdropExiting,
+    pickerContainerEntering,
+    pickerContainerExiting,
+    open,
+    handleBackdropPress,
+    handleDelete,
+    handleCancel,
+    handleDone,
+  } = useYearMonthPickerUseCase(props);
+  const {
+    yearSuffixLabel,
+    monthSuffixLabel,
+    placeholder,
+    textInputProps,
+    pickerItemsContainerProps: {style: pickerItemsContainerStyle, ...pickerItemsContainerProps} = {},
+    pickerProps,
+    pickerBackdropProps: {entering: backdropEntering, exiting: backdropExiting, ...pickerBackdropProps} = {},
+    pickerContainerProps: {
+      entering: containerEntering,
+      exiting: containerExiting,
+      style: pickerContainerStyle,
+      ...pickerContainerProps
+    } = {},
+    pickerAccessoryProps,
+  } = props;
+
+  return (
+    <>
+      <PickerBackdrop
+        isVisible={isVisible}
+        onPress={handleBackdropPress}
+        entering={pickerBackdropEntering}
+        exiting={pickerBackdropExiting}
+        {...pickerBackdropProps}>
+        <PickerContainer
+          isVisible={isVisible}
+          entering={pickerContainerEntering}
+          exiting={pickerContainerExiting}
+          style={StyleSheet.flatten([styles.pickerContainer, pickerContainerStyle])}
+          {...pickerContainerProps}>
+          <DefaultPickerAccessory
+            onDelete={handleDelete}
+            onCancel={handleCancel}
+            onDone={handleDone}
+            {...pickerAccessoryProps}
+          />
+          <View
+            style={StyleSheet.flatten([styles.pickerItemsContainer, pickerItemsContainerStyle])}
+            {...pickerItemsContainerProps}>
+            <View style={styles.flex}>
+              <SelectPickerItems
+                selectedValue={selectedYear}
+                items={yearItems}
+                onValueChange={onValueChangeYear}
+                testID="yearPicker"
+                {...pickerProps}
+              />
+            </View>
+            <Text>{yearSuffixLabel}</Text>
+            <View style={styles.flex}>
+              <SelectPickerItems
+                selectedValue={selectedMonth}
+                items={monthItems}
+                onValueChange={onValueChangeMonth}
+                testID="monthPicker"
+                {...pickerProps}
+              />
+            </View>
+            <Text>{monthSuffixLabel}</Text>
+          </View>
+        </PickerContainer>
+      </PickerBackdrop>
+      <Pressable onPress={open} testID="pressableContainer">
+        <View pointerEvents="box-only">
+          <TextInput placeholder={placeholder} value={selectedLabel} editable={false} {...textInputProps} />
+        </View>
+      </Pressable>
+    </>
+  );
 };
+
+const styles = StyleSheet.create({
+  flex: {
+    flex: 1,
+  },
+  pickerContainer: {
+    backgroundColor: 'white',
+  },
+  pickerItemsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+  },
+});
