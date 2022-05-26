@@ -66,9 +66,9 @@ describe('Snackbar', () => {
       </Snackbar>,
     );
 
-    await waitFor(() => {
-      expect(renderResult.queryByText('初回')).not.toBeNull();
+    expect(renderResult.queryByText('初回')).not.toBeNull();
 
+    await waitFor(() => {
       jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
 
       expect(renderResult.queryByText('初回')).toBeNull();
