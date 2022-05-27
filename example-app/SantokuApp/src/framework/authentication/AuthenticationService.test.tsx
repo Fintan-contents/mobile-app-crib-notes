@@ -227,6 +227,7 @@ describe('AuthenticationService refresh', () => {
 });
 
 describe('AuthenticationService logout', () => {
+  const spyAccountsMeDeviceTokenApi = jest.spyOn(accountApi, 'postAccountsMeDeviceToken').mockImplementation();
   const spyLogoutApi = jest.spyOn(accountApi, 'postLogout').mockResolvedValue({
     data: undefined,
     status: 200,
@@ -251,6 +252,7 @@ describe('AuthenticationService logout', () => {
     const {result} = renderHook(() => AuthenticationService.useLogout(), {wrapper});
     await act(async () => {
       await result.current.mutateAsync();
+      expect(spyAccountsMeDeviceTokenApi).toHaveBeenCalled();
       expect(spyLogoutApi).toHaveBeenCalled();
       expect(spyRefreshCsrfToken).toHaveBeenCalled();
       expect(spySecureStorageAdapterDeleteActiveAccountId).toHaveBeenCalled();
@@ -263,6 +265,7 @@ describe('AuthenticationService logout', () => {
     const {result} = renderHook(() => AuthenticationService.useLogout(), {wrapper});
     await act(async () => {
       await result.current.mutateAsync();
+      expect(spyAccountsMeDeviceTokenApi).toHaveBeenCalled();
       expect(spyLogoutApi).toHaveBeenCalled();
       expect(spyRefreshCsrfToken).toHaveBeenCalled();
       expect(spySecureStorageAdapterDeleteActiveAccountId).not.toHaveBeenCalled();

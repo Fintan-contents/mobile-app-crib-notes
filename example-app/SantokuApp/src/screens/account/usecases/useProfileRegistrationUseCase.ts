@@ -1,6 +1,6 @@
 import {useAccountContextOperation} from 'context/useAccountContextOperation';
 import {FormikProps} from 'formik';
-import {log, m} from 'framework';
+import {log, m, useIsMounted} from 'framework';
 import {AuthenticationService, isUnauthorizedError} from 'framework/authentication';
 import {generatePassword} from 'framework/utilities';
 import {isValidForm} from 'framework/validator';
@@ -21,6 +21,7 @@ export const useProfileRegistrationUseCase = (
   const {mutateAsync: callLogin} = AuthenticationService.useLogin();
   const {mutateAsync: callPostAccountsMeTerms} = usePostAccountsMeTerms();
   const accountContextOperation = useAccountContextOperation();
+  const isMounted = useIsMounted();
 
   const clearNickname = useCallback(() => form.setFieldValue('nickname', ''), [form]);
 
@@ -33,7 +34,6 @@ export const useProfileRegistrationUseCase = (
         const account = await callSignup({nickname, password});
         await callLogin({accountId: account.accountId, password});
         await callPostAccountsMeTerms(termsAgreementStatus);
-        setIsExecutingSignup(false);
         accountContextOperation.login(account, {termsAgreementStatus});
       } catch (e) {
         // ここではサインアップに成功したaccountId、passwordを使用してログインしているため、UnauthorizedErrorが発生しない想定です。
@@ -43,10 +43,13 @@ export const useProfileRegistrationUseCase = (
           log.error(m('app.account.signupError', String(e)), 'app.account.signupError');
           Alert.alert(m('app.account.サインアップエラータイトル'), m('app.account.サインアップエラー本文'));
         }
-        setIsExecutingSignup(false);
+      } finally {
+        if (isMounted()) {
+          setIsExecutingSignup(false);
+        }
       }
     }
-  }, [form, callSignup, callLogin, callPostAccountsMeTerms, termsAgreementStatus, accountContextOperation]);
+  }, [form, callSignup, callLogin, callPostAccountsMeTerms, termsAgreementStatus, accountContextOperation, isMounted]);
 
   return {
     clearNickname,

@@ -1,11 +1,15 @@
 import crashlytics from '@react-native-firebase/crashlytics';
 import axios from 'axios';
+import {postAccountsMeDeviceToken, postLogin, postLogout, postSignup} from 'generated/backend/account/account';
+import {Account, AccountLoginResponse} from 'generated/backend/model';
 import {useMutation} from 'react-query';
 
-import {postLogin, postLogout, postSignup} from '../../generated/backend/account/account';
-import {Account, AccountLoginResponse} from '../../generated/backend/model';
 import {refreshCsrfToken} from '../backend';
 import {ApplicationError} from '../error/ApplicationError';
+import {getFcmToken} from '../firebase';
+import {deleteFcmToken} from '../firebase/messaging/deleteFcmToken';
+import {log} from '../logging';
+import {m} from '../message';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 import {UnauthorizedError} from './UnauthorizedError';
 
@@ -141,6 +145,8 @@ function useRefresh() {
  * ログアウトします。
  */
 async function logout(): Promise<void> {
+  const fcmToken = await getFcmToken();
+  await postAccountsMeDeviceToken({oldDeviceToken: fcmToken});
   await postLogout();
   await refreshCsrfToken();
   await clientLogout();
@@ -156,6 +162,16 @@ async function clientLogout(): Promise<void> {
     await SecureStorageAdapter.deletePassword(accountId);
   }
   await crashlytics().setUserId('');
+  try {
+    // FCMに登録されている登録トークンを削除します。
+    // FCMから登録トークンを削除することで、SantokuApp Backend以外からPush通知を送信した場合も、通知を受信しなくなります。
+    // もし、Firebase Consoleからキャンペーン送信するなど、SantokuApp Backendを経由しないPush通知をログアウト後も受け取りたい場合は、
+    // FCMに登録されている登録トークンは削除しないでください。
+    await deleteFcmToken();
+  } catch (e) {
+    // 基本的にはFCM登録トークンの削除は失敗しない想定ですが、もし失敗した場合はログアウト後もSantokuApp Backendを経由しないPush通知は受信できてしまいます。
+    log.error(m('app.push.notification.deleteFcmTokenError', String(e)), 'app.push.notification.deleteFcmTokenError');
+  }
 }
 
 /**

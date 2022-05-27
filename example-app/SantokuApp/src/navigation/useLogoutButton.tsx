@@ -1,9 +1,11 @@
 import {Button} from 'components/button';
 import {useAccountContextOperation} from 'context/useAccountContextOperation';
 import {AuthenticationService} from 'framework/authentication';
+import {isGetFcmTokenError} from 'framework/firebase';
+import {log} from 'framework/logging';
 import {m} from 'framework/message';
 import React, {useCallback} from 'react';
-import {GestureResponderEvent, StyleSheet} from 'react-native';
+import {Alert, GestureResponderEvent, StyleSheet} from 'react-native';
 
 type HeaderRightLogoutButtonProps = {
   onPress: (event: GestureResponderEvent) => void;
@@ -46,7 +48,11 @@ export const useLogoutButton = () => {
       await callLogout();
       accountContextOperation.logout();
     } catch (e) {
-      // 個別のエラーハンドリングは不要
+      // 基本的にはFCM登録トークンの取得は失敗しない想定ですが、もし失敗した場合は、Firebase Crashlyticsにログを送信してアラートを表示します。
+      if (isGetFcmTokenError(e)) {
+        log.error(m('app.push.notification.getFcmTokenError', String(e)), 'app.push.notification.getFcmTokenError');
+        Alert.alert(m('app.account.ログアウトエラータイトル'), m('app.account.ログアウトエラー本文'));
+      }
     }
   }, [accountContextOperation, callLogout]);
   // NativeStackNavigatorのheaderRightに合わせたコンポーネント。

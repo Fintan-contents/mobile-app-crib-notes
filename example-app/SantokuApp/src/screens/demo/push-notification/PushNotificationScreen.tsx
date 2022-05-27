@@ -14,16 +14,8 @@ type Props = CompositeScreenProps<
 
 const ScreenName = 'PushNotification';
 const Screen: React.FC<Props> = ({navigation}) => {
-  const {
-    authStatus,
-    token,
-    requestUserPermission,
-    getToken,
-    registerFcmToken,
-    removeFcmToken,
-    notifyMessageToAll,
-    notifyMessageToMe,
-  } = usePushNotification();
+  const {authStatus, token, requestUserPermission, getToken, notifyMessageToAll, notifyMessageToMe, openSettings} =
+    usePushNotification();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,12 +35,6 @@ const Screen: React.FC<Props> = ({navigation}) => {
         <View style={styles.buttonContainer}>
           <Button onPress={getToken} title="FCM登録トークンの取得" />
         </View>
-        <View style={styles.buttonContainer}>
-          <Button onPress={registerFcmToken} title="FCM登録トークンをバックエンドに登録" />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button onPress={removeFcmToken} title="FCM登録トークンをバックエンドから削除" />
-        </View>
         <Divider orientation="vertical" style={styles.divider} />
         <View>
           <Text>【通知メッセージ】</Text>
@@ -57,6 +43,12 @@ const Screen: React.FC<Props> = ({navigation}) => {
           </View>
           <View style={styles.buttonContainer}>
             <Button onPress={notifyMessageToMe} title="Pushメッセージを自分に送信" />
+          </View>
+        </View>
+        <View>
+          <Text>【通知設定】</Text>
+          <View style={styles.buttonContainer}>
+            <Button onPress={openSettings} title="Push通知の設定" />
           </View>
         </View>
       </ScrollView>
