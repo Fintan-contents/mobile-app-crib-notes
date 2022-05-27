@@ -74,6 +74,38 @@ export const usePickerScreenUseCase = () => {
     setYearMonthCanceledKey(yearMonth);
   }, []);
 
+  //////////////////////////////////////////////////////////////////////////////////
+  // DateTimePicker
+  //////////////////////////////////////////////////////////////////////////////////
+  // 再レンダリング時に毎回YearMonthが変わらないようにRefで保持する
+  // Refで保持しているため、PickerScreenを開いている間は、maximumYearMonth/minimumYearMonthは変わらない
+  // 一旦前の画面に戻って、再度PickerScreenを開くと、maximumYearMonth/minimumYearMonthは更新される
+  const maximumDate = useRef(YearMonthUtil.now()).current;
+  // maximumYearMonthの5年前をminimumYearMonthとする
+  const minimumDate = useRef(YearMonthUtil.addMonth(maximumYearMonth, -60)).current;
+  const [selectedDate, setSelectedDate] = useState<Date>();
+  // キャンセルをタップした時に、Pickerを開く前の値に戻せるようにRefで保持しておく
+  const canceledDate = useRef<Date>();
+  const onSelectedItemChangeForDate = useCallback((selectedValue?: Date) => {
+    setSelectedDate(selectedValue);
+  }, []);
+  const onDismissForDate = useCallback((selectedValue?: Date) => {
+    canceledDate.current = selectedValue;
+  }, []);
+  const onDeleteForDate = useCallback(() => {
+    setSelectedDate(undefined);
+    canceledDate.current = undefined;
+  }, []);
+  const onCancelForDate = useCallback(() => {
+    setSelectedDate(canceledDate.current);
+  }, []);
+  const onDoneForDate = useCallback((selectedValue?: Date) => {
+    canceledDate.current = selectedValue;
+  }, []);
+  const formatDate = useCallback((date?: Date) => {
+    return date ? `${date.getUTCFullYear()}/${date.getMonth() + 1}/${date.getDate()}` : '';
+  }, []);
+
   return {
     items1,
     items1Key,
@@ -91,6 +123,15 @@ export const usePickerScreenUseCase = () => {
     onDeleteForYearMonthPicker,
     onCancelForYearMonthPicker,
     onDoneForYearMonthPicker,
+    maximumDate,
+    minimumDate,
+    selectedDate,
+    onSelectedItemChangeForDate,
+    onDismissForDate,
+    onDeleteForDate,
+    onCancelForDate,
+    onDoneForDate,
+    formatDate,
     placeholder,
   };
 };

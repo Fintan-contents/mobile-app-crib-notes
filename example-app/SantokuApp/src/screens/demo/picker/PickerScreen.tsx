@@ -1,4 +1,5 @@
 import {SelectPicker, YearMonthPicker} from 'components/picker';
+import {DateTimePicker} from 'components/picker/DateTimePicker';
 import {m} from 'framework/message';
 import {DemoStackParamList} from 'navigation/types';
 import React from 'react';
@@ -26,6 +27,13 @@ const Screen: React.FC = () => {
     onDeleteForYearMonthPicker,
     onCancelForYearMonthPicker,
     onDoneForYearMonthPicker,
+    selectedDate,
+    onSelectedItemChangeForDate,
+    onDismissForDate,
+    onDeleteForDate,
+    onCancelForDate,
+    onDoneForDate,
+    formatDate,
     placeholder,
   } = usePickerScreenUseCase();
 
@@ -59,6 +67,21 @@ const Screen: React.FC = () => {
         onDone={onDoneForYearMonthPicker}
         pickerAccessoryProps={{deleteLabel: m('消去'), cancelLabel: m('キャンセル'), doneLabel: m('完了')}}
         textInputProps={{style: styles.pickerTextInputStyle}}
+      />
+      <View style={styles.space} />
+      <Text>■DateTimePicker</Text>
+      <DateTimePicker
+        selectedValue={selectedDate}
+        defaultValue={new Date()}
+        onSelectedItemChange={onSelectedItemChangeForDate}
+        onDismiss={onDismissForDate}
+        onDelete={onDeleteForDate}
+        onCancel={onCancelForDate}
+        onDone={onDoneForDate}
+        formatText={formatDate}
+        mode="date"
+        displayIOS="spinner"
+        pickerAccessoryProps={{deleteLabel: m('消去'), cancelLabel: m('キャンセル'), doneLabel: m('完了')}}
       />
     </View>
   );
