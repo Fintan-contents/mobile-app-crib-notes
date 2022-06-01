@@ -1,3 +1,4 @@
+import {AxiosError} from 'axios';
 import {BundledMessagesLoader, loadMessages} from 'framework/message';
 
 import {log} from '../logging';
@@ -10,11 +11,15 @@ beforeAll(async () => {
 describe('resolveApiErrorMessage', () => {
   test('AxiosErrorの場合', () => {
     const spyError = jest.spyOn(log, 'error').mockImplementation();
-    sendErrorLog({
-      isAxiosError: true,
-      config: {url: 'http://dummy', method: 'get', data: 'request data', headers: {}},
-      response: {status: 500, statusText: 'Internal Server Error', data: 'response data', headers: {}},
-    });
+    const error = new AxiosError(
+      'dummyError',
+      '',
+      {url: 'http://dummy', method: 'get', data: 'request data', headers: {}},
+      {},
+      {status: 500, statusText: 'Internal Server Error', data: 'response data', headers: {}, config: {}},
+      // {status: 500, statusText: 'Internal Server Error', data: 'response data', headers: {}},
+    );
+    sendErrorLog(error);
     expect(spyError).toHaveBeenCalledWith(
       `
 Backend API Request Error:

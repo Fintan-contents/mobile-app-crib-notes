@@ -37,12 +37,19 @@ describe('useDefaultGlobalErrorHandler', () => {
   });
 
   test('400 Bad Requestの場合に何も行われない', async () => {
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 400, data: {}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
+    const axiosError = new AxiosError(
+      'error',
+      '',
+      {},
+      {},
+      {
+        status: 400,
+        statusText: 'Bad Request',
+        data: {},
+        headers: {},
+        config: {},
+      },
+    );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
       wrapper,
@@ -54,12 +61,19 @@ describe('useDefaultGlobalErrorHandler', () => {
   });
 
   test('401 Unauthorizedの場合に再ログインを促すアラートを表示', async () => {
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 401, data: {}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
+    const axiosError = new AxiosError(
+      'error',
+      '',
+      {},
+      {},
+      {
+        status: 401,
+        statusText: 'Unauthorized',
+        data: {},
+        headers: {},
+        config: {},
+      },
+    );
     const spyClientLogout = jest.spyOn(AuthenticationService, 'clientLogout').mockImplementation(() => {
       return Promise.resolve();
     });
@@ -87,12 +101,19 @@ describe('useDefaultGlobalErrorHandler', () => {
   });
 
   test('403 Forbiddenの場合に最新の利用規約への同意が必要なことを伝えるアラートを表示', async () => {
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 403, data: {}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
+    const axiosError = new AxiosError(
+      'error',
+      '',
+      {},
+      {},
+      {
+        status: 403,
+        statusText: 'Forbidden',
+        data: {},
+        headers: {},
+        config: {},
+      },
+    );
     const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
@@ -109,12 +130,19 @@ describe('useDefaultGlobalErrorHandler', () => {
   });
 
   test('404 Not Foundの場合に何も行われない', async () => {
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 404, data: {}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
+    const axiosError = new AxiosError(
+      'error',
+      '',
+      {},
+      {},
+      {
+        status: 404,
+        statusText: 'Not Found',
+        data: {},
+        headers: {},
+        config: {},
+      },
+    );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
       wrapper,
@@ -126,12 +154,19 @@ describe('useDefaultGlobalErrorHandler', () => {
   });
 
   test('412 Precondition Failedの場合にアプリを新しいバージョンにアップデートするように促すダイアログを表示', async () => {
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 412, data: {}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
+    const axiosError = new AxiosError(
+      'error',
+      '',
+      {},
+      {},
+      {
+        status: 412,
+        statusText: 'Precondition Failed',
+        data: {},
+        headers: {},
+        config: {},
+      },
+    );
     const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
@@ -148,12 +183,19 @@ describe('useDefaultGlobalErrorHandler', () => {
   });
 
   test('429 Too Many Requestsの場合に時間をおいてから再操作をするように促すスナックバーを表示', async () => {
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 429, data: {}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
+    const axiosError = new AxiosError(
+      'error',
+      '',
+      {},
+      {},
+      {
+        status: 429,
+        statusText: 'Too Many Requests',
+        data: {},
+        headers: {},
+        config: {},
+      },
+    );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
       wrapper,
@@ -167,12 +209,19 @@ describe('useDefaultGlobalErrorHandler', () => {
   });
 
   test('503 Service Unavailableの場合にシステムメンテナンス中であることを伝えるスナックバーを表示', async () => {
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 503, data: {}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
+    const axiosError = new AxiosError(
+      'error',
+      '',
+      {},
+      {},
+      {
+        status: 503,
+        statusText: 'Service Unavailable',
+        data: {},
+        headers: {},
+        config: {},
+      },
+    );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
       wrapper,
@@ -186,12 +235,19 @@ describe('useDefaultGlobalErrorHandler', () => {
   });
 
   test('504 SGateway Timeoutの場合に時間をおいてから再操作をするように促すスナックバーを表示', async () => {
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 504, data: {}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
+    const axiosError = new AxiosError(
+      'error',
+      '',
+      {},
+      {},
+      {
+        status: 504,
+        statusText: 'Gateway Timeout',
+        data: {},
+        headers: {},
+        config: {},
+      },
+    );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
       wrapper,
@@ -205,12 +261,19 @@ describe('useDefaultGlobalErrorHandler', () => {
   });
 
   test('500 Internal Server Errorの場合に予期せぬエラーのスナックバーを表示', async () => {
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 500, statusText: 'Internal Server Error', data: {message: 'message', code: 'errorCode'}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
+    const axiosError = new AxiosError(
+      'error',
+      '',
+      {},
+      {},
+      {
+        status: 500,
+        statusText: 'Internal Server Error',
+        data: {message: 'message', code: 'errorCode'},
+        headers: {},
+        config: {},
+      },
+    );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
       wrapper,

@@ -1,3 +1,4 @@
+import {AxiosError} from 'axios';
 import {BundledMessagesLoader, loadMessages} from 'framework/message';
 
 import {resolveErrorMessage} from './resolveErrorMessage';
@@ -8,11 +9,21 @@ beforeAll(async () => {
 
 describe('resolveApiErrorMessage', () => {
   test('AxiosErrorの場合は通信エラーが返ってくること', () => {
-    const {title, message} = resolveErrorMessage({
-      isAxiosError: true,
-      config: {url: 'http://dummy', method: 'get', data: 'dummy', headers: {}},
-      response: {status: 500, data: {}},
-    });
+    const {title, message} = resolveErrorMessage(
+      new AxiosError(
+        'error',
+        '',
+        {},
+        {},
+        {
+          status: 500,
+          statusText: 'Internal Server Error',
+          data: {},
+          headers: {},
+          config: {},
+        },
+      ),
+    );
     expect(title).toEqual('システムエラー');
     expect(message).toEqual('通信中にエラーが発生しました。\n500');
   });
