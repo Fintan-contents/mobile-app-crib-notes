@@ -41,7 +41,6 @@ module.exports = {
     locales: ['ja'],
   },
   themeConfig: {
-    hideableSidebar: true,
     colorMode: {
       // "light" | "dark"
       defaultMode: 'light',
@@ -51,6 +50,11 @@ module.exports = {
       // Should we use the prefers-color-scheme media-query,
       // using user system preferences, instead of the hardcoded defaultMode
       respectPrefersColorScheme: false,
+    },
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
     },
     prism: {
       additionalLanguages: ['ruby', 'groovy'],
