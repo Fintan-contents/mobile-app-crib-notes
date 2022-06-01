@@ -30,7 +30,7 @@ res.body=[${JSON.stringify(error.response?.data, null, 2)}]
       const errorMessage = error instanceof Error ? error.message : 'unknown';
       log.debug(`UnexpectedError: message=[${errorMessage}]`);
     }
-  } catch (e) {}
+  } catch {}
 };
 
 export const useDefaultGlobalErrorHandler = () => {

@@ -21,5 +21,5 @@ res.statusText=[${error.response?.statusText ?? ''}]
       const errorMessage = error instanceof Error ? error.message : 'unknown';
       log.error(`UnexpectedError: message=[${errorMessage}]`, 'UnexpectedRequestError');
     }
-  } catch (e) {}
+  } catch {}
 };

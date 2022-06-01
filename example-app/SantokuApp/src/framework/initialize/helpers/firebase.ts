@@ -12,7 +12,7 @@ const initializeFirebaseCrashlyticsAsync = async () => {
     try {
       const id = await launchedId();
       await crashlytics().setAttribute('launchedId', id);
-    } catch (e) {
+    } catch {
       throw new Error('Failed to get launchedId.');
     }
   }

@@ -7,7 +7,7 @@ const hideSplashScreen = async () => {
   await new Promise(resolve => setTimeout(resolve, 200));
   try {
     await SplashScreen.hideAsync();
-  } catch (e) {
+  } catch {
     // 既にSplashScreenが消えていた場合はそのまま継続
   }
 };
