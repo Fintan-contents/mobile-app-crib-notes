@@ -84,3 +84,5 @@ google-services.json
 **/fastlane/screenshots
 # scan temporary files
 **/fastlane/test_output
+
+assets/licenses

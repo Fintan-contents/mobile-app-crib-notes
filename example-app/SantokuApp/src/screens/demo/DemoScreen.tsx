@@ -5,6 +5,7 @@ import React, {useMemo} from 'react';
 
 import {DemoLinkItemData} from './DemoLinkItem';
 import {DemoTemplate} from './DemoTemplate';
+import {AcknowledgementsScreen} from './acknowledgements';
 import {AppStateScreen} from './app-state';
 import {AuthenticationScreen} from './authentication';
 import {ButtonScreen} from './button';
@@ -96,6 +97,10 @@ const demoScreenList: ScreenList[] = [
   {
     title: 'Picker',
     to: PickerScreen.name,
+  },
+  {
+    title: 'Acknowledgements',
+    to: AcknowledgementsScreen.name,
   },
 ];
 
