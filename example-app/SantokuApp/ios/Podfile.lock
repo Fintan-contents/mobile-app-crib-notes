@@ -425,14 +425,14 @@ PODS:
     - React-Core
   - RNCPicker (2.2.1):
     - React-Core
-  - RNFBApp (14.9.0):
+  - RNFBApp (14.11.0):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
-  - RNFBCrashlytics (14.9.0):
+  - RNFBCrashlytics (14.11.0):
     - Firebase/Crashlytics (= 8.15.0)
     - React-Core
     - RNFBApp
-  - RNFBMessaging (14.9.0):
+  - RNFBMessaging (14.11.0):
     - Firebase/Messaging (= 8.15.0)
     - React-Core
     - RNFBApp
@@ -754,9 +754,9 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 6bd5a7ba3dde1c3facba418aa273f449bdc5437a
   RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
   RNCPicker: cb57c823d5ce8d2d0b5dfb45ad97b737260dc59e
-  RNFBApp: d3a0f69a3cc67c609f962acf67f483a841ffc49f
-  RNFBCrashlytics: 297dea939dd7608ffdfaf90cdb869c586749f8b4
-  RNFBMessaging: fefc7807402d03f418bdc5e80c60fbc91d943c50
+  RNFBApp: b1b5a80a676a07dea17e778bda7c1e8b69b2f5ec
+  RNFBCrashlytics: 357955a1564721ca9001960e57b395c6a319f9be
+  RNFBMessaging: 3f327c8019ec2578b9da937ba6c01db48c81a457
   RNGestureHandler: e1099204721a17a89c81fcd1cc2e92143dc040fb
   RNReanimated: 0e5ef4a7e4e79f84efbe5b40771c31044c51e7d0
   RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
