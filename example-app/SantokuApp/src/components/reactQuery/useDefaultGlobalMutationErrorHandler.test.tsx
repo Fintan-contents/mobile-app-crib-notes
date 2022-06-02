@@ -18,6 +18,19 @@ const Wrapper: React.FC = ({children}) => {
 
 describe('useDefaultGlobalMutationErrorHandler', () => {
   const mockSnackbarShow = jest.fn();
+  const axiosError = new AxiosError(
+    'error',
+    '',
+    {},
+    {},
+    {
+      status: 500,
+      statusText: 'Internal Server Error',
+      data: {message: 'message', code: 'errorCode'},
+      headers: {},
+      config: {},
+    },
+  );
 
   beforeAll(() => {
     (useSnackbar as jest.Mock).mockImplementation(() => ({
@@ -34,12 +47,6 @@ describe('useDefaultGlobalMutationErrorHandler', () => {
 
   test('500 Internal Server Errorの場合に予期せぬエラーのスナックバーを表示', async () => {
     const mutation = {} as unknown as Mutation<unknown, unknown, unknown, unknown>;
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 500, statusText: 'Internal Server Error', data: {message: 'message', code: 'errorCode'}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalMutationErrorHandler(), {wrapper: Wrapper});
     expect(errorHandler.current).not.toBeUndefined();
@@ -56,12 +63,6 @@ describe('useDefaultGlobalMutationErrorHandler', () => {
       unknown,
       unknown
     >;
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 500, statusText: 'Internal Server Error', data: {message: 'message', code: 'errorCode'}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalMutationErrorHandler(), {wrapper: Wrapper});
     expect(errorHandler.current).not.toBeUndefined();

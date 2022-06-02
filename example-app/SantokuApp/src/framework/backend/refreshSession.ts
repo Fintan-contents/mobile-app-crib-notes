@@ -33,7 +33,7 @@ const setRefreshSessionInterceptor = () => {
         try {
           await refreshSession();
           return await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.request(error.config);
-        } catch (retryError) {
+        } catch {
           throw error;
         }
       }

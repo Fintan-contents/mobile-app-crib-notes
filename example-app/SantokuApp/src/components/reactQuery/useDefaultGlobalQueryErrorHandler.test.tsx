@@ -19,6 +19,19 @@ const Wrapper: React.FC = ({children}) => {
 describe('useDefaultGlobalQueryErrorHandler', () => {
   const query = {} as unknown as Query<unknown, unknown, unknown, QueryKey>;
   const mockSnackbarShow = jest.fn();
+  const axiosError = new AxiosError(
+    'error',
+    '',
+    {},
+    {},
+    {
+      status: 500,
+      statusText: 'Internal Server Error',
+      data: {message: 'message', code: 'errorCode'},
+      headers: {},
+      config: {},
+    },
+  );
 
   beforeAll(() => {
     (useSnackbar as jest.Mock).mockImplementation(() => ({
@@ -34,12 +47,6 @@ describe('useDefaultGlobalQueryErrorHandler', () => {
   });
 
   test('500 Internal Server Errorの場合に予期せぬエラーのスナックバーを表示', async () => {
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 500, statusText: 'Internal Server Error', data: {message: 'message', code: 'errorCode'}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler(), {wrapper: Wrapper});
     expect(errorHandler.current).not.toBeUndefined();
@@ -51,12 +58,6 @@ describe('useDefaultGlobalQueryErrorHandler', () => {
 
   test('disableGlobalErrorHandlerが設定されている場合に何も行わない', async () => {
     const query = {meta: {disableGlobalErrorHandler: true}} as unknown as Query<unknown, unknown, unknown, QueryKey>;
-    const axiosError = {
-      config: jest.fn(),
-      response: {status: 500, statusText: 'Internal Server Error', data: {message: 'message', code: 'errorCode'}},
-      isAxiosError: true,
-      toJSON: () => {},
-    } as unknown as AxiosError;
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalQueryErrorHandler(), {wrapper: Wrapper});
     expect(errorHandler.current).not.toBeUndefined();

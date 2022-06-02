@@ -40,6 +40,12 @@ module.exports = {
         ],
       },
     },
+    {
+      files: ['metro.config.js'],
+      env: {
+        node: true,
+      },
+    },
   ],
   ignorePatterns: ['src/generated/**/*.ts'],
 };
