@@ -43,7 +43,7 @@ export const useTermsAgreementOverlayUseCase = (
       };
       if (accountContext.isLoggedIn) {
         await callPostAccountsMeTerms(termsAgreementStatus);
-        accountContextOperation.agreedTerms(termsAgreementStatus);
+        accountContextOperation.didAgreeToTerms(termsAgreementStatus);
       }
       setAgreedStatus(termsAgreementStatus);
       close();

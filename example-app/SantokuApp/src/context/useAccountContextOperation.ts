@@ -58,7 +58,7 @@ export const useAccountOperation = (initialAccountContext: AccountContext, dispa
     () => ({
       login: createLoginAction(dispatch, isMounted),
       logout: createLogoutAction(dispatch, isMounted),
-      agreedTerms: createAgreedTermsAction(dispatch, isMounted),
+      didAgreeToTerms: createAgreedTermsAction(dispatch, isMounted),
     }),
     [dispatch, isMounted],
   );
