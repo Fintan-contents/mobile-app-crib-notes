@@ -1,4 +1,5 @@
 import {useAccountContext} from 'context/useAccountContext';
+import {useAccountContextOperation} from 'context/useAccountContextOperation';
 import {TermsOfService, TermsOfServiceAgreementStatus} from 'generated/backend/model';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {WebView as RNWebView} from 'react-native-webview';
@@ -15,6 +16,7 @@ export const useTermsAgreementOverlayUseCase = (
   const webViewRef = useRef<RNWebView>(null);
   const {mutateAsync: callPostAccountsMeTerms, isLoading} = usePostAccountsMeTerms();
   const accountContext = useAccountContext();
+  const accountContextOperation = useAccountContextOperation();
   const [agreedStatus, setAgreedStatus] = useState<TermsOfServiceAgreementStatus>();
   const [isExited, setIsExited] = useState(false);
 
@@ -35,19 +37,20 @@ export const useTermsAgreementOverlayUseCase = (
 
   const onAgree = useCallback(async () => {
     try {
-      const termsOfServiceAgreementStatus = {
+      const termsAgreementStatus = {
         hasAgreed: true,
         agreedVersion: termsOfService.version,
       };
       if (accountContext.isLoggedIn) {
-        await callPostAccountsMeTerms(termsOfServiceAgreementStatus);
+        await callPostAccountsMeTerms(termsAgreementStatus);
+        accountContextOperation.agreedToTerms(termsAgreementStatus.agreedVersion);
       }
-      setAgreedStatus(termsOfServiceAgreementStatus);
+      setAgreedStatus(termsAgreementStatus);
       close();
     } catch {
       // 個別のエラーハンドリングは不要
     }
-  }, [accountContext.isLoggedIn, callPostAccountsMeTerms, close, termsOfService?.version]);
+  }, [accountContext.isLoggedIn, accountContextOperation, callPostAccountsMeTerms, close, termsOfService.version]);
 
   const composedExitingCallback = useCallback(
     (finished: boolean) => {
