@@ -26,18 +26,13 @@ exports[`SelectPickerItems only with required props renders successfully if item
     }
     data={Array []}
     decelerationRate={0.98}
-    disableVirtualization={false}
     forwardedRef={[Function]}
     getItem={[Function]}
     getItemCount={[Function]}
     getItemLayout={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     initialScrollIndex={-1}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
     onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
@@ -56,9 +51,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
         "width": "100%",
       }
     }
-    updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
     <View />
   </RCTScrollView>
@@ -159,18 +152,13 @@ exports[`SelectPickerItems only with required props renders successfully with mo
       ]
     }
     decelerationRate={0.98}
-    disableVirtualization={false}
     forwardedRef={[Function]}
     getItem={[Function]}
     getItemCount={[Function]}
     getItemLayout={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     initialScrollIndex={0}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
     onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
@@ -189,9 +177,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
         "width": "100%",
       }
     }
-    updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
     <View>
       <View
@@ -414,18 +400,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
       ]
     }
     decelerationRate={0.98}
-    disableVirtualization={false}
     forwardedRef={[Function]}
     getItem={[Function]}
     getItemCount={[Function]}
     getItemLayout={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
     initialScrollIndex={0}
     keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
     onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
     onLayout={[Function]}
     onMomentumScrollBegin={[Function]}
     onMomentumScrollEnd={[Function]}
@@ -445,9 +426,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
       }
     }
     testID="FlatList"
-    updateCellsBatchingPeriod={50}
     viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
     <View>
       <View

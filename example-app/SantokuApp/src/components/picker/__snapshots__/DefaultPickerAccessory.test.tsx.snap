@@ -15,6 +15,7 @@ exports[`PickerAccessory with all props should be applied properly with custom t
 >
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -51,6 +52,7 @@ exports[`PickerAccessory with all props should be applied properly with custom t
   />
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -80,6 +82,7 @@ exports[`PickerAccessory with all props should be applied properly with custom t
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -125,6 +128,7 @@ exports[`PickerAccessory with all props should be applied properly with default 
 >
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -162,6 +166,7 @@ exports[`PickerAccessory with all props should be applied properly with default 
   />
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -192,6 +197,7 @@ exports[`PickerAccessory with all props should be applied properly with default 
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}

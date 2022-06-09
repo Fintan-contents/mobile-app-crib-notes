@@ -190,12 +190,11 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
                 },
               ]
             }
+            textInteractionEnabled={true}
             useSharedProcessPool={true}
           />
           <ActivityIndicator
-            animating={true}
             color="#0000ff"
-            hidesWhenStopped={true}
             size="large"
             style={
               Object {
@@ -246,6 +245,7 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
                 }
               }
               accessible={true}
+              collapsable={false}
               focusable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}

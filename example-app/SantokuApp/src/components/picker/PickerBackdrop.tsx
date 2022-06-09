@@ -78,7 +78,7 @@ export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
           <Reanimated.View
             entering={entering.withCallback(composedEnteringCallback)}
             exiting={exiting.withCallback(composedExitingCallback)}
-            style={StyleSheet.flatten([styles.backdrop, style])}
+            style={[styles.backdrop, style]}
             {...animatedViewProps}
           />
         </Pressable>

@@ -2,6 +2,7 @@
 
 exports[`Overlay Overlayが正常にrenderできることを確認: render直後 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "alignItems": "center",
@@ -29,6 +30,7 @@ exports[`Overlay Overlayが正常にrenderできることを確認: フェード
 
 exports[`Overlay Overlayが正常にrenderできることを確認: フェードイン後 1`] = `
 <View
+  collapsable={false}
   style={
     Object {
       "alignItems": "center",

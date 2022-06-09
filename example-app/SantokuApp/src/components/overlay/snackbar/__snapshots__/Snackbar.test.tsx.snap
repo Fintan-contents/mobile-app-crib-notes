@@ -11,6 +11,7 @@ Array [
     testID="FullWindowOverlay"
   >
     <View
+      collapsable={false}
       style={
         Object {
           "bottom": 20,
@@ -82,6 +83,7 @@ Array [
     testID="FullWindowOverlay"
   >
     <View
+      collapsable={false}
       style={
         Object {
           "bottom": 20,

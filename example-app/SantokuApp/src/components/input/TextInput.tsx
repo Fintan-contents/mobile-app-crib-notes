@@ -77,8 +77,6 @@ const styles = StyleSheet.create({
   },
   style: {
     lineHeight: 24,
-    // AndroidでEditTextに自動的に追加されてしまう余計なパディングを消す。
-    paddingVertical: 0,
     minHeight: 0,
     includeFontPadding: false,
   },

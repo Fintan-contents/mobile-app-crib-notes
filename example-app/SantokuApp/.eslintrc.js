@@ -8,6 +8,16 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*.tsx', '*.d.ts'],
+      plugins: ['deprecation'],
+      rules: {
+        'deprecation/deprecation': 'error', // or "error" to have stricter rule
+      },
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+    },
+    {
+      files: ['*.ts', '*.tsx', '*.d.ts'],
       // universe/shared/typescript-analysis: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
       // recommended-requiring-type-checking: https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules
       extends: ['universe/shared/typescript-analysis', 'plugin:@typescript-eslint/recommended-requiring-type-checking'],

@@ -20,11 +20,8 @@ exports[`YearMonthPicker only with required props renders successfully if invisi
     pointerEvents="box-only"
   >
     <TextInput
-      allowFontScaling={true}
       editable={false}
-      rejectResponderTermination={true}
       testID="textInput"
-      underlineColorAndroid="transparent"
       value="20224"
     />
   </View>
@@ -357,11 +354,8 @@ Array [
       pointerEvents="box-only"
     >
       <TextInput
-        allowFontScaling={true}
         editable={false}
-        rejectResponderTermination={true}
         testID="textInput"
-        underlineColorAndroid="transparent"
         value="20224"
       />
     </View>
@@ -500,6 +494,7 @@ Array [
           >
             <View
               accessible={true}
+              collapsable={false}
               focusable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
@@ -536,6 +531,7 @@ Array [
             />
             <View
               accessible={true}
+              collapsable={false}
               focusable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
@@ -565,6 +561,7 @@ Array [
             </View>
             <View
               accessible={true}
+              collapsable={false}
               focusable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
@@ -799,17 +796,14 @@ Array [
       pointerEvents="box-only"
     >
       <TextInput
-        allowFontScaling={true}
         editable={false}
         placeholder="please select..."
-        rejectResponderTermination={true}
         style={
           Object {
             "color": "red",
           }
         }
         testID="textInput"
-        underlineColorAndroid="transparent"
         value="2022年4月"
       />
     </View>

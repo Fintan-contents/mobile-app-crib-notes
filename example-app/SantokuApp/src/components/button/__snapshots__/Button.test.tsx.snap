@@ -38,6 +38,7 @@ exports[`Button Buttonが正常にrenderできることを確認 1`] = `
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -123,6 +124,7 @@ exports[`Button Buttonのprops（buttonStyle / containerStyle）が指定通りr
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -208,6 +210,7 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -293,6 +296,7 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -378,6 +382,7 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
@@ -463,6 +468,7 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
       }
     }
     accessible={true}
+    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}

@@ -50,17 +50,17 @@ stages:
     - job: build_${{buildVariant.name}}
       displayName: 'build ${{buildVariant.name}}'
       pool:
-        # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
-        vmImage: macOS-11
+        # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
+        vmImage: macOS-12
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.0.x'
+          versionSpec: '3.1.2'
           addToPath: true
       - task: NodeTool@0
-        displayName: 'Use Node.js 16.14.2'
+        displayName: 'Use Node.js 16.15.1'
         inputs:
-          versionSpec: '16.14.2'
+          versionSpec: '16.15.1'
       - task: JavaToolInstaller@0
         inputs:
           versionSpec: '11'
@@ -147,11 +147,11 @@ stages:
       displayName: 'build ${{buildVariant.name}}'
       pool:
         # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
-        vmImage: macOS-11
+        vmImage: macOS-12
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.0.x'
+          versionSpec: '3.1.2'
           addToPath: true
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
@@ -172,13 +172,13 @@ stages:
         inputs:
           provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileName)
       - task: CmdLine@2
-        displayName: 'Use Xcode 13.2.1'
+        displayName: 'Use Xcode 13.3.1'
         inputs:
-          script: 'sudo xcode-select --switch /Applications/Xcode_13.2.1.app'
+          script: 'sudo xcode-select --switch /Applications/Xcode_13.3.1.app'
       - task: NodeTool@0
-        displayName: 'Use Node.js 16.14.2'
+        displayName: 'Use Node.js 16.15.1'
         inputs:
-          versionSpec: '16.14.2'
+          versionSpec: '16.15.1'
       - task: Cache@2
         displayName: Cache npm
         inputs:
@@ -210,8 +210,6 @@ stages:
         displayName: Cache Pods
         inputs:
           key: 'pods | "$(Agent.OS)" | $(appDir)/ios/Podfile.lock'
-          restoreKeys: |
-            pods | "$(Agent.OS)"
           path: $(appDir)/ios/Pods
       - task: CmdLine@2
         displayName: 'Build iOS app for ${{buildVariant.name}}'

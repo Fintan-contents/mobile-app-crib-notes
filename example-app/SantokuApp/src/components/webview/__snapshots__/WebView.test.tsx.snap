@@ -53,12 +53,11 @@ exports[`WebView WebViewSourceHtmlでも正常にレンダリングされるこ�
       ]
     }
     testID="webview"
+    textInteractionEnabled={true}
     useSharedProcessPool={true}
   />
   <ActivityIndicator
-    animating={true}
     color="#0000ff"
-    hidesWhenStopped={true}
     size="large"
     style={
       Object {
@@ -127,12 +126,11 @@ exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
       ]
     }
     testID="webview"
+    textInteractionEnabled={true}
     useSharedProcessPool={true}
   />
   <ActivityIndicator
-    animating={true}
     color="#0000ff"
-    hidesWhenStopped={true}
     size="large"
     style={
       Object {

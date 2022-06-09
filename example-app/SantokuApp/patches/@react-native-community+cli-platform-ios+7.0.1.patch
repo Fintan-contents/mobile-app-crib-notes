@@ -1,5 +1,5 @@
 diff --git a/node_modules/@react-native-community/cli-platform-ios/build/commands/runIOS/index.js b/node_modules/@react-native-community/cli-platform-ios/build/commands/runIOS/index.js
-index ac9ca0e..6803f4a 100644
+index 0b2a2cf..d70d03a 100644
 --- a/node_modules/@react-native-community/cli-platform-ios/build/commands/runIOS/index.js
 +++ b/node_modules/@react-native-community/cli-platform-ios/build/commands/runIOS/index.js
 @@ -212,7 +212,7 @@ async function runOnSimulator(xcodeProject, scheme, args) {
@@ -11,22 +11,31 @@ index ac9ca0e..6803f4a 100644
  
    _cliTools().logger.info(`Installing "${_chalk().default.bold(appPath)}"`);
  
-@@ -245,7 +245,7 @@ async function runOnDevice(selectedDevice, scheme, xcodeProject, args) {
-   }
- 
+@@ -247,7 +247,7 @@ async function runOnDevice(selectedDevice, scheme, xcodeProject, args) {
    const buildOutput = await buildProject(xcodeProject, selectedDevice.udid, scheme, args);
--  const iosDeployInstallArgs = ['--bundle', getBuildPath(xcodeProject, args.configuration, buildOutput, scheme), '--id', selectedDevice.udid, '--justlaunch'];
-+  const iosDeployInstallArgs = ['--bundle', getBuildPath(xcodeProject, args.configuration, buildOutput, scheme, selectedDevice.udid), '--id', selectedDevice.udid, '--justlaunch'];
  
-   _cliTools().logger.info(`Installing and launching your app on ${selectedDevice.name}`);
+   if (selectedDevice.type === 'catalyst') {
+-    const appPath = getBuildPath(xcodeProject, args.configuration, buildOutput, scheme, true);
++    const appPath = getBuildPath(xcodeProject, args.configuration, buildOutput, scheme, selectedDevice.udid, true);
  
-@@ -350,8 +350,8 @@ function getTargetPaths(buildSettings) {
+     const appProcess = _child_process().default.spawn(`${appPath}/${scheme}`, [], {
+       detached: true,
+@@ -256,7 +256,7 @@ async function runOnDevice(selectedDevice, scheme, xcodeProject, args) {
+ 
+     appProcess.unref();
+   } else {
+-    const iosDeployInstallArgs = ['--bundle', getBuildPath(xcodeProject, args.configuration, buildOutput, scheme), '--id', selectedDevice.udid, '--justlaunch'];
++    const iosDeployInstallArgs = ['--bundle', getBuildPath(xcodeProject, args.configuration, buildOutput, scheme, selectedDevice.udid), '--id', selectedDevice.udid, '--justlaunch'];
+ 
+     _cliTools().logger.info(`Installing and launching your app on ${selectedDevice.name}`);
+ 
+@@ -365,8 +365,8 @@ function getTargetPaths(buildSettings) {
    return {};
  }
  
--function getBuildPath(xcodeProject, configuration, buildOutput, scheme) {
+-function getBuildPath(xcodeProject, configuration, buildOutput, scheme, isCatalyst = false) {
 -  const buildSettings = _child_process().default.execFileSync('xcodebuild', [xcodeProject.isWorkspace ? '-workspace' : '-project', xcodeProject.name, '-scheme', scheme, '-sdk', getPlatformName(buildOutput), '-configuration', configuration, '-showBuildSettings', '-json'], {
-+function getBuildPath(xcodeProject, configuration, buildOutput, scheme, udid) {
++function getBuildPath(xcodeProject, configuration, buildOutput, scheme, udid, isCatalyst = false) {
 +  const buildSettings = _child_process().default.execFileSync('xcodebuild', [xcodeProject.isWorkspace ? '-workspace' : '-project', xcodeProject.name, '-scheme', scheme, '-sdk', getPlatformName(buildOutput), '-configuration', configuration, '-showBuildSettings', '-json', '-destination', `id=${udid}`], {
      encoding: 'utf8'
    });

@@ -36,6 +36,7 @@ export const useLocalAuthentication = () => {
       cancelLabel: 'キャンセル',
       fallbackLabel: '失敗時の基本認証',
       disableDeviceFallback: false,
+      requireConfirmation: false,
     });
     alert(JSON.stringify(result));
   };

@@ -151,7 +151,7 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerProps<Ite
           isVisible={isVisible}
           entering={pickerContainerEntering}
           exiting={pickerContainerExiting}
-          style={StyleSheet.flatten([styles.pickerContainer, pickerContainerStyle])}
+          style={[styles.pickerContainer, pickerContainerStyle]}
           {...pickerContainerProps}>
           {pickerAccessoryComponent ? (
             pickerAccessoryComponent

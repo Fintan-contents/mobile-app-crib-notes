@@ -283,6 +283,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                             }
                                           }
                                           accessible={true}
+                                          collapsable={false}
                                           focusable={true}
                                           onClick={[Function]}
                                           onResponderGrant={[Function]}
@@ -373,6 +374,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                       </View>
                     </View>
                     <View
+                      collapsable={false}
                       onLayout={[Function]}
                       pointerEvents="auto"
                       style={
@@ -489,6 +491,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                             >
                               <Text
                                 allowFontScaling={false}
+                                selectable={false}
                                 style={
                                   Array [
                                     Object {
@@ -528,6 +531,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                             >
                               <Text
                                 allowFontScaling={false}
+                                selectable={false}
                                 style={
                                   Array [
                                     Object {
@@ -617,6 +621,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                             >
                               <Text
                                 allowFontScaling={false}
+                                selectable={false}
                                 style={
                                   Array [
                                     Object {
@@ -656,6 +661,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                             >
                               <Text
                                 allowFontScaling={false}
+                                selectable={false}
                                 style={
                                   Array [
                                     Object {

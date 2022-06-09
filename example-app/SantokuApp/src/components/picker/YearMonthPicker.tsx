@@ -148,7 +148,7 @@ export const YearMonthPicker = (props: YearMonthPickerProps) => {
           isVisible={isVisible}
           entering={pickerContainerEntering}
           exiting={pickerContainerExiting}
-          style={StyleSheet.flatten([styles.pickerContainer, pickerContainerStyle])}
+          style={[styles.pickerContainer, pickerContainerStyle]}
           {...pickerContainerProps}>
           <DefaultPickerAccessory
             onDelete={handleDelete}

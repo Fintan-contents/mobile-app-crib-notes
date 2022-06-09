@@ -5,6 +5,10 @@ import {FlatListProps, PressableProps, TextProps, ViewProps} from 'react-native'
 import {Item} from './SelectPicker';
 import {SelectPickerItems} from './SelectPickerItems.android';
 
+jest.useFakeTimers(); // jest.useFakeTimers('legacy') for jest >= 27
+// call animation
+jest.runAllTimers();
+
 describe('SelectPickerItems only with required props', () => {
   it('renders successfully with more than one item', () => {
     const items = [

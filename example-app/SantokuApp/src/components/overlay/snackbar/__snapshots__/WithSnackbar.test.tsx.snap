@@ -19,6 +19,7 @@ Array [
     testID="FullWindowOverlay"
   >
     <View
+      collapsable={false}
       style={
         Object {
           "bottom": 20,
@@ -79,6 +80,7 @@ Array [
         >
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
@@ -121,6 +123,7 @@ Array [
     testID="FullWindowOverlay"
   >
     <View
+      collapsable={false}
       style={
         Object {
           "bottom": 20,

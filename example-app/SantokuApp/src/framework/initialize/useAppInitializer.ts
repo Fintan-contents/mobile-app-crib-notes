@@ -55,7 +55,7 @@ type InitializationResult =
 const initializeCoreFeatures = async () => {
   // 開発中は画面がスリープしないように設定
   if (__DEV__) {
-    activateKeepAwake();
+    await activateKeepAwake();
   }
 
   // Firebase Crashlyticsの初期化
