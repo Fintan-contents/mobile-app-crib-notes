@@ -110,12 +110,10 @@
       ],
       matchPackageNames: [
         '@mdx-js/react',
-        '@svgr/webpack',
         'clsx',
-        'file-loader',
+        'prism-react-renderer',
         'react',
         'react-dom',
-        'url-loader',
         '@tsconfig/docusaurus'
       ],
     },
