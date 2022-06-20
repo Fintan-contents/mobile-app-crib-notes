@@ -69,6 +69,8 @@
         'gradle',
         // expo-template-bare-minimum
         'com.android.tools.build:gradle',
+        // expo-template-bare-minimum
+        'de.undercouch:gradle-download-task',
       ],
       matchPackagePrefixes: [
         'com.facebook.flipper',
