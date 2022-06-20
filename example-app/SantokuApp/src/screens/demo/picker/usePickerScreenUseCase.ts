@@ -1,5 +1,6 @@
 import {Item, YearMonth, YearMonthUtil} from 'components/picker';
 import React, {useCallback, useMemo, useRef, useState} from 'react';
+import {Platform} from 'react-native';
 
 type Item1Type = {
   a: string;
@@ -20,12 +21,16 @@ const items1: Item<Item1Type>[] = [
 
 const placeholder = 'please select...';
 
+const formatDate = (date?: Date) => {
+  return date ? `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}` : '';
+};
+
 export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
   // Items1
   //////////////////////////////////////////////////////////////////////////////////
   const [items1Key, setItems1Key] = useState<React.Key>();
-  // キャンセルをタップした時に、Pickerを開く前の値に戻せるようにRefで保持しておく
+  // キャンセルをタップした時に、Pickerを開く前の値に戻せるようにRefで保持しておきます。
   const items1CanceledKey = useRef<React.Key>();
   const onSelectedItemChangeForItem1 = useCallback((selectedItem?: Item<Item1Type>) => {
     setItems1Key(selectedItem?.key);
@@ -51,9 +56,9 @@ export const usePickerScreenUseCase = () => {
   //////////////////////////////////////////////////////////////////////////////////
   // YearMonthPicker
   //////////////////////////////////////////////////////////////////////////////////
-  // 再レンダリング時に毎回YearMonthが変わらないようにRefで保持する
-  // Refで保持しているため、PickerScreenを開いている間は、maximumYearMonth/minimumYearMonthは変わらない
-  // 一旦前の画面に戻って、再度PickerScreenを開くと、maximumYearMonth/minimumYearMonthは更新される
+  // 再レンダリング時に毎回YearMonthが変わらないようにRefで保持します。
+  // Refで保持しているため、PickerScreenを開いている間は、maximumYearMonth/minimumYearMonthは変わりません。
+  // 一旦前の画面に戻って、再度PickerScreenを開くと、maximumYearMonth/minimumYearMonthは更新されます。
   const maximumYearMonth = useRef(YearMonthUtil.now()).current;
   // maximumYearMonthの5年前をminimumYearMonthとする
   const minimumYearMonth = useRef(YearMonthUtil.addMonth(maximumYearMonth, -60)).current;
@@ -74,6 +79,67 @@ export const usePickerScreenUseCase = () => {
     setYearMonthCanceledKey(yearMonth);
   }, []);
 
+  //////////////////////////////////////////////////////////////////////////////////
+  // DateTimePicker
+  //////////////////////////////////////////////////////////////////////////////////
+  // 再レンダリング時に毎回日時が変わらないようにRefで保持します。
+  // Refで保持しているため、PickerScreenを開いている間は、maximumDate/minimumDateは変わりません。
+  // 一旦前の画面に戻って、再度PickerScreenを開くと、maximumDate/minimumDateは更新されます。
+  const maximumDate = useRef(new Date()).current;
+  // maximumYearMonthの5年前をminimumYearMonthとする
+  const minimumDate = useRef(
+    new Date(maximumDate.getFullYear() - 5, maximumDate.getMonth(), maximumDate.getDate()),
+  ).current;
+
+  //////////////////////////////////////////////////////////////////////////////////
+  // DateTimePicker1
+  //////////////////////////////////////////////////////////////////////////////////
+  const [selectedDate1, setSelectedDate1] = useState<Date>();
+  // キャンセルをタップした時に、Pickerを開く前の値に戻せるようにRefで保持しておきます。
+  const canceledDate1 = useRef<Date>();
+  const onSelectedItemChangeForDate1 = useCallback((selectedValue?: Date) => {
+    setSelectedDate1(selectedValue);
+  }, []);
+  const onDismissForDate1 = useCallback((selectedValue?: Date) => {
+    if (Platform.OS === 'android') {
+      // Androidの場合は、「キャンセル」ボタンタップ、またはBackdrop領域をタップした場合に、前回選択した値を設定します。
+      setSelectedDate1(canceledDate1.current);
+    } else if (Platform.OS === 'ios') {
+      canceledDate1.current = selectedValue;
+    }
+  }, []);
+  const onDeleteForDate1 = useCallback(() => {
+    setSelectedDate1(undefined);
+    canceledDate1.current = undefined;
+  }, []);
+  const onCancelForDate1 = useCallback(() => {
+    setSelectedDate1(canceledDate1.current);
+  }, []);
+  const onDoneForDate1 = useCallback((selectedValue?: Date) => {
+    canceledDate1.current = selectedValue;
+  }, []);
+  // Neutralボタンをタップすると、選択された値をクリアします。
+  const onNeutralButtonPressedForDate1 = useCallback(() => {
+    setSelectedDate1(undefined);
+    canceledDate1.current = undefined;
+  }, []);
+
+  //////////////////////////////////////////////////////////////////////////////////
+  // DateTimePicker2
+  //////////////////////////////////////////////////////////////////////////////////
+  const [selectedDate2, setSelectedDate2] = useState<Date>();
+  const onSelectedItemChangeForDate2 = useCallback((selectedValue?: Date) => {
+    setSelectedDate2(selectedValue);
+  }, []);
+
+  //////////////////////////////////////////////////////////////////////////////////
+  // DateTimePicker3
+  //////////////////////////////////////////////////////////////////////////////////
+  const [selectedDate3, setSelectedDate3] = useState<Date>();
+  const onSelectedItemChangeForDate3 = useCallback((selectedValue?: Date) => {
+    setSelectedDate3(selectedValue);
+  }, []);
+
   return {
     items1,
     items1Key,
@@ -91,6 +157,20 @@ export const usePickerScreenUseCase = () => {
     onDeleteForYearMonthPicker,
     onCancelForYearMonthPicker,
     onDoneForYearMonthPicker,
+    maximumDate,
+    minimumDate,
+    formatDate,
+    selectedDate1,
+    onSelectedItemChangeForDate1,
+    onDismissForDate1,
+    onDeleteForDate1,
+    onCancelForDate1,
+    onDoneForDate1,
+    onNeutralButtonPressedForDate1,
+    selectedDate2,
+    onSelectedItemChangeForDate2,
+    selectedDate3,
+    onSelectedItemChangeForDate3,
     placeholder,
   };
 };
