@@ -14,7 +14,7 @@ PODS:
     - ExpoModulesCore
   - EXLocalAuthentication (12.2.0):
     - ExpoModulesCore
-  - Expo (45.0.4):
+  - Expo (45.0.5):
     - ExpoModulesCore
   - ExpoCrypto (10.2.0):
     - ExpoModulesCore
@@ -375,9 +375,9 @@ PODS:
   - React-jsinspector (0.68.2)
   - React-logger (0.68.2):
     - glog
-  - react-native-config (1.4.5):
-    - react-native-config/App (= 1.4.5)
-  - react-native-config/App (1.4.5):
+  - react-native-config (1.4.6):
+    - react-native-config/App (= 1.4.6)
+  - react-native-config/App (1.4.6):
     - React-Core
   - react-native-netinfo (8.2.0):
     - React-Core
@@ -746,7 +746,7 @@ SPEC CHECKSUMS:
   EXFileSystem: 2aa2d9289f84bca9532b9ccbd81504fa31eb1ded
   EXFont: 04235cc22e6fef86028feb67db452978dc6f240f
   EXLocalAuthentication: 7f37b242eae73f9acf111d39bdee3f1379e68902
-  Expo: 64d52669fa3b9342919b5b44b2b4f15f19b0cf76
+  Expo: b9fff0a1eac0f424fc68ea49b4347fb308e52e17
   ExpoCrypto: d0d0f3e20875dc450b4ec88f0fb608da5c2c6c17
   ExpoKeepAwake: c0c494b442ecd8122974c13b93ccfb57bd408e88
   ExpoModulesCore: e4278a668e8c13c0269ed8b8a4200989deea2973
@@ -791,7 +791,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: b7b553412f2ec768fe6c8f27cd6bafdb9d8719e6
   React-jsinspector: c5989c77cb89ae6a69561095a61cce56a44ae8e8
   React-logger: a0833912d93b36b791b7a521672d8ee89107aff1
-  react-native-config: 6502b1879f97ed5ac570a029961fc35ea606cd14
+  react-native-config: 7cd105e71d903104e8919261480858940a6b9c0e
   react-native-netinfo: e922cb2e3eaf9ccdf16b8d4744a89657377aa4a1
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-webview: 0b7bd2bffced115aefd393e1841babd9b9a557b1
