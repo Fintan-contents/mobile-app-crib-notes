@@ -1,61 +1,54 @@
 import {composePressableStyles} from 'framework/utilities';
 import React, {useMemo} from 'react';
-import {Modal as RNModal, ModalProps, Omit, Pressable, PressableProps, StyleSheet, ViewProps} from 'react-native';
-import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';
+import {Modal as RNModal, ModalProps, Pressable, PressableProps, StyleSheet, ViewProps} from 'react-native';
+import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
 
 import {usePickerBackdropUseCase} from './usePickerBackdropUseCase';
 
-export const PICKER_BACKDROP_DEFAULT_COLOR = 'rgba(0,0,0,0.4)';
-export const PICKER_BACKDROP_DEFAULT_FADE_IN_DURATION = 300;
-export const PICKER_BACKDROP_DEFAULT_FADE_OUT_DURATION = 150;
-export const PICKER_BACKDROP_DEFAULT_ENTERING = FadeIn.duration(PICKER_BACKDROP_DEFAULT_FADE_IN_DURATION);
-export const PICKER_BACKDROP_DEFAULT_EXITING = FadeOut.duration(PICKER_BACKDROP_DEFAULT_FADE_OUT_DURATION);
+export const DEFAULT_BACKGROUND_COLOR = 'black';
+export const DEFAULT_OPACITY = 0.4;
+export const DEFAULT_FADE_IN_DURATION = 300;
+export const DEFAULT_FADE_OUT_DURATION = 150;
 
-export type PickerBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
+// React Native ReanimatedのLayout Animationsを使用すると↓の不具合が発生するため、指定できないようにしています。
+// https://github.com/software-mansion/react-native-reanimated/issues/2906
+export type PickerBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exiting' | 'entering'> & {
   isVisible: boolean;
   onPress?: () => unknown;
-  /**
-   * iOSの場合、アニメーションが終わった後に呼び出されます。
-   * Androidの場合、アニメーションが始まった時に呼び出されます。
-   */
-  enteringCallback?: (finished: boolean) => unknown;
-  exitingCallback?: (finished: boolean) => unknown;
+  afterFadeIn?: (finished?: boolean) => unknown;
+  afterFadeOut?: (finished?: boolean) => unknown;
+  fadeInDuration?: number;
+  fadeOutDuration?: number;
+  opacity?: number;
   pressableProps?: PressableProps;
   modalProps?: ModalProps;
-  /**
-   * enteringに指定したAnimationBuilderなどでwithCallbackを指定しても、このコンポーネントの中で上書きしているため実行できません。
-   * withCallbackで実行する関数は、enteringCallbackで指定してください。
-   */
-  entering?: BaseAnimationBuilder | Keyframe;
-  /**
-   * exitingに指定したAnimationBuilderなどでwithCallbackを指定しても、このコンポーネントの中で上書きしているため実行できません。
-   * withCallbackで実行する関数は、exitingCallbackで指定してください。
-   */
-  exiting?: BaseAnimationBuilder | Keyframe;
+  fadeInConfig?: WithTimingConfig;
+  fadeOutConfig?: WithTimingConfig;
 };
 
 export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
   isVisible,
+  opacity = DEFAULT_OPACITY,
   onPress,
-  entering = PICKER_BACKDROP_DEFAULT_ENTERING,
-  exiting = PICKER_BACKDROP_DEFAULT_EXITING,
-  enteringCallback,
-  exitingCallback,
+  afterFadeIn,
+  afterFadeOut,
+  fadeInDuration = DEFAULT_FADE_IN_DURATION,
+  fadeOutDuration = DEFAULT_FADE_OUT_DURATION,
   pressableProps: {style: pressableStyle, ...pressableProps} = {},
   modalProps: {style: modalStyle, ...modalProps} = {},
-  /**
-   * このコンポーネントでは、ReanimatedのEntering/Exitingを使用してアニメーションを実現しています。
-   * Entering/Exitingを使用した場合は、opacityを設定しても反映されません。
-   * backgroundColorにrgbaで指定してください。（e.g. backgroundColor: rgba(0,0,0,0.4)）
-   */
-  style,
+  fadeInConfig,
+  fadeOutConfig,
   children,
-  ...animatedViewProps
 }) => {
-  const {isModalVisible, composedEnteringCallback, composedExitingCallback} = usePickerBackdropUseCase({
+  const {isModalVisible} = usePickerBackdropUseCase({
     isVisible,
-    enteringCallback,
-    exitingCallback,
+    opacity,
+    afterFadeIn,
+    afterFadeOut,
+    fadeInDuration,
+    fadeOutDuration,
+    fadeInConfig,
+    fadeOutConfig,
   });
 
   const composedPressableStyles = useMemo(
@@ -67,22 +60,13 @@ export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
     <RNModal
       visible
       statusBarTranslucent
-      animationType="none"
+      animationType="fade"
       transparent
       // 戻るボタンが押されたとき（onRequestClose）は、背景がタップされたときと同じ振る舞いになるようにしておく。
       onRequestClose={onPress}
       style={modalStyle}
       {...modalProps}>
-      {isVisible && (
-        <Pressable onPress={onPress} style={composedPressableStyles} {...pressableProps}>
-          <Reanimated.View
-            entering={entering.withCallback(composedEnteringCallback)}
-            exiting={exiting.withCallback(composedExitingCallback)}
-            style={[styles.backdrop, style]}
-            {...animatedViewProps}
-          />
-        </Pressable>
-      )}
+      <Pressable onPress={onPress} style={composedPressableStyles} {...pressableProps} />
       {children}
     </RNModal>
   );
@@ -92,9 +76,10 @@ const styles = StyleSheet.create({
   pressable: {
     ...StyleSheet.absoluteFillObject,
     display: 'flex',
+    opacity: 0.4,
+    backgroundColor: DEFAULT_BACKGROUND_COLOR,
   },
   backdrop: {
     flex: 1,
-    backgroundColor: PICKER_BACKDROP_DEFAULT_COLOR,
   },
 });

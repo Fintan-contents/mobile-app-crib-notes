@@ -1,13 +1,9 @@
 import React, {useCallback, useMemo, useState} from 'react';
 
 import {ApplicationError} from '../../framework/error/ApplicationError';
-import {PICKER_BACKDROP_DEFAULT_ENTERING, PICKER_BACKDROP_DEFAULT_EXITING} from './PickerBackdrop';
-import {PICKER_CONTAINER_DEFAULT_ENTERING, PICKER_CONTAINER_DEFAULT_EXITING} from './PickerContainer';
 import {YearMonth} from './YearMonth';
 import {YearMonthPickerProps} from './YearMonthPicker';
 import {YearMonthUtil} from './YearMonthUtil';
-
-const DEFAULT_DURATION = 500;
 
 export const useYearMonthPickerUseCase = ({
   selectedValue,
@@ -20,8 +16,6 @@ export const useYearMonthPickerUseCase = ({
   onDelete,
   onCancel,
   onDone,
-  pickerBackdropProps: {entering: backdropEntering, exiting: backdropExiting} = {},
-  pickerContainerProps: {entering: containerEntering, exiting: containerExiting} = {},
   itemColor,
   itemFontFamily,
 }: YearMonthPickerProps) => {
@@ -30,22 +24,6 @@ export const useYearMonthPickerUseCase = ({
   }
   const [isVisible, setIsVisible] = useState(false);
   const close = useCallback(() => setIsVisible(false), []);
-  const pickerBackdropEntering = useMemo(
-    () => backdropEntering ?? PICKER_BACKDROP_DEFAULT_ENTERING.duration(DEFAULT_DURATION),
-    [backdropEntering],
-  );
-  const pickerBackdropExiting = useMemo(
-    () => backdropExiting ?? PICKER_BACKDROP_DEFAULT_EXITING.duration(DEFAULT_DURATION),
-    [backdropExiting],
-  );
-  const pickerContainerEntering = useMemo(
-    () => containerEntering ?? PICKER_CONTAINER_DEFAULT_ENTERING.duration(DEFAULT_DURATION),
-    [containerEntering],
-  );
-  const pickerContainerExiting = useMemo(
-    () => containerExiting ?? PICKER_CONTAINER_DEFAULT_EXITING.duration(DEFAULT_DURATION),
-    [containerExiting],
-  );
 
   const yearItems = useMemo(() => {
     const maximumYear = maximumYearMonth.year;
@@ -154,10 +132,6 @@ export const useYearMonthPickerUseCase = ({
     getSelectedYearMonth,
     onValueChangeYear,
     onValueChangeMonth,
-    pickerBackdropEntering,
-    pickerBackdropExiting,
-    pickerContainerEntering,
-    pickerContainerExiting,
     open,
     handleBackdropPress,
     handleDelete,

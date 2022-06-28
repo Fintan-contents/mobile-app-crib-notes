@@ -7,6 +7,13 @@ import {PickerContainerProps} from './PickerContainer';
 import {Item, SelectPicker} from './SelectPicker';
 import {SelectPickerItemsProps} from './SelectPickerItems';
 
+jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
+  get: jest.fn().mockReturnValue({width: 400, height: 1000}),
+  set: jest.fn(),
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+}));
+
 describe('SelectPicker only with required props', () => {
   it('renders successfully if invisible', () => {
     const items = [
@@ -18,7 +25,7 @@ describe('SelectPicker only with required props', () => {
         items={items}
         selectedItemKey="1"
         textInputProps={{testID: 'textInput'}}
-        pickerBackdropProps={{testID: 'pickerBackdrop'}}
+        pickerBackdropProps={{pressableProps: {testID: 'pickerBackdrop'}}}
         pickerContainerProps={{testID: 'pickerContainer'}}
         pickerAccessoryProps={{containerProps: {testID: 'pickerAccessory'}}}
         pickerItemsContainerProps={{testID: 'pickerItemsContainer'}}
@@ -49,7 +56,7 @@ describe('SelectPicker only with required props', () => {
         items={items}
         selectedItemKey="1"
         textInputProps={{testID: 'textInput'}}
-        pickerBackdropProps={{testID: 'pickerBackdrop'}}
+        pickerBackdropProps={{pressableProps: {testID: 'pickerBackdrop'}}}
         pickerContainerProps={{testID: 'pickerContainer'}}
         pickerAccessoryProps={{containerProps: {testID: 'pickerAccessory'}}}
         pickerItemsContainerProps={{testID: 'pickerItemsContainer'}}
@@ -97,9 +104,8 @@ describe('SelectPicker with all props', () => {
         pickerItemsContainerProps={{pointerEvents: 'none', testID: 'pickerItemsContainer'}}
         pickerProps={{numberOfLines: 5, testID: 'picker'}}
         pickerBackdropProps={{
-          style: {backgroundColor: 'green', borderColor: 'red'},
-          modalProps: {testID: 'modal'},
-          testID: 'pickerBackdrop',
+          modalProps: {testID: 'pickerBackdropModal'},
+          pressableProps: {testID: 'pickerBackdropPressable', style: {backgroundColor: 'green', borderColor: 'red'}},
         }}
         pickerContainerProps={{style: {backgroundColor: 'yellow', borderColor: 'black'}, testID: 'pickerContainer'}}
         pickerAccessoryProps={{
@@ -124,7 +130,11 @@ describe('SelectPicker with all props', () => {
     // assert pickerContainer
     const pickerContainer = sut.getByTestId('pickerContainer');
     const pickerContainerProps = pickerContainer.props as PickerContainerProps;
-    expect(pickerContainerProps.style).toEqual({backgroundColor: 'yellow', borderColor: 'black'});
+    expect(pickerContainerProps.style).toEqual({
+      backgroundColor: 'yellow',
+      borderColor: 'black',
+      transform: [{translateY: 1000}],
+    });
 
     // assert pickerItemsContainer
     const pickerItemsContainer = sut.getByTestId('pickerItemsContainer');
@@ -144,12 +154,22 @@ describe('SelectPicker with all props', () => {
     expect(keyExtractor).toHaveBeenNthCalledWith(1, {value: '1', label: 'test1'}, 0);
     expect(keyExtractor).toHaveBeenNthCalledWith(2, {value: '2', label: 'test2'}, 1);
 
-    // assert pickerBackdrop
-    const pickerBackdrop = sut.getByTestId('pickerBackdrop');
-    const modal = sut.getByTestId('modal');
-    const pickerBackdropProps = pickerBackdrop.props as PickerBackdropProps;
-    fireEvent(modal, 'onRequestClose');
-    expect(pickerBackdropProps.style).toEqual({flex: 1, backgroundColor: 'green', borderColor: 'red'});
+    // assert pickerBackdropPressable
+    const pickerBackdropPressable = sut.getByTestId('pickerBackdropPressable');
+    const pickerBackdropModal = sut.getByTestId('pickerBackdropModal');
+    const pickerBackdropProps = pickerBackdropPressable.props as PickerBackdropProps;
+    fireEvent(pickerBackdropModal, 'onRequestClose');
+    expect(pickerBackdropProps.style).toEqual({
+      backgroundColor: 'green',
+      borderColor: 'red',
+      opacity: 0.4,
+      bottom: 0,
+      display: 'flex',
+      left: 0,
+      position: 'absolute',
+      right: 0,
+      top: 0,
+    });
     expect(onDismiss).toHaveBeenCalledTimes(1);
 
     fireEvent.press(pressableContainer);
@@ -204,9 +224,8 @@ describe('SelectPicker with all props', () => {
         pickerItemsContainerProps={{pointerEvents: 'none', testID: 'pickerItemsContainer'}}
         pickerProps={{testID: 'defaultPicker'}}
         pickerBackdropProps={{
-          style: {backgroundColor: 'green', borderColor: 'red'},
-          modalProps: {testID: 'modal'},
-          testID: 'pickerBackdrop',
+          modalProps: {testID: 'pickerBackdropModal'},
+          pressableProps: {testID: 'pickerBackdropPressable', style: {backgroundColor: 'green', borderColor: 'red'}},
         }}
         pickerContainerProps={{style: {backgroundColor: 'yellow', borderColor: 'black'}, testID: 'pickerContainer'}}
         pickerAccessoryProps={{containerProps: {testID: 'defaultPickerAccessory'}}}
@@ -220,12 +239,22 @@ describe('SelectPicker with all props', () => {
 
     expect(sut).toMatchSnapshot('SelectPicker all properly with custom xxx component.');
 
-    // assert pickerBackdrop
-    const pickerBackdrop = sut.getByTestId('pickerBackdrop');
-    const modal = sut.getByTestId('modal');
-    const pickerBackdropProps = pickerBackdrop.props as PickerBackdropProps;
-    fireEvent(modal, 'onRequestClose');
-    expect(pickerBackdropProps.style).toEqual({flex: 1, backgroundColor: 'green', borderColor: 'red'});
+    // assert pickerBackdropPressable
+    const pickerBackdropPressable = sut.getByTestId('pickerBackdropPressable');
+    const pickerBackdropModal = sut.getByTestId('pickerBackdropModal');
+    const pickerBackdropProps = pickerBackdropPressable.props as PickerBackdropProps;
+    fireEvent(pickerBackdropModal, 'onRequestClose');
+    expect(pickerBackdropProps.style).toEqual({
+      backgroundColor: 'green',
+      borderColor: 'red',
+      opacity: 0.4,
+      bottom: 0,
+      display: 'flex',
+      left: 0,
+      position: 'absolute',
+      right: 0,
+      top: 0,
+    });
     expect(onDismiss).toHaveBeenCalledTimes(1);
 
     fireEvent.press(pressableContainer);
@@ -233,7 +262,11 @@ describe('SelectPicker with all props', () => {
     // assert pickerContainer
     const pickerContainer = sut.getByTestId('pickerContainer');
     const pickerContainerProps = pickerContainer.props as PickerContainerProps;
-    expect(pickerContainerProps.style).toEqual({backgroundColor: 'yellow', borderColor: 'black'});
+    expect(pickerContainerProps.style).toEqual({
+      backgroundColor: 'yellow',
+      borderColor: 'black',
+      transform: [{translateY: 1000}],
+    });
 
     // assert pickerAccessory
     const defaultPickerAccessory = sut.queryByTestId('defaultPickerAccessory');

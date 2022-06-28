@@ -1,18 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PickerBackdrop only with required props renders successfully only with required props: AnimatedView with invisible. 1`] = `
+exports[`PickerBackdrop only with required props renders successfully only with required props: Before animation started 1`] = `
 <Modal
-  animationType="none"
-  hardwareAccelerated={false}
-  statusBarTranslucent={true}
-  transparent={true}
-  visible={true}
-/>
-`;
-
-exports[`PickerBackdrop only with required props renders successfully only with required props: AnimatedView with visible. 1`] = `
-<Modal
-  animationType="none"
+  animationType="fade"
   hardwareAccelerated={false}
   statusBarTranslucent={true}
   transparent={true}
@@ -33,49 +23,22 @@ exports[`PickerBackdrop only with required props renders successfully only with 
     onStartShouldSetResponder={[Function]}
     style={
       Object {
+        "backgroundColor": "black",
         "bottom": 0,
         "display": "flex",
         "left": 0,
+        "opacity": 0.4,
         "position": "absolute",
         "right": 0,
         "top": 0,
       }
     }
-  >
-    <View
-      animatedStyle={
-        Object {
-          "value": Object {},
-        }
-      }
-      collapsable={false}
-      entering={
-        FadeIn {
-          "build": [Function],
-          "callbackV": [Function],
-          "durationV": 300,
-          "randomizeDelay": false,
-        }
-      }
-      exiting={
-        FadeOut {
-          "build": [Function],
-          "callbackV": [Function],
-          "durationV": 150,
-          "randomizeDelay": false,
-        }
-      }
-      style={
-        Object {
-          "backgroundColor": "rgba(0,0,0,0.4)",
-          "flex": 1,
-        }
-      }
-      testID="backdropAnimated"
-    />
-  </View>
+    testID="pressable"
+  />
 </Modal>
 `;
+
+exports[`PickerBackdrop only with required props renders successfully only with required props: Just After fade out animation completed 1`] = `null`;
 
 exports[`PickerBackdrop with all props should be applied properly: PickerBackdrop with all props. 1`] = `
 <Modal
@@ -108,48 +71,17 @@ exports[`PickerBackdrop with all props should be applied properly: PickerBackdro
     onStartShouldSetResponder={[Function]}
     style={
       Object {
+        "backgroundColor": "red",
         "bottom": 0,
         "display": "none",
         "left": 0,
+        "opacity": 0.8,
         "position": "absolute",
         "right": 0,
         "top": 0,
       }
     }
     testID="pressable"
-  >
-    <View
-      animatedStyle={
-        Object {
-          "value": Object {},
-        }
-      }
-      collapsable={false}
-      entering={
-        ZoomIn {
-          "build": [Function],
-          "callbackV": [Function],
-          "durationV": 500,
-          "randomizeDelay": false,
-        }
-      }
-      exiting={
-        ZoomOut {
-          "build": [Function],
-          "callbackV": [Function],
-          "durationV": 300,
-          "randomizeDelay": false,
-        }
-      }
-      style={
-        Object {
-          "backgroundColor": "green",
-          "borderColor": "red",
-          "flex": 1,
-        }
-      }
-      testID="animatedView"
-    />
-  </View>
+  />
 </Modal>
 `;

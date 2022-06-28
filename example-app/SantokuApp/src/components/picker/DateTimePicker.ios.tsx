@@ -14,6 +14,9 @@ export type DateTimePickerIOSProps = Omit<DateTimePickerProps, 'displayAndroid' 
     'value' | 'onChange' | 'mode' | 'display' | 'maximumDate' | 'minimumDate'
   >;
 };
+
+const DEFAULT_DURATION = 500;
+
 /**
  * 日時を表示するPickerとしてReact Native DateTimePickerを使用しています。
  * React Native DateTimePickerは、NativeのUIDatePickerを使用しています。
@@ -45,10 +48,6 @@ export const DateTimePicker = (props: DateTimePickerIOSProps) => {
     requiredSelectedValue,
     inputValue,
     handleDismiss,
-    pickerBackdropEntering,
-    pickerBackdropExiting,
-    pickerContainerEntering,
-    pickerContainerExiting,
     onValueChange,
     open,
     handleDelete,
@@ -67,11 +66,15 @@ export const DateTimePicker = (props: DateTimePickerIOSProps) => {
     textInputComponent,
     pickerItemsContainerProps: {style: pickerItemsContainerStyle, ...pickerItemsContainerProps} = {},
     pickerItemsProps,
-    pickerBackdropProps: {entering: backdropEntering, exiting: backdropExiting, ...pickerBackdropProps} = {},
+    pickerBackdropProps: {
+      fadeInDuration = DEFAULT_DURATION,
+      fadeOutDuration = DEFAULT_DURATION,
+      ...pickerBackdropProps
+    } = {},
     pickerContainerProps: {
-      entering: containerEntering,
-      exiting: containerExiting,
       style: pickerContainerStyle,
+      slideInDuration = DEFAULT_DURATION,
+      slideOutDuration = DEFAULT_DURATION,
       ...pickerContainerProps
     } = {},
     pickerAccessoryProps,
@@ -82,14 +85,14 @@ export const DateTimePicker = (props: DateTimePickerIOSProps) => {
       <PickerBackdrop
         isVisible={isVisible}
         onPress={handleDismiss}
-        entering={pickerBackdropEntering}
-        exiting={pickerBackdropExiting}
+        fadeInDuration={fadeInDuration}
+        fadeOutDuration={fadeOutDuration}
         {...pickerBackdropProps}>
         <PickerContainer
           isVisible={isVisible}
-          entering={pickerContainerEntering}
-          exiting={pickerContainerExiting}
           style={[styles.pickerContainer, pickerContainerStyle]}
+          slideInDuration={slideInDuration}
+          slideOutDuration={slideOutDuration}
           {...pickerContainerProps}>
           {pickerAccessoryComponent ? (
             pickerAccessoryComponent

@@ -1,47 +1,81 @@
 import {usePrevious, useVisibility} from 'framework/utilities';
-import {useWorkletCallback} from 'framework/utilities/useWorkletCallback';
 import {useCallback, useEffect} from 'react';
+import {cancelAnimation, Easing, runOnJS, useSharedValue, withTiming, WithTimingConfig} from 'react-native-reanimated';
 
 type BackdropAnimationConfig = {
   isVisible: boolean;
-  enteringCallback?: (finished: boolean) => unknown;
-  exitingCallback?: (finished: boolean) => unknown;
+  opacity: number;
+  afterFadeIn?: (finished?: boolean) => unknown;
+  afterFadeOut?: (finished?: boolean) => unknown;
+  fadeInDuration?: number;
+  fadeOutDuration?: number;
+  fadeInConfig?: WithTimingConfig;
+  fadeOutConfig?: WithTimingConfig;
 };
 
-export const usePickerBackdropUseCase = ({isVisible, enteringCallback, exitingCallback}: BackdropAnimationConfig) => {
+export const usePickerBackdropUseCase = ({
+  isVisible,
+  opacity,
+  afterFadeIn,
+  afterFadeOut,
+  fadeInDuration,
+  fadeOutDuration,
+  fadeInConfig,
+  fadeOutConfig,
+}: BackdropAnimationConfig) => {
   const {
     isVisible: isModalVisible,
     setVisible: setModalVisible,
     setInvisible: setModalInvisible,
   } = useVisibility(isVisible);
 
+  const animatedOpacity = useSharedValue(0);
+
   const show = useCallback(() => {
     setModalVisible();
-  }, [setModalVisible]);
+    cancelAnimation(animatedOpacity);
+    animatedOpacity.value = withTiming(
+      opacity,
+      {
+        easing: Easing.inOut(Easing.quad),
+        duration: fadeInDuration,
+        ...fadeInConfig,
+      },
+      afterFadeIn && (finished => runOnJS(afterFadeIn)(finished)),
+    );
+  }, [animatedOpacity, fadeInConfig, fadeInDuration, setModalVisible, afterFadeIn, opacity]);
 
-  const composedEnteringWorkletCallback = useWorkletCallback(enteringCallback);
-  const composedExitingCallback = useCallback(
-    (finished: boolean) => {
-      setModalInvisible();
-      if (exitingCallback) {
-        exitingCallback(finished);
-      }
-    },
-    [setModalInvisible, exitingCallback],
-  );
-  const composedExitingWorkletCallback = useWorkletCallback(composedExitingCallback);
+  const hide = useCallback(() => {
+    cancelAnimation(animatedOpacity);
+    animatedOpacity.value = withTiming(
+      0,
+      {
+        easing: Easing.inOut(Easing.quad),
+        duration: fadeOutDuration,
+        ...fadeOutConfig,
+      },
+      finished => {
+        if (finished) {
+          runOnJS(setModalInvisible)();
+        }
+        afterFadeOut && runOnJS(afterFadeOut)(finished);
+      },
+    );
+  }, [animatedOpacity, fadeOutConfig, fadeOutDuration, setModalInvisible, afterFadeOut]);
 
   const isVisiblePrevious = usePrevious(isVisible);
   useEffect(() => {
     if (!isVisiblePrevious && isVisible) {
       show();
+    } else if (isVisiblePrevious && !isVisible) {
+      hide();
     }
-  }, [isVisiblePrevious, isVisible, show, exitingCallback, composedExitingCallback]);
+  }, [isVisiblePrevious, isVisible, show, hide]);
 
   return {
     isModalVisible,
+    animatedOpacity,
     show,
-    composedEnteringCallback: composedEnteringWorkletCallback,
-    composedExitingCallback: composedExitingWorkletCallback,
+    hide,
   };
 };

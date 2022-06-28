@@ -1,13 +1,12 @@
 import React, {useMemo} from 'react';
 import {Pressable, PressableProps, StyleSheet, Text, TextProps} from 'react-native';
-import Animated, {interpolateColor, useAnimatedStyle} from 'react-native-reanimated';
 
 import {Item} from './SelectPicker';
 
 export type SelectPickerItemType<ItemT extends unknown> = {
   item: Item<ItemT>;
   index: number;
-  offset: Animated.SharedValue<number>;
+  offset: number;
   itemHeight: number;
   activeColor?: string;
   inactiveColor?: string;
@@ -15,40 +14,25 @@ export type SelectPickerItemType<ItemT extends unknown> = {
   textProps?: TextProps;
 };
 
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-const AnimatedText = Animated.createAnimatedComponent(Text);
-
-export const SelectPickerItem = <ItemT extends unknown>({
+const Component = <ItemT extends unknown>({
   item: {label, inputLabel, key, value, ...itemPropsStyle},
-  index,
-  offset,
-  activeColor = '#000000',
-  inactiveColor = '#999999',
   itemHeight,
   pressableProps,
   textProps: {style: textStyle, ...textProps} = {},
 }: SelectPickerItemType<ItemT>) => {
-  const itemOffset = index * itemHeight;
-  const animatedTextStyle = useAnimatedStyle(() => {
-    const color = interpolateColor(
-      offset.value,
-      [itemOffset - itemHeight, itemOffset, itemOffset + itemHeight],
-      [inactiveColor, activeColor, inactiveColor],
-    );
-    return {color};
-  }, [itemHeight]);
-
   const pressableHeightStyle = useMemo(() => ({height: itemHeight}), [itemHeight]);
 
   return (
-    <AnimatedPressable style={StyleSheet.flatten([pressableHeightStyle, styles.pressable])} {...pressableProps}>
+    <Pressable style={StyleSheet.flatten([pressableHeightStyle, styles.pressable])} {...pressableProps}>
       {/* AnimatedStyleの場合はStyleSheet.flattenだとマージされないため、配列で指定 */}
-      <AnimatedText style={[animatedTextStyle, styles.text, textStyle, itemPropsStyle]} {...textProps}>
+      <Text style={StyleSheet.flatten([styles.text, textStyle, itemPropsStyle])} {...textProps}>
         {label}
-      </AnimatedText>
-    </AnimatedPressable>
+      </Text>
+    </Pressable>
   );
 };
+
+export const SelectPickerItem = React.memo(Component);
 
 const styles = StyleSheet.create({
   pressable: {

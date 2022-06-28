@@ -15,9 +15,12 @@ const Separator: React.FC<{height: number; testID?: string}> = React.memo(({heig
   );
 });
 
-const FADER_SIZE = 60;
-const FaderTop = React.memo(() => <Fader visible position={FaderPosition.TOP} size={FADER_SIZE} />);
-const FaderBottom = React.memo(() => <Fader visible position={FaderPosition.BOTTOM} size={FADER_SIZE} />);
+const FaderTop = React.memo(({itemHeight}: {itemHeight: number}) => (
+  <Fader visible position={FaderPosition.TOP} size={itemHeight * 2.5} />
+));
+const FaderBottom = React.memo(({itemHeight}: {itemHeight: number}) => (
+  <Fader visible position={FaderPosition.BOTTOM} size={itemHeight * 2.5} />
+));
 
 const DECELERATION_RATE = 0.98;
 
@@ -73,7 +76,7 @@ export const SelectPickerItems = <ItemT extends unknown>({
       return (
         <SelectPickerItem
           item={info.item}
-          offset={offset}
+          offset={offset.value}
           index={info.index}
           itemHeight={itemHeight}
           activeColor={activeColor}
@@ -121,8 +124,8 @@ export const SelectPickerItems = <ItemT extends unknown>({
         centerContent
         testID={flatListTestID}
       />
-      <FaderBottom />
-      <FaderTop />
+      <FaderBottom itemHeight={itemHeight} />
+      <FaderTop itemHeight={itemHeight} />
       <Separator height={itemHeight} testID={separatorTestID} />
     </View>
   );

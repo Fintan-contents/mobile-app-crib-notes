@@ -57,7 +57,7 @@ describe('SelectPickerItems with all props', () => {
         numberOfLines={5}
         keyExtractor={keyExtractor}
         testID="SelectPickerItems"
-        itemStyle={{fontSize: 24, fontFamily: 'test-font-Regular'}}
+        itemStyle={{fontSize: 24, fontFamily: 'test-font-Regular', color: 'yellow'}}
         accessibilityLabel="testAccessibilityLabel"
         activeColor="#424242"
         inactiveColor="#565656"
@@ -78,13 +78,11 @@ describe('SelectPickerItems with all props', () => {
 
     const item1Text = sut.getByTestId('itemText-0');
     const item1TextProps = item1Text.props as TextProps;
-    expect(item1Text).toHaveAnimatedStyle({color: 'rgba(66, 66, 66, 1)'});
     expect(item1TextProps.style).toEqual({fontSize: 24, fontFamily: 'Roboto', color: 'red'});
 
     const item3Text = sut.getByTestId('itemText-2');
     const item3TextProps = item3Text.props as TextProps;
-    expect(item3Text).toHaveAnimatedStyle({color: 'rgba(86, 86, 86, 1)'});
-    expect(item3TextProps.style).toEqual({fontSize: 24, fontFamily: 'test-font-Regular', color: 'rgba(86, 86, 86, 1)'});
+    expect(item3TextProps.style).toEqual({fontSize: 24, fontFamily: 'test-font-Regular', color: 'yellow'});
 
     // assert flatList
     const flatList = sut.getByTestId('FlatList');

@@ -60,7 +60,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
     style={
       Object {
         "bottom": 0,
-        "height": 60,
+        "height": 110,
         "position": "absolute",
         "width": "100%",
       }
@@ -71,7 +71,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
       source={1}
       style={
         Object {
-          "height": 60,
+          "height": 110,
           "width": "100%",
         }
       }
@@ -81,7 +81,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
     pointerEvents="none"
     style={
       Object {
-        "height": 60,
+        "height": 110,
         "position": "absolute",
         "top": 0,
         "width": "100%",
@@ -93,7 +93,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
       source={1}
       style={
         Object {
-          "height": 60,
+          "height": 110,
           "width": "100%",
         }
       }
@@ -185,11 +185,6 @@ exports[`SelectPickerItems only with required props renders successfully with mo
       >
         <View
           accessible={true}
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
           collapsable={false}
           focusable={true}
           onBlur={[Function]}
@@ -210,17 +205,8 @@ exports[`SelectPickerItems only with required props renders successfully with mo
           }
         >
           <Text
-            animatedStyle={
-              Object {
-                "value": Object {
-                  "color": "rgba(0, 0, 0, 1)",
-                },
-              }
-            }
-            collapsable={false}
             style={
               Object {
-                "color": "rgba(0, 0, 0, 1)",
                 "fontSize": 20,
               }
             }
@@ -235,11 +221,6 @@ exports[`SelectPickerItems only with required props renders successfully with mo
       >
         <View
           accessible={true}
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
           collapsable={false}
           focusable={true}
           onBlur={[Function]}
@@ -260,17 +241,8 @@ exports[`SelectPickerItems only with required props renders successfully with mo
           }
         >
           <Text
-            animatedStyle={
-              Object {
-                "value": Object {
-                  "color": "rgba(153, 153, 153, 1)",
-                },
-              }
-            }
-            collapsable={false}
             style={
               Object {
-                "color": "rgba(153, 153, 153, 1)",
                 "fontSize": 20,
               }
             }
@@ -287,7 +259,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
     style={
       Object {
         "bottom": 0,
-        "height": 60,
+        "height": 110,
         "position": "absolute",
         "width": "100%",
       }
@@ -298,7 +270,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
       source={1}
       style={
         Object {
-          "height": 60,
+          "height": 110,
           "width": "100%",
         }
       }
@@ -308,7 +280,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
     pointerEvents="none"
     style={
       Object {
-        "height": 60,
+        "height": 110,
         "position": "absolute",
         "top": 0,
         "width": "100%",
@@ -320,7 +292,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
       source={1}
       style={
         Object {
-          "height": 60,
+          "height": 110,
           "width": "100%",
         }
       }
@@ -435,11 +407,6 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         <View
           accessibilityLabel="testAccessibilityLabel"
           accessible={true}
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
           collapsable={false}
           focusable={true}
           onBlur={[Function]}
@@ -461,14 +428,6 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           testID="itemPressable-0"
         >
           <Text
-            animatedStyle={
-              Object {
-                "value": Object {
-                  "color": "rgba(66, 66, 66, 1)",
-                },
-              }
-            }
-            collapsable={false}
             style={
               Object {
                 "color": "red",
@@ -488,11 +447,6 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         <View
           accessibilityLabel="testAccessibilityLabel"
           accessible={true}
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
           collapsable={false}
           focusable={true}
           onBlur={[Function]}
@@ -514,14 +468,6 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           testID="itemPressable-1"
         >
           <Text
-            animatedStyle={
-              Object {
-                "value": Object {
-                  "color": "rgba(86, 86, 86, 1)",
-                },
-              }
-            }
-            collapsable={false}
             style={
               Object {
                 "color": "yellow",
@@ -541,11 +487,6 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         <View
           accessibilityLabel="testAccessibilityLabel"
           accessible={true}
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
           collapsable={false}
           focusable={true}
           onBlur={[Function]}
@@ -567,17 +508,9 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           testID="itemPressable-2"
         >
           <Text
-            animatedStyle={
-              Object {
-                "value": Object {
-                  "color": "rgba(86, 86, 86, 1)",
-                },
-              }
-            }
-            collapsable={false}
             style={
               Object {
-                "color": "rgba(86, 86, 86, 1)",
+                "color": "yellow",
                 "fontFamily": "test-font-Regular",
                 "fontSize": 24,
               }
@@ -594,11 +527,6 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         <View
           accessibilityLabel="testAccessibilityLabel"
           accessible={true}
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
           collapsable={false}
           focusable={true}
           onBlur={[Function]}
@@ -620,17 +548,9 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           testID="itemPressable-3"
         >
           <Text
-            animatedStyle={
-              Object {
-                "value": Object {
-                  "color": "rgba(86, 86, 86, 1)",
-                },
-              }
-            }
-            collapsable={false}
             style={
               Object {
-                "color": "rgba(86, 86, 86, 1)",
+                "color": "yellow",
                 "fontFamily": "test-font-Regular",
                 "fontSize": 24,
               }
@@ -647,11 +567,6 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         <View
           accessibilityLabel="testAccessibilityLabel"
           accessible={true}
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
           collapsable={false}
           focusable={true}
           onBlur={[Function]}
@@ -673,17 +588,9 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           testID="itemPressable-4"
         >
           <Text
-            animatedStyle={
-              Object {
-                "value": Object {
-                  "color": "rgba(86, 86, 86, 1)",
-                },
-              }
-            }
-            collapsable={false}
             style={
               Object {
-                "color": "rgba(86, 86, 86, 1)",
+                "color": "yellow",
                 "fontFamily": "test-font-Regular",
                 "fontSize": 24,
               }
@@ -700,11 +607,6 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         <View
           accessibilityLabel="testAccessibilityLabel"
           accessible={true}
-          animatedStyle={
-            Object {
-              "value": Object {},
-            }
-          }
           collapsable={false}
           focusable={true}
           onBlur={[Function]}
@@ -726,17 +628,9 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           testID="itemPressable-5"
         >
           <Text
-            animatedStyle={
-              Object {
-                "value": Object {
-                  "color": "rgba(86, 86, 86, 1)",
-                },
-              }
-            }
-            collapsable={false}
             style={
               Object {
-                "color": "rgba(86, 86, 86, 1)",
+                "color": "yellow",
                 "fontFamily": "test-font-Regular",
                 "fontSize": 24,
               }
@@ -754,7 +648,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
     style={
       Object {
         "bottom": 0,
-        "height": 60,
+        "height": 150,
         "position": "absolute",
         "width": "100%",
       }
@@ -765,7 +659,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
       source={1}
       style={
         Object {
-          "height": 60,
+          "height": 150,
           "width": "100%",
         }
       }
@@ -775,7 +669,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
     pointerEvents="none"
     style={
       Object {
-        "height": 60,
+        "height": 150,
         "position": "absolute",
         "top": 0,
         "width": "100%",
@@ -787,7 +681,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
       source={1}
       style={
         Object {
-          "height": 60,
+          "height": 150,
           "width": "100%",
         }
       }

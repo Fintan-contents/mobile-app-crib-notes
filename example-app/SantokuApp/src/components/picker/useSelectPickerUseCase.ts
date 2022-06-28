@@ -1,10 +1,6 @@
 import React, {useCallback, useMemo, useState} from 'react';
 
-import {PICKER_BACKDROP_DEFAULT_ENTERING, PICKER_BACKDROP_DEFAULT_EXITING} from './PickerBackdrop';
-import {PICKER_CONTAINER_DEFAULT_ENTERING, PICKER_CONTAINER_DEFAULT_EXITING} from './PickerContainer';
 import {SelectPickerProps} from './SelectPicker';
-
-const DEFAULT_DURATION = 500;
 
 export const useSelectPickerUseCase = <ItemT extends unknown>({
   items,
@@ -14,27 +10,9 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
   onDelete,
   onCancel,
   onDone,
-  pickerBackdropProps: {entering: backdropEntering, exiting: backdropExiting} = {},
-  pickerContainerProps: {entering: containerEntering, exiting: containerExiting} = {},
 }: SelectPickerProps<ItemT>) => {
   const [isVisible, setIsVisible] = useState(false);
   const close = useCallback(() => setIsVisible(false), []);
-  const pickerBackdropEntering = useMemo(
-    () => backdropEntering ?? PICKER_BACKDROP_DEFAULT_ENTERING.duration(DEFAULT_DURATION),
-    [backdropEntering],
-  );
-  const pickerBackdropExiting = useMemo(
-    () => backdropExiting ?? PICKER_BACKDROP_DEFAULT_EXITING.duration(DEFAULT_DURATION),
-    [backdropExiting],
-  );
-  const pickerContainerEntering = useMemo(
-    () => containerEntering ?? PICKER_CONTAINER_DEFAULT_ENTERING.duration(DEFAULT_DURATION),
-    [containerEntering],
-  );
-  const pickerContainerExiting = useMemo(
-    () => containerExiting ?? PICKER_CONTAINER_DEFAULT_EXITING.duration(DEFAULT_DURATION),
-    [containerExiting],
-  );
   const getSelectedItem = useCallback(
     (key?: React.Key | ItemT) => {
       return items.find(item => item.key === key || item.value === key);
@@ -85,10 +63,6 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
     getSelectedItem,
     inputValue,
     handleBackdropPress,
-    pickerBackdropEntering,
-    pickerBackdropExiting,
-    pickerContainerEntering,
-    pickerContainerExiting,
     onValueChange,
     open,
     handleDelete,

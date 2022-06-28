@@ -103,21 +103,11 @@ export type SelectPickerProps<ItemT> = {
   pickerAccessoryProps?: Omit<DefaultPickerAccessoryProps, 'onDelete' | 'onCancel' | 'onDone'>;
 };
 
+const DEFAULT_DURATION = 300;
+
 export const SelectPicker = <ItemT extends unknown>(props: SelectPickerProps<ItemT>) => {
-  const {
-    isVisible,
-    inputValue,
-    handleBackdropPress,
-    pickerBackdropEntering,
-    pickerBackdropExiting,
-    pickerContainerEntering,
-    pickerContainerExiting,
-    onValueChange,
-    open,
-    handleDelete,
-    handleCancel,
-    handleDone,
-  } = useSelectPickerUseCase<ItemT>(props);
+  const {isVisible, inputValue, handleBackdropPress, onValueChange, open, handleDelete, handleCancel, handleDone} =
+    useSelectPickerUseCase<ItemT>(props);
   const {
     items,
     selectedItemKey,
@@ -129,11 +119,15 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerProps<Ite
     textInputComponent,
     pickerItemsContainerProps: {style: pickerItemsContainerStyle, ...pickerItemsContainerProps} = {},
     pickerProps,
-    pickerBackdropProps: {entering: backdropEntering, exiting: backdropExiting, ...pickerBackdropProps} = {},
+    pickerBackdropProps: {
+      fadeInDuration = DEFAULT_DURATION,
+      fadeOutDuration = DEFAULT_DURATION,
+      ...pickerBackdropProps
+    } = {},
     pickerContainerProps: {
-      entering: containerEntering,
-      exiting: containerExiting,
       style: pickerContainerStyle,
+      slideInDuration = DEFAULT_DURATION,
+      slideOutDuration = DEFAULT_DURATION,
       ...pickerContainerProps
     } = {},
     pickerAccessoryProps,
@@ -144,14 +138,14 @@ export const SelectPicker = <ItemT extends unknown>(props: SelectPickerProps<Ite
       <PickerBackdrop
         isVisible={isVisible}
         onPress={handleBackdropPress}
-        entering={pickerBackdropEntering}
-        exiting={pickerBackdropExiting}
+        fadeInDuration={fadeInDuration}
+        fadeOutDuration={fadeOutDuration}
         {...pickerBackdropProps}>
         <PickerContainer
           isVisible={isVisible}
-          entering={pickerContainerEntering}
-          exiting={pickerContainerExiting}
           style={[styles.pickerContainer, pickerContainerStyle]}
+          slideInDuration={slideInDuration}
+          slideOutDuration={slideOutDuration}
           {...pickerContainerProps}>
           {pickerAccessoryComponent ? (
             pickerAccessoryComponent

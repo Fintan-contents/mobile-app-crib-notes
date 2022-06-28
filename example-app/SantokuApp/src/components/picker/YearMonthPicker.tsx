@@ -99,6 +99,8 @@ export type YearMonthPickerProps = {
   itemFontFamily?: string;
 };
 
+const DEFAULT_DURATION = 300;
+
 export const YearMonthPicker = (props: YearMonthPickerProps) => {
   const {
     isVisible,
@@ -109,10 +111,6 @@ export const YearMonthPicker = (props: YearMonthPickerProps) => {
     onValueChangeYear,
     onValueChangeMonth,
     selectedLabel,
-    pickerBackdropEntering,
-    pickerBackdropExiting,
-    pickerContainerEntering,
-    pickerContainerExiting,
     open,
     handleBackdropPress,
     handleDelete,
@@ -126,11 +124,15 @@ export const YearMonthPicker = (props: YearMonthPickerProps) => {
     textInputProps,
     pickerItemsContainerProps: {style: pickerItemsContainerStyle, ...pickerItemsContainerProps} = {},
     pickerProps,
-    pickerBackdropProps: {entering: backdropEntering, exiting: backdropExiting, ...pickerBackdropProps} = {},
+    pickerBackdropProps: {
+      fadeInDuration = DEFAULT_DURATION,
+      fadeOutDuration = DEFAULT_DURATION,
+      ...pickerBackdropProps
+    } = {},
     pickerContainerProps: {
-      entering: containerEntering,
-      exiting: containerExiting,
       style: pickerContainerStyle,
+      slideInDuration = DEFAULT_DURATION,
+      slideOutDuration = DEFAULT_DURATION,
       ...pickerContainerProps
     } = {},
     pickerAccessoryProps,
@@ -141,14 +143,14 @@ export const YearMonthPicker = (props: YearMonthPickerProps) => {
       <PickerBackdrop
         isVisible={isVisible}
         onPress={handleBackdropPress}
-        entering={pickerBackdropEntering}
-        exiting={pickerBackdropExiting}
+        fadeInDuration={fadeInDuration}
+        fadeOutDuration={fadeOutDuration}
         {...pickerBackdropProps}>
         <PickerContainer
           isVisible={isVisible}
-          entering={pickerContainerEntering}
-          exiting={pickerContainerExiting}
           style={[styles.pickerContainer, pickerContainerStyle]}
+          slideInDuration={slideInDuration}
+          slideOutDuration={slideOutDuration}
           {...pickerContainerProps}>
           <DefaultPickerAccessory
             onDelete={handleDelete}

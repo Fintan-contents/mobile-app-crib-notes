@@ -1,67 +1,51 @@
-import {useWorkletCallback} from 'framework/utilities/useWorkletCallback';
 import React from 'react';
 import {StyleSheet, View, ViewProps} from 'react-native';
-import Reanimated, {BaseAnimationBuilder, Keyframe, SlideInDown, SlideOutDown} from 'react-native-reanimated';
+import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
 
-export type PickerContainerProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
+import {usePickerContainerUseCase} from './usePickerContainerUseCase';
+
+export const DEFAULT_SLIDE_IN_DURATION = 300;
+export const DEFAULT_SLIDE_OUT_DURATION = 300;
+
+// React Native ReanimatedのLayout Animationsを使用すると↓の不具合が発生するため、指定できないようにしています。
+// https://github.com/software-mansion/react-native-reanimated/issues/2906
+export type PickerContainerProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exiting' | 'entering'> & {
   isVisible: boolean;
-  /**
-   * iOSの場合、アニメーションが終わった後に呼び出されます。
-   * Androidの場合、アニメーションが始まった時に呼び出されます。
-   */
-  enteringCallback?: (finished: boolean) => unknown;
-  exitingCallback?: (finished: boolean) => unknown;
-  /**
-   * enteringに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
-   * withCallbackで実行する関数は、enteringCallbackで指定してください。
-   */
-  entering?: BaseAnimationBuilder | Keyframe;
-  /**
-   * exitingに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
-   * withCallbackで実行する関数は、exitingCallbackで指定してください。
-   */
-  exiting?: BaseAnimationBuilder | Keyframe;
+  afterSlideIn?: (finished?: boolean) => unknown;
+  afterSlideOut?: (finished?: boolean) => unknown;
+  slideInDuration?: number;
+  slideOutDuration?: number;
+  slideInConfig?: WithTimingConfig;
+  slideOutConfig?: WithTimingConfig;
 };
-
-export const PICKER_CONTAINER_DEFAULT_SLIDE_IN_DURATION = 300;
-export const PICKER_CONTAINER_DEFAULT_SLIDE_OUT_DURATION = 300;
-export const PICKER_CONTAINER_DEFAULT_ENTERING = SlideInDown.duration(PICKER_CONTAINER_DEFAULT_SLIDE_IN_DURATION);
-export const PICKER_CONTAINER_DEFAULT_EXITING = SlideOutDown.duration(PICKER_CONTAINER_DEFAULT_SLIDE_OUT_DURATION);
 
 export const PickerContainer: React.FC<PickerContainerProps> = ({
   isVisible,
-  entering = PICKER_CONTAINER_DEFAULT_ENTERING,
-  exiting = PICKER_CONTAINER_DEFAULT_EXITING,
-  enteringCallback,
-  exitingCallback,
   style,
+  afterSlideIn,
+  afterSlideOut,
+  slideInDuration = DEFAULT_SLIDE_IN_DURATION,
+  slideOutDuration = DEFAULT_SLIDE_OUT_DURATION,
+  slideInConfig,
+  slideOutConfig,
   children,
   ...animatedViewProps
 }) => {
-  const composedEnteringCallback = useWorkletCallback(enteringCallback);
-  const composedExitingCallback = useWorkletCallback(exitingCallback);
-
-  return (
-    <>
-      {isVisible && (
-        <View style={styles.container} pointerEvents="box-none">
-          {/*
-            entering/exitingに設定するアニメーションがSlideInXXXの場合、正常に動作しなかったため、Reanimated.Viewを二つ重ねてます
-            https://github.com/software-mansion/react-native-reanimated/issues/3245
-          */}
-          <Reanimated.View>
-            <Reanimated.View
-              style={style}
-              entering={entering.withCallback(composedEnteringCallback)}
-              exiting={exiting.withCallback(composedExitingCallback)}
-              pointerEvents="box-none"
-              {...animatedViewProps}>
-              {children}
-            </Reanimated.View>
-          </Reanimated.View>
-        </View>
-      )}
-    </>
+  const {isPickerVisible, transform, updateContentHeight} = usePickerContainerUseCase({
+    isVisible,
+    afterSlideIn,
+    afterSlideOut,
+    slideInDuration,
+    slideOutDuration,
+    slideInConfig,
+    slideOutConfig,
+  });
+  return !isPickerVisible ? null : (
+    <View style={[styles.container]} pointerEvents="box-none">
+      <Reanimated.View style={[style, transform]} onLayout={updateContentHeight} {...animatedViewProps}>
+        {children}
+      </Reanimated.View>
+    </View>
   );
 };
 
