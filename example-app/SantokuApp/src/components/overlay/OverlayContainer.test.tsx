@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {ViewProps} from 'react-native';
 import Reanimated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
@@ -22,17 +22,17 @@ jest.runAllTimers();
 
 describe('OverlayContainer only with required props', () => {
   it('returns null if not visible', () => {
-    const sut = render(<OverlayContainer isVisible={false} />);
+    render(<OverlayContainer isVisible={false} />);
     // OverlayContainerがnullを返していることを確認したいがうまくやる方法が見当たらないので`toJSON`でnullになることを確認する。
-    expect(sut.toJSON()).toBeNull();
+    expect(screen.toJSON()).toBeNull();
   });
 
   it('renders successfully only with required props', () => {
-    const sut = render(<OverlayContainer isVisible testID="containerAnimated" />);
-    const animatedView = sut.getByTestId('containerAnimated');
+    render(<OverlayContainer isVisible testID="containerAnimated" />);
+    const animatedView = screen.getByTestId('containerAnimated');
     const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
     // Animated.Viewのentering/exitingをテストで実行することができなかったため、entering/exitingにデフォルトアニメーションが設定されていることのみを確認する。
-    expect(sut).toMatchSnapshot('AnimatedView with visible.');
+    expect(screen).toMatchSnapshot('AnimatedView with visible.');
     expect(animatedView).not.toBeNull();
     expect(animatedViewProps.entering).toBe(MODAL_CONTAINER_DEFAULT_ENTERING);
     expect(animatedViewProps.exiting).toBe(MODAL_CONTAINER_DEFAULT_EXITING);
@@ -40,9 +40,9 @@ describe('OverlayContainer only with required props', () => {
     //////////////////////////////////////////////////////////////////////////////////
     // 非表示にする
     //////////////////////////////////////////////////////////////////////////////////
-    sut.update(<OverlayContainer isVisible={false} />);
-    const animatedView2 = sut.queryByTestId('containerAnimated');
-    expect(sut).toMatchSnapshot('AnimatedView with invisible.');
+    screen.update(<OverlayContainer isVisible={false} />);
+    const animatedView2 = screen.queryByTestId('containerAnimated');
+    expect(screen).toMatchSnapshot('AnimatedView with invisible.');
     expect(animatedView2).toBeNull();
   });
 });
@@ -58,7 +58,7 @@ describe('OverlayContainer with all props', () => {
      *
      * animatedPropsは取得できなかったため（Snapshot上にも存在していない）、検証できていません
      */
-    const sut = render(
+    render(
       <OverlayContainer
         isVisible
         testID="animatedView"
@@ -68,8 +68,8 @@ describe('OverlayContainer with all props', () => {
         exiting={exiting}
       />,
     );
-    expect(sut).toMatchSnapshot('OverlayContainer with all props.');
-    const animatedView = sut.getByTestId('animatedView');
+    expect(screen).toMatchSnapshot('OverlayContainer with all props.');
+    const animatedView = screen.getByTestId('animatedView');
 
     // assert animatedView
     const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;

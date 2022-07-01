@@ -1,4 +1,4 @@
-import {render, waitFor} from '@testing-library/react-native';
+import {render, screen, waitFor} from '@testing-library/react-native';
 import {BundledMessagesLoader, loadMessages} from 'framework';
 import React, {useEffect} from 'react';
 import {Text, TextStyle} from 'react-native';
@@ -35,41 +35,41 @@ const ChildComponent: React.FC<{type: UseSnackbarType}> = ({type}) => {
 
 describe('WithSnackbar', () => {
   it('useSnackbarのshowで、Snackbarが正常に表示されることを確認', () => {
-    const renderResult = render(
+    render(
       <WithSnackbar>
         <ChildComponent type="show" />
       </WithSnackbar>,
     );
 
-    expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
-    expect(getStyle<TextStyle>(renderResult.getByText('テストメッセージ')).color).toBe('blue');
-    expect(renderResult.queryByText('閉じる')).toBeNull();
-    expect(renderResult).toMatchSnapshot();
+    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
+    expect(getStyle<TextStyle>(screen.getByText('テストメッセージ')).color).toBe('blue');
+    expect(screen.queryByText('閉じる')).toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 
   it('useSnackbarのshowWithCloseButtonで、ボタン付きSnackbarが正常に表示されることを確認', async () => {
     await loadMessages(new BundledMessagesLoader());
 
-    const renderResult = render(
+    render(
       <WithSnackbar>
         <ChildComponent type="showWithCloseButton" />
       </WithSnackbar>,
     );
 
-    expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
-    expect(getStyle<TextStyle>(renderResult.getByText('テストメッセージ')).color).toBe('red');
-    expect(renderResult.queryByText('閉じる')).not.toBeNull();
-    expect(renderResult).toMatchSnapshot();
+    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
+    expect(getStyle<TextStyle>(screen.getByText('テストメッセージ')).color).toBe('red');
+    expect(screen.queryByText('閉じる')).not.toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 
   it('useSnackbarのhideで、Snackbarが消えることを確認', async () => {
-    const renderResult = render(
+    render(
       <WithSnackbar>
         <ChildComponent type="show" />
       </WithSnackbar>,
     );
 
-    renderResult.update(
+    screen.update(
       <WithSnackbar>
         <ChildComponent type="hide" />
       </WithSnackbar>,
@@ -78,9 +78,9 @@ describe('WithSnackbar', () => {
     await waitFor(() => {
       const HIDE_FADE_OUT_DURATION = 300;
       jest.advanceTimersByTime(HIDE_FADE_OUT_DURATION);
-      expect(renderResult.queryByText('テストメッセージ')).toBeNull();
-      expect(renderResult.queryByText('閉じる')).toBeNull();
-      expect(renderResult).toMatchSnapshot();
+      expect(screen.queryByText('テストメッセージ')).toBeNull();
+      expect(screen.queryByText('閉じる')).toBeNull();
+      expect(screen).toMatchSnapshot();
     });
   });
 });

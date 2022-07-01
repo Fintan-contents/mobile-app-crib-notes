@@ -1,4 +1,4 @@
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {TextInputProps, ViewProps} from 'react-native';
 
@@ -27,7 +27,7 @@ describe('YearMonthPicker only with required props', () => {
   });
   it('renders successfully if invisible', () => {
     const now = YearMonthUtil.now();
-    const sut = render(
+    render(
       <YearMonthPicker
         maximumYearMonth={now}
         minimumYearMonth={YearMonthUtil.addMonth(now, -60)}
@@ -40,13 +40,13 @@ describe('YearMonthPicker only with required props', () => {
       />,
     );
 
-    expect(sut).toMatchSnapshot('YearMonthPicker if invisible.');
+    expect(screen).toMatchSnapshot('YearMonthPicker if invisible.');
 
-    const pickerBackdrop = sut.queryByTestId('pickerBackdrop');
-    const pickerContainer = sut.queryByTestId('pickerContainer');
-    const pickerAccessory = sut.queryByTestId('pickerAccessory');
-    const pickerItemsContainer = sut.queryByTestId('pickerItemsContainer');
-    const textInput = sut.queryByTestId('textInput');
+    const pickerBackdrop = screen.queryByTestId('pickerBackdrop');
+    const pickerContainer = screen.queryByTestId('pickerContainer');
+    const pickerAccessory = screen.queryByTestId('pickerAccessory');
+    const pickerItemsContainer = screen.queryByTestId('pickerItemsContainer');
+    const textInput = screen.queryByTestId('textInput');
     expect(pickerBackdrop).toBeNull();
     expect(pickerContainer).toBeNull();
     expect(pickerAccessory).toBeNull();
@@ -56,7 +56,7 @@ describe('YearMonthPicker only with required props', () => {
 
   it('renders successfully if visible', () => {
     const now = YearMonthUtil.now();
-    const sut = render(
+    render(
       <YearMonthPicker
         maximumYearMonth={now}
         minimumYearMonth={YearMonthUtil.addMonth(now, -60)}
@@ -68,16 +68,16 @@ describe('YearMonthPicker only with required props', () => {
         pickerItemsContainerProps={{testID: 'pickerItemsContainer'}}
       />,
     );
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    expect(sut).toMatchSnapshot('YearMonthPicker if visible.');
+    expect(screen).toMatchSnapshot('YearMonthPicker if visible.');
 
-    const pickerBackdrop = sut.queryByTestId('pickerBackdrop');
-    const pickerContainer = sut.queryByTestId('pickerContainer');
-    const pickerAccessory = sut.queryByTestId('pickerAccessory');
-    const pickerItemsContainer = sut.queryByTestId('pickerItemsContainer');
-    const textInput = sut.queryByTestId('textInput');
+    const pickerBackdrop = screen.queryByTestId('pickerBackdrop');
+    const pickerContainer = screen.queryByTestId('pickerContainer');
+    const pickerAccessory = screen.queryByTestId('pickerAccessory');
+    const pickerItemsContainer = screen.queryByTestId('pickerItemsContainer');
+    const textInput = screen.queryByTestId('textInput');
     expect(pickerBackdrop).not.toBeNull();
     expect(pickerContainer).not.toBeNull();
     expect(pickerAccessory).not.toBeNull();
@@ -92,17 +92,15 @@ describe('YearMonthPicker only with required props', () => {
 describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
   it('same yearMonth', () => {
     const yearMonth = {year: 2022, month: 4};
-    const sut = render(
-      <YearMonthPicker maximumYearMonth={yearMonth} minimumYearMonth={yearMonth} selectedValue={yearMonth} />,
-    );
+    render(<YearMonthPicker maximumYearMonth={yearMonth} minimumYearMonth={yearMonth} selectedValue={yearMonth} />);
 
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    const yearPicker = sut.getByTestId('yearPicker');
+    const yearPicker = screen.getByTestId('yearPicker');
     const yearPickerProps = yearPicker.props as SelectPickerItemsProps<string>;
     expect(yearPickerProps.items).toEqual([{value: 2022, label: '2022'}]);
-    const monthPicker = sut.getByTestId('monthPicker');
+    const monthPicker = screen.getByTestId('monthPicker');
     const monthPickerProps = monthPicker.props as SelectPickerItemsProps<string>;
     expect(monthPickerProps.items).toEqual([{value: 4, label: '4'}]);
   });
@@ -110,7 +108,7 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
   it('same year and different month', () => {
     const maximumYearMonth = {year: 2022, month: 4};
     const minimumYearMonth = {year: 2022, month: 1};
-    const sut = render(
+    render(
       <YearMonthPicker
         maximumYearMonth={maximumYearMonth}
         minimumYearMonth={minimumYearMonth}
@@ -118,13 +116,13 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
       />,
     );
 
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    const yearPicker = sut.getByTestId('yearPicker');
+    const yearPicker = screen.getByTestId('yearPicker');
     const yearPickerProps = yearPicker.props as SelectPickerItemsProps<string>;
     expect(yearPickerProps.items).toEqual([{value: 2022, label: '2022'}]);
-    const monthPicker = sut.getByTestId('monthPicker');
+    const monthPicker = screen.getByTestId('monthPicker');
     const monthPickerProps = monthPicker.props as SelectPickerItemsProps<string>;
     expect(monthPickerProps.items).toEqual([
       {value: 1, label: '1'},
@@ -137,7 +135,7 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
   it('different year', () => {
     const maximumYearMonth = {year: 2022, month: 4};
     const minimumYearMonth = {year: 2021, month: 11};
-    const sut = render(
+    render(
       <YearMonthPicker
         maximumYearMonth={maximumYearMonth}
         minimumYearMonth={minimumYearMonth}
@@ -145,16 +143,16 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
       />,
     );
 
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    const yearPicker = sut.getByTestId('yearPicker');
+    const yearPicker = screen.getByTestId('yearPicker');
     const yearPickerProps = yearPicker.props as SelectPickerItemsProps<string>;
     expect(yearPickerProps.items).toEqual([
       {value: 2021, label: '2021'},
       {value: 2022, label: '2022'},
     ]);
-    const monthPicker = sut.getByTestId('monthPicker');
+    const monthPicker = screen.getByTestId('monthPicker');
     const monthPickerProps = monthPicker.props as SelectPickerItemsProps<string>;
     expect(monthPickerProps.items).toEqual([
       {value: 1, label: '1'},
@@ -197,7 +195,7 @@ describe('YearMonthPicker with all props', () => {
     const onDelete = jest.fn();
     const onCancel = jest.fn();
     const onDone = jest.fn();
-    const sut = render(
+    const screen = render(
       <YearMonthPicker
         maximumYearMonth={maximumYearMonth}
         minimumYearMonth={YearMonthUtil.addMonth(maximumYearMonth, -60)}
@@ -231,13 +229,13 @@ describe('YearMonthPicker with all props', () => {
         itemFontFamily="Roboto"
       />,
     );
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    expect(sut).toMatchSnapshot('YearMonthPicker all properly.');
+    expect(screen).toMatchSnapshot('YearMonthPicker all properly.');
 
     // assert pickerContainer
-    const pickerContainer = sut.getByTestId('pickerContainer');
+    const pickerContainer = screen.getByTestId('pickerContainer');
     const pickerContainerProps = pickerContainer.props as PickerContainerProps;
     expect(pickerContainerProps.style).toEqual({
       backgroundColor: 'yellow',
@@ -246,35 +244,35 @@ describe('YearMonthPicker with all props', () => {
     });
 
     // assert pickerItemsContainer
-    const pickerItemsContainer = sut.getByTestId('pickerItemsContainer');
+    const pickerItemsContainer = screen.getByTestId('pickerItemsContainer');
     const pickerItemsContainerProps = pickerItemsContainer.props as ViewProps;
     expect(pickerItemsContainerProps.pointerEvents).toBe('none');
 
     // assert PickerItems
-    const yearPicker = sut.getByTestId('yearPicker');
+    const yearPicker = screen.getByTestId('yearPicker');
     const yearPickerProps = yearPicker.props as SelectPickerItemsProps<string>;
     expect(yearPickerProps.numberOfLines).toBe(5);
     // itemsは、Itemの各Propを検証できなかったため、件数のみ検証する
     expect(yearPickerProps.items.length).toBe(6);
-    const monthPicker = sut.getByTestId('monthPicker');
+    const monthPicker = screen.getByTestId('monthPicker');
     const monthPickerProps = monthPicker.props as SelectPickerItemsProps<string>;
     expect(monthPickerProps.numberOfLines).toBe(5);
     // itemsは、Itemの各Propを検証できなかったため、件数のみ検証する
     expect(monthPickerProps.items.length).toBe(12);
-    const yearSuffix = sut.queryByText('年');
-    const monthSuffix = sut.queryByText('月');
+    const yearSuffix = screen.queryByText('年');
+    const monthSuffix = screen.queryByText('月');
     expect(yearSuffix).not.toBeNull();
     expect(monthSuffix).not.toBeNull();
 
     // assert textInput
-    const textInput = sut.getByTestId('textInput');
+    const textInput = screen.getByTestId('textInput');
     const textInputProps = textInput.props as TextInputProps;
     expect(textInputProps.style).toEqual({color: 'red'});
     expect(textInputProps.value).toBe('2022年4月');
 
     // assert pickerBackdrop
-    const pickerBackdropPressable = sut.getByTestId('pickerBackdropPressable');
-    const pickerBackdropModal = sut.getByTestId('pickerBackdropModal');
+    const pickerBackdropPressable = screen.getByTestId('pickerBackdropPressable');
+    const pickerBackdropModal = screen.getByTestId('pickerBackdropModal');
     const pickerBackdropProps = pickerBackdropPressable.props as PickerBackdropProps;
     fireEvent(pickerBackdropModal, 'onRequestClose');
     expect(pickerBackdropProps.style).toEqual({
@@ -293,7 +291,7 @@ describe('YearMonthPicker with all props', () => {
     fireEvent.press(pressableContainer);
 
     // assert pickerAccessory
-    const pickerAccessory = sut.getByTestId('pickerAccessory');
+    const pickerAccessory = screen.getByTestId('pickerAccessory');
     const pickerAccessoryProps = pickerAccessory.props as ViewProps;
     expect(pickerAccessoryProps.style).toEqual({
       backgroundColor: 'blue',
@@ -302,20 +300,20 @@ describe('YearMonthPicker with all props', () => {
       paddingHorizontal: 10,
       paddingVertical: 8,
     });
-    const deleteLink = sut.getByTestId('deleteLink');
-    const deleteText = sut.queryByText('delete');
+    const deleteLink = screen.getByTestId('deleteLink');
+    const deleteText = screen.queryByText('delete');
     expect(deleteText).not.toBeNull();
     fireEvent.press(deleteLink);
     expect(onDelete).toHaveBeenCalledTimes(1);
     fireEvent.press(pressableContainer);
-    const cancelLink = sut.getByTestId('cancelLink');
-    const cancelText = sut.queryByText('cancel');
+    const cancelLink = screen.getByTestId('cancelLink');
+    const cancelText = screen.queryByText('cancel');
     expect(cancelText).not.toBeNull();
     fireEvent.press(cancelLink);
     expect(onCancel).toHaveBeenCalledTimes(1);
     fireEvent.press(pressableContainer);
-    const doneLink = sut.getByTestId('doneLink');
-    const doneText = sut.queryByText('done');
+    const doneLink = screen.getByTestId('doneLink');
+    const doneText = screen.queryByText('done');
     expect(doneText).not.toBeNull();
     fireEvent.press(doneLink);
     expect(onDone).toHaveBeenCalledTimes(1);

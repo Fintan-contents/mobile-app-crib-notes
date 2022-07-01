@@ -1,4 +1,4 @@
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {StyleSheet, TextInputProps, View, ViewProps, ViewStyle} from 'react-native';
 
@@ -16,7 +16,7 @@ jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
 
 describe('DateTimePicker only with required props', () => {
   it('renders successfully if invisible', () => {
-    const sut = render(
+    render(
       <DateTimePicker
         textInputProps={{testID: 'textInput'}}
         pickerBackdropProps={{pressableProps: {testID: 'pickerBackdrop'}}}
@@ -26,13 +26,13 @@ describe('DateTimePicker only with required props', () => {
       />,
     );
 
-    expect(sut).toMatchSnapshot('DateTimePicker if invisible.');
+    expect(screen).toMatchSnapshot('DateTimePicker if invisible.');
 
-    const pickerBackdrop = sut.queryByTestId('pickerBackdrop');
-    const pickerContainer = sut.queryByTestId('pickerContainer');
-    const pickerAccessory = sut.queryByTestId('pickerAccessory');
-    const pickerItemsContainer = sut.queryByTestId('pickerItemsContainer');
-    const textInput = sut.queryByTestId('textInput');
+    const pickerBackdrop = screen.queryByTestId('pickerBackdrop');
+    const pickerContainer = screen.queryByTestId('pickerContainer');
+    const pickerAccessory = screen.queryByTestId('pickerAccessory');
+    const pickerItemsContainer = screen.queryByTestId('pickerItemsContainer');
+    const textInput = screen.queryByTestId('textInput');
     expect(pickerBackdrop).toBeNull();
     expect(pickerContainer).toBeNull();
     expect(pickerAccessory).toBeNull();
@@ -45,7 +45,7 @@ describe('DateTimePicker only with required props', () => {
     const selectedValue = new Date('2022-05-30T00:00:00.000Z');
     // formatTextを指定しないと、タイムゾーンの表記が環境によって違うので、どの環境でも変わらないように指定しています。
     const formatText = (date?: Date) => (date ? date.toISOString() : '');
-    const sut = render(
+    render(
       <DateTimePicker
         selectedValue={selectedValue}
         textInputProps={{testID: 'textInput'}}
@@ -57,16 +57,16 @@ describe('DateTimePicker only with required props', () => {
         formatText={formatText}
       />,
     );
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    expect(sut).toMatchSnapshot('DateTimePicker if visible.');
+    expect(screen).toMatchSnapshot('DateTimePicker if visible.');
 
-    const pickerBackdrop = sut.queryByTestId('pickerBackdrop');
-    const pickerContainer = sut.queryByTestId('pickerContainer');
-    const pickerAccessory = sut.queryByTestId('pickerAccessory');
-    const pickerItemsContainer = sut.queryByTestId('pickerItemsContainer');
-    const textInput = sut.queryByTestId('textInput');
+    const pickerBackdrop = screen.queryByTestId('pickerBackdrop');
+    const pickerContainer = screen.queryByTestId('pickerContainer');
+    const pickerAccessory = screen.queryByTestId('pickerAccessory');
+    const pickerItemsContainer = screen.queryByTestId('pickerItemsContainer');
+    const textInput = screen.queryByTestId('textInput');
     expect(pickerBackdrop).not.toBeNull();
     expect(pickerContainer).not.toBeNull();
     expect(pickerAccessory).not.toBeNull();
@@ -78,10 +78,10 @@ describe('DateTimePicker only with required props', () => {
 describe('DateTimePicker with default value', () => {
   it('defaultValue should be set at open if selectedValue does not exist,', () => {
     const defaultValue = new Date('2022-05-10T00:00:00.000Z');
-    const sut = render(<DateTimePicker defaultValue={defaultValue} pickerItemsProps={{testID: 'pickerItems'}} />);
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    render(<DateTimePicker defaultValue={defaultValue} pickerItemsProps={{testID: 'pickerItems'}} />);
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
-    expect(sut.getByTestId('pickerItems').props.date).toBe(defaultValue.getTime());
+    expect(screen.getByTestId('pickerItems').props.date).toBe(defaultValue.getTime());
   });
 });
 
@@ -96,7 +96,7 @@ describe('DateTimePicker with all props', () => {
     const selectedValue = new Date('2022-01-01T00:00:00.000Z');
     const maximumDate = new Date('2022-05-31T00:00:00.000Z');
     const minimumDate = new Date('2017-01-01T00:00:00.000Z');
-    const sut = render(
+    render(
       <DateTimePicker
         selectedValue={selectedValue}
         maximumDate={maximumDate}
@@ -131,13 +131,13 @@ describe('DateTimePicker with all props', () => {
       />,
     );
 
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    expect(sut).toMatchSnapshot('DateTimePicker all properly with default xxx component.');
+    expect(screen).toMatchSnapshot('DateTimePicker all properly with default xxx component.');
 
     // assert pickerContainer
-    const pickerContainer = sut.getByTestId('pickerContainer');
+    const pickerContainer = screen.getByTestId('pickerContainer');
     const pickerContainerProps = pickerContainer.props as PickerContainerProps;
     expect(pickerContainerProps.style).toEqual({
       backgroundColor: 'yellow',
@@ -146,12 +146,12 @@ describe('DateTimePicker with all props', () => {
     });
 
     // assert pickerItemsContainer
-    const pickerItemsContainer = sut.getByTestId('pickerItemsContainer');
+    const pickerItemsContainer = screen.getByTestId('pickerItemsContainer');
     const pickerItemsContainerProps = pickerItemsContainer.props as ViewProps;
     expect(pickerItemsContainerProps.pointerEvents).toBe('none');
 
     // assert PickerItems
-    const pickerItems = sut.getByTestId('pickerItems');
+    const pickerItems = screen.getByTestId('pickerItems');
     const pickerItemsProps = pickerItems.props as DateTimePickerItemsIOSProps;
     expect(pickerItemsProps.date).toBe(selectedValue.getTime());
     expect(pickerItemsProps.maximumDate).toBe(maximumDate.getTime());
@@ -166,13 +166,13 @@ describe('DateTimePicker with all props', () => {
     expect(flattenPickerItemsStyle.backgroundColor).toBe('yellow');
 
     // assert textInput
-    const textInput = sut.getByTestId('textInput');
+    const textInput = screen.getByTestId('textInput');
     const textInputProps = textInput.props as TextInputProps;
     expect(textInputProps.style).toEqual({color: 'red'});
 
     // assert pickerBackdrop
-    const pickerBackdropPressable = sut.getByTestId('pickerBackdropPressable');
-    const pickerBackdropModal = sut.getByTestId('pickerBackdropModal');
+    const pickerBackdropPressable = screen.getByTestId('pickerBackdropPressable');
+    const pickerBackdropModal = screen.getByTestId('pickerBackdropModal');
     const pickerBackdropProps = pickerBackdropPressable.props as PickerBackdropProps;
     fireEvent(pickerBackdropModal, 'onRequestClose');
     expect(pickerBackdropProps.style).toEqual({
@@ -191,7 +191,7 @@ describe('DateTimePicker with all props', () => {
     fireEvent.press(pressableContainer);
 
     // assert pickerAccessory
-    const pickerAccessory = sut.getByTestId('pickerAccessory');
+    const pickerAccessory = screen.getByTestId('pickerAccessory');
     const pickerAccessoryProps = pickerAccessory.props as ViewProps;
     expect(pickerAccessoryProps.style).toEqual({
       backgroundColor: 'blue',
@@ -200,20 +200,20 @@ describe('DateTimePicker with all props', () => {
       paddingHorizontal: 10,
       paddingVertical: 8,
     });
-    const deleteLink = sut.getByTestId('deleteLink');
-    const deleteText = sut.queryByText('delete');
+    const deleteLink = screen.getByTestId('deleteLink');
+    const deleteText = screen.queryByText('delete');
     expect(deleteText).not.toBeNull();
     fireEvent.press(deleteLink);
     expect(onDelete).toHaveBeenCalledTimes(1);
     fireEvent.press(pressableContainer);
-    const cancelLink = sut.getByTestId('cancelLink');
-    const cancelText = sut.queryByText('cancel');
+    const cancelLink = screen.getByTestId('cancelLink');
+    const cancelText = screen.queryByText('cancel');
     expect(cancelText).not.toBeNull();
     fireEvent.press(cancelLink);
     expect(onCancel).toHaveBeenCalledTimes(1);
     fireEvent.press(pressableContainer);
-    const doneLink = sut.getByTestId('doneLink');
-    const doneText = sut.queryByText('done');
+    const doneLink = screen.getByTestId('doneLink');
+    const doneText = screen.queryByText('done');
     expect(doneText).not.toBeNull();
     fireEvent.press(doneLink);
     expect(onDone).toHaveBeenCalledTimes(1);
@@ -232,7 +232,7 @@ describe('DateTimePicker with all props', () => {
     const onSelectedItemChange = jest.fn();
     const onDismiss = jest.fn();
     const formatText = jest.fn();
-    const sut = render(
+    render(
       <DateTimePicker
         selectedValue={selectedValue}
         maximumDate={maximumDate}
@@ -257,14 +257,14 @@ describe('DateTimePicker with all props', () => {
         displayIOS="spinner"
       />,
     );
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    expect(sut).toMatchSnapshot('DateTimePicker all properly with custom xxx component.');
+    expect(screen).toMatchSnapshot('DateTimePicker all properly with custom xxx component.');
 
     // assert pickerBackdrop
-    const pickerBackdropPressable = sut.getByTestId('pickerBackdropPressable');
-    const pickerBackdropModal = sut.getByTestId('pickerBackdropModal');
+    const pickerBackdropPressable = screen.getByTestId('pickerBackdropPressable');
+    const pickerBackdropModal = screen.getByTestId('pickerBackdropModal');
     const pickerBackdropProps = pickerBackdropPressable.props as PickerBackdropProps;
     fireEvent(pickerBackdropModal, 'onRequestClose');
     expect(pickerBackdropProps.style).toEqual({
@@ -283,7 +283,7 @@ describe('DateTimePicker with all props', () => {
     fireEvent.press(pressableContainer);
 
     // assert pickerContainer
-    const pickerContainer = sut.getByTestId('pickerContainer');
+    const pickerContainer = screen.getByTestId('pickerContainer');
     const pickerContainerProps = pickerContainer.props as PickerContainerProps;
     expect(pickerContainerProps.style).toEqual({
       backgroundColor: 'yellow',
@@ -292,19 +292,19 @@ describe('DateTimePicker with all props', () => {
     });
 
     // assert pickerAccessory
-    const defaultPickerAccessory = sut.queryByTestId('defaultPickerAccessory');
-    const customPickerAccessory = sut.queryByTestId('customPickerAccessory');
+    const defaultPickerAccessory = screen.queryByTestId('defaultPickerAccessory');
+    const customPickerAccessory = screen.queryByTestId('customPickerAccessory');
     expect(defaultPickerAccessory).toBeNull();
     expect(customPickerAccessory).not.toBeNull();
 
     // assert pickerItemsContainer
-    const pickerItemsContainer = sut.getByTestId('pickerItemsContainer');
+    const pickerItemsContainer = screen.getByTestId('pickerItemsContainer');
     const pickerItemsContainerProps = pickerItemsContainer.props as ViewProps;
     expect(pickerItemsContainerProps.pointerEvents).toBe('none');
 
     // assert textInput
-    const defaultTextInput = sut.queryByTestId('defaultTextInput');
-    const customTextInput = sut.queryByTestId('customTextInput');
+    const defaultTextInput = screen.queryByTestId('defaultTextInput');
+    const customTextInput = screen.queryByTestId('customTextInput');
     expect(defaultTextInput).toBeNull();
     expect(customTextInput).not.toBeNull();
   });

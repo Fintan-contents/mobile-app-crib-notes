@@ -1,4 +1,4 @@
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {PressableProps, ViewProps} from 'react-native';
 import Reanimated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
@@ -32,17 +32,17 @@ const Wrapper: React.FC = ({children}) => {
 
 describe('OverlayBackdrop only with required props', () => {
   it('returns null if not visible', () => {
-    const sut = render(<OverlayBackdrop isVisible={false} />, {wrapper: Wrapper});
+    render(<OverlayBackdrop isVisible={false} />, {wrapper: Wrapper});
     // OverlayBackdropがnullを返していることを確認したいがうまくやる方法が見当たらないので`toJSON`でnullになることを確認する。
-    expect(sut.toJSON()).toBeNull();
+    expect(screen.toJSON()).toBeNull();
   });
 
   it('renders successfully only with required props', () => {
-    const sut = render(<OverlayBackdrop isVisible testID="backdropAnimated" />, {wrapper: Wrapper});
-    const animatedView = sut.getByTestId('backdropAnimated');
+    render(<OverlayBackdrop isVisible testID="backdropAnimated" />, {wrapper: Wrapper});
+    const animatedView = screen.getByTestId('backdropAnimated');
     const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
     // Animated.Viewのentering/exitingをテストで実行することができなかったため、entering/exitingにデフォルトアニメーションが設定されていることのみを確認する。
-    expect(sut).toMatchSnapshot('AnimatedView with visible.');
+    expect(screen).toMatchSnapshot('AnimatedView with visible.');
     expect(animatedView).not.toBeNull();
     expect(animatedViewProps.entering).toBe(OVERLAY_BACKDROP_DEFAULT_ENTERING);
     expect(animatedViewProps.exiting).toBe(OVERLAY_BACKDROP_DEFAULT_EXITING);
@@ -50,9 +50,9 @@ describe('OverlayBackdrop only with required props', () => {
     //////////////////////////////////////////////////////////////////////////////////
     // 非表示にする
     //////////////////////////////////////////////////////////////////////////////////
-    sut.update(<OverlayBackdrop isVisible={false} />);
-    const animatedView2 = sut.queryByTestId('backdropAnimated');
-    expect(sut).toMatchSnapshot('AnimatedView with invisible.');
+    screen.update(<OverlayBackdrop isVisible={false} />);
+    const animatedView2 = screen.queryByTestId('backdropAnimated');
+    expect(screen).toMatchSnapshot('AnimatedView with invisible.');
     expect(animatedView2).toBeNull();
   });
 });
@@ -60,7 +60,7 @@ describe('OverlayBackdrop only with required props', () => {
 describe('OverlayBackdrop with `onPress', () => {
   it('should be called on pressed', () => {
     const onPress = jest.fn();
-    const sut = render(
+    render(
       <OverlayBackdrop
         isVisible
         onPress={onPress}
@@ -70,7 +70,7 @@ describe('OverlayBackdrop with `onPress', () => {
       />,
       {wrapper: Wrapper},
     );
-    fireEvent.press(sut.getByTestId('pressable'));
+    fireEvent.press(screen.getByTestId('pressable'));
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 });
@@ -88,7 +88,7 @@ describe('OverlayBackdrop with all props', () => {
      *
      * animatedPropsは取得できなかったため（Snapshot上にも存在していない）、検証できていません
      */
-    const sut = render(
+    render(
       <OverlayBackdrop
         isVisible
         testID="animatedView"
@@ -102,10 +102,10 @@ describe('OverlayBackdrop with all props', () => {
       />,
       {wrapper: Wrapper},
     );
-    expect(sut).toMatchSnapshot('OverlayBackdrop with all props.');
-    const modal = sut.getByTestId('modal');
-    const pressable = sut.getByTestId('pressable');
-    const animatedView = sut.getByTestId('animatedView');
+    expect(screen).toMatchSnapshot('OverlayBackdrop with all props.');
+    const modal = screen.getByTestId('modal');
+    const pressable = screen.getByTestId('pressable');
+    const animatedView = screen.getByTestId('animatedView');
 
     // assert modal
     const modalProps = modal.props as ViewProps;

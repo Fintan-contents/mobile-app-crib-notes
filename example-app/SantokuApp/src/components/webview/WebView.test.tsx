@@ -1,4 +1,4 @@
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render, screen} from '@testing-library/react-native';
 import {BundledMessagesLoader, loadMessages} from 'framework';
 import React from 'react';
 
@@ -14,9 +14,9 @@ jest.mock('components/overlay', () => ({
 
 describe('WebView', () => {
   it('WebViewが正常にrenderできることを確認', () => {
-    const renderResult = render(<WebView testID="webview" source={{uri: 'https://localhost/'}} />);
-    expect(renderResult.queryByTestId('webview')).not.toBeNull();
-    expect(renderResult).toMatchSnapshot();
+    render(<WebView testID="webview" source={{uri: 'https://localhost/'}} />);
+    expect(screen.queryByTestId('webview')).not.toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 
   it('WebViewのスクロールイベントが適切なタイミングで発行されることを確認', () => {
@@ -28,7 +28,7 @@ describe('WebView', () => {
     const layoutMeasurement = {height: 600};
     const contentSize = {height: 2000};
 
-    const renderResult = render(
+    render(
       <WebView
         source={{uri: 'https://localhost/'}}
         onLoadStart={handleOnLoadStart}
@@ -39,7 +39,7 @@ describe('WebView', () => {
       />,
     );
 
-    const webview = renderResult.getByTestId('webview');
+    const webview = screen.getByTestId('webview');
 
     expect(webview).not.toBeNull();
 
@@ -76,7 +76,7 @@ describe('WebView', () => {
     expect(handleOnScrollEnd).toHaveBeenCalledTimes(2);
     expect(handleOnScrollEndOnce).toHaveBeenCalledTimes(1);
 
-    renderResult.update(
+    screen.update(
       <WebView
         source={{uri: 'https://localhost2/'}}
         onLoadStart={handleOnLoadStart}
@@ -101,7 +101,7 @@ describe('WebView', () => {
     // ページが再ロードされたため、onScrollEndOnceイベントが発生
     expect(handleOnScrollEndOnce).toHaveBeenCalledTimes(2);
 
-    renderResult.update(
+    screen.update(
       <WebView
         source={{uri: 'https://localhost3/'}}
         onLoadStart={handleOnLoadStart}
@@ -125,7 +125,7 @@ describe('WebView', () => {
     expect(handleOnScrollEnd).toHaveBeenCalledTimes(4);
 
     const contentSizeShort = {height: 200};
-    renderResult.update(
+    screen.update(
       <WebView
         source={{uri: 'https://localhost4/'}}
         onLoadStart={handleOnLoadStart}
@@ -151,9 +151,8 @@ describe('WebView', () => {
     const layoutMeasurement = {height: 600};
     const contentSize = {height: 2000};
 
-    const webview = render(
-      <WebView source={{uri: 'https://localhost/'}} onScrollEnd={handleOnScrollEnd} testID="webview" />,
-    ).getByTestId('webview');
+    render(<WebView source={{uri: 'https://localhost/'}} onScrollEnd={handleOnScrollEnd} testID="webview" />);
+    const webview = screen.getByTestId('webview');
 
     // ロード完了前のスクロールイベント
     fireEvent.scroll(webview, {nativeEvent: {contentOffset: {y: 1400}, layoutMeasurement, contentSize}});
@@ -177,9 +176,8 @@ describe('WebView', () => {
     const layoutMeasurement = {height: 600};
     const contentSize = {height: 2000};
 
-    const webview = render(
-      <WebView source={{uri: 'https://localhost/'}} onScrollEndOnce={handleOnScrollEndOnce} testID="webview" />,
-    ).getByTestId('webview');
+    render(<WebView source={{uri: 'https://localhost/'}} onScrollEndOnce={handleOnScrollEndOnce} testID="webview" />);
+    const webview = screen.getByTestId('webview');
 
     // ロード完了前のスクロールイベント
     fireEvent.scroll(webview, {nativeEvent: {contentOffset: {y: 1400}, layoutMeasurement, contentSize}});
@@ -203,9 +201,8 @@ describe('WebView', () => {
     const layoutMeasurement = {height: 600};
     const contentSize = {height: 2000};
 
-    const webview = render(
-      <WebView source={{uri: 'https://localhost/'}} onScroll={handleOnScroll} testID="webview" />,
-    ).getByTestId('webview');
+    render(<WebView source={{uri: 'https://localhost/'}} onScroll={handleOnScroll} testID="webview" />);
+    const webview = screen.getByTestId('webview');
 
     // ロード完了前のスクロールイベント
     fireEvent.scroll(webview, {nativeEvent: {contentOffset: {y: 1400}, layoutMeasurement, contentSize}});
@@ -226,7 +223,8 @@ describe('WebView', () => {
   it('WebViewのonErrorイベントで、親からonErrorを指定してない場合はSnackbar表示関数をコールすることを確認', async () => {
     await loadMessages(new BundledMessagesLoader());
 
-    const webview = render(<WebView source={{uri: 'https://localhost/'}} testID="webview" />).getByTestId('webview');
+    render(<WebView source={{uri: 'https://localhost/'}} testID="webview" />);
+    const webview = screen.getByTestId('webview');
 
     fireEvent(webview, 'onError');
     expect(mockedShowWithCloseButton).toHaveBeenCalledTimes(1);
@@ -235,9 +233,8 @@ describe('WebView', () => {
   it('WebViewのonErrorイベントで、親からonErrorを指定した場合は親へイベント通知することを確認', () => {
     const handleOnError = jest.fn();
 
-    const webview = render(
-      <WebView source={{uri: 'https://localhost/'}} onError={handleOnError} testID="webview" />,
-    ).getByTestId('webview');
+    render(<WebView source={{uri: 'https://localhost/'}} onError={handleOnError} testID="webview" />);
+    const webview = screen.getByTestId('webview');
 
     fireEvent(webview, 'onError');
     expect(handleOnError).toHaveBeenCalledTimes(1);
@@ -246,8 +243,8 @@ describe('WebView', () => {
   it('WebViewSourceHtmlでも正常にレンダリングされること', () => {
     const handleOnError = jest.fn();
 
-    const webview = render(<WebView source={{html: '<h1>test</h1>'}} onError={handleOnError} testID="webview" />);
-    expect(webview.queryByTestId('webview')).not.toBeNull();
-    expect(webview).toMatchSnapshot();
+    render(<WebView source={{html: '<h1>test</h1>'}} onError={handleOnError} testID="webview" />);
+    expect(screen.queryByTestId('webview')).not.toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 });

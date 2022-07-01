@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
 import {WithAppTheme} from 'components/theme';
 import {WithAccountContext} from 'context/WithAccountContext';
@@ -46,10 +46,10 @@ describe('LoginScreen', () => {
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const Screen = require('./LoginScreen').LoginScreen.component as React.FC;
-    const app = render(<Screen />, {
+    render(<Screen />, {
       wrapper: Wrapper,
     });
-    expect(app.queryByTestId('Login')).not.toBeNull();
-    expect(app).toMatchSnapshot();
+    expect(screen.queryByTestId('Login')).not.toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 });

@@ -1,6 +1,6 @@
 import '@testing-library/jest-native/extend-expect';
 import {NavigationContainer} from '@react-navigation/native';
-import {render, RenderAPI} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
 import {WithTermsAgreementOverlay} from 'context/WithTermsAgreementOverlay';
@@ -36,15 +36,13 @@ const Wrapper: React.FC = ({children}) => {
 };
 
 describe('Home', () => {
-  let app: RenderAPI;
-
   beforeEach(() => {
     const Screen = HomeScreen.component as React.FC;
-    app = render(<Screen />, {wrapper: Wrapper});
+    render(<Screen />, {wrapper: Wrapper});
   });
 
   it('マウントされたときに正常にレンダリングされること', () => {
-    expect(app.queryByTestId('HomeScreen')).toHaveTextContent('開発中');
-    expect(app).toMatchSnapshot();
+    expect(screen.queryByTestId('HomeScreen')).toHaveTextContent('開発中');
+    expect(screen).toMatchSnapshot();
   });
 });

@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {Text} from 'react-native';
 
@@ -19,14 +19,14 @@ describe('FullWindowOverlay', () => {
       OS: 'ios',
     }));
 
-    const renderResult = render(
+    render(
       <FullWindowOverlay>
         <ChildComponent />
       </FullWindowOverlay>,
     );
-    expect(renderResult.queryByTestId('FullWindowOverlay')).not.toBeNull();
-    expect(renderResult.queryByTestId('text')).not.toBeNull();
-    expect(renderResult).toMatchSnapshot();
+    expect(screen.queryByTestId('FullWindowOverlay')).not.toBeNull();
+    expect(screen.queryByTestId('text')).not.toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 
   it('Android環境で子要素を含めて正常にrenderできることを確認', () => {
@@ -34,13 +34,13 @@ describe('FullWindowOverlay', () => {
       OS: 'android',
     }));
 
-    const renderResult = render(
+    render(
       <FullWindowOverlay>
         <ChildComponent />
       </FullWindowOverlay>,
     );
-    expect(renderResult.queryByTestId('FullWindowOverlay')).toBeNull();
-    expect(renderResult.queryByTestId('text')).not.toBeNull();
-    expect(renderResult).toMatchSnapshot();
+    expect(screen.queryByTestId('FullWindowOverlay')).toBeNull();
+    expect(screen.queryByTestId('text')).not.toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 });

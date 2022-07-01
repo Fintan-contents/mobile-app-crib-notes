@@ -1,4 +1,4 @@
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {TextInputProps, View, ViewProps} from 'react-native';
 
@@ -20,7 +20,7 @@ describe('SelectPicker only with required props', () => {
       {value: '1', label: 'test1'},
       {value: '2', label: 'test2'},
     ];
-    const sut = render(
+    render(
       <SelectPicker
         items={items}
         selectedItemKey="1"
@@ -32,13 +32,13 @@ describe('SelectPicker only with required props', () => {
       />,
     );
 
-    expect(sut).toMatchSnapshot('SelectPicker if invisible.');
+    expect(screen).toMatchSnapshot('SelectPicker if invisible.');
 
-    const pickerBackdrop = sut.queryByTestId('pickerBackdrop');
-    const pickerContainer = sut.queryByTestId('pickerContainer');
-    const pickerAccessory = sut.queryByTestId('pickerAccessory');
-    const pickerItemsContainer = sut.queryByTestId('pickerItemsContainer');
-    const textInput = sut.queryByTestId('textInput');
+    const pickerBackdrop = screen.queryByTestId('pickerBackdrop');
+    const pickerContainer = screen.queryByTestId('pickerContainer');
+    const pickerAccessory = screen.queryByTestId('pickerAccessory');
+    const pickerItemsContainer = screen.queryByTestId('pickerItemsContainer');
+    const textInput = screen.queryByTestId('textInput');
     expect(pickerBackdrop).toBeNull();
     expect(pickerContainer).toBeNull();
     expect(pickerAccessory).toBeNull();
@@ -51,7 +51,7 @@ describe('SelectPicker only with required props', () => {
       {value: '1', label: 'test1'},
       {value: '2', label: 'test2'},
     ];
-    const sut = render(
+    render(
       <SelectPicker
         items={items}
         selectedItemKey="1"
@@ -62,16 +62,16 @@ describe('SelectPicker only with required props', () => {
         pickerItemsContainerProps={{testID: 'pickerItemsContainer'}}
       />,
     );
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    expect(sut).toMatchSnapshot('SelectPicker if visible.');
+    expect(screen).toMatchSnapshot('SelectPicker if visible.');
 
-    const pickerBackdrop = sut.queryByTestId('pickerBackdrop');
-    const pickerContainer = sut.queryByTestId('pickerContainer');
-    const pickerAccessory = sut.queryByTestId('pickerAccessory');
-    const pickerItemsContainer = sut.queryByTestId('pickerItemsContainer');
-    const textInput = sut.queryByTestId('textInput');
+    const pickerBackdrop = screen.queryByTestId('pickerBackdrop');
+    const pickerContainer = screen.queryByTestId('pickerContainer');
+    const pickerAccessory = screen.queryByTestId('pickerAccessory');
+    const pickerItemsContainer = screen.queryByTestId('pickerItemsContainer');
+    const textInput = screen.queryByTestId('textInput');
     expect(pickerBackdrop).not.toBeNull();
     expect(pickerContainer).not.toBeNull();
     expect(pickerAccessory).not.toBeNull();
@@ -92,7 +92,7 @@ describe('SelectPicker with all props', () => {
     const onCancel = jest.fn();
     const onDone = jest.fn();
     const keyExtractor = jest.fn((item: Item<string>, index: number) => `${String(item.key ?? item.value)}-${index}`);
-    const sut = render(
+    render(
       <SelectPicker
         items={items}
         selectedItemKey="1"
@@ -122,13 +122,13 @@ describe('SelectPicker with all props', () => {
         onDone={onDone}
       />,
     );
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    expect(sut).toMatchSnapshot('SelectPicker all properly with default xxx component.');
+    expect(screen).toMatchSnapshot('SelectPicker all properly with default xxx component.');
 
     // assert pickerContainer
-    const pickerContainer = sut.getByTestId('pickerContainer');
+    const pickerContainer = screen.getByTestId('pickerContainer');
     const pickerContainerProps = pickerContainer.props as PickerContainerProps;
     expect(pickerContainerProps.style).toEqual({
       backgroundColor: 'yellow',
@@ -137,26 +137,26 @@ describe('SelectPicker with all props', () => {
     });
 
     // assert pickerItemsContainer
-    const pickerItemsContainer = sut.getByTestId('pickerItemsContainer');
+    const pickerItemsContainer = screen.getByTestId('pickerItemsContainer');
     const pickerItemsContainerProps = pickerItemsContainer.props as ViewProps;
     expect(pickerItemsContainerProps.pointerEvents).toBe('none');
 
     // assert PickerItems
-    const picker = sut.getByTestId('picker');
+    const picker = screen.getByTestId('picker');
     const pickerProps = picker.props as SelectPickerItemsProps<string>;
     expect(pickerProps.numberOfLines).toBe(5);
     expect(pickerProps.items.length).toBe(2);
 
     // assert textInput
-    const textInput = sut.getByTestId('textInput');
+    const textInput = screen.getByTestId('textInput');
     const textInputProps = textInput.props as TextInputProps;
     expect(textInputProps.style).toEqual({color: 'red'});
     expect(keyExtractor).toHaveBeenNthCalledWith(1, {value: '1', label: 'test1'}, 0);
     expect(keyExtractor).toHaveBeenNthCalledWith(2, {value: '2', label: 'test2'}, 1);
 
     // assert pickerBackdropPressable
-    const pickerBackdropPressable = sut.getByTestId('pickerBackdropPressable');
-    const pickerBackdropModal = sut.getByTestId('pickerBackdropModal');
+    const pickerBackdropPressable = screen.getByTestId('pickerBackdropPressable');
+    const pickerBackdropModal = screen.getByTestId('pickerBackdropModal');
     const pickerBackdropProps = pickerBackdropPressable.props as PickerBackdropProps;
     fireEvent(pickerBackdropModal, 'onRequestClose');
     expect(pickerBackdropProps.style).toEqual({
@@ -175,7 +175,7 @@ describe('SelectPicker with all props', () => {
     fireEvent.press(pressableContainer);
 
     // assert pickerAccessory
-    const pickerAccessory = sut.getByTestId('pickerAccessory');
+    const pickerAccessory = screen.getByTestId('pickerAccessory');
     const pickerAccessoryProps = pickerAccessory.props as ViewProps;
     expect(pickerAccessoryProps.style).toEqual({
       backgroundColor: 'blue',
@@ -184,20 +184,20 @@ describe('SelectPicker with all props', () => {
       paddingHorizontal: 10,
       paddingVertical: 8,
     });
-    const deleteLink = sut.getByTestId('deleteLink');
-    const deleteText = sut.queryByText('delete');
+    const deleteLink = screen.getByTestId('deleteLink');
+    const deleteText = screen.queryByText('delete');
     expect(deleteText).not.toBeNull();
     fireEvent.press(deleteLink);
     expect(onDelete).toHaveBeenCalledTimes(1);
     fireEvent.press(pressableContainer);
-    const cancelLink = sut.getByTestId('cancelLink');
-    const cancelText = sut.queryByText('cancel');
+    const cancelLink = screen.getByTestId('cancelLink');
+    const cancelText = screen.queryByText('cancel');
     expect(cancelText).not.toBeNull();
     fireEvent.press(cancelLink);
     expect(onCancel).toHaveBeenCalledTimes(1);
     fireEvent.press(pressableContainer);
-    const doneLink = sut.getByTestId('doneLink');
-    const doneText = sut.queryByText('done');
+    const doneLink = screen.getByTestId('doneLink');
+    const doneText = screen.queryByText('done');
     expect(doneText).not.toBeNull();
     fireEvent.press(doneLink);
     expect(onDone).toHaveBeenCalledTimes(1);
@@ -213,7 +213,7 @@ describe('SelectPicker with all props', () => {
     ];
     const onSelectedItemChange = jest.fn();
     const onDismiss = jest.fn();
-    const sut = render(
+    render(
       <SelectPicker
         items={items}
         selectedItemKey="1"
@@ -234,14 +234,14 @@ describe('SelectPicker with all props', () => {
         textInputComponent={CustomTextInput}
       />,
     );
-    const pressableContainer = sut.getByTestId('pressableContainer');
+    const pressableContainer = screen.getByTestId('pressableContainer');
     fireEvent.press(pressableContainer);
 
-    expect(sut).toMatchSnapshot('SelectPicker all properly with custom xxx component.');
+    expect(screen).toMatchSnapshot('SelectPicker all properly with custom xxx component.');
 
     // assert pickerBackdropPressable
-    const pickerBackdropPressable = sut.getByTestId('pickerBackdropPressable');
-    const pickerBackdropModal = sut.getByTestId('pickerBackdropModal');
+    const pickerBackdropPressable = screen.getByTestId('pickerBackdropPressable');
+    const pickerBackdropModal = screen.getByTestId('pickerBackdropModal');
     const pickerBackdropProps = pickerBackdropPressable.props as PickerBackdropProps;
     fireEvent(pickerBackdropModal, 'onRequestClose');
     expect(pickerBackdropProps.style).toEqual({
@@ -260,7 +260,7 @@ describe('SelectPicker with all props', () => {
     fireEvent.press(pressableContainer);
 
     // assert pickerContainer
-    const pickerContainer = sut.getByTestId('pickerContainer');
+    const pickerContainer = screen.getByTestId('pickerContainer');
     const pickerContainerProps = pickerContainer.props as PickerContainerProps;
     expect(pickerContainerProps.style).toEqual({
       backgroundColor: 'yellow',
@@ -269,25 +269,25 @@ describe('SelectPicker with all props', () => {
     });
 
     // assert pickerAccessory
-    const defaultPickerAccessory = sut.queryByTestId('defaultPickerAccessory');
-    const customPickerAccessory = sut.queryByTestId('customPickerAccessory');
+    const defaultPickerAccessory = screen.queryByTestId('defaultPickerAccessory');
+    const customPickerAccessory = screen.queryByTestId('customPickerAccessory');
     expect(defaultPickerAccessory).toBeNull();
     expect(customPickerAccessory).not.toBeNull();
 
     // assert pickerItemsContainer
-    const pickerItemsContainer = sut.getByTestId('pickerItemsContainer');
+    const pickerItemsContainer = screen.getByTestId('pickerItemsContainer');
     const pickerItemsContainerProps = pickerItemsContainer.props as ViewProps;
     expect(pickerItemsContainerProps.pointerEvents).toBe('none');
 
     // assert Picker
-    const defaultPicker = sut.queryByTestId('defaultPicker');
-    const customPicker = sut.queryByTestId('customPicker');
+    const defaultPicker = screen.queryByTestId('defaultPicker');
+    const customPicker = screen.queryByTestId('customPicker');
     expect(defaultPicker).toBeNull();
     expect(customPicker).not.toBeNull();
 
     // assert textInput
-    const defaultTextInput = sut.queryByTestId('defaultTextInput');
-    const customTextInput = sut.queryByTestId('customTextInput');
+    const defaultTextInput = screen.queryByTestId('defaultTextInput');
+    const customTextInput = screen.queryByTestId('customTextInput');
     expect(defaultTextInput).toBeNull();
     expect(customTextInput).not.toBeNull();
   });

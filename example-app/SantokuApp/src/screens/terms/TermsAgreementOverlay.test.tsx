@@ -1,5 +1,5 @@
 import '@testing-library/jest-native/extend-expect';
-import {render} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
 import {AppConfig, BundledMessagesLoader, loadMessages} from 'framework';
@@ -32,7 +32,7 @@ describe('TermsOfServiceAgreement', () => {
     // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const app = render(
+    render(
       <TermsAgreementOverlay
         visible
         close={() => {}}
@@ -43,7 +43,7 @@ describe('TermsOfServiceAgreement', () => {
         wrapper: Wrapper,
       },
     );
-    expect(app.queryByTestId('TermsOfServiceAgreement')).not.toBeNull();
-    expect(app).toMatchSnapshot();
+    expect(screen.queryByTestId('TermsOfServiceAgreement')).not.toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 });

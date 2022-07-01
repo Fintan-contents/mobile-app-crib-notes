@@ -1,5 +1,4 @@
-import {renderHook, WrapperComponent} from '@testing-library/react-hooks';
-import {render} from '@testing-library/react-native';
+import {render, renderHook, screen} from '@testing-library/react-native';
 import React from 'react';
 import {Text} from 'react-native';
 
@@ -7,8 +6,10 @@ import {AccountData} from '../framework/initialize/helpers';
 import {WithAccountContext} from './WithAccountContext';
 import {useAccountContext} from './useAccountContext';
 
-const wrapper: WrapperComponent<React.ProviderProps<AccountData>> = ({children, value}) => {
-  return <WithAccountContext accountData={value}>{children}</WithAccountContext>;
+const wrapper = (value: AccountData) => {
+  return ({children}: {children: React.ReactNode}) => {
+    return <WithAccountContext accountData={value}>{children}</WithAccountContext>;
+  };
 };
 
 describe('WithAccountContext', () => {
@@ -18,20 +19,19 @@ describe('WithAccountContext', () => {
 
   it('WithAccountContextを子要素を含めて正常にrenderできること', () => {
     const accountData = {account: {accountId: '123456789', deviceTokens: []}};
-    const withAccountContext = render(
+    render(
       <WithAccountContext accountData={accountData}>
         <ChildComponent />
       </WithAccountContext>,
     );
 
-    expect(withAccountContext.queryByTestId('test')).not.toBeNull();
-    expect(withAccountContext).toMatchSnapshot();
+    expect(screen.queryByTestId('test')).not.toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 
   it('初期データにAccountが存在している場合は、AccountContextのisLoggedInがtrueで取得できること', () => {
     const {result} = renderHook(() => useAccountContext(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     const accountContext = result.current;
     expect(accountContext).toEqual({account: {accountId: '123456789', deviceTokens: []}, isLoggedIn: true});
@@ -39,8 +39,7 @@ describe('WithAccountContext', () => {
 
   it('初期データにAccountが存在しない場合は、AccountContextのisLoggedInがfalseで取得できること', () => {
     const {result} = renderHook(() => useAccountContext(), {
-      wrapper,
-      initialProps: {value: {}},
+      wrapper: wrapper({}),
     });
     const accountContext = result.current;
     expect(accountContext).toEqual({isLoggedIn: false});

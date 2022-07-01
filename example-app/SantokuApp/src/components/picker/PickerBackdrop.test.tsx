@@ -1,4 +1,5 @@
-import {act, fireEvent, render} from '@testing-library/react-native';
+import {act} from '@testing-library/react-hooks';
+import {fireEvent, render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {ModalProps, PressableProps} from 'react-native';
 
@@ -19,36 +20,38 @@ jest.useFakeTimers('modern');
 
 describe('PickerBackdrop only with required props', () => {
   it('returns null if not visible', () => {
-    const sut = render(<PickerBackdrop isVisible={false} />);
+    render(<PickerBackdrop isVisible={false} />);
     // PickerBackdropがnullを返していることを確認したいがうまくやる方法が見当たらないので`toJSON`でnullになることを確認する。
-    expect(sut.toJSON()).toBeNull();
+    expect(screen.toJSON()).toBeNull();
   });
 
   it('renders successfully only with required props', () => {
-    const sut = render(<PickerBackdrop isVisible pressableProps={{testID: 'pressable'}} />);
+    render(<PickerBackdrop isVisible pressableProps={{testID: 'pressable'}} />);
     //////////////////////////////////////////////////////////////////////////////////
     // 初期表示
     //////////////////////////////////////////////////////////////////////////////////
     // エラーが起きずにレンダリングされること
-    const pressable = sut.queryByTestId('pressable');
+    const pressable = screen.queryByTestId('pressable');
     expect(pressable).not.toBeNull();
-    expect(sut).toMatchSnapshot('Before animation started');
+    expect(screen).toMatchSnapshot('Before animation started');
 
     //////////////////////////////////////////////////////////////////////////////////
     // 非表示にする
     //////////////////////////////////////////////////////////////////////////////////
-    sut.update(<PickerBackdrop isVisible={false} pressableProps={{testID: 'pressable'}} />);
-    act(() => jest.advanceTimersByTime(DEFAULT_FADE_OUT_DURATION));
-    const pressable2 = sut.queryByTestId('pressable');
+    screen.update(<PickerBackdrop isVisible={false} pressableProps={{testID: 'pressable'}} />);
+    act(() => {
+      jest.advanceTimersByTime(DEFAULT_FADE_OUT_DURATION);
+    });
+    const pressable2 = screen.queryByTestId('pressable');
     expect(pressable2).toBeNull();
-    expect(sut).toMatchSnapshot('Just After fade out animation completed');
+    expect(screen).toMatchSnapshot('Just After fade out animation completed');
   });
 });
 
 describe('PickerBackdrop with `onPress', () => {
   it('should be called on pressed', () => {
     const onPress = jest.fn();
-    const sut = render(
+    render(
       <PickerBackdrop
         isVisible
         onPress={onPress}
@@ -56,9 +59,9 @@ describe('PickerBackdrop with `onPress', () => {
         modalProps={{testID: 'modal'}}
       />,
     );
-    fireEvent.press(sut.getByTestId('pressable'));
+    fireEvent.press(screen.getByTestId('pressable'));
     expect(onPress).toHaveBeenCalledTimes(1);
-    fireEvent(sut.getByTestId('modal'), 'onRequestClose');
+    fireEvent(screen.getByTestId('modal'), 'onRequestClose');
     expect(onPress).toHaveBeenCalledTimes(2);
   });
 });
@@ -75,7 +78,7 @@ describe('PickerBackdrop with all props', () => {
      *
      * animatedPropsは取得できなかったため（Snapshot上にも存在していない）、検証できていません
      */
-    const sut = render(
+    render(
       <PickerBackdrop
         isVisible
         onPress={onPress}
@@ -98,9 +101,9 @@ describe('PickerBackdrop with all props', () => {
         afterFadeIn={afterFadeIn}
       />,
     );
-    expect(sut).toMatchSnapshot('PickerBackdrop with all props.');
-    const modal = sut.getByTestId('modal');
-    const pressable = sut.getByTestId('pressable');
+    expect(screen).toMatchSnapshot('PickerBackdrop with all props.');
+    const modal = screen.getByTestId('modal');
+    const pressable = screen.getByTestId('pressable');
 
     // assert modal
     fireEvent(modal, 'onRequestClose');
@@ -114,10 +117,14 @@ describe('PickerBackdrop with all props', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
 
     // fadeInDurationで指定した時間の1msc前ではafterFadeInは実行されない
-    act(() => jest.advanceTimersByTime(199));
+    act(() => {
+      jest.advanceTimersByTime(199);
+    });
     expect(afterFadeIn).not.toHaveBeenCalled();
     // fadeInDurationで指定した時間経過後は、afterFadeInが実行される
-    act(() => jest.advanceTimersByTime(1));
+    act(() => {
+      jest.advanceTimersByTime(1);
+    });
     expect(afterFadeIn).toHaveBeenCalled();
 
     // assert pressable
@@ -141,13 +148,17 @@ describe('PickerBackdrop with all props', () => {
     // 非表示にする
     //////////////////////////////////////////////////////////////////////////////////
     const afterFadeOut = jest.fn();
-    sut.update(<PickerBackdrop isVisible={false} afterFadeOut={afterFadeOut} fadeOutDuration={100} />);
+    screen.update(<PickerBackdrop isVisible={false} afterFadeOut={afterFadeOut} fadeOutDuration={100} />);
 
     // fadeOutDurationで指定した時間の1msc前ではafterFadeOutは実行されない
-    act(() => jest.advanceTimersByTime(99));
+    act(() => {
+      jest.advanceTimersByTime(99);
+    });
     expect(afterFadeOut).not.toHaveBeenCalled();
     // fadeOutDurationで指定した時間経過後は、afterFadeOutが実行される
-    act(() => jest.advanceTimersByTime(1));
+    act(() => {
+      jest.advanceTimersByTime(1);
+    });
     expect(afterFadeOut).toHaveBeenCalled();
   });
 });

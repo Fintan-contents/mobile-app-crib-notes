@@ -1,19 +1,19 @@
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render, screen} from '@testing-library/react-native';
 import React from 'react';
 
 import {Button} from './Button';
 
 describe('Button', () => {
   it('Buttonが正常にrenderできることを確認', () => {
-    const renderResult = render(<Button title="ボタン" />);
-    expect(renderResult.queryByText('ボタン')).not.toBeNull();
-    expect(renderResult).toMatchSnapshot();
+    render(<Button title="ボタン" />);
+    expect(screen.queryByText('ボタン')).not.toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 
   it('Buttonのプレス時にコールバックが実行されることを確認', () => {
     const handlePress = jest.fn();
-    const renderResult = render(<Button testID="button" onPress={handlePress} />);
-    fireEvent.press(renderResult.getByTestId('button'));
+    render(<Button testID="button" onPress={handlePress} />);
+    fireEvent.press(screen.getByTestId('button'));
     expect(handlePress).toHaveBeenCalledTimes(1);
   });
 

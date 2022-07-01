@@ -1,4 +1,5 @@
-import {act, fireEvent, render} from '@testing-library/react-native';
+import {act} from '@testing-library/react-hooks';
+import {fireEvent, render} from '@testing-library/react-native';
 import React from 'react';
 import {View, ViewProps} from 'react-native';
 import Reanimated from 'react-native-reanimated';
@@ -17,7 +18,10 @@ jest.useFakeTimers('modern');
 
 // TODO: Jest v27にアップデートできたら、withReanimatedTimerでテストを実装できるか検証する。
 //       （JestのバージョンはExpoに依存しているので、Expoでのアップデートを待っている状態）
-const startAnimation = () => act(() => jest.advanceTimersByTime(1));
+const startAnimation = () =>
+  act(() => {
+    jest.advanceTimersByTime(1);
+  });
 
 jest.runAllTimers();
 
@@ -53,17 +57,23 @@ describe('PickerContainer only with required props', () => {
     startAnimation();
 
     // アニメーション中は`transform`が変化すること
-    act(() => jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2));
+    act(() => {
+      jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2);
+    });
     expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 75}]});
     expect(sut).toMatchSnapshot('Animating (slide in)');
 
     // アニメーションが完了すると`transform`が設定値に到達していること
-    act(() => jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2));
+    act(() => {
+      jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2);
+    });
     expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 0}]});
     expect(sut).toMatchSnapshot('Just After slide in animation completed');
 
     // アニメーションが完了したあとは変化しないこと
-    act(() => jest.advanceTimersByTime(10));
+    act(() => {
+      jest.advanceTimersByTime(10);
+    });
     expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 0}]});
     expect(sut).toMatchSnapshot('Just After slide in animation completed');
 
@@ -76,17 +86,23 @@ describe('PickerContainer only with required props', () => {
     startAnimation();
 
     // アニメーション中は`transform`が変化すること
-    act(() => jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2));
+    act(() => {
+      jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2);
+    });
     expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 75}]});
     expect(sut).toMatchSnapshot('Animating (slide out)');
 
     // アニメーションが完了するとコンポーネントが消えること
-    act(() => jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2));
+    act(() => {
+      jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2);
+    });
     expect(sut.container.children).toEqual([]);
     expect(sut).toMatchSnapshot('Just After slide out animation completed');
 
     // アニメーションが完了した後も少し時間を進めて、何も変わらないことを確認する
-    act(() => jest.advanceTimersByTime(10));
+    act(() => {
+      jest.advanceTimersByTime(10);
+    });
     expect(sut.container.children).toEqual([]);
     expect(sut).toMatchSnapshot('Just After slide out animation completed');
   });
@@ -120,10 +136,14 @@ describe('PickerContainer with all props', () => {
     expect(animatedViewProps.style).toEqual({backgroundColor: 'green', transform: [{translateY: 1000}]});
 
     // slideInDurationで指定した時間の1msc前ではafterSlideInは実行されない
-    act(() => jest.advanceTimersByTime(199));
+    act(() => {
+      jest.advanceTimersByTime(199);
+    });
     expect(afterSlideIn).not.toHaveBeenCalled();
     // slideInDurationで指定した時間経過後は、afterSlideInが実行される
-    act(() => jest.advanceTimersByTime(1));
+    act(() => {
+      jest.advanceTimersByTime(1);
+    });
     expect(afterSlideIn).toHaveBeenCalled();
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -134,10 +154,14 @@ describe('PickerContainer with all props', () => {
 
     startAnimation();
     // slideOutDurationで指定した時間の1msc前ではafterSlideOutは実行されない
-    act(() => jest.advanceTimersByTime(99));
+    act(() => {
+      jest.advanceTimersByTime(99);
+    });
     expect(afterSlideOut).not.toHaveBeenCalled();
     // slideOutDurationで指定した時間経過後は、afterSlideOutが実行される
-    act(() => jest.advanceTimersByTime(1));
+    act(() => {
+      jest.advanceTimersByTime(1);
+    });
     expect(afterSlideOut).toHaveBeenCalled();
   });
 });

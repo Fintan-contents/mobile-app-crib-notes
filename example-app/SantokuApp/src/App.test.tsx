@@ -1,5 +1,5 @@
 import '@testing-library/jest-native/extend-expect';
-import {render, waitFor} from '@testing-library/react-native';
+import {render, screen, waitFor} from '@testing-library/react-native';
 import React from 'react';
 
 import {App} from './App';
@@ -102,11 +102,11 @@ beforeEach(() => {
 
 describe('App', () => {
   it('マウントされたときに正常にレンダリングされること', async () => {
-    const app = render(<App />);
+    render(<App />);
     await waitFor(
       () => {
-        expect(app.queryByTestId('HomeScreen')).not.toBeNull();
-        expect(app).toMatchSnapshot();
+        expect(screen.queryByTestId('HomeScreen')).not.toBeNull();
+        expect(screen).toMatchSnapshot();
       },
       {timeout: 60000},
     );

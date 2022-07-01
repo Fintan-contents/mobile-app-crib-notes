@@ -1,5 +1,5 @@
 import {act} from '@testing-library/react-hooks';
-import {render} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {Text, ViewStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
@@ -20,28 +20,26 @@ const FADE_DURATION = 200;
 
 describe('Overlay', () => {
   it('Overlayが正常にrenderできることを確認', () => {
-    const renderResult = render(
+    render(
       <Overlay visible>
         <ChildComponent />
       </Overlay>,
     );
 
-    const {queryByTestId, queryByText, getByTestId} = renderResult;
+    expect(screen.queryByTestId('text')).not.toBeNull();
+    expect(screen.queryByText('test')).not.toBeNull();
 
-    expect(queryByTestId('text')).not.toBeNull();
-    expect(queryByText('test')).not.toBeNull();
-
-    expect(getStyle<ViewStyle>(getByTestId('overlayAnimatedView')).opacity).toBe(0);
-    expect(renderResult).toMatchSnapshot('render直後');
+    expect(getStyle<ViewStyle>(screen.getByTestId('overlayAnimatedView')).opacity).toBe(0);
+    expect(screen).toMatchSnapshot('render直後');
 
     act(() => {
       jest.advanceTimersByTime(FADE_DURATION);
     });
 
-    expect(getStyle<ViewStyle>(getByTestId('overlayAnimatedView')).opacity).toBe(1);
-    expect(renderResult).toMatchSnapshot('フェードイン後');
+    expect(getStyle<ViewStyle>(screen.getByTestId('overlayAnimatedView')).opacity).toBe(1);
+    expect(screen).toMatchSnapshot('フェードイン後');
 
-    renderResult.rerender(
+    screen.rerender(
       <Overlay visible={false}>
         <ChildComponent />
       </Overlay>,
@@ -51,14 +49,14 @@ describe('Overlay', () => {
       jest.advanceTimersByTime(FADE_DURATION);
     });
 
-    expect(queryByTestId('overlayAnimatedView')).toBeNull();
-    expect(renderResult).toMatchSnapshot('フェードアウト後');
+    expect(screen.queryByTestId('overlayAnimatedView')).toBeNull();
+    expect(screen).toMatchSnapshot('フェードアウト後');
   });
 
   it('Overlayに指定したpropsがrenderに反映されていることを確認', () => {
     const onHideEnd = jest.fn();
     // fadeDurationはテストコードでアニメーション時間を調整できないため検証対象外
-    const {queryByText, getByTestId} = render(
+    render(
       <Overlay visible onHideEnd={onHideEnd} style={{backgroundColor: 'red'}}>
         <ChildComponent />
       </Overlay>,
@@ -68,7 +66,7 @@ describe('Overlay', () => {
       jest.advanceTimersByTime(FADE_DURATION);
     });
 
-    expect(queryByText('test')).not.toBeNull();
-    expect(getStyle<ViewStyle>(getByTestId('overlayAnimatedView')).backgroundColor).toBe('red');
+    expect(screen.queryByText('test')).not.toBeNull();
+    expect(getStyle<ViewStyle>(screen.getByTestId('overlayAnimatedView')).backgroundColor).toBe('red');
   });
 });

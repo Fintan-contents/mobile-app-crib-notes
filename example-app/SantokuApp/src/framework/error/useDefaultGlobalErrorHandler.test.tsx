@@ -1,4 +1,4 @@
-import {renderHook, WrapperComponent} from '@testing-library/react-hooks';
+import {act, renderHook} from '@testing-library/react-native';
 import {AxiosError} from 'axios';
 import {useSnackbar, WithSnackbar} from 'components/overlay';
 import {WithAccountContext} from 'context/WithAccountContext';
@@ -16,8 +16,10 @@ jest.mock('framework/logging');
 
 jest.useFakeTimers();
 
-const wrapper: WrapperComponent<React.ProviderProps<AccountData>> = ({children, value}) => {
-  return <WithAccountContext accountData={value}>{children}</WithAccountContext>;
+const wrapper = (value: AccountData) => {
+  return ({children}: {children: React.ReactNode}) => {
+    return <WithAccountContext accountData={value}>{children}</WithAccountContext>;
+  };
 };
 
 describe('useDefaultGlobalErrorHandler', () => {
@@ -52,8 +54,7 @@ describe('useDefaultGlobalErrorHandler', () => {
     );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
@@ -83,13 +84,14 @@ describe('useDefaultGlobalErrorHandler', () => {
     });
     const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
-    const {result: errorHandler, waitFor} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+    const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     expect(errorHandler.current).not.toBeUndefined();
-    await waitFor(() => {
-      errorHandler.current(axiosError);
+    await act(async () => {
+      await new Promise(resolve => {
+        resolve(errorHandler.current(axiosError));
+      });
     });
     expect(mockSnackbarShow).not.toBeCalled();
     expect(spyClientLogout).toHaveBeenCalled();
@@ -117,8 +119,7 @@ describe('useDefaultGlobalErrorHandler', () => {
     const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
@@ -145,8 +146,7 @@ describe('useDefaultGlobalErrorHandler', () => {
     );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
@@ -170,8 +170,7 @@ describe('useDefaultGlobalErrorHandler', () => {
     const spyAlert = jest.spyOn(Alert, 'alert');
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
@@ -198,8 +197,7 @@ describe('useDefaultGlobalErrorHandler', () => {
     );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
@@ -224,8 +222,7 @@ describe('useDefaultGlobalErrorHandler', () => {
     );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
@@ -250,8 +247,7 @@ describe('useDefaultGlobalErrorHandler', () => {
     );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
@@ -276,8 +272,7 @@ describe('useDefaultGlobalErrorHandler', () => {
     );
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(axiosError);
@@ -289,8 +284,7 @@ describe('useDefaultGlobalErrorHandler', () => {
   test('nullの場合に予期せぬエラーのスナックバーを表示', async () => {
     await loadBundledMessagesAsync();
     const {result: errorHandler} = renderHook(() => useDefaultGlobalErrorHandler(), {
-      wrapper,
-      initialProps: {value: {account: {accountId: '123456789', deviceTokens: []}}},
+      wrapper: wrapper({account: {accountId: '123456789', deviceTokens: []}}),
     });
     expect(errorHandler.current).not.toBeUndefined();
     errorHandler.current(null);

@@ -1,5 +1,5 @@
 import {act} from '@testing-library/react-hooks';
-import {render, waitFor} from '@testing-library/react-native';
+import {render, screen, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import {Text, TextStyle, ViewStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
@@ -24,74 +24,72 @@ const HIDE_FADE_OUT_DURATION = 300;
 
 describe('Snackbar', () => {
   it('Snackbarが正常にrenderできることを確認', () => {
-    const renderResult = render(
+    render(
       <Snackbar message="テストメッセージ">
         <ChildComponent />
       </Snackbar>,
     );
 
-    const {queryByTestId, queryByText, getByTestId} = renderResult;
+    expect(screen.queryByTestId('text')).not.toBeNull();
+    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 
-    expect(queryByTestId('text')).not.toBeNull();
-    expect(queryByText('テストメッセージ')).not.toBeNull();
-
-    expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(0);
-    expect(renderResult).toMatchSnapshot('render直後');
+    expect(getStyle<ViewStyle>(screen.getByTestId('snackbarAnimatedView')).opacity).toBe(0);
+    expect(screen).toMatchSnapshot('render直後');
 
     act(() => {
       jest.advanceTimersByTime(FADE_IN_DURATION);
     });
-    expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).opacity).toBe(1);
-    expect(renderResult).toMatchSnapshot('フェードイン後');
+    expect(getStyle<ViewStyle>(screen.getByTestId('snackbarAnimatedView')).opacity).toBe(1);
+    expect(screen).toMatchSnapshot('フェードイン後');
 
     act(() => {
       jest.advanceTimersByTime(AUTO_HIDE_DURATION + FADE_OUT_DURATION);
     });
-    expect(queryByTestId('snackbarAnimatedView')).toBeNull();
-    expect(renderResult).toMatchSnapshot('フェードアウト後');
+    expect(screen.queryByTestId('snackbarAnimatedView')).toBeNull();
+    expect(screen).toMatchSnapshot('フェードアウト後');
   });
 
   it('Snackbar表示中にpropsが更新された場合、フェードアウト後に更新後のpropsでSnackbarが表示されることを確認', async () => {
-    const renderResult = render(
+    render(
       <Snackbar message="初回">
         <ChildComponent />
       </Snackbar>,
     );
 
-    expect(renderResult.queryByText('初回')).not.toBeNull();
+    expect(screen.queryByText('初回')).not.toBeNull();
 
-    renderResult.update(
+    screen.update(
       <Snackbar message="２回目">
         <ChildComponent />
       </Snackbar>,
     );
 
-    expect(renderResult.queryByText('初回')).not.toBeNull();
+    expect(screen.queryByText('初回')).not.toBeNull();
 
     await waitFor(() => {
       jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
 
-      expect(renderResult.queryByText('初回')).toBeNull();
-      expect(renderResult.queryByText('２回目')).not.toBeNull();
+      expect(screen.queryByText('初回')).toBeNull();
+      expect(screen.queryByText('２回目')).not.toBeNull();
     });
   });
 
   it('Snackbarの表示中に２連続propsが更新された場合、後で更新した方のpropsでSnackbarが表示されることを確認', async () => {
-    const renderResult = render(
+    render(
       <Snackbar message="初回">
         <ChildComponent />
       </Snackbar>,
     );
 
-    expect(renderResult.queryByText('初回')).not.toBeNull();
+    expect(screen.queryByText('初回')).not.toBeNull();
 
-    renderResult.update(
+    screen.update(
       <Snackbar message="２回目">
         <ChildComponent />
       </Snackbar>,
     );
 
-    renderResult.update(
+    screen.update(
       <Snackbar message="３回目">
         <ChildComponent />
       </Snackbar>,
@@ -100,7 +98,7 @@ describe('Snackbar', () => {
     await waitFor(() => {
       jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
 
-      expect(renderResult.queryByText('３回目')).not.toBeNull();
+      expect(screen.queryByText('３回目')).not.toBeNull();
     });
   });
 
@@ -119,25 +117,25 @@ describe('Snackbar', () => {
       forceFadeOutDuration: 400,
       timestamp: Date.now(),
     };
-    const renderResult = render(
+    render(
       <Snackbar {...props}>
         <ChildComponent />
       </Snackbar>,
     );
 
-    expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
+    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 
     act(() => {
       jest.advanceTimersByTime(FADE_IN_DURATION + AUTO_HIDE_DURATION + FADE_OUT_DURATION);
     });
 
-    renderResult.update(
+    screen.update(
       <Snackbar {...props}>
         <ChildComponent />
       </Snackbar>,
     );
 
-    expect(renderResult.queryByText('テストメッセージ')).toBeNull();
+    expect(screen.queryByText('テストメッセージ')).toBeNull();
   });
 
   it('Snackbarの表示後にTimestamp以外同一のpropsを指定した場合、Snackbarが表示されることを確認', () => {
@@ -154,38 +152,38 @@ describe('Snackbar', () => {
       fadeOutDuration: 300,
       forceFadeOutDuration: 400,
     };
-    const renderResult = render(
+    render(
       <Snackbar {...props} timestamp={Date.now()}>
         <ChildComponent />
       </Snackbar>,
     );
 
-    expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
+    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 
     act(() => {
       jest.advanceTimersByTime(FADE_IN_DURATION + AUTO_HIDE_DURATION + FADE_OUT_DURATION);
     });
 
-    renderResult.update(
+    screen.update(
       <Snackbar {...props} timestamp={Date.now()}>
         <ChildComponent />
       </Snackbar>,
     );
 
-    expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
+    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
   });
 
   it('Snackbar表示中にpropsでhideを指定した場合、Snackbarが消えることを確認', async () => {
-    const renderResult = render(
+    render(
       <Snackbar message="テストメッセージ">
         <ChildComponent />
       </Snackbar>,
     );
 
     jest.advanceTimersByTime(FADE_IN_DURATION);
-    expect(renderResult.queryByText('テストメッセージ')).not.toBeNull();
+    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 
-    renderResult.update(
+    screen.update(
       <Snackbar message="テストメッセージ" hide>
         <ChildComponent />
       </Snackbar>,
@@ -193,7 +191,7 @@ describe('Snackbar', () => {
 
     await waitFor(() => {
       jest.advanceTimersByTime(HIDE_FADE_OUT_DURATION);
-      expect(renderResult.queryByText('テストメッセージ')).toBeNull();
+      expect(screen.queryByText('テストメッセージ')).toBeNull();
     });
   });
 
@@ -207,7 +205,7 @@ describe('Snackbar', () => {
      * - hide
      *     テスト済
      */
-    const {queryByText, getByText, getByTestId} = render(
+    render(
       <Snackbar
         message="テストメッセージ"
         messageTextStyle={{color: 'black'}}
@@ -222,11 +220,11 @@ describe('Snackbar', () => {
 
     jest.advanceTimersByTime(FADE_IN_DURATION);
 
-    expect(queryByText('テストメッセージ')).not.toBeNull();
-    expect(getStyle<TextStyle>(getByText('テストメッセージ')).color).toBe('black');
-    expect(getStyle<ViewStyle>(getByTestId('snackbarStyleView')).backgroundColor).toBe('red');
-    expect(getStyle<ViewStyle>(getByTestId('snackbarAnimatedView')).bottom).toBe(50);
-    expect(queryByText('閉じる')).not.toBeNull();
-    expect(getStyle<TextStyle>(getByText('閉じる')).color).toBe('blue');
+    expect(screen.queryByText('テストメッセージ')).not.toBeNull();
+    expect(getStyle<TextStyle>(screen.getByText('テストメッセージ')).color).toBe('black');
+    expect(getStyle<ViewStyle>(screen.getByTestId('snackbarStyleView')).backgroundColor).toBe('red');
+    expect(getStyle<ViewStyle>(screen.getByTestId('snackbarAnimatedView')).bottom).toBe(50);
+    expect(screen.queryByText('閉じる')).not.toBeNull();
+    expect(getStyle<TextStyle>(screen.getByText('閉じる')).color).toBe('blue');
   });
 });

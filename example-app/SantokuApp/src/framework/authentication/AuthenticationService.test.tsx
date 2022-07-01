@@ -1,4 +1,5 @@
-import {act, renderHook, WrapperComponent} from '@testing-library/react-hooks';
+import {act} from '@testing-library/react-hooks';
+import {renderHook} from '@testing-library/react-native';
 import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
@@ -9,7 +10,7 @@ import * as csrfToken from '../backend/refreshCsrfToken';
 import {ActiveAccountIdNotFoundError, PasswordNotFoundError} from './AuthenticationService';
 import {SecureStorageAdapter} from './SecureStorageAdapter';
 
-const wrapper: WrapperComponent<React.ProviderProps<void>> = ({children}) => {
+const wrapper: React.ComponentType<React.ProviderProps<void>> = ({children}) => {
   const queryClient = new QueryClient();
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 };
@@ -27,8 +28,8 @@ describe('AuthenticationService signup', () => {
     const spySecureStorageAdapterSavePassword = jest.spyOn(SecureStorageAdapter, 'savePassword');
     const {result} = renderHook(() => AuthenticationService.useSignup(), {wrapper});
     await act(async () => {
-      await result.current.mutateAsync({nickname: 'testNickName', password: 'password123'});
-      expect(result.current.data).toEqual({
+      const res = await result.current.mutateAsync({nickname: 'testNickName', password: 'password123'});
+      expect(res).toEqual({
         accountId: '123456789',
         profile: {nickname: 'testNickName'},
         deviceTokens: [],

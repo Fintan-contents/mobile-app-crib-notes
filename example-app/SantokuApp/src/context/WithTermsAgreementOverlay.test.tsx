@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native';
 import {WithAccountContext} from 'context/WithAccountContext';
 import {AppConfig, BundledMessagesLoader, loadMessages} from 'framework';
 import React, {useEffect} from 'react';
@@ -42,12 +42,12 @@ const ChildComponent: React.FC = () => {
 
 describe('WithTermsOfServiceAgreementOverlay', () => {
   it('useTermsAgreementOverlayのshowで、利用規約が正常に表示されることを確認', () => {
-    const renderResult = render(
+    render(
       <WithTermsAgreementOverlay>
         <ChildComponent />
       </WithTermsAgreementOverlay>,
       {wrapper: Wrapper},
     );
-    expect(renderResult.queryByText('利用規約')).not.toBeNull();
+    expect(screen.queryByText('利用規約')).not.toBeNull();
   });
 });

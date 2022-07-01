@@ -1,10 +1,11 @@
-import {renderHook} from '@testing-library/react-hooks';
+import {renderHook} from '@testing-library/react-native';
 
 import {usePrevious} from './usePrevious';
 
 describe('usePrevious', () => {
   it('returns previous value', () => {
-    const {result, rerender} = renderHook(current => usePrevious(current), {initialProps: 1});
+    const props: number = 1;
+    const {result, rerender} = renderHook(current => usePrevious(current), {initialProps: props});
     expect(result.current).toBe(undefined);
 
     rerender(2);

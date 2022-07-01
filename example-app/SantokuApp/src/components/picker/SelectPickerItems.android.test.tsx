@@ -1,4 +1,4 @@
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {FlatListProps, PressableProps, TextProps, ViewProps} from 'react-native';
 
@@ -15,16 +15,16 @@ describe('SelectPickerItems only with required props', () => {
       {value: '1', label: 'test1'},
       {value: '2', label: 'test2'},
     ];
-    const sut = render(<SelectPickerItems selectedValue="1" items={items} testID="SelectPickerItems" />);
-    const selectPickerItems = sut.queryByTestId('SelectPickerItems');
-    expect(sut).toMatchSnapshot('SelectPickerItems with more than one item.');
+    render(<SelectPickerItems selectedValue="1" items={items} testID="SelectPickerItems" />);
+    const selectPickerItems = screen.queryByTestId('SelectPickerItems');
+    expect(screen).toMatchSnapshot('SelectPickerItems with more than one item.');
     expect(selectPickerItems).not.toBeNull();
   });
 
   it('renders successfully if item does not exit', () => {
-    const sut = render(<SelectPickerItems selectedValue="1" items={[]} testID="SelectPickerItems" />);
-    const selectPickerItems = sut.queryByTestId('SelectPickerItems');
-    expect(sut).toMatchSnapshot('SelectPickerItems without item.');
+    render(<SelectPickerItems selectedValue="1" items={[]} testID="SelectPickerItems" />);
+    const selectPickerItems = screen.queryByTestId('SelectPickerItems');
+    expect(screen).toMatchSnapshot('SelectPickerItems without item.');
     expect(selectPickerItems).not.toBeNull();
   });
 });
@@ -49,7 +49,7 @@ describe('SelectPickerItems with all props', () => {
      * - itemStyle
      * - accessibilityLabel
      */
-    const sut = render(
+    render(
       <SelectPickerItems
         selectedValue="1"
         items={items}
@@ -68,24 +68,24 @@ describe('SelectPickerItems with all props', () => {
         itemTextTestIDPrefix="itemText"
       />,
     );
-    expect(sut).toMatchSnapshot('SelectPickerItems with all props.');
+    expect(screen).toMatchSnapshot('SelectPickerItems with all props.');
 
     // assert selectPickerItem
-    const item1Pressable = sut.getByTestId('itemPressable-1');
+    const item1Pressable = screen.getByTestId('itemPressable-1');
     const item1PressableProps = item1Pressable.props as PressableProps;
     expect(item1PressableProps.accessibilityLabel).toBe('testAccessibilityLabel');
     expect(item1PressableProps.style).toEqual({height: 60, alignItems: 'center', justifyContent: 'center'});
 
-    const item1Text = sut.getByTestId('itemText-0');
+    const item1Text = screen.getByTestId('itemText-0');
     const item1TextProps = item1Text.props as TextProps;
     expect(item1TextProps.style).toEqual({fontSize: 24, fontFamily: 'Roboto', color: 'red'});
 
-    const item3Text = sut.getByTestId('itemText-2');
+    const item3Text = screen.getByTestId('itemText-2');
     const item3TextProps = item3Text.props as TextProps;
     expect(item3TextProps.style).toEqual({fontSize: 24, fontFamily: 'test-font-Regular', color: 'yellow'});
 
     // assert flatList
-    const flatList = sut.getByTestId('FlatList');
+    const flatList = screen.getByTestId('FlatList');
     const flatListProps = flatList.props as FlatListProps<Item<string>>;
     expect(flatListProps.initialScrollIndex).toBe(0);
     // itemsは、Itemの各Propを検証できなかったため、件数のみ検証する
@@ -118,7 +118,7 @@ describe('SelectPickerItems with all props', () => {
     );
 
     // assert separator
-    const separator = sut.getByTestId('Separator');
+    const separator = screen.getByTestId('Separator');
     const separatorProps = separator.props as ViewProps;
     expect(separatorProps.style).toEqual({
       position: 'absolute',

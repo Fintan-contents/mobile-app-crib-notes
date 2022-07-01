@@ -1,4 +1,4 @@
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render, screen} from '@testing-library/react-native';
 import React from 'react';
 
 import {Item} from './SelectPicker';
@@ -11,16 +11,16 @@ describe('SelectPickerItems only with required props', () => {
       {value: '1', label: 'test1'},
       {value: '2', label: 'test2'},
     ];
-    const sut = render(<SelectPickerItems selectedValue="1" items={items} testID="SelectPickerItems" />);
-    const selectPickerItems = sut.queryByTestId('SelectPickerItems');
-    expect(sut).toMatchSnapshot('SelectPickerItems with more than one item.');
+    render(<SelectPickerItems selectedValue="1" items={items} testID="SelectPickerItems" />);
+    const selectPickerItems = screen.queryByTestId('SelectPickerItems');
+    expect(screen).toMatchSnapshot('SelectPickerItems with more than one item.');
     expect(selectPickerItems).not.toBeNull();
   });
 
   it('renders successfully if item does not exit', () => {
-    const sut = render(<SelectPickerItems selectedValue="1" items={[]} testID="SelectPickerItems" />);
-    const selectPickerItems = sut.queryByTestId('SelectPickerItems');
-    expect(sut).toMatchSnapshot('SelectPickerItems without item.');
+    render(<SelectPickerItems selectedValue="1" items={[]} testID="SelectPickerItems" />);
+    const selectPickerItems = screen.queryByTestId('SelectPickerItems');
+    expect(screen).toMatchSnapshot('SelectPickerItems without item.');
     expect(selectPickerItems).not.toBeNull();
   });
 });
@@ -39,7 +39,7 @@ describe('SelectPickerItems with all props', () => {
      * - itemStyle
      * - accessibilityLabel
      */
-    const sut = render(
+    render(
       <SelectPickerItems
         selectedValue="2"
         items={items}
@@ -49,8 +49,8 @@ describe('SelectPickerItems with all props', () => {
         testID="SelectPickerItems"
       />,
     );
-    expect(sut).toMatchSnapshot('SelectPickerItems with all props.');
-    const selectPickerItems = sut.getByTestId('SelectPickerItems');
+    expect(screen).toMatchSnapshot('SelectPickerItems with all props.');
+    const selectPickerItems = screen.getByTestId('SelectPickerItems');
 
     fireEvent(selectPickerItems, 'onValueChange');
 

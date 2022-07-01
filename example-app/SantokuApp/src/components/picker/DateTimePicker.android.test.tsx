@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native';
 import React from 'react';
 
 import {DateTimePicker} from './DateTimePicker.android';
@@ -7,14 +7,12 @@ import {DateTimePicker} from './DateTimePicker.android';
 // 自動テストではopenする前の初期表示のみテスト対象とする
 describe('DateTimePicker only with required props', () => {
   it('renders successfully if invisible', () => {
-    const sut = render(
-      <DateTimePicker textInputProps={{testID: 'textInput'}} pickerItemsProps={{testID: 'pickerItems'}} />,
-    );
+    render(<DateTimePicker textInputProps={{testID: 'textInput'}} pickerItemsProps={{testID: 'pickerItems'}} />);
 
-    expect(sut).toMatchSnapshot('DateTimePicker if invisible.');
+    expect(screen).toMatchSnapshot('DateTimePicker if invisible.');
 
-    const textInput = sut.queryByTestId('textInput');
-    const pickerItems = sut.queryByTestId('pickerItems');
+    const textInput = screen.queryByTestId('textInput');
+    const pickerItems = screen.queryByTestId('pickerItems');
     expect(textInput).not.toBeNull();
     expect(pickerItems).toBeNull();
   });

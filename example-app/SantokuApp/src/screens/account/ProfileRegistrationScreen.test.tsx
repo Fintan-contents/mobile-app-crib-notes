@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ParamListBase} from '@react-navigation/routers';
-import {render} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native';
 import {WithSnackbar} from 'components/overlay';
 import {WithAppTheme} from 'components/theme';
 import {WithAccountContext} from 'context/WithAccountContext';
@@ -46,7 +46,7 @@ describe('ProfileRegistrationScreen', () => {
     const Screen = require('./ProfileRegistrationScreen').ProfileRegistrationScreen.component as React.FC<
       NativeStackScreenProps<ParamListBase>
     >;
-    const app = render(
+    render(
       <Screen
         navigation={__mocks.navigation}
         route={{
@@ -60,7 +60,7 @@ describe('ProfileRegistrationScreen', () => {
         wrapper: Wrapper,
       },
     );
-    expect(app.queryByTestId('ProfileRegistration')).not.toBeNull();
-    expect(app).toMatchSnapshot();
+    expect(screen.queryByTestId('ProfileRegistration')).not.toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 });
