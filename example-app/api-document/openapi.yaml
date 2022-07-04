@@ -12,7 +12,11 @@ tags:
   - name: System
   - name: Account
   - name: Terms
-  - name: Team
+  - name: Event
+  - name: Question
+  - name: Tag
+  - name: Notification
+  - name: Template
 servers:
   - url: 'http://localhost:9080/api'
 security:
@@ -138,7 +142,7 @@ paths:
   /logout:
     post:
       summary: ログアウトする
-      description: ''
+      description: ログアウトします。
       tags:
         - Account
       operationId: post-logout
@@ -347,128 +351,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TermsOfService'
-  /teams:
-    post:
-      summary: チーム登録
-      description: |
-        チームを登録します。チームを作成したアカウントは 特権ユーザとして登録されます。
-      tags:
-        - Team
-      operationId: post-teams
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Team'
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Team'
-  '/teams/{teamId}':
-    parameters:
-      - name: teamId
-        in: path
-        description: チームのID
-        required: true
-        schema:
-          type: string
+  /events:
     get:
-      summary: チーム取得
-      description: |
-        チームIDを指定して、チームを取得します。
-      tags:
-        - Team
-      operationId: get-teams-teamId
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Team'
-  '/teams/{teamId}/invitation-code':
-    parameters:
-      - name: teamId
-        in: path
-        description: チームのID
-        required: true
-        schema:
-          type: string
-    post:
-      summary: 招待コード発行
-      description: |
-        チームの参加に必要な招待コードを発行します。
-      tags:
-        - Team
-      operationId: post-teams-teamId-invitation-code
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TeamInvitation'
-  '/teams/{teamId}/join':
-    parameters:
-      - name: teamId
-        in: path
-        description: チームのID
-        required: true
-        schema:
-          type: string
-    post:
-      summary: チーム参加
-      description: |
-        チームに参加します。
-      tags:
-        - Team
-      operationId: post-teams-teamId-join
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TeamInvitation'
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Team'
-  '/teams/{teamId}/timetable-templates':
-    parameters:
-      - name: teamId
-        in: path
-        description: チームのID
-        required: true
-        schema:
-          type: string
-    get:
-      summary: 時間割テンプレート一覧取得
-      description: |
-        時間割テンプレートの一覧を取得します。
-      tags:
-        - Team
-      operationId: get-teams-teamId-timetable-templates
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: sort
-          description: ソート
-        - schema:
-            type: number
-          in: query
-          name: limit
-          description: 1ページの上限件数
-        - schema:
-            type: number
-          in: query
-          name: page
-          description: 取得するページ番号
+      summary: イベント一覧取得
       responses:
         '200':
           description: OK
@@ -476,152 +361,50 @@ paths:
             application/json:
               schema:
                 type: array
-                description: 時間割テンプレート一覧
                 items:
-                  $ref: '#/components/schemas/TimetableTemplate'
-    post:
-      summary: 時間割テンプレート登録
-      description: |
-        時間割テンプレートを登録します。
+                  $ref: '#/components/schemas/Event'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-events
+      description: 掲載期間中のイベントまたは全イベントの一覧を取得します。
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - active
+              - all
+          in: query
+          name: target
+          description: 取得対象
+          required: true
       tags:
-        - Team
-      operationId: post-teams-teamId-timetable-templates
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TimetableTemplate'
+        - Event
+    parameters: []
+    post:
+      summary: イベント登録
+      operationId: post-events
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TimetableTemplate'
-  '/teams/{teamId}/timetable-templates/{templateId}':
-    parameters:
-      - name: teamId
-        in: path
-        description: チームのID
-        required: true
-        schema:
-          type: string
-      - name: templateId
-        in: path
-        description: テンプレートのID
-        required: true
-        schema:
-          type: string
-    get:
-      summary: 時間割テンプレート取得
-      description: |
-        時間割テンプレートを取得します。
-      tags:
-        - Team
-      operationId: get-teams-teamId-timetable-templates-templateId
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TimetableTemplate'
-    put:
-      summary: 時間割テンプレート更新
-      description: |
-        時間割テンプレートを更新します。
-      tags:
-        - Team
-      operationId: put-teams-teamId-timetable-templates-templateId
+                $ref: '#/components/schemas/EventContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      description: イベントを登録します。
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TimetableTemplate'
-      responses:
-        '201':
-          description: update
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TimetableTemplate'
-  '/teams/{teamId}/timetables/{timetableId}':
-    parameters:
-      - schema:
-          type: string
-        name: teamId
-        in: path
-        required: true
-        description: チームID
-      - schema:
-          type: string
-        name: timetableId
-        in: path
-        required: true
-        description: 時間割ID
+              $ref: '#/components/schemas/EventRegistration'
+        description: ''
+      parameters: []
+      tags:
+        - Event
+  /questions:
     get:
-      summary: 当日の時間割取得
-      description: |
-        当日の時間割を取得します。
-      tags:
-        - Team
-      operationId: get-teams-teamId-timetables-timetableId
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TimetableOfDay'
-    put:
-      summary: 今日の時間割開始
-      description: 今日の時間割を開始します。チームメンバーに今日の時間割の開始を通知します。
-      tags:
-        - Team
-      operationId: put-teams-teamId-timetables-timetableId
-      responses:
-        '201':
-          description: update
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TimetableOfDay'
-  '/teams/{teamId}/timetables':
-    parameters:
-      - schema:
-          type: string
-        name: teamId
-        in: path
-        required: true
-        description: チームID
-    get:
-      summary: 当日の時間割一覧取得
-      description: |
-        当日の時間割の一覧を取得します。
-      tags:
-        - Team
-      operationId: get-teams-teamId-timetables
-      parameters:
-        - name: limit
-          in: query
-          description: 上限件数
-          schema:
-            type: number
-        - schema:
-            type: string
-          in: query
-          name: sort
-          description: ソート
-        - schema:
-            type: number
-          in: query
-          name: since
-          description: 検索対象日付From
-        - schema:
-            type: string
-          in: query
-          name: until
-          description: 検索対象日付To
+      summary: 質問一覧取得
       responses:
         '200':
           description: OK
@@ -629,27 +412,440 @@ paths:
             application/json:
               schema:
                 type: array
-                description: 当日の時間割一覧
                 items:
-                  $ref: '#/components/schemas/TimetableOfDay'
-    post:
-      summary: 当日の時間割登録
-      description: 当日の時間割を登録します。
+                  $ref: '#/components/schemas/Question'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      operationId: get-list-questions
+      description: 質問の一覧を取得します。検索文言やソート条件を指定すると条件に合った質問のみの一覧を取得します。
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: keyword
+          description: 検索文言
+        - schema:
+            type: string
+            enum:
+              - like
+              - update
+          in: query
+          name: sort
+          description: ソート順
+        - schema:
+            type: string
+            enum:
+              - unanswered
+              - outstanding
+          in: query
+          name: filter
+          description: 絞り込み条件
+        - schema:
+            type: string
+          in: query
+          name: tag
+          description: 検索タグ
       tags:
-        - Team
-      operationId: post-teams-teamId-timetables
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TimetableOfDayInput'
+        - Question
+    parameters: []
+    post:
+      summary: 質問登録
+      operationId: post-questions
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TimetableOfDay'
+                $ref: '#/components/schemas/QuestionContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionRegistration'
+        description: ''
+      description: 質問を登録します。
+      tags:
+        - Question
+  /tags:
+    get:
+      summary: タグ一覧取得
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+      operationId: get-list-tags
+      description: タグの一覧を取得します。
+      tags:
+        - Tag
+    parameters: []
+  /notifications:
+    get:
+      summary: お知らせ一覧取得
+      responses:
+        '200':
+          description: OK
+          content:
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+      operationId: get-list-notifications
+      description: お知らせの一覧を取得します。
+      tags:
+        - Notification
+    parameters: []
+  /templates:
+    get:
+      summary: テンプレート一覧取得
+      tags:
+        - Template
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+      operationId: get-templates
+      description: 入力のテンプレート一覧を取得します。
+  '/events/{eventId}':
+    parameters:
+      - schema:
+          type: string
+        name: eventId
+        in: path
+        required: true
+        description: イベントID
+    get:
+      summary: イベント取得
+      tags:
+        - Event
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+      operationId: get-events-eventId
+      description: 特定のイベントを取得します。
+  '/questions/{questionId}':
+    get:
+      summary: 質問取得
+      operationId: get-detail-question
+      description: 特定の質問および紐づく回答とコメントを取得します。
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionAndAnswer'
+      tags:
+        - Question
+    parameters:
+      - schema:
+          type: string
+        name: questionId
+        in: path
+        description: 質問ID
+        required: true
+  '/questions/{questionId}/answers':
+    parameters:
+      - schema:
+          type: string
+        name: questionId
+        in: path
+        required: true
+    post:
+      summary: 回答登録
+      operationId: post-questions-questionId-answers
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswerContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      description: 回答を登録します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerRegistration'
+        description: ''
+      tags:
+        - Question
+  '/questions/{questionId}/comments':
+    post:
+      summary: コメント登録（質問）
+      operationId: post-detail-comment
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      description: 質問に対するコメントを登録します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentRegistration'
+      tags:
+        - Question
+    parameters:
+      - schema:
+          type: string
+        name: questionId
+        in: path
+        required: true
+        description: 質問ID
+  '/questions/{questionId}/answers/{answerId}/comments':
+    parameters:
+      - schema:
+          type: string
+        name: questionId
+        in: path
+        required: true
+        description: 質問ID
+      - schema:
+          type: string
+        name: answerId
+        in: path
+        required: true
+        description: 回答ID
+    post:
+      summary: コメント登録（回答）
+      operationId: post-questions-questionId-answers-answerId-comments
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      description: 回答に対するコメントを登録します。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentRegistration'
+      tags:
+        - Question
+  /accounts/me/likes:
+    parameters: []
+    get:
+      summary: いいね済の取得
+      tags:
+        - Account
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LikesResponse'
+      operationId: get-accounts-me-likes
+      description: いいね済のイベント、質問、回答、コメントを取得します。
+  '/accounts/me/likes/events/{eventId}':
+    parameters:
+      - schema:
+          type: string
+        name: eventId
+        in: path
+        required: true
+        description: イベントID
+    put:
+      summary: いいねの実施（イベント）
+      operationId: put-events-eventId-like
+      responses:
+        '204':
+          description: No Content
+      description: イベントに対するいいねを行います。
+      tags:
+        - Account
+    delete:
+      summary: いいねの取消（イベント）
+      operationId: delete-events-eventId-like
+      responses:
+        '204':
+          description: No Content
+      description: イベントに対するいいねを取り消します。
+      tags:
+        - Account
+    get:
+      summary: いいね済の取得（イベント）
+      operationId: get-accounts-me-likes-events-eventId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LikedEventResponse'
+      description: 特定のイベントについていいね済のイベントを取得します。いいね済の場合はイベントIDが返ります。
+      tags:
+        - Account
+  '/accounts/me/likes/questions/{questionId}':
+    parameters:
+      - schema:
+          type: string
+        name: questionId
+        in: path
+        required: true
+        description: 質問ID
+    put:
+      summary: いいねの実施（質問）
+      operationId: put-questions-questionId-like
+      responses:
+        '204':
+          description: No Content
+      description: 質問に対するいいねを行います。
+      tags:
+        - Account
+    delete:
+      summary: いいねの取消（質問）
+      operationId: delete-questions-questionId-like
+      responses:
+        '204':
+          description: No Content
+      description: 質問に対するいいねを取り消します。
+      tags:
+        - Account
+    get:
+      summary: いいね済の取得（質問）
+      operationId: get-accounts-me-likes-questions-questionId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LikedQuestionResponse'
+      description: 特定の質問についていいね済の質問および紐づく回答、コメントを取得します。いいね済の場合はIDが返ります。
+      tags:
+        - Account
+  '/accounts/me/likes/questions/{questionId}/comments/{commentId}':
+    parameters:
+      - schema:
+          type: string
+        name: questionId
+        in: path
+        required: true
+        description: 質問ID
+      - schema:
+          type: string
+        name: commentId
+        in: path
+        required: true
+        description: コメントID
+    put:
+      summary: いいねの実施（質問コメント）
+      operationId: put-questions-questionId-comment-commentId-like
+      responses:
+        '204':
+          description: No Content
+      description: 質問のコメントに対するいいねを行います。
+      tags:
+        - Account
+    delete:
+      summary: いいねの取消（質問コメント）
+      operationId: delete-questions-questionId-comments-commentId-like
+      responses:
+        '204':
+          description: No Content
+      description: 質問のコメントに対するいいねを取り消します。
+      tags:
+        - Account
+  '/accounts/me/likes/questions/{questionId}/answers/{answerId}':
+    parameters:
+      - schema:
+          type: string
+        name: questionId
+        in: path
+        required: true
+        description: 質問ID
+      - schema:
+          type: string
+        name: answerId
+        in: path
+        required: true
+        description: 回答ID
+    put:
+      summary: いいねの実施（回答）
+      operationId: put-questions-questionId-answer-answerId-like
+      responses:
+        '204':
+          description: No Content
+      description: 回答に対するいいねを行います。
+      tags:
+        - Account
+    delete:
+      summary: いいねの取消（回答）
+      operationId: delete-questions-questionId-answers-answerId-like
+      responses:
+        '204':
+          description: No Content
+      description: 回答に対するいいねを取り消します。
+      tags:
+        - Account
+  '/accounts/me/likes/questions/{questionId}/answers/{answerId}/comments/{commentId}':
+    parameters:
+      - schema:
+          type: string
+        name: questionId
+        in: path
+        required: true
+        description: 質問ID
+      - schema:
+          type: string
+        name: answerId
+        in: path
+        required: true
+        description: 回答ID
+      - schema:
+          type: string
+        name: commentId
+        in: path
+        required: true
+        description: コメントID
+    put:
+      summary: いいねの実施（回答コメント）
+      operationId: put-questions-questionId-answer-answerId-comment-commentId-like
+      responses:
+        '204':
+          description: No Content
+      description: 回答のコメントに対するいいねを行います。
+      tags:
+        - Account
+    delete:
+      summary: いいねの取消（回答コメント）
+      operationId: delete-questions-questionId-answers-answerId-comments-commentId-like
+      responses:
+        '204':
+          description: No Content
+      description: 回答のコメントに対するいいねを取り消します。
+      tags:
+        - Account
 components:
   schemas:
     CsrfTokenResponse:
@@ -699,12 +895,31 @@ components:
         avatarImageUrl:
           type: string
           description: アカウントのアバター画像のURL
+        type:
+          type: array
+          description: 該当する場合に付与されるアカウントの種類
+          items:
+            type: string
+            enum:
+              - partner
+              - techlead
+              - administrator
+        points:
+          type: integer
+          description: 今期ポイント数
+        totalPoints:
+          type: integer
+          description: 累積ポイント数
+      required:
+        - nickname
+        - type
+        - points
+        - totalPoints
     Account:
       title: Account
       description: アカウント
       allOf:
         - $ref: '#/components/schemas/AccountProfile'
-        - $ref: '#/components/schemas/AccountJoinedTeam'
         - $ref: '#/components/schemas/AccountDeviceTokens'
     AccountProfile:
       title: AccountProfile
@@ -719,20 +934,6 @@ components:
           $ref: '#/components/schemas/Profile'
       required:
         - accountId
-        - nickname
-    AccountJoinedTeam:
-      title: AccountJoinedTeam
-      type: object
-      description: アカウントチーム情報
-      properties:
-        defaultTeamId:
-          type: string
-          description: デフォルトのチームID
-        joinedTeamIdList:
-          type: array
-          items:
-            type: string
-          description: 参加済みチームID一覧
     AccountDeviceTokens:
       title: AccountDeviceTokens
       type: object
@@ -756,6 +957,9 @@ components:
         password:
           type: string
           description: パスワード
+      required:
+        - nickname
+        - password
     AccountLogin:
       title: AccountLogin
       type: object
@@ -767,6 +971,9 @@ components:
         password:
           type: string
           description: パスワード
+      required:
+        - accountId
+        - password
     AccountLoginResponse:
       title: AccountLoginResponse
       type: object
@@ -796,7 +1003,7 @@ components:
           format: binary
           description: アバター画像
     UpdateDeviceToken:
-      title: AddDeviceToken
+      title: UpdateDeviceToken
       type: object
       description: 更新するデバイス登録トークン
       properties:
@@ -834,134 +1041,6 @@ components:
           description: 同意した利用規約のバージョン
       required:
         - agreedVersion
-    Team:
-      title: Team
-      type: object
-      description: チーム
-      properties:
-        teamId:
-          type: string
-          description: チームID
-          readOnly: true
-        teamName:
-          type: string
-          description: チーム名
-        teamMemberList:
-          type: array
-          items:
-            $ref: '#/components/schemas/TeamMember'
-          description: チームメンバー
-          readOnly: true
-      x-examples: {}
-    TeamMember:
-      title: TeamMember
-      description: チームメンバー
-      properties:
-        teamMemberAuthority:
-          type: string
-          description: チームメンバー権限
-      allOf:
-        - $ref: '#/components/schemas/AccountProfile'
-      x-examples: {}
-    TeamInvitation:
-      title: TeamInvitation
-      type: object
-      description: チーム招待
-      properties:
-        invitationCode:
-          type: string
-          description: 招待コード
-        expirationDate:
-          type: string
-          description: 有効期限
-          readOnly: true
-    TimetableOfDay:
-      title: TimetableOfDay
-      type: object
-      description: 当日の時間割
-      properties:
-        timetableId:
-          type: string
-          description: 時間割ID
-          readOnly: true
-        timetableName:
-          type: string
-          description: 時間割名
-        timetableDate:
-          type: string
-          description: 当日日付
-          format: date
-        timetableStartedAt:
-          type: string
-          description: 時間割開始日時
-          format: date-time
-        periodList:
-          type: array
-          description: コマ一覧
-          items:
-            $ref: '#/components/schemas/Period'
-    Period:
-      description: 時間割のコマ
-      type: object
-      title: Period
-      properties:
-        timeBoxName:
-          type: string
-          description: コマ名
-        startTime:
-          type: string
-          description: 開始時間
-          format: time
-        endTime:
-          type: string
-          description: 終了時間
-          format: time
-    TimetableTemplate:
-      title: TimetableTemplate
-      type: object
-      description: 時間割テンプレートモデル
-      properties:
-        timetableTemplateId:
-          type: string
-          description: 時間割テンプレートID
-          readOnly: true
-        timetableTemplateName:
-          type: string
-          description: 時間割テンプレート名
-        periodTemplateList:
-          type: array
-          description: コマテンプレート一覧
-          items:
-            $ref: '#/components/schemas/PeriodTemplate'
-    PeriodTemplate:
-      description: コマテンプレートモデル
-      type: object
-      x-examples: {}
-      title: PeriodTemplate
-      properties:
-        timeBoxName:
-          type: string
-          description: コマ名
-        startTime:
-          type: string
-          description: 開始時間
-          format: time
-        endTime:
-          type: string
-          description: 終了時間
-          format: time
-    TimetableOfDayInput:
-      title: TimetableOfDayInput
-      type: object
-      properties:
-        timetableTemplateId:
-          type: string
-          description: 時間割テンプレートID
-        timatebleDate:
-          type: string
-          description: 当日日付
-          format: date
-      description: 当日時間割登録のインプット
     ErrorResponse:
       title: Error
       type: object
@@ -976,6 +1055,372 @@ components:
       required:
         - code
         - message
+    Event:
+      allOf:
+        - $ref: '#/components/schemas/EventContent'
+        - $ref: '#/components/schemas/AccountProfile'
+      title: Event
+      description: イベント
+    Question:
+      title: Question
+      description: 質問
+      allOf:
+        - $ref: '#/components/schemas/QuestionContent'
+        - $ref: '#/components/schemas/AccountProfile'
+    Answer:
+      title: Answer
+      description: 回答
+      allOf:
+        - $ref: '#/components/schemas/AnswerContent'
+        - $ref: '#/components/schemas/AccountProfile'
+    Comment:
+      title: Comment
+      description: コメント
+      allOf:
+        - $ref: '#/components/schemas/CommentContent'
+        - $ref: '#/components/schemas/AccountProfile'
+    EventContent:
+      type: object
+      title: EventContent
+      description: イベント内容
+      properties:
+        eventId:
+          type: string
+          description: イベントID
+          readOnly: true
+        title:
+          type: string
+          description: イベントのタイトル
+        endDate:
+          type: string
+          description: 掲載終了日
+          format: date
+        likes:
+          type: integer
+          description: いいね数
+      required:
+        - eventId
+        - title
+        - endDate
+        - likes
+    QuestionContent:
+      type: object
+      title: QuestionContent
+      description: 質問内容
+      properties:
+        questionId:
+          type: string
+          description: 質問ID
+          readOnly: true
+        title:
+          type: string
+          description: 質問のタイトル
+        content:
+          type: string
+          description: 質問内容
+        tags:
+          type: array
+          description: 質問に設定されているタグ
+          items:
+            type: string
+        datetime:
+          type: string
+          description: 質問日時
+          format: date-time
+        beginner:
+          type: boolean
+          description: 初心者か否か
+        resolved:
+          type: boolean
+          description: 解決済か否か
+        views:
+          type: integer
+          description: 閲覧数
+        answers:
+          type: integer
+          description: 回答数
+        likes:
+          type: integer
+          description: いいね数
+        comments:
+          type: integer
+          description: コメント数
+      required:
+        - questionId
+        - title
+        - content
+        - tags
+        - datetime
+        - beginner
+        - resolved
+        - views
+        - answers
+        - likes
+        - comments
+    AnswerContent:
+      type: object
+      title: AnswerContent
+      description: 回答内容
+      properties:
+        answerId:
+          type: string
+          description: 回答ID
+          readOnly: true
+        content:
+          type: string
+          description: 回答内容
+        datetime:
+          type: string
+          description: 回答日時
+          format: date-time
+        likes:
+          type: integer
+          description: いいね数
+        comments:
+          type: integer
+          description: コメント数
+      required:
+        - answerId
+        - content
+        - datetime
+        - likes
+        - comments
+    CommentContent:
+      type: object
+      title: CommentContent
+      description: コメント内容
+      properties:
+        commentId:
+          type: string
+          description: コメントID
+          readOnly: true
+        content:
+          type: string
+          description: コメント内容
+        datetime:
+          type: string
+          description: コメント日時
+          format: date-time
+        likes:
+          type: integer
+          description: いいね数
+      required:
+        - commentId
+        - content
+        - datetime
+        - likes
+    Notification:
+      type: object
+      title: Notification
+      description: お知らせ情報
+      properties:
+        notificationId:
+          type: string
+          description: お知らせID
+          readOnly: true
+        title:
+          type: string
+          description: お知らせのタイトル
+        datetime:
+          type: string
+          description: 発行日時
+          format: date-time
+        contentUrl:
+          type: string
+          description: お知らせページのURL
+          format: uri-reference
+      required:
+        - notificationId
+        - title
+        - datetime
+        - contentUrl
+    Tag:
+      type: object
+      title: Tag
+      description: タグ情報
+      properties:
+        tagId:
+          type: string
+          description: タグID
+          readOnly: true
+        tagName:
+          type: string
+          description: タグ名
+        questions:
+          type: integer
+          description: 設定されている質問数
+      required:
+        - tagId
+        - tagName
+        - questions
+    Template:
+      type: object
+      title: Template
+      description: 入力内容のテンプレート
+      properties:
+        templateId:
+          type: string
+          description: テンプレートID
+          readOnly: true
+        content:
+          type: string
+          description: テンプレート内容
+      required:
+        - templateId
+        - content
+    QuestionAndAnswer:
+      type: object
+      title: QuestionAndAnswer
+      description: 質問と回答およびコメント
+      properties:
+        question:
+          type: object
+          description: 質問とコメント
+          required:
+            - question
+            - commentList
+          properties:
+            question:
+              $ref: '#/components/schemas/Question'
+            commentList:
+              type: array
+              description: 質問に対するコメントのリスト
+              items:
+                $ref: '#/components/schemas/Comment'
+        answerList:
+          type: array
+          description: 回答とコメントのリスト
+          items:
+            type: object
+            description: 回答とコメント
+            properties:
+              answer:
+                $ref: '#/components/schemas/Answer'
+              commentList:
+                type: array
+                description: 回答に対するコメントのリスト
+                items:
+                  $ref: '#/components/schemas/Comment'
+      required:
+        - question
+        - answerList
+    CommentRegistration:
+      title: CommentRegistration
+      type: object
+      description: 登録するコメント情報
+      properties:
+        content:
+          type: string
+          description: コメント内容
+      required:
+        - content
+    EventRegistration:
+      title: EventRegistration
+      type: object
+      description: 登録するイベント情報
+      properties:
+        title:
+          type: string
+          description: イベントのタイトル
+        content:
+          type: string
+          description: イベント内容
+        endDate:
+          type: string
+          description: 掲載終了日
+          format: date
+      required:
+        - title
+        - content
+        - endDate
+    QuestionRegistration:
+      title: QuestionRegistration
+      type: object
+      description: 登録する質問情報
+      properties:
+        title:
+          type: string
+          description: 質問のタイトル
+        content:
+          type: string
+          description: 質問内容
+        tags:
+          type: array
+          description: 質問の設定するタグ
+          items:
+            type: string
+        beginner:
+          type: boolean
+          description: 初心者か否か
+      required:
+        - title
+        - content
+        - beginner
+    AnswerRegistration:
+      title: AnswerRegistration
+      type: object
+      description: 登録する回答情報
+      properties:
+        content:
+          type: string
+          description: 回答内容
+      required:
+        - content
+    LikedEventResponse:
+      title: LikedEventResponse
+      type: object
+      description: いいね済のイベントID
+      properties:
+        eventId:
+          type: string
+          description: いいね済のイベントID
+      required:
+        - eventId
+    LikedQuestionResponse:
+      title: LikedQuestionResponse
+      description: いいね済の質問IDと紐づく回答ID、コメントID
+      type: object
+      properties:
+        questionId:
+          type: string
+          description: いいね済の質問ID
+        commentId:
+          type: array
+          description: いいね済の質問コメントID
+          items:
+            type: string
+        answer:
+          type: array
+          description: いいね済の質問に紐づく回答
+          items:
+            type: object
+            description: いいね済の質問に紐づく回答
+            properties:
+              answerId:
+                type: string
+                description: いいね済の回答ID
+              commentId:
+                type: array
+                description: いいね済の回答コメントID
+                items:
+                  type: string
+      required:
+        - questionId
+        - commentId
+        - answer
+    LikesResponse:
+      allOf:
+        - description: いいね済のイベントID
+          items:
+            $ref: '#/components/schemas/LikedEventResponse'
+        - description: いいね済の質問ID、回答ID、コメントID
+          items:
+            $ref: '#/components/schemas/LikedQuestionResponse'
+      title: LikesResponse
+      description: いいね済のイベントID、質問ID、回答ID、コメントID
+      type: array
+      items:
+        type: object
   responses:
     BadRequest:
       description: Bad Request
