@@ -19,7 +19,11 @@ describe('AuthenticationService signup', () => {
   test('サインアップAPIを呼び出して、クレデシャルをセキュアストレージに格納しているかの検証', async () => {
     jest.mock('../../generated/backend/account/account');
     const spySignupApi = jest.spyOn(accountApi, 'postSignup').mockResolvedValue({
-      data: {accountId: '123456789', profile: {nickname: 'testNickName'}, deviceTokens: []},
+      data: {
+        accountId: '123456789',
+        profile: {nickname: 'testNickName', type: ['partner'], points: 0, totalPoints: 0},
+        deviceTokens: [],
+      },
       status: 200,
       statusText: 'ok',
       headers: {},
@@ -31,7 +35,7 @@ describe('AuthenticationService signup', () => {
       const res = await result.current.mutateAsync({nickname: 'testNickName', password: 'password123'});
       expect(res).toEqual({
         accountId: '123456789',
-        profile: {nickname: 'testNickName'},
+        profile: {nickname: 'testNickName', type: ['partner'], points: 0, totalPoints: 0},
         deviceTokens: [],
       });
       expect(spySignupApi).toHaveBeenCalledWith({nickname: 'testNickName', password: 'password123'});
