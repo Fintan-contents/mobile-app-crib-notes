@@ -39,8 +39,11 @@ export const useSelectPickerUseCase = <ItemT extends unknown>({
   }, [selectedItem]);
 
   const open = useCallback(() => {
+    if (selectedItem == null && items.length) {
+      onSelectedItemChange?.(items[0]);
+    }
     setIsVisible(true);
-  }, []);
+  }, [items, onSelectedItemChange, selectedItem]);
   const handleBackdropPress = useCallback(() => {
     onDismiss?.(selectedItem);
     close();
