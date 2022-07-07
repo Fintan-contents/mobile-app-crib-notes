@@ -2,6 +2,7 @@ import {render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {ViewProps} from 'react-native';
 import Reanimated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {MODAL_CONTAINER_DEFAULT_ENTERING, MODAL_CONTAINER_DEFAULT_EXITING, OverlayContainer} from './OverlayContainer';
 
@@ -20,15 +21,19 @@ jest.useFakeTimers('modern');
 
 jest.runAllTimers();
 
+const Wrapper: React.FC = ({children}) => {
+  return <SafeAreaProvider>{children}</SafeAreaProvider>;
+};
+
 describe('OverlayContainer only with required props', () => {
   it('returns null if not visible', () => {
-    render(<OverlayContainer isVisible={false} />);
+    render(<OverlayContainer isVisible={false} />, {wrapper: Wrapper});
     // OverlayContainerがnullを返していることを確認したいがうまくやる方法が見当たらないので`toJSON`でnullになることを確認する。
     expect(screen.toJSON()).toBeNull();
   });
 
   it('renders successfully only with required props', () => {
-    render(<OverlayContainer isVisible testID="containerAnimated" />);
+    render(<OverlayContainer isVisible testID="containerAnimated" />, {wrapper: Wrapper});
     const animatedView = screen.getByTestId('containerAnimated');
     const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
     // Animated.Viewのentering/exitingをテストで実行することができなかったため、entering/exitingにデフォルトアニメーションが設定されていることのみを確認する。
@@ -67,6 +72,7 @@ describe('OverlayContainer with all props', () => {
         entering={entering}
         exiting={exiting}
       />,
+      {wrapper: Wrapper},
     );
     expect(screen).toMatchSnapshot('OverlayContainer with all props.');
     const animatedView = screen.getByTestId('animatedView');

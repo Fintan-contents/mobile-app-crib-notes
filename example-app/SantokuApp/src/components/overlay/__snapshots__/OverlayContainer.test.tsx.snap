@@ -9,6 +9,10 @@ exports[`OverlayContainer only with required props renders successfully only wit
     Object {
       "flex": 1,
       "justifyContent": "flex-end",
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
     }
   }
 >
@@ -49,6 +53,10 @@ exports[`OverlayContainer with all props should be applied properly: OverlayCont
     Object {
       "flex": 1,
       "justifyContent": "flex-end",
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
     }
   }
 >

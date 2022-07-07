@@ -71,6 +71,10 @@ exports[`TermsOfServiceAgreement マウントされたときに正常にレン�
       Object {
         "flex": 1,
         "justifyContent": "flex-end",
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
       }
     }
   >
