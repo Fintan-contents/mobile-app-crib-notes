@@ -44,7 +44,7 @@ IDEは好みのものを利用していますが、主に以下のいずれか�
 
 [仮想デバイスを作成して管理する \| Android デベロッパー](https://developer.android.com/studio/run/managing-avds#createavd)を参照して、Androidアプリの開発中に使う仮想デバイスを作成してください。
 
-仮想デバイスは簡単に追加や削除ができるので、初回セットアップ時にはAVD Managerで「Recommended」に表示されているシステムイメージを利用するのが良いです。
+仮想デバイスは簡単に追加や削除ができるので、初回セットアップ時にはシステムイメージの一覧に初期表示されている「Recommended」タブから選択するのが良いです。
 
 ### Android SDKのコマンドラインツールの設定
 
@@ -58,10 +58,12 @@ Android StudioでSDK Managerを開き、SDK Toolsタブで以下のツールに�
 
 次に、[環境変数`ANDROID_SDK_ROOT`、`ANDROID_HOME`](https://developer.android.com/studio/command-line/variables)を設定します。
 
+Windowsは`ユーザー環境変数`に設定してください。また、`%USERPROFILE%`などの変数を使用するとアプリ実行時に変数が値に置き換わらずエラーとなることがあるため、値を直接設定してください。
+
 | 環境変数            | 設定例（macOS）                  | 設定例（Windows）                              |
 |:-------------------|:----------------------------|:------------------------------------------|
-| `ANDROID_SDK_ROOT` | `$HOME/Library/Android/sdk` | `%USERPROFILE%\AppData\Local\Android\Sdk` |
-| `ANDROID_HOME`[^1] | `$ANDROID_SDK_ROOT`         | `%ANDROID_SDK_ROOT%`                      |
+| `ANDROID_SDK_ROOT` | `$HOME/Library/Android/sdk` | `C:\Users\ユーザー名\AppData\Local\Android\Sdk` |
+| `ANDROID_HOME`[^1] | `$ANDROID_SDK_ROOT`         | `C:\Users\ユーザー名\AppData\Local\Android\Sdk` |
 
 [^1]: `ANDROID_HOME`という環境変数はすでに非推奨となっています。そのため、設定しなくても基本的に問題ないはずですが、メンテナンスされていないツールがこの環境変数を参照している可能性などもあるので、念のため設定しています。
 
