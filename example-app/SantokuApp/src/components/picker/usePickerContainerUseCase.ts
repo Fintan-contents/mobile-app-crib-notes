@@ -62,7 +62,9 @@ export const usePickerContainerUseCase = ({
         duration: slideInDuration,
         ...slideInConfig,
       },
-      afterSlideIn && (finished => runOnJS(afterSlideIn)(finished)),
+      finished => {
+        afterSlideIn && runOnJS(afterSlideIn)(finished);
+      },
     );
   }, [afterSlideIn, clock, setPickerIsVisible, slideInConfig, slideInDuration]);
 

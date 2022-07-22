@@ -15,7 +15,7 @@ export type DateTimePickerIOSProps = Omit<DateTimePickerProps, 'displayAndroid' 
   >;
 };
 
-const DEFAULT_DURATION = 500;
+const DEFAULT_DURATION = 300;
 
 /**
  * 日時を表示するPickerとしてReact Native DateTimePickerを使用しています。
