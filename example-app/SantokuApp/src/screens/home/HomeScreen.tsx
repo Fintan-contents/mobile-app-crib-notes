@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 });
 
 // Navigatorに登録する情報
-export const HomeScreen: NativeStackScreenConfig<HomeStackParamList, typeof ScreenName> = {
+export const HomeScreen: StackScreenConfig<HomeStackParamList, typeof ScreenName> = {
   component: Screen,
   name: ScreenName,
   options: () => ({
