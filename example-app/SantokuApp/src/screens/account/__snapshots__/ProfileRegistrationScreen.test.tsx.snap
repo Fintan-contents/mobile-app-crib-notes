@@ -177,5 +177,8 @@ Array [
   <View
     testID="FullWindowOverlay"
   />,
+  <View
+    testID="FullWindowOverlay"
+  />,
 ]
 `;

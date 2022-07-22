@@ -1,11 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`WithSnackbar useSnackbarのhideで、Snackbarが消えることを確認 1`] = `
-<Text
-  testID="text"
->
-  test
-</Text>
+Array [
+  <Text
+    testID="text"
+  >
+    test
+  </Text>,
+  <View
+    testID="FullWindowOverlay"
+  />,
+]
 `;
 
 exports[`WithSnackbar useSnackbarのshowWithCloseButtonで、ボタン付きSnackbarが正常に表示されることを確認 1`] = `

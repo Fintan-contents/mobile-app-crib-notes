@@ -2,6 +2,7 @@ import {m} from 'framework';
 import {createUseContextAndProvider} from 'framework/utilities';
 import React, {useMemo, useState} from 'react';
 
+import {FullWindowOverlay} from '../FullWindowOverlay';
 import {Snackbar, SnackbarHideProps, SnackbarProps, SnackbarShowProps} from './Snackbar';
 
 type SnackbarShowContextProps = Omit<SnackbarShowProps, 'message'>;
@@ -71,7 +72,10 @@ function WithSnackbar(props: {initialState?: SnackbarShowProps; children: React.
   );
   return (
     <SnackbarContextProvider value={snackbarContext}>
-      <Snackbar {...state}>{props.children}</Snackbar>
+      {props.children}
+      <FullWindowOverlay>
+        <Snackbar {...state} />
+      </FullWindowOverlay>
     </SnackbarContextProvider>
   );
 }

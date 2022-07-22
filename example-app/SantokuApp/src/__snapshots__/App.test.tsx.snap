@@ -700,5 +700,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
   <View
     testID="FullWindowOverlay"
   />
+  <View
+    testID="FullWindowOverlay"
+  />
 </View>
 `;

@@ -1,6 +1,7 @@
 import {createUseContextAndProvider} from 'framework/utilities';
 import React, {useMemo, useState} from 'react';
 
+import {FullWindowOverlay} from '../FullWindowOverlay';
 import {LoadingOverlay} from './LoadingOverlay';
 
 type LoadingOverlayContextType = {
@@ -14,7 +15,10 @@ const WithLoadingOverlay: React.FC = ({children}) => {
   const loadingOverlayContext = useMemo<LoadingOverlayContextType>(() => ({setVisible}), []);
   return (
     <LoadingOverlayContextProvider value={loadingOverlayContext}>
-      <LoadingOverlay visible={visible}>{children}</LoadingOverlay>
+      {children}
+      <FullWindowOverlay>
+        <LoadingOverlay visible={visible} />
+      </FullWindowOverlay>
     </LoadingOverlayContextProvider>
   );
 };
