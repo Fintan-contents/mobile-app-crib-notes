@@ -97,7 +97,7 @@ axiosでは、[timeout](https://github.com/axios/axios#request-config)を設定�
 
 そのため、SantokuAppではaxiosの`timeout`を使用せず、[CancelToken](https://github.com/axios/axios#cancellation)を利用してHTTP API通信をキャンセルすることによりタイムアウトを実現します。React Queryを使用した場合は、[Query Cancellation](https://react-query.tanstack.com/guides/query-cancellation)が参考になります。
 
-Query Cancellationは、リソースを取得する`useQuery`を使用した場合にHTTP API通信をキャンセルする方法です。リソースの登録や更新時に使用する`useMutation`ではHTTP API通信をキャンセルできません。[^1]
+Query Cancellationは、リソースを取得する`useQuery`を使用した場合にHTTP API通信をキャンセルする方法です。リソースの登録や更新時に使用する`useMutation`ではHTTP API通信をキャンセルできません。[^2]
 
 そのため、リソースの登録や更新時にHTTP API通信をキャンセルしたい場合は、axiosの`Cancel Token`を使用して独自に実装する必要があります。
 
@@ -105,7 +105,7 @@ Query Cancellationは、リソースを取得する`useQuery`を使用した場�
 
 ユーザに正確な情報を伝えることができないのは良くないと考えたため、SantokuAppではリソースの取得時のみHTTP API通信のタイムアウト処理を実施します。
 
-[^1]: `useMutation`を使用した場合のキャンセル機能については、React QueryのGitHubリポジトリで[ディスカッション](https://github.com/tannerlinsley/react-query/discussions/1551)されています。
+[^2]: `useMutation`を使用した場合のキャンセル機能については、React QueryのGitHubリポジトリで[ディスカッション](https://github.com/tannerlinsley/react-query/discussions/1551)されています。
 
 ### HTTP API通信のリトライ（検討開始時点）
 
