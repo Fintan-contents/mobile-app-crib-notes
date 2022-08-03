@@ -73,7 +73,7 @@
     "@babel/core": "^7.12.9",
     "@testing-library/jest-native": "^4.0.2",
     "@testing-library/react-hooks": "^8.0.0",
-    "@testing-library/react-native": "^10.0.0",
+    "@testing-library/react-native": "^11.0.0",
     "@types/jest": "<27.0.0",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.67.6",
