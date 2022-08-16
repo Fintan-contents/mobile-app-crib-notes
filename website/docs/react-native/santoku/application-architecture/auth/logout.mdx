@@ -21,16 +21,20 @@ title: ログアウト
 
 ## 利用方法
 
-ログアウトは`AuthenticationService`の`logout`メソッドを使用します。
+ログアウトは`useLogout`フックを使用します。
 
 ```typescript title="ログアウトの利用方法"
-import {AuthenticationService} from 'framework';
+import {useLogout} from 'features/account/hooks/useLogout';
 
-const logout = useCallback(async () => {
-  try {
-    await AuthenticationService.logout();
-  } catch (e) {
-    // エラー処理
-  }
-}, []);
+export const useLogoutUseCase = () => {
+  const {mutateAsync: callLogout, isLoading} = useLogout();
+  const logout = useCallback(async () => {
+    try {
+      await callLogout();
+    } catch (e) {
+      // エラー処理
+    }
+  }, [callLogout]);
+  return {logout, isLoading};
+};
 ```

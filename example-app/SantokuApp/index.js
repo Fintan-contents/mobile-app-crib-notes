@@ -8,7 +8,7 @@ import * as SplashScreen from 'expo-splash-screen';
 // なお、SantokuAppではOpenAPI Generatorを使用して生成したコードの中で、URL#searchやURLSearchParamsを利用しています。
 import 'react-native-url-polyfill/auto';
 
-import {App} from './src/App';
+import {App} from './src/apps/app/App';
 
 // Manually hide splash screen
 SplashScreen.preventAutoHideAsync().catch(() => {

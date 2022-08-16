@@ -28,10 +28,10 @@ export const bundledMessages = {
 
 ## メッセージの取得
 
-メッセージを取得する場合は、`src/framework/message/Message.ts`に定義されている`m`関数を使用します。
+メッセージを取得する場合は、`src/bases/message/utils/Message.ts`に定義されている`m`関数を使用します。
 
 ```typescript jsx title='メッセージの取得'
-import {m} from 'framework';
+import {m} from 'bases/message/utils/Message';
 
 console.log(m('最大{0}件', '3'));  // => 最大3件
 ```

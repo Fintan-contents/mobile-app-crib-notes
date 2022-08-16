@@ -32,8 +32,8 @@ title: ログ出力
 ロガーの初期化で複数のトランスポートを指定することで複数の出力先に出力できます。
 
 ```typescript
-  import { createLogger } from 'framework'
-  import { SimpleLogFormatter, ConsoleTransport, FirebaseCrashlyticsTransport} from 'framework/Logger'
+  import { createLogger } from 'bases'
+  import { SimpleLogFormatter, ConsoleTransport, FirebaseCrashlyticsTransport} from 'bases/Logger'
   // ...
   const formatter = new SimpleLogFormatter();
   const consoleTransport = new ConsoleTransport();

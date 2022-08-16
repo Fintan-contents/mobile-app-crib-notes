@@ -5,8 +5,8 @@ export default defineConfig({
     output: {
       mode: 'tags-split',
       clean: true,
-      target: 'src/generated/backend/api.ts',
-      schemas: 'src/generated/backend/model',
+      target: 'src/features/backend/apis/api.ts',
+      schemas: 'src/features/backend/apis/model',
       client: 'react-query',
       prettier: true,
       tsconfig: 'tsconfig.json',
@@ -15,7 +15,7 @@ export default defineConfig({
           useQuery: true,
         },
         mutator: {
-          path: 'src/framework/backend/customInstance.ts',
+          path: 'src/features/backend/utils/customInstance.ts',
           name: 'backendCustomInstance',
         },
       },
@@ -28,8 +28,8 @@ export default defineConfig({
     output: {
       mode: 'split',
       clean: true,
-      target: 'src/generated/sandbox/api.ts',
-      schemas: 'src/generated/sandbox/model',
+      target: 'src/features/sandbox/apis/api.ts',
+      schemas: 'src/features/sandbox/apis/model',
       client: 'react-query',
       prettier: true,
       tsconfig: 'tsconfig.json',
@@ -38,7 +38,7 @@ export default defineConfig({
           useQuery: true,
         },
         mutator: {
-          path: 'src/framework/backend/customInstance.ts',
+          path: 'src/features/backend/utils/customInstance.ts',
           name: 'sandboxCustomInstance',
         },
         operations: {

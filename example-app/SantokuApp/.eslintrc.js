@@ -2,6 +2,7 @@
 // npx eslint --print-config src/App.tsx
 
 module.exports = {
+  plugins: ['strict-dependencies'],
   root: true,
   // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
   extends: ['universe/native', 'plugin:react-hooks/recommended'],
@@ -57,5 +58,37 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['src/generated/**/*.ts'],
+  ignorePatterns: [
+    'src/features/backend/apis/**/*.ts',
+    'src/features/sandbox/apis/**/*.ts',
+    'src/features/acknowledgements/constants/ThirdPartyDependencies.ts',
+  ],
+  rules: {
+    'strict-dependencies/strict-dependencies': [
+      'error',
+      [
+        {
+          module: 'apps/**',
+          allowReferenceFrom: ['src/apps/**'],
+        },
+        {
+          module: 'features/**',
+          allowReferenceFrom: ['src/apps/**', 'src/features/**'],
+        },
+        {
+          module: 'bases/**',
+          allowReferenceFrom: ['src/apps/**', 'src/features/**', 'src/bases/**'],
+        },
+        {
+          module: '@react-navigation/**',
+          allowReferenceFrom: [
+            'src/apps/**',
+            'jest/types/global.d.ts',
+            'jest/__mocks__/@react-navigation/**',
+            'src/@types/**',
+          ],
+        },
+      ],
+    ],
+  },
 };

@@ -85,4 +85,4 @@ google-services.json
 # scan temporary files
 **/fastlane/test_output
 
-assets/licenses
+src/assets/licenses
