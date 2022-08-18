@@ -9,6 +9,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import 'react-native-url-polyfill/auto';
 
 import {App} from './src/apps/app/App';
+import {AppWithMsw} from './src/apps/app/AppWithMsw';
+import {AppConfig} from './src/bases/core/config/AppConfig';
 
 // Manually hide splash screen
 SplashScreen.preventAutoHideAsync().catch(() => {
@@ -22,7 +24,8 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
   // このアプリでは何も実施しないが、Handler未設定だとconsole.warnのログが出力されるため設定だけしておく
 });
 
+const app = AppConfig.mswEnabled ? AppWithMsw : App;
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
 // the environment is set up appropriately
-registerRootComponent(App);
+registerRootComponent(app);

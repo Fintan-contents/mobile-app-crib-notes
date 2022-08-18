@@ -42,4 +42,8 @@ export abstract class AppConfig {
       android: Config.GOOGLE_PLAY_APP_URL,
     });
   }
+
+  static get mswEnabled(): boolean {
+    return Config.MSW_ENABLED === 'true';
+  }
 }

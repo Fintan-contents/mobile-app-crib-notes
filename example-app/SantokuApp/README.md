@@ -74,16 +74,18 @@ src
 │   ├── react-query
 │   ├── ui
 │   └── validator
-└── features
-    ├── account
-    ├── acknowledgements
-    ├── app-updates
-    ├── backend
-    ├── demo-**
-    ├── sandbox
-    ├── secure-storage
-    └── terms
+│── features
+│   ├── account
+│   ├── acknowledgements
+│   ├── app-updates
+│   ├── backend
+│   ├── demo-**
+│   ├── sandbox
+│   ├── secure-storage 
+│   └── terms
+└── fixtures（※３）
 ```
 
 （※１）使用しているライブラリで不足している型定義や、自身で作成したNative Modulesの型定義など<br>
 （※２）アプリで使用する画像ファイルやフォントファイルなど
+（※３）API通信のモックデータなど

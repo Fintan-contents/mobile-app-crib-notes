@@ -1,6 +1,5 @@
+import {postAccountsMeTerms} from 'features/backend/apis/account/account';
 import {useMutation, useQueryClient} from 'react-query';
-
-import {postAccountsMeTerms} from './postAccountsMeTerms';
 
 export const useAccountCommands = () => {
   const queryClient = useQueryClient();
