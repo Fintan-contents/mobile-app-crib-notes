@@ -47,6 +47,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
             "top": 0,
           }
         }
+        swipeDirection="horizontal"
       >
         <View
           backButtonInCustomView={false}
@@ -113,6 +114,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                     "top": 0,
                   }
                 }
+                swipeDirection="horizontal"
               >
                 <View
                   backButtonInCustomView={false}
