@@ -5,7 +5,6 @@ import * as loadActiveAccountId from 'features/secure-storage/services/loadActiv
 import * as loadPassword from 'features/secure-storage/services/loadPassword';
 
 import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from '../../../backend/utils/customInstance';
-import * as getAccountData from '../account/getAccountData';
 import {autoLogin} from './autoLogin';
 
 jest.spyOn(BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, 'get').mockResolvedValue({
