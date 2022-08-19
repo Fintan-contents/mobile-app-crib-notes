@@ -18,7 +18,7 @@ export type ProfileRegistrationPageProps = {
 };
 export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = ({termsAgreementStatus}) => {
   const {signup, isSigningUp} = useAuthCommands();
-  const {agreeTerms, isaAgreeingTerms} = useAccountCommands();
+  const {agreeTerms, isAgreeingTerms} = useAccountCommands();
   const onSubmit = useCallback(
     async (values: ProfileFormValues) => {
       try {
@@ -51,7 +51,7 @@ export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = 
         errorMessage={form.errors.nickname}
       />
       <Spacer heightRatio={0.05} />
-      <FilledButton title={m('登録')} onPress={form.submitForm} loading={isSigningUp || isaAgreeingTerms} />
+      <FilledButton title={m('登録')} onPress={form.submitForm} loading={isSigningUp || isAgreeingTerms} />
     </View>
   );
 };

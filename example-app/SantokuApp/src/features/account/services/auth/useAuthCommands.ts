@@ -2,7 +2,7 @@ import {Query, useMutation, useQueryClient, hashQueryKey} from 'react-query';
 import {QueryFilters} from 'react-query/types/core/utils';
 
 import {useIsLoggedIn} from '../../client-states/useIsLoggedIn';
-import {AccountData} from '../../types/AccountData';
+import {useAccountCommands} from '../account/useAccountCommands';
 import {autoLogin} from './autoLogin';
 import {changeAccount} from './changeAccount';
 import {login} from './login';
@@ -14,15 +14,18 @@ const defaultQueryFilters = {predicate: (query: Query) => query.queryHash !== ha
 export const useAuthCommands = () => {
   const queryClient = useQueryClient();
   const [, setIsLoggedIn] = useIsLoggedIn();
+  const {loadAccountData} = useAccountCommands();
 
   /**
    * ログインします。
    */
   const loginMutation = useMutation(
-    async (arg: {accountId: string; password: string}) => login(arg.accountId, arg.password),
+    async (arg: {accountId: string; password: string}) => {
+      await login(arg.accountId, arg.password);
+      return loadAccountData();
+    },
     {
-      onSuccess: accountData => {
-        queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
+      onSuccess: () => {
         setIsLoggedIn(true);
       },
     },
@@ -31,14 +34,19 @@ export const useAuthCommands = () => {
   /**
    * 自動ログインします。
    */
-  const autoLoginMutation = useMutation(autoLogin, {
-    onSuccess: accountData => {
-      if (accountData) {
-        queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
+  const autoLoginMutation = useMutation(
+    async () => {
+      const response = await autoLogin();
+      if (response) {
+        return loadAccountData();
       }
-      setIsLoggedIn(!!accountData);
     },
-  });
+    {
+      onSuccess: accountData => {
+        setIsLoggedIn(!!accountData);
+      },
+    },
+  );
 
   /**
    * ログアウトします。
@@ -56,17 +64,25 @@ export const useAuthCommands = () => {
   /**
    * サインアップします。
    */
-  const signupMutation = useMutation(async (arg: {nickname: string}) => signup(arg.nickname), {
-    onSuccess: accountData => {
-      queryClient.setQueryData<AccountData>(['account', 'accountData'], accountData);
-      setIsLoggedIn(true);
+  const signupMutation = useMutation(
+    async (arg: {nickname: string}) => {
+      await signup(arg.nickname);
+      return loadAccountData();
     },
-  });
+    {
+      onSuccess: () => {
+        setIsLoggedIn(true);
+      },
+    },
+  );
 
   /**
    * アカウントを切り替えます。
    */
-  const changeAccountMutation = useMutation((arg: {accountId: string}) => changeAccount(arg.accountId));
+  const changeAccountMutation = useMutation(async (arg: {accountId: string}) => {
+    await changeAccount(arg.accountId);
+    return loadAccountData();
+  });
 
   return {
     login: loginMutation.mutateAsync,

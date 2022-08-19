@@ -22,14 +22,12 @@ describe('signup', () => {
       config: {},
     });
     const spyLogin = jest.spyOn(login, 'login').mockResolvedValue({
-      account: {accountId: '123456789', deviceTokens: []},
-      terms: {},
+      status: 'COMPLETE',
     });
 
     const res = await signup('testNickName');
     expect(res).toEqual({
-      account: {accountId: '123456789', deviceTokens: []},
-      terms: {},
+      status: 'COMPLETE',
     });
     expect(spyGeneratePassword).toHaveBeenCalled();
     expect(spySignupApi).toHaveBeenCalledWith({nickname: 'testNickName', password: 'password123'});

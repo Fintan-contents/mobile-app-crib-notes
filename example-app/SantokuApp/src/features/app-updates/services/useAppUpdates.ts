@@ -5,7 +5,10 @@ import {useQuery} from 'react-query';
 import {requestAppUpdates} from './requestAppUpdates';
 
 export const useAppUpdates = () => {
-  return useQuery(['app-updates#requestAppUpdates'], () =>
-    requestAppUpdates(Platform.OS, Application.nativeApplicationVersion),
+  const query = useQuery(
+    ['app-updates#requestAppUpdates'],
+    () => requestAppUpdates(Platform.OS, Application.nativeApplicationVersion),
+    {staleTime: Infinity},
   );
+  return {...query, appUpdates: query.data};
 };

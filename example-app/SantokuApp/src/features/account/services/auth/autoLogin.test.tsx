@@ -24,10 +24,6 @@ describe('autoLogin', () => {
     headers: {},
     config: {},
   });
-  const spyGetAccountData = jest.spyOn(getAccountData, 'getAccountData').mockResolvedValue({
-    account: {accountId: '123456789', deviceTokens: []},
-    terms: {termsAgreementStatus: {hasAgreed: true, agreedVersion: '1.0.0'}, termsOfService: undefined},
-  });
   const spyRefreshCsrfToken = jest.spyOn(csrfToken, 'refreshCsrfToken').mockImplementation();
   const spySecureStorageAdapterLoadActiveAccountId = jest.spyOn(loadActiveAccountId, 'loadActiveAccountId');
   const spySecureStorageAdapterLoadPassword = jest.spyOn(loadPassword, 'loadPassword');
@@ -44,15 +40,13 @@ describe('autoLogin', () => {
     spySecureStorageAdapterLoadPassword.mockResolvedValue('password123');
     const res = await autoLogin();
     expect(res).toEqual({
-      account: {accountId: '123456789', deviceTokens: []},
-      terms: {termsAgreementStatus: {hasAgreed: true, agreedVersion: '1.0.0'}, termsOfService: undefined},
+      status: 'COMPLETE',
     });
     expect(spyLoginApi).toHaveBeenCalledWith({accountId: '123456789', password: 'password123'});
     expect(spyRefreshCsrfToken).toHaveBeenCalled();
     expect(spySecureStorageAdapterLoadActiveAccountId).toHaveBeenCalled();
     expect(spySecureStorageAdapterLoadPassword).toHaveBeenCalledWith('123456789');
     expect(__mocks.crashlytics.setUserId).toHaveBeenCalledWith('123456789');
-    expect(spyGetAccountData).toHaveBeenCalled();
   });
 
   test('セキュアストレージからアクティブなアカウントIDを取得できなかった場合の検証', async () => {

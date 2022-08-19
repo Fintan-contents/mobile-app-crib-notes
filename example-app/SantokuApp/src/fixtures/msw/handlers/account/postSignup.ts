@@ -17,6 +17,7 @@ export const postSignup = rest.post(`${backendUrl}/signup`, async (req, res, ctx
       profile: {nickname, type: [], points: 0, totalPoints: 0},
       deviceTokens: [],
     });
+    db.accountTerms.create({accountId, hasAgreed: true, agreedVersion: '0.1.0'});
 
     return delayedResponse(ctx.status(201), ctx.json(account));
   } catch (e) {

@@ -5,7 +5,7 @@ import {useAppUpdates} from '../services/useAppUpdates';
 import {showUpdateRequiredDialog} from '../use-cases/showUpdateRequiredDialog';
 
 const AppUpdatesChecker: React.FC = ({children}) => {
-  const {data: appUpdates} = useAppUpdates();
+  const {appUpdates} = useAppUpdates();
 
   useEffect(() => {
     if (appUpdates?.updateRequired) {

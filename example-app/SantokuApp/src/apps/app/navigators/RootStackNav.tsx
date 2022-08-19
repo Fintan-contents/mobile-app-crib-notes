@@ -43,15 +43,27 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
   return (
     <nav.Navigator screenOptions={defaultScreenOptions} initialRouteName={initialRouteName}>
       {isLoggedIn ? (
-        <nav.Group screenOptions={invisibleHeaderOptions}>
-          <nav.Screen
-            name="AuthenticatedStackNav"
-            component={authenticatedStackNav}
-            options={{
-              headerShown: false,
-            }}
-          />
-        </nav.Group>
+        <>
+          <nav.Group screenOptions={invisibleHeaderOptions}>
+            <nav.Screen
+              name="AuthenticatedStackNav"
+              component={authenticatedStackNav}
+              options={{
+                headerShown: false,
+              }}
+            />
+          </nav.Group>
+          <nav.Group screenOptions={invisibleHeaderOptions}>
+            <nav.Screen
+              {...DemoStackNav}
+              name="DemoStackNav"
+              component={DemoStackNav}
+              options={{
+                presentation: 'formSheet' as const,
+              }}
+            />
+          </nav.Group>
+        </>
       ) : (
         <>
           <nav.Screen
@@ -72,16 +84,6 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
           />
         </>
       )}
-      <nav.Group screenOptions={invisibleHeaderOptions}>
-        <nav.Screen
-          {...DemoStackNav}
-          name="DemoStackNav"
-          component={DemoStackNav}
-          options={{
-            presentation: 'formSheet' as const,
-          }}
-        />
-      </nav.Group>
     </nav.Navigator>
   );
 };

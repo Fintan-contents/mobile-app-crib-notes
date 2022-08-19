@@ -1,7 +1,7 @@
-import {LoadingOverlay} from 'bases/ui/loading/LoadingOverlay';
+import {useLoadingOverlay} from 'bases/ui/loading/useLoadingOverlay';
 import {canAutoLogin} from 'features/account/services/auth/canAutoLogin';
 import {useAuthCommands} from 'features/account/services/auth/useAuthCommands';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Input, Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -68,9 +68,7 @@ export const AuthenticationPage = () => {
     }
   }, [accountId, setAccountIdInput]);
 
-  useEffect(() => {
-    LoadingOverlay.visible(isProcessing);
-  }, [isProcessing]);
+  useLoadingOverlay(isProcessing);
 
   return (
     <View style={styles.container}>
