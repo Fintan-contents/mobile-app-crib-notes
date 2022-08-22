@@ -54,14 +54,7 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
             />
           </nav.Group>
           <nav.Group screenOptions={invisibleHeaderOptions}>
-            <nav.Screen
-              {...DemoStackNav}
-              name="DemoStackNav"
-              component={DemoStackNav}
-              options={{
-                presentation: 'formSheet' as const,
-              }}
-            />
+            <nav.Screen {...DemoStackNav} name="DemoStackNav" component={DemoStackNav} />
           </nav.Group>
         </>
       ) : (

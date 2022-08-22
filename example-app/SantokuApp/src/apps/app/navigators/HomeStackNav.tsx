@@ -2,7 +2,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {m} from 'bases/message/Message';
 import React from 'react';
 
-import {HomeScreen} from '../screens/home/HomeScreen';
+import {HomeScreen} from '../screens/qa-home/HomeScreen';
+import {QuestionDetailScreen} from '../screens/qa-question/QuestionDetailScreen';
 import {HomeStackParamList} from './types';
 import {useLogoutButton} from './useLogoutButton';
 
@@ -18,6 +19,7 @@ export const HomeStackNav: React.FC = () => {
   return (
     <nav.Navigator screenOptions={{headerRight: LogoutButton}}>
       <nav.Screen component={HomeScreen} name="Home" options={{title: m('ホーム')}} />
+      <nav.Screen component={QuestionDetailScreen} name="QuestionDetail" options={{title: m('質問詳細')}} />
     </nav.Navigator>
   );
 };

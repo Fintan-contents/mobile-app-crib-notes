@@ -1,0 +1,210 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home マウントされたときに正常にレンダリングされること 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+    testID="HomePage"
+  >
+    <Text>
+      開発中
+    </Text>
+    <View
+      style={
+        Object {
+          "height": 12.8,
+          "width": 0,
+        }
+      }
+      testID="Spacer"
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "borderRadius": 3,
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 3,
+          },
+          Object {
+            "borderRadius": 8,
+            "width": 260,
+          },
+          Object {
+            "backgroundColor": "#fff",
+            "overflow": "visible",
+            "shadowColor": "rgba(0,0,0, .4)",
+            "shadowOffset": Object {
+              "height": 1,
+              "width": 1,
+            },
+            "shadowOpacity": 1,
+            "shadowRadius": 1,
+          },
+        ]
+      }
+    >
+      <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "busy": false,
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#2089dc",
+              "borderColor": "#2089dc",
+              "borderRadius": 8,
+              "borderWidth": 0,
+              "flexDirection": "row",
+              "height": 50,
+              "justifyContent": "center",
+              "padding": 8,
+              "width": 260,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 18,
+                "paddingVertical": 1,
+                "textAlign": "center",
+              }
+            }
+          >
+            Go to QuestionDetail
+          </Text>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "height": 12.8,
+          "width": 0,
+        }
+      }
+      testID="Spacer"
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "borderRadius": 3,
+            "overflow": "hidden",
+          },
+          Object {
+            "borderRadius": 3,
+          },
+          Object {
+            "borderRadius": 8,
+            "width": 260,
+          },
+          Object {
+            "backgroundColor": "#fff",
+            "overflow": "visible",
+            "shadowColor": "rgba(0,0,0, .4)",
+            "shadowOffset": Object {
+              "height": 1,
+              "width": 1,
+            },
+            "shadowOpacity": 1,
+            "shadowRadius": 1,
+          },
+        ]
+      }
+    >
+      <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "busy": false,
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#2089dc",
+              "borderColor": "#2089dc",
+              "borderRadius": 8,
+              "borderWidth": 0,
+              "flexDirection": "row",
+              "height": 50,
+              "justifyContent": "center",
+              "padding": 8,
+              "width": 260,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 18,
+                "paddingVertical": 1,
+                "textAlign": "center",
+              }
+            }
+          >
+            Go to QuestionAndEventPost
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>,
+  <View
+    testID="FullWindowOverlay"
+  />,
+  <View
+    testID="FullWindowOverlay"
+  />,
+]
+`;

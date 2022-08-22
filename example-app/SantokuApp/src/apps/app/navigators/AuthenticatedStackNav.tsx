@@ -4,6 +4,7 @@ import React, {useMemo} from 'react';
 
 import {withInitialData} from '../components/withInitialData';
 import {MainTabNav} from './MainTabNav';
+import {QuestionAndEventPostStackNav} from './QuestionAndEventPostStackNav';
 import {AuthenticatedStackParamList} from './types';
 
 const nav = createNativeStackNavigator<AuthenticatedStackParamList>();
@@ -26,6 +27,11 @@ const Component: React.FC<Props> = ({initialData}) => {
         options={{
           headerShown: false,
         }}
+      />
+      <nav.Screen
+        name="QuestionAndEventStackNav"
+        component={QuestionAndEventPostStackNav}
+        options={{presentation: 'formSheet', headerShown: false}}
       />
     </nav.Navigator>
   );
