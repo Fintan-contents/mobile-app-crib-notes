@@ -1,3 +1,4 @@
+import notifee from '@notifee/react-native';
 import type {ParamListBase} from '@react-navigation/routers';
 import crashlytics from '@react-native-firebase/crashlytics';
 import SplashScreen from 'expo-splash-screen';
@@ -9,5 +10,6 @@ declare global {
     navigation: Mocked<NativeStackNavigationProp<ParamListBase>>;
     crashlytics: Mocked<ReturnType<typeof crashlytics>>;
     expoSplashScreen: Mocked<typeof SplashScreen>;
+    notifee: Mocked<typeof notifee>;
   };
 }

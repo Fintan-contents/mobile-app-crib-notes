@@ -3,7 +3,7 @@ import type crashlyticsModule from '@react-native-firebase/crashlytics';
 import {launchedId} from 'bases/core/utils/launchedId';
 import {firebaseConfig} from 'bases/firebase/FirebaseConfig';
 
-const initializeFirebaseCrashlyticsAsync = async () => {
+export const initializeFirebaseCrashlyticsAsync = async () => {
   if (!firebaseConfig.isDummy) {
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // 型は、typeofで明示するようにします。
@@ -18,5 +18,3 @@ const initializeFirebaseCrashlyticsAsync = async () => {
     }
   }
 };
-
-export {initializeFirebaseCrashlyticsAsync};

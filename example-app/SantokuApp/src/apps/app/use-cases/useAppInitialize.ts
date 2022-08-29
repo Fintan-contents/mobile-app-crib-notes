@@ -8,6 +8,7 @@ import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
 
 import {isInitialDataError} from '../errors/initialDataError';
+import {createMessagingChannels} from '../services/createMessagingChannels';
 import {initializeFirebaseCrashlyticsAsync} from '../services/initializeFirebaseCrashlyticsAsync';
 import {loadBundledMessagesAsync} from '../services/loadBundledMessagesAsync';
 import {AppInitialData} from '../types/AppInitialData';
@@ -39,6 +40,8 @@ const initializeCoreFeatures = async () => {
   await loadBundledMessagesAsync();
   // メッセージのロード後にYupの設定をする必要がある
   enhanceValidator();
+  // Push通知受信用のチャンネルを作成
+  await createMessagingChannels();
 };
 
 const loadData = async () => {

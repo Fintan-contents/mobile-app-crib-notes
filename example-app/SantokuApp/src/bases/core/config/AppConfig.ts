@@ -28,7 +28,9 @@ export abstract class AppConfig {
   }
 
   static get santokuAppBackendUrl(): string {
-    return Config.SANTOKU_APP_BACKEND_URL;
+    return Platform.OS === 'android'
+      ? Config.SANTOKU_APP_BACKEND_URL.replace('localhost', '10.0.2.2')
+      : Config.SANTOKU_APP_BACKEND_URL;
   }
 
   static get requestTimeout(): number | undefined {
@@ -41,6 +43,14 @@ export abstract class AppConfig {
       ios: Config.APP_STORE_APP_URL,
       android: Config.GOOGLE_PLAY_APP_URL,
     });
+  }
+
+  static get mobileAppCribNotesWebsiteUrl(): string {
+    return Config.MOBILE_APP_CRIB_NOTES_WEBSITE_URL;
+  }
+
+  static get mobileAppCribNotesRepositoryUrl(): string {
+    return Config.MOBILE_APP_CRIB_NOTES_REPOSITORY_URL;
   }
 
   static get mswEnabled(): boolean {
