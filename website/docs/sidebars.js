@@ -470,6 +470,14 @@ module.exports = {
           label: 'コンテキスト設計',
           items: ['react-native/santoku/design/context/overview', 'react-native/santoku/design/context/theme'],
         },
+        {
+          type: 'category',
+          label: 'デモ機能',
+          items: [
+            'react-native/santoku/design/demo/overview',
+            'react-native/santoku/design/demo/push-notification/overview',
+          ],
+        },
       ],
     },
     {
