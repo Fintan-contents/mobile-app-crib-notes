@@ -1,0 +1,72 @@
+---
+title: Androidのヘッドアップ通知
+---
+
+Status: Accepted
+
+<!--
+Proposed: 提案中
+Accepted: 採用
+Rejected: 却下
+Superseded: 廃止
+-->
+
+## 要約
+
+Androidでヘッドアップ通知を表示したい場合は、重要度に`IMPORTANCE_HIGH`を設定した通知チャンネルにプッシュ通知を送信します。このアプリでは、通知チャンネルの作成方法やタイミングを以下の方針とします。
+
+- Notifeeを使用して、通知チャンネルを作成する
+- 通知チャンネルは、アプリ起動後の初期化処理で作成する
+- 送信されたプッシュ通知にチャンネルの指定がなかった場合は、重要度が`IMPORTANCE_HIGH`の通知チャンネルで受信してヘッドアップ通知を表示する
+
+## コンテキスト
+
+Androidでは、ヘッドアップ通知を表示するためにチャンネルの重要度を`IMPORTANCE_HIGH`に設定する必要があります。（Android 7.1以前では、通知の優先度を`PRIORITY_HIGH`または`PRIORITY_MAX`に設定する必要があります）
+
+Firebase Cloud Messagingを利用した場合は、デフォルトのチャンネルとして`Miscellaneous`というチャンネルが作成されます。このチャンネルは重要度が`IMPORTANCE_HIGH`に設定されていないため、ヘッドアップ通知を表示できません。
+そのため、このアプリでヘッドアップ通知を表示するためには、重要度を`IMPORTANCE_HIGH`に設定したチャンネルを作成する必要があります。
+
+## 議論
+
+### 通知チャンネルを作成するライブラリ
+
+このアプリで使用しているReact Native FirebaseのCloud Messagingには、通知チャンネルを作成する機能がありません。通知チャンネルの作成機能を持つサードパーティのライブラリとしては、以下のようなライブラリがあります。
+
+- [Expo Notifications](https://docs.expo.dev/versions/latest/sdk/notifications/)
+- [Notifee](https://notifee.app/)
+
+両者とも、通知チャンネルの作成や更新、削除などの機能は用意されており、大きな差異はありません。このアプリでは、React Native Firebaseと同じ開発母体（[INVERTASE](https://invertase.io/)）であるNotifeeを採用します。
+
+### 通知チャンネルの作成タイミング
+
+Notifeeのドキュメントでは、[Creating & updating channels](https://notifee.app/react-native/docs/android/channels#creating--updating-channels)に以下の記述があります。
+
+> When developing an application, it is safe to always assume a channel does not exist and attempt to create it each time the application boots.
+
+上記内容に準拠して、このアプリではアプリ起動後の初期化処理で通知チャンネルを作成・更新します。
+
+:::note
+通知チャンネルの作成後は、通知チャンネルの重要度や表示・鳴動動作などをアプリから変更できません。ユーザのみが、OSのシステム設定から変更できます。
+
+- [Android デベロッパー ガイド - 通知チャネル設定を開く](https://developer.android.com/training/notify-user/channels?hl=ja#UpdateChannel)
+- [Notifee Creating & updating channels](https://notifee.app/react-native/docs/android/channels#creating--updating-channels)
+  
+:::
+
+### 通知チャンネルの指定がないプッシュ通知
+
+React Native Firebaseでは、送信されたプッシュ通知にチャンネルの指定がない場合のデフォルト通知チャンネルを指定できます。
+`firebase.json`の[messaging_android_notification_channel_id](https://rnfirebase.io/messaging/usage#notification-channel-id)にデフォルトの通知チャンネルを指定します。
+
+このアプリでは、デフォルトの通知チャンネルとして重要度が`IMPORTANCE_HIGH`のチャンネルを指定します。
+
+### デモ機能の追加
+
+通知チャンネルの重要度に応じた動作を検証するために、デモ画面にチャンネルを指定してプッシュ通知を送信できる機能を追加します。
+
+## 決定
+
+- Notifeeを使用して、通知チャンネルを作成する
+- 通知チャンネルは、アプリ起動後の初期化処理で作成する
+- 送信されたプッシュ通知にチャンネルの指定がなかった場合は、重要度が`IMPORTANCE_HIGH`の通知チャンネルで受信する
+- デモ機能として、重要度の違う通知チャンネルを指定してプッシュ通知を送信できる機能を追加する

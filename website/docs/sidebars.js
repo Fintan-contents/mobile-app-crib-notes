@@ -577,6 +577,7 @@ module.exports = {
         'react-native/santoku/decisions/adr-012-http-api',
         'react-native/santoku/decisions/adr-013-react-query',
         'react-native/santoku/decisions/adr-014-ui-libraries',
+        'react-native/santoku/decisions/adr-015-android-head-up-notification',
       ],
     },
   ],
