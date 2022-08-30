@@ -327,6 +327,7 @@ module.exports = {
             'react-native/santoku/application-architecture/push-notification/overview',
             'react-native/santoku/application-architecture/push-notification/register-token',
             'react-native/santoku/application-architecture/push-notification/delete-token',
+            'react-native/santoku/application-architecture/push-notification/register-notification-channels',
             'react-native/santoku/application-architecture/push-notification/send-push-notification',
             'react-native/santoku/application-architecture/push-notification/receive-push-notification',
           ],
