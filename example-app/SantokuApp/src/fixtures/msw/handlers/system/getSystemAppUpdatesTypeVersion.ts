@@ -19,8 +19,8 @@ export const getSystemAppUpdatesTypeVersion = rest.get(
         ctx.json<AppUpdatesResponse>({
           updateRequired,
           message: updateRequired
-            ? `現在のバージョン(${supportedVersion})ではご利用いただけません。ストアより最新版アプリへのアップデートをお願いします。`
-            : `現在のバージョン(${supportedVersion})でご利用頂けます。`,
+            ? `現在のバージョン(${version})ではご利用いただけません。ストアより最新版アプリへのアップデートをお願いします。`
+            : `現在のバージョン(${version})でご利用頂けます。`,
           supportedVersion,
         }),
         ctx.delay(100),
