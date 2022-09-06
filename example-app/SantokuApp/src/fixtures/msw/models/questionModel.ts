@@ -1,5 +1,6 @@
 import {primaryKey} from '@mswjs/data';
 
+import {format2Iso8601} from '../utils/format2Iso8601';
 import {generateId} from '../utils/id';
 
 export const questionModel = {
@@ -7,15 +8,15 @@ export const questionModel = {
     questionId: primaryKey(generateId),
     title: String,
     content: String,
-    tags: Array,
-    datetime: String,
+    tags: () => [] as string[],
+    datetime: () => format2Iso8601(new Date()),
     beginner: Boolean,
-    resolved: Boolean,
-    views: Number,
-    answers: Number,
-    likes: Number,
-    comments: Number,
-    lastUpdatedAt: String,
+    resolved: () => false,
+    views: () => 0,
+    answers: () => 0,
+    likes: () => 0,
+    comments: () => 0,
+    lastUpdatedAt: () => format2Iso8601(new Date()),
     accountId: String,
     profile: {
       nickname: String,

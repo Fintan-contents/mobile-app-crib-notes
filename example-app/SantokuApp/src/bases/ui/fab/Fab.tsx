@@ -16,6 +16,13 @@ export const Fab: React.FC<FabProps> = ({size = 'medium', color = 'blue', onPres
       return 56;
     }
   }, [size]);
+  const borderRadius = useMemo(() => {
+    if (size === 'small') {
+      return 'p20';
+    } else {
+      return 'p28';
+    }
+  }, [size]);
   return (
     <StyledTouchableOpacity onPress={onPress}>
       <Box
@@ -28,7 +35,7 @@ export const Fab: React.FC<FabProps> = ({size = 'medium', color = 'blue', onPres
         shadowRadius={4}
         shadowOpacity={0.35}
         elevation={1}
-        borderRadius={side / 2}
+        borderRadius={borderRadius}
         margin="p8"
         width={side}
         height={side}>

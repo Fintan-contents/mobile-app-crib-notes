@@ -8,6 +8,7 @@ const palette = {
   grey1: '#9E9E9E',
   grey2: '#E0E0E0',
   grey3: '#F5F5F5',
+  grey4: '#CCCCCC',
   white: '#FFFFFF',
   divider: '#CBCBCB',
   textRed: '#FF4857',
@@ -25,15 +26,21 @@ export const restyleTheme = createTheme({
     white: palette.white,
     divider: palette.divider,
     textRed: palette.textRed,
+    placeholder: palette.grey4,
+    errorText: palette.textRed,
+    activityIndicator: palette.grey2,
   },
   spacing: {
     s: 8,
     p2: 2,
     p4: 4,
     p8: 8,
+    p12: 12,
     p16: 16,
     p24: 24,
     p32: 32,
+    p48: 48,
+    p64: 64,
   },
   breakpoints: {
     // phone: 0,
@@ -43,6 +50,10 @@ export const restyleTheme = createTheme({
     defaults: {
       width: 8,
       height: 8,
+    },
+    p18: {
+      width: 18,
+      height: 18,
     },
     p24: {
       width: 24,
@@ -57,12 +68,23 @@ export const restyleTheme = createTheme({
       height: 120,
     },
   },
+  zIndices: {},
+  borderRadii: {
+    s: 8,
+    p2: 2,
+    p4: 4,
+    p8: 8,
+    p16: 16,
+    p20: 20,
+    p24: 24,
+    p28: 28,
+    p32: 32,
+    p40: 40,
+    p56: 56,
+  },
   textVariants: {
     defaults: {
-      // fontFamily: 'ShopifySans-Bold',
-      // fontSize: 16,
-      // lineHeight: 24,
-      // color: 'black',
+      color: 'black',
     },
     font20Bold: {
       fontSize: 20,
@@ -82,6 +104,19 @@ export const restyleTheme = createTheme({
     font14SemiBold: {
       fontSize: 14,
       fontWeight: '600',
+    },
+    font14Bold: {
+      fontSize: 14,
+      fontWeight: 'bold',
+    },
+    button: {
+      fontSize: 14,
+      fontWeight: '600',
+      color: 'white',
+    },
+    inputErrorText: {
+      fontSize: 14,
+      color: 'errorText',
     },
     h1: {
       // fontFamily: 'ShopifySans-Bold',
@@ -119,6 +154,15 @@ export const restyleTheme = createTheme({
       // lineHeight: 24,
       // color: 'black',
     },
+  },
+  buttonVariants: {
+    defaults: {
+      backgroundColor: 'blue',
+      borderRadius: 'p16',
+      px: 'p12',
+      py: 'p8',
+    },
+    tag: {},
   },
 });
 

@@ -31,7 +31,7 @@ const Component: React.FC<Props> = ({initialData}) => {
       <nav.Screen
         name="QuestionAndEventStackNav"
         component={QuestionAndEventPostStackNav}
-        options={{presentation: 'formSheet', headerShown: false}}
+        options={{presentation: 'modal', headerShown: false}}
       />
     </nav.Navigator>
   );

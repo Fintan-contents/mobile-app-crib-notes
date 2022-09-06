@@ -8,7 +8,7 @@ export const eventModel = {
     title: String,
     content: String,
     endDate: String,
-    likes: Number,
+    likes: () => 0,
     accountId: String,
     profile: {
       nickname: String,

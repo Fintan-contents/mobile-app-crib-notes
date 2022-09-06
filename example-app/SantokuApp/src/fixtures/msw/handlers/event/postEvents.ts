@@ -16,7 +16,7 @@ export const postEvents = rest.post(`${backendUrl}/events`, async (req, res, ctx
     if (!account) {
       return delayedResponse(ctx.status(401));
     }
-    const event = {title, content, endDate, likes: 0, account};
+    const event = {title, content, endDate, likes: 0, ...account};
     const savedEvent = db.event.create(event);
     return delayedResponse(
       ctx.status(201),
