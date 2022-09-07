@@ -3,21 +3,13 @@ import {Button} from 'bases/ui/button/Button';
 import {OverlayBackdrop} from 'bases/ui/overlay/OverlayBackdrop';
 import {OverlayContainer} from 'bases/ui/overlay/OverlayContainer';
 import {WebView} from 'bases/ui/webview/WebView';
+import {useIsLoggedIn} from 'features/account/client-states/useIsLoggedIn';
+import {useAccountCommands} from 'features/account/services/account/useAccountCommands';
 import {TermsOfServiceAgreementStatus} from 'features/backend/apis/model';
 import {TermsOfService} from 'features/backend/apis/model/termsOfService';
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
-
-import {useButtonDisable} from '../client-states/useButtonDisable';
-import {useIsWebViewError} from '../client-states/useIsWebViewError';
-import {useComposedExitingCallback} from '../use-cases/useComposedExitingCallback';
-import {useExitingCallbackOnAgreed} from '../use-cases/useExitingCallbackOnAgreed';
-import {useOnAgree} from '../use-cases/useOnAgree';
-import {useOnScrollEndOnce} from '../use-cases/useOnScrollEndOnce';
-import {useOnWebViewError} from '../use-cases/useOnWebViewError';
-import {useResetWebViewError} from '../use-cases/useResetWebViewError';
-import {useWebViewSource} from '../use-cases/useWebViewSource';
 
 export type TermsAgreementOverlayShowProps = {
   termsOfService: TermsOfService;
@@ -51,15 +43,67 @@ export const TermsAgreementOverlayComponent: React.FC<TermsAgreementOverlayProps
   exitingCallbackOnAgreed,
   contentViewTestID,
 }) => {
-  const [isWebViewError] = useIsWebViewError();
-  const [buttonDisable] = useButtonDisable();
-  const {webViewSource} = useWebViewSource(termsOfService);
-  const {composedExitingCallback} = useComposedExitingCallback(exitingCallback);
-  const {exitOnAgreed} = useExitingCallbackOnAgreed(exitingCallbackOnAgreed);
-  const {resetWebViewError} = useResetWebViewError();
-  const {onScrollEndOnce} = useOnScrollEndOnce();
-  const {onWebViewError} = useOnWebViewError();
-  const {onAgree, isLoading} = useOnAgree(close, termsOfService);
+  const [isWebViewError, setIsWebViewError] = useState(false);
+  const [buttonDisable, setButtonDisable] = useState(true);
+  const [isExited, setIsExited] = useState(false);
+  const [agreedStatus, setAgreedStatus] = useState<TermsOfServiceAgreementStatus>();
+
+  const [isLoggedIn] = useIsLoggedIn();
+  const {agreeTerms, isAgreeingTerms} = useAccountCommands();
+
+  const webViewSource = useMemo(() => {
+    const termUrl = termsOfService?.url;
+    return termUrl ? {uri: termUrl} : undefined;
+  }, [termsOfService?.url]);
+
+  const onWebViewError = useCallback(() => {
+    setIsWebViewError(true);
+  }, [setIsWebViewError]);
+
+  const resetWebViewError = useCallback(() => {
+    setIsWebViewError(false);
+  }, [setIsWebViewError]);
+
+  const composedExitingCallback = useCallback(
+    (finished: boolean) => {
+      try {
+        exitingCallback?.(finished);
+      } finally {
+        setButtonDisable(true);
+        setIsExited(true);
+      }
+    },
+    [exitingCallback, setButtonDisable, setIsExited],
+  );
+
+  const onScrollEndOnce = useCallback(() => setButtonDisable(false), [setButtonDisable]);
+
+  const onAgree = useCallback(async () => {
+    try {
+      const termsAgreementStatus = {
+        hasAgreed: true,
+        agreedVersion: termsOfService.version,
+      };
+      if (isLoggedIn) {
+        await agreeTerms(termsAgreementStatus);
+      }
+      setAgreedStatus(termsAgreementStatus);
+      close();
+    } catch {
+      // 個別のエラーハンドリングは不要
+    }
+  }, [agreeTerms, close, isLoggedIn, setAgreedStatus, termsOfService.version]);
+
+  const exitOnAgreed = useCallback(() => {
+    if (isExited && agreedStatus) {
+      try {
+        exitingCallbackOnAgreed?.(agreedStatus);
+      } finally {
+        setIsExited(false);
+        setAgreedStatus(undefined);
+      }
+    }
+  }, [agreedStatus, exitingCallbackOnAgreed, isExited, setAgreedStatus, setIsExited]);
 
   useEffect(() => exitOnAgreed(), [exitOnAgreed]);
 
@@ -88,7 +132,7 @@ export const TermsAgreementOverlayComponent: React.FC<TermsAgreementOverlayProps
             />
           )}
           <View style={styles.footer}>
-            <Button title={m('同意')} onPress={onAgree} disabled={buttonDisable || isLoading} />
+            <Button title={m('同意')} onPress={onAgree} disabled={buttonDisable || isAgreeingTerms} />
           </View>
         </View>
       </OverlayContainer>
