@@ -1327,6 +1327,9 @@ components:
                 description: 回答に対するコメントのリスト
                 items:
                   $ref: '#/components/schemas/Comment'
+            required:
+              - answer
+              - commentList
       required:
         - question
         - answerList
