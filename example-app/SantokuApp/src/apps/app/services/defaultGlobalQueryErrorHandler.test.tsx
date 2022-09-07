@@ -37,7 +37,7 @@ describe('defaultGlobalQueryErrorHandler', () => {
     const errorHandler = defaultGlobalQueryErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError, query);
-    expect(spySnackbar).toBeCalledWith(
+    expect(spySnackbar).toHaveBeenCalledWith(
       '予期せぬ通信エラーが発生しました。時間をおいてから再度お試しいただき、解決しない場合はお問い合わせください。',
     );
   });
@@ -49,6 +49,6 @@ describe('defaultGlobalQueryErrorHandler', () => {
     const errorHandler = defaultGlobalQueryErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError, query);
-    expect(spySnackbar).not.toBeCalled();
+    expect(spySnackbar).not.toHaveBeenCalled();
   });
 });

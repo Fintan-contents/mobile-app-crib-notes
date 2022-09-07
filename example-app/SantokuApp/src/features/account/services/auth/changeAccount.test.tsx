@@ -35,6 +35,6 @@ describe('changeAccount', () => {
   test('セキュアストレージからパスワードを取得できなかった場合の検証', async () => {
     jest.spyOn(loadPassword, 'loadPassword').mockResolvedValue(null);
     const changeAccountPromise = changeAccount('123456789');
-    await expect(changeAccountPromise).rejects.toThrowError(PasswordNotFoundError);
+    await expect(changeAccountPromise).rejects.toThrow(PasswordNotFoundError);
   });
 });

@@ -5,7 +5,7 @@ import {loadMessages, m} from './Message';
 describe('Message message', () => {
   test('メッセージがロードされていない場合の検証', () => {
     // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
-    expect(() => m('msg.error.network')).toThrowError(new Error('Messages are not loaded.'));
+    expect(() => m('msg.error.network')).toThrow(new Error('Messages are not loaded.'));
   });
   test('オプションが存在しないメッセージの取得を検証', async () => {
     await loadMessages({

@@ -40,7 +40,7 @@ describe('defaultGlobalErrorHandler', () => {
     const errorHandler = defaultGlobalErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError);
-    expect(spySnackbar).not.toBeCalled();
+    expect(spySnackbar).not.toHaveBeenCalled();
   });
 
   test('401 Unauthorizedの場合に再ログインを促すアラートを表示', async () => {
@@ -71,9 +71,9 @@ describe('defaultGlobalErrorHandler', () => {
         resolve(errorHandler(axiosError));
       });
     });
-    expect(spySnackbar).not.toBeCalled();
+    expect(spySnackbar).not.toHaveBeenCalled();
     expect(spyClientLogout).toHaveBeenCalled();
-    expect(spyAlert).toBeCalledWith(
+    expect(spyAlert).toHaveBeenCalledWith(
       '再ログインが必要です',
       'セッションの有効期限が切れました。再度ログインしてください。',
     );
@@ -99,8 +99,8 @@ describe('defaultGlobalErrorHandler', () => {
     const errorHandler = defaultGlobalErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError);
-    expect(spySnackbar).not.toBeCalled();
-    expect(spyAlert).toBeCalledWith(
+    expect(spySnackbar).not.toHaveBeenCalled();
+    expect(spyAlert).toHaveBeenCalledWith(
       '新しい利用規約への同意',
       'この機能を利用するためには最新の利用規約への同意が必要です。',
     );
@@ -125,7 +125,7 @@ describe('defaultGlobalErrorHandler', () => {
     const errorHandler = defaultGlobalErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError);
-    expect(spySnackbar).not.toBeCalled();
+    expect(spySnackbar).not.toHaveBeenCalled();
   });
 
   test('412 Precondition Failedの場合にアプリを新しいバージョンにアップデートするように促すダイアログを表示', async () => {
@@ -148,8 +148,8 @@ describe('defaultGlobalErrorHandler', () => {
     const errorHandler = defaultGlobalErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError);
-    expect(spySnackbar).not.toBeCalled();
-    expect(spyAlert).toBeCalledWith(
+    expect(spySnackbar).not.toHaveBeenCalled();
+    expect(spyAlert).toHaveBeenCalledWith(
       'アプリの更新が必要です',
       'アプリのバージョンが古いためこの機能を利用できません。ストアからアップデートを実施してください。',
     );
@@ -174,7 +174,7 @@ describe('defaultGlobalErrorHandler', () => {
     const errorHandler = defaultGlobalErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError);
-    expect(spySnackbar).toBeCalledWith(
+    expect(spySnackbar).toHaveBeenCalledWith(
       'ただいまリクエストが集中しており混雑しております。時間をおいてから再度お試しください。',
     );
   });
@@ -198,7 +198,7 @@ describe('defaultGlobalErrorHandler', () => {
     const errorHandler = defaultGlobalErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError);
-    expect(spySnackbar).toBeCalledWith(
+    expect(spySnackbar).toHaveBeenCalledWith(
       'ただいまシステムメンテナンスを実施しております。時間をおいてから再度お試しください。',
     );
   });
@@ -222,7 +222,9 @@ describe('defaultGlobalErrorHandler', () => {
     const errorHandler = defaultGlobalErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError);
-    expect(spySnackbar).toBeCalledWith('サーバへの接続がタイムアウトしました。時間をおいてから再度お試しください。');
+    expect(spySnackbar).toHaveBeenCalledWith(
+      'サーバへの接続がタイムアウトしました。時間をおいてから再度お試しください。',
+    );
   });
 
   test('500 Internal Server Errorの場合に予期せぬエラーのスナックバーを表示', async () => {
@@ -244,7 +246,7 @@ describe('defaultGlobalErrorHandler', () => {
     const errorHandler = defaultGlobalErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError);
-    expect(spySnackbar).toBeCalledWith(
+    expect(spySnackbar).toHaveBeenCalledWith(
       '予期せぬ通信エラーが発生しました。時間をおいてから再度お試しいただき、解決しない場合はお問い合わせください。',
     );
   });
@@ -255,7 +257,7 @@ describe('defaultGlobalErrorHandler', () => {
     const errorHandler = defaultGlobalErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(null);
-    expect(spySnackbar).toBeCalledWith(
+    expect(spySnackbar).toHaveBeenCalledWith(
       '予期せぬ通信エラーが発生しました。時間をおいてから再度お試しいただき、解決しない場合はお問い合わせください。',
     );
   });

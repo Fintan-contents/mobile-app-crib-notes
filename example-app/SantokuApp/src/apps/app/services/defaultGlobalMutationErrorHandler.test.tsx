@@ -36,7 +36,7 @@ describe('defaultGlobalMutationErrorHandler', () => {
     const errorHandler = defaultGlobalMutationErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError, jest.fn(), jest.fn(), mutation);
-    expect(spySnackbar).toBeCalledWith(
+    expect(spySnackbar).toHaveBeenCalledWith(
       '予期せぬ通信エラーが発生しました。時間をおいてから再度お試しいただき、解決しない場合はお問い合わせください。',
     );
   });
@@ -53,6 +53,6 @@ describe('defaultGlobalMutationErrorHandler', () => {
     const errorHandler = defaultGlobalMutationErrorHandler(new QueryClient());
     expect(errorHandler).not.toBeUndefined();
     errorHandler(axiosError, jest.fn(), jest.fn(), mutation);
-    expect(spySnackbar).not.toBeCalled();
+    expect(spySnackbar).not.toHaveBeenCalled();
   });
 });
