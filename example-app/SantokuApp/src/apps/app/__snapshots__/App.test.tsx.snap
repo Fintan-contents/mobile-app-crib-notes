@@ -32,9 +32,12 @@ exports[`App マウントされたときに正常にレンダリングされる�
       <View
         enabled={true}
         isNativeStack={true}
+        nativeBackButtonDismissalEnabled={false}
         onAppear={[Function]}
         onDisappear={[Function]}
         onDismissed={[Function]}
+        onHeaderBackButtonClicked={[Function]}
+        onNativeDismissCancelled={[Function]}
         onWillDisappear={[Function]}
         replaceAnimation="push"
         stackPresentation="push"
@@ -99,9 +102,12 @@ exports[`App マウントされたときに正常にレンダリングされる�
               <View
                 enabled={true}
                 isNativeStack={true}
+                nativeBackButtonDismissalEnabled={false}
                 onAppear={[Function]}
                 onDisappear={[Function]}
                 onDismissed={[Function]}
+                onHeaderBackButtonClicked={[Function]}
+                onNativeDismissCancelled={[Function]}
                 onWillDisappear={[Function]}
                 replaceAnimation="push"
                 stackPresentation="push"

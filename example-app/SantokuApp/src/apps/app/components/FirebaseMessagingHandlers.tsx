@@ -15,7 +15,7 @@ type Props = {
 const getNavigateToScreen = (
   message: FirebaseMessagingTypes.RemoteMessage,
   initialData: AppInitialData,
-): NavigationParameter<RootStackParamList> => {
+): NavigationParameter<RootStackParamList, 'AuthenticatedStackNav'> => {
   return ['AuthenticatedStackNav', {screen: 'MainTabNav', params: {screen: 'HomeStackNav', params: {screen: 'Home'}}}];
 };
 

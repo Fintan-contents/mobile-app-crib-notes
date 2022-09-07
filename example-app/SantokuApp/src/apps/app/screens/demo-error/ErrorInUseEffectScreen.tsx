@@ -3,7 +3,9 @@ import {DemoStackParamList} from 'apps/app/navigators/types';
 import {ErrorInUseEffectPage} from 'features/demo-error/pages/ErrorInUseEffectPage';
 import React, {useCallback} from 'react';
 
-export const ErrorInUseEffectScreen: React.FC<NativeStackScreenProps<DemoStackParamList>> = ({navigation}) => {
+export const ErrorInUseEffectScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'ErrorInUseEffect'>> = ({
+  navigation,
+}) => {
   const navigateToErrorInUseEffectSyncProcess = useCallback(
     () => navigation.navigate('ErrorInUseEffectSyncProcess'),
     [navigation],

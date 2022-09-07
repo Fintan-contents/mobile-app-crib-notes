@@ -4,7 +4,9 @@ import {AcknowledgementsPage} from 'features/acknowledgements/pages/Acknowledgem
 import {ThirdPartyDependency} from 'features/acknowledgements/types/ThirdPartyDependency';
 import React, {useCallback} from 'react';
 
-export const AcknowledgementsScreen: React.FC<NativeStackScreenProps<DemoStackParamList>> = ({navigation}) => {
+export const AcknowledgementsScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'Acknowledgements'>> = ({
+  navigation,
+}) => {
   const navigateToLicense = useCallback(
     (dependency: ThirdPartyDependency) => navigation.navigate('License', {dependency}),
     [navigation],

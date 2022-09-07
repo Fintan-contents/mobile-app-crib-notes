@@ -3,7 +3,7 @@ import {DemoStackParamList} from 'apps/app/navigators/types';
 import {ErrorCasePage} from 'features/demo-error/pages/ErrorCasePage';
 import React, {useCallback} from 'react';
 
-export const ErrorCaseScreen: React.FC<NativeStackScreenProps<DemoStackParamList>> = ({navigation}) => {
+export const ErrorCaseScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'ErrorCase'>> = ({navigation}) => {
   const navigateToErrorInEventHandler = useCallback(() => navigation.navigate('ErrorInEventHandler'), [navigation]);
   const navigateToErrorInUseEffect = useCallback(() => navigation.navigate('ErrorInUseEffect'), [navigation]);
   const navigateToErrorInReactComponent = useCallback(() => navigation.navigate('ErrorInReactComponent'), [navigation]);

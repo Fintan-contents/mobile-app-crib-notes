@@ -6,7 +6,27 @@ import React, {useMemo} from 'react';
 
 type ScreenList = {
   title: string;
-  to: keyof DemoStackParamList;
+  to: Exclude<
+    keyof DemoStackParamList,
+    | 'License'
+    | 'EditTodoDemo'
+    | 'SearchBarTodoDemo'
+    | 'SearchFormTodoDemo'
+    | 'GetAccountsMeDemo'
+    | 'DisableErrorHandlerDemo'
+    | 'DependentQueryDemo3'
+    | 'DependentQueryDemo2'
+    | 'DependentQueryDemo1'
+    | 'DisabledQueryDemo'
+    | 'CreateTodoDemo'
+    | 'ListTodoDemo'
+    | 'ErrorInEventHandler'
+    | 'ErrorInNativeModule'
+    | 'ErrorInReactComponent'
+    | 'ErrorInUseEffectAsyncProcess'
+    | 'ErrorInUseEffect'
+    | 'ErrorInUseEffectSyncProcess'
+  >;
 };
 
 const demoScreenList: ScreenList[] = [
