@@ -25,6 +25,15 @@ export const putAccountsMeAnswerCommentLikes = rest.put(
       });
       if (!answerCommentLike) {
         db.answerCommentLike.create({questionId, accountId, answerId, commentId});
+        db.answerComment.update({
+          where: {
+            accountId: {equals: accountId},
+            questionId: {equals: questionId},
+            answerId: {equals: answerId},
+            commentId: {equals: commentId},
+          },
+          data: {likes: likes => likes + 1},
+        });
       }
 
       return delayedResponse(ctx.status(204));

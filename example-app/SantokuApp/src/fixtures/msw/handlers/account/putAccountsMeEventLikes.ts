@@ -16,6 +16,10 @@ export const putAccountsMeEventLikes = rest.put(
       const eventLike = db.eventLike.findFirst({where: {accountId: {equals: accountId}, eventId: {equals: eventId}}});
       if (!eventLike) {
         db.eventLike.create({eventId, accountId});
+        db.event.update({
+          where: {accountId: {equals: accountId}, eventId: {equals: eventId}},
+          data: {likes: likes => likes + 1},
+        });
       }
 
       return delayedResponse(ctx.status(204));

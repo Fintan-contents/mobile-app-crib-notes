@@ -1,6 +1,11 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {QuestionDetailPage} from 'features/qa-question/pages/QuestionDetailPage';
 import React from 'react';
 
-export const QuestionDetailScreen: React.VFC = () => {
-  return <QuestionDetailPage />;
+import {AuthenticatedStackParamList} from '../../navigators/types';
+
+export const QuestionDetailScreen: React.VFC<NativeStackScreenProps<AuthenticatedStackParamList, 'QuestionDetail'>> = ({
+  route,
+}) => {
+  return <QuestionDetailPage questionId={route.params.questionId} />;
 };

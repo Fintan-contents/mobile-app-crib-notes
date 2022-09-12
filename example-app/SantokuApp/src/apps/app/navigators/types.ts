@@ -11,6 +11,7 @@ export type RootStackParamList = {
 
 export type AuthenticatedStackParamList = {
   MainTabNav: NavigatorScreenParams<MainTabParamList> | undefined;
+  QuestionDetail: {questionId: string};
   QuestionAndEventStackNav: NavigatorScreenParams<QuestionAndEventPostStackParamList> | undefined;
 };
 
@@ -21,7 +22,6 @@ export type MainTabParamList = {
 
 export type HomeStackParamList = {
   Home: undefined;
-  QuestionDetail: {questionId: string};
 };
 
 export type QuestionAndEventPostStackParamList = {

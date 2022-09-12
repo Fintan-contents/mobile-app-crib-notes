@@ -5,6 +5,7 @@ import {generateId} from '../utils/id';
 export const answerCommentModel = {
   answerComment: {
     commentId: primaryKey(generateId),
+    questionId: String,
     answerId: String,
     content: String,
     datetime: String,

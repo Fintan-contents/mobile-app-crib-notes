@@ -21,6 +21,10 @@ export const deleteAccountsMeAnswerLikes = rest.delete(
         db.answerLike.delete({
           where: {accountId: {equals: accountId}, questionId: {equals: questionId}, answerId: {equals: answerId}},
         });
+        db.answer.update({
+          where: {accountId: {equals: accountId}, questionId: {equals: questionId}, answerId: {equals: answerId}},
+          data: {likes: likes => likes - 1},
+        });
       }
 
       return delayedResponse(ctx.status(204));

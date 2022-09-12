@@ -1,8 +1,12 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
+import {m} from 'bases/message/Message';
+import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo} from 'react';
 
 import {withInitialData} from '../components/withInitialData';
+import {QuestionDetailScreen} from '../screens/qa-question/QuestionDetailScreen';
 import {useMainTabNav} from './MainTabNav';
 import {QuestionAndEventPostStackNav} from './QuestionAndEventPostStackNav';
 import {AuthenticatedStackParamList} from './types';
@@ -19,6 +23,7 @@ type Props = {
 const Component: React.FC<Props> = ({initialData}) => {
   const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
   const mainTabNav = useMainTabNav(initialData);
+  const theme = useTheme<RestyleTheme>();
 
   return (
     <nav.Navigator initialRouteName={initialRouteName}>
@@ -28,6 +33,11 @@ const Component: React.FC<Props> = ({initialData}) => {
         options={{
           headerShown: false,
         }}
+      />
+      <nav.Screen
+        component={QuestionDetailScreen}
+        name="QuestionDetail"
+        options={{title: m('質問詳細'), contentStyle: {backgroundColor: theme.colors.orange2}}}
       />
       <nav.Screen
         name="QuestionAndEventStackNav"

@@ -18,6 +18,7 @@ export const deleteAccountsMeQuestionLikes = rest.delete(
       });
       if (questionLike) {
         db.questionLike.delete({where: {accountId: {equals: accountId}, questionId: {equals: questionId}}});
+        db.question.update({where: {questionId: {equals: questionId}}, data: {likes: likes => likes - 1}});
       }
 
       return delayedResponse(ctx.status(204));
