@@ -4,8 +4,6 @@ title: ログアウト
 
 このアプリでは、Cookie経由で受け渡すセッションIDの破棄と、セキュアストレージからログイン中のアカウントIDおよびログイン資格情報を破棄することでログアウトします。
 
-なお、匿名アカウントはログアウトすると再ログイン出来なくなるため、ログアウト操作が出来ません。
-
 ## 処理フロー
 
 ログアウトの処理フローは以下になります。
@@ -21,20 +19,13 @@ title: ログアウト
 
 ## 利用方法
 
-ログアウトは`useLogout`フックを使用します。
+`useAuthCommands`の戻り値の`logout`関数を使用してログアウトします。
 
 ```typescript title="ログアウトの利用方法"
-import {useLogout} from 'features/account/hooks/useLogout';
-
-export const useLogoutUseCase = () => {
-  const {mutateAsync: callLogout, isLoading} = useLogout();
-  const logout = useCallback(async () => {
-    try {
-      await callLogout();
-    } catch (e) {
-      // エラー処理
-    }
-  }, [callLogout]);
-  return {logout, isLoading};
-};
+const {logout} = useAuthCommands();
+try {
+  await logout(undefined);
+} catch (e) {
+  // エラー処理
+}
 ```
