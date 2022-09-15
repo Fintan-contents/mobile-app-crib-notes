@@ -1,4 +1,4 @@
-import {ApplicationError} from 'bases/core/error/ApplicationError';
+import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import {m} from 'bases/message/Message';
 
 export const messages = [

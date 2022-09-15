@@ -1,4 +1,4 @@
-import {ApplicationError} from 'bases/core/error/ApplicationError';
+import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import React, {useCallback, useMemo, useState} from 'react';
 
 import {YearMonth} from './YearMonth';

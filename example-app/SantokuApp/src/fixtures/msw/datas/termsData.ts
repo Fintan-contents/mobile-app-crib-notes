@@ -1,4 +1,4 @@
-import {AppConfig} from 'bases/core/config/AppConfig';
+import {AppConfig} from 'bases/core/configs/AppConfig';
 
 import {db} from '../db';
 

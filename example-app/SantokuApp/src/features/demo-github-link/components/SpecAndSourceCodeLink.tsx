@@ -1,4 +1,4 @@
-import {AppConfig} from 'bases/core/config/AppConfig';
+import {AppConfig} from 'bases/core/configs/AppConfig';
 import React, {useCallback} from 'react';
 import {Linking, StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-elements';

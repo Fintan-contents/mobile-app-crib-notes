@@ -1,11 +1,11 @@
 import axios from 'axios';
-import {isApplicationError} from 'bases/core/error/ApplicationError';
+import {isApplicationError} from 'bases/core/errors/ApplicationError';
 import {log} from 'bases/logging';
 import {sendErrorLog} from 'bases/logging/sendErrorLog';
 import {m} from 'bases/message/Message';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {clientLogout} from 'features/account/services/auth/clientLogout';
-import {RequestTimeoutError} from 'features/backend/error/RequestTimeoutError';
+import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
 import {Alert} from 'react-native';
 import {QueryClient} from 'react-query';
 

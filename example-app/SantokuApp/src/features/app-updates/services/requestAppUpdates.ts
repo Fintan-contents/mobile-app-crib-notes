@@ -1,4 +1,4 @@
-import {ApplicationError} from 'bases/core/error/ApplicationError';
+import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import * as Application from 'expo-application';
 import {getAppUpdates} from 'features/backend/apis/system/system';
 import {Platform} from 'react-native';

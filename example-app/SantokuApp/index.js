@@ -10,7 +10,7 @@ import 'react-native-url-polyfill/auto';
 
 import {App} from './src/apps/app/App';
 import {AppWithMsw} from './src/apps/app/AppWithMsw';
-import {AppConfig} from './src/bases/core/config/AppConfig';
+import {AppConfig} from './src/bases/core/configs/AppConfig';
 
 // Manually hide splash screen
 SplashScreen.preventAutoHideAsync().catch(() => {

@@ -1,4 +1,4 @@
-import {ApplicationError} from 'bases/core/error/ApplicationError';
+import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
 import {loadMessages} from 'bases/message/Message';
 import {getAppUpdates} from 'features/backend/apis/system/system';

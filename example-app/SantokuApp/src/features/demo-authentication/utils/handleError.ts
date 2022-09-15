@@ -1,4 +1,4 @@
-import {isApplicationError} from 'bases/core/error/ApplicationError';
+import {isApplicationError} from 'bases/core/errors/ApplicationError';
 import {ActiveAccountIdNotFoundError} from 'features/account/errors/ActiveAccountIdNotFoundError';
 import {PasswordNotFoundError} from 'features/account/errors/PasswordNotFoundError';
 

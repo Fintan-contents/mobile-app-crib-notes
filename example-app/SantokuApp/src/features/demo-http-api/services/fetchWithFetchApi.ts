@@ -1,4 +1,4 @@
-import {AppConfig} from 'bases/core/config/AppConfig';
+import {AppConfig} from 'bases/core/configs/AppConfig';
 
 import {CredentialOption} from '../types/CredentialOption';
 import {RedirectOption} from '../types/RedirectOption';

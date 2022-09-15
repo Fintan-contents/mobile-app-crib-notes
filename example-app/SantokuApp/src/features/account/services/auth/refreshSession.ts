@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import {ApplicationError} from 'bases/core/error/ApplicationError';
+import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import {sendErrorLog} from 'bases/logging/sendErrorLog';
 import {
   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION,

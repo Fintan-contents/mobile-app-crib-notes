@@ -1,4 +1,4 @@
-import {ApplicationError} from 'bases/core/error/ApplicationError';
+import {ApplicationError} from 'bases/core/errors/ApplicationError';
 
 export class CacheClearError extends ApplicationError {}
 

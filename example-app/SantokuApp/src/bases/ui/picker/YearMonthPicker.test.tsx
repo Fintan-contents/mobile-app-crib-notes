@@ -1,5 +1,5 @@
 import {fireEvent, render, screen} from '@testing-library/react-native';
-import {ApplicationError} from 'bases/core/error/ApplicationError';
+import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import React from 'react';
 import {TextInputProps, ViewProps} from 'react-native';
 
