@@ -471,10 +471,10 @@ PODS:
     - RNFBApp
   - RNGestureHandler (2.2.1):
     - React-Core
-  - RNNotifee (5.6.0):
+  - RNNotifee (5.7.0):
     - React-Core
-    - RNNotifee/NotifeeCore (= 5.6.0)
-  - RNNotifee/NotifeeCore (5.6.0):
+    - RNNotifee/NotifeeCore (= 5.7.0)
+  - RNNotifee/NotifeeCore (5.7.0):
     - React-Core
   - RNReanimated (2.8.0):
     - DoubleConversion
@@ -828,7 +828,7 @@ SPEC CHECKSUMS:
   RNFBCrashlytics: f2b5e456c4969bdec60482e83d973d873ff17f1d
   RNFBMessaging: 3e2682ea5e15fe86da24d16d16019395a881f33c
   RNGestureHandler: 1dc1ea9d4b64f999042afafbaccf5b143f0b2fa2
-  RNNotifee: 8ee6ddabfc44b16600b978983162e0d4db20ce19
+  RNNotifee: 5155e0a5e0a97d0c839030d8192783cd63053999
   RNReanimated: 64573e25e078ae6bec03b891586d50b9ec284393
   RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
