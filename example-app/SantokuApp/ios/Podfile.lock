@@ -458,14 +458,14 @@ PODS:
     - React-Core
   - RNDateTimePicker (6.1.2):
     - React-Core
-  - RNFBApp (14.11.1):
+  - RNFBApp (14.12.0):
     - Firebase/CoreOnly (= 8.15.0)
     - React-Core
-  - RNFBCrashlytics (14.11.1):
+  - RNFBCrashlytics (14.12.0):
     - Firebase/Crashlytics (= 8.15.0)
     - React-Core
     - RNFBApp
-  - RNFBMessaging (14.11.1):
+  - RNFBMessaging (14.12.0):
     - Firebase/Messaging (= 8.15.0)
     - React-Core
     - RNFBApp
@@ -824,9 +824,9 @@ SPEC CHECKSUMS:
   RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
   RNCPicker: 6d5d64e7b90c240c779ee0938ec433c11e2dd758
   RNDateTimePicker: 6f1f0b4cf7c71b6e2aea7a3aa62969111084bbd1
-  RNFBApp: 9646e09d041ea159b84584865212e4cf33acd179
-  RNFBCrashlytics: f2b5e456c4969bdec60482e83d973d873ff17f1d
-  RNFBMessaging: 3e2682ea5e15fe86da24d16d16019395a881f33c
+  RNFBApp: e4439717c23252458da2b41b81b4b475c86f90c4
+  RNFBCrashlytics: 94e1f78e2a9aa9e02edbfb0d3f1f0921ce00094b
+  RNFBMessaging: 40dac204b4197a2661dec5be964780c6ec39bf65
   RNGestureHandler: 1dc1ea9d4b64f999042afafbaccf5b143f0b2fa2
   RNNotifee: 5155e0a5e0a97d0c839030d8192783cd63053999
   RNReanimated: 64573e25e078ae6bec03b891586d50b9ec284393
