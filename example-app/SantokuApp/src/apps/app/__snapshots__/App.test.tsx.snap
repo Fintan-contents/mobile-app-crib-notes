@@ -571,6 +571,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                             }
                                           >
                                             <View
+                                              pointerEvents="box-none"
                                               style={
                                                 Array [
                                                   Object {
