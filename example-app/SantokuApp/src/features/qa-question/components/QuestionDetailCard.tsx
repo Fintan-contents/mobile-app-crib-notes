@@ -1,6 +1,9 @@
 import {useVisibility} from 'bases/core/utils/useVisibility';
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledColumn} from 'bases/ui/common/StyledColumn';
+import {StyledRow} from 'bases/ui/common/StyledRow';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {BeginnerMarkIllustration} from 'bases/ui/illustration/BeginnerMarkIllustration';
 import {DoneIllustration} from 'bases/ui/illustration/DoneIllustration';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
@@ -71,101 +74,87 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
       shadowColor="black"
       shadowOpacity={0.25}
       elevation={1}>
-      <Box flexDirection="row" alignItems="center">
+      <StyledRow alignItems="center">
         <PersonIllustration />
-        <Box px="p8" />
-        <Box flex={1} flexDirection="column">
+        <StyledSpace width="p16" />
+        <StyledColumn flex={1}>
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
-          <Box flexDirection="row" alignItems="center" justifyContent="space-between">
+          <StyledRow space="p24" alignItems="center" justifyContent="space-between">
             <Text variant="font14Regular" letterSpacing={0.25} color="black2">
               {profile?.points}/{profile?.totalPoints}
             </Text>
-            <Box py="p12" />
             {resolved && (
-              <Box flexDirection="row" justifyContent="flex-end" alignItems="center" px="p8">
+              <StyledRow space="p8" justifyContent="flex-end" alignItems="center" px="p8">
                 <DoneIllustration color="blue" />
-                <Box px="p4" />
                 <Text variant="font14Bold" lineHeight={20} color="blue" letterSpacing={0.25}>
                   {m('解決済み')}
                 </Text>
-              </Box>
+              </StyledRow>
             )}
-          </Box>
-        </Box>
+          </StyledRow>
+        </StyledColumn>
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <MoreVertIllustration />
         </StyledTouchableOpacity>
-      </Box>
-      <Box py="p12" />
+      </StyledRow>
+      <StyledSpace height="p24" />
       <Text fontSize={22} fontWeight="700" lineHeight={34} letterSpacing={0.18}>
         {beginner && (
           <>
             <BeginnerMarkIllustration />
-            <Box px="p4" />
+            <StyledSpace width="p8" />
           </>
         )}
         {title}
       </Text>
-      <Box py="p8" />
+      <StyledSpace height="p16" />
       <Text fontSize={14} lineHeight={28} letterSpacing={0.25}>
         {content}
       </Text>
-      <Box py="p4" />
-      <Box flexDirection="row" alignItems="flex-end">
-        <Box flex={1} />
+      <StyledSpace height="p8" />
+      <Box flex={1} alignItems="flex-end">
         <DiffDaysOrHours datetime={datetime} />
       </Box>
-      <Box flexDirection="row" justifyContent="flex-start" alignItems="flex-end">
+      <StyledRow justifyContent="flex-start" alignItems="flex-end">
         <QuestionAndAnswerLikeButtonWithCount onPress={toggleQuestionLike} count={likes} color={likeQuestionColor} />
         <Box flex={1} />
-        <Box flexDirection="row">
+        <StyledRow space="p16">
           <ViewsButtonWithCount onPress={showUnderDevelopment} count={views} />
-          <Box px="p8" />
           <CommentsButtonWithCount
             onPress={toggleQuestionCommentsVisible}
             count={comments}
             color={commentButtonColor}
           />
-        </Box>
-      </Box>
-      <Box py="p16" />
-      <Box flexDirection="row" alignItems="flex-end">
+        </StyledRow>
+      </StyledRow>
+      <StyledSpace height="p32" />
+      <StyledRow space="p16" alignItems="flex-end">
         <TagIllustration />
-        <Box flexDirection="row" alignItems="center">
-          <Box px="p8" />
-          <Text>
-            {questionTags?.map(tag => (
-              <Box key={tag?.tagId} flexDirection="row">
-                <Text variant="font14Regular" textDecorationLine="underline" letterSpacing={0.18}>
-                  {tag?.tagName}
-                </Text>
-                <Box px="p4" />
-              </Box>
-            ))}
-          </Text>
-        </Box>
-      </Box>
-      <Box py="p8" />
+        <StyledRow space="p8" flexWrap="wrap">
+          {questionTags?.map(tag => (
+            <Text key={tag?.tagId} variant="font14Regular" textDecorationLine="underline" letterSpacing={0.18}>
+              {tag?.tagName}
+            </Text>
+          ))}
+        </StyledRow>
+      </StyledRow>
+      <StyledSpace height="p16" />
       {isQuestionCommentsVisible && (
-        <>
+        <StyledColumn space="p16">
           {commentList.map(comment => {
             const liked = likedCommentIds?.some(v => v === comment.commentId);
             return (
-              <Box key={comment.commentId}>
-                <Box py="p8" />
+              <StyledColumn key={comment.commentId} space="p16">
                 <CommentDivider />
-                <Box py="p8" />
                 <CommentCard {...comment} liked={liked} />
-              </Box>
+              </StyledColumn>
             );
           })}
-          <Box py="p8" />
           <CommentDivider />
-          <Box py="p8" />
           <AddCommentButton onPress={showUnderDevelopment} />
-        </>
+        </StyledColumn>
       )}
     </Box>
   );

@@ -1,6 +1,9 @@
 import {m} from 'bases/message/Message';
 import {Box, StyledSafeAreaView, StyledScrollView, Text} from 'bases/ui/common';
 import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
+import {StyledColumn} from 'bases/ui/common/StyledColumn';
+import {StyledRow} from 'bases/ui/common/StyledRow';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {Fab} from 'bases/ui/fab/Fab';
 import {ExpandLessIllustration} from 'bases/ui/illustration/ExpandLessIllustration';
 import {QuestionAnswerIllustration} from 'bases/ui/illustration/QuestionAnswerIllustration';
@@ -45,26 +48,29 @@ export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({question
           liked={questionLikes?.liked}
           likedCommentIds={questionLikes?.commentId}
         />
-        <Box px="p24" py="p32" flexDirection="row" justifyContent="flex-start" alignItems="center">
+        <StyledRow space="p16" px="p24" py="p32" justifyContent="flex-start" alignItems="center">
           <Text variant="font20Bold" lineHeight={24}>
             {m('回答')}
           </Text>
-          <Box px="p8" />
           <Text variant="font14Bold" lineHeight={24}>
             {question.answerList.length}
             {m('件')}
           </Text>
-        </Box>
-        {question.answerList.map(answer => {
-          const answerLikes = questionLikes?.answer.find(v => v.answerId === answer.answer?.answerId);
-          return (
-            <Box key={answer.answer?.answerId}>
-              <AnswerDetailCard {...answer} liked={answerLikes?.liked} likedCommentIds={answerLikes?.commentId} />
-              <Box py="p8" />
-            </Box>
-          );
-        })}
-        <Box py="p32" />
+        </StyledRow>
+        <StyledColumn space="p16">
+          {question.answerList.map(answer => {
+            const answerLikes = questionLikes?.answer.find(v => v.answerId === answer.answer?.answerId);
+            return (
+              <AnswerDetailCard
+                key={answer.answer?.answerId}
+                {...answer}
+                liked={answerLikes?.liked}
+                likedCommentIds={answerLikes?.commentId}
+              />
+            );
+          })}
+        </StyledColumn>
+        <StyledSpace height="p64" />
       </StyledScrollView>
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         {Platform.OS === 'android' && (

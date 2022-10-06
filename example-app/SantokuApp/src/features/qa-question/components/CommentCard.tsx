@@ -1,4 +1,6 @@
 import {Box, Text} from 'bases/ui/common';
+import {StyledColumn} from 'bases/ui/common/StyledColumn';
+import {StyledRow} from 'bases/ui/common/StyledRow';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {Comment} from 'features/backend/apis/model';
 import React, {FC, useMemo} from 'react';
@@ -13,24 +15,21 @@ export type CommentProps = Comment & {liked?: boolean};
 export const CommentCard: FC<CommentProps> = ({content, likes, profile, datetime, liked}) => {
   const likeColor = useMemo(() => (liked ? 'blue' : 'grey1'), [liked]);
   return (
-    <Box flex={1} flexDirection="row">
+    <StyledRow flex={1} space="p16">
       <Box>
         <CommentsLikeButtonWithCount onPress={showUnderDevelopment} count={likes} color={likeColor} />
       </Box>
-      <Box px="p8" />
-      <Box flex={1} flexDirection="column">
+      <StyledColumn flex={1} space="p16">
         <Text variant="font13Regular" lineHeight={19} letterSpacing={0.25}>
           {content}
         </Text>
-        <Box py="p8" />
-        <Box flexDirection="row">
+        <StyledRow flex={1} justifyContent="space-between">
           <Text variant="font13Regular" lineHeight={24} letterSpacing={0.15} textDecorationLine="underline">
             {profile?.nickname}
           </Text>
-          <Box flex={1} />
           <DiffDaysOrHours datetime={datetime} />
-        </Box>
-      </Box>
-    </Box>
+        </StyledRow>
+      </StyledColumn>
+    </StyledRow>
   );
 };

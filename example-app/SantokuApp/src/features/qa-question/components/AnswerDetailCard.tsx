@@ -1,5 +1,8 @@
 import {useVisibility} from 'bases/core/utils/useVisibility';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledColumn} from 'bases/ui/common/StyledColumn';
+import {StyledRow} from 'bases/ui/common/StyledRow';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
@@ -40,26 +43,26 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
       shadowColor="black"
       shadowOpacity={0.25}
       elevation={1}>
-      <Box flexDirection="row" alignItems="center">
+      <StyledRow alignItems="center">
         <PersonIllustration />
-        <Box px="p8" />
-        <Box flex={1} flexDirection="column">
+        <StyledSpace width="p16" />
+        <StyledColumn flex={1}>
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
           <Text variant="font14Regular" letterSpacing={0.25} color="black2">
             {profile?.points}/{profile?.totalPoints}
           </Text>
-        </Box>
+        </StyledColumn>
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <MoreVertIllustration />
         </StyledTouchableOpacity>
-      </Box>
-      <Box py="p8" />
+      </StyledRow>
+      <StyledSpace height="p16" />
       <Text fontSize={14} lineHeight={28} letterSpacing={0.25}>
         {content}
       </Text>
-      <Box py="p4" />
+      <StyledSpace height="p8" />
       <Box flexDirection="row" alignItems="flex-end">
         <Box flex={1} />
         <DiffDaysOrHours datetime={datetime} />
@@ -69,22 +72,18 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
         <Box flex={1} />
         <CommentsButtonWithCount onPress={toggleAnswerCommentsVisible} count={comments} color={commentButtonColor} />
       </Box>
-      <Box py="p4" />
+      <StyledSpace height="p16" />
       {isAnswerCommentsVisible && (
-        <>
+        <StyledColumn space="p16">
           {commentList?.map(comment => (
-            <Box key={comment.commentId}>
-              <Box py="p8" />
+            <StyledColumn key={comment.commentId} space="p16">
               <CommentDivider />
-              <Box py="p8" />
-              <CommentCard {...comment} />
-            </Box>
+              <CommentCard key={comment.commentId} {...comment} />
+            </StyledColumn>
           ))}
-          <Box py="p8" />
           <CommentDivider />
-          <Box py="p8" />
           <AddCommentButton onPress={showUnderDevelopment} />
-        </>
+        </StyledColumn>
       )}
     </Box>
   );
