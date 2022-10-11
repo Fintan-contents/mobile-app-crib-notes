@@ -29,7 +29,8 @@ describe('ConsoleTransport logMethods', () => {
 
   test('errorメソッドの検証', () => {
     const mockConsole = jest.spyOn(console, 'error').mockImplementation();
-    transport.error('errorLog', 'err0001');
-    expect(mockConsole).toHaveBeenCalledWith('errorLog');
+    const error = new Error('errorLog');
+    transport.error(error, 'err0001');
+    expect(mockConsole).toHaveBeenCalledWith(error);
   });
 });

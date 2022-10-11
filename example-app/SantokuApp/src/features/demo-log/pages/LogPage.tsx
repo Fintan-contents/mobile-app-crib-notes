@@ -6,7 +6,7 @@ const traceLog = () => log.trace('デモ用Traceログ');
 const debugLog = () => log.debug('デモ用Debugログ');
 const infoLog = () => log.info('デモ用Infoログ');
 const warnLog = () => log.warn('デモ用Warnログ');
-const errorLog = () => log.error('デモ用Errorログ', 'DemoErrorLog');
+const errorLog = () => log.error(new Error('デモ用Errorログ'), 'DemoErrorLog');
 
 export const LogPage: React.FC = () => {
   return (

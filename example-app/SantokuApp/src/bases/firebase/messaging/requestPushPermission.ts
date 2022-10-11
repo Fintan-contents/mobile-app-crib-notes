@@ -5,7 +5,7 @@ export const requestPushPermission = async () => {
   try {
     return await messaging().requestPermission();
   } catch (e) {
-    throw new RequestPushPermissionError('Failed to request push permission.', e);
+    throw new RequestPushPermissionError('Failed to request push permission.', e, 'RequestPushPermissionError');
   }
 };
 

@@ -1,5 +1,6 @@
-import {log} from 'bases/logging';
+import {handleError} from 'bases/core/errors/handleError';
 
+import {RuntimeError} from '../core/errors/RuntimeError';
 import {MessageKey} from './BundledMessages';
 
 /**
@@ -48,7 +49,7 @@ function message(key: MessageKey, ...options: string[]): string {
     throw new Error('Messages are not loaded.');
   }
   if (cache[key] === undefined) {
-    log.error(`Could not find the message. messageKey=[${key}]`, 'MessageNotFound');
+    handleError(new RuntimeError(`Could not find the message. messageKey=[${key}]`, 'MessageNotFound'));
     return key;
   }
   return !options.length ? cache[key] : format(cache[key], options);

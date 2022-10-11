@@ -1,6 +1,6 @@
 import {ErrorWrapper} from './ErrorWrapper';
 
-export class ApplicationError extends ErrorWrapper {
+export class RuntimeError extends ErrorWrapper {
   constructor();
   constructor(cause: unknown);
   constructor(message: string);
@@ -24,6 +24,6 @@ export class ApplicationError extends ErrorWrapper {
   }
 }
 
-export function isApplicationError(error?: any): error is ApplicationError {
-  return error != null && typeof error === 'object' && error instanceof ApplicationError;
+export function isRuntimeError(error?: any): error is RuntimeError {
+  return error != null && typeof error === 'object' && error instanceof RuntimeError;
 }

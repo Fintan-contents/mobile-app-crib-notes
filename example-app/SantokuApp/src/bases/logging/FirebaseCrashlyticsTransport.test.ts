@@ -27,7 +27,7 @@ describe('FirebaseCrashlyticsTransport logMethods', () => {
 
   test('errorメソッドの検証', () => {
     const transport = new FirebaseCrashlyticsTransport();
-    transport.error('errorLog', 'err0001');
+    transport.error(new Error('errorLog'), 'err0001');
     expect(__mocks.crashlytics.recordError).toHaveBeenCalledWith(new Error('errorLog'), 'err0001');
   });
 });

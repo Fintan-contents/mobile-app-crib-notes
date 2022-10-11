@@ -2,9 +2,8 @@
  * クライアント側のログアウト処理を実施します。
  */
 import crashlytics from '@react-native-firebase/crashlytics';
+import {handleError} from 'bases/core/errors/handleError';
 import {deleteFcmToken} from 'bases/firebase/messaging/deleteFcmToken';
-import {log} from 'bases/logging';
-import {m} from 'bases/message/Message';
 import {deleteActiveAccountId} from 'features/secure-storage/services/deleteActiveAccountId';
 import {deletePassword} from 'features/secure-storage/services/deletePassword';
 import {loadActiveAccountId} from 'features/secure-storage/services/loadActiveAccountId';
@@ -32,6 +31,6 @@ export const clientLogout = async (queryClient?: QueryClient, queryRemovalFilter
     await deleteFcmToken();
   } catch (e) {
     // 基本的にはFCM登録トークンの削除は失敗しない想定ですが、もし失敗した場合はログアウト後もSantokuApp Backendを経由しないPush通知は受信できてしまいます。
-    log.error(m('app.push.notification.deleteFcmTokenError', String(e)), 'app.push.notification.deleteFcmTokenError');
+    handleError(e);
   }
 };

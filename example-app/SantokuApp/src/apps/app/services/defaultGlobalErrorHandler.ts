@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {isApplicationError} from 'bases/core/errors/ApplicationError';
+import {handleError} from 'bases/core/errors/handleError';
 import {log} from 'bases/logging';
-import {sendErrorLog} from 'bases/logging/sendErrorLog';
 import {m} from 'bases/message/Message';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {clientLogout} from 'features/account/services/auth/clientLogout';
@@ -87,7 +87,7 @@ export const defaultGlobalErrorHandler = (queryClient: QueryClient) => {
         default:
           // 想定外のエラーが発生したことを伝えるスナックバーを表示し、Firebase Clashlyticsへログを送信
           Snackbar.show(m('fw.error.予期せぬ通信エラー'));
-          sendErrorLog(error);
+          handleError(error);
           break;
       }
     } else if (error instanceof RequestTimeoutError) {
@@ -96,7 +96,7 @@ export const defaultGlobalErrorHandler = (queryClient: QueryClient) => {
     } else {
       // 想定外のエラーが発生したことを伝えるスナックバーを表示し、Firebase Clashlyticsへログを送信
       Snackbar.show(m('fw.error.予期せぬ通信エラー'));
-      sendErrorLog(error);
+      handleError(error);
     }
   };
 };

@@ -1,6 +1,6 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {sendErrorLog} from 'bases/logging/sendErrorLog';
+import {handleError} from 'bases/core/errors/handleError';
 import {m} from 'bases/message/Message';
 import {useIsLoggedIn} from 'features/account/client-states/useIsLoggedIn';
 import React, {useEffect, useMemo} from 'react';
@@ -36,7 +36,7 @@ const useRootStackNavigator = (initialData: AppInitialData) => {
 
   useEffect(() => {
     hideSplashScreen().catch(e => {
-      sendErrorLog(e);
+      handleError(e);
     });
   }, []);
 

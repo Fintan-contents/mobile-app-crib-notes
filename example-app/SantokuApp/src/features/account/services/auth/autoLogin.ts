@@ -1,3 +1,4 @@
+import {RuntimeError} from 'bases/core/errors/RuntimeError';
 import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
 import {AccountLoginResponse} from 'features/backend/apis/model';
 import {loadActiveAccountId} from 'features/secure-storage/services/loadActiveAccountId';
@@ -16,7 +17,7 @@ export const autoLogin = async (): Promise<AccountLoginResponse | undefined> => 
   }
   const accountId = await loadActiveAccountId();
   if (!accountId) {
-    throw new ActiveAccountIdNotFoundError('There is no auto-login enabled account.');
+    throw new ActiveAccountIdNotFoundError('There is no auto-login enabled account.', 'AutoLoginError');
   }
   try {
     return await changeAccount(accountId);
@@ -25,7 +26,7 @@ export const autoLogin = async (): Promise<AccountLoginResponse | undefined> => 
       // 認証エラーは処理成功として扱う
       return undefined;
     } else {
-      throw e;
+      throw new RuntimeError(e, 'AutoLoginError');
     }
   }
 };

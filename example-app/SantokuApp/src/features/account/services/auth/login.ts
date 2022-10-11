@@ -6,6 +6,7 @@
  */
 import crashlytics from '@react-native-firebase/crashlytics';
 import axios from 'axios';
+import {RuntimeError} from 'bases/core/errors/RuntimeError';
 import {postLogin} from 'features/backend/apis/account/account';
 import {AccountLoginResponse} from 'features/backend/apis/model';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
@@ -25,9 +26,9 @@ export const login = async (accountId: string, password: string): Promise<Accoun
   } catch (e) {
     if (axios.isAxiosError(e)) {
       if (e.response?.status === 401) {
-        throw new UnauthorizedError(e);
+        throw new UnauthorizedError(e, 'LoginError');
       }
     }
-    throw e;
+    throw new RuntimeError(e, 'LoginError');
   }
 };

@@ -1,5 +1,6 @@
-import {log} from 'bases/logging';
+import * as error from 'bases/core/errors/handleError';
 
+import {RuntimeError} from '../core/errors/RuntimeError';
 import {loadMessages, m} from './Message';
 
 describe('Message message', () => {
@@ -48,9 +49,11 @@ describe('Message message', () => {
         });
       },
     });
-    const spy = jest.spyOn(log, 'error').mockImplementation();
+    const spy = jest.spyOn(error, 'handleError').mockImplementation();
     // @ts-ignore テスト用にMessageKeyには存在しないキーを指定しているため
     expect(m('dummyKey')).toEqual('dummyKey');
-    expect(spy).toHaveBeenCalledWith('Could not find the message. messageKey=[dummyKey]', 'MessageNotFound');
+    expect(spy).toHaveBeenCalledWith(
+      new RuntimeError('Could not find the message. messageKey=[dummyKey]', 'MessageNotFound'),
+    );
   });
 });

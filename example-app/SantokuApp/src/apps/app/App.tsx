@@ -1,7 +1,9 @@
+import {setHandleError} from 'bases/core/errors/handleError';
+import {setHandleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
+import {setHandleErrorWithSnackbar} from 'bases/core/errors/handleErrorWithSnackbar';
 import {firebaseConfig} from 'bases/firebase/FirebaseConfig';
 import {createLogger, setLogger} from 'bases/logging';
 import {FirebaseCrashlyticsTransport} from 'bases/logging/FirebaseCrashlyticsTransport';
-import {setErrorSender} from 'bases/logging/sendErrorLog';
 import {LoadingOverlay} from 'bases/ui/loading/LoadingOverlay';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {AppThemeProvider} from 'bases/ui/theme/AppThemeProvider';
@@ -11,7 +13,9 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {AppWithInitialization} from './AppWithInitialization';
-import {sendErrorLog} from './utils/sendErrorLog';
+import {handleError} from './errors/handleError';
+import {handleErrorWithAlert} from './errors/handleErrorWithAlert';
+import {handleErrorWithSnackbar} from './errors/handleErrorWithSnackbar';
 
 type AppProperties = {
   [key: string]: any;
@@ -23,7 +27,9 @@ setLogger(
     : createLogger({level: 'error', transports: [new FirebaseCrashlyticsTransport()]}),
 );
 
-setErrorSender(sendErrorLog);
+setHandleError(handleError);
+setHandleErrorWithSnackbar(handleErrorWithSnackbar);
+setHandleErrorWithAlert(handleErrorWithAlert);
 
 export const App = ({isHeadless}: AppProperties) => {
   // isHeadlessを取得するためにはAppDelegate.mに変更が必要

@@ -12,7 +12,7 @@ import {login} from './login';
 export const changeAccount = async (accountId: string): Promise<AccountLoginResponse> => {
   const password = await loadPassword(accountId);
   if (!password) {
-    throw new PasswordNotFoundError('The password for the account ID does not exist.');
+    throw new PasswordNotFoundError('The password for the account ID does not exist.', 'ChangeAccountError');
   }
   return login(accountId, password);
 };

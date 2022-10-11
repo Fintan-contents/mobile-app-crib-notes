@@ -10,14 +10,17 @@ class FirebaseCrashlyticsTransport implements Transport {
   /**
    * Firebase Crashlyticsにログ出力します。
    * @param level ログレベル
-   * @param message 出力するメッセージ
+   * @param messageOrError 出力するメッセージ、またはエラー
    * @param errorCode エラーコード
    * @see {@link https://rnfirebase.io/crashlytics/usage#usage}
    * @see {@link FirebaseCrashlyticsTypes.Module.recordError}
    */
-  log(level: LogLevel, message: string, errorCode?: string) {
-    // FirebaseCrashlyticsTransportはエラーレベルのログしか出力しないため、errorCodeは必ず存在している想定
-    crashlytics().recordError(new Error(message), errorCode);
+  log(level: LogLevel, messageOrError: string | Error, errorCode?: string) {
+    if (typeof messageOrError === 'string') {
+      crashlytics().recordError(new Error(messageOrError), errorCode);
+      return;
+    }
+    crashlytics().recordError(messageOrError, errorCode);
   }
 
   /**
@@ -54,11 +57,11 @@ class FirebaseCrashlyticsTransport implements Transport {
 
   /**
    * Firebase Crashlyticsにerrorログを出力します。
-   * @param message 出力するメッセージ
+   * @param error エラー
    * @param errorCode エラーコード
    */
-  error(message: string, errorCode: string) {
-    this.log('error', message, errorCode);
+  error(error: Error, errorCode: string) {
+    this.log('error', error, errorCode);
   }
 }
 

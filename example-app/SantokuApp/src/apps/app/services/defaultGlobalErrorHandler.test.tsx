@@ -1,6 +1,6 @@
 import {act} from '@testing-library/react-native';
 import {AxiosError} from 'axios';
-import {setErrorSender} from 'bases/logging/sendErrorLog';
+import {setHandleError} from 'bases/core/errors/handleError';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import * as clientLogout from 'features/account/services/auth/clientLogout';
 import {Alert} from 'react-native';
@@ -18,7 +18,7 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
-setErrorSender(jest.fn());
+setHandleError(jest.fn());
 
 describe('defaultGlobalErrorHandler', () => {
   test('400 Bad Requestの場合に何も行われない', async () => {

@@ -1,10 +1,10 @@
+import {handleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
 import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
-import {log} from 'bases/logging';
 import {m} from 'bases/message/Message';
 import {Button} from 'bases/ui/button/Button';
 import {useAuthCommands} from 'features/account/services/auth/useAuthCommands';
 import React, {useCallback} from 'react';
-import {Alert, GestureResponderEvent, StyleSheet} from 'react-native';
+import {GestureResponderEvent, StyleSheet} from 'react-native';
 
 type HeaderRightLogoutButtonProps = {
   onPress: (event: GestureResponderEvent) => void;
@@ -47,8 +47,7 @@ export const useLogoutButton = () => {
     } catch (e) {
       // 基本的にはFCM登録トークンの取得は失敗しない想定ですが、もし失敗した場合は、Firebase Crashlyticsにログを送信してアラートを表示します。
       if (isGetFcmTokenError(e)) {
-        log.error(m('app.push.notification.getFcmTokenError', String(e)), 'app.push.notification.getFcmTokenError');
-        Alert.alert(m('app.account.ログアウトエラータイトル'), m('app.account.ログアウトエラー本文'));
+        handleErrorWithAlert(e, m('app.account.ログアウトエラータイトル'), m('app.account.ログアウトエラー本文'));
       }
     }
   }, [logout]);

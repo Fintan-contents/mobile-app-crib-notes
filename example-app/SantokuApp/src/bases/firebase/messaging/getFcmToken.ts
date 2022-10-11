@@ -8,7 +8,7 @@ export const getFcmToken = async () => {
     try {
       return await messaging().getToken();
     } catch (e) {
-      throw new GetFcmTokenError('Failed to get fcm token.', e);
+      throw new GetFcmTokenError('Failed to get fcm token.', e, 'GetFcmTokenError');
     }
   }
 };

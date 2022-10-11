@@ -1,12 +1,12 @@
 import {AxiosError} from 'axios';
-import {setErrorSender} from 'bases/logging/sendErrorLog';
+import {setHandleError} from 'bases/core/errors/handleError';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {Query, QueryClient, QueryKey} from 'react-query';
 
 import {defaultGlobalQueryErrorHandler} from './defaultGlobalQueryErrorHandler';
 import {loadBundledMessagesAsync} from './loadBundledMessagesAsync';
 
-setErrorSender(jest.fn());
+setHandleError(jest.fn());
 
 jest.mock('bases/logging');
 

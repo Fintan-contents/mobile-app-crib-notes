@@ -1,7 +1,6 @@
-import {sendErrorLog} from 'bases/logging/sendErrorLog';
+import {handleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
 import {resolveErrorMessage} from 'bases/message/resolveErrorMessage';
 import React, {useEffect, useRef} from 'react';
-import {Alert} from 'react-native';
 
 import {useIsLoggedIn} from '../client-states/useIsLoggedIn';
 import {useAccountData} from '../services/account/useAccountData';
@@ -19,8 +18,7 @@ export const AccountDataLoader: React.FC = ({children}) => {
     if (isAutoLoggedIn && isLoadingError) {
       if (errorUpdateCount === 1) {
         const {title, message} = resolveErrorMessage(error);
-        sendErrorLog(error);
-        Alert.alert(title, message);
+        handleErrorWithAlert(error, title, message);
       }
     }
   }, [error, errorUpdateCount, isAutoLoggedIn, isLoadingError]);

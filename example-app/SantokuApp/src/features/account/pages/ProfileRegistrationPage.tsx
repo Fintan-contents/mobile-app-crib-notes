@@ -1,11 +1,11 @@
-import {log} from 'bases/logging';
+import {handleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
 import {m} from 'bases/message/Message';
 import {FilledButton} from 'bases/ui/button/FilledButton';
 import {TextInput} from 'bases/ui/input/TextInput';
 import {Spacer} from 'bases/ui/spacer/Spacer';
 import {TermsOfServiceAgreementStatus} from 'features//backend/apis/model';
 import React, {useCallback} from 'react';
-import {Alert, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import {isUnauthorizedError} from '../errors/UnauthorizedError';
 import {ProfileFormValues, useProfileRegistrationForm} from '../forms/useProfileRegistrationForm';
@@ -29,8 +29,7 @@ export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = 
         // もし発生した場合は、クライアント側のログアウト処理を実施後、Firebase Crashlyticsにエラーログを送信します。
         if (isUnauthorizedError(e)) {
           await clientLogout();
-          log.error(m('app.account.signupError', String(e)), 'app.account.signupError');
-          Alert.alert(m('app.account.サインアップエラータイトル'), m('app.account.サインアップエラー本文'));
+          handleErrorWithAlert(e, m('app.account.サインアップエラータイトル'), m('app.account.サインアップエラー本文'));
         }
       }
     },

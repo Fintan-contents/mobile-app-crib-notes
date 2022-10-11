@@ -8,7 +8,7 @@ export const deleteFcmToken = async () => {
     try {
       return await messaging().deleteToken();
     } catch (e) {
-      throw new DeleteFcmTokenError('Failed to delete fcm token.', e);
+      throw new DeleteFcmTokenError('Failed to delete fcm token.', e, 'DeleteFcmTokenError');
     }
   }
 };

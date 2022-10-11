@@ -94,14 +94,13 @@ class Logger {
 
   /**
    * errorレベルのログを出力します。
-   * @param message ログメッセージ
+   * @param error エラー
    * @param errorCode エラーコード
    * @returns ロガーインスタンス
    */
-  error(message: string | LogMessageSupplier, errorCode: string): Logger {
+  error(error: Error, errorCode: string = 'UnexpectedError'): Logger {
     if (this.isLevelEnabled('error')) {
-      const formatted = this.formatMessage('error', message, errorCode);
-      this.transports.forEach(t => t.error(formatted, errorCode));
+      this.transports.forEach(t => t.error(error, errorCode));
     }
     return this;
   }

@@ -1,5 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
-import {sendErrorLog} from 'bases/logging/sendErrorLog';
+import {handleError} from 'bases/core/errors/handleError';
 import {resolveErrorMessage} from 'bases/message/resolveErrorMessage';
 import {enhanceValidator} from 'bases/validator';
 import {activateKeepAwake} from 'expo-keep-awake';
@@ -75,7 +75,7 @@ export const useAppInitialize = () => {
     } catch (e) {
       if (isInitialDataError(e)) {
         const {title, message} = resolveErrorMessage(e.cause);
-        sendErrorLog(e.cause);
+        handleError(e.cause);
         setInitializationResult({code: 'Failed', title, message});
       } else {
         throw e;

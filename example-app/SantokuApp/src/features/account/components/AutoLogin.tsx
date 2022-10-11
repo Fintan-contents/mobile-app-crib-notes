@@ -1,6 +1,6 @@
+import {handleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
 import {resolveErrorMessage} from 'bases/message/resolveErrorMessage';
 import React, {useEffect} from 'react';
-import {Alert} from 'react-native';
 
 import {useIsLoggedIn} from '../client-states/useIsLoggedIn';
 import {isUnauthorizedError} from '../errors/UnauthorizedError';
@@ -13,7 +13,7 @@ export const AutoLogin: React.FC = ({children}) => {
     autoLogin().catch(e => {
       if (!isUnauthorizedError(e)) {
         const {title, message} = resolveErrorMessage(e);
-        Alert.alert(title, message);
+        handleErrorWithAlert(e, title, message);
       }
     });
   }, [autoLogin]);

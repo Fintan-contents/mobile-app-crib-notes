@@ -58,9 +58,6 @@ export const bundledMessages = {
   'app.account.ログアウトエラータイトル': 'ログアウトに失敗しました',
   'app.account.ログアウトエラー本文': '時間をおいてから再度お試しください。',
   'app.terms.有効な利用規約の取得エラー': '利用規約の取得に失敗しました。画面をリロードして再度お試しください。',
-  'app.push.notification.requestPushPermissionError':
-    'プッシュ通知のパーミッションリクエストに失敗しました。cause=[{0}]',
-  'app.push.notification.getFcmTokenError': 'FCM登録トークンの取得に失敗しました。cause=[{0}]',
   'app.push.notification.deleteFcmTokenError': 'FCM登録トークンの削除に失敗しました。cause=[{0}]',
   'app.push.notification.プッシュ通知の設定エラー':
     'プッシュ通知の設定に失敗しました。\n現在、プッシュ通知を受信できません。',

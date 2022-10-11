@@ -23,12 +23,11 @@ class ConsoleTransport implements Transport {
   /**
    * ログレベルに応じたconsoleメソッドを取得してログ出力します。
    * @param level ログレベル
-   * @param message 出力するメッセージ
-   * @param errorCode エラーコード
+   * @param messageOrError 出力するメッセージ、またはエラー
    */
-  log(level: LogLevel, message: string, errorCode?: string) {
+  log(level: LogLevel, messageOrError: string | Error) {
     const log = ConsoleMethod.for(level);
-    log(message);
+    log(messageOrError);
   }
 
   /**
@@ -65,11 +64,11 @@ class ConsoleTransport implements Transport {
 
   /**
    * {@link console.error}にログを出力します。
-   * @param message 出力するメッセージ
+   * @param error エラー
    * @param errorCode エラーコード
    */
-  error(message: string, errorCode: string) {
-    this.log('error', message, errorCode);
+  error(error: Error, errorCode: string) {
+    this.log('error', error);
   }
 }
 
