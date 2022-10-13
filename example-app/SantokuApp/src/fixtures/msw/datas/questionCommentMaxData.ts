@@ -107,6 +107,7 @@ export const questionCommentMaxData = () => {
     const account = index % 2 ? partnerAccount : santokuAccount;
     maxDb.questionComment.create({
       questionId: '1',
+      commentId: String(index + 1),
       content: `コメント${index + 2}`,
       datetime: format2Iso8601(date),
       likes: 0,

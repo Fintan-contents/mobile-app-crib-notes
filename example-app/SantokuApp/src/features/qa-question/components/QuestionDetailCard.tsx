@@ -2,6 +2,7 @@ import {useVisibility} from 'bases/core/utils/useVisibility';
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
+import {StyledImage} from 'bases/ui/common/StyledImage';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {BeginnerMarkIllustration} from 'bases/ui/illustration/BeginnerMarkIllustration';
@@ -16,12 +17,12 @@ import React, {FC, useCallback, useMemo} from 'react';
 
 import {useTags} from '../services/useTags';
 import {AddCommentButton} from './AddCommentButton';
+import {CommentButtonWithCount} from './CommentButtonWithCount';
 import {CommentCard} from './CommentCard';
 import {CommentDivider} from './CommentDivider';
-import {CommentsButtonWithCount} from './CommentsButtonWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
 import {QuestionAndAnswerLikeButtonWithCount} from './QuestionAndAnswerLikeButtonWithCount';
-import {ViewsButtonWithCount} from './ViewsButtonWithCount';
+import {ViewButtonWithCount} from './ViewButtonWithCount';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
@@ -75,14 +76,18 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
       shadowOpacity={0.25}
       elevation={1}>
       <StyledRow alignItems="center">
-        <PersonIllustration />
+        {profile?.avatarImageUrl ? (
+          <StyledImage source={{uri: profile.avatarImageUrl}} width={40} height={40} borderRadius="p20" />
+        ) : (
+          <PersonIllustration size="p40" />
+        )}
         <StyledSpace width="p16" />
         <StyledColumn flex={1}>
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
           <StyledRow space="p24" alignItems="center" justifyContent="space-between">
-            <Text variant="font14Regular" letterSpacing={0.25} color="black2">
+            <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
               {profile?.points}/{profile?.totalPoints}
             </Text>
             {resolved && (
@@ -100,7 +105,7 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
         </StyledTouchableOpacity>
       </StyledRow>
       <StyledSpace height="p24" />
-      <Text fontSize={22} fontWeight="700" lineHeight={34} letterSpacing={0.18}>
+      <Text variant="font22Bold" lineHeight={34} letterSpacing={0.18}>
         {beginner && (
           <>
             <BeginnerMarkIllustration />
@@ -110,7 +115,7 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
         {title}
       </Text>
       <StyledSpace height="p16" />
-      <Text fontSize={14} lineHeight={28} letterSpacing={0.25}>
+      <Text variant="font14Regular" lineHeight={28} letterSpacing={0.25}>
         {content}
       </Text>
       <StyledSpace height="p8" />
@@ -121,12 +126,8 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
         <QuestionAndAnswerLikeButtonWithCount onPress={toggleQuestionLike} count={likes} color={likeQuestionColor} />
         <Box flex={1} />
         <StyledRow space="p16">
-          <ViewsButtonWithCount onPress={showUnderDevelopment} count={views} />
-          <CommentsButtonWithCount
-            onPress={toggleQuestionCommentsVisible}
-            count={comments}
-            color={commentButtonColor}
-          />
+          <ViewButtonWithCount onPress={showUnderDevelopment} count={views} />
+          <CommentButtonWithCount onPress={toggleQuestionCommentsVisible} count={comments} color={commentButtonColor} />
         </StyledRow>
       </StyledRow>
       <StyledSpace height="p32" />

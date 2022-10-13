@@ -14,15 +14,15 @@ export const NavigationScreen: React.FC<NavigationScreenProps> = ({navigation}) 
     () => navigation.navigate('AuthenticatedStackNav', {screen: 'MainTabNav', params: {screen: 'HomeStackNav'}}),
     [navigation],
   );
-  const navigateToTeamStack = useCallback(
-    () => navigation.navigate('AuthenticatedStackNav', {screen: 'MainTabNav', params: {screen: 'TeamStackNav'}}),
+  const navigateToAccountStack = useCallback(
+    () => navigation.navigate('AuthenticatedStackNav', {screen: 'MainTabNav', params: {screen: 'AccountStackNav'}}),
     [navigation],
   );
   return (
     <NavigationPage
       navigateToSnackbarDemo={navigateToSnackbarDemo}
       navigateToHomeStack={navigateToHomeStack}
-      navigateToTeamStack={navigateToTeamStack}
+      navigateToAccountStack={navigateToAccountStack}
     />
   );
 };

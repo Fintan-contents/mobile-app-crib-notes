@@ -1,6 +1,7 @@
 import {useVisibility} from 'bases/core/utils/useVisibility';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
+import {StyledImage} from 'bases/ui/common/StyledImage';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
@@ -10,9 +11,9 @@ import {QuestionAndAnswerAnswerListItem} from 'features/backend/apis/model';
 import React, {FC, useMemo} from 'react';
 
 import {AddCommentButton} from './AddCommentButton';
+import {CommentButtonWithCount} from './CommentButtonWithCount';
 import {CommentCard} from './CommentCard';
 import {CommentDivider} from './CommentDivider';
-import {CommentsButtonWithCount} from './CommentsButtonWithCount';
 import {DiffDaysOrHours} from './DiffDaysOrHours';
 import {QuestionAndAnswerLikeButtonWithCount} from './QuestionAndAnswerLikeButtonWithCount';
 
@@ -44,7 +45,11 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
       shadowOpacity={0.25}
       elevation={1}>
       <StyledRow alignItems="center">
-        <PersonIllustration />
+        {profile?.avatarImageUrl ? (
+          <StyledImage source={{uri: profile.avatarImageUrl}} width={40} height={40} borderRadius="p20" />
+        ) : (
+          <PersonIllustration size="p40" />
+        )}
         <StyledSpace width="p16" />
         <StyledColumn flex={1}>
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
@@ -70,7 +75,7 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
       <Box flexDirection="row" justifyContent="flex-start" alignItems="flex-end">
         <QuestionAndAnswerLikeButtonWithCount onPress={showUnderDevelopment} count={likes} color={likeAnswerColor} />
         <Box flex={1} />
-        <CommentsButtonWithCount onPress={toggleAnswerCommentsVisible} count={comments} color={commentButtonColor} />
+        <CommentButtonWithCount onPress={toggleAnswerCommentsVisible} count={comments} color={commentButtonColor} />
       </Box>
       <StyledSpace height="p16" />
       {isAnswerCommentsVisible && (

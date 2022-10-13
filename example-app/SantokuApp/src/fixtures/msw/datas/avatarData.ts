@@ -5,6 +5,9 @@ import santokuAvatarImage from './assets/santoku-avatar.png';
 
 export const avatarData = async () => {
   const image = Image.resolveAssetSource(santokuAvatarImage);
+  if (!image) {
+    return undefined;
+  }
   const uri = image.uri;
   const documentDirectory = FileSystem.documentDirectory!;
   if (uri.match(/^https?:/)) {

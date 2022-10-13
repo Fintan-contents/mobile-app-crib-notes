@@ -104,6 +104,9 @@ export const restyleTheme = createTheme({
       fontSize: 18,
       fontWeight: '600',
     },
+    font16Regular: {
+      fontSize: 16,
+    },
     font14Regular: {
       fontSize: 14,
     },

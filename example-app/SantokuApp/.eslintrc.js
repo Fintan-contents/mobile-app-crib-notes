@@ -83,6 +83,7 @@ module.exports = {
           module: '@react-navigation/**',
           allowReferenceFrom: [
             'src/apps/**',
+            'src/bases/focus-manager/**',
             'jest/types/global.d.ts',
             'jest/__mocks__/@react-navigation/**',
             'src/@types/**',

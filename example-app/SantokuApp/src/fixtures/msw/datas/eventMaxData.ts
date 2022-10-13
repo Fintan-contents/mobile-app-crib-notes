@@ -4,6 +4,8 @@ import {santokuAccount} from './accountData';
 import {adminAccount} from './accountMaxData';
 
 export const eventMaxData = () => {
+  const dateForMaxData = new Date();
+  dateForMaxData.setMonth(dateForMaxData.getDate() + 6);
   maxDb.event.create({
     eventId: '1',
     title:
@@ -66,7 +68,7 @@ export const eventMaxData = () => {
 コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメント
 コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメント
 `,
-    endDate: '2022-06-10T10:00:00Z',
+    endDate: format2Iso8601(dateForMaxData),
     likes: 99999999,
     ...adminAccount,
   });
@@ -85,15 +87,15 @@ RNUILib
     likes: 2000,
     ...adminAccount,
   });
-  const date = new Date(2022, 6, 1, 10, 0, 0);
+  const dateForIncrementalData = new Date();
   [...(Array(48) as unknown[])].forEach((_, index) => {
-    date.setDate(date.getDate() + 1);
+    dateForIncrementalData.setDate(dateForIncrementalData.getDate() + 1);
     const account = index % 2 ? adminAccount : santokuAccount;
     maxDb.event.create({
       eventId: String(index + 3),
       title: `【勉強会】Linuxを極める${index + 1}`,
       content: `Linuxを極める - Volume${index + 1}です。`,
-      endDate: format2Iso8601(date),
+      endDate: format2Iso8601(dateForIncrementalData),
       likes: 1,
       ...account,
     });

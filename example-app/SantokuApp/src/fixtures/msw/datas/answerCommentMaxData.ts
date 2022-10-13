@@ -110,6 +110,7 @@ export const answerCommentMaxData = () => {
     maxDb.answerComment.create({
       answerId: '1',
       questionId: '1',
+      commentId: `${index + 1}`,
       content: `コメント${index + 2}`,
       datetime: format2Iso8601(date),
       likes: 0,

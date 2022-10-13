@@ -1,7 +1,7 @@
 import beginnerMarkImageSource from 'assets/images/beginner-mark.png';
 import React from 'react';
 
-import {StyledImage} from '../common';
+import {StyledImage} from '../common/StyledImage';
 
 export type BeginnerMarkIllustrationProps = Omit<React.ComponentProps<typeof StyledImage>, 'source'>;
 

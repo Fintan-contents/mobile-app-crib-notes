@@ -1,3 +1,4 @@
+import {useVisibility} from 'bases/core/utils/useVisibility';
 import {m} from 'bases/message/Message';
 import {Box, StyledSafeAreaView, StyledTouchableOpacity} from 'bases/ui/common';
 import {StyledButton} from 'bases/ui/common/StyledButton';
@@ -5,8 +6,8 @@ import {TagIllustration} from 'bases/ui/illustration/TagIllustration';
 import {Tab} from 'bases/ui/tab/Tab';
 import {TabBar} from 'bases/ui/tab/TabBar';
 import {EventPost} from 'features/qa-event/components/EventPost';
+import {MultipleSelectableTagSheet} from 'features/qa-question/components/MultipleSelectableTagSheet';
 import {QuestionPost} from 'features/qa-question/components/QuestionPost';
-import {TagsSheet} from 'features/qa-question/components/TagsSheet';
 import {QuestionFormValues, useQuestionForm} from 'features/qa-question/forms/useQuestionForm';
 import {useQuestionCommands} from 'features/qa-question/services/useQuestionCommands';
 import {useTags} from 'features/qa-question/services/useTags';
@@ -21,7 +22,11 @@ type QuestionAndEventPostPageProps = {
 export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> = ({setNavigationOptions, goBack}) => {
   const {data: tags} = useTags();
   const {post: postQuestion, isPosting: isQuestionPosting} = useQuestionCommands();
-  const [isVisibleTagSheet, setIsVisibleTagSheet] = useState<boolean>(false);
+  const {
+    isVisible: isVisibleTagSheet,
+    setVisible: setVisibleTagSheet,
+    setInvisible: setInvisibleTagSheet,
+  } = useVisibility();
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 
   const submitQuestion = useCallback(
@@ -41,16 +46,12 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
     clearContent: clearQuestionContent,
   } = useQuestionForm({onSubmit: submitQuestion});
 
-  const showTagsSheet = useCallback(() => {
-    setIsVisibleTagSheet(true);
-  }, []);
-
   const selectTags = useCallback(
     async (tagIds: string[]) => {
       await setQuestionTags(tagIds);
-      setIsVisibleTagSheet(false);
+      setInvisibleTagSheet();
     },
-    [setQuestionTags],
+    [setInvisibleTagSheet, setQuestionTags],
   );
 
   const changeTab = useCallback(
@@ -90,7 +91,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         return (
           <Box flexDirection="row" alignItems="center">
             {selectedTabIndex === 0 && (
-              <StyledTouchableOpacity onPress={showTagsSheet} p="p8">
+              <StyledTouchableOpacity onPress={setVisibleTagSheet} p="p8">
                 <TagIllustration padding="p8" color="blue" />
               </StyledTouchableOpacity>
             )}
@@ -100,7 +101,7 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
         );
       },
     });
-  }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, showTagsSheet]);
+  }, [isQuestionPosting, post, selectedTabIndex, setNavigationOptions, setVisibleTagSheet]);
 
   return (
     <>
@@ -122,11 +123,12 @@ export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> 
           </Tab>
         </TabBar>
       </StyledSafeAreaView>
-      <TagsSheet
+      <MultipleSelectableTagSheet
         tags={tags}
         isVisible={isVisibleTagSheet}
         initialSelectedTagIds={questionForm.values.tags}
         select={selectTags}
+        close={setInvisibleTagSheet}
       />
     </>
   );

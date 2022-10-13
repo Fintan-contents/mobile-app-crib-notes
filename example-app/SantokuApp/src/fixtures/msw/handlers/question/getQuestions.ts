@@ -14,7 +14,7 @@ export const getQuestions = rest.get(`${backendUrl}/questions`, (req, res, ctx) 
     const tag = req.url.searchParams.get('tag');
     const accountId = getLoggedInAccountId();
     const db = getDb(accountId);
-    let questions = db.question.getAll();
+    let questions = db.question.findMany({orderBy: {datetime: 'desc'}});
     if (keyword) {
       questions = questions.filter(q => q.title.includes(keyword) || q.content.includes(keyword));
     }

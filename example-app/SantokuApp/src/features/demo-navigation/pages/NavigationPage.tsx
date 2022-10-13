@@ -5,19 +5,19 @@ import {StyleSheet, View} from 'react-native';
 export type NavigationPageProps = {
   navigateToSnackbarDemo: () => void;
   navigateToHomeStack: () => void;
-  navigateToTeamStack: () => void;
+  navigateToAccountStack: () => void;
 };
 
 export const NavigationPage: React.FC<NavigationPageProps> = ({
   navigateToSnackbarDemo,
   navigateToHomeStack,
-  navigateToTeamStack,
+  navigateToAccountStack,
 }) => {
   return (
     <View style={styles.container}>
       <Button size="large" title="Go to Snackbar Demo" onPress={navigateToSnackbarDemo} />
       <Button size="large" title="Go to Home" onPress={navigateToHomeStack} />
-      <Button size="large" title="Go to Team" onPress={navigateToTeamStack} />
+      <Button size="large" title="Go to Account" onPress={navigateToAccountStack} />
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import {primaryKey} from '@mswjs/data';
+import {primaryKey, nullable} from '@mswjs/data';
 
 import {generateId} from '../utils/id';
 
@@ -16,6 +16,7 @@ export const answerCommentModel = {
       type: Array,
       points: Number,
       totalPoints: Number,
+      avatarImageUrl: nullable(String),
     },
   },
 };

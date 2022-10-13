@@ -1,17 +1,19 @@
+import {ColorProps} from '@shopify/restyle';
 import {StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledRow} from 'bases/ui/common/StyledRow';
-import {VisibilityIllustration} from 'bases/ui/illustration/VisibilityIllustration';
+import {ChatBubbleOutlineIllustration} from 'bases/ui/illustration/ChatBubbleOutlineIllustration';
+import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React from 'react';
 
-type ViewsButtonWithCountProps = {
+type CommentButtonWithCountProps = {
   onPress: () => void;
   count: number;
-};
-export const ViewsButtonWithCount: React.FC<ViewsButtonWithCountProps> = ({onPress, count}) => {
+} & ColorProps<RestyleTheme>;
+export const CommentButtonWithCount: React.FC<CommentButtonWithCountProps> = ({onPress, count, color}) => {
   return (
     <StyledRow space="p8" alignItems="center">
       <StyledTouchableOpacity onPress={onPress}>
-        <VisibilityIllustration />
+        <ChatBubbleOutlineIllustration color={color} />
       </StyledTouchableOpacity>
       <Text fontSize={14} lineHeight={20} letterSpacing={0.25}>
         {count}

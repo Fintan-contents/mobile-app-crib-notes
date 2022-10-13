@@ -54,7 +54,7 @@ React NativeのNew Architectureは、さまざまな理由により導入に踏�
     eventId: '4',
     title: '【勉強会】OIDC',
     content: `Open ID Connectの勉強会。
-日時：2022年6月17日（金） 18:00〜19:00
+日時：2023年1月17日（火） 18:00〜19:00
 
 ■参加資格
 制限なし
@@ -62,7 +62,7 @@ React NativeのNew Architectureは、さまざまな理由により導入に踏�
 ■概要
 Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追っていきます。
 `,
-    endDate: '2022-06-20T10:00:00Z',
+    endDate: '2023-01-18T10:00:00Z',
     likes: 5,
     ...santokuAccount,
   });
@@ -70,7 +70,7 @@ Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追
     eventId: '5',
     title: '【イベント】React x Firebase',
     content: `ReactとFirebaseを使用したWebアプリケーションに関するイベントです。
-日時：2022年6月30日（木） 17:00〜19:00
+日時：2023年1月30日（月） 17:00〜19:00
 
 ■参加資格
 制限なし
@@ -78,7 +78,7 @@ Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追
 ■概要
 ReactとFirebaseを使用してWebアプリケーションを構築した開発者が、そのメリットやデメリットなどを話します。
 `,
-    endDate: '2022-07-01T10:00:00Z',
+    endDate: '2023-02-01T10:00:00Z',
     likes: 8,
     ...santokuAccount,
   });
@@ -92,7 +92,7 @@ ReactとFirebaseを使用してWebアプリケーションを構築した開発�
 ■参加資格
 XXRが全くわからない方
 `,
-    endDate: '2022-07-07T10:00:00Z',
+    endDate: '2023-06-07T10:00:00Z',
     likes: 15,
     ...partnerAccount,
   });
@@ -100,7 +100,7 @@ XXRが全くわからない方
     eventId: '7',
     title: '【イベント】トレーサビリティ',
     content: `Cloud Native時代のトレーサビリティ
-日時：2022年7月15日（金） 17:00〜19:00
+日時：2023年7月14日（金） 17:00〜19:00
 
 ■参加資格
 制限なし
@@ -109,7 +109,7 @@ XXRが全くわからない方
 不具合が発生した場合に、みなさんはどのようにログを追っていますか？
 今回のイベントは、Cloud Nativeのトレーサビリティに関する話を中心とした催しになります。
 `,
-    endDate: '2022-07-18T10:00:00Z',
+    endDate: '2023-07-17T10:00:00Z',
     likes: 18,
     ...adminAccount,
   });

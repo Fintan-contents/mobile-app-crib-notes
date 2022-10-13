@@ -9,5 +9,6 @@ module.exports = {
     '<rootDir>/jest/setup/react-native-reanimated.js',
     '<rootDir>/jest/setup/react-native-safe-area-context.js',
     '<rootDir>/jest/setup/react-query.js',
+    '<rootDir>/jest/setup/useFocusEffect.js',
   ],
 };

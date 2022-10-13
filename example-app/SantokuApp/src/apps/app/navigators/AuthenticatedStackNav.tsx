@@ -37,7 +37,14 @@ const Component: React.FC<Props> = ({initialData}) => {
       <nav.Screen
         component={QuestionDetailScreen}
         name="QuestionDetail"
-        options={{title: m('質問詳細'), contentStyle: {backgroundColor: theme.colors.orange2}}}
+        options={{
+          title: m('質問詳細'),
+          headerStyle: {backgroundColor: theme.colors.orange1},
+          contentStyle: {backgroundColor: theme.colors.orange2},
+          headerTitleStyle: {fontSize: 20, fontWeight: '500'},
+          headerTintColor: theme.colors.white,
+          headerBackTitleVisible: false,
+        }}
       />
       <nav.Screen
         name="QuestionAndEventStackNav"

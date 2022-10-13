@@ -1,4 +1,4 @@
-import {primaryKey} from '@mswjs/data';
+import {primaryKey, nullable} from '@mswjs/data';
 
 import {format2Iso8601} from '../utils/format2Iso8601';
 import {generateId} from '../utils/id';
@@ -23,6 +23,7 @@ export const questionModel = {
       type: Array,
       points: Number,
       totalPoints: Number,
+      avatarImageUrl: nullable(String),
     },
   },
 };

@@ -42,6 +42,7 @@ export const AppWithInitialization: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const FirebaseMessagingHandlers = require('./components/FirebaseMessagingHandlers')
       .FirebaseMessagingHandlers as React.FC<{initialData: AppInitialData}>;
+
     return (
       <NavigationContainer>
         <ReactQueryProvider>

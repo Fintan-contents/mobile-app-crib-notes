@@ -2,8 +2,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {m} from 'bases/message/Message';
 import React from 'react';
 
-import {TeamDetailScreen} from '../screens/team/TeamDetailScreen';
-import {TeamStackParamList} from './types';
+import {ProfileDetailScreen} from '../screens/account/ProfileDetailScreen';
+import {AccountStackParamList} from './types';
 import {useLogoutButton} from './useLogoutButton';
 
 // FIXME: Bottom Tabs + Native Stackでは、Androidで画面がチカチカする事象が発生したため、Stackを使用しています。
@@ -11,17 +11,17 @@ import {useLogoutButton} from './useLogoutButton';
 // https://github.com/react-navigation/react-navigation/issues/10175
 // https://github.com/software-mansion/react-native-screens/issues/1276
 // https://github.com/software-mansion/react-native-screens/issues/1251
-const nav = createStackNavigator<TeamStackParamList>();
+const nav = createStackNavigator<AccountStackParamList>();
 
-export const TeamStackNav: React.FC = () => {
+export const AccountStackNav: React.FC = () => {
   const {LogoutButton} = useLogoutButton();
   return (
     <nav.Navigator screenOptions={{headerRight: LogoutButton}}>
       <nav.Screen
-        name="TeamDetail"
-        component={TeamDetailScreen}
+        name="ProfileDetail"
+        component={ProfileDetailScreen}
         options={{
-          title: m('チーム詳細'),
+          title: m('プロフィール'),
         }}
       />
     </nav.Navigator>

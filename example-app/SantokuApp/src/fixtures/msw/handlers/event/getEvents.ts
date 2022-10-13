@@ -11,7 +11,7 @@ export const getEvents = rest.get(`${backendUrl}/events`, (req, res, ctx) => {
     const target = req.url.searchParams.get('target');
     const accountId = getLoggedInAccountId();
     const db = getDb(accountId);
-    const events = db.event.getAll();
+    const events = db.event.findMany({orderBy: {endDate: 'desc'}});
     if (target === 'active') {
       const now = new Date();
       const filtered = events.filter(e => now < new Date(e.endDate));
