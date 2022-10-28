@@ -10,7 +10,13 @@ export type OverlayProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-export const Overlay: React.FC<OverlayProps> = ({visible, onHideEnd, fadeDuration, style, ...props}) => {
+export const Overlay: React.FC<React.PropsWithChildren<OverlayProps>> = ({
+  visible,
+  onHideEnd,
+  fadeDuration,
+  style,
+  ...props
+}) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const [render, setRender] = useState(false);
 

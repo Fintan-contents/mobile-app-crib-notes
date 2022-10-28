@@ -19,7 +19,7 @@ const getNavigateToScreen = (
   return ['AuthenticatedStackNav', {screen: 'MainTabNav', params: {screen: 'HomeStackNav', params: {screen: 'Home'}}}];
 };
 
-export const FirebaseMessagingHandlers: React.FC<Props> = ({children, initialData}) => {
+export const FirebaseMessagingHandlers: React.FC<React.PropsWithChildren<Props>> = ({children, initialData}) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const navigateIfRequired = useCallback(
     (message: FirebaseMessagingTypes.RemoteMessage, initialData: AppInitialData) => {

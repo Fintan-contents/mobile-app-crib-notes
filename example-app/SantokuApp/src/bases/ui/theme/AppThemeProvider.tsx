@@ -11,7 +11,7 @@ import {AppThemeContextProvider} from './useAppTheme';
 
 const getAppTheme = (colorScheme: ColorSchemeName) => (colorScheme === 'dark' ? darkModeAppTheme : lightModeAppTheme);
 
-const AppThemeProvider: React.FC = ({children}) => {
+const AppThemeProvider: React.FC<React.PropsWithChildren> = ({children}) => {
   const colorScheme = useColorScheme();
   const appTheme = getAppTheme(colorScheme);
   const reactNativeElementsTheme = useMemo(() => getReactNativeElementsTheme(appTheme), [appTheme]);

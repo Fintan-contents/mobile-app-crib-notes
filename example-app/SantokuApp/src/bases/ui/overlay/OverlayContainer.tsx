@@ -29,7 +29,7 @@ export const MODAL_CONTAINER_DEFAULT_FADE_OUT_DURATION = 300;
 export const MODAL_CONTAINER_DEFAULT_ENTERING = FadeIn.duration(MODAL_CONTAINER_DEFAULT_FADE_IN_DURATION);
 export const MODAL_CONTAINER_DEFAULT_EXITING = FadeOut.duration(MODAL_CONTAINER_DEFAULT_FADE_OUT_DURATION);
 
-export const OverlayContainer: React.FC<ModalContainerProps> = ({
+export const OverlayContainer: React.FC<React.PropsWithChildren<ModalContainerProps>> = ({
   isVisible,
   entering = MODAL_CONTAINER_DEFAULT_ENTERING,
   exiting = MODAL_CONTAINER_DEFAULT_EXITING,

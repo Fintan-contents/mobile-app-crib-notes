@@ -22,7 +22,7 @@ const pickerItems: Item<PickerItemType>[] = [
   {value: {a: '11'}, label: 'test11', key: '11', inputLabel: 'テスト11'},
 ];
 
-export const DemoSelectPicker: React.VFC = () => {
+export const DemoSelectPicker: React.FC = () => {
   const [itemsKey, setItemsKey] = useState<React.Key>();
   // キャンセルをタップした時に、Pickerを開く前の値に戻せるようにRefで保持しておきます。
   const canceledKey = useRef<React.Key>();

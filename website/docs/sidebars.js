@@ -556,6 +556,24 @@ module.exports = {
       ],
     },
     {
+      type: 'category',
+      label: 'Maintenance',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/maintenance',
+        },
+        {
+          type: 'category',
+          label: 'エンハンス',
+          items: [
+            'react-native/santoku/maintenance/enhance',
+            'react-native/santoku/maintenance/enhance/expo-46-upgrade',
+          ],
+        },
+      ],
+    },
+    {
       type: 'doc',
       id: 'react-native/santoku/glossary',
     },

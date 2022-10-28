@@ -1,5 +1,4 @@
-import {act} from '@testing-library/react-hooks';
-import {fireEvent, render} from '@testing-library/react-native';
+import {fireEvent, render, act} from '@testing-library/react-native';
 import React from 'react';
 import {View, ViewProps} from 'react-native';
 import Reanimated from 'react-native-reanimated';
@@ -28,8 +27,7 @@ jest.runAllTimers();
 jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
   get: jest.fn().mockReturnValue({width: 400, height: 1000}),
   set: jest.fn(),
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
+  addEventListener: jest.fn().mockReturnValue({remove: jest.fn()}),
 }));
 
 describe('PickerContainer only with required props', () => {

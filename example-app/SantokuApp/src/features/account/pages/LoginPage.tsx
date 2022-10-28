@@ -18,7 +18,7 @@ export type LoginPageProps = {
   navigateToCreateAccount: (termsOfServiceAgreementStatus: TermsOfServiceAgreementStatus) => void;
 };
 
-export const LoginPage: React.VFC<LoginPageProps> = ({navigateToCreateAccount}) => {
+export const LoginPage: React.FC<LoginPageProps> = ({navigateToCreateAccount}) => {
   const {login, isLoggingIn} = useAuthCommands();
   const onSubmit = useCallback(
     async (values: LoginFormValues) => {

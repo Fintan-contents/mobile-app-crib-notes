@@ -21,7 +21,7 @@ const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 type QuestionDetailPageProps = {
   questionId: string;
 };
-export const QuestionDetailPage: React.VFC<QuestionDetailPageProps> = ({questionId}) => {
+export const QuestionDetailPage: React.FC<QuestionDetailPageProps> = ({questionId}) => {
   const {data: question, isLoading: isQuestionLoading} = useQuestion(questionId);
   const {data: questionLikes} = useAccountQuestionLikes(questionId);
   const scrollViewRef = useRef<ScrollView>();

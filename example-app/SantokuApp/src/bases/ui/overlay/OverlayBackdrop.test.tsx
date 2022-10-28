@@ -21,7 +21,7 @@ jest.useFakeTimers('modern');
 
 jest.runAllTimers();
 
-const Wrapper: React.FC = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   return (
     <SafeAreaProvider
       initialMetrics={{frame: {width: 200, height: 400, x: 0, y: 0}, insets: {top: 0, left: 0, right: 0, bottom: 0}}}>

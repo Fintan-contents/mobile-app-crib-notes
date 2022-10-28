@@ -1,10 +1,10 @@
-import {renderHook, RenderHookResult} from '@testing-library/react-hooks';
+import {renderHook} from '@testing-library/react-native';
 
 import {useIsMounted} from './useIsMounted';
 
 describe('useIsMounted', () => {
   let isMounted: () => boolean;
-  let hook: RenderHookResult<void, typeof isMounted>;
+  let hook: ReturnType<typeof renderHook<typeof isMounted, void>>;
   beforeEach(() => {
     hook = renderHook(useIsMounted);
     isMounted = hook.result.current;

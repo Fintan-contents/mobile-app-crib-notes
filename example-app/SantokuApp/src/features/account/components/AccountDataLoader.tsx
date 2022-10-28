@@ -5,7 +5,7 @@ import React, {useEffect, useRef} from 'react';
 import {useIsLoggedIn} from '../client-states/useIsLoggedIn';
 import {useAccountData} from '../services/account/useAccountData';
 
-export const AccountDataLoader: React.FC = ({children}) => {
+export const AccountDataLoader: React.FC<React.PropsWithChildren> = ({children}) => {
   const [isLoggedIn] = useIsLoggedIn();
   const isAutoLoggedIn = useRef(isLoggedIn).current;
   const {isLoading, isLoadingError, errorUpdateCount, error} = useAccountData({

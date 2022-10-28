@@ -4,7 +4,7 @@ import React from 'react';
 
 import {AuthenticatedStackParamList} from '../../navigators/types';
 
-export const QuestionDetailScreen: React.VFC<NativeStackScreenProps<AuthenticatedStackParamList, 'QuestionDetail'>> = ({
+export const QuestionDetailScreen: React.FC<NativeStackScreenProps<AuthenticatedStackParamList, 'QuestionDetail'>> = ({
   route,
 }) => {
   return <QuestionDetailPage questionId={route.params.questionId} />;

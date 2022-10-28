@@ -1,4 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
+import {RuntimeError} from 'bases/core/errors/RuntimeError';
 import {AccountDataLoader} from 'features/account/components/AccountDataLoader';
 import {AutoLogin} from 'features/account/components/AutoLogin';
 import {AppUpdatesChecker} from 'features/app-updates/components/AppUpdatesChecker';
@@ -24,7 +25,7 @@ export const AppWithInitialization: React.FC = () => {
   useEffect(() => {
     // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了
     if (initializationError) {
-      throw initializationError;
+      throw new RuntimeError('Failed to initialize app.', initializationError);
     }
   }, [initializationError]);
 
@@ -38,10 +39,12 @@ export const AppWithInitialization: React.FC = () => {
     // アプリの初期化処理が完了した時点でrequireする。
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC<{initialData: AppInitialData}>;
+    const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC<
+      React.PropsWithChildren<{initialData: AppInitialData}>
+    >;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const FirebaseMessagingHandlers = require('./components/FirebaseMessagingHandlers')
-      .FirebaseMessagingHandlers as React.FC<{initialData: AppInitialData}>;
+      .FirebaseMessagingHandlers as React.FC<React.PropsWithChildren<{initialData: AppInitialData}>>;
 
     return (
       <NavigationContainer>

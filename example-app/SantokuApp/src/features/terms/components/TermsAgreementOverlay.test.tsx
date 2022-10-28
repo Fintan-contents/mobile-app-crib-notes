@@ -12,7 +12,7 @@ import {TermsAgreementOverlay} from './TermsAgreementOverlay';
 
 jest.useFakeTimers();
 
-const Wrapper: React.FC = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>

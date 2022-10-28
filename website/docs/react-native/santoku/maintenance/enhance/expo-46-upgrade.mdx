@@ -1,0 +1,323 @@
+---
+title: Expo SDK 46アップグレード
+---
+
+## Expo SDK 46の主な変更
+
+### React Native 0.69.5
+
+React Nativeのバージョンが0.69.5にアップグレードされました。React Nativeの0.69では、大きく以下の変更が実施されています。
+
+#### React 18
+
+React Native 0.69では、デフォルトでReact 18が有効化されています。React 18はSuspenseのサポートやAutomatic Batching、Transitionsなど[多くの機能がリリース](https://ja.reactjs.org/blog/2022/03/29/react-v18.html)されています。それらの多くは、**Concurrent Rendering**という基盤に支えられています。
+
+React Nativeでは、**New Architectureを有効化する**ことでConcurrent Renderingを使用できます。
+
+また、React 18では[型定義の変更](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210)があります。特に影響が大きいのは、`React.FunctionComponent`や`React.Component`に実装されていた`children`が削除されたことでしょう。
+コンポーネントに定義されているPropsに`children`を追加するか、Propsを`React.PropsWithChildren`でラップするなどの対応が必要です。
+
+```typescript
+interface MyButtonProps {
+  color: string;
+  children?: React.ReactNode;
+}
+
+or
+
+interface MyButtonProps {
+  color: string;
+}
+const MyButtonComponent: React.FC<React.PropsWithChildren<MyButtonProps>> = (props) => {}
+```
+
+### Expo CLI
+
+Expo CLIが一新されました。Githubのリポジトリも、以前は[expo/expo-cli](https://github.com/expo/expo-cli)で管理されていましたが、[expo/expo](https://github.com/expo/expo/tree/main/packages/%40expo/cli)に移行されています。
+
+新しいExpo CLIでは、PNPMのサポートや`--fix`オプションによる依存ライブラリのバージョン修正機能が追加されています。
+また、グローバル領域にExpo CLIをインストールする必要がなくなりました。Expoが`package.json`の`dependencies`に含まれている場合は、`node_modules`配下のExpo CLI（以降Local Expo CLIと呼びます）が使用されます。
+
+- プロジェクトディレクトリで`npx expo install`を実行すると、Local Expo CLIが使用されます
+- プロジェクトディレクトリで`expo install`を実行すると、グローバル領域にインストールされたExpo CLIが使用されます
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+- `package.json`のscriptsに`{"scripts": {"start": "expo start"}}`と定義されている場合は、プロジェクトディレクトリで`npm start`を実行するとLocal Expo CLIが使用されます
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+ただし、新しいExpo CLIには`expo upgrade`や`expo doctor`が実装されていません。そのため、Expo SDKのアップグレード作業などは、旧APIを使用する必要があります。
+旧Expo CLIを使用する場合は、`expo-cli upgrade`のように`expo-cli`コマンドを使用します。
+
+旧Expo CLIからのマイグレーションに関する詳細は、[Expo CLI Migration](https://docs.expo.dev/archived/expo-cli/#expo-cli-migration)を参照してください。
+
+### Expoがサポートするライブラリ
+
+#### ライブラリの追加
+
+以下のライブラリが新たにサポート対象となりました。
+
+- [React Native Skia](https://github.com/Shopify/react-native-skia)
+  - 2Dグラフィックエンジンの[Skia](https://skia.org/)をReact Nativeから使用可能にするライブラリ
+- [FlashList](https://shopify.github.io/flash-list/)
+  - `FlatList`におけるFPSやメモリ使用に関するパフォーマンスの課題を解決してくれるライブラリ
+
+#### ライブラリの削除
+
+Expo SDK 45で非推奨となっていたライブラリが削除されました。
+
+- [expo-ads-admob](https://docs.expo.dev/versions/v45.0.0/sdk/admob/)
+- [expo-analytics-amplitude](https://docs.expo.dev/versions/v45.0.0/sdk/amplitude/)
+- [expo-ads-facebook](https://docs.expo.dev/versions/v45.0.0/sdk/facebook-ads/)
+- [expo-facebook](https://docs.expo.dev/versions/v45.0.0/sdk/facebook/)
+- [expo-google-sign-in](https://docs.expo.dev/versions/v45.0.0/sdk/google-sign-in/)
+- [expo-segment](https://docs.expo.dev/versions/v45.0.0/sdk/segment/)
+
+マイグレーション方法については、上記ライブラリのリンク先を参照してください。
+
+#### 非推奨となるライブラリ
+
+[expo-error-recovery](https://docs.expo.dev/versions/latest/sdk/error-recovery/)は非推奨となります。Classic Buildでは必要でしたが、[EAS Buildでは不要になった](https://github.com/expo/expo/pull/19132#pullrequestreview-1116086259)のが理由のようです。
+Expo SDK 47では、`expo-error-recovery`が削除される予定です。
+
+### iOSの最小サポート対象バージョンが12.4に変更
+
+React Native 0.69からは、iOSのサポート対象バージョンが12.4以降になります。
+
+なお、iOS 16はExpo SDK 47でサポート対象になる予定です。iOS 16がサポートされると同時に、iOS 12のサポートは対象外になる見込みです。
+
+### Expo SDK 43のサポート終了
+
+Expo SDK 43がサポート対象外になりました。Expo SDK 43を使用している場合は、Expo SDK 44以降にアップグレードする必要があります。
+
+### vscode-expoの機能追加
+
+[`vscode-expo`](https://marketplace.visualstudio.com/items?itemName=byCedric.vscode-expo)で、全てのExpo configsがサポートされるようになりました。
+
+`app.json`や`app.config.json`と同様に、以下のConfigファイルもAutoCompleteやValidationの機能が提供されます。
+
+- `eas.json`（EAS Build and Submit）
+- `store.config.json`（EAS Metadata）
+- `expo-module.config.json`（Expo modules）
+
+### Classic BuildからEAS Buildへのマイグレーション
+
+Expo SDK 46が、Classic Buildをサポートする最後のバージョンとなります。`expo build:android`や`expo build:ios`を使用している場合は、`eas build`に移行する必要があります。
+
+マイグレーションの詳細は、[Migrating from "expo build"](https://docs.expo.dev/build-reference/migrating/)を参照してください。
+
+### Classic UpdateからEAS Updateへのマイグレーション
+
+EAS Updateが正式にリリースされています。Classic Updateより速く、柔軟なアップデートシステムを提供しているようです。
+
+マイグレーションの詳細は、[Migrating from Classic Updates to EAS Update](https://docs.expo.dev/eas-update/migrate-to-eas-update/)を参照してください。
+
+## このアプリで実施したアップグレードの手順
+
+このアプリでは、以下の手順でExpo SDK 46にアップグレードしています。
+
+- Xcode 14にアップグレード
+- `npm i -g expo-cli`を実行して、Expo CLI（旧Expo CLI）のバージョンを最新化
+- `expo-cli upgrade`を実行して、Expo SDKをアップグレード
+- [依存ライブラリのバージョン不整合を解消](#依存ライブラリのバージョン不整合を解消)
+- `node_modules`、`package-lock.json`を削除して、`npm i`を実行
+- [expo-template-bare-minimumの更新履歴を確認](#expo-template-bare-minimumの更新履歴を確認)
+- [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.68.2&to=0.69.5)を参照して、React Nativeの更新を確認
+  - このアプリで必要な対応は、[expo-template-bare-minimumの更新履歴を確認](#expo-template-bare-minimumの更新履歴を確認)で対応した内容に含まれていました
+- [Expoの更新履歴](https://github.com/expo/expo/blob/main/CHANGELOG.md#4600--2022-07-19)を確認
+  - このアプリで必要な対応はありませんでした
+- [React Nativeの更新履歴](https://github.com/facebook/react-native/releases)を確認
+  - このアプリで必要な対応はありませんでした
+- [React 18の対応](#react-18の対応)
+- [自動テストの修正](#自動テストの修正)
+- [ESLintのエラー・警告対応](#eslintのエラー警告対応)
+- [TSCのエラー対応](#tscのエラー対応)
+- [React Native Firebase 15の対応](#react-native-firebase-15の対応)
+- [既存のパッチファイルの更新](#既存のパッチファイルの更新)
+- `Pods`、`Podfile.lock`を削除して、`npm run pod-install`を実行
+- [開発・CIに使用しているツールのバージョンを更新](#開発ciに使用しているツールのバージョンを更新)
+
+アップグレードを実施したPull Requestは[こちら](https://github.com/ws-4020/mobile-app-crib-notes/pull/956)です。
+
+### 依存ライブラリのバージョン不整合を解消
+
+`expo-cli upgrade`を実行すると、Expo SDKとExpoがサポートしているライブラリのバージョンが更新されます。その際に、いくつかの依存ライブラリでバージョンの不整合が発生しました。ここではそれらを解消した手順を記載します。
+
+#### `@react-native-picker/picker`
+
+Expo SDK 46がサポートしている`@react-native-picker/picker`の2.4.2は、peerDependenciesにReact 18が含まれていません。
+そのため、React 18をサポートする2.4.3にアップグレードしました。（[fix: Change React peerDependencies version](https://github.com/react-native-picker/picker/pull/432)）
+
+#### `react-native-svg`
+
+Expo SDK 46がサポートしている`react-native-svg`の12.3.0は、React 18で変更された型定義に対応していませんでした。そのため、[Expoのissue](https://github.com/expo/expo/issues/19013)のコメントに記載されている12.4.4にアップグレードしました。
+
+#### `@react-native-firebase`
+
+`expo-cli upgrade`を実行すると、`@react-native-firebase/app`が15.4.0にアップグレードされました。それに合わせて、このアプリで使用しているFirebase関連のライブラリも15.4.0にアップグレードしました。
+
+- `@react-native-firebase/crashlytics`
+- `@react-native-firebase/messaging`
+
+#### `@testing-library/react-hooks`
+
+`npm uninstall @testing-library/react-hooks`を実行して、`@testing-library/react-hooks`をアンインストールしました。
+
+`@testing-library/react-hooks`はReact 18をサポートしていません。代わりに、`@testing-library/react-native`を使用します。
+詳細は、[react-hooks-testing-library - A Note about React 18 Support](https://github.com/testing-library/react-hooks-testing-library#a-note-about-react-18-support)を参照してください。
+
+#### `react-native-safe-area-context`
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+Expo SDK 46がサポートしている`react-native-safe-area-context`のバージョンは4.3.1です。しかし、このアプリで使用しているReact Native Elements 3.4.2は、peerDependenciesに`react-native-safe-area-context`のバージョン4以降が含まれていません。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+そのため、`react-native-safe-area-context`を3.3.2にダウングレードしました。
+
+#### `react-test-renderer`、`@types/react-test-renderer`
+
+React 18のアップグレードに伴い、`react-test-renderer`、`@types/react-test-renderer`も18.0.0にアップグレードしました。
+
+### expo-template-bare-minimumの更新履歴を確認
+
+[expo-template-bare-minimumの更新履歴](https://github.com/expo/expo/commits/sdk-46/templates/expo-template-bare-minimum)を確認して、更新されたファイルをこのアプリに反映しました。
+
+その中で、iOSの場合にReact Native Firebaseの設定と競合する箇所があったので、それを解消した手順を記載します。
+
+該当する`expo-template-bare-minimum`のPull Requestは[こちら](https://github.com/expo/expo/commit/dec397fdc746a4cb632a714620e8574eac9c258d)です。
+
+このPull Requestでは、`AppDelegate.mm`で[Concurrent Renderingの有効化を判定する値を初期設定する機能](https://github.com/expo/expo/commit/dec397fdc746a4cb632a714620e8574eac9c258d#diff-0d067c2b00a7ef143ec5ef11c8850b93029c91ca293bac2f9fa204cc3e1d2fa2R49)が追加されています。
+一方このアプリでは、iOSでアプリがバックグラウンドや停止状態中にPush通知を受信した際の対応として、以下に記載されている対応を追加しています。
+
+- [React Native Firebase Cloud MessagingのBackground Application State](https://rnfirebase.io/messaging/usage#background-application-state)
+
+どちらも、初期設定を`NSDictionary`として作成してアプリに渡しています。そのため、それらの初期設定（`NSDictionary`）をマージする必要がありました。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+React Native Firebase Cloud Messagingでは、`RNFBMessagingModule.m`の[`addCustomPropsToUserProps`](https://github.com/invertase/react-native-firebase/blob/v15.4.0/packages/messaging/ios/RNFBMessaging/RNFBMessagingModule.m#L48)に`NSDictionary`を渡すことができます。渡された`NSDictionary`は、React Native Firebase Cloud Messagingが生成する初期設定とマージされます。今回は、それを利用することで初期設定のマージを実施しました。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+```objectivec
+NSDictionary *initProps = [self prepareInitialProps];
+NSDictionary *appProperties = [RNFBMessagingModule addCustomPropsToUserProps:initProps withLaunchOptions:launchOptions];
+```
+
+### React 18の対応
+
+[Expo SDK 46の主な変更](#expo-sdk-46の主な変更)に記載した通り、React 18ではSuspenseのサポートやAutomatic Batching、Transitionsなど多くの機能がリリースされています。しかし、それらはReact NativeのNew Architectureを有効化しないと使用できません。
+
+Expoをはじめとするエコシステムでは、New Architectureを完全にサポートしているライブラリはまだ少ないです。このアプリも、依存しているライブラリがNew Architectureに対応するまでは有効化できないのが現状です。
+
+そのため、React 18の対応としては、React 18アップグレードガイドに記載されている[TypeScript 型定義の変更](https://ja.reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html)のみを実施しました。型定義の全ての変更は、[React 18の型定義に関するPull Request](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210)に記載されています。
+
+このアプリでは、`Removal of implicit children`の変更のみが該当しました。対応するコンポーネントの数が多かったので、React 18アップグレードガイドでも紹介されている[types-react-codemod](https://github.com/eps1lon/types-react-codemod)を利用して修正しました。
+
+`types-react-codemod`は、`React.FunctionComponent`のPropsを、`React.PropsWithChildren`でラップするように自動修正してくれます。ただし、注意点として以下がありました。
+
+- `children`を必要としていないコンポーネントも、`React.PropsWithChildren`でラップしてしまう
+- コンポーネントのPropsが存在しない場合、`React.PropsWithChildren<unknown>`のようにジェネリクスの型に`unknown`が指定されてしまう
+
+これらは動作的には問題ありませんが、不要な定義を残すとコードの可読性を損なうため、`types-react-codemod`の実行後に手動で削除しました。
+
+修正後のコード例は以下になります。
+
+```typescript jsx
+interface ComponentBProps {
+  color: string;
+}
+interface ComponentCProps {
+  color: string;
+}
+// コンポーネントのPropsもchildrenも受け取らない場合
+const ComponentA: React.FC = () => {}
+// コンポーネントのPropsのみ受け取る場合
+const ComponentB: React.FC<ComponentBProps> = (props) => {}
+// コンポーネントのPropsもchildrenも受け取る場合
+const ComponentC: React.FC<React.PropsWithChildren<ComponentCProps>> = ({children, ...props}) => {}
+```
+
+### 自動テストの修正
+
+`@testing-library/react-hooks`はReact 18をサポートしていません。代わりに、`@testing-library/react-native`の`act`や`renderHook`を使用するように修正しました。
+
+### ESLintのエラー・警告対応
+
+一部のコンポーネントで、`@typescript-eslint/no-throw-literal`の警告が発生していました。
+
+unknown型をthrowしていたので、このアプリで用意している`Error`クラスを継承した`RuntimeError`でラップしてthrowするように修正しました。
+
+また、`React.VoidFunctionComponent（React.VFC）`が非推奨になったことから、`eslint-plugin-deprecation`のチェックでエラーが発生していました。そのため、`React.VoidFunctionComponent（React.VFC）`を`React.FunctionComponent（React.FC）`に変更しました。
+
+:::note
+今回は利用しませんでしたが、`types-react-codemod`には、React 19の対応として`React.VFC`を`React.FC`に自動修正してくれる機能も存在します。
+
+詳細は、[deprecated-void-function-component](https://github.com/eps1lon/types-react-codemod#deprecated-void-function-component)を参照してください。
+:::
+
+### TSCのエラー対応
+
+一部のTSファイルで、以下のエラーが発生していました。
+
+> TS7006: Parameter '_' implicitly has an 'any' type.
+
+使用していない変数の型を省略していたため、型を明示的に指定しました。
+
+### React Native Firebase 15の対応
+
+iOSの場合、React Native Firebaseのバージョン15（Firebase iOS SDKのバージョン9）以降では、`Framework`を使用します。`Framework`を使用した場合、[React Native Firebaseのドキュメント](https://rnfirebase.io/#altering-cocoapods-to-use-frameworks)によると以下の制限があります。
+
+- React NativeのNew Architectureは有効化できない
+- Flipperは使用できない
+- JavaScriptのエンジンとして`Hermes`を使用する場合は、Static Frameworkを使用する必要がある
+
+このアプリでは、`use_frameworks`を使用して`Framework`を有効化して、Flipperを無効化する対応をしました（New Architectureは以前から無効化しています）。
+
+```diff title=Podfile
++ $RNFirebaseAsStaticFramework = true
+    /* ～省略～ */
+-   use_flipper!(configurations: ['Debug', 'DebugAdvanced'])
++ #   use_flipper!(configurations: ['Debug', 'DebugAdvanced'])
+   /* ～省略～ */
+```
+
+```diff title=Podfile.properties.json
+  {
+-   "expo.jsEngine": "jsc"
++   "expo.jsEngine": "jsc",
++   "ios.useFrameworks": "static"
+  }
+```
+
+### 既存のパッチファイルの更新
+
+このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用してます。パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/patches/README.md)を参照してください。
+
+- @react-native-community+cli-platform-ios
+- expo-splash-screen
+- react-native-reanimated
+- react-native-elements
+
+React Native Elements以外は、Expo SDKのアップグレードに伴いバージョンが上がりました。しかし、適用していたパッチファイルはまだ必要な対応だったため、パッチファイルは削除せずに各ライブラリのバージョンに合わせてファイル名をリネームしました。
+
+React Native Elementsのバージョンは変更していないのですが、React 18のアップグレードに伴い、`ThemeProvider`のPropsから`children`が削除されていました。そのため、`ThemeProvider`のPropsに`children?: React.ReactNode`を定義するパッチを追加しています。
+
+### 開発・CIに使用しているツールのバージョンを更新
+
+開発に使用しているツールのバージョンを更新しました。
+
+| Tool    | from          | to            |
+|---------|---------------|---------------|
+| Node.js | 16.15.1       | 16.18.0       |
+| Java    | zulu-11.56.19 | zulu-11.58.23 |
+
+CIに使用しているツールのバージョンも更新しました。
+
+| Tool    | from      | to         |
+|---------|-----------|------------|
+| Node.js | 16.15.1   | 16.18.0    |
+| Xcode   | 13.3.1    | 14.0.1     |
+
+## 参考記事
+
+- [Expo SDK 46](https://blog.expo.dev/expo-sdk-46-c2a1655f63f7)
+- [Announcing React Native 0.69](https://reactnative.dev/blog/2022/06/21/version-069)
+- [React v18.0](https://ja.reactjs.org/blog/2022/03/29/react-v18.html)
+- [React 18 アップグレードガイド](https://ja.reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html)

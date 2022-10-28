@@ -27,7 +27,7 @@ type AcknowledgementsPageProps = {
 
 export const keyExtractor = ({id}: DependencyWithAction) => id;
 
-export const AcknowledgementsPage: React.VFC<AcknowledgementsPageProps> = ({navigateToLicense}) => {
+export const AcknowledgementsPage: React.FC<AcknowledgementsPageProps> = ({navigateToLicense}) => {
   const thirdPartyDependenciesWithAction = useMemo(
     () => requireThirdPartyDependenciesWithAction(navigateToLicense),
     [navigateToLicense],

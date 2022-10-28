@@ -464,9 +464,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                       "fontWeight": "600",
                                                     }
                                                   }
-                                                >
-                                                  
-                                                </Text>
+                                                />
                                               </View>
                                               <View
                                                 collapsable={false}
@@ -759,6 +757,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                               <View
                                                 collapsable={false}
                                                 forwardedRef={[Function]}
+                                                handlerTag={1}
+                                                handlerType="PanGestureHandler"
                                                 needsOffscreenAlphaCompositing={false}
                                                 onGestureHandlerEvent={[Function]}
                                                 onGestureHandlerStateChange={[Function]}

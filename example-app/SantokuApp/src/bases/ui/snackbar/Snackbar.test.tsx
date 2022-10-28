@@ -1,4 +1,4 @@
-import {render, screen, waitFor} from '@testing-library/react-native';
+import {act, render, screen} from '@testing-library/react-native';
 import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
 import {loadMessages} from 'bases/message/Message';
 import React, {useEffect} from 'react';
@@ -6,6 +6,11 @@ import {Text, TextStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
 
 import {Snackbar} from './Snackbar';
+
+// If advancing a timer changes the state of a component, the timer must be run within an act.
+// However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+// For convenience, disable the relevant rule in this file.
+/* eslint-disable @typescript-eslint/no-floating-promises */
 
 function getStyle<T>(instance: ReactTestInstance) {
   return instance.props.style as T;
@@ -63,7 +68,7 @@ describe('Snackbar', () => {
     expect(screen).toMatchSnapshot();
   });
 
-  it('Snackbarのhideで、Snackbarが消えることを確認', async () => {
+  it('Snackbarのhideで、Snackbarが消えることを確認', () => {
     render(
       <>
         <ChildComponent type="show" />
@@ -78,12 +83,12 @@ describe('Snackbar', () => {
       </>,
     );
 
-    await waitFor(() => {
-      const HIDE_FADE_OUT_DURATION = 300;
+    const HIDE_FADE_OUT_DURATION = 300;
+    act(() => {
       jest.advanceTimersByTime(HIDE_FADE_OUT_DURATION);
-      expect(screen.queryByText('テストメッセージ')).toBeNull();
-      expect(screen.queryByText('閉じる')).toBeNull();
-      expect(screen).toMatchSnapshot();
     });
+    expect(screen.queryByText('テストメッセージ')).toBeNull();
+    expect(screen.queryByText('閉じる')).toBeNull();
+    expect(screen).toMatchSnapshot();
   });
 });

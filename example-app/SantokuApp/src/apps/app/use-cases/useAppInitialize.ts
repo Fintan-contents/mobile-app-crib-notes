@@ -71,7 +71,6 @@ export const useAppInitialize = () => {
       const data = await loadData();
 
       setInitializationResult({code: 'Success', data});
-      // await hideSplashScreen();
     } catch (e) {
       if (isInitialDataError(e)) {
         const {title, message} = resolveErrorMessage(e.cause);

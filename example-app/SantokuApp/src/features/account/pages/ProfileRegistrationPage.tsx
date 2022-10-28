@@ -16,7 +16,7 @@ import {useAuthCommands} from '../services/auth/useAuthCommands';
 export type ProfileRegistrationPageProps = {
   termsAgreementStatus: TermsOfServiceAgreementStatus;
 };
-export const ProfileRegistrationPage: React.VFC<ProfileRegistrationPageProps> = ({termsAgreementStatus}) => {
+export const ProfileRegistrationPage: React.FC<ProfileRegistrationPageProps> = ({termsAgreementStatus}) => {
   const {signup, isSigningUp} = useAuthCommands();
   const {agreeTerms, isAgreeingTerms} = useAccountCommands();
   const onSubmit = useCallback(

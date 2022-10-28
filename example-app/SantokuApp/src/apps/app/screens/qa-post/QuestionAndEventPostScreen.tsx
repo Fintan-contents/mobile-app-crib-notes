@@ -4,7 +4,7 @@ import React, {useCallback} from 'react';
 
 import {QuestionAndEventPostStackParamList} from '../../navigators/types';
 
-export const QuestionAndEventPostScreen: React.VFC<
+export const QuestionAndEventPostScreen: React.FC<
   NativeStackScreenProps<QuestionAndEventPostStackParamList, 'QuestionAndEventPost'>
 > = ({navigation}) => {
   const setNavigationOptions = useCallback(

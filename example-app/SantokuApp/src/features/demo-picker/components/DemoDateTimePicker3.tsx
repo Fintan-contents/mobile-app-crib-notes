@@ -3,7 +3,7 @@ import {DateTimePicker} from 'bases/ui/picker/DateTimePicker';
 import React, {useCallback, useRef, useState} from 'react';
 import {Platform, StyleSheet} from 'react-native';
 
-export const DemoDateTimePicker3: React.VFC = () => {
+export const DemoDateTimePicker3: React.FC = () => {
   // 再レンダリング時に毎回日時が変わらないようにRefで保持します。
   // Refで保持しているため、PickerScreenを開いている間は、maximumDate/minimumDateは変わりません。
   // 一旦前の画面に戻って、再度PickerScreenを開くと、maximumDate/minimumDateは更新されます。

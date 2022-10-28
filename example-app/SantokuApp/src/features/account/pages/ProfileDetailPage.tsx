@@ -5,7 +5,7 @@ import {Button, Text} from 'react-native-elements';
 export type ProfileDetailPageProps = {
   navigateToDemo: () => void;
 };
-export const ProfileDetailPage: React.VFC<ProfileDetailPageProps> = ({navigateToDemo}) => {
+export const ProfileDetailPage: React.FC<ProfileDetailPageProps> = ({navigateToDemo}) => {
   return (
     <View style={styles.container} testID="ProfileDetailPage">
       <Text h2>開発中</Text>

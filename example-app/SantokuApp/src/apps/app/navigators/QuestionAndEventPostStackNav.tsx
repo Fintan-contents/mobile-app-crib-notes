@@ -9,7 +9,7 @@ import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
 
 const nav = createNativeStackNavigator<QuestionAndEventPostStackParamList>();
 
-export const QuestionAndEventPostStackNav: React.VFC = () => {
+export const QuestionAndEventPostStackNav: React.FC = () => {
   const {CloseThisNavigatorButton} = useCloseThisNavigatorButton();
   const theme = useTheme<RestyleTheme>();
   return (

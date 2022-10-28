@@ -1,3 +1,4 @@
+import {DateTimePickerEvent} from '@react-native-community/datetimepicker';
 import {useCallback, useState} from 'react';
 
 import {DateTimePickerIOSProps} from './DateTimePicker.ios';
@@ -11,7 +12,7 @@ export const useDateTimePickerIOS = (props: DateTimePickerIOSProps) => {
     setIsVisible(false);
   }, []);
   const onValueChange = useCallback(
-    (_, date?: Date) => {
+    (_: DateTimePickerEvent, date?: Date) => {
       onSelectedItemChange?.(date);
     },
     [onSelectedItemChange],

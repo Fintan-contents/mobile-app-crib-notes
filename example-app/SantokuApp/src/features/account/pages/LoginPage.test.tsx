@@ -16,7 +16,7 @@ import {LoginPageProps} from './LoginPage';
 jest.mock('features/backend/apis/account/account');
 jest.mock('features/backend/apis/terms/terms');
 
-const Wrapper: React.FC = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>
@@ -43,7 +43,7 @@ describe('LoginScreen', () => {
     // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const Page = require('./LoginPage').LoginPage as React.FC<LoginPageProps>;
+    const Page = require('./LoginPage').LoginPage as React.FC<React.PropsWithChildren<LoginPageProps>>;
     render(<Page navigateToCreateAccount={() => {}} />, {
       wrapper: Wrapper,
     });

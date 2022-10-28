@@ -21,7 +21,7 @@ jest.useFakeTimers('modern');
 
 jest.runAllTimers();
 
-const Wrapper: React.FC = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   return <SafeAreaProvider>{children}</SafeAreaProvider>;
 };
 

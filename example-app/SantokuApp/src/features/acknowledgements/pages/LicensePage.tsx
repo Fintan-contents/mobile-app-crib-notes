@@ -9,7 +9,7 @@ import {openRepositoryLink} from '../utils/openRepositoryLink';
 type LicensePageProps = {
   dependency: ThirdPartyDependency;
 };
-export const LicensePage: React.VFC<LicensePageProps> = ({dependency}) => {
+export const LicensePage: React.FC<LicensePageProps> = ({dependency}) => {
   const {data: licenseContentText, isLoading: isLoadingLicenseContentText} = useAssetContent(
     dependency.licenseContentModuleId,
   );

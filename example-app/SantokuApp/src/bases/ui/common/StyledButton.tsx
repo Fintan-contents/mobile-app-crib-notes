@@ -32,7 +32,7 @@ export type ButtonProps = BaseButtonProps & {
 } & ColorProps<RestyleTheme> &
   TypographyProps<RestyleTheme> &
   TextShadowProps<RestyleTheme>;
-export const StyledButton: React.FC<ButtonProps> = ({
+export const StyledButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   title,
   isLoading,
   color,

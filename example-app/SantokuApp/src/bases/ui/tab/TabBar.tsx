@@ -8,7 +8,7 @@ export type TabBarProps = {
   onChange: (index: number) => void;
 };
 
-export const TabBar: React.FC<TabBarProps> = ({children: source, selectedIndex, onChange}) => {
+export const TabBar: React.FC<React.PropsWithChildren<TabBarProps>> = ({children: source, selectedIndex, onChange}) => {
   const children = React.Children.toArray(source) as React.ReactElement<TabProps>[];
   return (
     <>

@@ -19,7 +19,7 @@ type QuestionAndEventPostPageProps = {
   goBack: () => void;
 };
 
-export const QuestionAndEventPostPage: React.VFC<QuestionAndEventPostPageProps> = ({setNavigationOptions, goBack}) => {
+export const QuestionAndEventPostPage: React.FC<QuestionAndEventPostPageProps> = ({setNavigationOptions, goBack}) => {
   const {data: tags} = useTags();
   const {post: postQuestion, isPosting: isQuestionPosting} = useQuestionCommands();
   const {

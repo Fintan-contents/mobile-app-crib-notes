@@ -26,7 +26,7 @@ export type ModalBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exiti
   fadeOutConfig?: WithTimingConfig;
 };
 
-export const ModalBackdrop: React.FC<ModalBackdropProps> = ({
+export const ModalBackdrop: React.FC<React.PropsWithChildren<ModalBackdropProps>> = ({
   isVisible,
   opacity = DEFAULT_OPACITY,
   onPress,

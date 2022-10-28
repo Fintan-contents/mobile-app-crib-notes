@@ -73,7 +73,7 @@ export type HomePageProps = {
   setHeader: (options: {headerLeft: () => React.ReactNode; headerRight: () => React.ReactNode}) => void;
 };
 
-export const HomePage: React.VFC<HomePageProps> = ({
+export const HomePage: React.FC<HomePageProps> = ({
   navigateToQuestionAndEventPost,
   navigateToQuestionDetail,
   setHeader,

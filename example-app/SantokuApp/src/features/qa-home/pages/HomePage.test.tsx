@@ -36,7 +36,7 @@ jest.mock('bases/date/formatDiffInDaysOrHours', () => {
   };
 });
 
-const Wrapper: React.FC = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>
@@ -53,7 +53,7 @@ describe('Home', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
     // メッセージのロード前にHomePageをimportしてしまうとエラーになるため、メッセージのロード後にrequireします
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    const HomePage = require('./HomePage').HomePage as React.FC<HomePageProps>;
+    const HomePage = require('./HomePage').HomePage as React.FC<React.PropsWithChildren<HomePageProps>>;
     render(
       <HomePage navigateToQuestionDetail={() => {}} navigateToQuestionAndEventPost={() => {}} setHeader={() => {}} />,
       {

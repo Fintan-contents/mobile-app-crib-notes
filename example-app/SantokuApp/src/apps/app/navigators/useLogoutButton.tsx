@@ -52,7 +52,7 @@ export const useLogoutButton = () => {
     }
   }, [logout]);
   // NativeStackNavigatorのheaderRightに合わせたコンポーネント。
-  const LogoutButton: React.FC<CloseThisNavigatorButtonProps> = () => (
+  const LogoutButton: React.FC<React.PropsWithChildren<CloseThisNavigatorButtonProps>> = () => (
     <HeaderRightLogoutButton onPress={onLogout} isLoading={isLoggingOut} />
   );
 

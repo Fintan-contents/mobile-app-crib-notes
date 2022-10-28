@@ -1,3 +1,15 @@
+diff --git a/node_modules/react-native-elements/dist/config/ThemeProvider.d.ts b/node_modules/react-native-elements/dist/config/ThemeProvider.d.ts
+index 5143276..50e3254 100644
+--- a/node_modules/react-native-elements/dist/config/ThemeProvider.d.ts
++++ b/node_modules/react-native-elements/dist/config/ThemeProvider.d.ts
+@@ -11,6 +11,7 @@ export interface ThemeProps<T> {
+ export declare const ThemeContext: React.Context<ThemeProps<{}>>;
+ export declare type ThemeProviderProps = {
+     useDark?: boolean;
++    children?: React.ReactNode;
+ };
+ declare type ThemeProviderState = {
+     theme: Theme;
 diff --git a/node_modules/react-native-elements/dist/icons/Icon.d.ts b/node_modules/react-native-elements/dist/icons/Icon.d.ts
 index a3b1ede..50c7fdb 100644
 --- a/node_modules/react-native-elements/dist/icons/Icon.d.ts

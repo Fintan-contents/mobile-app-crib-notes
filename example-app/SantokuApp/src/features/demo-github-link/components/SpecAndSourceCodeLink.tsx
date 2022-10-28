@@ -10,7 +10,7 @@ const openUrl = async (url: string) => {
 type Props = {
   feature: string;
 };
-export const SpecAndSourceCodeLink: React.VFC<Props> = ({feature}) => {
+export const SpecAndSourceCodeLink: React.FC<Props> = ({feature}) => {
   const openSpec = useCallback(async () => {
     await openUrl(`${AppConfig.mobileAppCribNotesWebsiteUrl}/react-native/santoku/design/demo/${feature}/overview`);
   }, [feature]);

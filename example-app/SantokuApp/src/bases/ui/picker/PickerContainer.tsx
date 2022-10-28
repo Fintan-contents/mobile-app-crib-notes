@@ -19,7 +19,7 @@ export type PickerContainerProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exi
   slideOutConfig?: WithTimingConfig;
 };
 
-export const PickerContainer: React.FC<PickerContainerProps> = ({
+export const PickerContainer: React.FC<React.PropsWithChildren<PickerContainerProps>> = ({
   isVisible,
   style,
   afterSlideIn,

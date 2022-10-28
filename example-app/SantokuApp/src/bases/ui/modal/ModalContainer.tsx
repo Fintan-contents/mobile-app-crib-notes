@@ -19,7 +19,7 @@ export type ModalContainerProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exit
   slideOutConfig?: WithTimingConfig;
 };
 
-export const ModalContainer: React.FC<ModalContainerProps> = ({
+export const ModalContainer: React.FC<React.PropsWithChildren<ModalContainerProps>> = ({
   isVisible,
   style,
   afterSlideIn,

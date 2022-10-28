@@ -41,7 +41,7 @@ export type OverlayBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'ent
  * スプラッシュを非表示にできない問題があります。
  * OverlayBackdropでは、react-nativeのModalを利用しないでOverlay表示することにより、上記問題に対応しています。
  */
-export const OverlayBackdrop: React.FC<OverlayBackdropProps> = ({
+export const OverlayBackdrop: React.FC<React.PropsWithChildren<OverlayBackdropProps>> = ({
   isVisible,
   onPress,
   entering = OVERLAY_BACKDROP_DEFAULT_ENTERING,

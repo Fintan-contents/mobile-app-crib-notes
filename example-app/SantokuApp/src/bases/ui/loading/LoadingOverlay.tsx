@@ -8,7 +8,7 @@ type LoadingOverlayType = {
   Component: typeof Component;
 };
 
-const Component: React.VFC = () => {
+const Component: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   LoadingOverlay = useMemo<LoadingOverlayType>(
     () => ({...LoadingOverlay, visible: (visible: boolean) => setVisible(visible)}),

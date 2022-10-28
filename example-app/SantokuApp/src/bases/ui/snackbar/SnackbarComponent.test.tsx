@@ -1,12 +1,16 @@
-import {act} from '@testing-library/react-hooks';
-import {render, screen, waitFor} from '@testing-library/react-native';
+import {act, render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {TextStyle, ViewStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
 
 import {SnackbarComponent} from './SnackbarComponent';
 
-jest.useFakeTimers();
+// If advancing a timer changes the state of a component, the timer must be run within an act.
+// However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+// For convenience, disable the relevant rule in this file.
+/* eslint-disable @typescript-eslint/no-floating-promises */
+
+jest.useFakeTimers('modern');
 
 function getStyle<T>(instance: ReactTestInstance) {
   return instance.props.style as T;
@@ -40,7 +44,7 @@ describe('SnackbarComponent', () => {
     expect(screen).toMatchSnapshot('フェードアウト後');
   });
 
-  it('SnackbarComponent表示中にpropsが更新された場合、フェードアウト後に更新後のpropsでSnackbarComponentが表示されることを確認', async () => {
+  it('SnackbarComponent表示中にpropsが更新された場合、フェードアウト後に更新後のpropsでSnackbarComponentが表示されることを確認', () => {
     render(<SnackbarComponent message="初回" />);
 
     expect(screen.queryByText('初回')).not.toBeNull();
@@ -49,15 +53,15 @@ describe('SnackbarComponent', () => {
 
     expect(screen.queryByText('初回')).not.toBeNull();
 
-    await waitFor(() => {
+    act(() => {
       jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
-
-      expect(screen.queryByText('初回')).toBeNull();
-      expect(screen.queryByText('２回目')).not.toBeNull();
     });
+
+    expect(screen.queryByText('初回')).toBeNull();
+    expect(screen.queryByText('２回目')).not.toBeNull();
   });
 
-  it('SnackbarComponentの表示中に２連続propsが更新された場合、後で更新した方のpropsでSnackbarComponentが表示されることを確認', async () => {
+  it('SnackbarComponentの表示中に２連続propsが更新された場合、後で更新した方のpropsでSnackbarComponentが表示されることを確認', () => {
     render(<SnackbarComponent message="初回" />);
 
     expect(screen.queryByText('初回')).not.toBeNull();
@@ -66,11 +70,11 @@ describe('SnackbarComponent', () => {
 
     screen.update(<SnackbarComponent message="３回目" />);
 
-    await waitFor(() => {
+    act(() => {
       jest.advanceTimersByTime(FORCE_FADE_OUT_DURATION);
-
-      expect(screen.queryByText('３回目')).not.toBeNull();
     });
+
+    expect(screen.queryByText('３回目')).not.toBeNull();
   });
 
   it('SnackbarComponentの表示後に同一のpropsを指定した場合、SnackbarComponentが表示されないことを確認', () => {
@@ -128,7 +132,7 @@ describe('SnackbarComponent', () => {
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
   });
 
-  it('SnackbarComponent表示中にpropsでhideを指定した場合、SnackbarComponentが消えることを確認', async () => {
+  it('SnackbarComponent表示中にpropsでhideを指定した場合、SnackbarComponentが消えることを確認', () => {
     render(<SnackbarComponent message="テストメッセージ" />);
 
     jest.advanceTimersByTime(FADE_IN_DURATION);
@@ -136,10 +140,11 @@ describe('SnackbarComponent', () => {
 
     screen.update(<SnackbarComponent message="テストメッセージ" hide />);
 
-    await waitFor(() => {
+    act(() => {
       jest.advanceTimersByTime(HIDE_FADE_OUT_DURATION);
-      expect(screen.queryByText('テストメッセージ')).toBeNull();
     });
+
+    expect(screen.queryByText('テストメッセージ')).toBeNull();
   });
 
   it('SnackbarComponentに指定したpropsがrenderに反映されていることを確認', () => {

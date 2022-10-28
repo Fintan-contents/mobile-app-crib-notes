@@ -10,7 +10,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {TermsAgreementOverlayComponent} from './TermsAgreementOverlayComponent';
 
-const Wrapper: React.FC = ({children}) => {
+const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
   const queryClient = new QueryClient();
   return (
     <SafeAreaProvider>

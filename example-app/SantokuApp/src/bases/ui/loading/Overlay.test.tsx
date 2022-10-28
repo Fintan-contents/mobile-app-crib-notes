@@ -1,10 +1,14 @@
-import {act} from '@testing-library/react-hooks';
-import {render, screen} from '@testing-library/react-native';
+import {render, screen, act} from '@testing-library/react-native';
 import React from 'react';
 import {Text, ViewStyle} from 'react-native';
 import {ReactTestInstance} from 'react-test-renderer';
 
 import {Overlay} from './Overlay';
+
+// If advancing a timer changes the state of a component, the timer must be run within an act.
+// However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
+// For convenience, disable the relevant rule in this file.
+/* eslint-disable @typescript-eslint/no-floating-promises */
 
 jest.useFakeTimers();
 
@@ -53,7 +57,7 @@ describe('Overlay', () => {
     expect(screen).toMatchSnapshot('フェードアウト後');
   });
 
-  it('Overlayに指定したpropsがrenderに反映されていることを確認', () => {
+  it('Overlayに指定したpropsがrenderに反映されていることを確認', async () => {
     const onHideEnd = jest.fn();
     // fadeDurationはテストコードでアニメーション時間を調整できないため検証対象外
     render(
@@ -62,7 +66,7 @@ describe('Overlay', () => {
       </Overlay>,
     );
 
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(FADE_DURATION);
     });
 

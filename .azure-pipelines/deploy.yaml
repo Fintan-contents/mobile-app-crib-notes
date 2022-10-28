@@ -58,9 +58,9 @@ stages:
           versionSpec: '3.1.2'
           addToPath: true
       - task: NodeTool@0
-        displayName: 'Use Node.js 16.15.1'
+        displayName: 'Use Node.js 16.18.0'
         inputs:
-          versionSpec: '16.15.1'
+          versionSpec: '16.18.0'
       - task: JavaToolInstaller@0
         inputs:
           versionSpec: '11'
@@ -172,13 +172,13 @@ stages:
         inputs:
           provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileName)
       - task: CmdLine@2
-        displayName: 'Use Xcode 13.3.1'
+        displayName: 'Use Xcode 14.0.1'
         inputs:
-          script: 'sudo xcode-select --switch /Applications/Xcode_13.3.1.app'
+          script: 'sudo xcode-select --switch /Applications/Xcode_14.0.1.app'
       - task: NodeTool@0
-        displayName: 'Use Node.js 16.15.1'
+        displayName: 'Use Node.js 16.18.0'
         inputs:
-          versionSpec: '16.15.1'
+          versionSpec: '16.18.0'
       - task: Cache@2
         displayName: Cache npm
         inputs:

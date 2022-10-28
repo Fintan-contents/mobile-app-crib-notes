@@ -162,12 +162,9 @@ Array [
               injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
               injectedJavaScriptForMainFrameOnly={true}
               javaScriptEnabled={true}
-              messagingEnabled={false}
+              messagingEnabled={true}
               onContentProcessDidTerminate={[Function]}
-              onError={[Function]}
               onHttpError={[Function]}
-              onLoadProgress={[Function]}
-              onLoadStart={[Function]}
               onLoadingError={[Function]}
               onLoadingFinish={[Function]}
               onLoadingProgress={[Function]}
@@ -180,7 +177,6 @@ Array [
                   "uri": "https://www.tis.co.jp/termsofuse/",
                 }
               }
-              startInLoadingState={true}
               style={
                 Array [
                   Object {

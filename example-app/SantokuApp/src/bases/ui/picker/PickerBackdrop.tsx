@@ -26,7 +26,7 @@ export type PickerBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exit
   fadeOutConfig?: WithTimingConfig;
 };
 
-export const PickerBackdrop: React.FC<PickerBackdropProps> = ({
+export const PickerBackdrop: React.FC<React.PropsWithChildren<PickerBackdropProps>> = ({
   isVisible,
   opacity = DEFAULT_OPACITY,
   onPress,

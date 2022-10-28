@@ -16,7 +16,7 @@ export type EventListProps = {
   data?: Event[];
 };
 
-export const EventList: React.VFC<EventListProps> = ({data}) => {
+export const EventList: React.FC<EventListProps> = ({data}) => {
   const theme = useTheme<RestyleTheme>();
   const {width: windowWidth} = useSafeAreaFrame();
   return (

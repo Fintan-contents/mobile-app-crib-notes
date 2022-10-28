@@ -8,7 +8,12 @@ export type FabProps = {
   onPress?: () => void;
 };
 
-export const Fab: React.FC<FabProps> = ({size = 'medium', color = 'blue', onPress, children}) => {
+export const Fab: React.FC<React.PropsWithChildren<FabProps>> = ({
+  size = 'medium',
+  color = 'blue',
+  onPress,
+  children,
+}) => {
   const side = useMemo(() => {
     if (size === 'small') {
       return 40;

@@ -6,7 +6,7 @@ import {useIsLoggedIn} from '../client-states/useIsLoggedIn';
 import {isUnauthorizedError} from '../errors/UnauthorizedError';
 import {useAuthCommands} from '../services/auth/useAuthCommands';
 
-export const AutoLogin: React.FC = ({children}) => {
+export const AutoLogin: React.FC<React.PropsWithChildren> = ({children}) => {
   const [isLoggedIn] = useIsLoggedIn();
   const {autoLogin} = useAuthCommands();
   useEffect(() => {

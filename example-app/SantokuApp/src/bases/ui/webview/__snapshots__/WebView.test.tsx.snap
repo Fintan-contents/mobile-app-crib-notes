@@ -19,12 +19,9 @@ exports[`WebView WebViewSourceHtmlでも正常にレンダリングされるこ�
     injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
     injectedJavaScriptForMainFrameOnly={true}
     javaScriptEnabled={true}
-    messagingEnabled={false}
+    messagingEnabled={true}
     onContentProcessDidTerminate={[Function]}
-    onError={[Function]}
     onHttpError={[Function]}
-    onLoadProgress={[Function]}
-    onLoadStart={[Function]}
     onLoadingError={[Function]}
     onLoadingFinish={[Function]}
     onLoadingProgress={[Function]}
@@ -37,7 +34,6 @@ exports[`WebView WebViewSourceHtmlでも正常にレンダリングされるこ�
         "html": "<h1>test</h1>",
       }
     }
-    startInLoadingState={true}
     style={
       Array [
         Object {
@@ -92,12 +88,9 @@ exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
     injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
     injectedJavaScriptForMainFrameOnly={true}
     javaScriptEnabled={true}
-    messagingEnabled={false}
+    messagingEnabled={true}
     onContentProcessDidTerminate={[Function]}
-    onError={[Function]}
     onHttpError={[Function]}
-    onLoadProgress={[Function]}
-    onLoadStart={[Function]}
     onLoadingError={[Function]}
     onLoadingFinish={[Function]}
     onLoadingProgress={[Function]}
@@ -110,7 +103,6 @@ exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
         "uri": "https://localhost/",
       }
     }
-    startInLoadingState={true}
     style={
       Array [
         Object {

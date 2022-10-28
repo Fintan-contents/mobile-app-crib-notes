@@ -15,7 +15,7 @@ export type BottomSheetProps = {
   modalContainerProps?: Omit<ModalContainerProps, 'isVisible'>;
 };
 
-export const BottomSheet: React.FC<BottomSheetProps> = ({
+export const BottomSheet: React.FC<React.PropsWithChildren<BottomSheetProps>> = ({
   isVisible,
   modalBackdropProps,
   modalContainerProps,
