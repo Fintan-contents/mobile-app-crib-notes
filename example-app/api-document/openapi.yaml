@@ -1140,7 +1140,7 @@ components:
           type: array
           description: 質問に設定されているタグ
           items:
-            type: string
+            $ref: '#/components/schemas/Tag'
         datetime:
           type: string
           description: 質問日時

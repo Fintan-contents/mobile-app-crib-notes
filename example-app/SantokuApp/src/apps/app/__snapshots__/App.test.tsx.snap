@@ -1004,7 +1004,11 @@ Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追
                                                                   "questionId": "7",
                                                                   "resolved": false,
                                                                   "tags": Array [
-                                                                    "10",
+                                                                    Object {
+                                                                      "questions": 1,
+                                                                      "tagId": "10",
+                                                                      "tagName": "c",
+                                                                    },
                                                                   ],
                                                                   "title": "C言語のchar型は何ビットでしょうか",
                                                                   "views": 0,
@@ -1031,7 +1035,11 @@ Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追
                                                                   "questionId": "6",
                                                                   "resolved": false,
                                                                   "tags": Array [
-                                                                    "8",
+                                                                    Object {
+                                                                      "questions": 1,
+                                                                      "tagId": "8",
+                                                                      "tagName": "react",
+                                                                    },
                                                                   ],
                                                                   "title": "アプリ全体で保持するデータの実装方法について",
                                                                   "views": 0,
@@ -1059,7 +1067,11 @@ Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追
                                                                   "questionId": "5",
                                                                   "resolved": false,
                                                                   "tags": Array [
-                                                                    "3",
+                                                                    Object {
+                                                                      "questions": 1,
+                                                                      "tagId": "3",
+                                                                      "tagName": "typescript",
+                                                                    },
                                                                   ],
                                                                   "title": "TypeScriptを使った方が良いのでしょうか？",
                                                                   "views": 1,
@@ -1092,8 +1104,16 @@ Nablarch 5u21
                                                                   "questionId": "3",
                                                                   "resolved": true,
                                                                   "tags": Array [
-                                                                    "5",
-                                                                    "6",
+                                                                    Object {
+                                                                      "questions": 1,
+                                                                      "tagId": "5",
+                                                                      "tagName": "aws",
+                                                                    },
+                                                                    Object {
+                                                                      "questions": 1,
+                                                                      "tagId": "6",
+                                                                      "tagName": "nablarch",
+                                                                    },
                                                                   ],
                                                                   "title": "Nablarchを使用したWebアプリケーションからS3に接続する方法について",
                                                                   "views": 1,
@@ -1128,7 +1148,11 @@ Flutter 3.0.5 stable
                                                                   "questionId": "4",
                                                                   "resolved": false,
                                                                   "tags": Array [
-                                                                    "7",
+                                                                    Object {
+                                                                      "questions": 1,
+                                                                      "tagId": "7",
+                                                                      "tagName": "flutter",
+                                                                    },
                                                                   ],
                                                                   "title": "Flutterでオートコンプリートする方法",
                                                                   "views": 1,
@@ -1155,7 +1179,11 @@ Flutter 3.0.5 stable
                                                                   "questionId": "2",
                                                                   "resolved": false,
                                                                   "tags": Array [
-                                                                    "4",
+                                                                    Object {
+                                                                      "questions": 1,
+                                                                      "tagId": "4",
+                                                                      "tagName": "javascript",
+                                                                    },
                                                                   ],
                                                                   "title": "JavaScriptのビックリマーク二つ（！！）はどういう意味でしょうか？",
                                                                   "views": 1,
@@ -1190,9 +1218,21 @@ React Native 0.66
                                                                   "questionId": "1",
                                                                   "resolved": true,
                                                                   "tags": Array [
-                                                                    "1",
-                                                                    "2",
-                                                                    "9",
+                                                                    Object {
+                                                                      "questions": 1,
+                                                                      "tagId": "1",
+                                                                      "tagName": "技術支援",
+                                                                    },
+                                                                    Object {
+                                                                      "questions": 1,
+                                                                      "tagId": "2",
+                                                                      "tagName": "react-native",
+                                                                    },
+                                                                    Object {
+                                                                      "questions": 1,
+                                                                      "tagId": "9",
+                                                                      "tagName": "mobile-application",
+                                                                    },
                                                                   ],
                                                                   "title": "React Nativeでヘッダを非表示にする方法",
                                                                   "views": 1,

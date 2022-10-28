@@ -15,7 +15,6 @@ import {useAccountQuestionCommands} from 'features/account/services/account/useA
 import {QuestionAndAnswerQuestion} from 'features/backend/apis/model';
 import React, {FC, useCallback, useMemo} from 'react';
 
-import {useTags} from '../services/useTags';
 import {AddCommentButton} from './AddCommentButton';
 import {CommentButtonWithCount} from './CommentButtonWithCount';
 import {CommentCard} from './CommentCard';
@@ -32,34 +31,15 @@ export type QuestionDetailCardProps = QuestionAndAnswerQuestion & {
 };
 
 export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
-  question: {
-    questionId,
-    title,
-    content,
-    likes,
-    views,
-    comments,
-    beginner,
-    resolved,
-    datetime,
-    tags: questionTagIds,
-    profile,
-  },
+  question: {questionId, title, content, likes, views, comments, beginner, resolved, datetime, tags, profile},
   commentList,
   liked,
   likedCommentIds,
 }) => {
   const {toggleQuestionLike: toggleQuestionLikeCommand} = useAccountQuestionCommands();
-  const {data: tags} = useTags();
   const {isVisible: isQuestionCommentsVisible, toggleVisibility: toggleQuestionCommentsVisible} = useVisibility(false);
   const likeQuestionColor = useMemo(() => (liked ? 'blue' : 'grey1'), [liked]);
   const commentButtonColor = useMemo(() => (isQuestionCommentsVisible ? 'blue' : 'grey1'), [isQuestionCommentsVisible]);
-  const questionTags = useMemo(() => {
-    if (!tags) {
-      return [];
-    }
-    return questionTagIds.map(tagId => tags.find(tag => tag.tagId === tagId));
-  }, [questionTagIds, tags]);
   const toggleQuestionLike = useCallback(
     () => toggleQuestionLikeCommand(questionId),
     [questionId, toggleQuestionLikeCommand],
@@ -134,9 +114,9 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
       <StyledRow space="p16" alignItems="flex-end">
         <TagIllustration />
         <StyledRow space="p8" flexWrap="wrap">
-          {questionTags?.map(tag => (
-            <Text key={tag?.tagId} variant="font14Regular" textDecorationLine="underline" letterSpacing={0.18}>
-              {tag?.tagName}
+          {tags.map(tag => (
+            <Text key={tag.tagId} variant="font14Regular" textDecorationLine="underline" letterSpacing={0.18}>
+              {tag.tagName}
             </Text>
           ))}
         </StyledRow>

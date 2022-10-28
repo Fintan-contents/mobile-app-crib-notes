@@ -15,6 +15,7 @@ export const getQuestions = rest.get(`${backendUrl}/questions`, (req, res, ctx) 
     const accountId = getLoggedInAccountId();
     const db = getDb(accountId);
     let questions = db.question.findMany({orderBy: {datetime: 'desc'}});
+    const tags = db.tag.getAll();
     if (keyword) {
       questions = questions.filter(q => q.title.includes(keyword) || q.content.includes(keyword));
     }
@@ -38,7 +39,10 @@ export const getQuestions = rest.get(`${backendUrl}/questions`, (req, res, ctx) 
         questions = questions.sort((a, b) => (new Date(b.lastUpdatedAt) > new Date(a.lastUpdatedAt) ? 1 : -1));
       }
     }
-    return delayedResponse(ctx.json(questions));
+    const response = questions.map(question => {
+      return {...question, tags: question.tags.map(tagId => tags.find(tag => tag.tagId === tagId))};
+    });
+    return delayedResponse(ctx.json(response));
   } catch (e) {
     return errorResponse(e, ctx);
   }
