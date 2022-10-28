@@ -91,6 +91,11 @@ Array [
       scrollEventThrottle={50}
       showsVerticalScrollIndicator={false}
       stickyHeaderIndices={Array []}
+      style={
+        Array [
+          Object {},
+        ]
+      }
       viewabilityConfigCallbackPairs={Array []}
     >
       <RCTRefreshControl />

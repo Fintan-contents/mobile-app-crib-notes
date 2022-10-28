@@ -6,6 +6,7 @@ import {useFocusEffect} from 'bases/focus-manager/useFocusEffect';
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
+import {StyledFlatList} from 'bases/ui/common/StyledFlatList';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {Fab} from 'bases/ui/fab/Fab';
@@ -26,7 +27,7 @@ import {SingleSelectableTagSheet} from 'features/qa-question/components/SingleSe
 import {useTags} from 'features/qa-question/services/useTags';
 import {useShowTermsAgreementOverlay} from 'features/terms/use-cases/useShowTermsAgreementOverlay';
 import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
-import {FlatList, Platform, ScrollView} from 'react-native';
+import {Platform, ScrollView} from 'react-native';
 
 import {useEventsAndQuestions} from '../services/useEventsAndQuestions';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
@@ -166,7 +167,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   return (
     <Box flex={1} testID="HomePage">
-      <FlatList
+      <StyledFlatList
         showsVerticalScrollIndicator={false}
         refreshing={isPullToRefreshing}
         onRefresh={pullToRefresh}
