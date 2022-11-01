@@ -27,7 +27,7 @@ import {SingleSelectableTagSheet} from 'features/qa-question/components/SingleSe
 import {useTags} from 'features/qa-question/services/useTags';
 import {useShowTermsAgreementOverlay} from 'features/terms/use-cases/useShowTermsAgreementOverlay';
 import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
-import {Platform, ScrollView} from 'react-native';
+import {FlatList, Platform} from 'react-native';
 
 import {useEventsAndQuestions} from '../services/useEventsAndQuestions';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
@@ -157,8 +157,8 @@ export const HomePage: React.FC<HomePageProps> = ({
   );
   const tagIconColor = useMemo(() => (selectedTagId ? 'blue' : 'black'), [selectedTagId]);
 
-  const scrollViewRef = useRef<ScrollView>();
-  const scrollToTop = useCallback(() => scrollViewRef.current?.scrollTo({y: 0, animated: true}), []);
+  const flatListRef = useRef<FlatList>(null);
+  const scrollToTop = useCallback(() => flatListRef.current?.scrollToOffset({offset: 0, animated: true}), []);
 
   const questionItems = useMemo(
     () => questions?.map(addOnPressHandlerToQuestions(navigateToQuestionDetail)),
