@@ -19,13 +19,13 @@ import TabItem from '@theme/TabItem';
 
 以下のツールは、React Nativeでのアプリ開発に必要となるので、必ずインストールしてください。XcodeとAndroid Studio以外のツールは、[Homebrew (macOS)](https://brew.sh/)や[Scoop (Windows)](https://scoop.sh/)などを利用してインストールすることをおすすめします。
 
-| OS             | ツール                | バージョン                                             | その他                                                                                                                                                |
-|:---------------|:---------------------|:-----------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| macOS, Windows | Node.js              | [アクティブLTS](https://nodejs.org/ja/about/releases/) | Node.js 12以降であれば学習には問題ないはずですが、このコンテンツはアクティブLTSを前提にして書かれています。                                                         |
-| macOS, Windows | Java Development Kit | 11                                                   | ディストリビューションにはこだわりなし                                                                                                                     |
+| OS             | ツール                | バージョン                                             | その他                                                                                                         |
+|:---------------|:---------------------|:-----------------------------------------------------|:------------------------------------------------------------------------------------------------------------|
+| macOS, Windows | Node.js              | [アクティブLTS](https://github.com/nodejs/release#release-schedule) | Node.js 16以降であれば学習には問題ないはずですが、このコンテンツはアクティブLTSを前提にして書かれています。                                                |
+| macOS, Windows | Java Development Kit | 11                                                   | ディストリビューションにはこだわりなし                                                                                         |
 | macOS, Windows | Android Studio       | 最新                                                  | インストール後に[Android仮想デバイスの作成](#android仮想デバイスの作成)と[Android SDKのコマンドラインツールの設定](#android-sdkのコマンドラインツールの設定)が必要です。 |
-| macOS          | Xcode                | 13                                                   | [異なるバージョンのXcodeを共存させる](../../santoku/development/development-environment/90.use-multiple-version-xcode.mdx)                                |
-| macOS          | CocoaPods            | 最新                                                  | [Ruby, CocoaPodsのインストール](#ruby-cocoapodsのインストール)                                                                                           |
+| macOS          | Xcode                | 13                                                   | [異なるバージョンのXcodeを共存させる](../../santoku/development/development-environment/90.use-multiple-version-xcode.mdx) |
+| macOS          | CocoaPods            | 最新                                                  | [Ruby, CocoaPodsのインストール](#ruby-cocoapodsのインストール)                                                            |
 
 これらに加えて、少し便利に開発するために次のツールも導入してください。ドキュメント内の手順は、これらのツールがインストールされていることを前提にしています。
 
@@ -106,11 +106,15 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 
 ### Ruby, CocoaPodsのインストール
 
-macOSには、デフォルトでRubyがインストールされているので、`sudo gem install cocoapods`を実行することで[CocoaPods](https://cocoapods.org)をインストールできます。[^2]
+macOSには、デフォルトでRubyがインストールされているので、`sudo gem install cocoapods`を実行することで[CocoaPods](https://cocoapods.org)をインストールできます。
 
 システム全体にBundlerをインストールするのは避けたい場合や、開発に特権ユーザを利用したくない場合はシステムとは別のRubyをインストールし、その中にBundlerをインストールしてください。[asdf-vm](https://asdf-vm.com/)などのツールを利用すると、システムとは別のRubyを簡単にインストールできます。
 
-[^2]:M1アーキテクチャを使用したMacでCocoaPodsをインストールする場合は、React Native公式のドキュメントに記載されている[Note for Mac M1 users](https://reactnative.dev/docs/environment-setup#cocoapods)を参照してください。
+:::danger warning
+Appleシリコン搭載のMacコンピュータでは、Rubyのバージョンが2.7.x未満の場合にCocoaPodsのインストールでエラーが発生します。
+
+Homebrewやasdf-vmなどのツールを利用して、**使用するRubyのバージョンを2.7.x以上にアップデートしてください。**
+:::
 
 ## プロキシ設定
 

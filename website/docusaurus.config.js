@@ -22,7 +22,7 @@ const copyright = `<div class="no-content">
 
 const injectOptions = {
   organization,
-  rnSpoilerTag: 'v2021.12.0',
+  rnSpoilerTag: 'master',
 };
 
 module.exports = {
