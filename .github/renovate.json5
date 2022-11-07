@@ -73,6 +73,8 @@
         'com.android.tools.build:gradle',
         // expo-template-bare-minimum
         'de.undercouch:gradle-download-task',
+        // @testing-library/react-native -> jest
+        '@testing-library/react-native',
       ],
       matchPackagePrefixes: [
         'com.facebook.flipper',
@@ -125,7 +127,6 @@
       // ツール系のパッケージはまとめて更新するようにします
       groupName: 'Tools',
       matchPackageNames: [
-        '@testing-library/react-native',
         '@typescript-eslint/eslint-plugin',
         '@typescript-eslint/parser',
         'cross-env',
