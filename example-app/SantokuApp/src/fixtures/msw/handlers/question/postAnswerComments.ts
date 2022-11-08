@@ -21,7 +21,7 @@ export const postAnswerComments = rest.post(
         return delayedResponse(ctx.status(401));
       }
       const comment = {answerId, content, datetime: format2Iso8601(new Date()), likes: 0};
-      const savedComment = db.questionComment.create(comment);
+      const savedComment = db.answerComment.create(comment);
       return delayedResponse(
         ctx.status(201),
         ctx.json<CommentContent>({
