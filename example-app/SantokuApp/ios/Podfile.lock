@@ -13,13 +13,13 @@ PODS:
     - ExpoModulesCore
   - EXLocalAuthentication (12.3.0):
     - ExpoModulesCore
-  - Expo (46.0.15):
+  - Expo (46.0.16):
     - ExpoModulesCore
   - ExpoCrypto (11.0.0):
     - ExpoModulesCore
   - ExpoKeepAwake (10.2.0):
     - ExpoModulesCore
-  - ExpoModulesCore (0.11.7):
+  - ExpoModulesCore (0.11.8):
     - React-Core
     - ReactCommon/turbomodule/core
   - ExpoRandom (12.3.0):
@@ -396,15 +396,15 @@ PODS:
     - React-Core
   - RNDateTimePicker (6.2.0):
     - React-Core
-  - RNFBApp (16.4.0):
+  - RNFBApp (16.4.3):
     - Firebase/CoreOnly (= 10.1.0)
     - React-Core
-  - RNFBCrashlytics (16.4.0):
+  - RNFBCrashlytics (16.4.3):
     - Firebase/Crashlytics (= 10.1.0)
     - FirebaseCoreExtension (= 10.1.0)
     - React-Core
     - RNFBApp
-  - RNFBMessaging (16.4.0):
+  - RNFBMessaging (16.4.3):
     - Firebase/Messaging (= 10.1.0)
     - FirebaseCoreExtension (= 10.1.0)
     - React-Core
@@ -662,10 +662,10 @@ SPEC CHECKSUMS:
   EXFileSystem: 927e0a8885aa9c49e50fc38eaba2c2389f2f1019
   EXFont: 06df627203afcb8a3b3152ec06eb2f11f46f0cff
   EXLocalAuthentication: a714f4e7370c4efba4ed4345a55110f22ac3d85f
-  Expo: 7e821e708a35d2720ef6baa658e224dd91c4821e
+  Expo: 7ac824960a6059d6c68e73f432c8e6bf6d92a0ef
   ExpoCrypto: e534314db0e1a17ae12b5140d529bd0c5efcbc6a
   ExpoKeepAwake: 0e8f18142e71bbf2c7f6aa66ebed249ba1420320
-  ExpoModulesCore: 2d60ec04c49641afb55fee3faac86fb108c68fe0
+  ExpoModulesCore: 39ec590ce622289c060183aba57f77b1e73b4e11
   ExpoRandom: f9f1faa299a40733867f344d6b7bfa2d1f4ab04d
   EXSecureStore: ac4b3c89dd5810528074d9422d5fed5a9e684467
   EXSplashScreen: 799bece80089219b2c989c1082d70f3b00995cda
@@ -718,9 +718,9 @@ SPEC CHECKSUMS:
   RNCMaskedView: cb9670ea9239998340eaab21df13fa12a1f9de15
   RNCPicker: a99807a74d9cd65c394f6e2a6c843a377b355b4d
   RNDateTimePicker: 30e6733efc179d1e49d6008ea5fce42cdc9aeeca
-  RNFBApp: 4180fc452f41c74ee88a5f4d1357d02a4570d5f1
-  RNFBCrashlytics: bfd993b4b4b46a8a453b8e255b18671608c8a777
-  RNFBMessaging: 546780ac4921787b2ef5c920895e22520cf45274
+  RNFBApp: e2157f61e4769b53641df8948c534580630cb50a
+  RNFBCrashlytics: e0869743b4f57b0353605363a0a41fbff2500594
+  RNFBMessaging: 00da9a5a7136caa61a7b75d87e1dd83864251136
   RNGestureHandler: bad495418bcbd3ab47017a38d93d290ebd406f50
   RNNotifee: 5155e0a5e0a97d0c839030d8192783cd63053999
   RNReanimated: 2cf7451318bb9cc430abeec8d67693f9cf4e039c
