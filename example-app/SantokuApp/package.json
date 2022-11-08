@@ -30,7 +30,7 @@
     "orval": "npx orval --config ./orval.config.ts"
   },
   "dependencies": {
-    "@mswjs/data": "^0.10.1",
+    "@mswjs/data": "^0.11.0",
     "@notifee/react-native": "~5.7.0",
     "@react-native-async-storage/async-storage": "~1.17.3",
     "@react-native-community/datetimepicker": "6.2.0",
