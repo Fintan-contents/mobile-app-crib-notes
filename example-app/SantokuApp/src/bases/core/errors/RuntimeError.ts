@@ -7,13 +7,20 @@ export class RuntimeError extends ErrorWrapper {
   constructor(cause: unknown, errorCode?: string);
   constructor(message: string, errorCode?: string);
   constructor(message: string, cause: unknown, errorCode?: string);
-  constructor(messageOrCause?: unknown, cause?: unknown, errorCode?: string) {
+  constructor(messageOrCause?: unknown, causeOrErrorCode?: unknown, errorCode?: string) {
     if (typeof messageOrCause === 'string') {
-      super(messageOrCause, cause);
-      this._errorCode = errorCode;
+      if (typeof causeOrErrorCode === 'string' && !errorCode) {
+        super(messageOrCause);
+        this._errorCode = causeOrErrorCode;
+      } else {
+        super(messageOrCause, causeOrErrorCode);
+        this._errorCode = errorCode;
+      }
     } else {
       super(messageOrCause);
-      this._errorCode = errorCode;
+      if (typeof causeOrErrorCode === 'string') {
+        this._errorCode = causeOrErrorCode;
+      }
     }
   }
 
