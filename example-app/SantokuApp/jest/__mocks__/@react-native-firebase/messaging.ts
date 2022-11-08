@@ -31,7 +31,8 @@ const mock: Omit<
   subscribeToTopic: jest.fn(),
   unsubscribeFromTopic: jest.fn(),
   getDidOpenSettingsForNotification: jest.fn(),
-  setOpenSettingsForNotificationsHandler: jest.fn,
+  setOpenSettingsForNotificationsHandler: jest.fn(),
+  setDeliveryMetricsExportToBigQuery: jest.fn(),
 };
 
 // 複数のファイルでmessagingをimportしていた場合に、redefineされないようにモックが存在するか確認
