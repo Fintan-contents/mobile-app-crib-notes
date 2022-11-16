@@ -20,10 +20,6 @@ sidebar_label: スプラッシュスクリーン
 （※2）Androidのピクセル密度については、[こちら](https://developer.android.com/training/multiscreen/screendensities?hl=ja)をご参照ください。<br />
 （※3）iOSの画像スケールについては、[こちら](https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)をご参照ください。
 
-:::note
-初期化処理は、今後開発予定です。現在は一部の処理のみ開発対象としております。
-:::
-
 ## 画面レイアウト
 
 ![layout](./layout.drawio.png)
@@ -46,15 +42,11 @@ sidebar_label: スプラッシュスクリーン
 |:------|:------|
 | 初期表示 | [初期化処理][]を実施します。 |
 
-:::note
-本来は初期化処理にて遷移先の画面を決定し、画面遷移します。しかし、初期化処理および遷移先の画面が今後開発予定のため、現在は常に利用規約同意画面へ遷移します。
-:::
-
 ## エラー発生時の動作
 
 | エラー | 発生時の動作 |
 |:------|:-----------|
-| 初期化処理に失敗 | メッセージキー：`app.初期化エラー`をダイアログで表示し、アプリを終了します。（※1） |
+| 初期化処理に失敗 | アプリを終了します。（※1） |
 （※1）クリティカルエラーの可能性があるため、発生時のログを[Firebase Crashlyticsで収集](/react-native/santoku/application-architecture/logging-app/logging.mdx#firebase-crashlyticsについて)します。
 
 <!-- link定義を使う場合は以下に記載する -->
