@@ -151,7 +151,7 @@ module.exports = {
             },
             {
               label: 'Fintan » React Native',
-              href: 'https://fintan.jp/?tag=react-native',
+              href: 'https://fintan.jp/blog-tag/react-native',
             },
           ],
         },
