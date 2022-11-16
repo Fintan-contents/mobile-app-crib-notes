@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 
 1. ToDo一覧画面と設定画面をそれぞれ配置するStackナビゲータ（`TodoStackNav`と`SettingsStackNav`）を追加
 1. Stackナビゲータを切り替えるTabナビゲータ（`MainTabNav`）を追加
-1. `RootStackNav`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置
+1. `AuthedStackNav`ナビゲータに`Main`という名前でTabナビゲータ（`MainTabNav`）を配置
 
 ![TabNavigation](../app-hands-on/tab_navigation.png)
 
@@ -170,6 +170,7 @@ export const MainTabNav: React.FC = () => {
         component={TodoStackNav}
         options={{
           title: 'ホーム',
+          headerShown: false,
           tabBarIcon: ({color}) => <Ionicons name="md-home" size={30} color={color} />,
         }}
       />

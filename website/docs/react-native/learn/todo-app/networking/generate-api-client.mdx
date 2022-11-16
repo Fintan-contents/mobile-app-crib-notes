@@ -60,6 +60,28 @@ npm install -D @openapitools/openapi-generator-cli
 
 </Tabs>
 
+:::note
+プロキシ環境下では、npmパッケージの`@openapitools/openapi-generator-cli`を使用すると次のようなエラーになる場合があります。
+
+`Unable to query repository, because of: "Request failed with status code 400"`
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+`@openapitools/openapi-generator-cli`は、Maven Central Repositoryから`org.openapitools:openapi-generator-cli`のjarのダウンロードを試みますが、そこでエラーになっているようです。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+この場合は、以下の手順でAPIクライアントを自動生成してください。
+
+1. `openapi-generator-cli`のjarを[ここ](https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.2.1/openapi-generator-cli-6.2.1.jar)からダウンロード
+1. 以下のコマンドを実行
+
+```bash
+java -jar -Dhttp.proxyHost=[プロキシホスト] -Dhttp.proxyPort=[プロキシポート] -Dhttps.proxyHost=[プロキシホスト] -Dhttps.proxyPort=[プロキシポート] generate -g typescript-fetch -i https://raw.githubusercontent.com/{@inject: organization}/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
+```
+
+:::
+
 ## APIクライアントの簡単な説明
 
 それでは、自動生成されたAPIクライアントを簡単に見ていきましょう。

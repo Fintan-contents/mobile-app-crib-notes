@@ -23,6 +23,7 @@ REST APIを呼びだす`TodoService.getTodos()`の前で`loading`中に設定し
 
 ```diff typescript title="screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
+   const navigation = useNavigation();
    const {theme} = useContext(ThemeContext);
    const [todos, setTodos] = useState<Todo[]>([]);
    const [filterType, setFilterType] = useState<FilterType>(FilterType.ALL);
