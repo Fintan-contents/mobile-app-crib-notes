@@ -32,6 +32,11 @@ const overviews = [
     to: '/react-native/learn/todo-app',
     summary: <>React Nativeで簡単なToDoアプリを実装します。</>
   },
+  {
+    title: 'Q&Aアプリの実装',
+    to: '/react-native/learn/qa-app',
+    summary: <>React Nativeでより実践的なQ&Aアプリを実装します。</>
+  },
 ]
 
 <PageList overviews={overviews} colSize={12} />
