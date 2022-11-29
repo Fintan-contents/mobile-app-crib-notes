@@ -4,7 +4,7 @@
 
 モバイルアプリの開発は短期間での開発が要求される傾向にあります。そのため、技術選定や方式設計など、開発準備を十分に行う時間を確保できないことが多いと感じています。
 
-そこで、React Nativeアプリの開発をスムーズに進行できるよう、時間割共有アプリを題材とした次のコンテンツを公開しています。
+そこで、React Nativeアプリの開発をスムーズに進行できるよう、アプリ開発現場で役立つ次のコンテンツを公開しています。
 
 [React Nativeのサンプルアプリケーション \| Fintan » Mobile App Development](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku)
 
@@ -15,6 +15,7 @@
 - テスト計画
 - 外部設計
 - 開発ガイド
+- メンテナンス
 
 また、アプリ開発現場でこのサンプルアプリケーションをより有効に活用してもらうため、方式設計などについては検討過程も「[Decision Records](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions)」として公開しています。
 
@@ -32,6 +33,31 @@
 ---
 
 ## 更新履歴
+
+### 2022/12/12
+
+#### 🌱 新規コンテンツ（2022/12/12）
+
+- プッシュ通知
+  - 外部設計
+    - [プッシュ通知](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/demo/push-notification/overview)
+  - Decision Records
+    - [Androidのヘッドアップ通知](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-015-android-head-up-notification)
+- Expoアップグレード
+  - メンテナンス
+    - [Expo SDK 46アップグレード](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/maintenance/enhance/expo-46-upgrade)
+- UIライブラリの選定
+  - Decision Records
+    - [UIライブラリの選定](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-014-ui-libraries)
+- アプリの責務配置
+  - README
+    - [アプリの責務配置](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp#%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E8%B2%AC%E5%8B%99%E9%85%8D%E7%BD%AE)
+
+#### 🌿 更新コンテンツ（2022/12/13）
+
+- ドキュメントの全般見直し
+  - ドキュメント全般
+    - [React Nativeのサンプルアプリケーション](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku)
 
 ### 2022/03/31
 
