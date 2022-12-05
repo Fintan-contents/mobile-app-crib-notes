@@ -44,8 +44,8 @@ Expo CLIが一新されました。Githubのリポジトリも、以前は[expo/
 - `package.json`のscriptsに`{"scripts": {"start": "expo start"}}`と定義されている場合は、プロジェクトディレクトリで`npm start`を実行するとLocal Expo CLIが使用されます
 <!-- textlint-enable ja-technical-writing/sentence-length -->
 
-ただし、新しいExpo CLIには`expo upgrade`や`expo doctor`が実装されていません。そのため、Expo SDKのアップグレード作業などは、旧APIを使用する必要があります。
-旧Expo CLIを使用する場合は、`expo-cli upgrade`のように`expo-cli`コマンドを使用します。
+ただし、新しいExpo CLIには`expo upgrade`や`expo doctor`が実装されていません。そのため、Expo SDKのアップグレード作業などは、旧Expo CLIを使用する必要があります。
+新しいExpo CLIがインストールされた環境で旧Expo CLIを使用する場合は、`expo-cli upgrade`のように`expo-cli`コマンドを使用します。
 
 旧Expo CLIからのマイグレーションに関する詳細は、[Expo CLI Migration](https://docs.expo.dev/archived/expo-cli/#expo-cli-migration)を参照してください。
 
@@ -100,7 +100,7 @@ Expo SDK 43がサポート対象外になりました。Expo SDK 43を使用し�
 
 ### Classic BuildからEAS Buildへのマイグレーション
 
-Expo SDK 46が、Classic Buildをサポートする最後のバージョンとなります。`expo build:android`や`expo build:ios`を使用している場合は、`eas build`に移行する必要があります。
+Expo SDK 46が、Classic Buildをサポートする最後のバージョンとなります。`expo build:android`や`expo build:ios`を使用している場合は、次回のExpoアップグレードまでに`eas build`へ移行する必要があります。
 
 マイグレーションの詳細は、[Migrating from "expo build"](https://docs.expo.dev/build-reference/migrating/)を参照してください。
 
@@ -112,7 +112,7 @@ EAS Updateが正式にリリースされています。Classic Updateより速�
 
 ## このアプリで実施したアップグレードの手順
 
-このアプリでは、以下の手順でExpo SDK 46にアップグレードしています。
+このアプリでは、以下の作業を上から順に実施してExpo SDK 46にアップグレードしました。
 
 - Xcode 14にアップグレード
 - `npm i -g expo-cli`を実行して、Expo CLI（旧Expo CLI）のバージョンを最新化
@@ -301,7 +301,7 @@ React Native Elementsのバージョンは変更していないのですが、Re
 
 ### 開発・CIに使用しているツールのバージョンを更新
 
-開発に使用しているツールのバージョンを更新しました。
+Expo SDK 46のアップグレードとは関係ありませんが、このタイミングで開発に使用しているツールのバージョンを更新しました。
 
 | Tool    | from          | to            |
 |---------|---------------|---------------|
