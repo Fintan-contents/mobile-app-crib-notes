@@ -246,4 +246,11 @@ module.exports = {
     ],
     './src/plugins/medium-zoom-docusaurus-plugin',
   ],
+  scripts: [
+    {
+      src: 'https://plausible.io/js/script.js',
+      defer: true,
+      'data-domain': 'fintan-content.github.io,all.fintan',
+    },
+  ],
 };
