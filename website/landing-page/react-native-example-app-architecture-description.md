@@ -49,9 +49,9 @@
 - UIライブラリの選定
   - Decision Records
     - [UIライブラリの選定](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-014-ui-libraries)
-- アプリの責務配置
+- アプリケーション構造
   - README
-    - [アプリの責務配置](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp#%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E8%B2%AC%E5%8B%99%E9%85%8D%E7%BD%AE)
+    - [アプリケーション構造](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp#アプリケーション構造)
 
 #### 🌿 更新コンテンツ（2022/12/13）
 
