@@ -85,6 +85,20 @@ Q&Aアプリは、サンプルアプリ（SantokuApp）と同様のアプリケ�
 | src/bases/logging/Transport.ts |
 | src/bases/logging/sendErrorLog.ts |
 
+### エラー処理
+
+エラー発生時の処理を統一するために、エラークラスとエラーをハンドリングする機能を追加します。
+エラークラスはJavaScript標準のErrorを継承しており、原因例外とエラーコードを指定できるようになっています。
+
+| コピーファイル |
+|--|
+| src/bases/core/errors/ErrorWrapper.ts |
+| src/bases/core/errors/ApplicationError.ts |
+| src/bases/core/errors/RuntimeError.ts |
+| src/bases/core/errors/ErrorWithErrorCode.ts |
+| src/bases/core/errors/handleError.ts |
+| src/apps/app/errors/handleError.ts |
+
 ### メッセージ管理
 
 アプリの文言を統一するため、メッセージ管理機能を追加します。
@@ -232,7 +246,6 @@ React Queryのデフォルトオプションや、エラーハンドリングの
 | src/apps/app/services/defaultGlobalQueryErrorHandler.tsx |
 | src/apps/app/services/defaultGlobalMutationErrorHandler.tsx |
 | src/apps/app/services/defaultOptions.ts |
-| src/bases/core/errors/ApplicationError.ts |
 
 次に、`src/apps/app/services/defaultGlobalErrorHandler.ts`を次のように修正してください。
 
@@ -398,12 +411,16 @@ export const AppWithInitialization: React.FC = () => {
 最後に、`src/App.tsx`を`src/apps/app/App.tsx`に移動して、次の内容に差し替えてください。
 
 ```typescript jsx title="src/apps/app/App.tsx"
+import {setHandleError} from 'bases/core/errors/handleError';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {AppWithInitialization} from './AppWithInitialization';
+import {handleError} from './errors/handleError';
+
+setHandleError(handleError);
 
 export const App = () => {
   return (
