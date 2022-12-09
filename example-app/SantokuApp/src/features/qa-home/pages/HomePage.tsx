@@ -168,6 +168,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <Box flex={1} testID="HomePage">
       <StyledFlatList
+        ref={flatListRef}
         showsVerticalScrollIndicator={false}
         refreshing={isPullToRefreshing}
         onRefresh={pullToRefresh}
