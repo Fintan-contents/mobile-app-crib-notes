@@ -2,7 +2,7 @@
 
 ## React Native開発環境の構築
 
-- [開発環境構築](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment)を参考に開発環境を構築してください。
+- [開発環境構築](https://fintan-contents.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment)を参考に開発環境を構築してください。
 
 ## アプリで使用するアカウント
 
