@@ -196,6 +196,65 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Q&Aアプリの実装',
+      items: [
+        'react-native/learn/qa-app/qa-app',
+        'react-native/learn/qa-app/app-spec',
+        'react-native/learn/qa-app/app-project-desc',
+        {
+          type: 'category',
+          label: 'Q&Aアプリの実装（基本編）',
+          items: [
+            {
+              type: 'category',
+              label: '一覧画面（ホーム画面）',
+              items: [
+                'react-native/learn/qa-app/exercise-basic-home-components',
+                'react-native/learn/qa-app/exercise-basic-home-screen',
+                'react-native/learn/qa-app/exercise-basic-home-api',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'イベント一覧画面',
+              items: [
+                'react-native/learn/qa-app/exercise-basic-list-event-screen',
+                'react-native/learn/qa-app/exercise-basic-list-event-api',
+              ],
+            },
+            {
+              type: 'category',
+              label: '質問詳細画面',
+              items: [
+                'react-native/learn/qa-app/exercise-basic-detail-question-components',
+                'react-native/learn/qa-app/exercise-basic-detail-question-screen',
+                'react-native/learn/qa-app/exercise-basic-detail-question-api',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'イベント詳細画面',
+              items: [
+                'react-native/learn/qa-app/exercise-basic-detail-event-screen',
+                'react-native/learn/qa-app/exercise-basic-detail-event-api',
+              ],
+            },
+            {
+              type: 'category',
+              label: '入力画面',
+              items: [
+                'react-native/learn/qa-app/exercise-basic-input-components',
+                'react-native/learn/qa-app/exercise-basic-input-screen',
+                'react-native/learn/qa-app/exercise-basic-input-api',
+              ],
+            },
+          ],
+        },
+        'react-native/learn/qa-app/exercise-advanced',
+      ],
+    },
+    {
+      type: 'category',
       label: '応用編',
       items: ['react-native/learn/advance/react-navigation-param'],
     },
@@ -327,6 +386,7 @@ module.exports = {
             'react-native/santoku/application-architecture/push-notification/overview',
             'react-native/santoku/application-architecture/push-notification/register-token',
             'react-native/santoku/application-architecture/push-notification/delete-token',
+            'react-native/santoku/application-architecture/push-notification/register-notification-channels',
             'react-native/santoku/application-architecture/push-notification/send-push-notification',
             'react-native/santoku/application-architecture/push-notification/receive-push-notification',
           ],
@@ -470,6 +530,14 @@ module.exports = {
           label: 'コンテキスト設計',
           items: ['react-native/santoku/design/context/overview', 'react-native/santoku/design/context/theme'],
         },
+        {
+          type: 'category',
+          label: 'デモ機能',
+          items: [
+            'react-native/santoku/design/demo/overview',
+            'react-native/santoku/design/demo/push-notification/overview',
+          ],
+        },
       ],
     },
     {
@@ -547,8 +615,22 @@ module.exports = {
       ],
     },
     {
-      type: 'doc',
-      id: 'react-native/santoku/glossary',
+      type: 'category',
+      label: 'Maintenance',
+      items: [
+        {
+          type: 'doc',
+          id: 'react-native/santoku/maintenance',
+        },
+        {
+          type: 'category',
+          label: 'エンハンス',
+          items: [
+            'react-native/santoku/maintenance/enhance',
+            'react-native/santoku/maintenance/enhance/expo-46-upgrade',
+          ],
+        },
+      ],
     },
     {
       type: 'category',
@@ -568,6 +650,8 @@ module.exports = {
         'react-native/santoku/decisions/adr-011-cache-management',
         'react-native/santoku/decisions/adr-012-http-api',
         'react-native/santoku/decisions/adr-013-react-query',
+        'react-native/santoku/decisions/adr-014-ui-libraries',
+        'react-native/santoku/decisions/adr-015-android-head-up-notification',
       ],
     },
   ],

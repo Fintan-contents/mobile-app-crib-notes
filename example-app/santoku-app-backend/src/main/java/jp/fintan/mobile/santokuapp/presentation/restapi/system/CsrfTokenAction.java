@@ -9,7 +9,7 @@ import nablarch.core.repository.di.config.externalize.annotation.SystemRepositor
 import nablarch.fw.ExecutionContext;
 
 @SystemRepositoryComponent
-@Path("/csrf_token")
+@Path("/system/csrf-token")
 public class CsrfTokenAction {
 
   @GET

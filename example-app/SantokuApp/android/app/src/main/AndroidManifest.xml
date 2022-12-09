@@ -25,6 +25,7 @@
     <activity
       android:name=".MainActivity"
       android:theme="@style/Theme.App.SplashScreen"
+      android:exported="true"
     >
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -36,6 +37,7 @@
         android:label="@string/APP_NAME_HOME"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode|screenLayout|smallestScreenSize"
         android:launchMode="singleTask"
-        android:windowSoftInputMode="adjustResize"/>
+        android:windowSoftInputMode="adjustResize"
+        android:exported="false"/>
   </application>
 </manifest>

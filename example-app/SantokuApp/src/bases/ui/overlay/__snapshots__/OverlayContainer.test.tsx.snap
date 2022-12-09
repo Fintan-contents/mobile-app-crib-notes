@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OverlayContainer only with required props renders successfully only with required props: AnimatedView with invisible. 1`] = `null`;
+
+exports[`OverlayContainer only with required props renders successfully only with required props: AnimatedView with visible. 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+      "justifyContent": "flex-end",
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
+    }
+  }
+>
+  <View
+    animatedStyle={
+      Object {
+        "value": Object {},
+      }
+    }
+    collapsable={false}
+    entering={
+      FadeIn {
+        "build": [Function],
+        "callbackV": [Function],
+        "durationV": 300,
+        "randomizeDelay": false,
+      }
+    }
+    exiting={
+      FadeOut {
+        "build": [Function],
+        "callbackV": [Function],
+        "durationV": 300,
+        "randomizeDelay": false,
+      }
+    }
+    pointerEvents="box-none"
+    style={Object {}}
+    testID="containerAnimated"
+  />
+</View>
+`;
+
+exports[`OverlayContainer with all props should be applied properly: OverlayContainer with all props. 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+      "justifyContent": "flex-end",
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
+    }
+  }
+>
+  <View
+    animatedStyle={
+      Object {
+        "value": Object {},
+      }
+    }
+    collapsable={false}
+    entering={
+      ZoomIn {
+        "build": [Function],
+        "callbackV": [Function],
+        "durationV": 500,
+        "randomizeDelay": false,
+      }
+    }
+    exiting={
+      ZoomOut {
+        "build": [Function],
+        "callbackV": [Function],
+        "durationV": 300,
+        "randomizeDelay": false,
+      }
+    }
+    pointerEvents="box-none"
+    style={
+      Object {
+        "backgroundColor": "green",
+      }
+    }
+    testID="animatedView"
+  />
+</View>
+`;

@@ -17,7 +17,7 @@ public class CsrfTokenActionIT extends SimpleRestTestSupport {
     ExecutionContext context = new ExecutionContext();
     context.setSessionStoredVar(
         WebConfigFinder.getWebConfig().getCsrfTokenSessionStoredVarName(), "123");
-    RestMockHttpRequest request = get("/api/csrf_token");
+    RestMockHttpRequest request = get("/api/system/csrf-token");
 
     HttpResponse response = sendRequestWithContext(request, context);
 

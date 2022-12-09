@@ -5,6 +5,11 @@ module.exports = [
     enabled: true,
     commands: [
       {
+        command: 'rm',
+        args: ['-rf', 'build'],
+        cwd: 'ios',
+      },
+      {
         command: 'xcodebuild',
         args: ['-alltargets', 'clean'],
         cwd: 'ios',
@@ -91,7 +96,7 @@ module.exports = [
     commands: [
       {
         command: 'bash',
-        args: ['./gradlew', 'clean', 'cleanBuildCache'],
+        args: ['./gradlew', 'clean'],
         cwd: 'android',
       },
       {

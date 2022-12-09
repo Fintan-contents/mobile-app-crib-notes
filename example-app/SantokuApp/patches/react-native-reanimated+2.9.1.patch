@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-native-reanimated/ios/REANodesManager.m b/node_modules/react-native-reanimated/ios/REANodesManager.m
+index f40467d..1a88db6 100644
+--- a/node_modules/react-native-reanimated/ios/REANodesManager.m
++++ b/node_modules/react-native-reanimated/ios/REANodesManager.m
+@@ -537,12 +537,17 @@ - (void)updateProps:(nonnull NSDictionary *)props
+       propsSnapshot.viewName = viewName;
+       _componentUpdateBuffer[viewTag] = propsSnapshot;
+       atomic_store(&_shouldFlushUpdateBuffer, true);
++      return;
+     } else {
+       NSMutableDictionary *lastProps = lastSnapshot.props;
+       for (NSString *key in props) {
+         [lastProps setValue:props[key] forKey:key];
+       }
+     }
++  }
++  if (lastSnapshot != nil) {
++    [_componentUpdateBuffer removeObjectForKey:viewTag];
++    [self updateProps:lastSnapshot.props ofViewWithTag:viewTag withName:viewName];
+     return;
+   }
+ 

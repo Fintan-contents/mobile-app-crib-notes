@@ -12,5 +12,11 @@ module.exports = {
         project: './tsconfig.json',
       },
     },
+    {
+      files: ['src/plugins/medium-zoom-docusaurus-plugin/index.js'],
+      env: {
+        node: true,
+      },
+    },
   ],
 };

@@ -6,7 +6,7 @@ module.exports = [
     commands: [
       {
         command: 'gradlew',
-        args: ['clean', 'cleanBuildCache'],
+        args: ['clean'],
         cwd: 'android',
       },
       {

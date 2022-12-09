@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectPickerItems only with required props renders successfully if item does not exit: SelectPickerItems without item. 1`] = `
+<View>
+  <RNCPicker
+    items={Array []}
+    numberOfLines={1}
+    onChange={[Function]}
+    selectedIndex={0}
+    style={
+      Array [
+        Object {
+          "height": 216,
+        },
+        undefined,
+      ]
+    }
+    testID="SelectPickerItems"
+  />
+</View>
+`;
+
+exports[`SelectPickerItems only with required props renders successfully with more than one item: SelectPickerItems with more than one item. 1`] = `
+<View>
+  <RNCPicker
+    items={
+      Array [
+        Object {
+          "label": "test1",
+          "testID": undefined,
+          "textColor": undefined,
+          "value": "1",
+        },
+        Object {
+          "label": "test2",
+          "testID": undefined,
+          "textColor": undefined,
+          "value": "2",
+        },
+      ]
+    }
+    numberOfLines={1}
+    onChange={[Function]}
+    selectedIndex={0}
+    style={
+      Array [
+        Object {
+          "height": 216,
+        },
+        undefined,
+      ]
+    }
+    testID="SelectPickerItems"
+  />
+</View>
+`;
+
+exports[`SelectPickerItems with all props should be applied properly: SelectPickerItems with all props. 1`] = `
+<View>
+  <RNCPicker
+    items={
+      Array [
+        Object {
+          "label": "test1",
+          "testID": undefined,
+          "textColor": 4294901760,
+          "value": "key1",
+        },
+        Object {
+          "label": "test2",
+          "testID": undefined,
+          "textColor": 4294967040,
+          "value": "2",
+        },
+      ]
+    }
+    numberOfLines={5}
+    onChange={[Function]}
+    selectedIndex={1}
+    style={
+      Array [
+        Object {
+          "height": 216,
+        },
+        undefined,
+      ]
+    }
+    testID="SelectPickerItems"
+  />
+</View>
+`;

@@ -167,8 +167,8 @@ HTTPメソッドがPOST, PUT, DELETEなどのAPIに対しては、useMutationを
 
 ```typescript
 import axios from 'axios';
-import {LocalStorageError} from 'framework';
-import {isApplicationError} from 'framework/error/ApplicationError';
+import {LocalStorageError} from 'bases';
+import {isApplicationError} from 'bases/error/ApplicationError';
 import {ErrorResponse} from 'generated/backend/model';
 import React, {useCallback, useState} from 'react';
 import {View} from 'react-native';

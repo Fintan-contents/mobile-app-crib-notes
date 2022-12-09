@@ -52,6 +52,7 @@ IgnoreURLs:
   - https://marketplace.visualstudio.com/items\?itemName=naumovs.color-highlight
   - https://marketplace.visualstudio.com/items\?itemName=2gua.rainbow-brackets
   - https://marketplace.visualstudio.com/items\?itemName=yzhang.markdown-all-in-one
+  - https://marketplace.visualstudio.com/items\?itemName=byCedric.vscode-expo
   # 403になってしまうので無視
   - https://blog.expo.dev/
 # タイムアウトでビルドが失敗するので、外部リンクのエラーは警告とし手動で問題ないかを確認とする。

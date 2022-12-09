@@ -245,8 +245,16 @@ FCMから以下のエラー応答が返ってきた場合には、通知送信�
 - レスポンスヘッダにRetry-Afterが含まれている場合は、そのヘッダで指定された秒数だけ待機
 - レスポンスヘッダにRetry-Afterが含まれていない場合は指数バックオフに従い、1秒、2秒、4秒と指数関数的に時間を増やしながら待機
 
-このアプリでは、クライアント側となるモバイルアプリのサンプルを充実させることに注力しているため、
-今回はバックエンド側での再送制御までは実装しないものとします。
+このアプリでは、クライアント側となるモバイルアプリのサンプルを充実させることに注力しているため、[Firebase Admin SDKが自動的にリトライする仕様](https://firebase.google.com/docs/reference/admin/error-handling#automatic-retries)に準拠します。
+
+:::note
+[Firebase Admin SDKのRetry-Afterサポート](https://firebase.google.com/docs/reference/admin/error-handling#retry-after-support)には以下の記載があります。
+
+- `Go`や`.Net`のAdmin SDKはRetry-Afterのサポートがされている
+- `Python`のAdmin SDKはRetry-Afterのサポートがされていない
+
+上記以外の言語に関してはドキュメントに仕様が記載されていないため、各言語のAdmin SDKのソースコードをみて仕様を確認する必要があります。
+:::
 
 送信に成功しなかった場合には、通知送信の失敗とその理由をログに記録します。
 その後の処理については、通知のユースケースごとにアプリケーションのエラーハンドリングとして別途検討します。

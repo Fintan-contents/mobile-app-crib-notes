@@ -8,7 +8,6 @@
 
 * `website`: GitHub Pagesで公開しているページのソースコード（Docusaurus）
 * `example-app`: サンプルアプリケーションのソースコード（React Native）
-* `react-native-samples`: GitHub Pagesで「リファレンス」として紹介しているコンテンツのソースコード例（React Native）
 
 ## ライセンス
 
@@ -18,4 +17,4 @@
 
 * [extensible-custom-error](https://github.com/necojackarc/extensible-custom-error)
   * ライセンス： https://github.com/necojackarc/extensible-custom-error/blob/52d56448d9f535835a9ffbc7e447b951555c08c2/README.md
-  * 利用箇所： [ApplicationError.ts](example-app/SantokuApp/src/framework/error/ApplicationError.ts)
+  * 利用箇所： [ApplicationError.ts](example-app/SantokuApp/src/bases/core/errors/ApplicationError.ts)

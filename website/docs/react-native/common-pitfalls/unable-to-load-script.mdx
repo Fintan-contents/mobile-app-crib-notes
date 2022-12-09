@@ -76,7 +76,13 @@ Metro Bundlerのポートは、次の方法で変更できます。
 
 <TabItem value="android">
 
-Androidでは、`npm run android`に引数`--port`を渡すことで利用するポートを変更できます。
+AndroidエミュレータからホストPCにポート転送する設定を追加します。
+
+```bash
+adb reverse tcp:xxx tcp:xxx
+```
+
+`npm run android`に引数`--port`を渡すことで利用するポートを変更できます。
 
 ```bash
 npm run android -- --port=xxx

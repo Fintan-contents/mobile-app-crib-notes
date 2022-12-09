@@ -72,5 +72,5 @@ npm ERR! to accept an incorrect (and potentially broken) dependency resolution.
 
 1. `cd <YourAppName>`（`<YourAppName>`は実際に作成したときの値に変更してください）
 2. `npm install --legacy-peer-deps`
-3. （macOSの場合のみ）`npx pod-install`
+3. （macOSの場合のみ）`npm run pod-install`
 :::

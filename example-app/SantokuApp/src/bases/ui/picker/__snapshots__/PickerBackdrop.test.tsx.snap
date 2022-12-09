@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PickerBackdrop only with required props renders successfully only with required props: Before animation started 1`] = `
+<Modal
+  animationType="fade"
+  hardwareAccelerated={false}
+  statusBarTranslucent={true}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "black",
+        "bottom": 0,
+        "display": "flex",
+        "left": 0,
+        "opacity": 0.4,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    testID="pressable"
+  />
+</Modal>
+`;
+
+exports[`PickerBackdrop only with required props renders successfully only with required props: Just After fade out animation completed 1`] = `null`;
+
+exports[`PickerBackdrop with all props should be applied properly: PickerBackdrop with all props. 1`] = `
+<Modal
+  animationType="fade"
+  hardwareAccelerated={false}
+  onRequestClose={[MockFunction]}
+  presentationStyle="fullScreen"
+  statusBarTranslucent={false}
+  style={
+    Object {
+      "backgroundColor": "yellow",
+    }
+  }
+  testID="modal"
+  transparent={false}
+  visible={true}
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "red",
+        "bottom": 0,
+        "display": "none",
+        "left": 0,
+        "opacity": 0.8,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    testID="pressable"
+  />
+</Modal>
+`;

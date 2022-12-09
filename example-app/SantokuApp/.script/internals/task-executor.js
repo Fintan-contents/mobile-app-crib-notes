@@ -1,6 +1,6 @@
 const {spawn} = require('child_process');
 
-const elapsedTime = (startTime) => {
+const elapsedTime = startTime => {
   const precision = 0;
   const elapsed = process.hrtime(startTime)[1] / 1000000;
   const secondCount = process.hrtime(startTime)[0];
@@ -13,19 +13,25 @@ const elapsedTime = (startTime) => {
 const runCommand = (task, command) => {
   return new Promise((resolve, reject) => {
     process.stdout.write(`\t${command.command} ${command.args.join(' ')} @[${command.cwd || './'}]...`);
-    const spawnedTask = spawn(command.command, command.args, {shell: true, cwd: command.cwd});
+    const spawnedTask = spawn(command.command, command.args, {
+      shell: true,
+      cwd: command.cwd,
+      env: {...process.env, ...command.env},
+    });
+    // Gradleの実行がブロックされてしまうことがあったので、stdoutを読み取るように修正
+    spawnedTask.stdout.on('data', () => {});
 
     let stderr = '';
-    spawnedTask.stderr.on('data', (data) => {
+    spawnedTask.stderr.on('data', data => {
       stderr += data;
     });
 
-    spawnedTask.on('error', (error) => {
+    spawnedTask.on('error', error => {
       console.log(`❌ (error: ${error.message})`);
       reject(error);
     });
 
-    spawnedTask.on('exit', (code) => {
+    spawnedTask.on('exit', code => {
       if (code !== 0) {
         console.log(`❌ (code: ${code})`);
         process.stderr.write(`\t\t${stderr}`);
@@ -38,7 +44,7 @@ const runCommand = (task, command) => {
   });
 };
 
-const execute = async (task) => {
+const execute = async task => {
   if (!task.enabled) {
     console.log(`⏭️ Skip '${task.name}'`);
     return;
@@ -46,7 +52,7 @@ const execute = async (task) => {
 
   console.log(`🚀 '${task.name}' has started.`);
   const startTime = process.hrtime();
-  for (let command of task.commands) {
+  for (const command of task.commands) {
     try {
       await runCommand(task, command);
     } catch (e) {

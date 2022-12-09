@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PickerAccessory with all props should be applied properly with custom text component: PickerAccessory with all props(custom text component ). 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "red",
+      "flexDirection": "row",
+      "justifyContent": "flex-end",
+      "paddingHorizontal": 10,
+      "paddingVertical": 8,
+    }
+  }
+  testID="PickerAccessory"
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="deleteLink"
+  >
+    <Text
+      style={
+        Object {
+          "backgroundColor": "yellow",
+          "color": "grey",
+        }
+      }
+      testID="deleteText"
+    >
+      deleteWithRNEText
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="cancelLink"
+  >
+    <Text
+      style={
+        Object {
+          "backgroundColor": "green",
+          "color": "black",
+        }
+      }
+      testID="cancelText"
+    >
+      cancelWithRNEText
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="doneLink"
+  >
+    <Text
+      style={
+        Object {
+          "backgroundColor": "aqua",
+          "color": "blue",
+        }
+      }
+      testID="doneText"
+    >
+      doneWithRNEText
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`PickerAccessory with all props should be applied properly with default text component: PickerAccessory with all props(default text component ). 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "red",
+      "flexDirection": "row",
+      "justifyContent": "flex-end",
+      "paddingHorizontal": 10,
+      "paddingVertical": 8,
+    }
+  }
+  testID="PickerAccessory"
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="deleteLink"
+  >
+    <Text
+      style={
+        Object {
+          "color": "yellow",
+          "fontWeight": "bold",
+          "paddingHorizontal": 10,
+        }
+      }
+      testID="deleteText"
+    >
+      delete
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="cancelLink"
+  >
+    <Text
+      style={
+        Object {
+          "color": "green",
+          "fontWeight": "bold",
+          "paddingHorizontal": 10,
+        }
+      }
+      testID="cancelText"
+    >
+      cancel
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID="doneLink"
+  >
+    <Text
+      style={
+        Object {
+          "color": "aqua",
+          "fontWeight": "bold",
+          "paddingHorizontal": 10,
+        }
+      }
+      testID="doneText"
+    >
+      done
+    </Text>
+  </View>
+</View>
+`;

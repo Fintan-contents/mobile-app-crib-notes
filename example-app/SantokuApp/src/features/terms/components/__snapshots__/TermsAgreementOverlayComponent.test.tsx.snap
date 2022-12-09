@@ -1,0 +1,304 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TermsAgreementOverlayComponent マウントされたときに正常にレンダリングされること 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "bottom": 0,
+        "height": 640,
+        "position": "absolute",
+        "width": 320,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        animatedStyle={
+          Object {
+            "value": Object {},
+          }
+        }
+        collapsable={false}
+        entering={
+          FadeIn {
+            "build": [Function],
+            "callbackV": [Function],
+            "durationV": 300,
+            "randomizeDelay": false,
+          }
+        }
+        exiting={
+          FadeOut {
+            "build": [Function],
+            "callbackV": [Function],
+            "durationV": 300,
+            "randomizeDelay": false,
+          }
+        }
+        style={
+          Object {
+            "backgroundColor": "rgba(0,0,0,0.4)",
+            "flex": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      pointerEvents="box-none"
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "flex-end",
+          "paddingBottom": 0,
+          "paddingLeft": 0,
+          "paddingRight": 0,
+          "paddingTop": 0,
+        }
+      }
+    >
+      <View
+        animatedStyle={
+          Object {
+            "value": Object {},
+          }
+        }
+        collapsable={false}
+        entering={
+          FadeIn {
+            "build": [Function],
+            "callbackV": [Function],
+            "durationV": 300,
+            "randomizeDelay": false,
+          }
+        }
+        exiting={
+          FadeOut {
+            "build": [Function],
+            "callbackV": [Function],
+            "durationV": 300,
+            "randomizeDelay": false,
+          }
+        }
+        pointerEvents="box-none"
+        style={
+          Object {
+            "paddingHorizontal": 15,
+            "paddingVertical": 50,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "white",
+              "borderRadius": 10,
+              "height": "100%",
+              "justifyContent": "center",
+              "paddingHorizontal": 10,
+              "paddingVertical": 20,
+              "width": "100%",
+            }
+          }
+          testID="TermsAgreementOverlay"
+        >
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "paddingVertical": 10,
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#242424",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              利用規約
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "flex": 1,
+                  "overflow": "hidden",
+                },
+                undefined,
+              ]
+            }
+          >
+            <RNCWebView
+              androidLayerType="software"
+              cacheEnabled={true}
+              decelerationRate={0.998}
+              injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
+              injectedJavaScriptForMainFrameOnly={true}
+              javaScriptEnabled={true}
+              messagingEnabled={true}
+              onContentProcessDidTerminate={[Function]}
+              onHttpError={[Function]}
+              onLoadingError={[Function]}
+              onLoadingFinish={[Function]}
+              onLoadingProgress={[Function]}
+              onLoadingStart={[Function]}
+              onMessage={[Function]}
+              onScroll={[Function]}
+              onShouldStartLoadWithRequest={[Function]}
+              source={
+                Object {
+                  "uri": "https://www.tis.co.jp/termsofuse/",
+                }
+              }
+              style={
+                Array [
+                  Object {
+                    "flex": 1,
+                    "overflow": "hidden",
+                  },
+                  Object {
+                    "backgroundColor": "#ffffff",
+                  },
+                  Object {
+                    "flex": 1,
+                  },
+                ]
+              }
+              textInteractionEnabled={true}
+              useSharedProcessPool={true}
+            />
+            <ActivityIndicator
+              color="#0000ff"
+              size="large"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "position": "absolute",
+                  "width": "100%",
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "flex": 0,
+                "flexDirection": "row-reverse",
+                "paddingHorizontal": 20,
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "borderRadius": 3,
+                    "overflow": "hidden",
+                  },
+                  Object {
+                    "borderRadius": 3,
+                  },
+                  Object {
+                    "borderRadius": 8,
+                    "width": 90,
+                  },
+                  false,
+                ]
+              }
+            >
+              <View
+                accessibilityRole="button"
+                accessibilityState={
+                  Object {
+                    "busy": false,
+                    "disabled": true,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "opacity": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "backgroundColor": "hsl(208, 8%, 90%)",
+                      "borderColor": "#2089dc",
+                      "borderRadius": 8,
+                      "borderWidth": 0,
+                      "flexDirection": "row",
+                      "height": 50,
+                      "justifyContent": "center",
+                      "padding": 8,
+                      "width": 90,
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      Object {
+                        "color": "hsl(208, 8%, 63%)",
+                        "fontSize": 18,
+                        "paddingVertical": 1,
+                        "textAlign": "center",
+                      }
+                    }
+                  >
+                    同意
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>,
+  <View
+    testID="FullWindowOverlay"
+  />,
+]
+`;

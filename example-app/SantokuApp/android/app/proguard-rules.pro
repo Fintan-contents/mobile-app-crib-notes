@@ -17,7 +17,8 @@
 -keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
 
 # React Native ReanimatedからTurbomoduleを使うための設定
-# https://docs.swmansion.com/react-native-reanimated/docs/2.2.0/installation
+# https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation
+-keep class com.swmansion.reanimated.** { *; }
 -keep class com.facebook.react.turbomodule.** { *; }
 
 # ExpoModulesPakage.ktから、自動生成されたクラスを参照するためにクラス名を利用しているので、クラス名が変わるとアプリが起動しなくなる。

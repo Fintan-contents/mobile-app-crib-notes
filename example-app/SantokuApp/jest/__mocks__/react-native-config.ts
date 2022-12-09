@@ -17,4 +17,10 @@ export abstract class Config {
   static get REQUEST_TIMEOUT() {
     return undefined;
   }
+  static get APP_STORE_APP_URL() {
+    return 'apps://itunes.apple.com/jp/app/{appleAppID}';
+  }
+  static get GOOGLE_PLAY_APP_URL() {
+    return 'https://play.google.com/store/apps/details?id={applicationId}';
+  }
 }

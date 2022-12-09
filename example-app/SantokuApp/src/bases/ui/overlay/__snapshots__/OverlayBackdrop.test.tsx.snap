@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OverlayBackdrop only with required props renders successfully only with required props: AnimatedView with invisible. 1`] = `
+<View
+  style={
+    Object {
+      "bottom": 0,
+      "height": 400,
+      "position": "absolute",
+      "width": 200,
+    }
+  }
+/>
+`;
+
+exports[`OverlayBackdrop only with required props renders successfully only with required props: AnimatedView with visible. 1`] = `
+<View
+  style={
+    Object {
+      "bottom": 0,
+      "height": 400,
+      "position": "absolute",
+      "width": 200,
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      animatedStyle={
+        Object {
+          "value": Object {},
+        }
+      }
+      collapsable={false}
+      entering={
+        FadeIn {
+          "build": [Function],
+          "callbackV": [Function],
+          "durationV": 300,
+          "randomizeDelay": false,
+        }
+      }
+      exiting={
+        FadeOut {
+          "build": [Function],
+          "callbackV": [Function],
+          "durationV": 300,
+          "randomizeDelay": false,
+        }
+      }
+      style={
+        Object {
+          "backgroundColor": "rgba(0,0,0,0.4)",
+          "flex": 1,
+        }
+      }
+      testID="backdropAnimated"
+    />
+  </View>
+</View>
+`;
+
+exports[`OverlayBackdrop with all props should be applied properly: OverlayBackdrop with all props. 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    Object {
+      "bottom": 10,
+      "height": 400,
+      "position": "absolute",
+      "right": 10,
+      "width": 200,
+    }
+  }
+  testID="modal"
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "bottom": 0,
+        "display": "none",
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    testID="pressable"
+  >
+    <View
+      animatedStyle={
+        Object {
+          "value": Object {},
+        }
+      }
+      collapsable={false}
+      entering={
+        ZoomIn {
+          "build": [Function],
+          "callbackV": [Function],
+          "durationV": 500,
+          "randomizeDelay": false,
+        }
+      }
+      exiting={
+        ZoomOut {
+          "build": [Function],
+          "callbackV": [Function],
+          "durationV": 300,
+          "randomizeDelay": false,
+        }
+      }
+      style={
+        Object {
+          "backgroundColor": "green",
+          "borderColor": "red",
+          "flex": 1,
+        }
+      }
+      testID="animatedView"
+    />
+  </View>
+</View>
+`;
