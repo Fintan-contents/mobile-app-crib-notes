@@ -8,7 +8,9 @@ import * as SplashScreen from 'expo-splash-screen';
 // なお、SantokuAppではOpenAPI Generatorを使用して生成したコードの中で、URL#searchやURLSearchParamsを利用しています。
 import 'react-native-url-polyfill/auto';
 
-import {App} from './src/App';
+import {App} from './src/apps/app/App';
+import {AppWithMsw} from './src/apps/app/AppWithMsw';
+import {AppConfig} from './src/bases/core/configs/AppConfig';
 
 // Manually hide splash screen
 SplashScreen.preventAutoHideAsync().catch(() => {
@@ -22,7 +24,8 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
   // このアプリでは何も実施しないが、Handler未設定だとconsole.warnのログが出力されるため設定だけしておく
 });
 
+const app = AppConfig.mswEnabled ? AppWithMsw : App;
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
 // the environment is set up appropriately
-registerRootComponent(App);
+registerRootComponent(app);

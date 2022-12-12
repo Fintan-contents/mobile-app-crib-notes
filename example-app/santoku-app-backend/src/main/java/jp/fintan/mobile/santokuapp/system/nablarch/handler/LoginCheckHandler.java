@@ -29,7 +29,8 @@ public class LoginCheckHandler implements Handler<HttpRequest, Object> {
         .add("/api/signup", HttpMethod.POST)
         .add("/api/login", HttpMethod.POST)
         .add("/api/system/messages", HttpMethod.GET)
-        .add("/api/csrf_token", HttpMethod.GET)
+        .add("/api/system/csrf-token", HttpMethod.GET)
+        .add("/api/system/app-updates/**", HttpMethod.GET)
         .add("/api/health", HttpMethod.GET);
   }
 

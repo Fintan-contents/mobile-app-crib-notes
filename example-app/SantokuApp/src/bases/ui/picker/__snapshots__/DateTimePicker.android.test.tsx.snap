@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DateTimePicker only with required props renders successfully if invisible: DateTimePicker if invisible. 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  testID="pressableContainer"
+>
+  <View
+    pointerEvents="box-only"
+  >
+    <TextInput
+      editable={false}
+      testID="textInput"
+    />
+  </View>
+</View>
+`;

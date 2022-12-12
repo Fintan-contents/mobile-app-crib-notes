@@ -16,10 +16,30 @@ Xcode 13から、`xcodebuild`の実行時に常に`destination`が適切に指�
 
 動作には特に問題はなかったですが、警告を放置するのは問題があるのでパッチを当てて対応しています。
 
-## Podfile.lockにdiffが出ないようにするパッチ
+## React Native Elementsの型エラーに対処するパッチ
 
-React Native 0.64.3ではReact Nativeに含まれるPodのpodspecの内容が`pod install`した環境によって異なるという問題があります。この問題のため、`Podfile.lock`の内容も環境によって異なるものになってしまいます。
+↓の変更で、TV関連の型が変更されました。
+https://github.com/DefinitelyTyped/DefinitelyTyped/commit/73459e5084f7406d577a5b03ac2bf8cdd2c30f45
 
-[Diff in Podfile.lock when runs in different machines](https://github.com/facebook/react-native/issues/31121#issuecomment-802182459)
+React Native 0.66ではTextInputの`autoCompleteType`が`autoComplete`に変更になりました。
+https://github.com/facebook/react-native/commit/27fec9569e08a04e0dbdbd5de063a599ad0416fa
 
-[このコミット](https://github.com/facebook/react-native/commit/bdfe2a51791046c4e6836576e08655431373ed67)で解決されているので、内容をパッチとして取り込んでいます。
+React18から、React.Componentに定義されていたchildrenが削除されました。
+https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210
+
+React Native Elementsの3系ではこれらの変更に追従できていなかったため、以下の修正をしたパッチを当てています。
+* `Icon`のPropsから`tvParallaxProperties`を削除
+* `ListItem`のPropsから`tvParallaxProperties`、`hasTVPreferredFocus`を削除
+* `ListItem.XXX`のPropsから`tvParallaxProperties`を削除
+* `Input`のPropsの`autoCompleteType`を`autoComplete`に変更
+* `ThemeProvider`のPropsに`children`を追加
+
+## React Native ReanimatedのuseAnimatedStyleを利用した際に、アニメーションが発生しない事象に対処するパッチ
+
+`useAnimatedStyle`を利用した際に、アニメーションが実行されない事象が発生しました。
+
+関連issueは↓です。
+https://github.com/software-mansion/react-native-reanimated/issues/3296
+
+issueに対応するPRが挙がっていたので、その変更をパッチとして当てています。
+https://github.com/software-mansion/react-native-reanimated/pull/3302

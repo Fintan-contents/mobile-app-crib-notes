@@ -1,0 +1,47 @@
+---
+title: 通知チャンネルの登録
+---
+
+Android8.0（APIレベル26）以降では、プッシュ通知はすべて通知チャンネルに割り当てる必要があります。通知チャンネルごとに、表示や鳴動動作などを適用します。
+
+このアプリでは、通知チャンネルを作成するライブラリとして[Notifee](https://notifee.app/)を使用します。
+
+## 通知チャンネルの作成タイミング
+
+通知チャンネルは、アプリ起動後の初期化処理で作成します。
+
+:::note
+通知チャンネルの作成後は、通知チャンネルの重要度や表示・鳴動動作などをアプリから変更できません。ユーザのみが、OSのシステム設定から変更できます。
+
+- [Android デベロッパー ガイド - 通知チャネル設定を開く](https://developer.android.com/training/notify-user/channels?hl=ja#UpdateChannel)
+- [Notifee Creating & updating channels](https://notifee.app/react-native/docs/android/channels#creating--updating-channels)
+
+:::
+
+## 通知チャンネルの重要度
+
+通知チャンネルには重要度を設定できます。
+
+:::note
+
+Android7.1以前では、通知チャンネルが存在しません。その代わりに、通知の優先度を設定します。
+
+:::
+
+通知チャンネルに設定した重要度によって、表示や鳴動動作などが変わります。以下は、[Androidのデベロッパーガイド](https://developer.android.com/training/notify-user/channels?hl=ja)に記載されている内容です。
+
+| 重要度 | 内容
+|:--|:--|
+| 緊急 | 音が鳴り、[ヘッドアップ通知](https://developer.android.com/guide/topics/ui/notifiers/notifications?hl=ja#Heads-up)が表示されます。 |
+| 高 | 音が鳴ります。 |
+| 中 | 音は鳴りません。 |
+| 低 | 音は鳴らず、ステータスバーにも表示されません。 |
+
+このアプリでは、用途に応じて適切な重要度を設定したチャンネルにプッシュ通知を送信します。
+
+:::note
+
+React Native Firebaseでは、送信されたプッシュ通知にチャンネルの指定がない場合のデフォルト通知チャンネルを指定できます。
+`firebase.json`の[messaging_android_notification_channel_id](https://rnfirebase.io/messaging/usage#notification-channel-id)にデフォルトの通知チャンネルを指定します。
+
+:::

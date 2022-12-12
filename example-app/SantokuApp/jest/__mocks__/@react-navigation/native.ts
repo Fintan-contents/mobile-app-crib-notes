@@ -14,6 +14,7 @@ const mock: jest.Mocked<NavigationProp<ParamListBase>> = {
   reset: jest.fn(),
   setOptions: jest.fn(),
   setParams: jest.fn(),
+  getId: jest.fn(),
 };
 
 Object.defineProperty(__mocks, 'navigation', {value: mock});

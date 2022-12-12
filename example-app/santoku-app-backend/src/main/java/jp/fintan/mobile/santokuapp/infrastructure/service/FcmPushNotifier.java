@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.messaging.AndroidConfig;
 import com.google.firebase.messaging.AndroidConfig.Priority;
+import com.google.firebase.messaging.AndroidNotification;
 import com.google.firebase.messaging.ApnsConfig;
 import com.google.firebase.messaging.Aps;
 import com.google.firebase.messaging.BatchResponse;
@@ -14,12 +15,6 @@ import com.google.firebase.messaging.MessagingErrorCode;
 import com.google.firebase.messaging.MulticastMessage;
 import com.google.firebase.messaging.Notification;
 import com.google.firebase.messaging.SendResponse;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import jp.fintan.mobile.santokuapp.domain.model.account.DeviceToken;
 import jp.fintan.mobile.santokuapp.domain.model.core.ValueObject;
 import jp.fintan.mobile.santokuapp.domain.model.notification.FailureDeviceTokens;
@@ -32,6 +27,13 @@ import jp.fintan.mobile.santokuapp.domain.model.notification.UnregisteredDeviceT
 import nablarch.core.log.Logger;
 import nablarch.core.log.LoggerManager;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @SystemRepositoryComponent
 public class FcmPushNotifier implements PushNotifier {
@@ -208,6 +210,11 @@ public class FcmPushNotifier implements PushNotifier {
     }
     if (pushNotification.priority() != null) {
       androidConfigBuilder.setPriority(getAndroidPriority(pushNotification.priority()));
+    }
+    if (pushNotification.channelId() != null) {
+      AndroidNotification.Builder androidNotificationBuilder = AndroidNotification.builder();
+      androidNotificationBuilder.setChannelId(pushNotification.channelId().value());
+      androidConfigBuilder.setNotification(androidNotificationBuilder.build());
     }
     return androidConfigBuilder.build();
   }

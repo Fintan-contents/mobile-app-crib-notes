@@ -104,15 +104,15 @@ const Context = React.createContext<ContextType>({
 
 - モックサーバ
 
-  モックサーバには[Mockoon](https://mockoon.com/)を利用します。
+  モックサーバには[Mock Service Worker](https://mswjs.io/docs/)を利用します。
 
 :::note info
-stubby4nodeやSwaggerなど他のモックサーバに比べ次の機能が充実していたため、今回Mockoonを選択しました。
+stubby4node、SwaggerやMockoonなど他のモックサーバに比べ次の機能が充実していたため、今回Mock Service Workerを選択しました。
 
-- テストデータが作りやすい
-- ホットリロードに対応している
+- モバイルアプリに組み込んで利用できる
 - 条件によってレスポンスを動的に変更でき、エラーケースや応答結果で分岐する処理がテストしやすい
 - レスポンス応答の遅延時間を指定できる
+- テストデータが作りやすい
 
 モックサーバは年々新しい候補が増えるため、厳密な比較検討を行っておりません。
 プロジェクトの特性に応じて最適なモックサーバを選択してください。

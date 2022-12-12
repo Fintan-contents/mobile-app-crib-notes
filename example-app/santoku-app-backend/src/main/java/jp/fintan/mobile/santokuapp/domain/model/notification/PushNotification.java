@@ -16,16 +16,19 @@ public class PushNotification {
 
   private final PushNotificationTtl ttl;
 
+  private final PushNotificationChannelId channelId;
+
   public PushNotification(
       NotificationTitle title, NotificationBody body, PushNotificationType type,
       Map<String, Object> params,
-      PushNotificationPriority priority, PushNotificationTtl ttl) {
+      PushNotificationPriority priority, PushNotificationTtl ttl, PushNotificationChannelId channelId) {
     this.title = title;
     this.body = body;
     this.type = type;
     this.params = params;
     this.priority = priority;
     this.ttl = ttl;
+    this.channelId = channelId;
   }
 
   public NotificationTitle title() {
@@ -50,5 +53,9 @@ public class PushNotification {
 
   public PushNotificationTtl ttl() {
     return ttl;
+  }
+
+  public PushNotificationChannelId channelId() {
+    return channelId;
   }
 }

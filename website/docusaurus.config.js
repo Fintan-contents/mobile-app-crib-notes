@@ -22,7 +22,7 @@ const copyright = `<div class="no-content">
 
 const injectOptions = {
   organization,
-  rnSpoilerTag: 'v2021.12.0',
+  rnSpoilerTag: 'master',
 };
 
 module.exports = {
@@ -41,7 +41,6 @@ module.exports = {
     locales: ['ja'],
   },
   themeConfig: {
-    hideableSidebar: true,
     colorMode: {
       // "light" | "dark"
       defaultMode: 'light',
@@ -51,6 +50,11 @@ module.exports = {
       // Should we use the prefers-color-scheme media-query,
       // using user system preferences, instead of the hardcoded defaultMode
       respectPrefersColorScheme: false,
+    },
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
     },
     prism: {
       additionalLanguages: ['ruby', 'groovy'],
@@ -147,7 +151,7 @@ module.exports = {
             },
             {
               label: 'Fintan » React Native',
-              href: 'https://fintan.jp/?tag=react-native',
+              href: 'https://fintan.jp/blog-tag/react-native',
             },
           ],
         },
@@ -166,6 +170,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./docs/sidebars.js'),
+          breadcrumbs: false,
           routeBasePath: '/',
           showLastUpdateTime: true,
           rehypePlugins: [[require('./src/plugins/literal-injector-rehype-plugin'), injectOptions]],
@@ -182,7 +187,7 @@ module.exports = {
         specs: [
           {
             spec: '../example-app/api-document/openapi.yaml',
-            routePath: '/react-native/santoku/design/api-document',
+            route: '/react-native/santoku/design/api-document',
           },
         ],
         theme: {
@@ -240,5 +245,12 @@ module.exports = {
       },
     ],
     './src/plugins/medium-zoom-docusaurus-plugin',
+  ],
+  scripts: [
+    {
+      src: 'https://plausible.io/js/script.js',
+      defer: true,
+      'data-domain': 'fintan-content.github.io,all.fintan',
+    },
   ],
 };

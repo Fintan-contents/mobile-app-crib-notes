@@ -28,21 +28,16 @@ title: 匿名サインアップ
 
 ## 利用方法
 
-サインアップは`AuthenticationService`の`signup`メソッドを使用します。このメソッドを使用する前に、バックエンドからCSRFトークンを取得する必要があります。
+`useAuthCommands`の戻り値の`signup`関数を使用してサインアップします。このメソッドを使用する前に、バックエンドからCSRFトークンを取得する必要があります。
 
 ```typescript title="サインアップの利用方法"
-import {AuthenticationService, csrfToken, generatePassword} from 'framework';
-
-const signup = useCallback(async () => {
-  try {
-    // CSRFトークンの取得
-    await csrfToken();
-    // パスワードの自動生成
-    const password = await generatePassword();
-    // サインアップ
-    const res = await AuthenticationService.signup('[nickName]', password);
-  } catch (e) {
-    // エラー処理
-  }
-}, []);
+const {signup} = useAuthCommands();
+try {
+  // CSRFトークンの取得
+  await refreshCsrfToken();
+  // サインアップ
+  await signup({nickname: values.nickname});
+} catch (e) {
+  // エラー処理
+}
 ```

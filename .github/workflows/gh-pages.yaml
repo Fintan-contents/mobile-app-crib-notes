@@ -22,27 +22,27 @@ on:
 jobs:
   lint:
     name: Lints
-    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
-    runs-on: macos-11
+    # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
+    runs-on: macos-12
     env:
       REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16.13.0'
+          node-version: '16.18.0'
 
       # Cache '.npm' to speed up clean-install when package-lock.json is updated.
       # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
       - name: Cache .npm
         id: cache-npm
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           # If cache is corrupted, increment prefixed number.
@@ -54,7 +54,7 @@ jobs:
       # So, cache node_modules directly to skip install step.
       - name: Cache node_modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: website/node_modules
           # If cache is corrupted, increment prefixed number.
@@ -101,7 +101,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: true
           fetch-depth: 0
@@ -110,7 +110,7 @@ jobs:
       # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
       - name: Cache .npm
         id: cache-npm
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           # If cache is corrupted, increment prefixed number.
@@ -122,7 +122,7 @@ jobs:
       # So, cache node_modules directly to skip install step.
       - name: Cache node_modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: website/node_modules
           # If cache is corrupted, increment prefixed number.
@@ -141,12 +141,12 @@ jobs:
         # 同じPull Requestの中で、「新規ファイルの追加」と「追加した新規ファイルへの外部リンクの追加」をしてしまうと、htmltestでNot Foundエラーになってしまいます。
         # Fintan-contentsへのPRでは普通にこの状況が発生するので、htmltestをスキップします。
         if: ${{ !(github.repository_owner == 'Fintan-contents' && github.event_name == 'pull_request') }}
-        uses: docker://wjdp/htmltest:v0.15.0
+        uses: docker://wjdp/htmltest:v0.17.0
         with:
           args: --conf website/.htmltest.yaml website/build
 
       - name: Save artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mobile-app-crib-notes
           path: ./website/build/mobile-app-crib-notes

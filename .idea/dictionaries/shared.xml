@@ -17,6 +17,7 @@
       <w>infima</w>
       <w>infoplist</w>
       <w>intelli</w>
+      <w>iphonesimulator</w>
       <w>itms</w>
       <w>jaxrs</w>
       <w>jssec</w>
@@ -29,11 +30,13 @@
       <w>nablarch</w>
       <w>nativebase</w>
       <w>necojackarc</w>
+      <w>netinfo</w>
       <w>noopener</w>
       <w>noreferrer</w>
       <w>nullcheck</w>
       <w>onone</w>
       <w>pkce</w>
+      <w>pressable</w>
       <w>pversion</w>
       <w>qiita</w>
       <w>rdjson</w>
@@ -61,7 +64,9 @@
       <w>undraw</w>
       <w>urltrademark</w>
       <w>whoami</w>
+      <w>xcbeautify</w>
       <w>xcpretty</w>
+      <w>xcrun</w>
       <w>xcscheme</w>
       <w>xcschemes</w>
       <w>xcshareddata</w>

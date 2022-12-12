@@ -30,9 +30,15 @@ const mock: Omit<
   sendMessage: jest.fn(),
   subscribeToTopic: jest.fn(),
   unsubscribeFromTopic: jest.fn(),
+  getDidOpenSettingsForNotification: jest.fn(),
+  setOpenSettingsForNotificationsHandler: jest.fn(),
+  setDeliveryMetricsExportToBigQuery: jest.fn(),
 };
 
-Object.defineProperty(__mocks, 'messaging', {value: mock});
+// 複数のファイルでmessagingをimportしていた場合に、redefineされないようにモックが存在するか確認
+if (!__mocks.crashlytics) {
+  Object.defineProperty(__mocks, 'messaging', {value: mock});
+}
 
 // テストケースごとにモックは初期化しておく。
 beforeEach(() =>

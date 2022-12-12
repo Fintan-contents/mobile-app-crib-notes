@@ -5,6 +5,7 @@
     <inspection_tool class="NonAsciiCharacters" enabled="true" level="INFORMATION" enabled_by_default="true">
       <scope name="Production" level="WARNING" enabled="true" />
     </inspection_tool>
+    <inspection_tool class="Rubocop" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="Stylelint" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="TsLint" enabled="true" level="ERROR" enabled_by_default="true" />
   </profile>

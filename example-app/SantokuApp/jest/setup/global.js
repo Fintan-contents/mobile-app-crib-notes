@@ -7,7 +7,7 @@
 // `global.__mocks`に登録されています。
 //
 // テストでは、`expect(__mocks.navigation.navigate).toBeCalledWith('Screen')`のようにして、
-// `navigation.navigate`の呼び出しを検証することができます。`src/screens/home/HomeScreen.test.tsx`を参考にしてください。
+// `navigation.navigate`の呼び出しを検証することができます。
 //
 // TypeScriptで型エラーにならないように、`global.__mocks`にモックを追加したら、`jest/types/global.d.ts`にその型も追加してください。
 global.__mocks = {};

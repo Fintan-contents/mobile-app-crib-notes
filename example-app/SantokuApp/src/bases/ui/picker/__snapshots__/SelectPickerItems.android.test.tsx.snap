@@ -1,0 +1,705 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectPickerItems only with required props renders successfully if item does not exit: SelectPickerItems without item. 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
+  }
+  testID="SelectPickerItems"
+>
+  <RCTScrollView
+    animatedStyle={
+      Object {
+        "value": Object {},
+      }
+    }
+    centerContent={true}
+    collapsable={false}
+    contentContainerStyle={
+      Object {
+        "paddingVertical": 88,
+      }
+    }
+    data={Array []}
+    decelerationRate={0.98}
+    forwardedRef={[Function]}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    getItemLayout={[Function]}
+    initialScrollIndex={-1}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    showsVerticalScrollIndicator={false}
+    snapToInterval={44}
+    stickyHeaderIndices={Array []}
+    style={
+      Object {
+        "height": 220,
+        "width": "100%",
+      }
+    }
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <View />
+  </RCTScrollView>
+  <View
+    pointerEvents="none"
+    style={
+      Object {
+        "bottom": 0,
+        "height": 110,
+        "position": "absolute",
+        "width": "100%",
+      }
+    }
+  >
+    <Image
+      resizeMode="stretch"
+      source={1}
+      style={
+        Object {
+          "height": 110,
+          "width": "100%",
+        }
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      Object {
+        "height": 110,
+        "position": "absolute",
+        "top": 0,
+        "width": "100%",
+      }
+    }
+  >
+    <Image
+      resizeMode="stretch"
+      source={1}
+      style={
+        Object {
+          "height": 110,
+          "width": "100%",
+        }
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      Object {
+        "backgroundColor": "rgba(0,0,0,0.06)",
+        "borderColor": "grey",
+        "borderRadius": 8,
+        "height": 44,
+        "position": "absolute",
+        "width": "95%",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`SelectPickerItems only with required props renders successfully with more than one item: SelectPickerItems with more than one item. 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
+  }
+  testID="SelectPickerItems"
+>
+  <RCTScrollView
+    animatedStyle={
+      Object {
+        "value": Object {},
+      }
+    }
+    centerContent={true}
+    collapsable={false}
+    contentContainerStyle={
+      Object {
+        "paddingVertical": 88,
+      }
+    }
+    data={
+      Array [
+        Object {
+          "label": "test1",
+          "value": "1",
+        },
+        Object {
+          "label": "test2",
+          "value": "2",
+        },
+      ]
+    }
+    decelerationRate={0.98}
+    forwardedRef={[Function]}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    getItemLayout={[Function]}
+    initialScrollIndex={0}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    showsVerticalScrollIndicator={false}
+    snapToInterval={44}
+    stickyHeaderIndices={Array []}
+    style={
+      Object {
+        "height": 220,
+        "width": "100%",
+      }
+    }
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <View>
+      <View
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "height": 44,
+              "justifyContent": "center",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 20,
+              }
+            }
+            testID="-0"
+          >
+            test1
+          </Text>
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "height": 44,
+              "justifyContent": "center",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "fontSize": 20,
+              }
+            }
+            testID="-1"
+          >
+            test2
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+  <View
+    pointerEvents="none"
+    style={
+      Object {
+        "bottom": 0,
+        "height": 110,
+        "position": "absolute",
+        "width": "100%",
+      }
+    }
+  >
+    <Image
+      resizeMode="stretch"
+      source={1}
+      style={
+        Object {
+          "height": 110,
+          "width": "100%",
+        }
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      Object {
+        "height": 110,
+        "position": "absolute",
+        "top": 0,
+        "width": "100%",
+      }
+    }
+  >
+    <Image
+      resizeMode="stretch"
+      source={1}
+      style={
+        Object {
+          "height": 110,
+          "width": "100%",
+        }
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      Object {
+        "backgroundColor": "rgba(0,0,0,0.06)",
+        "borderColor": "grey",
+        "borderRadius": 8,
+        "height": 44,
+        "position": "absolute",
+        "width": "95%",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`SelectPickerItems with all props should be applied properly: SelectPickerItems with all props. 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
+  }
+  testID="SelectPickerItems"
+>
+  <RCTScrollView
+    animatedStyle={
+      Object {
+        "value": Object {},
+      }
+    }
+    centerContent={true}
+    collapsable={false}
+    contentContainerStyle={
+      Object {
+        "paddingVertical": 120,
+      }
+    }
+    data={
+      Array [
+        Object {
+          "color": "red",
+          "fontFamily": "Roboto",
+          "key": "key1",
+          "label": "test1",
+          "value": "1",
+        },
+        Object {
+          "color": "yellow",
+          "fontFamily": "SFProText",
+          "label": "test2",
+          "value": "2",
+        },
+        Object {
+          "label": "test3",
+          "value": "3",
+        },
+        Object {
+          "label": "test4",
+          "value": "4",
+        },
+        Object {
+          "label": "test5",
+          "value": "5",
+        },
+        Object {
+          "label": "test6",
+          "value": "6",
+        },
+      ]
+    }
+    decelerationRate={0.98}
+    forwardedRef={[Function]}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    getItemLayout={[Function]}
+    initialScrollIndex={0}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    showsVerticalScrollIndicator={false}
+    snapToInterval={60}
+    stickyHeaderIndices={Array []}
+    style={
+      Object {
+        "height": 300,
+        "width": "100%",
+      }
+    }
+    testID="FlatList"
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <View>
+      <View
+        style={null}
+      >
+        <View
+          accessibilityLabel="testAccessibilityLabel"
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "height": 60,
+              "justifyContent": "center",
+            }
+          }
+          testID="itemPressable-0"
+        >
+          <Text
+            style={
+              Object {
+                "color": "red",
+                "fontFamily": "Roboto",
+                "fontSize": 24,
+              }
+            }
+            testID="itemText-0"
+          >
+            test1
+          </Text>
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          accessibilityLabel="testAccessibilityLabel"
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "height": 60,
+              "justifyContent": "center",
+            }
+          }
+          testID="itemPressable-1"
+        >
+          <Text
+            style={
+              Object {
+                "color": "yellow",
+                "fontFamily": "SFProText",
+                "fontSize": 24,
+              }
+            }
+            testID="itemText-1"
+          >
+            test2
+          </Text>
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          accessibilityLabel="testAccessibilityLabel"
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "height": 60,
+              "justifyContent": "center",
+            }
+          }
+          testID="itemPressable-2"
+        >
+          <Text
+            style={
+              Object {
+                "color": "yellow",
+                "fontFamily": "test-font-Regular",
+                "fontSize": 24,
+              }
+            }
+            testID="itemText-2"
+          >
+            test3
+          </Text>
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          accessibilityLabel="testAccessibilityLabel"
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "height": 60,
+              "justifyContent": "center",
+            }
+          }
+          testID="itemPressable-3"
+        >
+          <Text
+            style={
+              Object {
+                "color": "yellow",
+                "fontFamily": "test-font-Regular",
+                "fontSize": 24,
+              }
+            }
+            testID="itemText-3"
+          >
+            test4
+          </Text>
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          accessibilityLabel="testAccessibilityLabel"
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "height": 60,
+              "justifyContent": "center",
+            }
+          }
+          testID="itemPressable-4"
+        >
+          <Text
+            style={
+              Object {
+                "color": "yellow",
+                "fontFamily": "test-font-Regular",
+                "fontSize": 24,
+              }
+            }
+            testID="itemText-4"
+          >
+            test5
+          </Text>
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          accessibilityLabel="testAccessibilityLabel"
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "height": 60,
+              "justifyContent": "center",
+            }
+          }
+          testID="itemPressable-5"
+        >
+          <Text
+            style={
+              Object {
+                "color": "yellow",
+                "fontFamily": "test-font-Regular",
+                "fontSize": 24,
+              }
+            }
+            testID="itemText-5"
+          >
+            test6
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+  <View
+    pointerEvents="none"
+    style={
+      Object {
+        "bottom": 0,
+        "height": 150,
+        "position": "absolute",
+        "width": "100%",
+      }
+    }
+  >
+    <Image
+      resizeMode="stretch"
+      source={1}
+      style={
+        Object {
+          "height": 150,
+          "width": "100%",
+        }
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      Object {
+        "height": 150,
+        "position": "absolute",
+        "top": 0,
+        "width": "100%",
+      }
+    }
+  >
+    <Image
+      resizeMode="stretch"
+      source={1}
+      style={
+        Object {
+          "height": 150,
+          "width": "100%",
+        }
+      }
+    />
+  </View>
+  <View
+    pointerEvents="none"
+    style={
+      Object {
+        "backgroundColor": "rgba(0,0,0,0.06)",
+        "borderColor": "grey",
+        "borderRadius": 8,
+        "height": 60,
+        "position": "absolute",
+        "width": "95%",
+      }
+    }
+    testID="Separator"
+  />
+</View>
+`;

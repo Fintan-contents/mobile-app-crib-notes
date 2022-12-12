@@ -3,13 +3,16 @@ package jp.fintan.mobile.santokuapp.sandbox.presentation.restapi;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 import jp.fintan.mobile.santokuapp.domain.model.account.DeviceToken;
 import jp.fintan.mobile.santokuapp.domain.model.core.ValueObject;
 import jp.fintan.mobile.santokuapp.domain.model.notification.NotificationBody;
 import jp.fintan.mobile.santokuapp.domain.model.notification.NotificationTitle;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotification;
+import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationChannelId;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationPriority;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationResult;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationTtl;
@@ -37,7 +40,8 @@ public class PushNotificationTestAction {
 
   @PUT
   @Path("/all")
-  public void all(ExecutionContext context) {
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void all(ExecutionContext context, PushNotificationRequest requestBody) {
 
     final List<AccountDeviceTokenEntity> devices = UniversalDao.findAll(AccountDeviceTokenEntity.class);
     final List<DeviceToken> deviceTokens =
@@ -52,7 +56,8 @@ public class PushNotificationTestAction {
             PushNotificationType.STARTED_TIMETABLE,
             Map.of("testKey", "testValue"),
             PushNotificationPriority.HIGH,
-            new PushNotificationTtl(43200L));
+            new PushNotificationTtl(43200L),
+            requestBody.channelId == null ? null : new PushNotificationChannelId(requestBody.channelId));
     PushNotificationResult pushNotificationResult =
         pushNotifier.notifyToDevice(pushNotification, deviceTokens);
     removeUnregisteredDeviceTokens(pushNotificationResult.unregisteredDeviceTokens());
@@ -60,7 +65,8 @@ public class PushNotificationTestAction {
 
   @PUT
   @Path("/single/{deviceToken}")
-  public void single(ExecutionContext context, HttpRequest request) {
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void single(ExecutionContext context, HttpRequest request, PushNotificationRequest requestBody) {
     final DeviceToken deviceToken = new DeviceToken(request.getParam("deviceToken")[0]);
 
     final PushNotification pushNotification =
@@ -70,7 +76,8 @@ public class PushNotificationTestAction {
             PushNotificationType.STARTED_TIMETABLE,
             Map.of("testKey", "testValue"),
             null,
-            null);
+            null,
+            requestBody.channelId == null ? null : new PushNotificationChannelId(requestBody.channelId));
     PushNotificationResult pushNotificationResult =
         pushNotifier.notifyToDevice(pushNotification, List.of(deviceToken));
     removeUnregisteredDeviceTokens(pushNotificationResult.unregisteredDeviceTokens());
@@ -90,5 +97,9 @@ public class PushNotificationTestAction {
         connection.prepareParameterizedSqlStatementBySqlId(
             "db.sql.sandbox.device#delete_by_device_tokens", condition);
     statement.executeUpdateByMap(condition);
+  }
+
+  static class PushNotificationRequest {
+    public String channelId;
   }
 }

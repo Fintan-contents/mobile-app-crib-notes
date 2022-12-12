@@ -19,6 +19,8 @@ ToDo一覧のインジケータ表示と同じように`State`を追加します
 
 ```diff typescript title="/src/screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
+   const navigation = useNavigation();
+   const {theme} = useContext(ThemeContext);
    const [todos, setTodos] = useState<Todo[]>();
    const [filterType, setFilterType] = useState<FilterType>(FilterType.ALL);
    const [loading, setLoading] = useState(false);
@@ -66,7 +68,7 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 
 ```diff typescritp title="/src/components/parts/todo/TodoList.tsx"
  interface Props {
-   todos?: Todo[];
+   todos: Todo[];
 +  processingTodos: number[];
    contentContainerStyle?: StyleProp<ViewStyle>;
    toggleTodoCompletion: (id: number) => void;

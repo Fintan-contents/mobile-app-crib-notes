@@ -100,6 +100,8 @@ FirebaseApp.initializeApp()は複数回呼びだすと、\[DEFAULT\]アプリは
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.messaging.AndroidConfig;
+import com.google.firebase.messaging.AndroidNotification;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
@@ -110,6 +112,7 @@ String title = "Notification title";
 String body = "Notification body";
 String dataKey = "text";
 String dataValue = "Text Data";
+String chennelId = "weatherChannel"
 
 // Initialize Firebase Admin SDK
 GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
@@ -122,11 +125,19 @@ notificationBuilder.setTitle(title);
 notificationBuilder.setBody(body);
 Notification notification = notificationBuilder.build();
 
+// Build android config
+AndroidConfig.Builder androidConfigBuilder = AndroidConfig.builder();
+AndroidNotification.Builder androidNotificationBuilder = AndroidNotification.builder();
+androidNotificationBuilder.setChannelId(chennelId);
+androidConfigBuilder.setNotification(androidNotificationBuilder.build());
+AndroidConfig androidConfig = androidConfigBuilder.build();
+
 // Build message
 Message.Builder messageBuilder = Message.builder();
 messageBuilder.setToken(token);
 messageBuilder.setNotification(notification);
 messageBuilder.putData(dataKey, dataValue);
+messageBuilder.setAndroidConfig(androidConfig)
 Message message = messageBuilder.build();
 
 // Send message
@@ -141,6 +152,8 @@ Notificationで指定した内容が通知領域に表示される内容とな�
 今回の例ではタイトルと本文を指定していますが、他に画像ファイルのURLも指定できます。
 
 リモート通知のメッセージには、通知領域に表示されるNotificationの他に、任意のKey-Value形式のデータを含めることができます。MessageにputDataで設定したデータは、クライアントアプリで読み込んで自由に処理を行えます。
+
+Android8.0（APIレベル26）以降では、送信する通知チャンネルを指定できます。クライアントアプリでは、AndroidConfigに指定したチャンネルでプッシュ通知を受信できます。
 
 宛先となるデバイスは、Registration Tokenと呼ばれる端末・アプリケーション毎に一意に生成されるトークンを用いて指定します。
 このトークンは、Firebase SDKを組み込んだアプリの初回起動時に生成されます。また、アプリを一度削除して再インストールすると次の起動時に再生成されて値が更新されます。
