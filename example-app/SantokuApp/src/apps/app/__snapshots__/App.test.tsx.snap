@@ -68,6 +68,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
           translucent={false}
         />
         <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
           style={
             Object {
               "flex": 1,
@@ -145,6 +147,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                     translucent={false}
                   />
                   <View
+                    accessibilityElementsHidden={false}
+                    importantForAccessibility="auto"
                     style={
                       Object {
                         "flex": 1,
