@@ -1,36 +1,17 @@
 parameters:
-- name: buildVariants
+- name: environments
   type: object
   default:
-    - name: 'devSantokuAppDebugAdvanced'
-      laneName: 'dev_debug_advanced'
-      buildType: 'debugAdvanced'
-      androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppDebugAdvanced/app-devSantokuApp-debugAdvanced.aab'
-      iOSAppPath: 'ios/build/DevSantokuAppDebugAdvanced.ipa'
-    - name: 'devSantokuAppReleaseInHouse'
-      laneName: 'dev_release_in_house'
-      buildType: 'releaseInHouse'
-      androidAppPath: 'android/app/build/outputs/bundle/devSantokuAppReleaseInHouse/app-devSantokuApp-releaseInHouse.aab'
-      iOSAppPath: 'ios/build/DevSantokuAppReleaseInHouse.ipa'
-    - name: 'santokuAppDebugAdvanced'
-      laneName: 'debug_advanced'
-      buildType: 'debugAdvanced'
-      androidAppPath: 'android/app/build/outputs/bundle/santokuAppDebugAdvanced/app-santokuApp-debugAdvanced.aab'
-      iOSAppPath: 'ios/build/SantokuAppDebugAdvanced.ipa'
-    - name: 'santokuAppReleaseInHouse'
-      laneName: 'release_in_house'
-      buildType: 'releaseInHouse'
-      androidAppPath: 'android/app/build/outputs/bundle/santokuAppReleaseInHouse/app-santokuApp-releaseInHouse.aab'
-      iOSAppPath: 'ios/build/SantokuAppReleaseInHouse.ipa'
+    - name: 'stg'
+      laneName: 'stg'
+      androidAppPath: 'android/app/build/outputs/bundle/release/app-release.aab'
+      iOSAppPath: 'ios/build/santoku-app-stg.ipa'
 
 variables:
 - group: android
 - group: apple
 - group: deployGate
-- group: devSantokuAppDebugAdvanced
-- group: devSantokuAppReleaseInHouse
-- group: santokuAppDebugAdvanced
-- group: santokuAppReleaseInHouse
+- group: santokuAppStg
 - name: appDir
   value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
 - name: branchName
@@ -42,20 +23,20 @@ variables:
   value: '$(Pipeline.Workspace)/.npm'
 
 stages:
-- ${{ each buildVariant in parameters.buildVariants }}:
-  - stage: Android_${{buildVariant.name}}
-    displayName: Android_${{buildVariant.name}}
+- ${{ each environment in parameters.environments }}:
+  - stage: Android_${{environment.name}}
+    displayName: Android_${{environment.name}}
     dependsOn: []
     jobs:
-    - job: build_${{buildVariant.name}}
-      displayName: 'build ${{buildVariant.name}}'
+    - job: build_${{environment.name}}
+      displayName: 'build ${{environment.name}}'
       pool:
         # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
         vmImage: macOS-12
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.1.2'
+          versionSpec: '3.1.3'
           addToPath: true
       - task: NodeTool@0
         displayName: 'Use Node.js 16.18.0'
@@ -79,98 +60,99 @@ stages:
           script: 'npm ci --cache $(npmConfigCache)'
           workingDirectory: '$(appDir)'
       - task: DownloadSecureFile@1
-        displayName: 'Download Keystore file for ReleaseInHouse'
+        displayName: 'Download Keystore file for Staging'
         inputs:
           secureFile: $(android_ReleaseInHouseKeyStoreSecureFileName)
-        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
       - task: CopyFiles@2
-        displayName: 'Copy Keystore file to: $(appDir)/android/app'
+        displayName: 'Copy Keystore file to: $(appDir)'
         inputs:
           SourceFolder: '$(Agent.TempDirectory)'
           Contents: $(android_ReleaseInHouseKeyStoreSecureFileName)
-          TargetFolder: '$(appDir)/android/app'
-        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
+          TargetFolder: '$(appDir)'
+      - task: DownloadSecureFile@1
+        name: googleServicesJson${{environment.name}}
+        displayName: 'Download google-services.json file for ${{environment.name}}'
+        inputs:
+          secureFile: $(${{environment.name}}_GoogleServicesJsonSecureFileName)
+      - task: CopyFiles@2
+        displayName: 'Copy google-services.json file to: $(appDir)'
+        inputs:
+          SourceFolder: '$(Agent.TempDirectory)'
+          Contents: $(${{environment.name}}_GoogleServicesJsonSecureFileName)
+          TargetFolder: '$(appDir)'
+      - task: CmdLine@2
+        displayName: 'Rename google-services.json'
+        inputs:
+          script: |
+            /bin/mv $(${{environment.name}}_GoogleServicesJsonSecureFileName) google-services.json
+          workingDirectory: '$(appDir)'
+      - task: CmdLine@2
+        displayName: 'Prebuild Android app for ${{environment.name}}'
+        inputs:
+          script: 'fastlane android prebuild_${{environment.laneName}}'
+          workingDirectory: '$(appDir)'
       - task: CmdLine@2
         displayName: 'Add gradle.properties settings for ReleaseInHouse'
         inputs:
           script: |
             echo '# Keystore properties for ReleaseInHouse' >> gradle.properties
-            echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_FILE=$(android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
-            echo 'SANTOKU_APP_IN_HOUSE_KEYSTORE_PASSWORD=$(android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
-            echo 'SANTOKU_APP_IN_HOUSE_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
-            echo 'SANTOKU_APP_IN_HOUSE_KEY_PASSWORD=$(android_ReleaseInHouseKeyPassword)' >> gradle.properties
+            echo 'SANTOKU_APP_UPLOAD_KEYSTORE_FILE=$(appDir)/$(android_ReleaseInHouseKeyStoreSecureFileName)' >> gradle.properties
+            echo 'SANTOKU_APP_UPLOAD_KEYSTORE_PASSWORD=$(android_ReleaseInHouseKeyStorePassword)' >> gradle.properties
+            echo 'SANTOKU_APP_UPLOAD_KEY_ALIAS=$(android_ReleaseInHouseKeyAlias)' >> gradle.properties
+            echo 'SANTOKU_APP_UPLOAD_KEY_PASSWORD=$(android_ReleaseInHouseKeyPassword)' >> gradle.properties
           workingDirectory: '$(appDir)/android'
-        condition: and(succeeded(), eq('${{buildVariant.buildType}}', 'releaseInHouse'))
-      - task: DownloadSecureFile@1
-        name: googleServicesJson${{buildVariant.name}}
-        displayName: 'Download google-services.json file for ${{buildVariant.name}}'
-        inputs:
-          secureFile: $(${{buildVariant.name}}_GoogleServicesJsonSecureFileName)
-      - task: CopyFiles@2
-        displayName: 'Copy google-services.json file to: $(appDir)/android/app/src/${{buildVariant.buildType}}'
-        inputs:
-          SourceFolder: '$(Agent.TempDirectory)'
-          Contents: $(${{buildVariant.name}}_GoogleServicesJsonSecureFileName)
-          TargetFolder: '$(appDir)/android/app/src/${{buildVariant.buildType}}'
       - task: CmdLine@2
-        displayName: 'Rename google-services.json'
+        displayName: 'Build Android app for ${{environment.name}}'
         inputs:
-          script: |
-            /bin/mv $(${{buildVariant.name}}_GoogleServicesJsonSecureFileName) google-services.json
-          workingDirectory: '$(appDir)/android/app/src/${{buildVariant.buildType}}'
-      - task: CmdLine@2
-        displayName: 'Build Android app for ${{buildVariant.name}}'
-        inputs:
-          script: 'fastlane android ${{buildVariant.laneName}}'
+          script: 'fastlane android build_${{environment.laneName}}'
           workingDirectory: '$(appDir)'
       - task: CmdLine@2
         displayName: 'Upload app to DeployGate'
         inputs:
           script: |
-            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.androidAppPath}}" -F "distribution_name=$(branchName)" -F "message=$(Build.Reason) triggered build by $(Build.BuildNumber)"
+            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{environment.androidAppPath}}" -F "distribution_name=$(branchName)" -F "message=$(Build.Reason) triggered build by $(Build.BuildNumber)"
           workingDirectory: '$(appDir)'
       - task: PublishPipelineArtifact@1
         displayName: 'Publish Artifact'
         inputs:
           targetPath: '$(appDir)/android/app/build/outputs'
           artifactType: 'pipeline'
-          artifactName: '${{buildVariant.name}}.aab'
+          artifactName: '${{environment.name}}.aab'
           parallel: true
         condition: succeeded()
-- ${{ each buildVariant in parameters.buildVariants }}:
-  - stage: iOS_${{buildVariant.name}}
-    displayName: iOS_${{buildVariant.name}}
+- ${{ each environment in parameters.environments }}:
+  - stage: iOS_${{environment.name}}
+    displayName: iOS_${{environment.name}}
     dependsOn: []
-    condition: and(succeeded(), ne('${{buildVariant.buildType}}', 'debugAdvanced'))
     jobs:
-    - job: build_${{buildVariant.name}}
-      displayName: 'build ${{buildVariant.name}}'
+    - job: build_${{environment.name}}
+      displayName: 'build ${{environment.name}}'
       pool:
         # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
         vmImage: macOS-12
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.1.2'
+          versionSpec: '3.1.3'
           addToPath: true
       - task: InstallAppleCertificate@2
-        displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
+        displayName: 'Install an Apple certificate for ${{environment.name}}'
         inputs:
           certSecureFile: $(apple_DevelopmentCertificateSecureFileName)
           certPwd: $(apple_DevelopmentCertificatePassword)
       - task: InstallAppleCertificate@2
-        displayName: 'Install an Apple certificate for ${{buildVariant.name}}'
+        displayName: 'Install an Apple certificate for ${{environment.name}}'
         inputs:
           certSecureFile: $(apple_DistributionCertificateSecureFileName)
           certPwd: $(apple_DistributionCertificatePassword)
       - task: InstallAppleProvisioningProfile@1
-        displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
+        displayName: 'Install an Apple provisioning profile for ${{environment.name}}'
         inputs:
-          provProfileSecureFile: $(${{buildVariant.name}}_AppleDevelopmentProvisioningProfileSecureFileName)
+          provProfileSecureFile: $(${{environment.name}}_AppleDevelopmentProvisioningProfileSecureFileName)
       - task: InstallAppleProvisioningProfile@1
-        displayName: 'Install an Apple provisioning profile for ${{buildVariant.name}}'
+        displayName: 'Install an Apple provisioning profile for ${{environment.name}}'
         inputs:
-          provProfileSecureFile: $(${{buildVariant.name}}_AppleDistributionProvisioningProfileSecureFileName)
+          provProfileSecureFile: $(${{environment.name}}_AppleDistributionProvisioningProfileSecureFileName)
       - task: CmdLine@2
         displayName: 'Use Xcode 14.0.1'
         inputs:
@@ -197,36 +179,42 @@ stages:
           script: 'bundle install'
           workingDirectory: '$(appDir)'
       - task: DownloadSecureFile@1
-        displayName: 'Download GoogleServices-Info.plist file for ${{buildVariant.name}}'
+        displayName: 'Download GoogleServices-Info.plist file for ${{environment.name}}'
         inputs:
-          secureFile: $(${{buildVariant.name}}_GoogleServicesInfoPlistSecureFileName)
+          secureFile: $(${{environment.name}}_GoogleServicesInfoPlistSecureFileName)
       - task: CopyFiles@2
-        displayName: 'Copy GoogleServices-Info.plist file to: $(appDir)/ios/SantokuApp/Supporting'
+        displayName: 'Copy GoogleService-Info.plist file to: $(appDir)'
         inputs:
           SourceFolder: '$(Agent.TempDirectory)'
-          Contents: $(${{buildVariant.name}}_GoogleServicesInfoPlistSecureFileName)
-          TargetFolder: '$(appDir)/ios/SantokuApp/Supporting'
-      - task: Cache@2
-        displayName: Cache Pods
-        inputs:
-          key: 'pods | "$(Agent.OS)" | $(appDir)/ios/Podfile.lock'
-          path: $(appDir)/ios/Pods
+          Contents: $(${{environment.name}}_GoogleServicesInfoPlistSecureFileName)
+          TargetFolder: '$(appDir)'
       - task: CmdLine@2
-        displayName: 'Build iOS app for ${{buildVariant.name}}'
+        displayName: 'Rename GoogleService-Info.plist'
         inputs:
-          script: 'fastlane ios ${{buildVariant.laneName}}'
+          script: |
+            /bin/mv $(${{environment.name}}_GoogleServicesInfoPlistSecureFileName) GoogleService-Info.plist
+          workingDirectory: '$(appDir)'
+      - task: CmdLine@2
+        displayName: 'Prebuild iOS app for ${{environment.name}}'
+        inputs:
+          script: 'fastlane ios prebuild_${{environment.laneName}}'
+          workingDirectory: '$(appDir)'
+      - task: CmdLine@2
+        displayName: 'Build iOS app for ${{environment.name}}'
+        inputs:
+          script: 'fastlane ios build_${{environment.laneName}}'
           workingDirectory: '$(appDir)'
       - task: CmdLine@2
         displayName: 'Upload app to DeployGate'
         inputs:
           script: |
-            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{buildVariant.iOSAppPath}}" -F "distribution_name=$(branchName)" -F "message=$(Build.Reason) triggered build by $(Build.BuildNumber)"
+            curl -X POST -H "Authorization: token $(deployGate_OrganizationApiKey)" "https://deploygate.com/api/users/$(deployGate_OrganizationName)/apps" -F "file=@${{environment.iOSAppPath}}" -F "distribution_name=$(branchName)" -F "message=$(Build.Reason) triggered build by $(Build.BuildNumber)"
           workingDirectory: '$(appDir)'
       - task: PublishPipelineArtifact@1
         displayName: 'Publish Artifact'
         inputs:
           targetPath: '$(appDir)/ios/build'
           artifactType: 'pipeline'
-          artifactName: '${{buildVariant.name}}.ipa'
+          artifactName: '${{environment.name}}.ipa'
           parallel: true
         condition: succeeded()

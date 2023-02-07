@@ -1,4 +1,6 @@
 import "Fastfile.build_santoku_app_ios"
+import "Fastfile.prebuild_santoku_app_ios"
+import "Fastfile.prebuild_santoku_app_android"
 
 ################################################################################
 # DeployGateへのデプロイに関する注意点
@@ -13,70 +15,48 @@ import "Fastfile.build_santoku_app_ios"
 
 platform :ios do
 
-  before_all do |lane|
-    # CocoaPodsの依存パッケージをインストールする
-    # https://docs.fastlane.tools/actions/cocoapods/
-    cocoapods(
-      repo_update: true,
-      podfile: "ios/Podfile",
-      # CI環境ではFlipperをインストールしないので、Podfile.lockに差分が出てしまう
-      deployment: false,
-      silent: false,
-    )
+  desc "Prebuild SantokuApp Production Release"
+  lane :prebuild_prod do
+    prebuild_santoku_app_ios(environment: "prod")
   end
 
-  desc "Build SantokuApp Release"
-  lane :release do
-    build_santoku_app_ios(flavor: "SantokuApp", build_type: "Release")
+  desc "Prebuild SantokuApp Staging Release"
+  lane :prebuild_stg do
+    prebuild_santoku_app_ios(environment: "stg")
   end
 
-  desc "Build SantokuApp ReleaseInHouse"
-  lane :release_in_house do
-    build_santoku_app_ios(flavor: "SantokuApp", build_type: "ReleaseInHouse")
+  desc "Build SantokuApp Production Release"
+  lane :build_prod do
+    build_santoku_app_ios(environment: "prod")
   end
 
-  desc "Build DevSantokuApp ReleaseInHouse"
-  lane :dev_release_in_house do
-    build_santoku_app_ios(flavor: "DevSantokuApp", build_type: "ReleaseInHouse")
-  end
-
-  desc "Build SantokuApp DebugAdvanced"
-  lane :debug_advanced do
-    build_santoku_app_ios(flavor: "SantokuApp", build_type: "DebugAdvanced")
-  end
-
-  desc "Build DevSantokuApp DebugAdvanced"
-  lane :dev_debug_advanced do
-    build_santoku_app_ios(flavor: "DevSantokuApp", build_type: "DebugAdvanced")
+  desc "Build SantokuApp Staging Release"
+  lane :build_stg do
+    build_santoku_app_ios(environment: "stg")
   end
 
 end
 
 platform :android do
 
-  desc "Build SantokuApp Release"
-  lane :release do
-    build_android_app(task: "bundle", flavor: "SantokuApp", build_type: "Release", project_dir: "android")
+  desc "Prebuild SantokuApp Production Release"
+  lane :prebuild_prod do
+    prebuild_santoku_app_android(environment: "prod")
   end
 
-  desc "Build SantokuApp ReleaseInHouse"
-  lane :release_in_house do
-    build_android_app(task: "bundle", flavor: "SantokuApp", build_type: "ReleaseInHouse", project_dir: "android")
+  desc "Prebuild SantokuApp Staging Release"
+  lane :prebuild_stg do
+    prebuild_santoku_app_android(environment: "stg")
   end
 
-  desc "Build DevSantokuApp ReleaseInHouse"
-  lane :dev_release_in_house do
-    build_android_app(task: "bundle", flavor: "DevSantokuApp", build_type: "ReleaseInHouse", project_dir: "android")
+  desc "Build SantokuApp Production Release"
+  lane :build_prod do
+    build_android_app(task: "bundle", build_type: "Release", project_dir: "android")
   end
 
-  desc "Build SantokuApp DebugAdvanced"
-  lane :debug_advanced do
-    build_android_app(task: "bundle", flavor: "SantokuApp", build_type: "DebugAdvanced", project_dir: "android")
-  end
-
-  desc "Build DevSantokuApp DebugAdvanced"
-  lane :dev_debug_advanced do
-    build_android_app(task: "bundle", flavor: "DevSantokuApp", build_type: "DebugAdvanced", project_dir: "android")
+  desc "Build SantokuApp Staging Release"
+  lane :build_stg do
+    build_android_app(task: "bundle", build_type: "Release", project_dir: "android")
   end
 
 end

@@ -1,0 +1,101 @@
+diff --git a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
+index 403356f..8048396 100644
+--- a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
++++ b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
+@@ -14,13 +14,15 @@ export declare function getHackyProjectName(projectRoot: string, config: ExpoCon
+  * Add a resource file (ex: `SplashScreen.storyboard`, `Images.xcassets`) to an Xcode project.
+  * This is akin to creating a new code file in Xcode with `⌘+n`.
+  */
+-export declare function addResourceFileToGroup({ filepath, groupName, isBuildFile, project, verbose, targetUuid, }: {
++export declare function addResourceFileToGroup({ filepath, groupName, isBuildFile, project, verbose, targetUuid, fileUuid, fileRef, }: {
+     filepath: string;
+     groupName: string;
+     isBuildFile?: boolean;
+     project: XcodeProject;
+     verbose?: boolean;
+     targetUuid?: string;
++    fileUuid?: string;
++    fileRef?: string;
+ }): XcodeProject;
+ /**
+  * Add a build source file (ex: `AppDelegate.m`, `ViewController.swift`) to an Xcode project.
+@@ -33,7 +35,7 @@ export declare function addBuildSourceFileToGroup({ filepath, groupName, project
+     verbose?: boolean;
+     targetUuid?: string;
+ }): XcodeProject;
+-export declare function addFileToGroupAndLink({ filepath, groupName, project, verbose, addFileToProject, targetUuid, }: {
++export declare function addFileToGroupAndLink({ filepath, groupName, project, verbose, addFileToProject, targetUuid, fileUuid, fileRef, }: {
+     filepath: string;
+     groupName: string;
+     project: XcodeProject;
+@@ -43,6 +45,8 @@ export declare function addFileToGroupAndLink({ filepath, groupName, project, ve
+         file: PBXFile;
+         project: XcodeProject;
+     }) => void;
++    fileUuid?: string;
++    fileRef?: string;
+ }): XcodeProject;
+ export declare function getApplicationNativeTarget({ project, projectName, }: {
+     project: XcodeProject;
+diff --git a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js
+index 840276a..e205dba 100644
+--- a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js
++++ b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js
+@@ -181,7 +181,9 @@ function addResourceFileToGroup({
+   isBuildFile,
+   project,
+   verbose,
+-  targetUuid
++  targetUuid,
++  fileUuid,
++  fileRef,
+ }) {
+   return addFileToGroupAndLink({
+     filepath,
+@@ -189,6 +191,8 @@ function addResourceFileToGroup({
+     project,
+     verbose,
+     targetUuid,
++    fileUuid,
++    fileRef,
+ 
+     addFileToProject({
+       project,
+@@ -202,7 +206,6 @@ function addResourceFileToGroup({
+ 
+       project.addToPbxResourcesBuildPhase(file);
+     }
+-
+   });
+ }
+ /**
+@@ -246,7 +249,9 @@ function addFileToGroupAndLink({
+   project,
+   verbose,
+   addFileToProject,
+-  targetUuid
++  targetUuid,
++  fileUuid,
++  fileRef,
+ }) {
+   const group = pbxGroupByPathOrAssert(project, groupName);
+   const file = createProjectFileForGroup({
+@@ -271,8 +276,16 @@ function addFileToGroupAndLink({
+     file.target = applicationNativeTarget === null || applicationNativeTarget === void 0 ? void 0 : applicationNativeTarget.uuid;
+   }
+ 
+-  file.uuid = project.generateUuid();
+-  file.fileRef = project.generateUuid();
++  if (fileUuid) {
++    file.uuid = fileUuid;
++  } else {
++    file.uuid = project.generateUuid();
++  }
++  if (fileRef) {
++    file.fileRef = fileRef;
++  } else {
++    file.fileRef = project.generateUuid();
++  }
+   addFileToProject({
+     project,
+     file

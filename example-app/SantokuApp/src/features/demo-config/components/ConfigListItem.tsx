@@ -4,7 +4,7 @@ import {ListItem} from 'react-native-elements';
 
 export type ConfigItemData = {
   name?: string;
-  value: string | null;
+  value: string | number | boolean | undefined;
 };
 
 type ConfigListItemProps = {

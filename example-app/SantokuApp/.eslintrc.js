@@ -62,6 +62,7 @@ module.exports = {
     'src/features/backend/apis/**/*.ts',
     'src/features/sandbox/apis/**/*.ts',
     'src/features/acknowledgements/constants/ThirdPartyDependencies.ts',
+    'config/plugin/build/**',
   ],
   rules: {
     'strict-dependencies/strict-dependencies': [

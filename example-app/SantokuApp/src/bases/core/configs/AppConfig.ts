@@ -1,5 +1,5 @@
+import Constants from 'expo-constants';
 import {Platform} from 'react-native';
-import {Config} from 'react-native-config';
 
 /**
  * 環境設定値を取得できます。
@@ -10,55 +10,42 @@ import {Config} from 'react-native-config';
  * console.log(AppConfig.appNameHome);
  * ```
  *
- * {@link Config}.XXXで取得できる値が、型定義ではstring | undefinedとなっています。
- * しかし、環境設定値はenv.xxxに必ず設定されている想定のため、「!(Non-null assertion operator)」を付けています。
+ * {@link Constants.manifest.extra}.XXXで取得できる値が、型定義ではanyとなっています。
+ * しかし、環境設定値はapp.config.xxx.jsに必ず適切な型で設定されている想定のため、type assertionしています。
  *
- * もし、env.xxxに環境設定値が設定されていない場合は、実行時にエラーとなります。
+ * app.config.xxx.jsに環境設定値が設定されていない場合や、適切な型で設定されていない場合は、実行時にエラーとなります。
  */
 export abstract class AppConfig {
-  static get appIdFlavorSuffix(): string {
-    return Config.APP_ID_FLAVOR_SUFFIX!;
-  }
-
-  static get appNameHome(): string {
-    return Config.APP_NAME_HOME!;
-  }
-
-  static get provisioningProfileFlavor(): string {
-    return Config.PROVISIONING_PROFILE_FLAVOR!;
-  }
-
   static get termsUrl(): string {
-    return Config.TERMS_URL!;
+    return Constants.manifest?.extra?.termsUrl as string;
   }
 
   static get santokuAppBackendUrl(): string {
-    return Platform.OS === 'android'
-      ? Config.SANTOKU_APP_BACKEND_URL!.replace('localhost', '10.0.2.2')
-      : Config.SANTOKU_APP_BACKEND_URL!;
+    const url = Constants.manifest?.extra?.santokuAppBackendUrl as string;
+    return Platform.OS === 'android' ? url.replace('localhost', '10.0.2.2') : url;
   }
 
   static get requestTimeout(): number | undefined {
-    const timeout = Number(Config.REQUEST_TIMEOUT);
+    const timeout = Constants.manifest?.extra?.requestTimeout as number;
     return isNaN(timeout) ? undefined : timeout;
   }
 
   static get storeUrl(): string | undefined {
     return Platform.select({
-      ios: Config.APP_STORE_APP_URL,
-      android: Config.GOOGLE_PLAY_APP_URL,
+      ios: Constants.manifest?.extra?.appStoreAppUrl as string,
+      android: Constants.manifest?.extra?.googlePlayAppUrl as string,
     });
   }
 
   static get mobileAppCribNotesWebsiteUrl(): string {
-    return Config.MOBILE_APP_CRIB_NOTES_WEBSITE_URL!;
+    return Constants.manifest?.extra?.mobileAppCribNotesWebsiteUrl as string;
   }
 
   static get mobileAppCribNotesRepositoryUrl(): string {
-    return Config.MOBILE_APP_CRIB_NOTES_REPOSITORY_URL!;
+    return Constants.manifest?.extra?.mobileAppCribNotesRepositoryUrl as string;
   }
 
   static get mswEnabled(): boolean {
-    return Config.MSW_ENABLED === 'true';
+    return Constants.manifest?.extra?.mswEnabled as boolean;
   }
 }
