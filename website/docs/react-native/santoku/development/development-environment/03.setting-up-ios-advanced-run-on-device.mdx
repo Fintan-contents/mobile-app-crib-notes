@@ -4,6 +4,12 @@ title: USB接続でiOS端末にインストール（Appの高度な機能）
 
 プッシュ通知やディープリンクなど、[Appの高度な機能](https://help.apple.com/developer-account/?lang=ja#/dev21218dfd6)をデバイスで動かすには無償のデベロッパアカウントではなく、Apple Developer (Enterprise) Programのライセンスが必要になります。
 
+Appの高度な機能を利用するビルドには、ビルド環境`stg`と`prod`を利用します。
+
+:::note
+ビルド環境など、ビルド設定の概要について理解が必要な場合は[ビルド](../build-configuration.mdx)を参照してください。
+:::
+
 この目的でビルドする場合、リポジトリにコミットされているリソースだけでは不足しているので、別途以下のリソースを入手する必要があります。
 
 * 開発用証明書
@@ -19,8 +25,10 @@ title: USB接続でiOS端末にインストール（Appの高度な機能）
 Apple Developer (Enterprise) Programでは、開発用デバイスはデバイス種別ごとにライセンス全体で100台までしか登録できません。Appの高度な機能をテストする場合も、基本的にはiOS端末に直接インストールするのではなく、DeployGateでアプリを配布してインストールしてください。
 :::
 
-開発用証明書と開発用プロビジョニングプロファイルを入手したら、それぞれダブルクリックでインストールして、ビルドタイプ`DebugAdvanced`でアプリを実行してください。
+開発用証明書と開発用プロビジョニングプロファイルを入手したら、それぞれダブルクリックでインストールして、`stg`か`prod`環境でアプリを実行してください。
 
 ```bash
-npm run ios -- --configuration DebugAdvanced --device "<Registered Device>"
+npm run prebuild:[stg/prod]
+npm run pod-install
+npm run ios -- --device "<Registered Device>"
 ```

@@ -1,0 +1,61 @@
+---
+title: アプリ特有の設定値
+---
+
+これまでに記載したように、環境によって変更する値はExpo config（app.json, app.config.js）に設定します。Expo configでは、アプリアイコンやアプリケーションIDなどモバイルアプリで一般的に必要な設定を変更できます。しかし、中にはアプリから接続するバックエンドのURLなどアプリ特有の設定値が必要になるケースがあります。
+
+そういった場合は、Expo configの[extra](https://docs.expo.dev/versions/latest/config/app/#extra)属性を使用します。
+
+## 設定値の取得
+
+Expo configに設定した値をアプリで取得するには、[Expo Constants](https://docs.expo.dev/versions/latest/sdk/constants/)を使用します。
+
+このアプリでは、Expo configのextra属性に利用規約のURLやバックエンドのURLなどを定義します。
+
+```javascript title=app.config.js
+module.exports = ({config}) => {
+  return {
+    /* ～省略～ */
+    extra: {
+      termsUrl: 'https://www.tis.co.jp/termsofuse/',
+      santokuAppBackendUrl: 'https://santoku-app-backend.azurewebsites.net',
+      /* ～省略～ */
+    },
+    /* ～省略～ */
+  };
+};
+```
+
+設定した値を取得するには、`expo-constants`をimportして、`Expo.Constants.manifest.extra`から取得します。
+
+```typescript title=AppConfig.ts
+import Constants from 'expo-constants';
+
+export abstract class AppConfig {
+  static get termsUrl(): string {
+    return Constants.manifest?.extra?.termsUrl as string;
+  }
+  
+  static get santokuAppBackendUrl(): string {
+    const url = Constants.manifest?.extra?.santokuAppBackendUrl as string;
+    return Platform.OS === 'android' ? url.replace('localhost', '10.0.2.2') : url;
+  }
+  
+  /* ～省略～ */
+}
+```
+
+:::note
+Expo configに設定した値は、Config Pluginの中でも取得できます。
+
+例えば、`extra`属性に設定した利用規約のURLを取得するには以下のように実装します。
+
+```typescript
+export const withConsoleLogTermsUrl: ConfigPlugin = config => {
+  const termsUrl = config.extra.termsUrl
+  console.log(termsUrl)
+  return config;
+}
+```
+
+:::

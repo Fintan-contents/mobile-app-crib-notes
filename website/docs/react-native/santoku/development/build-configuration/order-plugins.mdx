@@ -1,0 +1,57 @@
+---
+title: Config Pluginsの実行順序
+---
+
+Config Pluginsは特定の規則に従った順序で実行されますが、一部の条件下においては順序に規則性がありません。また、現状の規則が今後のExpoアップグレードによって変更される可能性もあります。
+そのため、基本的には順序に影響されないConfig Pluginsを作成することが望ましいです。
+
+ただし、場合によっては順序の影響を受けるプラグインを作らざるを得ない可能性もあります。そのため、ここではConfig Pluginsが実行される順序について説明します。
+
+## Modifier
+
+実行順序の説明をする前に、まずはModifierという機能について説明します。
+
+全てのConfig Pluginは、[Modifier](https://docs.expo.dev/guides/config-plugins/#what-are-mods)という関数によって実行されます。
+Expoには、[標準でいくつかのModifier](https://docs.expo.dev/guides/config-plugins/#default-mods)が用意されており、Config Pluginは必ずどれかのModifierに属する必要があります。
+各Modifierは、用途に応じたオブジェクトをConfig Pluginに渡してくれます。
+
+例えば、iOSの`Info.plist`を変更するConfig Pluginは、`mods.ios.infoPlist`というModifierによって実行されます。
+`mods.ios.infoPlist`は、Info.plistをパースしたオブジェクトをConfig Pluginに渡してくれます。
+Config Pluginは、受け取ったオブジェクト使用して特定の項目の値を変更したり新たな項目を追加できます。
+
+また、Expoには`mods.[android/ios].dangerous`というModifierもあります。
+このModifierは、何かの用途に特化したModifierではありません。
+Expoの標準で用意されているModifier以外の処理を実施したい場合、例えばFirebaseの設定ファイルをコピーしたい場合などに使用します。
+
+## 実行順序
+
+`Prebuild`実行時、Config PluginsはModifierの単位で実行されます。実行順序は以下となっています。
+
+- Android
+  - `mods.android.dangerous`
+  - 以降は順不同
+- iOS
+  - `mods.ios.dangerous`
+  - `mods.ios.xcodeproj`
+  - 以降は順不同
+
+:::warning
+[Config Pluginsのドキュメント](https://docs.expo.dev/guides/config-plugins/#experimental-functionality)にも記載されていますが、`mods.[android/ios].dangerous`は将来的に変更される可能性があります。
+実行順序も、現状は最初に実行されますが今後どうなるかはわかりません。
+
+そのため、基本的には`mods.[android/ios].dangerous`以外のModifierの使用を検討してください。また、`mods.[android/ios].dangerous`を使用しなくてはいけない場合も、実行順序に影響されないように作成することが望ましいです。
+:::
+
+各Modifier内のConfig Pluginsは、後から定義した順番で実行されます。例えば、以下のようなConfig Pluginsが適用されていた場合、`b.plugin` → `a.plugin`の順番で実行されます。
+
+```javascript title=app.config.js
+module.exports = ({config}) => {
+  return {
+    /* ～省略～ */
+    plugins: [
+      'a.plugin',
+      'b.plugin',
+    ],
+  };
+};
+```

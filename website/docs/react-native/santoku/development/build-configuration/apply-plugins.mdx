@@ -1,0 +1,32 @@
+---
+title: Config Pluginsの適用
+---
+
+このアプリでは、Expoが標準で用意しているConfig Pluginsに加えて、サードパーティのライブラリが公開しているものや、アプリで独自に作成したConfig Pluginsも適用しています。
+
+## サードバーティのConfig Plugins
+
+| プラグイン名 | OS | 環境 | 概要 |
+|:--|:--|:--|:--|
+| [expo-build-properties](https://docs.expo.dev/versions/latest/sdk/build-properties/) | iOS/Android | all | `ios/Podfile.properties.json`と`android/gradle.properties`に定義している設定値を変更するプラグインです。 |
+| [@react-native-firebase/app](https://rnfirebase.io/#managed-workflow) | iOS/Android |all | `@react-native-firebase/app`の初期設定を実施するプラグインです。 |
+| [@react-native-firebase/crashlytics](https://rnfirebase.io/crashlytics/usage#installation) | iOS/Android | all | `@react-native-firebase/crashlytics`の初期設定を実施するプラグインです。 |
+
+## アプリで独自に作成したConfig Plugins
+
+| プラグイン名 | OS | 環境 | 概要 |
+|:--|:--|:--|:--|
+| [withAddNativeModules](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/withAddNativeModules.ts) | Android/iOS | all | このアプリで作成したNativeModulesを追加します。 |
+| [withAddAppActivity](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/android/withAddAppActivity.ts) | Android | all | [Transition中にActivityのbackgroundが表示される問題](https://github.com/software-mansion/react-native-screens/issues/380)があるため、Splash Screen用とReact Native用にActivityを分けます。 |
+| [withEnabledStatusBarTranslucent](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/android/withEnabledStatusBarTranslucent.ts) | Android | all | [スプラッシュスクリーンがexpo-splash-screenで表示されるImageViewに変わった時に、画像がずれてしまう問題](https://github.com/crazycodeboy/react-native-splash-screen/issues/241)があるため、[expo_splash_screen_status_bar_translucent](https://github.com/expo/expo/tree/master/packages/expo-splash-screen#-optional-customize-statusbar-1)を有効化します。 |
+| [withDisabledWindowDrawsSystemBarBackgrounds](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/android/withDisabledWindowDrawsSystemBarBackgrounds.ts) | Android | all | [スプラッシュスクリーンがexpo-splash-screenで表示されるImageViewに変わった時に、画像がずれてしまう問題](https://github.com/crazycodeboy/react-native-splash-screen/issues/241)があるため、`windowDrawsSystemBarBackgrounds`を無効化します。|
+| [withMoveDevSettingsActivityToDebugAndroidManifest](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/android/withMoveDevSettingsActivityToDebugAndroidManifest.ts) | Android | all | DevSettingsActivityの設定を`main/AndroidManifest.xml`から`debug/AndroidManifest.xml`に移動します。|
+| [withFlexibleSplashScreen](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/android/withFlexibleSplashScreen.ts) | Android | all | Expoの標準プラグインでは、スプラッシュスクリーンに1枚の画像しか設定できません。このアプリでは、複数の画像を中央で画面サイズに合わせて表示したり、下揃えで表示したりする必要があります。<br/>そのため、スプラッシュスクリーン用に複数枚の画像をコピーしたり、それらの画像を使用する設定ファイルをテンプレートからコピーします。|
+| [withAppBuildGradleForRelease](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/android/withAppBuildGradleForRelease.ts) | Android | stg<br/>prod | リリース用の署名設定や、[NDKのクラッシュログ収集に関する設定](https://rnfirebase.io/crashlytics/android-setup#4-optional-enable-crashlytics-ndk-reporting)を追加します。 |
+| [withRemoveUsesClearTextTrafficForRelease](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/android/withRemoveUsesClearTextTrafficForRelease.ts) | Android | stg<br/>prod | リリースビルドでは、`usesCleartextTraffic`の設定を削除します。 |
+| [withRemoveCFBundleUrlTypes](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/ios/withRemoveCFBundleUrlTypes.ts) | iOS | all | このアプリではカスタムスキーマを定義しないため、CFBundleURLTypesを削除します。|
+| [withOverrideStoryboard](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/ios/withOverrideStoryboard.ts) | iOS | all | Expoの標準プラグインでは、スプラッシュスクリーンに1枚の画像しか設定できません。このアプリでは、複数の画像を中央で画面サイズに合わせて表示したり、下揃えで表示したりする必要があります。<br/>そのため、スプラッシュスクリーン用に複数枚の画像をコピーしたり、Storyboardをテンプレートからコピーします。|
+| [withSetCredentials](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/ios/withSetCredentials.ts) | iOS | all | BundleIdentifierや署名に関する設定をします。|
+| [withDisabledATS](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/ios/withDisabledATS.ts) | iOS | local | ATS（App Transport Security）を無効化します。|
+| [withEnabledATS](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/ios/withEnabledATS.ts) | iOS | stg<br/>prod | ATS（App Transport Security）を有効化します。|
+| [withAddPersonalAccountConfig](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/config/plugin/src/ios/withAddPersonalAccountConfig.ts) | iOS | local | 開発者アカウントが設定された`PersonalAccount.xcconfig`をテンプレートからコピーします。 |

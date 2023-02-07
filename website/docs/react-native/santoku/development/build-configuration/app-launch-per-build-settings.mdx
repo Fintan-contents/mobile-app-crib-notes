@@ -1,0 +1,98 @@
+---
+title: 環境やビルドタイプに応じたアプリ起動
+---
+
+このアプリでは、[ビルド環境](./environments-configuration)や[ビルドタイプ](./build-type)を切り替えてアプリをインストール、起動できます。
+
+## 環境の切り替え
+
+このアプリでは、以下3つの環境に切り替えることができます。
+
+- local
+- stg
+- prod
+
+環境を切り替えるためには`Prebuild`を実行します。
+
+### local環境
+
+local環境に切り替える場合は、以下のコマンドを実行します。
+
+```bash
+npm run prebuild
+```
+
+### stg環境
+
+stg環境に切り替える場合は、以下のコマンドを実行します。
+
+```bash
+npm run prebuild:stg
+```
+
+### prod環境
+
+prod環境に切り替える場合は、以下のコマンドを実行します。
+
+```bash
+npm run prebuild:prod
+```
+
+## pod-install（iOS）
+
+iOSの場合、環境を切り替えた後はPodsをインストールする必要があります。
+
+```bash
+npm run pod-install
+```
+
+## ビルドタイプに応じたアプリ起動
+
+アプリをデバイスにインストールして起動するには、以下のコマンドを実行します。
+
+### デバッグビルド
+
+#### Android
+
+```bash
+npm run android
+```
+
+#### iOS
+
+```bash
+npm run ios 
+```
+
+:::note
+既にアプリをインストール済みの場合は、`npm start`を実行してMetro Bundlerを立ち上げるだけでも問題ありません。
+
+ただし、local環境で`npm start`を実行した場合は、以下の制約があります。
+
+> Expo CLIがコンソールに`>Press i │ open iOS simulator`と表示するが、`i`を押してもシミュレータは起動しない
+
+Expo CLIは、シミュレータの起動とアプリの起動を実施するのですが、アプリを起動する際のBundleIdentifierがうまく解決できないためです。
+`i`を押すと以下のようなエラーが表示されます。
+
+> CommandError: No development build (personal.jp.fintan.mobile.SantokuApp.local.${PERSONAL_IDENTIFIER}) for this project is installed. Please make and install a development build on the device first.
+
+この場合は、手動でシミュレータとアプリを立ち上げてください。
+:::
+
+### リリースビルド
+
+<!-- markdownlint-disable MD024 -->
+
+#### Android
+
+```bash
+npm run android -- --variant release
+```
+
+#### iOS
+
+```bash
+npm run ios -- --configuration Release
+```
+
+<!-- markdownlint-enable MD024 -->

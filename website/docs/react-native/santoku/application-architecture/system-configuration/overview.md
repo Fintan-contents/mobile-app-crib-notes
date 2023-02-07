@@ -5,7 +5,7 @@ sidebar_label: システム構成
 
 このアプリでは、HTTP APIや利用規約などの静的ファイルのホスティングにAzureのサービスを利用します。また、Push通知やディープリンク、ログの管理などにFirebaseのサービスも利用します。
 
-[ビルドバリアント](/react-native/santoku/development/build-configuration/build-variants.mdx)に応じて、使用するAzureのリソースグループやFirebaseのプロジェクトを切り替えます。
+[ビルド環境](/react-native/santoku/development/build-configuration/environments-configuration)に応じて、使用するAzureのリソースグループやFirebaseのプロジェクトを切り替えます。
 
 ## ローカル環境のシステム構成
 

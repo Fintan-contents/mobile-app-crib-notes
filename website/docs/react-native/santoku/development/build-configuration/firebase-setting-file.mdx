@@ -1,0 +1,14 @@
+---
+title: Firebaseの設定ファイル
+---
+
+Firebaseの機能を利用するためには、Firebase SDK用の設定ファイルを配置する必要があります。local環境ではダミーの設定ファイルを使用しており、Firebaseの機能は無効化されています。stg/prod環境の設定ファイルは、別途入手する必要があります。
+
+## 設定ファイルの配置場所
+
+stg/prod環境用に入手したFirebaseの設定ファイルは、プロジェクトルートの直下に配置します。
+
+- Android: `[プロジェクトルート]/google-services.json`
+- iOS: `[プロジェクトルート]/GoogleService-Info.plist`
+
+設定ファイルを配置後は、`Prebuild`と`pod-install（iOS）`を実行してください。`Prebuild`を実行しないと、ネイティブプロジェクトに設定ファイルが反映されません。
