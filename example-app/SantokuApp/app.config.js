@@ -4,14 +4,14 @@ import localConfig from './config/app.config.local.js';
 import prodConfig from './config/app.config.prod.js';
 import stgConfig from './config/app.config.stg.js';
 import {
-  withAddAppActivity,
-  withEnabledStatusBarTranslucent,
-  withDisabledWindowDrawsSystemBarBackgrounds,
-  withMoveDevSettingsActivityToDebugAndroidManifest,
-  withRemoveCFBundleUrlTypes,
+  withAndroidAddAppActivity,
+  withAndroidEnabledStatusBarTranslucent,
+  withAndroidDisabledWindowDrawsSystemBarBackgrounds,
+  withAndroidMoveDevSettingsActivityToDebugAndroidManifest,
+  withIosRemoveCFBundleUrlTypes,
   withAddNativeModules,
-  withFlexibleSplashScreen,
-  withOverrideStoryboard,
+  withAndroidFlexibleSplashScreen,
+  withIosOverrideStoryboard,
 } from './config/app.plugin.js';
 
 const environmentConfig = {
@@ -97,12 +97,12 @@ module.exports = ({config}) => {
       withAddNativeModules,
 
       // このアプリで用意しているAndroid用のプラグイン
-      withAddAppActivity,
-      withEnabledStatusBarTranslucent,
-      withDisabledWindowDrawsSystemBarBackgrounds,
-      withMoveDevSettingsActivityToDebugAndroidManifest,
+      withAndroidAddAppActivity,
+      withAndroidEnabledStatusBarTranslucent,
+      withAndroidDisabledWindowDrawsSystemBarBackgrounds,
+      withAndroidMoveDevSettingsActivityToDebugAndroidManifest,
       [
-        withFlexibleSplashScreen,
+        withAndroidFlexibleSplashScreen,
         {
           ldpi: './assets/android/splashscreen/ldpi',
           mdpi: './assets/android/splashscreen/mdpi',
@@ -113,17 +113,17 @@ module.exports = ({config}) => {
         },
       ],
       // 以下のプラグインは、環境毎の設定ファイルで定義します。
-      // withAppBuildGradleForRelease,
-      // withRemoveUsesClearTextTrafficForRelease,
+      // withAndroidAppBuildGradleForRelease,
+      // withAndroidRemoveUsesClearTextTrafficForRelease,
 
       // このアプリで用意しているiOS用のプラグイン
-      withRemoveCFBundleUrlTypes,
-      withOverrideStoryboard,
+      withIosRemoveCFBundleUrlTypes,
+      withIosOverrideStoryboard,
       // 以下のプラグインは、環境毎の設定ファイルで定義します。
-      // withEnabledATS,
-      // withDisabledATS
-      // withSetCredentials,
-      // withAddPersonalAccountConfig,
+      // withIosEnabledATS,
+      // withIosDisabledATS
+      // withIosSetCredentials,
+      // withIosAddPersonalAccountConfig,
     ],
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',

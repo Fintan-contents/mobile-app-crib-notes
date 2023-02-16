@@ -5,7 +5,7 @@ import path from 'path';
  * DevSettingsActivityの設定を「main/AndroidManifest.xml」から「debug/AndroidManifest.xml」に移動します。
  * @param config ExpoConfig
  */
-export const withMoveDevSettingsActivityToDebugAndroidManifest: ConfigPlugin = config => {
+export const withAndroidMoveDevSettingsActivityToDebugAndroidManifest: ConfigPlugin = config => {
   return withAndroidManifest(config, async config => {
     const androidManifest = config.modResults;
     const mainApplication = androidManifest.manifest.application?.find(a => a.$['android:name'] === '.MainApplication');

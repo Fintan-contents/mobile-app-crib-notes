@@ -17,7 +17,7 @@ const IMAGES_XCASSETS_DIR_NAME = 'Images.xcassets';
  * @see https://github.com/expo/expo/blob/main/packages/%40expo/prebuild-config/src/plugins/unversioned/expo-splash-screen/wtihIosSplashScreenStoryboardImage.ts#L19
  * @param config ExpoConfig
  */
-export const withOverrideStoryboard: ConfigPlugin = config => {
+export const withIosOverrideStoryboard: ConfigPlugin = config => {
   return withDangerousMod(config, [
     'ios',
     config => {

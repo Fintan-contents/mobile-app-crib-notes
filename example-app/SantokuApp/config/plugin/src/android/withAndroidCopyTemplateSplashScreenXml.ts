@@ -11,7 +11,7 @@ const SPLASH_SCREEN_XML_FILE_NAME = 'splashscreen.xml';
  * テンプレートの「splashscreen.xml」を、「android/app/main/res/drawable」配下にコピーします。
  * @param config ExpoConfig
  */
-export const withCopyTemplateSplashScreenXml: ConfigPlugin = config => {
+export const withAndroidCopyTemplateSplashScreenXml: ConfigPlugin = config => {
   return withDangerousMod(config, [
     'android',
     async config => {

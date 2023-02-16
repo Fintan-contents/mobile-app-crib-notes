@@ -11,7 +11,7 @@ import {getMainActivityDir} from './getMainActivityDir';
  * @param srcDir テンプレートファイルが存在するディレクトリ
  * @param fileName テンプレートファイル名
  */
-export const withCopyTemplateJavaFile: ConfigPlugin<{srcDir: string; fileName: string}> = (
+export const withAndroidCopyTemplateJavaFile: ConfigPlugin<{srcDir: string; fileName: string}> = (
   config,
   {srcDir, fileName},
 ) => {

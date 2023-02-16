@@ -18,7 +18,7 @@ export type CopySplashScreenImagesProps = {
  * @param config ExpoConfig
  * @param props CopySplashscreenImagesProps
  */
-export const withCopySplashScreenImages: ConfigPlugin<CopySplashScreenImagesProps> = (config, props) => {
+export const withAndroidCopySplashScreenImages: ConfigPlugin<CopySplashScreenImagesProps> = (config, props) => {
   return withDangerousMod(config, [
     'android',
     async config => {

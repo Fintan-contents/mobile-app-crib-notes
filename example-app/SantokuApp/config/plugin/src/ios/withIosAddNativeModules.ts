@@ -13,7 +13,7 @@ const THROW_ERROR_MODULE_FILE_NAME = 'RCTThrowErrorModule.m';
  * アプリで独自に作成したNativeModulesを追加します。
  * @param config ExpoConfig
  */
-export const withAddNativeModules: ConfigPlugin = config => {
+export const withIosAddNativeModules: ConfigPlugin = config => {
   return withXcodeProject(config, config => {
     const pbxProject = PbxProjectConfig.getPbxProject(config);
     const projectRoot = config.modRequest.projectRoot;

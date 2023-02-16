@@ -1,6 +1,6 @@
-const withDisabledATS = require('./app.plugin.js').withDisabledATS;
-const withSetCredentials = require('./app.plugin.js').withSetCredentials;
-const withAddPersonalAccountConfig = require('./app.plugin.js').withAddPersonalAccountConfig;
+const withIosDisabledATS = require('./app.plugin.js').withIosDisabledATS;
+const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
+const withIosAddPersonalAccountConfig = require('./app.plugin.js').withIosAddPersonalAccountConfig;
 
 module.exports = config => {
   return {
@@ -23,16 +23,16 @@ module.exports = config => {
     },
     plugins: [
       // このアプリで用意しているiOS用のプラグイン
-      withDisabledATS,
+      withIosDisabledATS,
       [
-        withSetCredentials,
+        withIosSetCredentials,
         {
           developmentTeam: '${DEVELOPMENT_TEAM}',
           codeSignStyle: '${CODE_SIGN_STYLE}',
           bundleIdentifier: 'personal.jp.fintan.mobile.SantokuApp.local.${PERSONAL_IDENTIFIER}',
         },
       ],
-      withAddPersonalAccountConfig,
+      withIosAddPersonalAccountConfig,
     ],
     extra: {
       mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',

@@ -4,7 +4,7 @@ import {ConfigPlugin, withAndroidManifest} from '@expo/config-plugins';
  * AppActivityをAndroidManifest.xmlに追加します。
  * @param config ExpoConfig
  */
-export const withAddAppActivityAndroidManifest: ConfigPlugin = config => {
+export const withAndroidAddAppActivityAndroidManifest: ConfigPlugin = config => {
   return withAndroidManifest(config, config => {
     const androidManifest = config.modResults;
     const mainApplication = androidManifest.manifest.application?.find(a => a.$['android:name'] === '.MainApplication');

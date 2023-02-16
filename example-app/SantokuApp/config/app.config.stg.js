@@ -1,7 +1,8 @@
-const withAppBuildGradleForRelease = require('./app.plugin.js').withAppBuildGradleForRelease;
-const withRemoveUsesClearTextTrafficForRelease = require('./app.plugin.js').withRemoveUsesClearTextTrafficForRelease;
-const withEnabledATS = require('./app.plugin.js').withEnabledATS;
-const withSetCredentials = require('./app.plugin.js').withSetCredentials;
+const withAndroidAppBuildGradleForRelease = require('./app.plugin.js').withAndroidAppBuildGradleForRelease;
+const withAndroidRemoveUsesClearTextTrafficForRelease =
+  require('./app.plugin.js').withAndroidRemoveUsesClearTextTrafficForRelease;
+const withIosEnabledATS = require('./app.plugin.js').withIosEnabledATS;
+const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
 
 module.exports = config => {
   return {
@@ -18,13 +19,13 @@ module.exports = config => {
     },
     plugins: [
       // このアプリで用意しているAndroid用のプラグイン
-      withAppBuildGradleForRelease,
-      withRemoveUsesClearTextTrafficForRelease,
+      withAndroidAppBuildGradleForRelease,
+      withAndroidRemoveUsesClearTextTrafficForRelease,
 
       // このアプリで用意しているiOS用のプラグイン
-      withEnabledATS,
+      withIosEnabledATS,
       [
-        withSetCredentials,
+        withIosSetCredentials,
         {
           developmentTeam: 'D9MUZCM4X6',
           codeSignStyle: 'Manual',

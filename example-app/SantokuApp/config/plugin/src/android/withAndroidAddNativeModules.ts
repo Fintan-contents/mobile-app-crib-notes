@@ -1,8 +1,8 @@
 import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
 
 import {ANDROID} from '../constants';
-import {withAddNativeModulePackages} from './withAddNativeModulePackages';
-import {withCopyTemplateJavaFile} from './withCopyTemplateJavaFile';
+import {withAndroidAddNativeModulePackages} from './withAndroidAddNativeModulePackages';
+import {withAndroidCopyTemplateJavaFile} from './withAndroidCopyTemplateJavaFile';
 
 const THROW_ERROR_MODULE_FILE_NAME = 'ThrowErrorModule.java';
 const THROW_ERROR_PACKAGE_FILE_NAME = 'ThrowErrorPackage.java';
@@ -11,16 +11,16 @@ const THROW_ERROR_PACKAGE_FILE_NAME = 'ThrowErrorPackage.java';
  * アプリで作成したNativeModulesを追加します。
  * @param config ExpoConfig
  */
-export const withAddNativeModules: ConfigPlugin = config => {
+export const withAndroidAddNativeModules: ConfigPlugin = config => {
   return withPlugins(config, [
     [
-      withCopyTemplateJavaFile,
+      withAndroidCopyTemplateJavaFile,
       {srcDir: ANDROID.PLUGIN_TEMPLATE_MAIN_ACTIVITY_DIR, fileName: THROW_ERROR_MODULE_FILE_NAME},
     ],
     [
-      withCopyTemplateJavaFile,
+      withAndroidCopyTemplateJavaFile,
       {srcDir: ANDROID.PLUGIN_TEMPLATE_MAIN_ACTIVITY_DIR, fileName: THROW_ERROR_PACKAGE_FILE_NAME},
     ],
-    withAddNativeModulePackages,
+    withAndroidAddNativeModulePackages,
   ]);
 };

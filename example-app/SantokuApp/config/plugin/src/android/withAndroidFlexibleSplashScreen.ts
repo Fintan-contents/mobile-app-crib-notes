@@ -1,7 +1,7 @@
 import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
 
-import {CopySplashScreenImagesProps, withCopySplashScreenImages} from './withCopySplashScreenImages';
-import {withCopyTemplateSplashScreenXml} from './withCopyTemplateSplashScreenXml';
+import {CopySplashScreenImagesProps, withAndroidCopySplashScreenImages} from './withAndroidCopySplashScreenImages';
+import {withAndroidCopyTemplateSplashScreenXml} from './withAndroidCopyTemplateSplashScreenXml';
 
 export type FlexibleSplashScreenProps = CopySplashScreenImagesProps;
 
@@ -17,6 +17,6 @@ export type FlexibleSplashScreenProps = CopySplashScreenImagesProps;
  * @param config ExpoConfig
  * @param props SplashscreenProps
  */
-export const withFlexibleSplashScreen: ConfigPlugin<FlexibleSplashScreenProps> = (config, props) => {
-  return withPlugins(config, [[withCopySplashScreenImages, {...props}], withCopyTemplateSplashScreenXml]);
+export const withAndroidFlexibleSplashScreen: ConfigPlugin<FlexibleSplashScreenProps> = (config, props) => {
+  return withPlugins(config, [[withAndroidCopySplashScreenImages, {...props}], withAndroidCopyTemplateSplashScreenXml]);
 };

@@ -11,7 +11,7 @@ import {getMainActivityPath} from './getMainActivityPath';
  * @param config ExpoConfig
  * @param toClassName コピー先のクラス名
  */
-export const withCopyMainActivity: ConfigPlugin<{toClassName: string}> = (config, {toClassName}) => {
+export const withAndroidCopyMainActivity: ConfigPlugin<{toClassName: string}> = (config, {toClassName}) => {
   return withDangerousMod(config, [
     'android',
     async config => {

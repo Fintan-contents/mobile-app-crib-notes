@@ -25,7 +25,7 @@ import {ConfigPlugin, withAppBuildGradle} from '@expo/config-plugins';
  * @param config ExpoConfig
  * @see https://rnfirebase.io/crashlytics/android-setup#4-optional-enable-crashlytics-ndk-reporting
  */
-export const withAppBuildGradleForRelease: ConfigPlugin = config => {
+export const withAndroidAppBuildGradleForRelease: ConfigPlugin = config => {
   return withAppBuildGradle(config, config => {
     if (config.modResults.language === 'groovy') {
       config.modResults.contents = apply(config.modResults.contents);

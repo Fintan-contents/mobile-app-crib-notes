@@ -16,7 +16,7 @@ const PERSONAL_ACCOUNT_CONFIG_FILE_NAME = 'PersonalAccount.xcconfig';
  * 存在しない場合は、警告ログを出力して正常終了します。
  * @param config ExpoConfig
  */
-export const withAddPersonalAccountConfig: ConfigPlugin = config => {
+export const withIosAddPersonalAccountConfig: ConfigPlugin = config => {
   return withXcodeProject(config, config => {
     const pbxProject = PbxProjectConfig.getPbxProject(config);
     const projectRoot = config.modRequest.projectRoot;

@@ -1,9 +1,9 @@
 import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
 
 import {ANDROID} from '../constants';
-import {withAddAppActivityAndroidManifest} from './withAddAppActivityAndroidManifest';
-import {withCopyMainActivity} from './withCopyMainActivity';
-import {withCopyTemplateJavaFile} from './withCopyTemplateJavaFile';
+import {withAndroidAddAppActivityAndroidManifest} from './withAndroidAddAppActivityAndroidManifest';
+import {withAndroidCopyMainActivity} from './withAndroidCopyMainActivity';
+import {withAndroidCopyTemplateJavaFile} from './withAndroidCopyTemplateJavaFile';
 
 const MAIN_ACTIVITY_FILE_NAME = 'MainActivity.java';
 const APP_ACTIVITY_CLASS_NAME = 'AppActivity';
@@ -19,10 +19,13 @@ const APP_ACTIVITY_CLASS_NAME = 'AppActivity';
  * 1でMainActivity.javaを単純にリネームしないでコピーしているのは、MainActivity.javaが存在しないとExpo prebuild中にエラーが発生するためです。
  * @param config ExpoConfig
  */
-export const withAddAppActivity: ConfigPlugin = config => {
+export const withAndroidAddAppActivity: ConfigPlugin = config => {
   return withPlugins(config, [
-    [withCopyTemplateJavaFile, {srcDir: ANDROID.PLUGIN_TEMPLATE_MAIN_ACTIVITY_DIR, fileName: MAIN_ACTIVITY_FILE_NAME}],
-    [withCopyMainActivity, {toClassName: APP_ACTIVITY_CLASS_NAME}],
-    withAddAppActivityAndroidManifest,
+    [
+      withAndroidCopyTemplateJavaFile,
+      {srcDir: ANDROID.PLUGIN_TEMPLATE_MAIN_ACTIVITY_DIR, fileName: MAIN_ACTIVITY_FILE_NAME},
+    ],
+    [withAndroidCopyMainActivity, {toClassName: APP_ACTIVITY_CLASS_NAME}],
+    withAndroidAddAppActivityAndroidManifest,
   ]);
 };

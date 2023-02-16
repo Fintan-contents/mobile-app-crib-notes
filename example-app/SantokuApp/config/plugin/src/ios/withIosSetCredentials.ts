@@ -17,7 +17,7 @@ type CredentialsProps = {
  * @param provisioningProfileSpecifier
  * @param bundleIdentifier
  */
-export const withSetCredentials: ConfigPlugin<CredentialsProps> = (
+export const withIosSetCredentials: ConfigPlugin<CredentialsProps> = (
   config,
   {developmentTeam, codeSignStyle, provisioningProfileSpecifier, bundleIdentifier},
 ) => {

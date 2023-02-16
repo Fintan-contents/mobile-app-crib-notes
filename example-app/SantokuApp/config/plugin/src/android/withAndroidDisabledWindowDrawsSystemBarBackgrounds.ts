@@ -5,7 +5,7 @@ import {ConfigPlugin, withAndroidStyles} from '@expo/config-plugins';
  * cf.) https://github.com/crazycodeboy/react-native-splash-screen/issues/241
  * @param config ExpoConfig
  */
-export const withDisabledWindowDrawsSystemBarBackgrounds: ConfigPlugin = config => {
+export const withAndroidDisabledWindowDrawsSystemBarBackgrounds: ConfigPlugin = config => {
   return withAndroidStyles(config, config => {
     const styles = config.modResults.resources.style ?? [];
     const filtered = styles?.filter(s => s.$.name !== 'Theme.App.SplashScreen');
