@@ -1,0 +1,259 @@
+---
+title: Config Pluginsについて
+---
+
+ここではConfig Pluginsの概要について説明します。
+Config Plugins、Modとは何か、何ができるのかをコード例と共に示します。
+更なる詳細情報は公式サイトの[Config Plugins](https://docs.expo.dev/guides/config-plugins/)を参照してください。
+
+## Config Plugins
+
+Config Pluginは、Expo configを変更できる機能です。
+その実態は、`ExpoConfig`を受け取り、修正された`ExpoConfig`を返す同期関数です。
+関数の名前は、`with` + `<Plugin Functionality>` と規約で定義されています。
+例えばwithFacebookのように命名します。
+
+最も基本的なConfig Pluginを次に示します。
+
+```javascript
+const withNothing = (config) => config;
+```
+
+Config PluginはアプリのExpo config（app.json、またはapp.config.js）で指定します。
+次の例は、設定名を変更するConfig Pluginを指定したものです。
+
+```javascript title=app.config.js
+const withAddSuffix = (config, suffix) => {
+  config.name = config.name + '-' + suffix;
+  return config;
+};
+
+module.exports = ({config}) => {
+  return {
+    ...config,
+    name: 'expo-config-plugin',
+    plugins: [[withAddSuffix, 'A']],
+  };
+};
+```
+
+`Prebuild`を実行するとExpo configの`name`は`expo-config-plugin-A`となります。
+
+`expo/config-plugins`は`withPlugins`関数を提供しています。
+これを使用して複数のConfig Pluginを連結し、順番に実行できます。
+
+```javascript title=app.config.js
+import {withPlugins} from 'expo/config-plugins';
+
+module.exports = ({config}) => {
+  return withPlugins({...config, name: 'expo-config-plugin'}, [
+    [withAddSuffix, 'A'],
+    [withAddSuffix, 'B'],
+    [withAddSuffix, 'C'],
+  ]);
+};
+```
+
+`Prebuild`を実行すると、Expo configの`name`は`expo-config-plugin-A-B-C`となります。
+
+JSONの設定をサポートするために、プラグイン配列も利用できます。
+次の例は、上記例と同じ設定です。
+
+```javascript title=app.config.js
+module.exports = ({config}) => {
+  return {
+    ...config,
+    name: 'expo-config-plugin',
+    plugins: [
+      [withAddSuffix, 'A'],
+      [withAddSuffix, 'B'],
+      [withAddSuffix, 'C'],
+    ],
+  };
+};
+```
+
+## Mod
+
+Modifier（略してMod）は、コード生成中にネイティブプロジェクトのファイルを変更する機能です。
+その実態は、configとデータを受け取り、両方を操作してオブジェクトで返す非同期関数です。
+ModはExpo configのmodsオブジェクトに追加します。
+Modコンパイラが提供するデフォルトのベースModに処理を追加することで、ファイルを操作できます。
+例えば、`mods.android.strings`にModを指定することで`android/app/src/main/res/values/strings.xml`ファイルを操作できます。
+
+次の例は、`android/app/src/main/res/values/strings.xml`ファイルに設定値（`A`）を追加するModを指定したものです。
+
+```javascript title=app.config.js
+const addAndroidStrings = (config, name, value) => {
+  const find = config.modResults.resources.string && config.modResults.resources.string.find((s) => s.$.name === name);
+  if (!find) {
+    config.modResults.resources.string = [...config.modResults.resources.string, {$: {name}, _: value}];
+  }
+  return config;
+};
+
+module.exports = ({config}) => {
+  return {
+    ...config,
+    mods: {
+      android: {
+        strings: (config) => addAndroidStrings(config, 'A', 'true'),
+      },
+    },
+  };
+};
+```
+
+`Prebuild`を実行すると、`android/app/src/main/res/values/strings.xml`ファイルに次の設定値が追加されます。
+
+```xml title=strings.xml
+<resources>
+    :
+  <string name="A">true</string>
+</resources>
+```
+
+## Mod plugins
+
+`expo/config-plugins` が提供するPluginを利用してModをExpo configのmodsオブジェクトに追加できます。
+
+`withMod`を使用して、`mods.android.strings`にModを指定する例を次に示します。
+
+```javascript title=app.config.js
+const withAndroidAddStrings = (config, {name, value}) => {
+  return withMod(config, {
+    platform: 'android',
+    mod: 'strings',
+    action: (configWithProps) => addAndroidStrings(configWithProps, name, value),
+  });
+};
+
+module.exports = ({config}) => {
+  return {
+    ...config,
+    plugins: [[withAndroidAddStrings, {name: 'A', value: 'true'}]],
+  };
+};
+```
+
+`withMod`を使用すると、同じModを指定しても処理が連携します。
+次の例は、`android/app/src/main/res/values/strings.xml`ファイルに複数の設定値（`A`、`B`、`C`）を追加します。
+
+```javascript title=app.config.js
+module.exports = ({config}) => {
+  return {
+    ...config,
+    plugins: [
+      [withAndroidAddStrings, {name: 'A', value: 'true'}],
+      [withAndroidAddStrings, {name: 'B', value: 'true'}],
+      [withAndroidAddStrings, {name: 'C', value: 'true'}],
+    ],
+  };
+};
+```
+
+`Prebuild`を実行すると、`android/app/src/main/res/values/strings.xml`ファイルに次の設定値が追加されます。
+
+```xml title=strings.xml
+<resources>
+    :
+  <string name="C">true</string>
+  <string name="B">true</string>
+  <string name="A">true</string>
+</resources>
+```
+
+**Mod の実行順序に注意してください。**
+Modは後から指定した順番で実行されます。
+上記の結果から、`C`→`B`→`A`の順番で実行されていることが分かります。
+
+## withDangerousMod
+
+Modコンパイラが提供するデフォルトのベースModを用いずファイル操作するには、`withDangerousMod` を使用します。
+`withDangerousMod`を使用すると、modsオブジェクトの`dangerous`にModが追加されます 。
+このModは危険な操作なため、他のどのModよりも優先して実行されます。
+
+:::warning
+`withDangerousMod` は実験的な機能で将来変更される可能性があります。
+実行順序も現状は最初に実行されますが、今後どうなるかはわかりません。
+そのため、基本的には`mods.[android/ios].dangerous`以外のModの使用を検討してください。
+また、`mods.[android/ios].dangerous`を使用しなくてはいけない場合も、実行順序に影響されないように作成することが望ましいです。
+:::
+
+`withDangerousMod`を使った例を次に示します。
+
+```javascript title=app.config.js
+const withCustomDangerousMod = (config) => {
+  return withDangerousMod(config, [
+    'ios',
+    async (config) => {
+      console.log('Priority execution due to danger.');
+      return config;
+    },
+  ]);
+};
+
+module.exports = ({config}) => {
+  return {
+    ...config,
+    plugins: [withCustomDangerousMod],
+  };
+};
+```
+
+## Custom Base Modifiers
+
+デフォルトのベースModでサポートされていない新しいファイル操作を追加したい場合は、新しいベースModを追加することで対応できます。
+
+次の例は、`android/app/src/main/res/values/hello.xml` ファイルのサポートを追加する、 `android.hello` ベースModを追加しています。
+
+```javascript title=app.config.js
+const withAndroidHello = (config, {name, value}) => {
+  return withMod(config, {
+    platform: 'android',
+    mod: 'hello',
+    action: (configWithProps) => addAndroidStrings(configWithProps, name, value),
+  });
+};
+
+const withAndroidHelloBase = (config) => {
+  return BaseMods.withGeneratedBaseMods(config, {
+    platform: 'android',
+    providers: {
+      hello: BaseMods.provider({
+        isIntrospective: true,
+        getFilePath({modRequest}) {
+          return path.join(modRequest.projectRoot, 'android', 'app', 'src', 'main', 'res', 'values', 'hello.xml');
+        },
+        async read(filePath) {
+          let modResults = await XML.readXMLAsync({
+            path: filePath,
+          });
+          if (!modResults) {
+            modResults = {resources: {string: []}};
+          }
+          return modResults;
+        },
+        async write(filePath, {modResults, modRequest}) {
+          if (!modRequest.introspect) {
+            await XML.writeXMLAsync({
+              path: filePath,
+              xml: modResults,
+            });
+          }
+        },
+      }),
+    },
+  });
+};
+
+module.exports = ({config}) => {
+  return {
+    ...config,
+    plugins: [withAndroidHelloBase, withCustomDangerousMod],
+  };
+};
+```
+
+**_ベース Mod は、Mod を使用する他のすべてのプラグインの後に追加しなければなりません_**。
+これは、ベースModが最後に処理の結果をディスクに書き込む必要があるためです。
