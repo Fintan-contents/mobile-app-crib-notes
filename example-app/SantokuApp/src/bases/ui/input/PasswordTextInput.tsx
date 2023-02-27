@@ -2,8 +2,8 @@ import {useVisibility} from 'bases/core/utils/useVisibility';
 import React, {useMemo} from 'react';
 import {ColorValue, GestureResponderEvent, KeyboardTypeOptions, Platform, StyleSheet, View} from 'react-native';
 
-import {IconButton} from '../button/IconButton';
 import {TextInput, TextInputProps} from './TextInput';
+import {IconButton} from '../button/IconButton';
 
 export type RightIconsProps = {
   color: ColorValue | number | undefined;

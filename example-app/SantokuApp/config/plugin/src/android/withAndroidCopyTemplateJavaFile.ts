@@ -2,8 +2,8 @@ import {ConfigPlugin, withDangerousMod} from '@expo/config-plugins';
 import fs from 'fs';
 import path from 'path';
 
-import {copyFile} from '../utils/copyFile';
 import {getMainActivityDir} from './getMainActivityDir';
+import {copyFile} from '../utils/copyFile';
 
 /**
  * テンプレートに存在するファイルを、「android/app/main/java/[パッケージ名]」配下にコピーします。

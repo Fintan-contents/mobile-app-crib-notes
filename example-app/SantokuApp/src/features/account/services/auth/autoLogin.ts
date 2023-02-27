@@ -3,9 +3,9 @@ import {isUnauthorizedError} from 'features/account/errors/UnauthorizedError';
 import {AccountLoginResponse} from 'features/backend/apis/model';
 import {loadActiveAccountId} from 'features/secure-storage/services/loadActiveAccountId';
 
-import {ActiveAccountIdNotFoundError} from '../../errors/ActiveAccountIdNotFoundError';
 import {canAutoLogin} from './canAutoLogin';
 import {changeAccount} from './changeAccount';
+import {ActiveAccountIdNotFoundError} from '../../errors/ActiveAccountIdNotFoundError';
 
 /**
  * 自動ログインします。

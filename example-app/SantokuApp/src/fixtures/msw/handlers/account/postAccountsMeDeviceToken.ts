@@ -1,11 +1,11 @@
 import {UpdateDeviceToken} from 'features/backend/apis/model';
 import {rest} from 'msw';
 
+import {getLoggedInAccountId} from './getLoggedInAccountId';
 import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
 import {getDb} from '../../utils/getDb';
-import {getLoggedInAccountId} from './getLoggedInAccountId';
 
 export const postAccountsMeDeviceToken = rest.post(`${backendUrl}/accounts/me/device-token`, async (req, res, ctx) => {
   try {

@@ -1,7 +1,7 @@
 import React, {useMemo, useState} from 'react';
 
-import {FullWindowOverlay} from '../overlay/FullWindowOverlay';
 import {LoadingOverlayComponent} from './LoadingOverlayComponent';
+import {FullWindowOverlay} from '../overlay/FullWindowOverlay';
 
 type LoadingOverlayType = {
   visible: (visible: boolean) => void;

@@ -1,10 +1,10 @@
 import {ConfigPlugin, IOSConfig, withXcodeProject} from '@expo/config-plugins';
 import path from 'path';
 
-import {IOS} from '../constants';
-import {copyFile} from '../utils/copyFile';
 import {PbxProjectConfig} from './PbxProjectConfig';
 import {PbxProject} from './types/pbxproj';
+import {IOS} from '../constants';
+import {copyFile} from '../utils/copyFile';
 
 const THROW_ERROR_MODULE_HEADER_FILE_NAME = 'RCTThrowErrorModule.h';
 const THROW_ERROR_MODULE_FILE_NAME = 'RCTThrowErrorModule.m';

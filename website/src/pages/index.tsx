@@ -3,8 +3,8 @@ import Layout from '@theme/Layout';
 import clsx from 'clsx';
 import React from 'react';
 
-import {PageList} from '../components';
 import styles from './styles.module.css';
+import {PageList} from '../components';
 
 const genericOverview = [
   {

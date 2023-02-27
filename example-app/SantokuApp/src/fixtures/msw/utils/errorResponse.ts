@@ -1,7 +1,7 @@
 import {RestContext} from 'msw';
 
-import {isLoggedInAccountIdNotFound} from '../handlers/account/getLoggedInAccountId';
 import {delayedResponse} from './delayedResponse';
+import {isLoggedInAccountIdNotFound} from '../handlers/account/getLoggedInAccountId';
 
 export const errorResponse = (e: unknown, ctx: RestContext) => {
   console.error(e);

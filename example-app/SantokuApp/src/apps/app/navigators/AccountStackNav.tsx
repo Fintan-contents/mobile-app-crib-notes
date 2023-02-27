@@ -2,9 +2,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {m} from 'bases/message/Message';
 import React from 'react';
 
-import {ProfileDetailScreen} from '../screens/account/ProfileDetailScreen';
 import {AccountStackParamList} from './types';
 import {useLogoutButton} from './useLogoutButton';
+import {ProfileDetailScreen} from '../screens/account/ProfileDetailScreen';
 
 // FIXME: Bottom Tabs + Native Stackでは、Androidで画面がチカチカする事象が発生したため、Stackを使用しています。
 // （以下のissueではiOSでも発生すると記載されているので、確認できていないだけでiOSでも発生する可能性があります。）

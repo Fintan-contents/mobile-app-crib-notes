@@ -1,7 +1,7 @@
 import * as error from 'bases/core/errors/handleError';
 
-import {RuntimeError} from '../core/errors/RuntimeError';
 import {loadMessages, m} from './Message';
+import {RuntimeError} from '../core/errors/RuntimeError';
 
 describe('Message message', () => {
   test('メッセージがロードされていない場合の検証', () => {

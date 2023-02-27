@@ -2,10 +2,10 @@ import {ConfigPlugin, IOSConfig, withXcodeProject} from '@expo/config-plugins';
 import fs from 'fs';
 import path from 'path';
 
-import {IOS} from '../constants';
-import {copyFile} from '../utils/copyFile';
 import {PbxProjectConfig} from './PbxProjectConfig';
 import {PbxProject} from './types/pbxproj';
+import {IOS} from '../constants';
+import {copyFile} from '../utils/copyFile';
 
 const PERSONAL_ACCOUNT_CONFIG_FILE_NAME = 'PersonalAccount.xcconfig';
 

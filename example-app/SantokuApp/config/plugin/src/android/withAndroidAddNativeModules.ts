@@ -1,8 +1,8 @@
 import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
 
-import {ANDROID} from '../constants';
 import {withAndroidAddNativeModulePackages} from './withAndroidAddNativeModulePackages';
 import {withAndroidCopyTemplateJavaFile} from './withAndroidCopyTemplateJavaFile';
+import {ANDROID} from '../constants';
 
 const THROW_ERROR_MODULE_FILE_NAME = 'ThrowErrorModule.java';
 const THROW_ERROR_PACKAGE_FILE_NAME = 'ThrowErrorPackage.java';

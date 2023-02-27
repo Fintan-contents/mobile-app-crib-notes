@@ -1,13 +1,13 @@
 import {m} from 'bases/message/Message';
 import React, {useMemo, useState} from 'react';
 
-import {FullWindowOverlay} from '../overlay/FullWindowOverlay';
 import {
   SnackbarComponent,
   SnackbarHideProps as SnackbarComponentHideProps,
   SnackbarProps as SnackbarComponentProps,
   SnackbarShowProps as SnackbarComponentShowProps,
 } from './SnackbarComponent';
+import {FullWindowOverlay} from '../overlay/FullWindowOverlay';
 
 type SnackbarShowProps = Omit<SnackbarComponentShowProps, 'message'>;
 type SnackbarShowCloseButtonProps = Omit<SnackbarShowProps, 'actionText' | 'actionHandler' | 'actionTextStyle'>;

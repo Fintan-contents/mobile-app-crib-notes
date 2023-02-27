@@ -5,11 +5,11 @@ import {m} from 'bases/message/Message';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo} from 'react';
 
-import {withInitialData} from '../components/withInitialData';
-import {QuestionDetailScreen} from '../screens/qa-question/QuestionDetailScreen';
 import {useMainTabNav} from './MainTabNav';
 import {QuestionAndEventPostStackNav} from './QuestionAndEventPostStackNav';
 import {AuthenticatedStackParamList} from './types';
+import {withInitialData} from '../components/withInitialData';
+import {QuestionDetailScreen} from '../screens/qa-question/QuestionDetailScreen';
 
 const nav = createNativeStackNavigator<AuthenticatedStackParamList>();
 

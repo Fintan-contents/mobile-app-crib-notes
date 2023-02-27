@@ -1,7 +1,7 @@
-import {db} from '../db';
 import {santokuAccount} from './accountData';
 import {adminAccount} from './accountMaxData';
 import {partnerAccount} from './accountMinData';
+import {db} from '../db';
 
 export const questionLikeData = () => {
   db.questionLike.create({questionLikeId: '1', questionId: '1', accountId: partnerAccount.accountId});

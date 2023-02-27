@@ -10,8 +10,8 @@ import {
 import React from 'react';
 import {TextInput as RNTextInput, TextInputProps as RNTextInputProps} from 'react-native';
 
-import {RestyleTheme} from '../theme/restyleTheme';
 import {Box, Text} from './index';
+import {RestyleTheme} from '../theme/restyleTheme';
 
 type TextVariantsProps = Exclude<keyof RestyleTheme['textVariants'], 'defaults'>;
 export type TextInputProps = TextProps<RestyleTheme> &

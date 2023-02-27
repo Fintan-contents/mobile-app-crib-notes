@@ -1,9 +1,9 @@
 import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
 
-import {ANDROID} from '../constants';
 import {withAndroidAddAppActivityAndroidManifest} from './withAndroidAddAppActivityAndroidManifest';
 import {withAndroidCopyMainActivity} from './withAndroidCopyMainActivity';
 import {withAndroidCopyTemplateJavaFile} from './withAndroidCopyTemplateJavaFile';
+import {ANDROID} from '../constants';
 
 const MAIN_ACTIVITY_FILE_NAME = 'MainActivity.java';
 const APP_ACTIVITY_CLASS_NAME = 'AppActivity';

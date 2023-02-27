@@ -2,9 +2,9 @@ import {ConfigPlugin, withDangerousMod} from '@expo/config-plugins';
 import fs from 'fs';
 import path from 'path';
 
-import {copyFile} from '../utils/copyFile';
 import {getMainActivityDir} from './getMainActivityDir';
 import {getMainActivityPath} from './getMainActivityPath';
+import {copyFile} from '../utils/copyFile';
 
 /**
  * MainActivity.javaをコピーして、指定のクラス名に変更します。
