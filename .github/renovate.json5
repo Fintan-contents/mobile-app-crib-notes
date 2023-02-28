@@ -109,6 +109,14 @@
       ],
     },
     {
+      // fs-extra: 型定義と一緒に更新するようにします
+      groupName: 'fs-extra',
+      matchPackageNames: [
+        '@types/fs-extra',
+        'fs-extra',
+      ],
+    },
+    {
       // Docusaurusの関連パッケージはまとめて更新するようにします
       groupName: 'Docusaurus',
       matchPackagePrefixes: [
