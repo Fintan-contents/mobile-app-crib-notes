@@ -35,6 +35,7 @@
         '@types/react-native',
         'babel-preset-expo',
         'expo',
+        'expo-build-properties',
         'expo-crypto',
         'expo-keep-awake',
         'expo-local-authentication',
