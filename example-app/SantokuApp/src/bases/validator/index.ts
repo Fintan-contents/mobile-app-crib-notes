@@ -1,6 +1,6 @@
 import {m} from 'bases/message/Message';
 import * as Yup from 'yup';
-import {AnyObject, Maybe, Message} from 'yup/lib/types';
+import {AnyObject, Maybe, Message, Flags} from 'yup';
 
 import {loginPasswordValidator} from './loginPasswordValidator';
 
@@ -8,9 +8,10 @@ declare module 'yup' {
   interface StringSchema<
     TType extends Maybe<string> = string | undefined,
     TContext extends AnyObject = AnyObject,
-    TOut extends TType = TType,
+    TDefault = undefined,
+    TFlags extends Flags = '',
   > {
-    loginPassword(message?: Message): StringSchema<TType, TContext, TOut>;
+    loginPassword(message?: Message): StringSchema<TType, TContext, TDefault, TFlags>;
   }
 }
 
