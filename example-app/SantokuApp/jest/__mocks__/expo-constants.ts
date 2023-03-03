@@ -2,10 +2,9 @@ import ExpoConstants from 'expo-constants';
 
 export const Constants: typeof ExpoConstants = {
   ...ExpoConstants,
-  manifest: {
+  expoConfig: {
     name: 'SantokuApp',
     slug: 'santokuApp',
-    bundleUrl: 'http://localhost',
     extra: {
       termsUrl: 'https://www.tis.co.jp/termsofuse/',
       santokuAppBackendUrl: 'http://localhost:9080',

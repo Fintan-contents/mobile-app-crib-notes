@@ -26,18 +26,18 @@ module.exports = ({config}) => {
 };
 ```
 
-設定した値を取得するには、`expo-constants`をimportして、`Expo.Constants.manifest.extra`から取得します。
+設定した値を取得するには、`expo-constants`をimportして、`Expo.Constants.expoConfig.extra`から取得します。
 
 ```typescript title=AppConfig.ts
 import Constants from 'expo-constants';
 
 export abstract class AppConfig {
   static get termsUrl(): string {
-    return Constants.manifest?.extra?.termsUrl as string;
+    return Constants.expoConfig?.extra?.termsUrl as string;
   }
   
   static get santokuAppBackendUrl(): string {
-    const url = Constants.manifest?.extra?.santokuAppBackendUrl as string;
+    const url = Constants.expoConfig?.extra?.santokuAppBackendUrl as string;
     return Platform.OS === 'android' ? url.replace('localhost', '10.0.2.2') : url;
   }
   
