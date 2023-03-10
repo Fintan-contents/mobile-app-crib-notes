@@ -23,6 +23,7 @@ import {MessageScreen} from 'apps/app/screens/demo-message/MessageScreen';
 import {NavigationScreen} from 'apps/app/screens/demo-navigation/NavigationScreen';
 import {PickerScreen} from 'apps/app/screens/demo-picker/PickerScreen';
 import {PushNotificationScreen} from 'apps/app/screens/demo-push-notification/PushNotificationScreen';
+import {QRCodeScreen} from 'apps/app/screens/demo-qrcode/QRCodeScreen';
 import {CreateTodoDemoScreen} from 'apps/app/screens/demo-react-query/CreateTodoDemoScreen';
 import {DependentQueryDemo1Screen} from 'apps/app/screens/demo-react-query/DependentQueryDemo1Screen';
 import {DependentQueryDemo2Screen} from 'apps/app/screens/demo-react-query/DependentQueryDemo2Screen';
@@ -131,6 +132,7 @@ export const DemoStackNav: React.FC = () => {
       <nav.Screen name="SearchFormTodoDemo" component={SearchFormTodoDemoScreen} />
       <nav.Screen name="SearchBarTodoDemo" component={SearchBarTodoDemoScreen} />
       <nav.Screen name="Picker" component={PickerScreen} />
+      <nav.Screen name="QRCode" component={QRCodeScreen} />
       <nav.Screen
         name="Acknowledgements"
         component={AcknowledgementsScreen}
