@@ -27,9 +27,6 @@ export const enhanceValidator = () => {
     string: {
       max: m('validation.string.max'),
     },
-    number: {
-      max: m('validation.number.max'),
-    },
   });
 };
 

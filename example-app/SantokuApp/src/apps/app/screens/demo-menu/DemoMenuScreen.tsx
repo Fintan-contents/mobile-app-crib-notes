@@ -99,10 +99,6 @@ const demoScreenList: ScreenList[] = [
     to: 'Picker',
   },
   {
-    title: 'QRCode',
-    to: 'QRCode',
-  },
-  {
     title: 'Acknowledgements',
     to: 'Acknowledgements',
   },

@@ -536,7 +536,6 @@ module.exports = {
           items: [
             'react-native/santoku/design/demo/overview',
             'react-native/santoku/design/demo/push-notification/overview',
-            'react-native/santoku/design/demo/qrcode/overview',
           ],
         },
       ],
