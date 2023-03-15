@@ -632,6 +632,7 @@ module.exports = {
           label: 'エンハンス',
           items: [
             'react-native/santoku/maintenance/enhance',
+            'react-native/santoku/maintenance/enhance/config-plugins',
             'react-native/santoku/maintenance/enhance/expo-46-upgrade',
           ],
         },
