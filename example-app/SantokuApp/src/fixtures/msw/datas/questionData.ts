@@ -30,7 +30,9 @@ React Native 0.66
   db.question.create({
     questionId: '2',
     title: 'JavaScriptのビックリマーク二つ（！！）はどういう意味でしょうか？',
-    content: `React Navigationを使用していますが、ヘッダを非表示にする方法はありますか？`,
+    content: `現在携わっているPJで、ビックリマークが二つ連続で並んでいる構文がありました。
+この構文を理解できずに困っています。ご存知の方いらっしゃいますか？
+`,
     tags: ['4'],
     datetime: '2022-06-28T10:00:00Z',
     beginner: false,
