@@ -75,7 +75,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
   * ▶ `@types/jest`はメジャーバージョンが25なら問題ないとして、`"@types/jest": "<26.0.0"`と指定する
 * 例： `react-test-renderer`
   * ▶ `jest-expo`では、`react-test-renderer`のバージョンを`~16.11.0`と指定している（`expo 41.0.0`時点）
-  * ▶ `@types/react-test-renderer` はパッチバージョンが25なら問題ないとして、 `"@types/react-test-renderer": "<16.12.0"` と指定する
+  * ▶ `@types/react-test-renderer` はマイナーバージョンが11なら問題ないとして、 `"@types/react-test-renderer": "<16.12.0"` と指定する
 
 ## 依存パッケージのアップデート
 
