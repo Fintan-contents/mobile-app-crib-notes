@@ -163,9 +163,11 @@ module.exports = ({config}) => {
 </resources>
 ```
 
+:::caution
 **Mod の実行順序に注意してください。**
 Modは後から指定した順番で実行されます。
 上記の結果から、`C`→`B`→`A`の順番で実行されていることが分かります。
+:::
 
 ## withDangerousMod
 
@@ -204,6 +206,11 @@ module.exports = ({config}) => {
 ## Custom Base Modifiers
 
 デフォルトのベースModでサポートされていない新しいファイル操作を追加したい場合は、新しいベースModを追加することで対応できます。
+
+:::caution
+**_ベース Mod は、Mod を使用する他のすべてのプラグインの後に追加しなければなりません_**。
+これは、ベースModが最後に処理の結果をディスクに書き込む必要があるためです。
+:::
 
 次の例は、`android/app/src/main/res/values/hello.xml` ファイルのサポートを追加する、 `android.hello` ベースModを追加しています。
 
@@ -254,6 +261,3 @@ module.exports = ({config}) => {
   };
 };
 ```
-
-**_ベース Mod は、Mod を使用する他のすべてのプラグインの後に追加しなければなりません_**。
-これは、ベースModが最後に処理の結果をディスクに書き込む必要があるためです。
