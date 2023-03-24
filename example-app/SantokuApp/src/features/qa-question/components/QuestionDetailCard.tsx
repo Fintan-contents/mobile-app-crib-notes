@@ -19,7 +19,7 @@ import {AddCommentButton} from './AddCommentButton';
 import {CommentButtonWithCount} from './CommentButtonWithCount';
 import {CommentCard} from './CommentCard';
 import {CommentDivider} from './CommentDivider';
-import {DiffDaysOrHours} from './DiffDaysOrHours';
+import {DiffInDateTime} from './DiffInDateTime';
 import {QuestionAndAnswerLikeButtonWithCount} from './QuestionAndAnswerLikeButtonWithCount';
 import {ViewButtonWithCount} from './ViewButtonWithCount';
 
@@ -100,7 +100,7 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
       </Text>
       <StyledSpace height="p8" />
       <Box flex={1} alignItems="flex-end">
-        <DiffDaysOrHours datetime={datetime} />
+        <DiffInDateTime datetime={datetime} />
       </Box>
       <StyledRow justifyContent="flex-start" alignItems="flex-end">
         <QuestionAndAnswerLikeButtonWithCount onPress={toggleQuestionLike} count={likes} color={likeQuestionColor} />

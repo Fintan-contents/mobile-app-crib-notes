@@ -13,7 +13,7 @@ import React, {FC} from 'react';
 import {Pressable} from 'react-native';
 
 import {AnswerWithCount} from './AnswerWithCount';
-import {DiffDaysOrHours} from './DiffDaysOrHours';
+import {DiffInDateTime} from './DiffInDateTime';
 import {LikeWithCount} from './LikeWithCount';
 import {ViewWithCount} from './ViewWithCount';
 
@@ -95,7 +95,7 @@ const QuestionListCardComponent: FC<QuestionListCardProps> = ({
       </Text>
       <StyledSpace height="p16" />
       <StyledRow space="p16" alignItems="flex-end">
-        <DiffDaysOrHours datetime={datetime} />
+        <DiffInDateTime datetime={datetime} />
         <Box flex={1} />
         <ViewWithCount count={views} />
         <LikeWithCount count={likes} />
