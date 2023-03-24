@@ -1,8 +1,10 @@
+import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledImage} from 'bases/ui/common/StyledImage';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {BeginnerMarkIllustration} from 'bases/ui/illustration/BeginnerMarkIllustration';
+import {DoneIllustration} from 'bases/ui/illustration/DoneIllustration';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
@@ -26,7 +28,7 @@ export type QuestionListCardProps = {
 
 export const QuestionListCard: FC<QuestionListCardProps> = ({
   item: {
-    question: {title, content, likes, views, beginner, datetime, profile},
+    question: {title, content, likes, views, beginner, resolved, datetime, profile},
     navigateToQuestionDetail,
   },
 }) => {
@@ -55,6 +57,14 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
             <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
               {profile?.points}/{profile?.totalPoints}
             </Text>
+            {resolved && (
+              <StyledRow space="p8" justifyContent="flex-end" alignItems="center" px="p8">
+                <DoneIllustration color="blue" />
+                <Text variant="font14Bold" lineHeight={20} color="blue" letterSpacing={0.25}>
+                  {m('解決済み')}
+                </Text>
+              </StyledRow>
+            )}
           </StyledRow>
         </Box>
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
