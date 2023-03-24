@@ -896,48 +896,14 @@ XXRが全くわからない方
                                                                   ]
                                                                 }
                                                               />
-                                                              <StyledRow
-                                                                alignItems="center"
-                                                                justifyContent="space-between"
-                                                                px="p24"
-                                                                py="p32"
-                                                              >
-                                                                <ForwardRef
-                                                                  letterSpacing={0.18}
-                                                                  lineHeight={24}
-                                                                  variant="font20Bold"
-                                                                >
-                                                                  質問
-                                                                </ForwardRef>
-                                                                <StyledRow
-                                                                  alignItems="center"
-                                                                  space="p32"
-                                                                >
-                                                                  <ForwardRef
-                                                                    onPress={[Function]}
-                                                                  >
-                                                                    <SortIllustration
-                                                                      color="black"
-                                                                    />
-                                                                  </ForwardRef>
-                                                                  <ForwardRef
-                                                                    onPress={[Function]}
-                                                                  >
-                                                                    <FilterAltIllustration />
-                                                                  </ForwardRef>
-                                                                  <ForwardRef
-                                                                    onPress={[Function]}
-                                                                  >
-                                                                    <LocalOfferIllustration
-                                                                      color="black"
-                                                                    />
-                                                                  </ForwardRef>
-                                                                </StyledRow>
-                                                              </StyledRow>
                                                             </React.Fragment>
                                                           }
                                                           data={
                                                             Array [
+                                                              Object {
+                                                                "navigateToQuestionDetail": [Function],
+                                                                "question": Object {},
+                                                              },
                                                               Object {
                                                                 "navigateToQuestionDetail": [Function],
                                                                 "question": Object {
@@ -1222,7 +1188,11 @@ React Native 0.66
                                                           renderItem={[Function]}
                                                           scrollEventThrottle={50}
                                                           showsVerticalScrollIndicator={false}
-                                                          stickyHeaderIndices={Array []}
+                                                          stickyHeaderIndices={
+                                                            Array [
+                                                              1,
+                                                            ]
+                                                          }
                                                           style={
                                                             Array [
                                                               Object {},
@@ -1937,15 +1907,22 @@ React Native 0.66
                                                                   />
                                                                 </View>
                                                               </RCTScrollView>
+                                                            </View>
+                                                            <View
+                                                              onLayout={[Function]}
+                                                              style={null}
+                                                            >
                                                               <View
                                                                 style={
                                                                   Array [
                                                                     Object {
                                                                       "alignItems": "center",
+                                                                      "backgroundColor": "#FFF5E4",
                                                                       "flexDirection": "row",
                                                                       "justifyContent": "space-between",
+                                                                      "paddingBottom": 16,
                                                                       "paddingHorizontal": 24,
-                                                                      "paddingVertical": 32,
+                                                                      "paddingTop": 32,
                                                                     },
                                                                   ]
                                                                 }
@@ -2208,6 +2185,15 @@ React Native 0.66
                                                                   </View>
                                                                 </View>
                                                               </View>
+                                                              <View
+                                                                style={
+                                                                  Array [
+                                                                    Object {
+                                                                      "paddingTop": 16,
+                                                                    },
+                                                                  ]
+                                                                }
+                                                              />
                                                             </View>
                                                             <View
                                                               onLayout={[Function]}

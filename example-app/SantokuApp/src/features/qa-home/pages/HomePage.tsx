@@ -7,27 +7,24 @@ import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
 import {StyledFlatList} from 'bases/ui/common/StyledFlatList';
-import {StyledRow} from 'bases/ui/common/StyledRow';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {Fab} from 'bases/ui/fab/Fab';
 import {AddIllustration} from 'bases/ui/illustration/AddIllustration';
 import {ExpandLessIllustration} from 'bases/ui/illustration/ExpandLessIllustration';
-import {FilterAltIllustration} from 'bases/ui/illustration/FilterAltIllustration';
-import {LocalOfferIllustration} from 'bases/ui/illustration/LocalOfferIllustration';
 import {NotificationsIllustration} from 'bases/ui/illustration/NotificationsIllustration';
 import {SearchIllustration} from 'bases/ui/illustration/SearchIllustration';
 import {SettingsIllustration} from 'bases/ui/illustration/SettingsIllustration';
-import {SortIllustration} from 'bases/ui/illustration/SortIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {GetListQuestionsSort, Question} from 'features/backend/apis/model';
 import {EventList} from 'features/qa-event/components/EventList';
 import {QuestionListCard} from 'features/qa-question/components/QuestionListCard';
+import {QuestionListHeader} from 'features/qa-question/components/QuestionListHeader';
 import {SingleSelectableSortSheet} from 'features/qa-question/components/SingleSelectableSortSheet';
 import {SingleSelectableTagSheet} from 'features/qa-question/components/SingleSelectableTagSheet';
 import {useTags} from 'features/qa-question/services/useTags';
 import {useShowTermsAgreementOverlay} from 'features/terms/use-cases/useShowTermsAgreementOverlay';
 import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react';
-import {FlatList, Platform} from 'react-native';
+import {FlatList, ListRenderItemInfo, Platform} from 'react-native';
 
 import {useEventsAndQuestions} from '../services/useEventsAndQuestions';
 import {useRequestPermissionAndRegisterToken} from '../services/useRequestPermissionAndRegisterToken';
@@ -160,10 +157,10 @@ export const HomePage: React.FC<HomePageProps> = ({
   const flatListRef = useRef<FlatList>(null);
   const scrollToTop = useCallback(() => flatListRef.current?.scrollToOffset({offset: 0, animated: true}), []);
 
-  const questionItems = useMemo(
-    () => questions?.map(addOnPressHandlerToQuestions(navigateToQuestionDetail)),
-    [questions, navigateToQuestionDetail],
-  );
+  // 質問一覧先頭にラベルを表示するためのダミーオブジェクトを挿入する
+  const questionItems = useMemo(() => {
+    return [...[{} as Question], ...(questions ?? [])].map(addOnPressHandlerToQuestions(navigateToQuestionDetail));
+  }, [questions, navigateToQuestionDetail]);
 
   return (
     <Box flex={1} testID="HomePage">
@@ -172,6 +169,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         showsVerticalScrollIndicator={false}
         refreshing={isPullToRefreshing}
         onRefresh={pullToRefresh}
+        stickyHeaderIndices={[1]}
         ListHeaderComponent={
           <>
             <Box px="p24" py="p32">
@@ -180,26 +178,31 @@ export const HomePage: React.FC<HomePageProps> = ({
               </Text>
             </Box>
             {!isEventsLoading && <EventList data={events} />}
-            <StyledRow px="p24" py="p32" justifyContent="space-between" alignItems="center">
-              <Text variant="font20Bold" lineHeight={24} letterSpacing={0.18}>
-                {m('質問')}
-              </Text>
-              <StyledRow space="p32" alignItems="center">
-                <StyledTouchableOpacity onPress={setVisibleSortSheet}>
-                  <SortIllustration color={sortIconColor} />
-                </StyledTouchableOpacity>
-                <StyledTouchableOpacity onPress={showUnderDevelopment}>
-                  <FilterAltIllustration />
-                </StyledTouchableOpacity>
-                <StyledTouchableOpacity onPress={setVisibleTagSheet}>
-                  <LocalOfferIllustration color={tagIconColor} />
-                </StyledTouchableOpacity>
-              </StyledRow>
-            </StyledRow>
           </>
         }
         data={questionItems}
-        renderItem={QuestionListCard}
+        renderItem={useCallback(
+          (
+            listRenderItemInfo: ListRenderItemInfo<{
+              question: Question;
+              navigateToQuestionDetail: () => void;
+            }>,
+          ) => {
+            if (listRenderItemInfo.index === 0) {
+              return (
+                <QuestionListHeader
+                  setVisibleSortSheet={setVisibleSortSheet}
+                  sortIconColor={sortIconColor}
+                  setVisibleTagSheet={setVisibleTagSheet}
+                  tagIconColor={tagIconColor}
+                  showUnderDevelopment={showUnderDevelopment}
+                />
+              );
+            }
+            return <QuestionListCard {...listRenderItemInfo} />;
+          },
+          [setVisibleSortSheet, setVisibleTagSheet, sortIconColor, tagIconColor],
+        )}
         ItemSeparatorComponent={ListSeparator}
       />
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
