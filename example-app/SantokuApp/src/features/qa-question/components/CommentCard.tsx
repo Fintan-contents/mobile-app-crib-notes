@@ -23,7 +23,7 @@ export const CommentCard: FC<CommentCardProps> = ({content, likes, profile, date
         <Text variant="font13Regular" lineHeight={19} letterSpacing={0.25}>
           {content}
         </Text>
-        <StyledRow flex={1} justifyContent="space-between">
+        <StyledRow flex={1} justifyContent="space-between" flexWrap="wrap">
           <Text variant="font13Regular" lineHeight={24} letterSpacing={0.15} textDecorationLine="underline">
             {profile?.nickname}
           </Text>
