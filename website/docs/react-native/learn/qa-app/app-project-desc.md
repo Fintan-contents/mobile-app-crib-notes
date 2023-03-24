@@ -14,6 +14,14 @@ hide_table_of_contents: true
 
 [プロジェクトの作成](/react-native/learn/getting-started/create-project)を参照し、新たに初期プロジェクトを作成してください。
 
+### ネイティブプロジェクトの生成
+
+次のコマンドを実行して、ネイティブプロジェクトを生成してください。
+
+```bash
+npm run prebuild
+```
+
 ### 使用ライブラリのインストール
 
 Q&Aアプリの作成には、次のライブラリを使用します。他に使用したいライブラリがあれば、適宜追加してください。

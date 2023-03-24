@@ -32,9 +32,15 @@ React Nativeアプリの実行方法と仕組みをかんたんに説明しま�
 ![Image](expo-build.png)
 
 Expo Goを利用する場合、ストア公開されているExpo Goアプリを端末にインストールして使用するため、アプリのビルドは不要です。
-Expo Goは、Expoで作られたアプリをビルドすることなく簡単に実機で動かすことができるアプリです。Expo SDKに含まれないネイティブモジュールを利用していなければ、[Bare Workflow](https://docs.expo.io/introduction/managed-vs-bare/#bare-workflow)のアプリでも実行できます。[App Store](https://apps.apple.com/jp/app/expo-go/id982107779), [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent)からインストールしてください。
+Expo Goは、Expoで作られたアプリをビルドすることなく簡単に実機で動かすことができるアプリです。Expo SDKに含まれないネイティブモジュールを利用していなければ、アプリを実行できます。[App Store](https://apps.apple.com/jp/app/expo-go/id982107779), [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent)からインストールしてください。
 
-Expo Goをインストールしたら、プロジェクトでExpoの開発サーバを起動します。
+Expo Goをインストールしたら、Expoの標準では提供されていないConfig Pluginをビルドします。
+
+```bash
+npm run build:plugin
+```
+
+Expoの開発サーバを起動します。
 
 ```bash
 npx expo start
@@ -78,7 +84,18 @@ Expo DevTools is running at http://localhost:19003
 
 ![Image](react-native-android-build.png)
 
-`npm run android` と実行するとMetro Bundlerが起動した後、アプリのビルドが始まります。
+はじめに、ネイティブプロジェクトを生成します（iPhoneシミュレータの手順で既に生成している場合は不要です）。
+
+```bash
+npm run prebuild
+```
+
+Metro Bundlerの起動と、アプリのビルドをします。
+
+```bash
+npm run android
+```
+
 Androidアプリがビルドされ、エミュレータにインストールされます。
 
 その後、インストールされたアプリがMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
@@ -88,7 +105,37 @@ Androidアプリがビルドされ、エミュレータにインストールさ�
 
 ![Image](react-native-ios-build.png)
 
-`npm run ios` と実行するとMetro Bundlerが起動した後、アプリのビルドが始まります。
+はじめに、ネイティブプロジェクトを生成します（Androidエミュレータの手順で既に生成している場合は不要です）。
+
+```bash
+npm run prebuild
+```
+
+:::info
+`npm run prebuild`を実行すると以下のような警告ログが出力されてしまいます。起動に影響はないので無視してください。
+
+```console
+Failed to copy PersonalAccount.xcconfig because PersonalAccount.xcconfig does not exist. Error: ENOENT: no such file or directory, stat '[PJのパス]/config/plugin/template/ios/[PJ名]/PersonalAccount.xcconfig'
+    at Object.statSync (node:fs:1583:3)
+〜〜 以下略 〜〜
+```
+
+ログの最後に「Config synced」が出力されていれば、問題ありません。
+
+:::
+
+Podsをインストールします。
+
+```bash
+npm run pod-install
+```
+
+Metro Bundlerの起動と、アプリのビルドをします。
+
+```bash
+npm run ios
+```
+
 iOSアプリがビルドされ、シミュレータにインストールされます。
 
 その後、インストールされたアプリがMetro Bundlerを通してJava Scriptのソースを読み込み、実行します。
