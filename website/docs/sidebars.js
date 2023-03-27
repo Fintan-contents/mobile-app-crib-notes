@@ -450,7 +450,7 @@ module.exports = {
         },
         {
           type: 'doc',
-          id: 'react-native/santoku/test-planning/collaboration-with-test-engineers',
+          id: 'react-native/santoku/test-planning/collaboration-with-qa-vendors',
         },
       ],
     },
