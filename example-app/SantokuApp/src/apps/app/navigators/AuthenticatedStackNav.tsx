@@ -1,7 +1,11 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createNativeStackNavigator, NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useTheme} from '@shopify/restyle';
 import {AppInitialData} from 'apps/app/types/AppInitialData';
 import {m} from 'bases/message/Message';
+import {StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {StyledColumn} from 'bases/ui/common/StyledColumn';
+import {StyledSpace} from 'bases/ui/common/StyledSpace';
+import {GoBackIllustration} from 'bases/ui/illustration/GoBackIllustration';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo} from 'react';
 
@@ -37,14 +41,26 @@ const Component: React.FC<Props> = ({initialData}) => {
       <nav.Screen
         component={QuestionDetailScreen}
         name="QuestionDetail"
-        options={{
-          title: m('質問詳細'),
+        options={({navigation}: {navigation: NativeStackNavigationProp<AuthenticatedStackParamList>}) => ({
+          title: '',
           headerStyle: {backgroundColor: theme.colors.orange1},
           contentStyle: {backgroundColor: theme.colors.orange2},
-          headerTitleStyle: {fontSize: 20, fontWeight: '500'},
-          headerTintColor: theme.colors.white,
           headerBackTitleVisible: false,
-        }}
+          headerLeft: () => (
+            <>
+              <StyledColumn>
+                <StyledSpace height="p4" />
+                <StyledTouchableOpacity onPress={navigation.goBack}>
+                  <GoBackIllustration />
+                </StyledTouchableOpacity>
+              </StyledColumn>
+              <StyledSpace width="p32" />
+              <Text color="white" fontSize={20} fontWeight="500">
+                {m('質問詳細')}
+              </Text>
+            </>
+          ),
+        })}
       />
       <nav.Screen
         name="QuestionAndEventStackNav"
