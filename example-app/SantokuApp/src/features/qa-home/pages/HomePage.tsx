@@ -4,7 +4,7 @@ import {isGetFcmTokenError} from 'bases/firebase/messaging/getFcmToken';
 import {isRequestPushPermissionError} from 'bases/firebase/messaging/requestPushPermission';
 import {useFocusEffect} from 'bases/focus-manager/useFocusEffect';
 import {m} from 'bases/message/Message';
-import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
+import {Box, StyledSafeAreaView, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledActivityIndicator} from 'bases/ui/common/StyledActivityIndicator';
 import {StyledFlatList} from 'bases/ui/common/StyledFlatList';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
@@ -162,13 +162,16 @@ export const HomePage: React.FC<HomePageProps> = ({
     return [...[{} as Question], ...(questions ?? [])].map(addOnPressHandlerToQuestions(navigateToQuestionDetail));
   }, [questions, navigateToQuestionDetail]);
 
+  const [containerWidth, setContainerWidth] = useState(0);
+
   return (
-    <Box flex={1} testID="HomePage">
+    <StyledSafeAreaView flex={1} testID="HomePage">
       <StyledFlatList
         ref={flatListRef}
         showsVerticalScrollIndicator={false}
         refreshing={isPullToRefreshing}
         onRefresh={pullToRefresh}
+        onLayout={event => setContainerWidth(event.nativeEvent.layout.width)}
         stickyHeaderIndices={[1]}
         ListHeaderComponent={
           <>
@@ -183,7 +186,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   {m('募集中のイベントはありません')}
                 </Text>
               ) : (
-                <EventList data={events} />
+                <EventList data={events} containerWidth={containerWidth} />
               ))}
           </>
         }
@@ -212,16 +215,24 @@ export const HomePage: React.FC<HomePageProps> = ({
         )}
         ItemSeparatorComponent={ListSeparator}
       />
-      <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
-        {Platform.OS === 'android' && (
-          <Fab size="small" color="white" onPress={scrollToTop}>
-            <ExpandLessIllustration />
+      <StyledSafeAreaView>
+        <Box
+          position="absolute"
+          right={8}
+          bottom={32}
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center">
+          {Platform.OS === 'android' && (
+            <Fab size="small" color="white" onPress={scrollToTop}>
+              <ExpandLessIllustration />
+            </Fab>
+          )}
+          <Fab onPress={navigateToQuestionAndEventPost}>
+            <AddIllustration />
           </Fab>
-        )}
-        <Fab onPress={navigateToQuestionAndEventPost}>
-          <AddIllustration />
-        </Fab>
-      </Box>
+        </Box>
+      </StyledSafeAreaView>
       <SingleSelectableSortSheet
         isVisible={isVisibleSortSheet}
         initialSelectedSort={selectedSort}
@@ -236,10 +247,12 @@ export const HomePage: React.FC<HomePageProps> = ({
         close={setInvisibleTagSheet}
       />
       {(isRefreshing || isLoading) && (
-        <Box position="absolute" top={10} right={10}>
-          <StyledActivityIndicator />
-        </Box>
+        <StyledSafeAreaView>
+          <Box position="absolute" top={10} right={10}>
+            <StyledActivityIndicator />
+          </Box>
+        </StyledSafeAreaView>
       )}
-    </Box>
+    </StyledSafeAreaView>
   );
 };

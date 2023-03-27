@@ -814,7 +814,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                         }
                                                       }
                                                     >
-                                                      <View
+                                                      <RCTSafeAreaView
+                                                        emulateUnlessSupported={true}
                                                         style={
                                                           Array [
                                                             Object {
@@ -841,6 +842,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                                 </ForwardRef>
                                                               </ForwardRef>
                                                               <EventList
+                                                                containerWidth={0}
                                                                 data={
                                                                   Array [
                                                                     Object {
@@ -1278,7 +1280,7 @@ React Native 0.66
                                                                             },
                                                                             "shadowOpacity": 0.1,
                                                                             "shadowRadius": 0,
-                                                                            "width": 272,
+                                                                            "width": -48,
                                                                           },
                                                                         ]
                                                                       }
@@ -1578,7 +1580,7 @@ React Native 0.66
                                                                             },
                                                                             "shadowOpacity": 0.1,
                                                                             "shadowRadius": 0,
-                                                                            "width": 272,
+                                                                            "width": -48,
                                                                           },
                                                                         ]
                                                                       }
@@ -1857,7 +1859,7 @@ React Native 0.66
                                                                         Object {
                                                                           "alignItems": "center",
                                                                           "justifyContent": "center",
-                                                                          "width": 272,
+                                                                          "width": -48,
                                                                         },
                                                                       ]
                                                                     }
@@ -7162,135 +7164,144 @@ React Native 0.66
                                                             />
                                                           </View>
                                                         </RCTScrollView>
-                                                        <View
+                                                        <RCTSafeAreaView
+                                                          emulateUnlessSupported={true}
                                                           style={
                                                             Array [
-                                                              Object {
-                                                                "alignItems": "center",
-                                                                "bottom": 32,
-                                                                "flexDirection": "column",
-                                                                "justifyContent": "center",
-                                                                "position": "absolute",
-                                                                "right": 8,
-                                                              },
+                                                              Object {},
                                                             ]
                                                           }
                                                         >
                                                           <View
-                                                            accessible={true}
-                                                            collapsable={false}
-                                                            focusable={true}
-                                                            onClick={[Function]}
-                                                            onResponderGrant={[Function]}
-                                                            onResponderMove={[Function]}
-                                                            onResponderRelease={[Function]}
-                                                            onResponderTerminate={[Function]}
-                                                            onResponderTerminationRequest={[Function]}
-                                                            onStartShouldSetResponder={[Function]}
                                                             style={
-                                                              Object {
-                                                                "opacity": 1,
-                                                              }
+                                                              Array [
+                                                                Object {
+                                                                  "alignItems": "center",
+                                                                  "bottom": 32,
+                                                                  "flexDirection": "column",
+                                                                  "justifyContent": "center",
+                                                                  "position": "absolute",
+                                                                  "right": 8,
+                                                                },
+                                                              ]
                                                             }
                                                           >
                                                             <View
+                                                              accessible={true}
+                                                              collapsable={false}
+                                                              focusable={true}
+                                                              onClick={[Function]}
+                                                              onResponderGrant={[Function]}
+                                                              onResponderMove={[Function]}
+                                                              onResponderRelease={[Function]}
+                                                              onResponderTerminate={[Function]}
+                                                              onResponderTerminationRequest={[Function]}
+                                                              onStartShouldSetResponder={[Function]}
                                                               style={
-                                                                Array [
-                                                                  Object {
-                                                                    "alignItems": "center",
-                                                                    "backgroundColor": "#29B6F6",
-                                                                    "borderRadius": 28,
-                                                                    "elevation": 1,
-                                                                    "flexDirection": "row",
-                                                                    "height": 56,
-                                                                    "justifyContent": "center",
-                                                                    "margin": 8,
-                                                                    "shadowColor": "#212121",
-                                                                    "shadowOffset": Object {
-                                                                      "height": 4,
-                                                                      "width": 0,
-                                                                    },
-                                                                    "shadowOpacity": 0.35,
-                                                                    "shadowRadius": 4,
-                                                                    "width": 56,
-                                                                  },
-                                                                ]
+                                                                Object {
+                                                                  "opacity": 1,
+                                                                }
                                                               }
                                                             >
-                                                              <RNSVGSvgView
-                                                                align="xMidYMid"
-                                                                bbHeight={24}
-                                                                bbWidth={24}
-                                                                fill="none"
-                                                                focusable={false}
-                                                                meetOrSlice={0}
-                                                                minX={0}
-                                                                minY={0}
+                                                              <View
                                                                 style={
                                                                   Array [
                                                                     Object {
-                                                                      "backgroundColor": "transparent",
-                                                                      "borderWidth": 0,
-                                                                    },
-                                                                    Array [
-                                                                      Object {
-                                                                        "height": 24,
-                                                                        "width": 24,
+                                                                      "alignItems": "center",
+                                                                      "backgroundColor": "#29B6F6",
+                                                                      "borderRadius": 28,
+                                                                      "elevation": 1,
+                                                                      "flexDirection": "row",
+                                                                      "height": 56,
+                                                                      "justifyContent": "center",
+                                                                      "margin": 8,
+                                                                      "shadowColor": "#212121",
+                                                                      "shadowOffset": Object {
+                                                                        "height": 4,
+                                                                        "width": 0,
                                                                       },
-                                                                    ],
-                                                                    Object {
-                                                                      "flex": 0,
-                                                                      "height": 24,
-                                                                      "width": 24,
+                                                                      "shadowOpacity": 0.35,
+                                                                      "shadowRadius": 4,
+                                                                      "width": 56,
                                                                     },
                                                                   ]
                                                                 }
-                                                                vbHeight={24}
-                                                                vbWidth={24}
                                                               >
-                                                                <RNSVGGroup
-                                                                  fill={null}
-                                                                  propList={
+                                                                <RNSVGSvgView
+                                                                  align="xMidYMid"
+                                                                  bbHeight={24}
+                                                                  bbWidth={24}
+                                                                  fill="none"
+                                                                  focusable={false}
+                                                                  meetOrSlice={0}
+                                                                  minX={0}
+                                                                  minY={0}
+                                                                  style={
                                                                     Array [
-                                                                      "fill",
+                                                                      Object {
+                                                                        "backgroundColor": "transparent",
+                                                                        "borderWidth": 0,
+                                                                      },
+                                                                      Array [
+                                                                        Object {
+                                                                          "height": 24,
+                                                                          "width": 24,
+                                                                        },
+                                                                      ],
+                                                                      Object {
+                                                                        "flex": 0,
+                                                                        "height": 24,
+                                                                        "width": 24,
+                                                                      },
                                                                     ]
                                                                   }
+                                                                  vbHeight={24}
+                                                                  vbWidth={24}
                                                                 >
-                                                                  <RNSVGGroup>
-                                                                    <RNSVGPath
-                                                                      d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                                                                      fill={4294967295}
-                                                                      propList={
-                                                                        Array [
-                                                                          "fill",
-                                                                        ]
-                                                                      }
-                                                                    />
-                                                                  </RNSVGGroup>
-                                                                  <RNSVGDefs>
-                                                                    <RNSVGClipPath
-                                                                      name="clip0_5404_1261"
-                                                                    >
-                                                                      <RNSVGRect
+                                                                  <RNSVGGroup
+                                                                    fill={null}
+                                                                    propList={
+                                                                      Array [
+                                                                        "fill",
+                                                                      ]
+                                                                    }
+                                                                  >
+                                                                    <RNSVGGroup>
+                                                                      <RNSVGPath
+                                                                        d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
                                                                         fill={4294967295}
-                                                                        height="24"
                                                                         propList={
                                                                           Array [
                                                                             "fill",
                                                                           ]
                                                                         }
-                                                                        width="24"
-                                                                        x={0}
-                                                                        y={0}
                                                                       />
-                                                                    </RNSVGClipPath>
-                                                                  </RNSVGDefs>
-                                                                </RNSVGGroup>
-                                                              </RNSVGSvgView>
+                                                                    </RNSVGGroup>
+                                                                    <RNSVGDefs>
+                                                                      <RNSVGClipPath
+                                                                        name="clip0_5404_1261"
+                                                                      >
+                                                                        <RNSVGRect
+                                                                          fill={4294967295}
+                                                                          height="24"
+                                                                          propList={
+                                                                            Array [
+                                                                              "fill",
+                                                                            ]
+                                                                          }
+                                                                          width="24"
+                                                                          x={0}
+                                                                          y={0}
+                                                                        />
+                                                                      </RNSVGClipPath>
+                                                                    </RNSVGDefs>
+                                                                  </RNSVGGroup>
+                                                                </RNSVGSvgView>
+                                                              </View>
                                                             </View>
                                                           </View>
-                                                        </View>
-                                                      </View>
+                                                        </RCTSafeAreaView>
+                                                      </RCTSafeAreaView>
                                                     </View>
                                                   </View>
                                                 </View>
