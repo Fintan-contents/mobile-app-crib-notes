@@ -1,3 +1,4 @@
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledImage} from 'bases/ui/common/StyledImage';
@@ -28,7 +29,7 @@ export type QuestionListCardProps = {
 
 const QuestionListCardComponent: FC<QuestionListCardProps> = ({
   item: {
-    question: {title, content, likes, views, beginner, resolved, datetime, profile},
+    question: {title, content, likes, views, beginner, resolved, datetime, profile, answers},
     navigateToQuestionDetail,
   },
 }) => {
@@ -54,9 +55,11 @@ const QuestionListCardComponent: FC<QuestionListCardProps> = ({
             {profile?.nickname}
           </Text>
           <StyledRow alignItems="center" justifyContent="space-between">
-            <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
-              {profile?.points}/{profile?.totalPoints}
-            </Text>
+            {profile && (
+              <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
+                {formatLargeNumber(profile.points, 999)}/{formatLargeNumber(profile.totalPoints, 999)}
+              </Text>
+            )}
             {resolved && (
               <StyledRow space="p8" justifyContent="flex-end" alignItems="center" px="p8">
                 <DoneIllustration color="blue" />
@@ -99,7 +102,7 @@ const QuestionListCardComponent: FC<QuestionListCardProps> = ({
         <Box flex={1} />
         <ViewWithCount count={views} />
         <LikeWithCount count={likes} />
-        <AnswerWithCount count={views} />
+        <AnswerWithCount count={answers} />
       </StyledRow>
     </Box>
   );

@@ -1454,9 +1454,9 @@ React Native 0.66
                                                                                 ]
                                                                               }
                                                                             >
-                                                                              99999999
+                                                                              999+
                                                                               /
-                                                                              99999999
+                                                                              999+
                                                                             </Text>
                                                                           </View>
                                                                         </View>
@@ -2345,9 +2345,9 @@ React Native 0.66
                                                                           ]
                                                                         }
                                                                       >
-                                                                        99999999
+                                                                        999+
                                                                         /
-                                                                        99999999
+                                                                        999+
                                                                       </Text>
                                                                     </View>
                                                                   </View>
@@ -3005,9 +3005,9 @@ React Native 0.66
                                                                           ]
                                                                         }
                                                                       >
-                                                                        1000
+                                                                        999+
                                                                         /
-                                                                        3000
+                                                                        999+
                                                                       </Text>
                                                                     </View>
                                                                   </View>
@@ -3685,9 +3685,9 @@ React Native 0.66
                                                                           ]
                                                                         }
                                                                       >
-                                                                        1000
+                                                                        999+
                                                                         /
-                                                                        3000
+                                                                        999+
                                                                       </Text>
                                                                     </View>
                                                                   </View>
@@ -4366,9 +4366,9 @@ React Native 0.66
                                                                           ]
                                                                         }
                                                                       >
-                                                                        1000
+                                                                        999+
                                                                         /
-                                                                        3000
+                                                                        999+
                                                                       </Text>
                                                                       <View
                                                                         style={
@@ -5710,7 +5710,7 @@ Flutter 3.0.5 stable
                                                                         ]
                                                                       }
                                                                     >
-                                                                      1
+                                                                      2
                                                                     </Text>
                                                                   </View>
                                                                 </View>
@@ -5830,9 +5830,9 @@ Flutter 3.0.5 stable
                                                                           ]
                                                                         }
                                                                       >
-                                                                        1000
+                                                                        999+
                                                                         /
-                                                                        3000
+                                                                        999+
                                                                       </Text>
                                                                     </View>
                                                                   </View>
@@ -6492,9 +6492,9 @@ Flutter 3.0.5 stable
                                                                           ]
                                                                         }
                                                                       >
-                                                                        1000
+                                                                        999+
                                                                         /
-                                                                        3000
+                                                                        999+
                                                                       </Text>
                                                                       <View
                                                                         style={

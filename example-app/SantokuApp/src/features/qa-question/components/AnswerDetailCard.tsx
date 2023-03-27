@@ -1,3 +1,4 @@
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {useVisibility} from 'bases/core/utils/useVisibility';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
@@ -55,9 +56,11 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
-          <Text variant="font14Regular" letterSpacing={0.25} color="black2">
-            {profile?.points}/{profile?.totalPoints}
-          </Text>
+          {profile && (
+            <Text variant="font14Regular" letterSpacing={0.25} color="black2">
+              {formatLargeNumber(profile.points, 999)}/{formatLargeNumber(profile.totalPoints, 999)}
+            </Text>
+          )}
         </StyledColumn>
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <MoreVertIllustration />
