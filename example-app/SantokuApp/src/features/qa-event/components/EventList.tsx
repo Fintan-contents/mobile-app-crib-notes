@@ -34,13 +34,25 @@ export const EventList: React.FC<EventListProps> = ({data, containerWidth}) => {
       pagingEnabled={Platform.select({android: true})}
       decelerationRate="fast">
       <StyledSpace width="p16" />
-      {data?.map(item => (
-        <StyledRow key={item.eventId}>
+      {data?.length ? (
+        data?.map(item => (
+          <StyledRow key={item.eventId}>
+            <StyledSpace width="p8" />
+            <EventListCard event={item} containerWidth={eventListCardWidth} />
+            <StyledSpace width="p8" />
+          </StyledRow>
+        ))
+      ) : (
+        <StyledRow>
           <StyledSpace width="p8" />
-          <EventListCard event={item} containerWidth={eventListCardWidth} />
+          <Box width={eventListCardWidth} py="p24">
+            <Text textAlign="center" variant="font14Bold" lineHeight={20} letterSpacing={0.25} color="blue">
+              {m('募集中のイベントはありません')}
+            </Text>
+          </Box>
           <StyledSpace width="p8" />
         </StyledRow>
-      ))}
+      )}
       <StyledSpace width="p8" />
       <Box width={eventListCardWidth} justifyContent="center" alignItems="center">
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
