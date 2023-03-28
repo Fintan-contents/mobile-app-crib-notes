@@ -7,6 +7,7 @@ import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {Event} from 'features/backend/apis/model';
 import React, {useMemo} from 'react';
+import {Platform} from 'react-native';
 
 import {EventListCard} from './EventListCard';
 
@@ -18,17 +19,29 @@ export type EventListProps = {
 
 export const EventList: React.FC<EventListProps> = ({data, containerWidth}) => {
   const theme = useTheme<RestyleTheme>();
-  const eventListCardWidth = useMemo(() => containerWidth - theme.spacing.p24 * 2, [containerWidth, theme.spacing.p24]);
+  const eventListCardWidth = useMemo(() => {
+    // カード幅は、画面幅からカードのはみ出し部分とカード間の余白を引いた値である。
+    // カードのはみ出し部は8px、カード間の余白は16pxであり、それぞれカードの左右に存在することを考慮すると
+    // カード幅の算出式は以下のようになる。
+    return containerWidth - (theme.spacing.p8 + theme.spacing.p16) * 2;
+  }, [containerWidth, theme.spacing.p16, theme.spacing.p8]);
   return (
-    <StyledScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
+    <StyledScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      snapToInterval={Platform.select({ios: containerWidth - 32})}
+      snapToAlignment={Platform.select({android: 'center'})}
+      pagingEnabled={Platform.select({android: true})}
+      decelerationRate="fast">
+      <StyledSpace width="p16" />
       {data?.map(item => (
         <StyledRow key={item.eventId}>
-          <StyledSpace width="p24" />
+          <StyledSpace width="p8" />
           <EventListCard event={item} containerWidth={eventListCardWidth} />
-          <StyledSpace width="p24" />
+          <StyledSpace width="p8" />
         </StyledRow>
       ))}
-      <StyledSpace width="p24" />
+      <StyledSpace width="p8" />
       <Box width={eventListCardWidth} justifyContent="center" alignItems="center">
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <Text variant="font14Bold" lineHeight={20} letterSpacing={0.25} color="blue">
