@@ -34,7 +34,6 @@ export const deleteAccountsMeAnswerCommentLikes = rest.delete(
         });
         db.answerComment.update({
           where: {
-            accountId: {equals: accountId},
             questionId: {equals: questionId},
             answerId: {equals: answerId},
             commentId: {equals: commentId},

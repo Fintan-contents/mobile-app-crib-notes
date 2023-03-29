@@ -17,7 +17,7 @@ export const deleteAccountsMeEventLikes = rest.delete(
       if (eventLike) {
         db.eventLike.delete({where: {accountId: {equals: accountId}, eventId: {equals: eventId}}});
         db.event.update({
-          where: {accountId: {equals: accountId}, eventId: {equals: eventId}},
+          where: {eventId: {equals: eventId}},
           data: {likes: likes => likes - 1},
         });
       }

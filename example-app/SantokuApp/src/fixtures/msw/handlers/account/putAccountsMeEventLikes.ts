@@ -17,7 +17,7 @@ export const putAccountsMeEventLikes = rest.put(
       if (!eventLike) {
         db.eventLike.create({eventId, accountId});
         db.event.update({
-          where: {accountId: {equals: accountId}, eventId: {equals: eventId}},
+          where: {eventId: {equals: eventId}},
           data: {likes: likes => likes + 1},
         });
       }
