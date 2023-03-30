@@ -52,6 +52,25 @@ NGINX_PORT=3001 docker run -v $(pwd)/nginx:/etc/nginx/templates -v $(pwd)/build:
 npm run serve
 ```
 
+## Git Large File Storage (LFS)
+
+サイズの大きいバイナリファイルはGit LFSを使ってcommitしています。
+
+ローカルで以下対象ファイルを閲覧したり、追加する場合は以下の事前準備を実施してください。
+
+### 現在の対象ファイル
+
+- `pptx`
+
+### 事前準備
+
+1. [git-lfs](https://git-lfs.com/) のインストール
+1. ローカルリポジトリでのlfs有効化
+
+    ```sh
+    git lfs install
+    ```
+
 ## Lint
 
 ### 文章校正
