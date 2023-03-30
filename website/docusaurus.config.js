@@ -250,7 +250,7 @@ module.exports = {
     {
       src: 'https://plausible.io/js/script.js',
       defer: true,
-      'data-domain': 'fintan-content.github.io,all.fintan',
+      'data-domain': 'fintan-contents.github.io,all.fintan',
     },
   ],
 };
