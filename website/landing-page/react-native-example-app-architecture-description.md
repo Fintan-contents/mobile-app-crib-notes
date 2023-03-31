@@ -34,9 +34,54 @@
 
 ## 更新履歴
 
-### 2022/12/12
+### 2023/03/31
 
-#### 🌱 新規コンテンツ（2022/12/12）
+#### 🌱 新規コンテンツ（2023/03/31）
+
+- Config Plugins対応
+  - メンテナンス
+    - [Config Plugins対応](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/maintenance/enhance/config-plugins)
+  - 開発ガイド
+    - ビルド
+      - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration)
+      - [環境の切り替え](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/environments-configuration)
+      - [Config Pluginsについて](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/about-plugins)
+      - [Config Pluginsの適用](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/apply-plugins)
+      - [ビルドタイプ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/build-type)
+      - [アプリ特有の設定値](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/app-constants)
+      - [開発者アカウントの使用（iOS）](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/development-account-for-ios)
+      - [Firebaseの設定ファイル](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/firebase-setting-file)
+      - [ネイティブプロジェクトの管理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/native-project-management)
+      - [環境やビルドタイプに応じたアプリ起動](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/app-launch-per-build-settings)
+
+- QA専門ベンダーとの協業
+  - テスト計画
+    - [QA専門ベンダーとの協業](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/test-planning/collaboration-with-qa-vendors)
+
+#### 🌿 更新コンテンツ（2023/03/31）
+
+- Config Plugins対応
+  - アプリケーション方式
+    - [システム構成](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/system-configuration/overview)
+  - 開発ガイド
+    - 開発環境
+      - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment)
+      - [基本的なセットアップ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/basic-setup)
+      - [USB接続でiOS端末にインストール](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/setting-up-ios-run-on-device)
+      - [USB接続でiOS端末にインストール（Appの高度な機能）](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/setting-up-ios-advanced-run-on-device)
+      - [Firebaseの機能を利用する](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/use-firebase)
+      - [Androidアプリの配布用ビルドの設定](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/setting-up-android-distribution-build)
+      - [iOSアプリの配布用ビルドの設定](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/setting-up-ios-distribution-build)
+    - 実装
+      - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement)
+      - [ログの利用](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/logs-implementation)
+      - [Firebaseの機能を利用する際の注意点](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/cautions-on-using-firebase)
+  - テスト計画
+    - [単体テスト計画](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/test-planning/ut-planning)
+
+### 2022/12/15
+
+#### 🌱 新規コンテンツ（2022/12/15）
 
 - プッシュ通知
   - 外部設計
@@ -53,7 +98,7 @@
   - README
     - [アプリケーション構造](https://github.com/ws-4020/mobile-app-crib-notes/tree/master/example-app/SantokuApp#アプリケーション構造)
 
-#### 🌿 更新コンテンツ（2022/12/13）
+#### 🌿 更新コンテンツ（2022/12/15）
 
 - ドキュメントの全般見直し
   - ドキュメント全般

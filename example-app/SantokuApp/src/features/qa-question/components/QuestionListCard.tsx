@@ -1,8 +1,11 @@
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
+import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledImage} from 'bases/ui/common/StyledImage';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {BeginnerMarkIllustration} from 'bases/ui/illustration/BeginnerMarkIllustration';
+import {DoneIllustration} from 'bases/ui/illustration/DoneIllustration';
 import {MoreVertIllustration} from 'bases/ui/illustration/MoreVertIllustration';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
@@ -11,7 +14,7 @@ import React, {FC} from 'react';
 import {Pressable} from 'react-native';
 
 import {AnswerWithCount} from './AnswerWithCount';
-import {DiffDaysOrHours} from './DiffDaysOrHours';
+import {DiffInDateTime} from './DiffInDateTime';
 import {LikeWithCount} from './LikeWithCount';
 import {ViewWithCount} from './ViewWithCount';
 
@@ -24,9 +27,9 @@ export type QuestionListCardProps = {
   };
 };
 
-export const QuestionListCard: FC<QuestionListCardProps> = ({
+const QuestionListCardComponent: FC<QuestionListCardProps> = ({
   item: {
-    question: {title, content, likes, views, beginner, datetime, profile},
+    question: {title, content, likes, views, beginner, resolved, datetime, profile, answers},
     navigateToQuestionDetail,
   },
 }) => {
@@ -52,9 +55,19 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
             {profile?.nickname}
           </Text>
           <StyledRow alignItems="center" justifyContent="space-between">
-            <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
-              {profile?.points}/{profile?.totalPoints}
-            </Text>
+            {profile && (
+              <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
+                {formatLargeNumber(profile.points, 999)}/{formatLargeNumber(profile.totalPoints, 999)}
+              </Text>
+            )}
+            {resolved && (
+              <StyledRow space="p8" justifyContent="flex-end" alignItems="center" px="p8">
+                <DoneIllustration color="blue" />
+                <Text variant="font14Bold" lineHeight={20} color="blue" letterSpacing={0.25}>
+                  {m('解決済み')}
+                </Text>
+              </StyledRow>
+            )}
           </StyledRow>
         </Box>
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
@@ -85,12 +98,14 @@ export const QuestionListCard: FC<QuestionListCardProps> = ({
       </Text>
       <StyledSpace height="p16" />
       <StyledRow space="p16" alignItems="flex-end">
-        <DiffDaysOrHours datetime={datetime} />
+        <DiffInDateTime datetime={datetime} />
         <Box flex={1} />
         <ViewWithCount count={views} />
         <LikeWithCount count={likes} />
-        <AnswerWithCount count={views} />
+        <AnswerWithCount count={answers} />
       </StyledRow>
     </Box>
   );
 };
+
+export const QuestionListCard = React.memo(QuestionListCardComponent);

@@ -1,3 +1,4 @@
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {useVisibility} from 'bases/core/utils/useVisibility';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledColumn} from 'bases/ui/common/StyledColumn';
@@ -14,7 +15,7 @@ import {AddCommentButton} from './AddCommentButton';
 import {CommentButtonWithCount} from './CommentButtonWithCount';
 import {CommentCard} from './CommentCard';
 import {CommentDivider} from './CommentDivider';
-import {DiffDaysOrHours} from './DiffDaysOrHours';
+import {DiffInDateTime} from './DiffInDateTime';
 import {QuestionAndAnswerLikeButtonWithCount} from './QuestionAndAnswerLikeButtonWithCount';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
@@ -55,9 +56,11 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
           <Text variant="font18SemiBold" lineHeight={22} letterSpacing={0.15} color="black2">
             {profile?.nickname}
           </Text>
-          <Text variant="font14Regular" letterSpacing={0.25} color="black2">
-            {profile?.points}/{profile?.totalPoints}
-          </Text>
+          {profile && (
+            <Text variant="font14Regular" letterSpacing={0.25} color="black2">
+              {formatLargeNumber(profile.points, 999)}/{formatLargeNumber(profile.totalPoints, 999)}
+            </Text>
+          )}
         </StyledColumn>
         <StyledTouchableOpacity onPress={showUnderDevelopment}>
           <MoreVertIllustration />
@@ -70,7 +73,7 @@ export const AnswerDetailCard: FC<AnswerDetailCardProps> = ({
       <StyledSpace height="p8" />
       <Box flexDirection="row" alignItems="flex-end">
         <Box flex={1} />
-        <DiffDaysOrHours datetime={datetime} />
+        <DiffInDateTime datetime={datetime} />
       </Box>
       <Box flexDirection="row" justifyContent="flex-start" alignItems="flex-end">
         <QuestionAndAnswerLikeButtonWithCount onPress={showUnderDevelopment} count={likes} color={likeAnswerColor} />

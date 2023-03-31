@@ -4,8 +4,8 @@ import * as csrfToken from 'features/backend/utils/refreshCsrfToken';
 import * as loadActiveAccountId from 'features/secure-storage/services/loadActiveAccountId';
 import * as loadPassword from 'features/secure-storage/services/loadPassword';
 
-import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from '../../../backend/utils/customInstance';
 import {autoLogin} from './autoLogin';
+import {BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION} from '../../../backend/utils/customInstance';
 
 jest.spyOn(BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION, 'get').mockResolvedValue({
   status: 200,

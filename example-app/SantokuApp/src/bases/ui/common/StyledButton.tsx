@@ -12,9 +12,9 @@ import {
 import React, {useMemo} from 'react';
 import {TouchableOpacity, TouchableOpacityProps} from 'react-native';
 
-import {RestyleTheme} from '../theme/restyleTheme';
 import {StyledActivityIndicator} from './StyledActivityIndicator';
 import {Box, Text} from './index';
+import {RestyleTheme} from '../theme/restyleTheme';
 
 const variant = createVariant<RestyleTheme, 'buttonVariants'>({themeKey: 'buttonVariants'});
 type BaseButtonProps = VariantProps<RestyleTheme, 'buttonVariants'> & BoxProps<RestyleTheme> & TouchableOpacityProps;
@@ -28,7 +28,7 @@ export type ButtonProps = BaseButtonProps & {
   title?: string;
   isLoading?: boolean;
   textVariant?: TextVariantsProps;
-  activityIndicatorColor?: ResponsiveValue<keyof RestyleTheme['colors'], RestyleTheme>;
+  activityIndicatorColor?: ResponsiveValue<keyof RestyleTheme['colors'], RestyleTheme['breakpoints']>;
 } & ColorProps<RestyleTheme> &
   TypographyProps<RestyleTheme> &
   TextShadowProps<RestyleTheme>;

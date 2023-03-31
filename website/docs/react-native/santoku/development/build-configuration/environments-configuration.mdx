@@ -1,0 +1,72 @@
+---
+title: 環境の切り替え
+---
+
+## 環境の種類
+
+このアプリでは、用途に応じて以下の環境を用意しています。
+
+| 環境 | 概要 |
+|:--|:--|
+| local | ローカル環境で開発する際に使用します。 |
+| stg | ステージング環境のアプリを配信する際に使用します。この環境でビルドしたアプリはDeployGateにアップロードして配信されます。 |
+| prod | 本番環境のアプリを配信する際に使用します。この環境でビルドしたアプリはApp StoreやGoogle Play Consoleにアップロードして配信されます。|
+
+## 環境の切り替え方法
+
+Expoの`Prebuild`には、環境ごとにExpo configの設定を切り替える機能はありません。
+そのため、`Prebuild`時にビルドする環境を変数として渡し、その値によって使用する設定を切り替えるようにします。
+
+例えば、ステージング環境のアプリをビルドする場合は、環境変数`ENVIRONMENT`に`stg`を指定して`Prebuild`を実行します。
+
+```bash
+ENVIRONMENT=stg npx expo prebuild
+```
+
+:::note
+このアプリでは、環境変数の指定や`Prebuild`の実行をnpm scriptsに設定しています。
+
+そのため、実際に使用する設定切り替えのコマンドについては、[環境やビルドタイプに応じたアプリ起動](./app-launch-per-build-settings)を参照してください。
+:::
+
+Expo configでは、環境変数`ENVIRONMENT`の値によって使用する設定を切り替えます。
+
+以下は設定切り替えの例です。実際の設定は[app.config.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/app.config.js)を参照してください。
+
+```javascript title=app.config.js
+import localConfig from './config/app.config.local.js';
+import prodConfig from './config/app.config.prod.js';
+import stgConfig from './config/app.config.stg.js';
+
+const environmentConfig = {
+  local: localConfig,
+  stg: stgConfig,
+  prod: prodConfig,
+};
+
+/**
+ * アプリ全体のベースとなる設定です
+ * 環境毎に違う設定値は、prodの設定を定義しています。（一部のプラグインを除く）
+ * prodと違う設定を定義する場合などは、各環境ごとの設定ファイル（app.config.xxx.json）で再定義してください。
+ */
+module.exports = ({config}) => {
+  const environment = process.env.ENVIRONMENT ?? 'prod';
+  const defaultAppConfig =  {
+    ...config,
+    name: 'SantokuApp',
+    version: '0.1.0',
+    /* ～省略～ */
+  };
+  return {...defaultAppConfig, ...environmentConfig[environment](defaultAppConfig)};
+};
+```
+
+```javascript title=app.config.stg.js
+module.exports = config => {
+  return {
+    ...config,
+    name: 'Stg SantokuApp',
+    /* ～省略～ */
+  };
+};
+```

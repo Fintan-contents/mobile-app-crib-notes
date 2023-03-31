@@ -1,3 +1,4 @@
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {VisibilityIllustration} from 'bases/ui/illustration/VisibilityIllustration';
@@ -14,7 +15,7 @@ export const ViewButtonWithCount: React.FC<ViewButtonWithCountProps> = ({onPress
         <VisibilityIllustration />
       </StyledTouchableOpacity>
       <Text fontSize={14} lineHeight={20} letterSpacing={0.25}>
-        {count}
+        {formatLargeNumber(count, 999)}
       </Text>
     </StyledRow>
   );

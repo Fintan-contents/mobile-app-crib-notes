@@ -448,6 +448,10 @@ module.exports = {
           type: 'doc',
           id: 'react-native/santoku/test-planning/test-variation',
         },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/test-planning/collaboration-with-qa-vendors',
+        },
       ],
     },
     {
@@ -575,9 +579,7 @@ module.exports = {
             'react-native/santoku/development/implement',
             'react-native/santoku/development/implement/message-configuration',
             'react-native/santoku/development/implement/logs-implementation',
-            'react-native/santoku/development/implement/app-launch-with-build-variants',
             'react-native/santoku/development/implement/cautions-on-using-firebase',
-            'react-native/santoku/development/implement/configurations',
             'react-native/santoku/development/implement/http-api',
           ],
         },
@@ -586,9 +588,15 @@ module.exports = {
           label: 'ビルド',
           items: [
             'react-native/santoku/development/build-configuration',
-            'react-native/santoku/development/build-configuration/build-variants',
-            'react-native/santoku/development/build-configuration/build-type-configurations',
-            'react-native/santoku/development/build-configuration/product-flavor-configurations',
+            'react-native/santoku/development/build-configuration/environments-configuration',
+            'react-native/santoku/development/build-configuration/about-plugins',
+            'react-native/santoku/development/build-configuration/apply-plugins',
+            'react-native/santoku/development/build-configuration/build-type',
+            'react-native/santoku/development/build-configuration/app-constants',
+            'react-native/santoku/development/build-configuration/development-account-for-ios',
+            'react-native/santoku/development/build-configuration/firebase-setting-file',
+            'react-native/santoku/development/build-configuration/native-project-management',
+            'react-native/santoku/development/build-configuration/app-launch-per-build-settings',
           ],
         },
         {
@@ -627,6 +635,7 @@ module.exports = {
           label: 'エンハンス',
           items: [
             'react-native/santoku/maintenance/enhance',
+            'react-native/santoku/maintenance/enhance/config-plugins',
             'react-native/santoku/maintenance/enhance/expo-46-upgrade',
           ],
         },

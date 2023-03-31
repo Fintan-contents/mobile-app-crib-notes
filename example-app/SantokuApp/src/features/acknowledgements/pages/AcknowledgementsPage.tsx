@@ -50,7 +50,7 @@ const ListItem: React.FC<DependencyWithAction> = React.memo(({id, name, version,
       <View style={styles.listItemContainer}>
         <Text>
           <Text style={styles.dependencyName}>{name ?? id}</Text>
-          <Text style={styles.dependencyVersion}> ({version})</Text>
+          {version && <Text style={styles.dependencyVersion}> ({version})</Text>}
         </Text>
       </View>
       <View style={styles.listItemRightIconContainer}>

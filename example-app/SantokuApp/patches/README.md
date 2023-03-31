@@ -18,20 +18,10 @@ Xcode 13から、`xcodebuild`の実行時に常に`destination`が適切に指�
 
 ## React Native Elementsの型エラーに対処するパッチ
 
-↓の変更で、TV関連の型が変更されました。
-https://github.com/DefinitelyTyped/DefinitelyTyped/commit/73459e5084f7406d577a5b03ac2bf8cdd2c30f45
-
-React Native 0.66ではTextInputの`autoCompleteType`が`autoComplete`に変更になりました。
-https://github.com/facebook/react-native/commit/27fec9569e08a04e0dbdbd5de063a599ad0416fa
-
 React18から、React.Componentに定義されていたchildrenが削除されました。
 https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210
 
-React Native Elementsの3系ではこれらの変更に追従できていなかったため、以下の修正をしたパッチを当てています。
-* `Icon`のPropsから`tvParallaxProperties`を削除
-* `ListItem`のPropsから`tvParallaxProperties`、`hasTVPreferredFocus`を削除
-* `ListItem.XXX`のPropsから`tvParallaxProperties`を削除
-* `Input`のPropsの`autoCompleteType`を`autoComplete`に変更
+React Native Elementsの3系では上記の変更に追従できていなかったため、以下の修正をしたパッチを当てています。
 * `ThemeProvider`のPropsに`children`を追加
 
 ## React Native ReanimatedのuseAnimatedStyleを利用した際に、アニメーションが発生しない事象に対処するパッチ
@@ -43,3 +33,10 @@ https://github.com/software-mansion/react-native-reanimated/issues/3296
 
 issueに対応するPRが挙がっていたので、その変更をパッチとして当てています。
 https://github.com/software-mansion/react-native-reanimated/pull/3302
+
+## Expo Config Pluginsで、iOS用に追加したファイルのIDを取得できない問題に対処するパッチ
+
+`IOSConfig.XcodeUtils.addResourceFileToGroup`でファイルを追加した際に、追加したファイルのIDが取得できません。
+そのため、追加したファイルのIDを参照するような設定ができない事象が発生しました。
+
+そこで、`IOSConfig.XcodeUtils.addResourceFileToGroup`にファイルのIDを指定できるパッチを当てています。

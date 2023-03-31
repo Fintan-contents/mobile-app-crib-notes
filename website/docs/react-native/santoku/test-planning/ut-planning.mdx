@@ -89,9 +89,9 @@ const Context = React.createContext<ContextType>({
 
 基本的にエミュレータ／シミュレータを用いて検証します。ただし、実機でしか確認できないようなOS依存の機能（例：カメラ）については、実機を用いて検証します。このアプリで、実機でしか確認できない機能は`iOSのカメラ`です。
 
-- ビルドバリアント
+- ビルド設定
 
-  使用する[ビルドバリアント](/react-native/santoku/development/build-configuration/build-variants.mdx)は、`devSantokuAppDebug`です。単体テストでは性能面の評価をしないため、デバッグ効率を重視する方針です。
+  使用する[環境](/react-native/santoku/development/build-configuration/environments-configuration)は`local`です。[ビルドタイプ](/react-native/santoku/development/build-configuration/build-type)はデバッグビルドです。単体テストでは性能面の評価をしないため、デバッグ効率を重視する方針です。
 
 - テスト端末（実機）
 

@@ -7,10 +7,10 @@ import {PeopleIllustration} from 'bases/ui/illustration/PeopleIllustration';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React, {useMemo} from 'react';
 
-import {withInitialData} from '../components/withInitialData';
 import {AccountStackNav} from './AccountStackNav';
 import {HomeStackNav} from './HomeStackNav';
 import {MainTabParamList} from './types';
+import {withInitialData} from '../components/withInitialData';
 
 const nav = createBottomTabNavigator<MainTabParamList>();
 

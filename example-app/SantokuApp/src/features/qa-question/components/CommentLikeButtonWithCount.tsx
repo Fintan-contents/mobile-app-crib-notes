@@ -1,4 +1,5 @@
 import {ColorProps} from '@shopify/restyle';
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {StyledTouchableOpacity, Text} from 'bases/ui/common';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {ThumbUpIllustration} from 'bases/ui/illustration/ThumbUpIllustration';
@@ -16,7 +17,7 @@ export const CommentLikeButtonWithCount: React.FC<CommentLikeButtonWithCountProp
         <ThumbUpIllustration size="p24" color={color} />
       </StyledTouchableOpacity>
       <Text variant="font14Regular" lineHeight={20} letterSpacing={0.25}>
-        {count}
+        {formatLargeNumber(count, 999)}
       </Text>
     </StyledRow>
   );

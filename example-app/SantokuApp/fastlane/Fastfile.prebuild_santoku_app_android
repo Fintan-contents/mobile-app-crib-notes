@@ -1,0 +1,8 @@
+private_lane :prebuild_santoku_app_android do |options|
+  environment = options[:environment]
+
+  # npmパッケージのインストールは、lane実行前に実施されている想定のため、
+  # --no-installオプションを付けて依存パッケージはインストールしないようにする（このアプリでは、prebuildスクリプトの中で、--no-installオプションを付与している）
+  # https://docs.fastlane.tools/actions/sh/
+  sh("npm run prebuild:#{environment} -- -p android")
+end

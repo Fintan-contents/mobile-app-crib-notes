@@ -43,6 +43,7 @@ export const restyleTheme = createTheme({
     p32: 32,
     p48: 48,
     p64: 64,
+    p168: 168,
   },
   breakpoints: {
     // phone: 0,
@@ -56,6 +57,10 @@ export const restyleTheme = createTheme({
     p18: {
       width: 18,
       height: 18,
+    },
+    p20: {
+      width: 20,
+      height: 20,
     },
     p24: {
       width: 24,

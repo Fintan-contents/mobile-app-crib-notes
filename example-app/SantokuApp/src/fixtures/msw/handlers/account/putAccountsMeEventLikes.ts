@@ -1,10 +1,10 @@
 import {rest} from 'msw';
 
+import {getLoggedInAccountId} from './getLoggedInAccountId';
 import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
 import {getDb} from '../../utils/getDb';
-import {getLoggedInAccountId} from './getLoggedInAccountId';
 
 export const putAccountsMeEventLikes = rest.put(
   `${backendUrl}/accounts/me/likes/events/:eventId`,
@@ -17,7 +17,7 @@ export const putAccountsMeEventLikes = rest.put(
       if (!eventLike) {
         db.eventLike.create({eventId, accountId});
         db.event.update({
-          where: {accountId: {equals: accountId}, eventId: {equals: eventId}},
+          where: {eventId: {equals: eventId}},
           data: {likes: likes => likes + 1},
         });
       }

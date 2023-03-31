@@ -1,6 +1,6 @@
-import {maxDb} from '../db';
 import {santokuAccount} from './accountData';
 import {adminAccount} from './accountMaxData';
+import {maxDb} from '../db';
 
 export const answerLikeMaxData = () => {
   maxDb.answerLike.create({answerLikeId: '1', questionId: '1', answerId: '1', accountId: santokuAccount.accountId});

@@ -1,6 +1,6 @@
-import {db} from '../db';
 import {santokuAccount} from './accountData';
 import {partnerAccount} from './accountMinData';
+import {db} from '../db';
 
 export const answerCommentData = () => {
   db.answerComment.create({

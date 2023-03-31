@@ -7,7 +7,6 @@ import {answerModel} from './answerModel';
 import {appSupportedVersionModel} from './appSupportedVersionModel';
 import {eventLikeModel} from './eventLikeModel';
 import {eventModel} from './eventModel';
-import {loggedInAccountModel} from './loggedInAccountModel';
 import {notificationModel} from './notificationModel';
 import {questionCommentLikeModel} from './questionCommentLikeModel';
 import {questionCommentModel} from './questionCommentModel';
@@ -18,7 +17,6 @@ import {templateModel} from './templateModel';
 import {termsModel} from './termsModel';
 
 export const models = {
-  ...loggedInAccountModel,
   ...accountModel,
   ...accountTermsModel,
   ...termsModel,

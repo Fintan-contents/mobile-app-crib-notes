@@ -1,7 +1,7 @@
-import {maxDb} from '../db';
-import {format2Iso8601} from '../utils/format2Iso8601';
 import {santokuAccount} from './accountData';
 import {adminAccount} from './accountMaxData';
+import {maxDb} from '../db';
+import {format2Iso8601} from '../utils/format2Iso8601';
 
 export const eventMaxData = () => {
   const dateForMaxData = new Date();

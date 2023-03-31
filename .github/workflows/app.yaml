@@ -83,12 +83,12 @@ jobs:
 
       - name: Lint (ESLint)
         run: |
-          cd example-app/SantokuApp && npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -f=rdjson -name="ESLint (SantokuApp)"
+          cd example-app/SantokuApp && npm run -s lint:es -- -f eslint-formatter-rdjson | reviewdog -tee -fail-on-error -reporter=github-check -filter-mode=nofilter -f=rdjson -name="ESLint (SantokuApp)"
 
       - name: Lint (TypeScript)
         if: always()
         run: |
-          cd example-app/SantokuApp && npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -f=tsc -name="TypeScript (SantokuApp)"
+          cd example-app/SantokuApp && npm run -s lint:tsc | reviewdog -tee -fail-on-error -reporter=github-check -filter-mode=nofilter -f=tsc -name="TypeScript (SantokuApp)"
 
       - name: Test
         if: always()

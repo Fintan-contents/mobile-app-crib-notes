@@ -50,9 +50,9 @@ jest.mock('expo-secure-store', () => {
     }),
   };
 });
-jest.mock('bases/date/formatDiffInDaysOrHours', () => {
+jest.mock('bases/date/formatDiffInDateTime', () => {
   return {
-    formatDiffInDaysOrHours: jest.fn(() => {
+    formatDiffInDateTime: jest.fn(() => {
       return '1時間前';
     }),
   };

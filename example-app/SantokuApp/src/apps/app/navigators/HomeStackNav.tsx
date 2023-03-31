@@ -3,8 +3,8 @@ import {useTheme} from '@shopify/restyle';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React from 'react';
 
-import {HomeScreen} from '../screens/qa-home/HomeScreen';
 import {HomeStackParamList} from './types';
+import {HomeScreen} from '../screens/qa-home/HomeScreen';
 
 // FIXME: Bottom Tabs + Native Stackでは、Androidで画面がチカチカする事象が発生したため、Stackを使用しています。
 // （以下のissueではiOSでも発生すると記載されているので、確認できていないだけでiOSでも発生する可能性があります。）

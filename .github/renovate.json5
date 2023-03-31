@@ -35,6 +35,7 @@
         '@types/react-native',
         'babel-preset-expo',
         'expo',
+        'expo-build-properties',
         'expo-crypto',
         'expo-keep-awake',
         'expo-local-authentication',
@@ -96,6 +97,23 @@
       groupName: 'React Native Firebase',
       matchPackagePrefixes: [
         '@react-native-firebase/'
+      ],
+    },
+    {
+      // React Native FirebaseのConfig Pluginに依存するパッケージは、React Native Firebaseアップグレード後のPrebuildで更新するため対象外とします
+      groupName: 'Depends on Config Plugin of React Native Firebase',
+      enabled: false,
+      matchPackageNames: [
+        'com.google.firebase:firebase-crashlytics-gradle',
+        'com.google.gms:google-services',
+      ],
+    },
+    {
+      // fs-extra: 型定義と一緒に更新するようにします
+      groupName: 'fs-extra',
+      matchPackageNames: [
+        '@types/fs-extra',
+        'fs-extra',
       ],
     },
     {

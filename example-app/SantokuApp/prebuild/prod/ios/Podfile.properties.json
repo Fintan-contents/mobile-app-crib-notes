@@ -1,0 +1,4 @@
+{
+  "expo.jsEngine": "jsc",
+  "ios.useFrameworks": "static"
+}

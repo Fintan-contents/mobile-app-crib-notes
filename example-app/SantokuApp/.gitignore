@@ -60,20 +60,18 @@ jest-junit.xml
 /coverage
 
 # Local environmental variables
-ios/PersonalAccount.xcconfig
-
-# react-native-config
-.env
-ios/tmp.xcconfig
+PersonalAccount.xcconfig
 
 # Firebase
-GoogleService-Info*.plist
-!ios/SantokuApp/Supporting/GoogleService-Info.Dummy.plist
+GoogleService-Info.plist
 google-services.json
-!android/app/google-services.json
 
 # generated
 /generated
+
+# Prebuild
+/android/
+/ios/
 
 ## Fastlane
 # fastlane specific

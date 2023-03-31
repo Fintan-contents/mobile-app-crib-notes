@@ -1,6 +1,6 @@
-import {db} from '../db';
 import {santokuAccount} from './accountData';
 import {partnerAccount} from './accountMinData';
+import {db} from '../db';
 
 export const answerLikeData = () => {
   db.answerLike.create({answerLikeId: '1', questionId: '1', answerId: '1', accountId: santokuAccount.accountId});

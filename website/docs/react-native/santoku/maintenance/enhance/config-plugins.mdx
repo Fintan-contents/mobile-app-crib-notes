@@ -1,0 +1,233 @@
+---
+title: Config Plugins対応
+---
+
+:::danger
+**このアプリの`Prebuild`はプロキシ環境下で動作しません。**
+Config Pluginsに対応すると`Prebuild`の実行が必須となります。プロキシ環境下で開発を進めるプロジェクトはご注意ください。
+
+おそらく次のPull Requestに関連する不具合と推測しております。
+
+- feat(cli): add proxy support（[https://github.com/expo/expo/pull/19592](https://github.com/expo/expo/pull/19592)）
+
+このPull RequestはExpo SDK 47で取り込まれております。Expo SDK 47以降においては、プロキシ環境下でも`Prebuild`が動作することを確認出来ております。
+しかし、現時点でのこのアプリのExpo SDK対応バージョンは46のため、`Prebuild`はプロキシ環境下で動作しません。
+プロキシ環境下で開発を進めるプロジェクトにおいては、Expo SDK 47へのアップグレード対応と併せてConfig Pluginsに対応することをお勧めします。
+:::
+
+## Config Plugins対応の背景
+
+ネイティブ機能を柔軟に組み込むため、このアプリではBare workflowを採用しました。
+その結果、次の課題が生じました。
+
+**Expo SDKのアップグレードに時間がかかる。**
+Expo SDKのアップグレードに対応するには、ネイティブプロジェクトの設定やコードの変更が必要でした。
+この作業は細心の注意とネイティブ知識が必要で、対応できる人材が限られ非常に時間がかかりました。
+
+**ネイティブプロジェクトへの変更を管理しづらい。**
+Bare workflowでは、Expoで用意されたネイティブプロジェクトのテンプレートを管理します。
+アプリは必要に応じてアプリ独自の変更をネイティブプロジェクトに加えます。
+元から用意されたリソースと後から変更したリソースの区別が難しく、どこに何を何のために追加・修正したのかの管理が困難でした。
+
+これらの課題を解決するため、Config Pluginsに対応しました。
+
+Config PluginsはAndroidやiOSプロジェクトのネイティブ設定やコードをカスタマイズできる機能です。
+ネイティブ設定やコードの変更をプラグインとして管理できるため、上記課題への解決策となります。
+Config Pluginsの概要は[Config Pluginsについて](/react-native/santoku/development/build-configuration/about-plugins.mdx)を参照してください。
+
+## Config Plugins対応に伴う主な変更点
+
+### ビルドバリアント
+
+Config Plugins対応に伴い、ビルドバリアントの考え方を見直しました。
+見直した理由は次のとおりです。
+
+- デバッグビルドとリリースビルド以外のビルドタイプを用意するのが難しい
+- ビルドタイプとプロダクトフレーバーの柔軟な組み合わせが必要な場面はあまりない
+
+今後はアプリの利用シーンに応じて、環境変数とビルドタイプの組み合わせでビルドを管理します。
+詳しくは[ビルドタイプ](/react-native/santoku/development/build-configuration/build-type.mdx)を参照してください。
+
+### react-native-config
+
+react-native-configを導入することで、ネイティブとReactで同じ環境変数を使用できました。
+しかし、react-native-configの設定は難しく、新たな環境を追加するには技術力と時間を要しました。
+そこで、react-native-configを使用しないことにしました。
+環境変数はExpo Configでの管理となります。
+詳しくは[アプリ特有の設定値](/react-native/santoku/development/build-configuration/app-constants.mdx)を参照してください。
+
+## このアプリで実施したConfig Pluginsの対応手順
+
+このアプリでは、次の作業を上から順に実施してConfig Pluginsに対応しました。
+
+- [リソースをassetsへ移動](#リソースをassetsへ移動)
+- [リソースをtemplateへ移動](#リソースをtemplateへ移動)
+- [android、iosフォルダの削除](#androidiosフォルダの削除)
+- [Expo configの追加](#expo-configの追加)
+- [patchesの追加](#patchesの追加)
+- [ダミーのFirebase設定ファイルの追加](#ダミーのfirebase設定ファイルの追加)
+- [依存ライブラリの追加・変更](#依存ライブラリの追加変更)
+- [ソースコードの修正](#ソースコードの修正)
+
+アップグレードを実施したPull Requestは次のとおりです。具体的な修正内容はこちらを参照してください。
+
+- [🧑‍💻: Improve build settings (#996)](https://github.com/ws-4020/mobile-app-crib-notes/pull/1024)
+- [♻️: Corrected according to Config Plugin naming conventions best practices](https://github.com/ws-4020/mobile-app-crib-notes/pull/1028)
+- [♻️: Use Constants.expoConfig instead of Constants.manifest.](https://github.com/ws-4020/mobile-app-crib-notes/pull/1046)
+
+### リソースをassetsへ移動
+
+次のリソースを`assets`フォルダへ移動しました。
+
+- Android（アイコン）
+
+|移動元([プロジェクトルート]/android/app/src/)|移動先([プロジェクトルート]/assets/android/)|
+|--|--|
+|debug/res/mipmap-xxxhdpi/ic_launcher_foreground.png|ic_launcher_foreground_local.png|
+|releaseInHouse/res/mipmap-xxxhdpi/ic_launcher_foreground.png|ic_launcher_foreground_stg.png|
+|main/res/mipmap-xxxhdpi/ic_launcher_foreground.png|ic_launcher_foreground_prod.png|
+
+- Android（スプラッシュスクリーン）
+
+|移動元([プロジェクトルート]/android/app/src/)|移動先([プロジェクトルート]/assets/android/)|
+|--|--|
+|main/res/drawable-hdpi/splashscreen_footer.png|splashscreen/hdpi/splashscreen_footer.png|
+|main/res/drawable-hdpi/splashscreen_footer_background.png|splashscreen/hdpi/splashscreen_footer_background.png|
+|main/res/drawable-hdpi/splashscreen_foreground.png|splashscreen/hdpi/splashscreen_foreground.png|
+|main/res/drawable-ldpi/splashscreen_footer.png|splashscreen/ldpi/splashscreen_footer.png|
+|main/res/drawable-ldpi/splashscreen_footer_background.png|splashscreen/ldpi/splashscreen_footer_background.png|
+|main/res/drawable-ldpi/splashscreen_foreground.png|splashscreen/ldpi/splashscreen_foreground.png|
+|main/res/drawable-mdpi/splashscreen_footer.png|splashscreen/mdpi/splashscreen_footer.png|
+|main/res/drawable-mdpi/splashscreen_footer_background.png|splashscreen/mdpi/splashscreen_footer_background.png|
+|main/res/drawable-mdpi/splashscreen_foreground.png|splashscreen/mdpi/splashscreen_foreground.png|
+|main/res/drawable-xhdpi/splashscreen_footer.png|splashscreen/xhdpi/splashscreen_footer.png|
+|main/res/drawable-xhdpi/splashscreen_footer_background.png|splashscreen/xhdpi/splashscreen_footer_background.png|
+|main/res/drawable-xhdpi/splashscreen_foreground.png|splashscreen/xhdpi/splashscreen_foreground.png|
+|main/res/drawable-xxhdpi/splashscreen_footer.png|splashscreen/xxhdpi/splashscreen_footer.png|
+|main/res/drawable-xxhdpi/splashscreen_footer_background.png|splashscreen/xxhdpi/splashscreen_footer_background.png|
+|main/res/drawable-xxhdpi/splashscreen_foreground.png|splashscreen/xxhdpi/splashscreen_foreground.png|
+|main/res/drawable-xxxhdpi/splashscreen_footer.png|splashscreen/xxxhdpi/splashscreen_footer.png|
+|main/res/drawable-xxxhdpi/splashscreen_footer_background.png|splashscreen/xxxhdpi/splashscreen_footer_background.png|
+|main/res/drawable-xxxhdpi/splashscreen_foreground.png|splashscreen/xxxhdpi/splashscreen_foreground.png|
+
+- iOS（アイコン）
+
+|移動元([プロジェクトルート]/ios/SantokuApp/Images.xcassets/)|移動先([プロジェクトルート]/assets/ios/)|
+|--|--|
+|AppIcon.debug.appiconset/1024x1024&#64;1x.png|ic_local.png|
+|AppIcon.house.appiconset/1024x1024&#64;1x.png|ic_stg.png|
+|AppIcon.appiconset/1024x1024&#64;1x.png|ic_prod.png|
+
+### リソースをtemplateへ移動
+
+次のリソースを`template`フォルダへ移動しました。
+これらのリソースはアプリ独自に作成したConfig Pluginsで利用します。
+
+- Android（スプラッシュスクリーン）
+
+|移動元([プロジェクトルート]/android/app/src/)|移動先([プロジェクトルート]/config/plugin/template/android/app/src/)|
+|--|--|
+|main/res/drawable/splashscreen.xml|main/res/drawable/splashscreen.xml|
+
+- Android（ソースコード）
+
+|移動元([プロジェクトルート]/android/app/src/)|移動先([プロジェクトルート]/config/plugin/template/android/app/src/)|
+|--|--|
+|main/java/jp/fintan/mobile/santokuapp/MainActivity.java|main/java/com/helloworld/MainActivity.java|
+|main/java/jp/fintan/mobile/santokuapp/demo/throwerror/ThrowErrorModule.java|main/java/com/helloworld/ThrowErrorModule.java|
+|main/java/jp/fintan/mobile/santokuapp/demo/throwerror/ThrowErrorPackage.java|main/java/com/helloworld/ThrowErrorPackage.java|
+
+- iOS（スプラッシュスクリーン）
+
+|移動元([プロジェクトルート]/ios/SantokuApp/Images.xcassets/)|移動先([プロジェクトルート]/config/plugin/template/ios/HelloWorld/Images.xcassets/)|
+|--|--|
+|SplashScreenBackground.imageset/Contents.json|SplashScreenBackground.imageset/Contents.json|
+|SplashScreenBackground.imageset/background.png|SplashScreenBackground.imageset/background.png|
+|SplashScreenFooter.imageset/Contents.json|SplashScreenFooter.imageset/Contents.json|
+|SplashScreenFooter.imageset/splashscreen_footer&#64;1x.png|SplashScreenFooter.imageset/splashscreen_footer&#64;1x.png|
+|SplashScreenFooter.imageset/splashscreen_footer&#64;2x.png|SplashScreenFooter.imageset/splashscreen_footer&#64;2x.png|
+|SplashScreenFooter.imageset/splashscreen_footer&#64;3x.png|SplashScreenFooter.imageset/splashscreen_footer&#64;x.png|
+|SplashScreenFooterBackground.imageset/Contents.json|SplashScreenFooterBackground.imageset/Contents.json|
+|SplashScreenFooterBackground.imageset/splashscreen_footer_background&#64;1x.png|SplashScreenFooterBackground.imageset/splashscreen_footer_background&#64;1x.png|
+|SplashScreenFooterBackground.imageset/splashscreen_footer_background&#64;2x.png|SplashScreenFooterBackground.imageset/splashscreen_footer_background&#64;2x.png|
+|SplashScreenFooterBackground.imageset/splashscreen_footer_background&#64;3x.png|SplashScreenFooterBackground.imageset/splashscreen_footer_background&#64;3x.png|
+|SplashScreen.imageset/Contents.json|SplashScreenForeground.imageset/Contents.json|
+|SplashScreen.imageset/SplashScreenForeground.imageset/splashscreen_foreground&#64;1x.png|SplashScreenForeground.imageset/splashscreen_foreground&#64;1x.png|
+|SplashScreen.imageset/SplashScreenForeground.imageset/splashscreen_foreground&#64;2x.png|SplashScreenForeground.imageset/splashscreen_foreground&#64;2x.png|
+|SplashScreen.imageset/SplashScreenForeground.imageset/splashscreen_foreground&#64;3x.png|SplashScreenForeground.imageset/splashscreen_foreground&#64;3x.png|
+
+- iOS（ソースコード）
+
+|移動元([プロジェクトルート]/ios/)|移動先([プロジェクトルート]/config/plugin/template/ios/)|
+|--|--|
+|Demo/RCTThrowErrorModule.h|HelloWorld/RCTThrowErrorModule.h|
+|Demo/RCTThrowErrorModule.m|HelloWorld/RCTThrowErrorModule.m|
+
+- iOS（xcconfig）
+
+|移動元([プロジェクトルート]/ios/)|移動先([プロジェクトルート]/config/plugin/template/ios/)|
+|--|--|
+|PersonalAccount.xcconfig.template|HelloWorld/PersonalAccount.xcconfig.template|
+
+- iOS（Storyboard）
+
+|移動元([プロジェクトルート]/ios/)|移動先([プロジェクトルート]/config/plugin/template/ios/)|
+|--|--|
+|SantokuApp/SplashScreen.storyboard|HelloWorld/SplashScreen.storyboard|
+
+### android、iosフォルダの削除
+
+`android`、`ios`フォルダを削除しました。
+
+### pluginのソースコード追加
+
+`config/plugin/src`フォルダにアプリ独自のConfig Pluginsを作成しました。
+それぞれの概要は[アプリで独自に作成したConfig Plugins](/react-native/santoku/development/build-configuration/apply-plugins.mdx#アプリで独自に作成したconfig-plugins)を参照してください。
+
+### Expo configの追加
+
+次のExpo configを用意しました。
+
+|ファイル|概要|
+|--|--|
+|app.config.js|アプリ全体のベースとなる設定です。環境毎に違う設定値は、prodの設定を定義しています。prodと違う設定を定義する場合は、各環境ごとの設定ファイル（app.config.xxx.json）で再定義しています。|
+|config/app.config.local.js|ローカル環境で開発する際の設定を定義しています。|
+|config/app.config.stg.js|ステージング環境のアプリを配信する際の設定を定義しています。|
+|config/app.config.prod.js|本番環境のアプリを配信する際の設定を定義しています。|
+
+詳しくは[環境の切り替え](/react-native/santoku/development/build-configuration/environments-configuration.mdx)を参照してください。
+
+### patchesの追加
+
+`IOSConfig.XcodeUtils.addResourceFileToGroup`でファイルを追加した際に、追加したファイルのIDが取得できません。
+そのため、追加したファイルのIDを参照するような設定をできない事象が発生しました。
+そこで、`IOSConfig.XcodeUtils.addResourceFileToGroup`にファイルのIDを指定できるパッチを当てました。
+
+### ダミーのFirebase設定ファイルの追加
+
+local環境で使用するダミーの設定ファイルを用意しました。
+
+- Android: `[プロジェクトルート]/google-services-dummy.json`
+- iOS: `[プロジェクトルート]/GoogleService-Info.Dummy.plist`
+
+詳しくは[Firebaseの設定ファイル](/react-native/santoku/development/build-configuration/firebase-setting-file.mdx)を参照してください。
+
+### 依存ライブラリの追加・変更
+
+#### `expo`、`react-native`、`expo-status-bar`
+
+`Prebuild`の際に`expo`、`react-native`のバージョンが更新され、`expo-status-bar`への依存性が追加されました。
+`Prebuild`の際の`dependencies`フィールドの更新については、[Expoの公式記事](https://docs.expo.dev/workflow/prebuild/#dependencies)を参照してください。
+
+#### `expo-build-properties`
+
+アプリ独自のConfig Pluginsで使用するため、`expo-build-properties`を依存ライブラリに追加しました。
+
+#### `react-native-config`
+
+`react-native-config`は使用しないことにしたので、依存ライブラリから削除しました。
+
+### ソースコードの修正
+
+環境変数の扱いを変更したことにより、`[プロジェクトルート]/src/bases/core/configs/AppConfig.ts`を修正しました。
+詳しくは[アプリ特有の設定値](/react-native/santoku/development/build-configuration/app-constants.mdx)を参照してください。

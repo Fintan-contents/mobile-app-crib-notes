@@ -14,6 +14,14 @@ hide_table_of_contents: true
 
 [プロジェクトの作成](/react-native/learn/getting-started/create-project)を参照し、新たに初期プロジェクトを作成してください。
 
+### ネイティブプロジェクトの生成
+
+次のコマンドを実行して、ネイティブプロジェクトを生成してください。
+
+```bash
+npm run prebuild
+```
+
 ### 使用ライブラリのインストール
 
 Q&Aアプリの作成には、次のライブラリを使用します。他に使用したいライブラリがあれば、適宜追加してください。
@@ -33,13 +41,14 @@ Q&Aアプリの作成には、次のライブラリを使用します。他に�
 ライブラリのインストールは、次のコマンドを実行してください。
 
 ```bash
-expo install <package-name>
+npx expo install <package-name>
 ```
 
 `devDependencies`に追加する場合は、`-D`または`--save-dev`オプションをつけてコマンドを実行してください。
+今回使用するライブラリで該当するものはありませんが、Expo SDKと互換性のある依存パッケージを`devDependencies`に追加しようとすると、`dependencies`に追加されてしまいます。詳細は、[依存パッケージの追加](/react-native/santoku/development/dependency-management#依存パッケージの追加)を参考にしてください。
 
 ```bash
-npm install -D <package-name>
+npx expo install <package-name> -- -D
 ```
 
 iOSアプリを開発をする場合は、macOSで次のコマンドを実行して必要なライブラリをインストールしてください。
@@ -83,7 +92,6 @@ Q&Aアプリは、サンプルアプリ（SantokuApp）と同様のアプリケ�
 | src/bases/logging/ConsoleTransport.ts |
 | src/bases/logging/SimpleLogFormatter.ts |
 | src/bases/logging/Transport.ts |
-| src/bases/logging/sendErrorLog.ts |
 
 ### エラー処理
 
@@ -477,11 +485,11 @@ export const AppWithMsw = () => {
 ```
 
 ```typescript title="src/fixtures/msw/datas/loggedInAccountData.ts"
-import {db} from "../db";
+import {setLoggedInAccountId} from '../handlers/account/setLoggedInAccountId';
 
 export const loggedInAccountData = () => {
-  db.loggedInAccount.create({accountId: 'santoku'});
-}
+  setLoggedInAccountId('santoku');
+};
 ```
 
 次に、以下のファイルを修正します。

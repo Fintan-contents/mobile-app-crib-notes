@@ -1,11 +1,10 @@
-import {db} from '../../db';
+import {accountId} from './setLoggedInAccountId';
 
 export const getLoggedInAccountId = () => {
-  const loggedInAccount = db.loggedInAccount.getAll();
-  if (!loggedInAccount.length) {
+  if (!accountId) {
     throw new LoggedInAccountIdNotFound('Logged in account not found.');
   }
-  return loggedInAccount[0].accountId;
+  return accountId;
 };
 
 export class LoggedInAccountIdNotFound extends Error {}

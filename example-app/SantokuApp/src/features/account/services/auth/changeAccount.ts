@@ -6,8 +6,8 @@
 import {AccountLoginResponse} from 'features/backend/apis/model';
 import {loadPassword} from 'features/secure-storage/services/loadPassword';
 
-import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
 import {login} from './login';
+import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
 
 export const changeAccount = async (accountId: string): Promise<AccountLoginResponse> => {
   const password = await loadPassword(accountId);

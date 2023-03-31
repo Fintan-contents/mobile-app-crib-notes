@@ -3,8 +3,8 @@ import {AccountLoginResponseStatus} from 'features/backend/apis/model';
 import * as csrfToken from 'features/backend/utils/refreshCsrfToken';
 import * as loadPassword from 'features/secure-storage/services/loadPassword';
 
-import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
 import {changeAccount} from './changeAccount';
+import {PasswordNotFoundError} from '../../errors/PasswordNotFoundError';
 
 describe('changeAccount', () => {
   const spyLoginApi = jest.spyOn(accountApi, 'postLogin').mockResolvedValue({

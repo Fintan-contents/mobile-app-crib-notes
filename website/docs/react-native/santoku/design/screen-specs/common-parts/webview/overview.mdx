@@ -51,16 +51,16 @@ sidebar_label: WebView
 
 | イベント | 処理概要 |
 |:------|:------|
-| コンテンツを一番下までスクロール | プロパティ：onScrollEndで渡された処理を実行します。<br/>初回のみ、プロパティ：onceScrollEndで渡された処理も実行します。 |
+| コンテンツを一番下までスクロール | プロパティ：onScrollEndで渡された処理を実行します。<br/>初回のみ、プロパティ：onScrollEndOnceで渡された処理も実行します。 |
 
 ## プロパティ
 
-| 名称           | 必須 | 型     | 説明                                                   |
-|:--------------|:-----|:-------|:------------------------------------------------------|
-| onScrollEnd   | -    | function  | コンテンツを一番下までスクロールした時に実行する処理        |
-| onceScrollEnd | -    | function  | 最初にコンテンツを一番下までスクロールした時にのみ実行する処理 |
-| onError       | -    | function  | React Native WebViewのonErrorが発生した時に実行する処理<br />指定がない場合は、後述のエラー発生時の処理に準拠します |
-| onHttpError   | -    | function  | React Native WebViewのonHttpErrorが発生した時に実行する処理<br />指定がない場合は、後述のエラー発生時の処理に準拠します              |
+| 名称             | 必須 | 型     | 説明                                                   |
+|:----------------|:-----|:-------|:------------------------------------------------------|
+| onScrollEnd     | -    | function  | コンテンツを一番下までスクロールした時に実行する処理        |
+| onScrollEndOnce | -    | function  | 最初にコンテンツを一番下までスクロールした時にのみ実行する処理 |
+| onError         | -    | function  | React Native WebViewのonErrorが発生した時に実行する処理<br />指定がない場合は、後述のエラー発生時の処理に準拠します |
+| onHttpError     | -    | function  | React Native WebViewのonHttpErrorが発生した時に実行する処理<br />指定がない場合は、後述のエラー発生時の処理に準拠します              |
 
 ※ React Native WebViewには存在しないプロパティや、デフォルトの動作を提供しているもののみ記載しています。上記以外のプロパティについては[React Native WebViewのAPIリファレンス](https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md)をご参照ください。
 

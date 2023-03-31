@@ -1,13 +1,13 @@
 import {Query, useMutation, useQueryClient, hashQueryKey} from 'react-query';
 import {QueryFilters} from 'react-query/types/core/utils';
 
-import {useIsLoggedIn} from '../../client-states/useIsLoggedIn';
-import {useAccountCommands} from '../account/useAccountCommands';
 import {autoLogin} from './autoLogin';
 import {changeAccount} from './changeAccount';
 import {login} from './login';
 import {logout} from './logout';
 import {signup} from './signup';
+import {useIsLoggedIn} from '../../client-states/useIsLoggedIn';
+import {useAccountCommands} from '../account/useAccountCommands';
 
 const defaultQueryFilters = {predicate: (query: Query) => query.queryHash !== hashQueryKey(['account', 'isLoggedIn'])};
 

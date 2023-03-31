@@ -11,14 +11,14 @@ title: ログの利用
 
 Firebase Crashlyticsに記録されるエラーログは、エラーコードを基準にグループ化されます。Firebase Crashlyticsのコンソールでは、グループ化されたエラーコード毎にエラーの発生回数やユーザ数を確認できます。そのため、エラーコードにはグループ化したい単位で値を設定してください。
 
-以下は、エラーログを送信する例です。`log.error`の第一引数がメッセージ、第二引数がエラーコードになります。
+以下は、エラーログを送信する例です。`log.error`の第一引数がエラーオブジェクト、第二引数がエラーコードになります。
 
 ```typescript title="起動IDの取得に失敗した場合"
-log.error('Failed to get launchedId.', 'LaunchedIdGettingFailure');
+log.error(new Error('Failed to get launchedId.'), 'LaunchedIdGettingFailure');
 ```
 
 ```typescript title="メッセージのロードに失敗した場合"
-log.error('Failed to load message.', 'BundledMessagesLoadingFailure');
+log.error(new Error('Failed to load message.'), 'BundledMessagesLoadingFailure');
 ```
 
 :::caution

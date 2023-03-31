@@ -1,8 +1,8 @@
 import React from 'react';
 
+import {MarkdownToolbarItem} from './MarkdownToolbarItem';
 import {Box} from '../common';
 import {Snackbar} from '../snackbar/Snackbar';
-import {MarkdownToolbarItem} from './MarkdownToolbarItem';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
