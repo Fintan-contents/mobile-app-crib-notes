@@ -41,7 +41,7 @@ Q&Aアプリの作成には、次のライブラリを使用します。他に�
 ライブラリのインストールは、次のコマンドを実行してください。
 
 ```bash
-expo install <package-name>
+npx expo install <package-name>
 ```
 
 `devDependencies`に追加する場合は、`-D`または`--save-dev`オプションをつけてコマンドを実行してください。
@@ -91,7 +91,6 @@ Q&Aアプリは、サンプルアプリ（SantokuApp）と同様のアプリケ�
 | src/bases/logging/ConsoleTransport.ts |
 | src/bases/logging/SimpleLogFormatter.ts |
 | src/bases/logging/Transport.ts |
-| src/bases/logging/sendErrorLog.ts |
 
 ### エラー処理
 
