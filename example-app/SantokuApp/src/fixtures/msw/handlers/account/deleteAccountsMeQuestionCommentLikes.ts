@@ -1,10 +1,10 @@
 import {rest} from 'msw';
 
+import {getLoggedInAccountId} from './getLoggedInAccountId';
 import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
 import {getDb} from '../../utils/getDb';
-import {getLoggedInAccountId} from './getLoggedInAccountId';
 
 export const deleteAccountsMeQuestionCommentLikes = rest.delete(
   `${backendUrl}/accounts/me/likes/questions/:questionId/comments/:commentId`,

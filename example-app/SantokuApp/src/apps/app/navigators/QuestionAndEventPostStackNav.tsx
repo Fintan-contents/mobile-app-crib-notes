@@ -3,9 +3,9 @@ import {useTheme} from '@shopify/restyle';
 import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import React from 'react';
 
-import {QuestionAndEventPostScreen} from '../screens/qa-post/QuestionAndEventPostScreen';
 import {QuestionAndEventPostStackParamList} from './types';
 import {useCloseThisNavigatorButton} from './useCloseThisNavigatorButton';
+import {QuestionAndEventPostScreen} from '../screens/qa-post/QuestionAndEventPostScreen';
 
 const nav = createNativeStackNavigator<QuestionAndEventPostStackParamList>();
 

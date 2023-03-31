@@ -70,7 +70,7 @@ export const QuestionDetailPage: React.FC<QuestionDetailPageProps> = ({questionI
             );
           })}
         </StyledColumn>
-        <StyledSpace height="p64" />
+        <StyledSpace height="p168" />
       </StyledScrollView>
       <Box position="absolute" right={8} bottom={32} flexDirection="column" justifyContent="center" alignItems="center">
         {Platform.OS === 'android' && (

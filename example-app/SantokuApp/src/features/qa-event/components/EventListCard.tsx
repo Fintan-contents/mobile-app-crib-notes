@@ -1,25 +1,21 @@
-import {useTheme} from '@shopify/restyle';
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {Box, Text} from 'bases/ui/common';
 import {StyledImage} from 'bases/ui/common/StyledImage';
 import {StyledRow} from 'bases/ui/common/StyledRow';
 import {StyledSpace} from 'bases/ui/common/StyledSpace';
 import {PersonIllustration} from 'bases/ui/illustration/PersonIllustration';
-import {RestyleTheme} from 'bases/ui/theme/restyleTheme';
 import {Event} from 'features/backend/apis/model';
 import React, {FC} from 'react';
-import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
 import {LikeWithCount} from './LikeWithCount';
 
-export type EventListCardProps = {event: Event};
+export type EventListCardProps = {event: Event; containerWidth: number};
 
-export const EventListCard: FC<EventListCardProps> = ({event: {title, likes, profile}}) => {
-  const {width: windowWidth} = useSafeAreaFrame();
-  const theme = useTheme<RestyleTheme>();
+export const EventListCard: FC<EventListCardProps> = ({event: {title, likes, profile}, containerWidth}) => {
   return (
     <Box
       backgroundColor="white"
-      width={windowWidth - theme.spacing.p24 * 2}
+      width={containerWidth}
       px="p24"
       py="p16"
       my="p2"
@@ -48,9 +44,11 @@ export const EventListCard: FC<EventListCardProps> = ({event: {title, likes, pro
             {profile?.nickname}
           </Text>
           <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-            <Text variant="font14Regular" lineHeight={20} letterSpacing={0.25}>
-              {profile?.points}/{profile?.totalPoints}
-            </Text>
+            {profile && (
+              <Text variant="font14Regular" lineHeight={20} letterSpacing={0.25}>
+                {formatLargeNumber(profile.points, 999)}/{formatLargeNumber(profile.totalPoints, 999)}
+              </Text>
+            )}
           </Box>
         </Box>
         <StyledSpace width="p16" />

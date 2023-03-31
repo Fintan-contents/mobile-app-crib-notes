@@ -6,7 +6,7 @@ import {Comment} from 'features/backend/apis/model';
 import React, {FC, useMemo} from 'react';
 
 import {CommentLikeButtonWithCount} from './CommentLikeButtonWithCount';
-import {DiffDaysOrHours} from './DiffDaysOrHours';
+import {DiffInDateTime} from './DiffInDateTime';
 
 const showUnderDevelopment = () => Snackbar.show('現在開発中です。');
 
@@ -23,11 +23,11 @@ export const CommentCard: FC<CommentCardProps> = ({content, likes, profile, date
         <Text variant="font13Regular" lineHeight={19} letterSpacing={0.25}>
           {content}
         </Text>
-        <StyledRow flex={1} justifyContent="space-between">
+        <StyledRow flex={1} justifyContent="space-between" flexWrap="wrap">
           <Text variant="font13Regular" lineHeight={24} letterSpacing={0.15} textDecorationLine="underline">
             {profile?.nickname}
           </Text>
-          <DiffDaysOrHours datetime={datetime} />
+          <DiffInDateTime datetime={datetime} />
         </StyledRow>
       </StyledColumn>
     </StyledRow>

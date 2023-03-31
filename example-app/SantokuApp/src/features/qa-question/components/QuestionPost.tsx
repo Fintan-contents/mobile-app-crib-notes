@@ -11,10 +11,10 @@ import {MarkdownToolbar} from 'bases/ui/markdown/MarkdownToolbar';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {InputAccessoryView, Keyboard, Platform} from 'react-native';
 
-import {useQuestionForm} from '../forms/useQuestionForm';
-import {useTemplates} from '../services/useTemplates';
 import {TemplateChip} from './TemplateChip';
 import {TemplateClearChip} from './TemplateClearChip';
+import {useQuestionForm} from '../forms/useQuestionForm';
+import {useTemplates} from '../services/useTemplates';
 
 type QuestionPostProps = {
   isVisibleTagSheet: boolean;

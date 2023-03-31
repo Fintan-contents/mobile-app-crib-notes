@@ -68,6 +68,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
           translucent={false}
         />
         <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
           style={
             Object {
               "flex": 1,
@@ -145,6 +147,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                     translucent={false}
                   />
                   <View
+                    accessibilityElementsHidden={false}
+                    importantForAccessibility="auto"
                     style={
                       Object {
                         "flex": 1,
@@ -810,7 +814,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                         }
                                                       }
                                                     >
-                                                      <View
+                                                      <RCTSafeAreaView
+                                                        emulateUnlessSupported={true}
                                                         style={
                                                           Array [
                                                             Object {
@@ -837,6 +842,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                                 </ForwardRef>
                                                               </ForwardRef>
                                                               <EventList
+                                                                containerWidth={0}
                                                                 data={
                                                                   Array [
                                                                     Object {
@@ -889,97 +895,17 @@ XXRが全くわからない方
                                                                       },
                                                                       "title": "【勉強会】CSR/SSR/SSG/ISR",
                                                                     },
-                                                                    Object {
-                                                                      "accountId": "santoku",
-                                                                      "content": "ReactとFirebaseを使用したWebアプリケーションに関するイベントです。
-日時：2023年1月30日（月） 17:00〜19:00
-
-■参加資格
-制限なし
-
-■概要
-ReactとFirebaseを使用してWebアプリケーションを構築した開発者が、そのメリットやデメリットなどを話します。
-",
-                                                                      "endDate": "2023-02-01T10:00:00Z",
-                                                                      "eventId": "5",
-                                                                      "likes": 8,
-                                                                      "profile": Object {
-                                                                        "avatarImageUrl": "undefinedsantoku-avatar.png",
-                                                                        "nickname": "santoku",
-                                                                        "points": 1000,
-                                                                        "totalPoints": 3000,
-                                                                        "type": Array [],
-                                                                      },
-                                                                      "title": "【イベント】React x Firebase",
-                                                                    },
-                                                                    Object {
-                                                                      "accountId": "santoku",
-                                                                      "content": "Open ID Connectの勉強会。
-日時：2023年1月17日（火） 18:00〜19:00
-
-■参加資格
-制限なし
-
-■概要
-Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追っていきます。
-",
-                                                                      "endDate": "2023-01-18T10:00:00Z",
-                                                                      "eventId": "4",
-                                                                      "likes": 5,
-                                                                      "profile": Object {
-                                                                        "avatarImageUrl": "undefinedsantoku-avatar.png",
-                                                                        "nickname": "santoku",
-                                                                        "points": 1000,
-                                                                        "totalPoints": 3000,
-                                                                        "type": Array [],
-                                                                      },
-                                                                      "title": "【勉強会】OIDC",
-                                                                    },
                                                                   ]
                                                                 }
                                                               />
-                                                              <StyledRow
-                                                                alignItems="center"
-                                                                justifyContent="space-between"
-                                                                px="p24"
-                                                                py="p32"
-                                                              >
-                                                                <ForwardRef
-                                                                  letterSpacing={0.18}
-                                                                  lineHeight={24}
-                                                                  variant="font20Bold"
-                                                                >
-                                                                  質問
-                                                                </ForwardRef>
-                                                                <StyledRow
-                                                                  alignItems="center"
-                                                                  space="p32"
-                                                                >
-                                                                  <ForwardRef
-                                                                    onPress={[Function]}
-                                                                  >
-                                                                    <SortIllustration
-                                                                      color="black"
-                                                                    />
-                                                                  </ForwardRef>
-                                                                  <ForwardRef
-                                                                    onPress={[Function]}
-                                                                  >
-                                                                    <FilterAltIllustration />
-                                                                  </ForwardRef>
-                                                                  <ForwardRef
-                                                                    onPress={[Function]}
-                                                                  >
-                                                                    <LocalOfferIllustration
-                                                                      color="black"
-                                                                    />
-                                                                  </ForwardRef>
-                                                                </StyledRow>
-                                                              </StyledRow>
                                                             </React.Fragment>
                                                           }
                                                           data={
                                                             Array [
+                                                              Object {
+                                                                "navigateToQuestionDetail": [Function],
+                                                                "question": Object {},
+                                                              },
                                                               Object {
                                                                 "navigateToQuestionDetail": [Function],
                                                                 "question": Object {
@@ -1165,7 +1091,9 @@ Flutter 3.0.5 stable
                                                                   "answers": 1,
                                                                   "beginner": false,
                                                                   "comments": 0,
-                                                                  "content": "React Navigationを使用していますが、ヘッダを非表示にする方法はありますか？",
+                                                                  "content": "現在携わっているPJで、ビックリマークが二つ連続で並んでいる構文がありました。
+この構文を理解できずに困っています。ご存知の方いらっしゃいますか？
+",
                                                                   "datetime": "2022-06-28T10:00:00Z",
                                                                   "lastUpdatedAt": "2022-07-05T10:00:00Z",
                                                                   "likes": 3,
@@ -1262,7 +1190,11 @@ React Native 0.66
                                                           renderItem={[Function]}
                                                           scrollEventThrottle={50}
                                                           showsVerticalScrollIndicator={false}
-                                                          stickyHeaderIndices={Array []}
+                                                          stickyHeaderIndices={
+                                                            Array [
+                                                              1,
+                                                            ]
+                                                          }
                                                           style={
                                                             Array [
                                                               Object {},
@@ -1302,9 +1234,10 @@ React Native 0.66
                                                                 </Text>
                                                               </View>
                                                               <RCTScrollView
+                                                                decelerationRate="fast"
                                                                 horizontal={true}
-                                                                pagingEnabled={true}
                                                                 showsHorizontalScrollIndicator={false}
+                                                                snapToInterval={-32}
                                                                 style={
                                                                   Array [
                                                                     Object {},
@@ -1312,6 +1245,15 @@ React Native 0.66
                                                                 }
                                                               >
                                                                 <View>
+                                                                  <View
+                                                                    style={
+                                                                      Array [
+                                                                        Object {
+                                                                          "paddingLeft": 16,
+                                                                        },
+                                                                      ]
+                                                                    }
+                                                                  />
                                                                   <View
                                                                     style={
                                                                       Array [
@@ -1325,7 +1267,7 @@ React Native 0.66
                                                                       style={
                                                                         Array [
                                                                           Object {
-                                                                            "paddingLeft": 24,
+                                                                            "paddingLeft": 8,
                                                                           },
                                                                         ]
                                                                       }
@@ -1348,7 +1290,7 @@ React Native 0.66
                                                                             },
                                                                             "shadowOpacity": 0.1,
                                                                             "shadowRadius": 0,
-                                                                            "width": 272,
+                                                                            "width": -48,
                                                                           },
                                                                         ]
                                                                       }
@@ -1524,9 +1466,9 @@ React Native 0.66
                                                                                 ]
                                                                               }
                                                                             >
-                                                                              99999999
+                                                                              999+
                                                                               /
-                                                                              99999999
+                                                                              999+
                                                                             </Text>
                                                                           </View>
                                                                         </View>
@@ -1606,7 +1548,7 @@ React Native 0.66
                                                                       style={
                                                                         Array [
                                                                           Object {
-                                                                            "paddingLeft": 24,
+                                                                            "paddingLeft": 8,
                                                                           },
                                                                         ]
                                                                       }
@@ -1625,7 +1567,7 @@ React Native 0.66
                                                                       style={
                                                                         Array [
                                                                           Object {
-                                                                            "paddingLeft": 24,
+                                                                            "paddingLeft": 8,
                                                                           },
                                                                         ]
                                                                       }
@@ -1648,7 +1590,7 @@ React Native 0.66
                                                                             },
                                                                             "shadowOpacity": 0.1,
                                                                             "shadowRadius": 0,
-                                                                            "width": 272,
+                                                                            "width": -48,
                                                                           },
                                                                         ]
                                                                       }
@@ -1906,7 +1848,7 @@ React Native 0.66
                                                                       style={
                                                                         Array [
                                                                           Object {
-                                                                            "paddingLeft": 24,
+                                                                            "paddingLeft": 8,
                                                                           },
                                                                         ]
                                                                       }
@@ -1916,517 +1858,7 @@ React Native 0.66
                                                                     style={
                                                                       Array [
                                                                         Object {
-                                                                          "flexDirection": "row",
-                                                                        },
-                                                                      ]
-                                                                    }
-                                                                  >
-                                                                    <View
-                                                                      style={
-                                                                        Array [
-                                                                          Object {
-                                                                            "paddingLeft": 24,
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                    />
-                                                                    <View
-                                                                      style={
-                                                                        Array [
-                                                                          Object {
-                                                                            "backgroundColor": "#FFFFFF",
-                                                                            "borderRadius": 8,
-                                                                            "elevation": 2,
-                                                                            "justifyContent": "space-between",
-                                                                            "marginVertical": 2,
-                                                                            "paddingHorizontal": 24,
-                                                                            "paddingVertical": 16,
-                                                                            "shadowColor": "#212121",
-                                                                            "shadowOffset": Object {
-                                                                              "height": 2,
-                                                                              "width": 0,
-                                                                            },
-                                                                            "shadowOpacity": 0.1,
-                                                                            "shadowRadius": 0,
-                                                                            "width": 272,
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                    >
-                                                                      <Text
-                                                                        ellipsizeMode="tail"
-                                                                        numberOfLines={3}
-                                                                        style={
-                                                                          Array [
-                                                                            Object {
-                                                                              "color": "#000000",
-                                                                              "fontSize": 22,
-                                                                              "fontWeight": "bold",
-                                                                              "letterSpacing": 0.18,
-                                                                              "lineHeight": 34,
-                                                                              "textDecorationLine": "underline",
-                                                                            },
-                                                                          ]
-                                                                        }
-                                                                      >
-                                                                        【イベント】React x Firebase
-                                                                      </Text>
-                                                                      <View
-                                                                        style={
-                                                                          Array [
-                                                                            Object {
-                                                                              "alignItems": "center",
-                                                                              "flexDirection": "row",
-                                                                              "justifyContent": "space-between",
-                                                                              "marginTop": 16,
-                                                                            },
-                                                                          ]
-                                                                        }
-                                                                      >
-                                                                        <View
-                                                                          style={
-                                                                            Array [
-                                                                              Object {
-                                                                                "alignItems": "center",
-                                                                                "flexDirection": "row",
-                                                                              },
-                                                                            ]
-                                                                          }
-                                                                        >
-                                                                          <RNSVGSvgView
-                                                                            align="xMidYMid"
-                                                                            bbHeight={24}
-                                                                            bbWidth={24}
-                                                                            fill="none"
-                                                                            focusable={false}
-                                                                            meetOrSlice={0}
-                                                                            minX={0}
-                                                                            minY={0}
-                                                                            style={
-                                                                              Array [
-                                                                                Object {
-                                                                                  "backgroundColor": "transparent",
-                                                                                  "borderWidth": 0,
-                                                                                },
-                                                                                Array [
-                                                                                  Object {
-                                                                                    "height": 24,
-                                                                                    "width": 24,
-                                                                                  },
-                                                                                ],
-                                                                                Object {
-                                                                                  "flex": 0,
-                                                                                  "height": 24,
-                                                                                  "width": 24,
-                                                                                },
-                                                                              ]
-                                                                            }
-                                                                            vbHeight={48}
-                                                                            vbWidth={48}
-                                                                          >
-                                                                            <RNSVGGroup
-                                                                              fill={null}
-                                                                              propList={
-                                                                                Array [
-                                                                                  "fill",
-                                                                                ]
-                                                                              }
-                                                                            >
-                                                                              <RNSVGPath
-                                                                                d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                                fill={4288585374}
-                                                                                propList={
-                                                                                  Array [
-                                                                                    "fill",
-                                                                                  ]
-                                                                                }
-                                                                              />
-                                                                            </RNSVGGroup>
-                                                                          </RNSVGSvgView>
-                                                                          <View
-                                                                            style={
-                                                                              Array [
-                                                                                Object {
-                                                                                  "paddingHorizontal": 4,
-                                                                                },
-                                                                              ]
-                                                                            }
-                                                                          />
-                                                                          <Text
-                                                                            style={
-                                                                              Array [
-                                                                                Object {
-                                                                                  "color": "#212121",
-                                                                                  "fontSize": 14,
-                                                                                  "letterSpacing": 0.25,
-                                                                                  "lineHeight": 20,
-                                                                                },
-                                                                              ]
-                                                                            }
-                                                                          >
-                                                                            8
-                                                                          </Text>
-                                                                        </View>
-                                                                        <View
-                                                                          style={
-                                                                            Array [
-                                                                              Object {
-                                                                                "paddingLeft": 32,
-                                                                              },
-                                                                            ]
-                                                                          }
-                                                                        />
-                                                                        <View
-                                                                          style={
-                                                                            Array [
-                                                                              Object {
-                                                                                "alignItems": "flex-end",
-                                                                                "flex": 1,
-                                                                              },
-                                                                            ]
-                                                                          }
-                                                                        >
-                                                                          <Text
-                                                                            style={
-                                                                              Array [
-                                                                                Object {
-                                                                                  "color": "#000000",
-                                                                                  "fontSize": 18,
-                                                                                  "fontWeight": "600",
-                                                                                  "letterSpacing": 0.15,
-                                                                                  "lineHeight": 22,
-                                                                                },
-                                                                              ]
-                                                                            }
-                                                                          >
-                                                                            santoku
-                                                                          </Text>
-                                                                          <View
-                                                                            style={
-                                                                              Array [
-                                                                                Object {
-                                                                                  "alignItems": "center",
-                                                                                  "flexDirection": "row",
-                                                                                  "justifyContent": "space-between",
-                                                                                },
-                                                                              ]
-                                                                            }
-                                                                          >
-                                                                            <Text
-                                                                              style={
-                                                                                Array [
-                                                                                  Object {
-                                                                                    "color": "#212121",
-                                                                                    "fontSize": 14,
-                                                                                    "letterSpacing": 0.25,
-                                                                                    "lineHeight": 20,
-                                                                                  },
-                                                                                ]
-                                                                              }
-                                                                            >
-                                                                              1000
-                                                                              /
-                                                                              3000
-                                                                            </Text>
-                                                                          </View>
-                                                                        </View>
-                                                                        <View
-                                                                          style={
-                                                                            Array [
-                                                                              Object {
-                                                                                "paddingLeft": 16,
-                                                                              },
-                                                                            ]
-                                                                          }
-                                                                        />
-                                                                        <Image
-                                                                          source={
-                                                                            Object {
-                                                                              "uri": "undefinedsantoku-avatar.png",
-                                                                            }
-                                                                          }
-                                                                          style={
-                                                                            Array [
-                                                                              Object {
-                                                                                "borderRadius": 20,
-                                                                                "height": 40,
-                                                                                "width": 40,
-                                                                              },
-                                                                            ]
-                                                                          }
-                                                                        />
-                                                                      </View>
-                                                                    </View>
-                                                                    <View
-                                                                      style={
-                                                                        Array [
-                                                                          Object {
-                                                                            "paddingLeft": 24,
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                    />
-                                                                  </View>
-                                                                  <View
-                                                                    style={
-                                                                      Array [
-                                                                        Object {
-                                                                          "flexDirection": "row",
-                                                                        },
-                                                                      ]
-                                                                    }
-                                                                  >
-                                                                    <View
-                                                                      style={
-                                                                        Array [
-                                                                          Object {
-                                                                            "paddingLeft": 24,
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                    />
-                                                                    <View
-                                                                      style={
-                                                                        Array [
-                                                                          Object {
-                                                                            "backgroundColor": "#FFFFFF",
-                                                                            "borderRadius": 8,
-                                                                            "elevation": 2,
-                                                                            "justifyContent": "space-between",
-                                                                            "marginVertical": 2,
-                                                                            "paddingHorizontal": 24,
-                                                                            "paddingVertical": 16,
-                                                                            "shadowColor": "#212121",
-                                                                            "shadowOffset": Object {
-                                                                              "height": 2,
-                                                                              "width": 0,
-                                                                            },
-                                                                            "shadowOpacity": 0.1,
-                                                                            "shadowRadius": 0,
-                                                                            "width": 272,
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                    >
-                                                                      <Text
-                                                                        ellipsizeMode="tail"
-                                                                        numberOfLines={3}
-                                                                        style={
-                                                                          Array [
-                                                                            Object {
-                                                                              "color": "#000000",
-                                                                              "fontSize": 22,
-                                                                              "fontWeight": "bold",
-                                                                              "letterSpacing": 0.18,
-                                                                              "lineHeight": 34,
-                                                                              "textDecorationLine": "underline",
-                                                                            },
-                                                                          ]
-                                                                        }
-                                                                      >
-                                                                        【勉強会】OIDC
-                                                                      </Text>
-                                                                      <View
-                                                                        style={
-                                                                          Array [
-                                                                            Object {
-                                                                              "alignItems": "center",
-                                                                              "flexDirection": "row",
-                                                                              "justifyContent": "space-between",
-                                                                              "marginTop": 16,
-                                                                            },
-                                                                          ]
-                                                                        }
-                                                                      >
-                                                                        <View
-                                                                          style={
-                                                                            Array [
-                                                                              Object {
-                                                                                "alignItems": "center",
-                                                                                "flexDirection": "row",
-                                                                              },
-                                                                            ]
-                                                                          }
-                                                                        >
-                                                                          <RNSVGSvgView
-                                                                            align="xMidYMid"
-                                                                            bbHeight={24}
-                                                                            bbWidth={24}
-                                                                            fill="none"
-                                                                            focusable={false}
-                                                                            meetOrSlice={0}
-                                                                            minX={0}
-                                                                            minY={0}
-                                                                            style={
-                                                                              Array [
-                                                                                Object {
-                                                                                  "backgroundColor": "transparent",
-                                                                                  "borderWidth": 0,
-                                                                                },
-                                                                                Array [
-                                                                                  Object {
-                                                                                    "height": 24,
-                                                                                    "width": 24,
-                                                                                  },
-                                                                                ],
-                                                                                Object {
-                                                                                  "flex": 0,
-                                                                                  "height": 24,
-                                                                                  "width": 24,
-                                                                                },
-                                                                              ]
-                                                                            }
-                                                                            vbHeight={48}
-                                                                            vbWidth={48}
-                                                                          >
-                                                                            <RNSVGGroup
-                                                                              fill={null}
-                                                                              propList={
-                                                                                Array [
-                                                                                  "fill",
-                                                                                ]
-                                                                              }
-                                                                            >
-                                                                              <RNSVGPath
-                                                                                d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                                fill={4288585374}
-                                                                                propList={
-                                                                                  Array [
-                                                                                    "fill",
-                                                                                  ]
-                                                                                }
-                                                                              />
-                                                                            </RNSVGGroup>
-                                                                          </RNSVGSvgView>
-                                                                          <View
-                                                                            style={
-                                                                              Array [
-                                                                                Object {
-                                                                                  "paddingHorizontal": 4,
-                                                                                },
-                                                                              ]
-                                                                            }
-                                                                          />
-                                                                          <Text
-                                                                            style={
-                                                                              Array [
-                                                                                Object {
-                                                                                  "color": "#212121",
-                                                                                  "fontSize": 14,
-                                                                                  "letterSpacing": 0.25,
-                                                                                  "lineHeight": 20,
-                                                                                },
-                                                                              ]
-                                                                            }
-                                                                          >
-                                                                            5
-                                                                          </Text>
-                                                                        </View>
-                                                                        <View
-                                                                          style={
-                                                                            Array [
-                                                                              Object {
-                                                                                "paddingLeft": 32,
-                                                                              },
-                                                                            ]
-                                                                          }
-                                                                        />
-                                                                        <View
-                                                                          style={
-                                                                            Array [
-                                                                              Object {
-                                                                                "alignItems": "flex-end",
-                                                                                "flex": 1,
-                                                                              },
-                                                                            ]
-                                                                          }
-                                                                        >
-                                                                          <Text
-                                                                            style={
-                                                                              Array [
-                                                                                Object {
-                                                                                  "color": "#000000",
-                                                                                  "fontSize": 18,
-                                                                                  "fontWeight": "600",
-                                                                                  "letterSpacing": 0.15,
-                                                                                  "lineHeight": 22,
-                                                                                },
-                                                                              ]
-                                                                            }
-                                                                          >
-                                                                            santoku
-                                                                          </Text>
-                                                                          <View
-                                                                            style={
-                                                                              Array [
-                                                                                Object {
-                                                                                  "alignItems": "center",
-                                                                                  "flexDirection": "row",
-                                                                                  "justifyContent": "space-between",
-                                                                                },
-                                                                              ]
-                                                                            }
-                                                                          >
-                                                                            <Text
-                                                                              style={
-                                                                                Array [
-                                                                                  Object {
-                                                                                    "color": "#212121",
-                                                                                    "fontSize": 14,
-                                                                                    "letterSpacing": 0.25,
-                                                                                    "lineHeight": 20,
-                                                                                  },
-                                                                                ]
-                                                                              }
-                                                                            >
-                                                                              1000
-                                                                              /
-                                                                              3000
-                                                                            </Text>
-                                                                          </View>
-                                                                        </View>
-                                                                        <View
-                                                                          style={
-                                                                            Array [
-                                                                              Object {
-                                                                                "paddingLeft": 16,
-                                                                              },
-                                                                            ]
-                                                                          }
-                                                                        />
-                                                                        <Image
-                                                                          source={
-                                                                            Object {
-                                                                              "uri": "undefinedsantoku-avatar.png",
-                                                                            }
-                                                                          }
-                                                                          style={
-                                                                            Array [
-                                                                              Object {
-                                                                                "borderRadius": 20,
-                                                                                "height": 40,
-                                                                                "width": 40,
-                                                                              },
-                                                                            ]
-                                                                          }
-                                                                        />
-                                                                      </View>
-                                                                    </View>
-                                                                    <View
-                                                                      style={
-                                                                        Array [
-                                                                          Object {
-                                                                            "paddingLeft": 24,
-                                                                          },
-                                                                        ]
-                                                                      }
-                                                                    />
-                                                                  </View>
-                                                                  <View
-                                                                    style={
-                                                                      Array [
-                                                                        Object {
-                                                                          "paddingLeft": 24,
+                                                                          "paddingLeft": 8,
                                                                         },
                                                                       ]
                                                                     }
@@ -2437,7 +1869,7 @@ React Native 0.66
                                                                         Object {
                                                                           "alignItems": "center",
                                                                           "justifyContent": "center",
-                                                                          "width": 272,
+                                                                          "width": -48,
                                                                         },
                                                                       ]
                                                                     }
@@ -2487,15 +1919,22 @@ React Native 0.66
                                                                   />
                                                                 </View>
                                                               </RCTScrollView>
+                                                            </View>
+                                                            <View
+                                                              onLayout={[Function]}
+                                                              style={null}
+                                                            >
                                                               <View
                                                                 style={
                                                                   Array [
                                                                     Object {
                                                                       "alignItems": "center",
+                                                                      "backgroundColor": "#FFF5E4",
                                                                       "flexDirection": "row",
                                                                       "justifyContent": "space-between",
+                                                                      "paddingBottom": 16,
                                                                       "paddingHorizontal": 24,
-                                                                      "paddingVertical": 32,
+                                                                      "paddingTop": 32,
                                                                     },
                                                                   ]
                                                                 }
@@ -2758,6 +2197,15 @@ React Native 0.66
                                                                   </View>
                                                                 </View>
                                                               </View>
+                                                              <View
+                                                                style={
+                                                                  Array [
+                                                                    Object {
+                                                                      "paddingTop": 16,
+                                                                    },
+                                                                  ]
+                                                                }
+                                                              />
                                                             </View>
                                                             <View
                                                               onLayout={[Function]}
@@ -2909,9 +2357,9 @@ React Native 0.66
                                                                           ]
                                                                         }
                                                                       >
-                                                                        99999999
+                                                                        999+
                                                                         /
-                                                                        99999999
+                                                                        999+
                                                                       </Text>
                                                                     </View>
                                                                   </View>
@@ -3569,9 +3017,9 @@ React Native 0.66
                                                                           ]
                                                                         }
                                                                       >
-                                                                        1000
+                                                                        999+
                                                                         /
-                                                                        3000
+                                                                        999+
                                                                       </Text>
                                                                     </View>
                                                                   </View>
@@ -4249,9 +3697,9 @@ React Native 0.66
                                                                           ]
                                                                         }
                                                                       >
-                                                                        1000
+                                                                        999+
                                                                         /
-                                                                        3000
+                                                                        999+
                                                                       </Text>
                                                                     </View>
                                                                   </View>
@@ -4930,10 +4378,97 @@ React Native 0.66
                                                                           ]
                                                                         }
                                                                       >
-                                                                        1000
+                                                                        999+
                                                                         /
-                                                                        3000
+                                                                        999+
                                                                       </Text>
+                                                                      <View
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "alignItems": "center",
+                                                                              "flexDirection": "row",
+                                                                              "justifyContent": "flex-end",
+                                                                              "paddingHorizontal": 8,
+                                                                            },
+                                                                          ]
+                                                                        }
+                                                                      >
+                                                                        <RNSVGSvgView
+                                                                          align="xMidYMid"
+                                                                          bbHeight={24}
+                                                                          bbWidth={24}
+                                                                          fill="none"
+                                                                          focusable={false}
+                                                                          meetOrSlice={0}
+                                                                          minX={0}
+                                                                          minY={0}
+                                                                          style={
+                                                                            Array [
+                                                                              Object {
+                                                                                "backgroundColor": "transparent",
+                                                                                "borderWidth": 0,
+                                                                              },
+                                                                              Array [
+                                                                                Object {
+                                                                                  "height": 24,
+                                                                                  "width": 24,
+                                                                                },
+                                                                              ],
+                                                                              Object {
+                                                                                "flex": 0,
+                                                                                "height": 24,
+                                                                                "width": 24,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                          vbHeight={24}
+                                                                          vbWidth={24}
+                                                                        >
+                                                                          <RNSVGGroup
+                                                                            fill={null}
+                                                                            propList={
+                                                                              Array [
+                                                                                "fill",
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            <RNSVGPath
+                                                                              d="M9.00002 16.2L4.80002 12L3.40002 13.4L9.00002 19L21 6.99998L19.6 5.59998L9.00002 16.2Z"
+                                                                              fill={4280923894}
+                                                                              propList={
+                                                                                Array [
+                                                                                  "fill",
+                                                                                ]
+                                                                              }
+                                                                            />
+                                                                          </RNSVGGroup>
+                                                                        </RNSVGSvgView>
+                                                                        <View
+                                                                          style={
+                                                                            Array [
+                                                                              Object {
+                                                                                "paddingLeft": 8,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                        <Text
+                                                                          style={
+                                                                            Array [
+                                                                              Object {
+                                                                                "color": "#29B6F6",
+                                                                                "fontSize": 14,
+                                                                                "fontWeight": "bold",
+                                                                                "letterSpacing": 0.25,
+                                                                                "lineHeight": 20,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        >
+                                                                          解決済み
+                                                                        </Text>
+                                                                      </View>
                                                                     </View>
                                                                   </View>
                                                                   <View
@@ -6187,7 +5722,7 @@ Flutter 3.0.5 stable
                                                                         ]
                                                                       }
                                                                     >
-                                                                      1
+                                                                      2
                                                                     </Text>
                                                                   </View>
                                                                 </View>
@@ -6307,9 +5842,9 @@ Flutter 3.0.5 stable
                                                                           ]
                                                                         }
                                                                       >
-                                                                        1000
+                                                                        999+
                                                                         /
-                                                                        3000
+                                                                        999+
                                                                       </Text>
                                                                     </View>
                                                                   </View>
@@ -6447,7 +5982,9 @@ Flutter 3.0.5 stable
                                                                     ]
                                                                   }
                                                                 >
-                                                                  React Navigationを使用していますが、ヘッダを非表示にする方法はありますか？
+                                                                  現在携わっているPJで、ビックリマークが二つ連続で並んでいる構文がありました。
+この構文を理解できずに困っています。ご存知の方いらっしゃいますか？
+
                                                                 </Text>
                                                                 <View
                                                                   style={
@@ -6967,10 +6504,97 @@ Flutter 3.0.5 stable
                                                                           ]
                                                                         }
                                                                       >
-                                                                        1000
+                                                                        999+
                                                                         /
-                                                                        3000
+                                                                        999+
                                                                       </Text>
+                                                                      <View
+                                                                        style={
+                                                                          Array [
+                                                                            Object {
+                                                                              "alignItems": "center",
+                                                                              "flexDirection": "row",
+                                                                              "justifyContent": "flex-end",
+                                                                              "paddingHorizontal": 8,
+                                                                            },
+                                                                          ]
+                                                                        }
+                                                                      >
+                                                                        <RNSVGSvgView
+                                                                          align="xMidYMid"
+                                                                          bbHeight={24}
+                                                                          bbWidth={24}
+                                                                          fill="none"
+                                                                          focusable={false}
+                                                                          meetOrSlice={0}
+                                                                          minX={0}
+                                                                          minY={0}
+                                                                          style={
+                                                                            Array [
+                                                                              Object {
+                                                                                "backgroundColor": "transparent",
+                                                                                "borderWidth": 0,
+                                                                              },
+                                                                              Array [
+                                                                                Object {
+                                                                                  "height": 24,
+                                                                                  "width": 24,
+                                                                                },
+                                                                              ],
+                                                                              Object {
+                                                                                "flex": 0,
+                                                                                "height": 24,
+                                                                                "width": 24,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                          vbHeight={24}
+                                                                          vbWidth={24}
+                                                                        >
+                                                                          <RNSVGGroup
+                                                                            fill={null}
+                                                                            propList={
+                                                                              Array [
+                                                                                "fill",
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            <RNSVGPath
+                                                                              d="M9.00002 16.2L4.80002 12L3.40002 13.4L9.00002 19L21 6.99998L19.6 5.59998L9.00002 16.2Z"
+                                                                              fill={4280923894}
+                                                                              propList={
+                                                                                Array [
+                                                                                  "fill",
+                                                                                ]
+                                                                              }
+                                                                            />
+                                                                          </RNSVGGroup>
+                                                                        </RNSVGSvgView>
+                                                                        <View
+                                                                          style={
+                                                                            Array [
+                                                                              Object {
+                                                                                "paddingLeft": 8,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                        <Text
+                                                                          style={
+                                                                            Array [
+                                                                              Object {
+                                                                                "color": "#29B6F6",
+                                                                                "fontSize": 14,
+                                                                                "fontWeight": "bold",
+                                                                                "letterSpacing": 0.25,
+                                                                                "lineHeight": 20,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        >
+                                                                          解決済み
+                                                                        </Text>
+                                                                      </View>
                                                                     </View>
                                                                   </View>
                                                                   <View
@@ -7550,135 +7174,144 @@ React Native 0.66
                                                             />
                                                           </View>
                                                         </RCTScrollView>
-                                                        <View
+                                                        <RCTSafeAreaView
+                                                          emulateUnlessSupported={true}
                                                           style={
                                                             Array [
-                                                              Object {
-                                                                "alignItems": "center",
-                                                                "bottom": 32,
-                                                                "flexDirection": "column",
-                                                                "justifyContent": "center",
-                                                                "position": "absolute",
-                                                                "right": 8,
-                                                              },
+                                                              Object {},
                                                             ]
                                                           }
                                                         >
                                                           <View
-                                                            accessible={true}
-                                                            collapsable={false}
-                                                            focusable={true}
-                                                            onClick={[Function]}
-                                                            onResponderGrant={[Function]}
-                                                            onResponderMove={[Function]}
-                                                            onResponderRelease={[Function]}
-                                                            onResponderTerminate={[Function]}
-                                                            onResponderTerminationRequest={[Function]}
-                                                            onStartShouldSetResponder={[Function]}
                                                             style={
-                                                              Object {
-                                                                "opacity": 1,
-                                                              }
+                                                              Array [
+                                                                Object {
+                                                                  "alignItems": "center",
+                                                                  "bottom": 32,
+                                                                  "flexDirection": "column",
+                                                                  "justifyContent": "center",
+                                                                  "position": "absolute",
+                                                                  "right": 8,
+                                                                },
+                                                              ]
                                                             }
                                                           >
                                                             <View
+                                                              accessible={true}
+                                                              collapsable={false}
+                                                              focusable={true}
+                                                              onClick={[Function]}
+                                                              onResponderGrant={[Function]}
+                                                              onResponderMove={[Function]}
+                                                              onResponderRelease={[Function]}
+                                                              onResponderTerminate={[Function]}
+                                                              onResponderTerminationRequest={[Function]}
+                                                              onStartShouldSetResponder={[Function]}
                                                               style={
-                                                                Array [
-                                                                  Object {
-                                                                    "alignItems": "center",
-                                                                    "backgroundColor": "#29B6F6",
-                                                                    "borderRadius": 28,
-                                                                    "elevation": 1,
-                                                                    "flexDirection": "row",
-                                                                    "height": 56,
-                                                                    "justifyContent": "center",
-                                                                    "margin": 8,
-                                                                    "shadowColor": "#212121",
-                                                                    "shadowOffset": Object {
-                                                                      "height": 4,
-                                                                      "width": 0,
-                                                                    },
-                                                                    "shadowOpacity": 0.35,
-                                                                    "shadowRadius": 4,
-                                                                    "width": 56,
-                                                                  },
-                                                                ]
+                                                                Object {
+                                                                  "opacity": 1,
+                                                                }
                                                               }
                                                             >
-                                                              <RNSVGSvgView
-                                                                align="xMidYMid"
-                                                                bbHeight={24}
-                                                                bbWidth={24}
-                                                                fill="none"
-                                                                focusable={false}
-                                                                meetOrSlice={0}
-                                                                minX={0}
-                                                                minY={0}
+                                                              <View
                                                                 style={
                                                                   Array [
                                                                     Object {
-                                                                      "backgroundColor": "transparent",
-                                                                      "borderWidth": 0,
-                                                                    },
-                                                                    Array [
-                                                                      Object {
-                                                                        "height": 24,
-                                                                        "width": 24,
+                                                                      "alignItems": "center",
+                                                                      "backgroundColor": "#29B6F6",
+                                                                      "borderRadius": 28,
+                                                                      "elevation": 1,
+                                                                      "flexDirection": "row",
+                                                                      "height": 56,
+                                                                      "justifyContent": "center",
+                                                                      "margin": 8,
+                                                                      "shadowColor": "#212121",
+                                                                      "shadowOffset": Object {
+                                                                        "height": 4,
+                                                                        "width": 0,
                                                                       },
-                                                                    ],
-                                                                    Object {
-                                                                      "flex": 0,
-                                                                      "height": 24,
-                                                                      "width": 24,
+                                                                      "shadowOpacity": 0.35,
+                                                                      "shadowRadius": 4,
+                                                                      "width": 56,
                                                                     },
                                                                   ]
                                                                 }
-                                                                vbHeight={24}
-                                                                vbWidth={24}
                                                               >
-                                                                <RNSVGGroup
-                                                                  fill={null}
-                                                                  propList={
+                                                                <RNSVGSvgView
+                                                                  align="xMidYMid"
+                                                                  bbHeight={24}
+                                                                  bbWidth={24}
+                                                                  fill="none"
+                                                                  focusable={false}
+                                                                  meetOrSlice={0}
+                                                                  minX={0}
+                                                                  minY={0}
+                                                                  style={
                                                                     Array [
-                                                                      "fill",
+                                                                      Object {
+                                                                        "backgroundColor": "transparent",
+                                                                        "borderWidth": 0,
+                                                                      },
+                                                                      Array [
+                                                                        Object {
+                                                                          "height": 24,
+                                                                          "width": 24,
+                                                                        },
+                                                                      ],
+                                                                      Object {
+                                                                        "flex": 0,
+                                                                        "height": 24,
+                                                                        "width": 24,
+                                                                      },
                                                                     ]
                                                                   }
+                                                                  vbHeight={24}
+                                                                  vbWidth={24}
                                                                 >
-                                                                  <RNSVGGroup>
-                                                                    <RNSVGPath
-                                                                      d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                                                                      fill={4294967295}
-                                                                      propList={
-                                                                        Array [
-                                                                          "fill",
-                                                                        ]
-                                                                      }
-                                                                    />
-                                                                  </RNSVGGroup>
-                                                                  <RNSVGDefs>
-                                                                    <RNSVGClipPath
-                                                                      name="clip0_5404_1261"
-                                                                    >
-                                                                      <RNSVGRect
+                                                                  <RNSVGGroup
+                                                                    fill={null}
+                                                                    propList={
+                                                                      Array [
+                                                                        "fill",
+                                                                      ]
+                                                                    }
+                                                                  >
+                                                                    <RNSVGGroup>
+                                                                      <RNSVGPath
+                                                                        d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
                                                                         fill={4294967295}
-                                                                        height="24"
                                                                         propList={
                                                                           Array [
                                                                             "fill",
                                                                           ]
                                                                         }
-                                                                        width="24"
-                                                                        x={0}
-                                                                        y={0}
                                                                       />
-                                                                    </RNSVGClipPath>
-                                                                  </RNSVGDefs>
-                                                                </RNSVGGroup>
-                                                              </RNSVGSvgView>
+                                                                    </RNSVGGroup>
+                                                                    <RNSVGDefs>
+                                                                      <RNSVGClipPath
+                                                                        name="clip0_5404_1261"
+                                                                      >
+                                                                        <RNSVGRect
+                                                                          fill={4294967295}
+                                                                          height="24"
+                                                                          propList={
+                                                                            Array [
+                                                                              "fill",
+                                                                            ]
+                                                                          }
+                                                                          width="24"
+                                                                          x={0}
+                                                                          y={0}
+                                                                        />
+                                                                      </RNSVGClipPath>
+                                                                    </RNSVGDefs>
+                                                                  </RNSVGGroup>
+                                                                </RNSVGSvgView>
+                                                              </View>
                                                             </View>
                                                           </View>
-                                                        </View>
-                                                      </View>
+                                                        </RCTSafeAreaView>
+                                                      </RCTSafeAreaView>
                                                     </View>
                                                   </View>
                                                 </View>

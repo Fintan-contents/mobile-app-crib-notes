@@ -1,10 +1,10 @@
 import {BoxProps} from '@shopify/restyle';
 import React from 'react';
 
-import {RestyleTheme} from '../theme/restyleTheme';
 import {getSpacedChildren} from './getSpacedChildren';
 import {Box} from './index';
 import {StyledSpaceProps} from './types';
+import {RestyleTheme} from '../theme/restyleTheme';
 
 export const StyledRow: React.FC<
   React.PropsWithChildren<Omit<BoxProps<RestyleTheme>, 'flexDirection'> & Partial<StyledSpaceProps>>

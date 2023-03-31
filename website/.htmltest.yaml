@@ -33,6 +33,7 @@ IgnoreInternalURLs:
   - /mobile-app-crib-notes/react-native/santoku/design/api-document#operation/get-terms
 IgnoreURLs:
   - localhost:19002
+  - http://localhost:9080/api/todos
   # 認証が必要なURLは無視
   - https://developer.apple.com/account/resources/identifiers/add/bundleId
   - https://developer.apple.com/account/resources/identifiers/list/bundleId

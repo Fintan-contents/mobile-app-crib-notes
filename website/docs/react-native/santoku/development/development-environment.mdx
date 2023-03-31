@@ -48,16 +48,17 @@ const overviews = [
 
 <!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-ビルドタイプとインストール先ごとに必要なセットアップ手順は次のようになります。
+ビルド環境やビルドタイプ、インストール先ごとに必要なセットアップ手順は次のようになります。
 
-| ビルドタイプ                                   | インストール先                  | 必要なセットアップ手順[^1]                                                                                          |
-|:---------------------------------------------|:------------------------------|:----------------------------------------------------------------------------------------------------------------|
-| Debug、DebugAdvanced                         | Androidエミュレータ、Android端末 | -                                                                                                                |
-| ReleaseInHouse、Release                      | Androidエミュレータ、Android端末 | [Androidアプリの配布用ビルドの設定](development-environment/10.setting-up-android-distribution-build.mdx)               |
-| Debug、DebugAdvanced、ReleaseInHouse、Release | iOSシミュレータ                 | -                                                                                                               |
-| Debug                                        | iOS端末                        | [USB接続でiOS端末にインストール](development-environment/02.setting-up-ios-run-on-device.mdx)                          |
-| DebugAdvanced                                | iOS端末                        | [USB接続でiOS端末にインストール（Appの高度な機能）](development-environment/03.setting-up-ios-advanced-run-on-device.mdx) |
-| ReleaseInHouse、Release                      | iOS端末                        | [iOSアプリの配布用ビルドの設定](development-environment/11.setting-up-ios-distribution-build.mdx)                                                 |
+| 環境             | ビルドタイプ        | インストール先                 | 必要なセットアップ手順[^1] |
+|:---------------|:--------------|:------------------------|:----------------|
+| local          | Debug/Release | Androidエミュレータ、Android端末 | -               |
+| stg、prod       | Debug         | Androidエミュレータ、Android端末 | -               |
+| stg、prod       | Release       | Androidエミュレータ、Android端末 | [Androidアプリの配布用ビルドの設定](development-environment/10.setting-up-android-distribution-build.mdx)          |
+| local、stg、prod | Debug/Release | iOSシミュレータ               | -                                                                                                     |
+| local          | Debug/Release | iOS端末                   | [USB接続でiOS端末にインストール](development-environment/02.setting-up-ios-run-on-device.mdx)                     |
+| stg、prod       | Debug/Release | iOS端末                   | [USB接続でiOS端末にインストール（Appの高度な機能）](development-environment/03.setting-up-ios-advanced-run-on-device.mdx) |
+| stg、prod       | Debug/Release | iOS端末                   | [iOSアプリの配布用ビルドの設定](development-environment/11.setting-up-ios-distribution-build.mdx)                  |
 
 [^1]: [基本的なセットアップ](development-environment/01.basic-setup.mdx)は、すべてのビルドタイプでのビルドに必要な手順です。
 
@@ -84,7 +85,7 @@ export const v = [
 
 <!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
 
-ビルドバリアントごとに、アプリをビルドするレーンを用意しています。以下のようなコマンドでfastlaneを実行するとアプリをビルドできます。
+ビルド環境ごとに、アプリをビルドするレーンを用意しています。以下のようなコマンドでfastlaneを実行するとアプリをビルドできます。
 
 ```bash
 bundle exec fastlane <Platform: ios/android> <Lane>

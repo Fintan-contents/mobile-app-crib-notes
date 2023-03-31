@@ -8,8 +8,9 @@ title: 依存パッケージの管理
 
 次の2つのコマンドをセットで実行してください。
 
-* `expo install <package-name>`
-  * `devDependencies`に追加する場合は、`npm install -D <package-name>`
+* `npx expo install <package-name>`
+  * `devDependencies`に追加する場合は、`npx expo install <package-name> -- -D`
+  * 上の方法で`dependencies`に追加されてしまった場合は、該当パッケージを`package.json`の`dependencies`から`devDependencies`へ移動してください。その後、`npm install`
 * `npm run pod-install`
 
 :::info
@@ -18,11 +19,13 @@ macOSでないと`pod-install`は実行できないので、依存ライブラ�
 ただし、Podを利用していないとわかっているライブラリを追加するのであれば、macOSでなくても問題ありません。
 :::
 
-ExpoはReactなど一部の依存パッケージについて、利用できるバージョンを管理しています。そういったライブラリについては、個別に自分たちで依存ライブラリのバージョンを管理する必要はありません。`expo install`でインストールすれば、適切なバージョンがインストールされます。
+ExpoはReactなど一部の依存パッケージについて、利用できるバージョンを管理しています。そういったライブラリについては、個別に自分たちで依存ライブラリのバージョンを管理する必要はありません。`npx expo install`でインストールすれば、適切なバージョンがインストールされます。
 
 一方で、`npm install <package-name>`でインストールするだけでは正しいバージョンでインストールされない可能性があるということに注意してください。
 
-依存パッケージを`dependencies`に追加する場合は、**必ず`expo install`で**インストールしてください。`devDependencies`に追加する場合は、`npm install -D`でインストールする必要があります。
+依存パッケージを`dependencies`に追加する場合は、必ず`npx expo install`でインストールしてください。
+ただし、Expo SDKと互換性のある依存パッケージを`devDependencies`に追加しようとすると、`dependencies`に追加されてしまいます。
+その場合、依存パッケージを`package.json`の`dependencies`から`devDependencies`へ移動してください。その後、`npm install`で`package-lock.json`を更新する必要があります。
 
 ### Renovateの設定を追加
 
@@ -75,7 +78,7 @@ ExpoはReactなど一部の依存パッケージについて、利用できる�
   * ▶ `@types/jest`はメジャーバージョンが25なら問題ないとして、`"@types/jest": "<26.0.0"`と指定する
 * 例： `react-test-renderer`
   * ▶ `jest-expo`では、`react-test-renderer`のバージョンを`~16.11.0`と指定している（`expo 41.0.0`時点）
-  * ▶ `@types/react-test-renderer` はパッチバージョンが25なら問題ないとして、 `"@types/react-test-renderer": "<16.12.0"` と指定する
+  * ▶ `@types/react-test-renderer` はマイナーバージョンが11なら問題ないとして、 `"@types/react-test-renderer": "<16.12.0"` と指定する
 
 ## 依存パッケージのアップデート
 

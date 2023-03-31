@@ -6,14 +6,14 @@ import {useIsLoggedIn} from 'features/account/client-states/useIsLoggedIn';
 import React, {useEffect, useMemo} from 'react';
 import {DevSettings} from 'react-native';
 
-import {LoginScreen} from '../screens/account/LoginScreen';
-import {ProfileRegistrationScreen} from '../screens/account/ProfileRegistrationScreen';
-import {hideSplashScreen} from '../services/hideSplashScreen';
-import {AppInitialData} from '../types/AppInitialData';
 import {useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
 import {RootStackParamList} from './types';
 import {useDefaultScreenOptions} from './useDefaultScreenOptions';
+import {LoginScreen} from '../screens/account/LoginScreen';
+import {ProfileRegistrationScreen} from '../screens/account/ProfileRegistrationScreen';
+import {hideSplashScreen} from '../services/hideSplashScreen';
+import {AppInitialData} from '../types/AppInitialData';
 
 const nav = createNativeStackNavigator<RootStackParamList>();
 

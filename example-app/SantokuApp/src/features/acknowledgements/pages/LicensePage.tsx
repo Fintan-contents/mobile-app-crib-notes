@@ -26,7 +26,7 @@ export const LicensePage: React.FC<LicensePageProps> = ({dependency}) => {
             <Text h4 h4Style={styles.dependencyName}>
               {dependency.name ?? dependency.id}
             </Text>
-            <Text style={styles.dependencyVersion}> ({dependency.version})</Text>
+            {dependency.version && <Text style={styles.dependencyVersion}> ({dependency.version})</Text>}
           </Text>
         </View>
         {dependency.repository?.startsWith('https://') && (
@@ -38,13 +38,13 @@ export const LicensePage: React.FC<LicensePageProps> = ({dependency}) => {
       <ScrollView contentContainerStyle={styles.body}>
         {dependency.licenseContentModuleId && (
           <>
-            <FileName fileName={dependency.licenseFileName} />
+            <FileName fileName="LICENSE" />
             <FileContent isLoading={isLoadingLicenseContentText} content={licenseContentText} />
           </>
         )}
         {dependency.noticeContentModuleId && (
           <>
-            <FileName fileName={dependency.noticeFileName} />
+            <FileName fileName="NOTICE" />
             <FileContent isLoading={isLoadingNoticeContentText} content={noticeContentText} />
           </>
         )}

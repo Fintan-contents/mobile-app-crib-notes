@@ -6,8 +6,9 @@ import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {AppThemeProvider} from 'bases/ui/theme/AppThemeProvider';
 import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
 import {initialData} from 'fixtures/msw/datas';
-import {db, initialDb} from 'fixtures/msw/db';
+import {initialDb} from 'fixtures/msw/db';
 import {handlers} from 'fixtures/msw/handlers';
+import {setLoggedInAccountId} from 'fixtures/msw/handlers/account/setLoggedInAccountId';
 import {setupServer} from 'msw/node';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -20,7 +21,7 @@ beforeAll(async () => {
   await loadMessages(new BundledMessagesLoader());
   initialDb();
   await initialData();
-  db.loggedInAccount.create({accountId: 'santoku'});
+  setLoggedInAccountId('santoku');
   server.listen();
 });
 afterAll(() => server.close());
@@ -28,9 +29,9 @@ afterAll(() => server.close());
 beforeEach(() => {
   jest.useFakeTimers();
 });
-jest.mock('bases/date/formatDiffInDaysOrHours', () => {
+jest.mock('bases/date/formatDiffInDateTime', () => {
   return {
-    formatDiffInDaysOrHours: jest.fn(() => {
+    formatDiffInDateTime: jest.fn(() => {
       return '1時間前';
     }),
   };

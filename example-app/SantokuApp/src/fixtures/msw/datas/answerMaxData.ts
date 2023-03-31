@@ -1,8 +1,8 @@
-import {maxDb} from '../db';
-import {format2Iso8601} from '../utils/format2Iso8601';
 import {santokuAccount} from './accountData';
 import {adminAccount} from './accountMaxData';
 import {partnerAccount} from './accountMinData';
+import {maxDb} from '../db';
+import {format2Iso8601} from '../utils/format2Iso8601';
 
 export const answerMaxData = () => {
   maxDb.answer.create({

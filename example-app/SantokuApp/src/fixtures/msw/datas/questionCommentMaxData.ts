@@ -1,7 +1,7 @@
-import {maxDb} from '../db';
-import {format2Iso8601} from '../utils/format2Iso8601';
 import {santokuAccount} from './accountData';
 import {partnerAccount} from './accountMinData';
+import {maxDb} from '../db';
+import {format2Iso8601} from '../utils/format2Iso8601';
 
 export const questionCommentMaxData = () => {
   maxDb.questionComment.create({

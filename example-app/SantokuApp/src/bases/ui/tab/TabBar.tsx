@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {Box} from '../common';
 import {Tab, TabProps} from './Tab';
+import {Box} from '../common';
 
 export type TabBarProps = {
   selectedIndex: number;

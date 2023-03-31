@@ -1,0 +1,23 @@
+trigger: none
+
+pr:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - 'example-app/SantokuApp'
+    exclude:
+      - 'example-app/SantokuApp/README.md'
+  drafts: false
+
+name: $(date:yyyyMMdd)$(rev:.rr)
+
+extends:
+  template: deploy.yaml
+  parameters:
+    environments:
+      - name: 'stg'
+        laneName: 'stg'
+        androidAppPath: 'android/app/build/outputs/bundle/release/app-release.aab'
+        iOSAppPath: 'ios/build/santoku-app-stg.ipa'

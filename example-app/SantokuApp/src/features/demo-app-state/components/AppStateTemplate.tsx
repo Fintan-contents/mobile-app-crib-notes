@@ -1,8 +1,8 @@
 import React, {useRef} from 'react';
 import {FlatList} from 'react-native';
 
-import {StateChangedEventRecord} from '../types/StateChangedEventRecord';
 import {AppStateHistoryListItem} from './AppStateHistoryListItem';
+import {StateChangedEventRecord} from '../types/StateChangedEventRecord';
 
 type AppStateTemplateProps = {
   history: StateChangedEventRecord[];

@@ -4,15 +4,9 @@ title: USB接続でiOS端末にインストール
 
 ## iOSプロジェクト設定の修正
 
-iOS端末にインストールして開発する場合、XcodeからApple ID（デベロッパアカウント）でログインする必要があります。また、そのデベロッパアカウントのプロビジョニングプロファイルや証明書を利用してビルドするように、iOSアプリのプロジェクト設定を変更する必要があります。
+iOS端末にインストールして開発する場合、XcodeからApple ID（開発者アカウント）でログインする必要があります。また、その開発者アカウントのプロビジョニングプロファイルや証明書を利用してビルドするように設定を変更する必要があります。
 
-1. `ios/PersonalAccount.xcconfig.template` を `ios/PersonalAccount.xcconfig` としてコピーしてください。
-2. ファイルに記載されている設定値を、それぞれ次のように設定してください。
-   * `CODE_SIGN_STYLE`: `Automatic`
-   * `PERSONAL_IDENTIFIER`: 他の人とかぶらない、何らかの一意の値
-   * `DEVELOPMENT_TEAM`: 個人のデベロッパアカウントに割り当てられたチームID
-     * わからない場合は、[デベロッパアカウントのチームIDを確認する](#デベロッパアカウントのチームidを確認する)の手順で確認してください。
-3. `xed ios`と実行して、Xcodeでプロジェクトを開いてください。開くだけで良いようです。
+設定方法は、[ビルド - 開発者アカウントの設定](../build-configuration/development-account-for-ios#開発者アカウントの設定)を参照してください。
 
 セットアップできたら、次のコマンドを実行してください。`<device name>`はインストール先のiOSデバイス名です。
 
@@ -34,7 +28,7 @@ ios-deploy --detect
 Xcodeで一度もプロジェクトを開いていない状態でインストールしようとすると、次のようなエラーが発生します。
 
 ```console
-error: No profiles for 'personal.jp.fintan.mobile.SantokuApp.<personal>.dev.debug' were found: Xcode couldn't find any iOS App Development provisioning profiles matching 'personal.jp.fintan.mobile.SantokuApp.<personal>.dev.debug'. Automatic signing is disabled and unable to generate a profile. To enable automatic signing, pass -allowProvisioningUpdates to xcodebuild. (in target 'SantokuApp' from project 'SantokuApp')
+error: No profiles for 'personal.jp.fintan.mobile.SantokuApp.local.<personal>' were found: Xcode couldn't find any iOS App Development provisioning profiles matching 'personal.jp.fintan.mobile.SantokuApp.local.<personal>'. Automatic signing is disabled and unable to generate a profile. To enable automatic signing, pass -allowProvisioningUpdates to xcodebuild. (in target 'SantokuApp' from project 'SantokuApp')
 ```
 
 このようなエラーが発生した場合は、一度Xcodeでプロジェクトを開いてからデバイスへのインストールを試してください。

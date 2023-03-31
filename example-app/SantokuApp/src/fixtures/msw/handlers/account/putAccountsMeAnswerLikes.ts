@@ -1,10 +1,10 @@
 import {rest} from 'msw';
 
+import {getLoggedInAccountId} from './getLoggedInAccountId';
 import {backendUrl} from '../../utils/backendUrl';
 import {delayedResponse} from '../../utils/delayedResponse';
 import {errorResponse} from '../../utils/errorResponse';
 import {getDb} from '../../utils/getDb';
-import {getLoggedInAccountId} from './getLoggedInAccountId';
 
 export const putAccountsMeAnswerLikes = rest.put(
   `${backendUrl}/accounts/me/likes/questions/:questionId/answers/:answerId`,
@@ -20,7 +20,7 @@ export const putAccountsMeAnswerLikes = rest.put(
       if (!answerLike) {
         db.answerLike.create({questionId, accountId, answerId});
         db.answer.update({
-          where: {accountId: {equals: accountId}, questionId: {equals: questionId}, answerId: {equals: answerId}},
+          where: {questionId: {equals: questionId}, answerId: {equals: answerId}},
           data: {likes: likes => likes + 1},
         });
       }

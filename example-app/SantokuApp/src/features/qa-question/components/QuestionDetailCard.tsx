@@ -1,3 +1,4 @@
+import {formatLargeNumber} from 'bases/core/utils/formatLargeNumber';
 import {useVisibility} from 'bases/core/utils/useVisibility';
 import {m} from 'bases/message/Message';
 import {Box, StyledTouchableOpacity, Text} from 'bases/ui/common';
@@ -19,7 +20,7 @@ import {AddCommentButton} from './AddCommentButton';
 import {CommentButtonWithCount} from './CommentButtonWithCount';
 import {CommentCard} from './CommentCard';
 import {CommentDivider} from './CommentDivider';
-import {DiffDaysOrHours} from './DiffDaysOrHours';
+import {DiffInDateTime} from './DiffInDateTime';
 import {QuestionAndAnswerLikeButtonWithCount} from './QuestionAndAnswerLikeButtonWithCount';
 import {ViewButtonWithCount} from './ViewButtonWithCount';
 
@@ -67,9 +68,11 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
             {profile?.nickname}
           </Text>
           <StyledRow space="p24" alignItems="center" justifyContent="space-between">
-            <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
-              {profile?.points}/{profile?.totalPoints}
-            </Text>
+            {profile && (
+              <Text variant="font14Regular" lineHeight={24} letterSpacing={0.25} color="black2">
+                {formatLargeNumber(profile.points, 999)}/{formatLargeNumber(profile.totalPoints, 999)}
+              </Text>
+            )}
             {resolved && (
               <StyledRow space="p8" justifyContent="flex-end" alignItems="center" px="p8">
                 <DoneIllustration color="blue" />
@@ -100,7 +103,7 @@ export const QuestionDetailCard: FC<QuestionDetailCardProps> = ({
       </Text>
       <StyledSpace height="p8" />
       <Box flex={1} alignItems="flex-end">
-        <DiffDaysOrHours datetime={datetime} />
+        <DiffInDateTime datetime={datetime} />
       </Box>
       <StyledRow justifyContent="flex-start" alignItems="flex-end">
         <QuestionAndAnswerLikeButtonWithCount onPress={toggleQuestionLike} count={likes} color={likeQuestionColor} />

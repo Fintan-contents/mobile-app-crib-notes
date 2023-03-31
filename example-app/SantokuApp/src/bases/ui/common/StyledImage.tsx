@@ -22,7 +22,7 @@ export type StyledImageProps = BoxProps<RestyleTheme> &
     | 'borderTopRightRadius'
     | 'borderBottomLeftRadius'
     | 'borderBottomRightRadius'
-  > & {tintColor?: ResponsiveValue<keyof RestyleTheme['colors'], RestyleTheme>};
+  > & {tintColor?: ResponsiveValue<keyof RestyleTheme['colors'], RestyleTheme['breakpoints']>};
 export const StyledImage = createRestyleComponent<StyledImageProps, RestyleTheme>(
   [...boxRestyleFunctions, tintColor],
   Image,

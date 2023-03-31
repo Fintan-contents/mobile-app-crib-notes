@@ -139,7 +139,7 @@ AndroidとiOSどちらの場合も、React Nativeのfetchやaxiosのパラメー
 端末内のファイルを選択してアップロードするようなユースケースにおいて、端末内からファイルを選択するUIをライブラリを用いて実現する場合があります。
 こうしたファイル選択系のライブラリでは、選択されたファイルが一時的にキャッシュ領域に保存される場合があります。
 
-例えば[expo-document-picker](https://docs.expo.dev/versions/v44.0.0/sdk/document-picker/)ライブラリの場合、
+例えば[expo-document-picker](https://docs.expo.dev/versions/latest/sdk/document-picker/)ライブラリの場合、
 copyToCacheDirectoryのオプションがデフォルトでtrueとなっています。
 そのため選択したファイルはデフォルトではキャッシュディレクトリにコピーされます。
 機密情報を含むファイルを扱う場合は、アップロードなどの処理が完了次第、キャッシュファイルを明示的に削除しておくことが望ましいです。

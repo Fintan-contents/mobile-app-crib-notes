@@ -3,8 +3,8 @@ import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
 import {loadMessages} from 'bases/message/Message';
 import React from 'react';
 
-import {Snackbar} from '../snackbar/Snackbar';
 import {WebView} from './WebView';
+import {Snackbar} from '../snackbar/Snackbar';
 
 describe('WebView', () => {
   it('WebViewが正常にrenderできることを確認', () => {

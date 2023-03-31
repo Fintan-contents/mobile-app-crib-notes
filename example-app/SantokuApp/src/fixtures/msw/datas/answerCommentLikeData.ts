@@ -1,6 +1,6 @@
-import {db} from '../db';
 import {santokuAccount} from './accountData';
 import {adminAccount} from './accountMaxData';
+import {db} from '../db';
 
 export const answerCommentLikeData = () => {
   db.answerCommentLike.create({

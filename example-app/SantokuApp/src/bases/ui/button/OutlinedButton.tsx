@@ -1,8 +1,8 @@
 import React, {useMemo} from 'react';
 import {StyleSheet} from 'react-native';
 
-import {useAppTheme} from '../theme/useAppTheme';
 import {Button, ButtonProps} from './Button';
+import {useAppTheme} from '../theme/useAppTheme';
 
 export const OutlinedButton: React.FC<ButtonProps> = props => {
   const styles = useStyles();

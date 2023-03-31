@@ -2,40 +2,14 @@ const path = require('path');
 const fs = require('fs');
 const fsPromises = require('fs/promises');
 const crypto = require('crypto');
-const licenseChecker = require("license-checker");
+const listDependencies = require("./list-dependencies");
+const licenseTextCache = require('./license-text-cache');
 
 const rootDir = path.resolve(__dirname, '..');
 
 const DEPENDENCIES_OUTPUT_FILE = path.resolve(rootDir, 'src/features/acknowledgements/constants/ThirdPartyDependencies.ts');
 const LICENSE_FILE_OUTPUT_DIR = path.resolve(rootDir, 'src/assets/licenses');
-
-const listDependencies = () => new Promise((resolve, reject) => {
-  // Options: https://github.com/davglass/license-checker#options
-  licenseChecker.init({
-    start: rootDir,
-    // devDependenciesは含めない。
-    production: true,
-    // privateなパッケージは含めない。
-    excludePrivatePackages: true,
-    // https://github.com/davglass/license-checker#custom-format
-    // 個人名やメールアドレスは含めない。
-    customFormat: {publisher: false, email: false, name: true, version: true},
-  }, (err, packages) => {
-    if (err) {
-      reject(err);
-    }
-    // ハッシュ値の一致するLICENSEファイルとNOTICEファイルは一つしかアプリに含めないようにする。（サイズ圧縮のため）
-    // なので、ここで各ライセンスファイルのハッシュ値を計算しておく。
-    Promise.all(Object.entries(packages).map(async ([id, info]) => {
-        const licenseFileDigest = await getLicenseFileHashDigest(id, info.licenseFile);
-        const licenseFileAssetPath = getAssetPath(licenseFileDigest, 'license.txt');
-        const noticeFileDigest = await getFileHashDigest(id, info.noticeFile);
-        const noticeFileAssetPath = getAssetPath(noticeFileDigest, 'notice.txt');
-        return {...info, id, licenseFileDigest, licenseFileAssetPath, noticeFileDigest, noticeFileAssetPath}
-      })
-    ).then(dependencies => resolve(dependencies)).catch(e => reject(e));
-  })
-})
+const LICENSE_FILE_TEMP_DIR = path.resolve(__dirname, 'license-text/build');
 
 const getLicenseFileHashDigest = (id, filePath) => {
   if (!filePath) {
@@ -92,27 +66,31 @@ const copyFilesToOutputDir = async (files) => {
 
 const buildDependenciesSourceCode = (dependencies) => {
   return `export type ThirdPartyDependency = {
+  type: string;
   id: string;
   name?: string;
   version?: string;
   repository?: string;
   licenses?: string | string[];
-  licenseFileName?: string;
   licenseContentModuleId?: number;
-  noticeFileName?: string;
   noticeContentModuleId?: number;
 };
-export const ThirdPartyDependencies: ThirdPartyDependency[] = [${dependencies.map(buildAcknowledgement).join(',')}];`
+import {Platform} from 'react-native';
+const usingTypes = Platform.select({
+  ios: ['npm', 'cocoapods'],
+  android: ['npm', 'gradle'],
+});
+export const ThirdPartyDependencies: ThirdPartyDependency[] = [${dependencies.map(buildAcknowledgement).join(',')}].filter(d => {
+  return usingTypes?.includes(d.type);
+});`
 }
 
 const buildAcknowledgement = (dependency) => {
-  return `{${['id', 'name', 'version', 'licenses', 'repository'].map(key => {
+  return `{${['type', 'id', 'name', 'version', 'licenses', 'repository'].map(key => {
     return buildAcknowledgementInfo(dependency, key);
   }).concat(
     buildFileContentModuleIdPart(dependency, 'licenseFileAssetPath', 'licenseContentModuleId'),
-    buildFileNamePart(dependency, 'licenseFile', 'licenseFileName'),
     buildFileContentModuleIdPart(dependency, 'noticeFileAssetPath', 'noticeContentModuleId'),
-    buildFileNamePart(dependency, 'noticeFile', 'noticeFileName'),
   ).filter(item => !!item).join(',')}}`
 }
 
@@ -135,13 +113,50 @@ const getRelativePathToRequire = (from, to) => {
   return relativePath;
 }
 
-const buildFileNamePart = (dependency, fileNameKey, outputKey) => {
-  const fileName = dependency[fileNameKey] ? path.basename(dependency[fileNameKey]) : undefined;
-  return fileName ? `${JSON.stringify(outputKey)}: ${JSON.stringify(fileName)}` : '';
-}
+const initLicenseFileTempDir = async () => {
+  await fsPromises.rm(LICENSE_FILE_TEMP_DIR, {
+    force: true, // ディレクトリが存在しない場合に失敗にしない
+    recursive: true, // 中のファイルも消す
+  });
+  await fsPromises.mkdir(LICENSE_FILE_TEMP_DIR, {
+    recursive: true,
+  });
+};
+
+const saveLicenseFile = lib => {
+  if (lib.licenseFile) return lib;
+  const filePath = path.resolve(LICENSE_FILE_TEMP_DIR, encodeURIComponent(`${lib.id}.txt`))
+  return fsPromises.writeFile(filePath, lib.licenseText).then(() => {
+    lib.licenseFile = filePath;
+    return lib;
+  });
+};
 
 const main = async () => {
-  const dependencies = await listDependencies();
+  const dependencies = await listDependencies().then(async dependencies => {
+    await initLicenseFileTempDir();
+    const promises = dependencies.map(d => {
+      if (d.licenseFile) return d;
+      if (d.licenseText) return saveLicenseFile(d);
+      return licenseTextCache.fetch(d.licenseUrl).then(text => {
+        if (text.includes('<body')) console.warn('ライセンステキストにHTML("<body")が含まれています', d.licenseUrl, d.id)
+        d.licenseText = text;
+        return saveLicenseFile(d);
+      });
+    });
+    return Promise.all(promises);
+  }).then(dependencies => {
+    // ハッシュ値の一致するLICENSEファイルとNOTICEファイルは一つしかアプリに含めないようにする。（サイズ圧縮のため）
+    // なので、ここで各ライセンスファイルのハッシュ値を計算しておく。
+    const promises =  dependencies.map(async (info) => {
+      const licenseFileDigest = await getLicenseFileHashDigest(info.id, info.licenseFile);
+      const licenseFileAssetPath = getAssetPath(licenseFileDigest, 'license.txt');
+      const noticeFileDigest = await getFileHashDigest(info.id, info.noticeFile);
+      const noticeFileAssetPath = getAssetPath(noticeFileDigest, 'notice.txt');
+      return {...info, licenseFileDigest, licenseFileAssetPath, noticeFileDigest, noticeFileAssetPath}
+    });
+    return Promise.all(promises);
+  });
   await copyFilesToOutputDir(getFilesToCopy(dependencies, 'licenseFile'));
   await copyFilesToOutputDir(getFilesToCopy(dependencies, 'noticeFile'));
   const output = fs.createWriteStream(DEPENDENCIES_OUTPUT_FILE)

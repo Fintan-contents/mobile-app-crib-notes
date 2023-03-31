@@ -1,8 +1,8 @@
 import * as FileSystem from 'expo-file-system';
 
-import {CacheClearError} from '../errors/CacheClearError';
 import {readDirectoryItemsFileInfoAsync} from './readDirectoryItemsFileInfoAsync';
 import {reloadCacheDirectoryItemsAsync} from './reloadCacheDirectoryItemsAsync';
+import {CacheClearError} from '../errors/CacheClearError';
 
 const deleteChildItemsAsync = async (fileInfo: FileSystem.FileInfo) => {
   if (fileInfo.exists) {

@@ -1,5 +1,5 @@
-import {db, maxDb, minDb} from '../db';
 import {isAdminAccount, isPartnerAccount} from './accounts';
+import {db, maxDb, minDb} from '../db';
 
 export const getDb = (accountId: string) => {
   if (isAdminAccount(accountId)) {

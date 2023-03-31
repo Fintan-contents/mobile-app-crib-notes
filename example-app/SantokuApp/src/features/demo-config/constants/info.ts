@@ -2,15 +2,15 @@ import {AppConfig} from 'bases/core/configs/AppConfig';
 
 export const info = [
   {
-    name: 'APP_ID_FLAVOR_SUFFIX',
-    value: AppConfig.appIdFlavorSuffix,
+    name: 'termsUrl',
+    value: AppConfig.termsUrl,
   },
   {
-    name: 'APP_NAME_HOME',
-    value: AppConfig.appNameHome,
+    name: 'requestTimeout',
+    value: AppConfig.requestTimeout,
   },
   {
-    name: 'PROVISIONING_PROFILE_FLAVOR',
-    value: AppConfig.provisioningProfileFlavor,
+    name: 'mswEnabled',
+    value: AppConfig.mswEnabled,
   },
 ];

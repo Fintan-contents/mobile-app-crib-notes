@@ -1,0 +1,46 @@
+---
+title: ネイティブプロジェクトの管理
+---
+
+これまで説明したように、このアプリではExpoの`Prebuild`や、`Config Plugins`の仕組みを利用して、環境に応じたネイティブプロジェクトを自動生成しています。
+
+Expoの`Prebuild`は、基本的に以下のファイルが変更されると自動生成するネイティブプロジェクトに差分が発生します。
+
+- Expo config
+- Expoの`Prebuild`がベースとするテンプレート（expo-template-bare-minimum）
+- `package.json`に指定している依存ライブラリ（ネイティブモジュールや、Config Pluginが含まれているライブラリ）
+
+ネイティブプロジェクトをバージョン管理しないと気づかない内にネイティブプロジェクトが更新され、予期しない事象を引き起こす可能性があります。
+そのためこのアプリでは、`Prebuild`実行後のネイティブプロジェクトをGit管理して、差分を検知する方針とします。
+
+## 環境ごとのネイティブプロジェクトの配置
+
+`Prebuild`実行後のネイティブプロジェクトは、`prebuild/[環境]/[ios/android]`にコピーします。コピーは、npm scriptsとして定義しており、`npm run prebuild`実行時に自動でコピーします。
+
+以下は、ローカル環境のネイティブプロジェクトをコピーするnpm scriptsになります。
+
+```json
+{
+  "scripts": {
+    "prebuild": "run-s build:plugin && cross-env ENVIRONMENT=local expo prebuild --clean --no-install",
+    "postprebuild": "run-p copy:local:*",
+    "build:plugin": "rimraf config/plugin/build && tsc --build config/plugin",
+    "copy:local:android": "cpx 'android/**' prebuild/local/android",
+    "copy:local:ios": "cpx 'ios/**' prebuild/local/ios"
+  }
+}
+```
+
+:::note
+前回実行した環境と同じ環境で`Prebuild`を実行した場合も、以下のファイルに必ず差分が発生してしまいます。
+
+- `prebuild/[環境]/ios/[環境]SantokuApp.xcodeproj/project.pbxproj`
+
+このアプリで使用しているConfig Pluginsでは、`GoogleService-Info.plist`や`PersonalAccount.xcconfig`など、いくつかのファイルが追加されます。
+iOSのプロジェクトでは、新規にファイルを追加する場合に一意のIDを割り当てる必要があり、それらは`project.pbxproj`に設定されます。
+
+Config Pluginsでは、一意のIDを生成するためにUUIDを使用しており、`Prebuild`が実行されるたびにUUIDが変わってしまいます。
+そのため、`Prebuild`実行後は常に`project.pbxproj`の差分が発生してしまいます。
+
+ファイルのIDが変更しているだけで動作には影響しないため、`project.pbxproj`は`git-restore`してください。
+:::

@@ -1,6 +1,6 @@
-import {maxDb} from '../db';
 import {santokuAccount} from './accountData';
 import {partnerAccount} from './accountMinData';
+import {maxDb} from '../db';
 
 export const eventLikeMaxData = () => {
   maxDb.eventLike.create({eventLikeId: '1', eventId: '1', accountId: partnerAccount.accountId});

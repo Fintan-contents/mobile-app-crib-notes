@@ -1,0 +1,53 @@
+---
+title: 開発者アカウントの使用（iOS）
+---
+
+AppleはADP・ADEPライセンス利用に関して以下のようなルールを定めています。
+
+- 組織単位（ライセンス契約単位）で、デバイス登録台数は種類（iPhone、iPadなど）ごとに100台まで
+- Appの高度な機能を使ったアプリの場合、ライセンス利用が必須
+
+100台のデバイスが意図せずに登録されてしまうと、実際に高度な機能を手元にあるデバイスで確認したいと思っても登録できません。
+
+そのため、このアプリではlocal環境の開発にはPersonal Team（以降、開発者アカウントと記載）を利用します。
+
+## 開発者アカウントの設定
+
+Expoが標準で用意しているConfig Pluginsには、開発者アカウントを設定するための機能がありません。そのため、このアプリでは[withAddPersonalAccountConfig](./apply-plugins#アプリで独自に作成したconfig-plugins)というプラグインを作成しています。
+
+開発者アカウントを設定する手順は以下になります。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+1. `config/plugin/template/ios/HelloWorld/PersonalAccount.xcconfig.template` を `config/plugin/template/ios/HelloWorld/PersonalAccount.xcconfig` としてコピーしてください。
+2. ファイルに記載されている設定値を、それぞれ次のように設定してください。
+   - `CODE_SIGN_STYLE`: `Automatic`
+   - `PERSONAL_IDENTIFIER`: 他の人とかぶらない、何らかの一意の値
+   - `DEVELOPMENT_TEAM`: 個人のデベロッパアカウントに割り当てられたチームID
+     - わからない場合は、[デベロッパアカウントのチームIDを確認する](#デベロッパアカウントのチームidを確認する)の手順で確認してください。
+3. `npm run prebuild`を実行してください。
+4. `npm run pod-install`を実行してください。
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+### デベロッパアカウントのチームIDを確認する
+
+無償のデベロッパアカウントのチームIDは、Xcodeの設定ファイルや開発用証明書などから確認できます。ここでは、開発用証明書から確認する手順を紹介します。
+
+まず、XcodeからApple ID（デベロッパアカウント）でログインし、開発用の証明書を作成します。
+
+1. Xcodeでアカウントの設定画面を開き、必要ならログインします。
+   - 「Preferences」＞「Accounts」でアカウントの設定画面が開きます。
+   - ログインする場合、左下の「＋」ボタンをクリックしてログインします。
+2. 利用するApple IDを選択状態にし、右側のチーム一覧で「<Apple IDの氏名> **(Personal Team)**」と書かれているチームを選択します。
+   - Apple Developer Programなどに登録されているユーザの場合、Apple Developer Programのデベロッパ名なども表示されるため、複数のチームが表示されます。
+3. 「Personal Team」を選択した状態で「Manage Certificates」をクリックします。
+4. 「Apple Development Certificates」に証明書がリストされていることを確認します。
+   - 証明書が表示されない場合は、左下の「＋」ボタンを押して証明書を作成してください。
+
+次に、「キーチェーンアクセス」を開き、開発用の証明書を確認します。
+
+1. 「キーチェーンアクセス」を開き、左上のキーチェーン一覧から「ログイン」を選択します。
+2. 「分類」の「証明書」を選択し、ログインキーチェーンに保存されている証明書の一覧を表示します。
+3. 「Apple Development: <Apple IDのメールアドレス> (xxxxxxxxxx)」という名前の証明書をダブルクリックし、情報を表示します。
+4. 表示された情報の中の「部署」に設定されている文字列がチームIDです。
