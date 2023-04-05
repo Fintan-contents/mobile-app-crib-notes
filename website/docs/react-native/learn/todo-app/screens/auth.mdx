@@ -45,12 +45,12 @@ ToDoアプリでもこれに従い、認証制御を組み込んでいきます�
 
 次のファイルを追加・修正してください。
 
-- `/src/services/AuthService.ts`
-- `/src/services/index.ts`
-- `/src/contexts/UserContext.tsx`
-- `/src/App.tsx`
+- `src/services/AuthService.ts`
+- `src/services/index.ts`
+- `src/contexts/UserContext.tsx`
+- `src/App.tsx`
 
-```typescript jsx title="/src/services/AuthService.ts"
+```typescript jsx title="src/services/AuthService.ts"
 const refreshCsrfToken = async () => {};
 
 const signup = async (userName: string, password: string) => {
@@ -73,11 +73,11 @@ export const AuthService = {
 };
 ```
 
-```typescript jsx title="/src/services/index.ts"
+```typescript jsx title="src/services/index.ts"
 export * from './AuthService';
 ```
 
-```typescript jsx title="/src/contexts/UserContext.tsx"
+```typescript jsx title="src/contexts/UserContext.tsx"
 import React, {useContext, useState} from 'react';
 import {AuthService} from 'services/AuthService';
 
@@ -122,7 +122,7 @@ export const UserContextProvider: React.FC<React.PropsWithChildren> = ({children
 };
 ```
 
-```diff title="/src/App.tsx"
+```diff title="src/App.tsx"
   import {NavigationContainer} from '@react-navigation/native';
 + import {UserContextProvider} from 'contexts/UserContext';
   import {RootStackNav} from 'navigation';
@@ -153,9 +153,9 @@ export const UserContextProvider: React.FC<React.PropsWithChildren> = ({children
 
 ![AuthStack](../app-hands-on/auth_flows.png)
 
-`/src/navigation/RootStackNav.tsx`のファイル名を`UnauthedStackNav.tsx`に変更し、次のように修正してください。
+`src/navigation/RootStackNav.tsx`のファイル名を`UnauthedStackNav.tsx`に変更し、次のように修正してください。
 
-```diff typescript jsx title="/src/navigation/UnauthedStackNav.tsx"
+```diff typescript jsx title="src/navigation/UnauthedStackNav.tsx"
   import {useNavigation} from '@react-navigation/native';
   import {createStackNavigator} from '@react-navigation/stack';
   import React from 'react';
@@ -208,11 +208,11 @@ export const UserContextProvider: React.FC<React.PropsWithChildren> = ({children
 
 次のファイルを追加・修正してください。
 
-- `/src/navigation/AuthedStackNav.tsx`
-- `/src/navigation/RootStackNav.tsx`
-- `/src/navigation/index.ts`
+- `src/navigation/AuthedStackNav.tsx`
+- `src/navigation/RootStackNav.tsx`
+- `src/navigation/index.ts`
 
-```typescript jsx title="/src/navigation/AuthedStackNav.tsx"
+```typescript jsx title="src/navigation/AuthedStackNav.tsx"
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {TodoBoard} from 'screens';
@@ -227,7 +227,7 @@ export const AuthedStackNav: React.FC = () => {
 };
 ```
 
-```typescript jsx title="/src/navigation/RootStackNav.tsx"
+```typescript jsx title="src/navigation/RootStackNav.tsx"
 import {createStackNavigator} from '@react-navigation/stack';
 import {useUserContext} from 'contexts/UserContext';
 import React from 'react';
@@ -250,7 +250,7 @@ export const RootStackNav: React.FC = () => {
 };
 ```
 
-```diff title="/src/navigation/index.ts"
+```diff title="src/navigation/index.ts"
   export * from './RootStackNav';
 + export * from './UnauthedStackNav';
 + export * from './AuthedStackNav';
@@ -265,9 +265,9 @@ export const RootStackNav: React.FC = () => {
 ボタンを押した際に`userContext.login(userName, password)`を呼び出して認証状態にします。
 `userName`や`password`を入力するフォームはログイン画面の実装で作成するため、今は固定値を渡します。
 
-`/src/screens/auth/Login.tsx`を修正してください。
+`src/screens/auth/Login.tsx`を修正してください。
 
-```diff title="/src/screens/auth/Login.tsx"
+```diff title="src/screens/auth/Login.tsx"
 - import {useNavigation} from '@react-navigation/native';
 + import {useUserContext} from 'contexts/UserContext';
 - import React from 'react';
@@ -296,9 +296,9 @@ export const RootStackNav: React.FC = () => {
 
 最後に、ToDo一覧画面に`userContext.logout()`を呼びだすログアウトボタンを追加します。
 
-`/src/screens/todo/TodoBoard.tsx`を修正してください。
+`src/screens/todo/TodoBoard.tsx`を修正してください。
 
-```diff title="/src/screens/todo/TodoBoard.tsx"
+```diff title="src/screens/todo/TodoBoard.tsx"
 + import {useUserContext} from 'contexts/UserContext';
 - import React from 'react';
 + import React, {useCallback} from 'react';

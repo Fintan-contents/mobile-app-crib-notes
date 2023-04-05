@@ -21,7 +21,7 @@ ToDoアプリでは、一覧の取得中はToDo一覧上にローディング中
 次のように `useState` を利用して`loading`状態を管理します。
 REST APIを呼びだす`TodoService.getTodos()`の前で`loading`中に設定し、`finally`で`loading`を解除します。
 
-```diff typescript title="screens/todo/TodoBoard.tsx"
+```diff typescript title="src/screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
    const navigation = useNavigation();
    const {theme} = useContext(ThemeContext);
@@ -78,7 +78,7 @@ export const TodoBoard: React.FC = () => {
 
 まず、操作をブロックするための`indicatorContainer`とアクティビティインジケータを中央に表示するための`indicator`のスタイルを定義してください。
 
-``` diff typescript jsx title="/src/screens/todo/TodoBoard.tsx"
+``` diff typescript jsx title="src/screens/todo/TodoBoard.tsx"
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 次にReact Nativeの `ActivityIndicator` を表示します。
 操作をブロックするためのContainerは、`loading`中でなければ表示されないようにします。
 
-```diff typescript title="/src/screens/todo/TodoBoard.tsx"
+```diff typescript title="src/screens/todo/TodoBoard.tsx"
  import React, {useCallback, useContext, useState} from 'react';
 -import {Alert, StyleSheet, View} from 'react-native';
 +import {Alert, StyleSheet, View, ActivityIndicator} from 'react-native';
@@ -161,7 +161,7 @@ Middlewareとは、特定の処理に対して共通的に行いたい処理（�
 今回は、REST APIの応答時間を任意のものへ設定するのに使用してます。
 :::
 
-``` typescript jsx title="/src/backend/config.ts"
+``` typescript jsx title="src/backend/config.ts"
 import {Configuration, Middleware} from './generated-rest-client';
 const waitResponse: Middleware = {
   post: async context => {

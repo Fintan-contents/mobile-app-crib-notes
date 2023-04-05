@@ -40,9 +40,9 @@ ToDo登録画面が表示されている時も、ToDo一覧画面はスタック
 :::
 
 では修正していきましょう。
-`/src/screens/todo/TodoBoard.tsx`を修正してください。
+`src/screens/todo/TodoBoard.tsx`を修正してください。
 
-```diff title="/src/screens/todo/TodoBoard.tsx"
+```diff title="src/screens/todo/TodoBoard.tsx"
 - import {useNavigation} from '@react-navigation/native';
 + import {useNavigation, useFocusEffect} from '@react-navigation/native';
   import {FilterType, TodoFilter, TodoList} from 'components/parts';

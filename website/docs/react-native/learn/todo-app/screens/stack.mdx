@@ -13,13 +13,13 @@ title: Stackナビゲーション
 
 次のファイルを追加・修正してください。
 
-- `/src/screens/auth/Login.tsx`
-- `/src/screens/auth/index.ts`
-- `/src/screens/todo/TodoBoard.tsx`
-- `/src/screens/todo/index.ts`
-- `/src/screens/index.ts`
+- `src/screens/auth/Login.tsx`
+- `src/screens/auth/index.ts`
+- `src/screens/todo/TodoBoard.tsx`
+- `src/screens/todo/index.ts`
+- `src/screens/index.ts`
 
-```typescript jsx title="/src/screens/auth/Login.tsx"
+```typescript jsx title="src/screens/auth/Login.tsx"
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
 });
 ```
 
-```typescript jsx title="/src/screens/auth/index.ts"
+```typescript jsx title="src/screens/auth/index.ts"
 export * from './Login';
 ```
 
-```typescript jsx title="/src/screens/todo/TodoBoard.tsx"
+```typescript jsx title="src/screens/todo/TodoBoard.tsx"
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
@@ -67,11 +67,11 @@ const styles = StyleSheet.create({
 });
 ```
 
-```typescript jsx title="/src/screens/todo/index.ts"
+```typescript jsx title="src/screens/todo/index.ts"
 export * from './TodoBoard';
 ```
 
-``` diff jsx title="/src/screens/index.ts"
+``` diff jsx title="src/screens/index.ts"
 + export * from './auth';
   export * from './home';
   export * from './instructions';
@@ -219,7 +219,7 @@ Stackナビゲータに指定できるオプションの種類については[�
 
 最後に、ログイン画面からToDo一覧画面への遷移を実装します。`src/screens/auth/Login.tsx`を修正してください。
 
-``` diff jsx title="/src/screens/auth/Login.tsx"
+``` diff jsx title="src/screens/auth/Login.tsx"
 + import {useNavigation} from '@react-navigation/native';
   import React from 'react';
   import {StyleSheet, View} from 'react-native';

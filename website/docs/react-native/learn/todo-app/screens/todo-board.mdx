@@ -22,10 +22,10 @@ ToDo一覧画面を実装します。
 
 次のファイルを追加・修正してください。
 
-- `/src/services/TodoService.ts`
-- `/src/services/index.ts`
+- `src/services/TodoService.ts`
+- `src/services/index.ts`
 
-```typescript title="/src/services/TodoService.ts"
+```typescript title="src/services/TodoService.ts"
 export type Todo = {
   id: number;
   text: string;
@@ -108,7 +108,7 @@ export const TodoService = {
 };
 ```
 
-```diff title="/src/services/index.ts"
+```diff title="src/services/index.ts"
   export * from './AuthService';
 + export * from './TodoService';
 ```
@@ -131,13 +131,13 @@ export const TodoService = {
 
 次のファイルを追加してください。
 
-- `/src/components/parts/todo/TodoFilter.tsx`
-- `/src/components/parts/todo/TodoItem.tsx`
-- `/src/components/parts/todo/TodoList.tsx`
-- `/src/components/parts/todo/index.ts`
-- `/src/components/parts/index.ts`
+- `src/components/parts/todo/TodoFilter.tsx`
+- `src/components/parts/todo/TodoItem.tsx`
+- `src/components/parts/todo/TodoList.tsx`
+- `src/components/parts/todo/index.ts`
+- `src/components/parts/index.ts`
 
-```typescript jsx title="/src/components/parts/todo/TodoFilter.tsx"
+```typescript jsx title="src/components/parts/todo/TodoFilter.tsx"
 import React from 'react';
 import {ButtonGroup} from 'react-native-elements';
 
@@ -159,7 +159,7 @@ export const TodoFilter: React.FC<Props> = ({filterType, setFilterType}) => {
 };
 ```
 
-```typescript jsx title="/src/components/parts/todo/TodoItem.tsx"
+```typescript jsx title="src/components/parts/todo/TodoItem.tsx"
 import React, {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {CheckBox} from 'react-native-elements';
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-```typescript jsx title="/src/components/parts/todo/TodoList.tsx"
+```typescript jsx title="src/components/parts/todo/TodoList.tsx"
 import React from 'react';
 import {FlatList, StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import {Todo} from 'services';
@@ -246,13 +246,13 @@ const styles = StyleSheet.create({
 });
 ```
 
-```typescript jsx title="/src/components/parts/todo/index.ts"
+```typescript jsx title="src/components/parts/todo/index.ts"
 export * from './TodoFilter';
 export * from './TodoList';
 export * from './TodoItem';
 ```
 
-```typescript jsx title="/src/components/parts/index.ts"
+```typescript jsx title="src/components/parts/index.ts"
 export * from './todo';
 ```
 
@@ -269,7 +269,7 @@ ToDo一覧画面を実装していきます。
 
 修正量が多いので、次のソースコードで`TodoBoard.tsx`を上書きしてください。
 
-```typescript jsx title="/src/screens/todo/TodoBoard.tsx"
+```typescript jsx title="src/screens/todo/TodoBoard.tsx"
 import {useNavigation} from '@react-navigation/native';
 import {FilterType, TodoFilter, TodoList} from 'components/parts';
 import React, {useContext, useEffect, useState} from 'react';
