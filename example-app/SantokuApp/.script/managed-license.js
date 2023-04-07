@@ -29,9 +29,6 @@ module.exports = function () {
         licenseName: 'MIT',
         licenseUrl: 'https://github.com/ogt/valid-url/blob/v1.0.9/LICENSE',
       },
-      '@graphql-typed-document-node/core@3.1.1': { // https://github.com/dotansimha/graphql-typed-document-node
-        licenseUrl: 'https://github.com/dotansimha/graphql-typed-document-node/blob/core%40v3.1.1/LICENSE',
-      },
       '@react-native/assets@1.0.0': { // https://github.com/facebook/react-native/blob/v0.70.5/packages/assets/package.json
         licenseUrl: 'https://github.com/facebook/react-native/blob/v0.70.5/LICENSE',
       },
@@ -83,10 +80,8 @@ module.exports = function () {
         licenseName: 'Apache-2.0',
         licenseUrl: 'https://github.com/facebookincubator/fbjni/blob/v0.2.2/LICENSE',
       },
-      'org.webkit:android-jsc:r250230': { // https://mvnrepository.com/artifact/org.webkit/android-jsc/r250230
-        exclude: false, // jsEngine の指定で jsc(JavaScriptCore) を使わない場合 exclude 可能
-        licenseName: 'LGPL-2.0', // https://web.archive.org/web/20091005200350/https://developer.apple.com/opensource/internet/webkit.html
-        licenseText: fs.readFileSync(`${__dirname}/license-text/LGPL-apple.txt`, 'utf8'), // https://webkit.org/licensing-webkit/
+      'org.webkit:android-jsc:r250230': { // https://www.npmjs.com/package/jsc-android
+        exclude: true, // 「Android JSC is installed from npm」なので npm 側のライブラリで管理する
       },
       'com.parse.bolts:bolts-tasks:1.4.0': { // https://github.com/BoltsFramework/Bolts-Android
         licenseName: 'BSD-3-Clause', // 名称だけ厳密にする(元: BSD License: https://github.com/BoltsFramework/Bolts-Android/blob/1.4.0/LICENSE)
@@ -106,10 +101,10 @@ module.exports = function () {
       'glog@0.3.5': { // https://github.com/google/glog
         licenseName: 'BSD-3-Clause', // https://code.google.com/archive/p/google-glog/ (元: "Google" https://github.com/facebook/react-native/blob/v0.70.5/third-party-podspecs/glog.podspec#L9)
       },
-      'GoogleDataTransport@9.2.1': {
+      'GoogleDataTransport@9.2.2': {
         licenseName: 'Apache-2.0', // 名称だけ SPDX 形式に変更する (元: Apache)
       },
-      'GoogleUtilities@c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f': {
+      'GoogleUtilities@9aa0ad5a7bc171f8bae016300bfcfa3fb8425749': {
         licenseName: 'Apache-2.0', // 名称だけ SPDX 形式に変更する (元: Apache)
       },
     },
