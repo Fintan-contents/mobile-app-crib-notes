@@ -383,8 +383,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                   >
                                                     <RNSVGSvgView
                                                       align="xMidYMid"
-                                                      bbHeight={24}
-                                                      bbWidth={24}
+                                                      bbHeight="24"
+                                                      bbWidth="24"
                                                       fill="none"
                                                       focusable={false}
                                                       meetOrSlice={0}
@@ -422,7 +422,12 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                       >
                                                         <RNSVGPath
                                                           d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z"
-                                                          fill={4294309365}
+                                                          fill={
+                                                            Object {
+                                                              "payload": 4294309365,
+                                                              "type": 0,
+                                                            }
+                                                          }
                                                           propList={
                                                             Array [
                                                               "fill",
@@ -522,8 +527,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                     >
                                                       <RNSVGSvgView
                                                         align="xMidYMid"
-                                                        bbHeight={24}
-                                                        bbWidth={24}
+                                                        bbHeight="24"
+                                                        bbWidth="24"
                                                         fill="none"
                                                         focusable={false}
                                                         meetOrSlice={0}
@@ -561,7 +566,12 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                         >
                                                           <RNSVGPath
                                                             d="M12 22C13.1 22 14 21.1 14 20H10C10 21.1 10.9 22 12 22ZM18 16V11C18 7.93 16.37 5.36 13.5 4.68V4C13.5 3.17 12.83 2.5 12 2.5C11.17 2.5 10.5 3.17 10.5 4V4.68C7.64 5.36 6 7.92 6 11V16L4 18V19H20V18L18 16ZM16 17H8V11C8 8.52 9.51 6.5 12 6.5C14.49 6.5 16 8.52 16 11V17Z"
-                                                            fill={4294309365}
+                                                            fill={
+                                                              Object {
+                                                                "payload": 4294309365,
+                                                                "type": 0,
+                                                              }
+                                                            }
                                                             propList={
                                                               Array [
                                                                 "fill",
@@ -599,8 +609,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                     >
                                                       <RNSVGSvgView
                                                         align="xMidYMid"
-                                                        bbHeight={24}
-                                                        bbWidth={24}
+                                                        bbHeight="24"
+                                                        bbWidth="24"
                                                         fill="none"
                                                         focusable={false}
                                                         meetOrSlice={0}
@@ -638,7 +648,12 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                         >
                                                           <RNSVGPath
                                                             d="M19.43 12.98C19.47 12.66 19.5 12.34 19.5 12C19.5 11.66 19.47 11.34 19.43 11.02L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.57 5.11 19.4 5.02 19.22 5.02C19.16 5.02 19.1 5.03 19.05 5.05L16.56 6.05C16.04 5.65 15.48 5.32 14.87 5.07L14.49 2.42C14.46 2.18 14.25 2 14 2H9.99999C9.74999 2 9.53999 2.18 9.50999 2.42L9.12999 5.07C8.51999 5.32 7.95999 5.66 7.43999 6.05L4.94999 5.05C4.88999 5.03 4.82999 5.02 4.76999 5.02C4.59999 5.02 4.42999 5.11 4.33999 5.27L2.33999 8.73C2.20999 8.95 2.26999 9.22 2.45999 9.37L4.56999 11.02C4.52999 11.34 4.49999 11.67 4.49999 12C4.49999 12.33 4.52999 12.66 4.56999 12.98L2.45999 14.63C2.26999 14.78 2.21999 15.05 2.33999 15.27L4.33999 18.73C4.42999 18.89 4.59999 18.98 4.77999 18.98C4.83999 18.98 4.89999 18.97 4.94999 18.95L7.43999 17.95C7.95999 18.35 8.51999 18.68 9.12999 18.93L9.50999 21.58C9.53999 21.82 9.74999 22 9.99999 22H14C14.25 22 14.46 21.82 14.49 21.58L14.87 18.93C15.48 18.68 16.04 18.34 16.56 17.95L19.05 18.95C19.11 18.97 19.17 18.98 19.23 18.98C19.4 18.98 19.57 18.89 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.98ZM17.45 11.27C17.49 11.58 17.5 11.79 17.5 12C17.5 12.21 17.48 12.43 17.45 12.73L17.31 13.86L18.2 14.56L19.28 15.4L18.58 16.61L17.31 16.1L16.27 15.68L15.37 16.36C14.94 16.68 14.53 16.92 14.12 17.09L13.06 17.52L12.9 18.65L12.7 20H11.3L11.11 18.65L10.95 17.52L9.88999 17.09C9.45999 16.91 9.05999 16.68 8.65999 16.38L7.74999 15.68L6.68999 16.11L5.41999 16.62L4.71999 15.41L5.79999 14.57L6.68999 13.87L6.54999 12.74C6.51999 12.43 6.49999 12.2 6.49999 12C6.49999 11.8 6.51999 11.57 6.54999 11.27L6.68999 10.14L5.79999 9.44L4.71999 8.6L5.41999 7.39L6.68999 7.9L7.72999 8.32L8.62999 7.64C9.05999 7.32 9.46999 7.08 9.87999 6.91L10.94 6.48L11.1 5.35L11.3 4H12.69L12.88 5.35L13.04 6.48L14.1 6.91C14.53 7.09 14.93 7.32 15.33 7.62L16.24 8.32L17.3 7.89L18.57 7.38L19.27 8.59L18.2 9.44L17.31 10.14L17.45 11.27ZM12 8C9.78999 8 7.99999 9.79 7.99999 12C7.99999 14.21 9.78999 16 12 16C14.21 16 16 14.21 16 12C16 9.79 14.21 8 12 8ZM12 14C10.9 14 9.99999 13.1 9.99999 12C9.99999 10.9 10.9 10 12 10C13.1 10 14 10.9 14 12C14 13.1 13.1 14 12 14Z"
-                                                            fill={4294309365}
+                                                            fill={
+                                                              Object {
+                                                                "payload": 4294309365,
+                                                                "type": 0,
+                                                              }
+                                                            }
                                                             propList={
                                                               Array [
                                                                 "fill",
@@ -815,7 +830,6 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                       }
                                                     >
                                                       <RCTSafeAreaView
-                                                        emulateUnlessSupported={true}
                                                         style={
                                                           Array [
                                                             Object {
@@ -1337,8 +1351,8 @@ React Native 0.66
                                                                         >
                                                                           <RNSVGSvgView
                                                                             align="xMidYMid"
-                                                                            bbHeight={24}
-                                                                            bbWidth={24}
+                                                                            bbHeight="24"
+                                                                            bbWidth="24"
                                                                             fill="none"
                                                                             focusable={false}
                                                                             meetOrSlice={0}
@@ -1376,7 +1390,12 @@ React Native 0.66
                                                                             >
                                                                               <RNSVGPath
                                                                                 d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                                fill={4288585374}
+                                                                                fill={
+                                                                                  Object {
+                                                                                    "payload": 4288585374,
+                                                                                    "type": 0,
+                                                                                  }
+                                                                                }
                                                                                 propList={
                                                                                   Array [
                                                                                     "fill",
@@ -1483,8 +1502,8 @@ React Native 0.66
                                                                         />
                                                                         <RNSVGSvgView
                                                                           align="xMidYMid"
-                                                                          bbHeight={40}
-                                                                          bbWidth={40}
+                                                                          bbHeight="40"
+                                                                          bbWidth="40"
                                                                           fill="none"
                                                                           focusable={false}
                                                                           meetOrSlice={0}
@@ -1523,7 +1542,12 @@ React Native 0.66
                                                                             <RNSVGCircle
                                                                               cx="20"
                                                                               cy="20"
-                                                                              fill={4293322470}
+                                                                              fill={
+                                                                                Object {
+                                                                                  "payload": 4293322470,
+                                                                                  "type": 0,
+                                                                                }
+                                                                              }
                                                                               propList={
                                                                                 Array [
                                                                                   "fill",
@@ -1533,7 +1557,12 @@ React Native 0.66
                                                                             />
                                                                             <RNSVGPath
                                                                               d="M20 20C22.21 20 24 18.21 24 16C24 13.79 22.21 12 20 12C17.79 12 16 13.79 16 16C16 18.21 17.79 20 20 20ZM20 22C17.33 22 12 23.34 12 26V28H28V26C28 23.34 22.67 22 20 22Z"
-                                                                              fill={4290295992}
+                                                                              fill={
+                                                                                Object {
+                                                                                  "payload": 4290295992,
+                                                                                  "type": 0,
+                                                                                }
+                                                                              }
                                                                               propList={
                                                                                 Array [
                                                                                   "fill",
@@ -1637,8 +1666,8 @@ React Native 0.66
                                                                         >
                                                                           <RNSVGSvgView
                                                                             align="xMidYMid"
-                                                                            bbHeight={24}
-                                                                            bbWidth={24}
+                                                                            bbHeight="24"
+                                                                            bbWidth="24"
                                                                             fill="none"
                                                                             focusable={false}
                                                                             meetOrSlice={0}
@@ -1676,7 +1705,12 @@ React Native 0.66
                                                                             >
                                                                               <RNSVGPath
                                                                                 d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                                fill={4288585374}
+                                                                                fill={
+                                                                                  Object {
+                                                                                    "payload": 4288585374,
+                                                                                    "type": 0,
+                                                                                  }
+                                                                                }
                                                                                 propList={
                                                                                   Array [
                                                                                     "fill",
@@ -1783,8 +1817,8 @@ React Native 0.66
                                                                         />
                                                                         <RNSVGSvgView
                                                                           align="xMidYMid"
-                                                                          bbHeight={40}
-                                                                          bbWidth={40}
+                                                                          bbHeight="40"
+                                                                          bbWidth="40"
                                                                           fill="none"
                                                                           focusable={false}
                                                                           meetOrSlice={0}
@@ -1823,7 +1857,12 @@ React Native 0.66
                                                                             <RNSVGCircle
                                                                               cx="20"
                                                                               cy="20"
-                                                                              fill={4293322470}
+                                                                              fill={
+                                                                                Object {
+                                                                                  "payload": 4293322470,
+                                                                                  "type": 0,
+                                                                                }
+                                                                              }
                                                                               propList={
                                                                                 Array [
                                                                                   "fill",
@@ -1833,7 +1872,12 @@ React Native 0.66
                                                                             />
                                                                             <RNSVGPath
                                                                               d="M20 20C22.21 20 24 18.21 24 16C24 13.79 22.21 12 20 12C17.79 12 16 13.79 16 16C16 18.21 17.79 20 20 20ZM20 22C17.33 22 12 23.34 12 26V28H28V26C28 23.34 22.67 22 20 22Z"
-                                                                              fill={4290295992}
+                                                                              fill={
+                                                                                Object {
+                                                                                  "payload": 4290295992,
+                                                                                  "type": 0,
+                                                                                }
+                                                                              }
                                                                               propList={
                                                                                 Array [
                                                                                   "fill",
@@ -1983,8 +2027,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -2022,7 +2066,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M3 18H9V16H3V18ZM3 6V8H21V6H3ZM3 13H15V11H3V13Z"
-                                                                          fill={4280361249}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4280361249,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -2060,8 +2109,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -2099,7 +2148,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M6.99999 6H17L11.99 12.3L6.99999 6ZM4.24999 5.61C6.26999 8.2 9.99999 13 9.99999 13V19C9.99999 19.55 10.45 20 11 20H13C13.55 20 14 19.55 14 19V13C14 13 17.72 8.2 19.74 5.61C20.25 4.95 19.78 4 18.95 4H5.03999C4.20999 4 3.73999 4.95 4.24999 5.61Z"
-                                                                          fill={4280361249}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4280361249,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -2137,8 +2191,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -2176,7 +2230,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M21.41 11.58L12.41 2.58C12.05 2.22 11.55 2 11 2H4C2.9 2 2 2.9 2 4V11C2 11.55 2.22 12.05 2.59 12.42L11.59 21.42C11.95 21.78 12.45 22 13 22C13.55 22 14.05 21.78 14.41 21.41L21.41 14.41C21.78 14.05 22 13.55 22 13C22 12.45 21.77 11.94 21.41 11.58ZM13 20.01L4 11V4H11V3.99L20 12.99L13 20.01Z"
-                                                                          fill={4280361249}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4280361249,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -2185,7 +2244,12 @@ React Native 0.66
                                                                         />
                                                                         <RNSVGPath
                                                                           d="M6.5 8C7.32843 8 8 7.32843 8 6.5C8 5.67157 7.32843 5 6.5 5C5.67157 5 5 5.67157 5 6.5C5 7.32843 5.67157 8 6.5 8Z"
-                                                                          fill={4280361249}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4280361249,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -2242,8 +2306,8 @@ React Native 0.66
                                                                 >
                                                                   <RNSVGSvgView
                                                                     align="xMidYMid"
-                                                                    bbHeight={40}
-                                                                    bbWidth={40}
+                                                                    bbHeight="40"
+                                                                    bbWidth="40"
                                                                     fill="none"
                                                                     focusable={false}
                                                                     meetOrSlice={0}
@@ -2282,7 +2346,12 @@ React Native 0.66
                                                                       <RNSVGCircle
                                                                         cx="20"
                                                                         cy="20"
-                                                                        fill={4293322470}
+                                                                        fill={
+                                                                          Object {
+                                                                            "payload": 4293322470,
+                                                                            "type": 0,
+                                                                          }
+                                                                        }
                                                                         propList={
                                                                           Array [
                                                                             "fill",
@@ -2292,7 +2361,12 @@ React Native 0.66
                                                                       />
                                                                       <RNSVGPath
                                                                         d="M20 20C22.21 20 24 18.21 24 16C24 13.79 22.21 12 20 12C17.79 12 16 13.79 16 16C16 18.21 17.79 20 20 20ZM20 22C17.33 22 12 23.34 12 26V28H28V26C28 23.34 22.67 22 20 22Z"
-                                                                        fill={4290295992}
+                                                                        fill={
+                                                                          Object {
+                                                                            "payload": 4290295992,
+                                                                            "type": 0,
+                                                                          }
+                                                                        }
                                                                         propList={
                                                                           Array [
                                                                             "fill",
@@ -2382,8 +2456,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -2421,7 +2495,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM12 16C10.9 16 10 16.9 10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16Z"
-                                                                          fill={4278190080}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4278190080,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -2530,8 +2609,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={18}
-                                                                      bbWidth={18}
+                                                                      bbHeight="18"
+                                                                      bbWidth="18"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -2569,7 +2648,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M8.9925 1.5C4.8525 1.5 1.5 4.86 1.5 9C1.5 13.14 4.8525 16.5 8.9925 16.5C13.14 16.5 16.5 13.14 16.5 9C16.5 4.86 13.14 1.5 8.9925 1.5ZM9 15C5.685 15 3 12.315 3 9C3 5.685 5.685 3 9 3C12.315 3 15 5.685 15 9C15 12.315 12.315 15 9 15ZM9.375 5.25H8.25V9.75L12.1875 12.1125L12.75 11.19L9.375 9.1875V5.25Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -2642,8 +2726,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -2681,7 +2765,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 4C7 4 2.73 7.11 1 11.5C2.73 15.89 7 19 12 19C17 19 21.27 15.89 23 11.5C21.27 7.11 17 4 12 4ZM12 17C8.21 17 4.83 14.87 3.18 11.5C4.83 8.13 8.21 6 12 6C15.79 6 19.17 8.13 20.82 11.5C19.17 14.87 15.79 17 12 17ZM12 7C9.52 7 7.5 9.02 7.5 11.5C7.5 13.98 9.52 16 12 16C14.48 16 16.5 13.98 16.5 11.5C16.5 9.02 14.48 7 12 7ZM12 14C10.62 14 9.5 12.88 9.5 11.5C9.5 10.12 10.62 9 12 9C13.38 9 14.5 10.12 14.5 11.5C14.5 12.88 13.38 14 12 14Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -2735,8 +2824,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -2774,7 +2863,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -2828,8 +2922,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -2867,7 +2961,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M15 5V12H5.17L4.58 12.59L4 13.17V5H15ZM16 3H3C2.45 3 2 3.45 2 4V18L6 14H16C16.55 14 17 13.55 17 13V4C17 3.45 16.55 3 16 3ZM21 7H19V16H6V18C6 18.55 6.45 19 7 19H18L22 23V8C22 7.45 21.55 7 21 7Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -3042,8 +3141,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3081,7 +3180,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM12 16C10.9 16 10 16.9 10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16Z"
-                                                                          fill={4278190080}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4278190080,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -3210,8 +3314,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={18}
-                                                                      bbWidth={18}
+                                                                      bbHeight="18"
+                                                                      bbWidth="18"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3249,7 +3353,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M8.9925 1.5C4.8525 1.5 1.5 4.86 1.5 9C1.5 13.14 4.8525 16.5 8.9925 16.5C13.14 16.5 16.5 13.14 16.5 9C16.5 4.86 13.14 1.5 8.9925 1.5ZM9 15C5.685 15 3 12.315 3 9C3 5.685 5.685 3 9 3C12.315 3 15 5.685 15 9C15 12.315 12.315 15 9 15ZM9.375 5.25H8.25V9.75L12.1875 12.1125L12.75 11.19L9.375 9.1875V5.25Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -3322,8 +3431,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3361,7 +3470,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 4C7 4 2.73 7.11 1 11.5C2.73 15.89 7 19 12 19C17 19 21.27 15.89 23 11.5C21.27 7.11 17 4 12 4ZM12 17C8.21 17 4.83 14.87 3.18 11.5C4.83 8.13 8.21 6 12 6C15.79 6 19.17 8.13 20.82 11.5C19.17 14.87 15.79 17 12 17ZM12 7C9.52 7 7.5 9.02 7.5 11.5C7.5 13.98 9.52 16 12 16C14.48 16 16.5 13.98 16.5 11.5C16.5 9.02 14.48 7 12 7ZM12 14C10.62 14 9.5 12.88 9.5 11.5C9.5 10.12 10.62 9 12 9C13.38 9 14.5 10.12 14.5 11.5C14.5 12.88 13.38 14 12 14Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -3415,8 +3529,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3454,7 +3568,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -3508,8 +3627,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3547,7 +3666,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M15 5V12H5.17L4.58 12.59L4 13.17V5H15ZM16 3H3C2.45 3 2 3.45 2 4V18L6 14H16C16.55 14 17 13.55 17 13V4C17 3.45 16.55 3 16 3ZM21 7H19V16H6V18C6 18.55 6.45 19 7 19H18L22 23V8C22 7.45 21.55 7 21 7Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -3722,8 +3846,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3761,7 +3885,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM12 16C10.9 16 10 16.9 10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16Z"
-                                                                          fill={4278190080}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4278190080,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -3891,8 +4020,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={18}
-                                                                      bbWidth={18}
+                                                                      bbHeight="18"
+                                                                      bbWidth="18"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3930,7 +4059,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M8.9925 1.5C4.8525 1.5 1.5 4.86 1.5 9C1.5 13.14 4.8525 16.5 8.9925 16.5C13.14 16.5 16.5 13.14 16.5 9C16.5 4.86 13.14 1.5 8.9925 1.5ZM9 15C5.685 15 3 12.315 3 9C3 5.685 5.685 3 9 3C12.315 3 15 5.685 15 9C15 12.315 12.315 15 9 15ZM9.375 5.25H8.25V9.75L12.1875 12.1125L12.75 11.19L9.375 9.1875V5.25Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -4003,8 +4137,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4042,7 +4176,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 4C7 4 2.73 7.11 1 11.5C2.73 15.89 7 19 12 19C17 19 21.27 15.89 23 11.5C21.27 7.11 17 4 12 4ZM12 17C8.21 17 4.83 14.87 3.18 11.5C4.83 8.13 8.21 6 12 6C15.79 6 19.17 8.13 20.82 11.5C19.17 14.87 15.79 17 12 17ZM12 7C9.52 7 7.5 9.02 7.5 11.5C7.5 13.98 9.52 16 12 16C14.48 16 16.5 13.98 16.5 11.5C16.5 9.02 14.48 7 12 7ZM12 14C10.62 14 9.5 12.88 9.5 11.5C9.5 10.12 10.62 9 12 9C13.38 9 14.5 10.12 14.5 11.5C14.5 12.88 13.38 14 12 14Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -4096,8 +4235,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4135,7 +4274,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -4189,8 +4333,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4228,7 +4372,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M15 5V12H5.17L4.58 12.59L4 13.17V5H15ZM16 3H3C2.45 3 2 3.45 2 4V18L6 14H16C16.55 14 17 13.55 17 13V4C17 3.45 16.55 3 16 3ZM21 7H19V16H6V18C6 18.55 6.45 19 7 19H18L22 23V8C22 7.45 21.55 7 21 7Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -4396,8 +4545,8 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGSvgView
                                                                           align="xMidYMid"
-                                                                          bbHeight={24}
-                                                                          bbWidth={24}
+                                                                          bbHeight="24"
+                                                                          bbWidth="24"
                                                                           fill="none"
                                                                           focusable={false}
                                                                           meetOrSlice={0}
@@ -4435,7 +4584,12 @@ React Native 0.66
                                                                           >
                                                                             <RNSVGPath
                                                                               d="M9.00002 16.2L4.80002 12L3.40002 13.4L9.00002 19L21 6.99998L19.6 5.59998L9.00002 16.2Z"
-                                                                              fill={4280923894}
+                                                                              fill={
+                                                                                Object {
+                                                                                  "payload": 4280923894,
+                                                                                  "type": 0,
+                                                                                }
+                                                                              }
                                                                               propList={
                                                                                 Array [
                                                                                   "fill",
@@ -4490,8 +4644,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4529,7 +4683,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM12 16C10.9 16 10 16.9 10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16Z"
-                                                                          fill={4278190080}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4278190080,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -4644,8 +4803,8 @@ Nablarch 5u21
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={18}
-                                                                      bbWidth={18}
+                                                                      bbHeight="18"
+                                                                      bbWidth="18"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4683,7 +4842,12 @@ Nablarch 5u21
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M8.9925 1.5C4.8525 1.5 1.5 4.86 1.5 9C1.5 13.14 4.8525 16.5 8.9925 16.5C13.14 16.5 16.5 13.14 16.5 9C16.5 4.86 13.14 1.5 8.9925 1.5ZM9 15C5.685 15 3 12.315 3 9C3 5.685 5.685 3 9 3C12.315 3 15 5.685 15 9C15 12.315 12.315 15 9 15ZM9.375 5.25H8.25V9.75L12.1875 12.1125L12.75 11.19L9.375 9.1875V5.25Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -4756,8 +4920,8 @@ Nablarch 5u21
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4795,7 +4959,12 @@ Nablarch 5u21
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 4C7 4 2.73 7.11 1 11.5C2.73 15.89 7 19 12 19C17 19 21.27 15.89 23 11.5C21.27 7.11 17 4 12 4ZM12 17C8.21 17 4.83 14.87 3.18 11.5C4.83 8.13 8.21 6 12 6C15.79 6 19.17 8.13 20.82 11.5C19.17 14.87 15.79 17 12 17ZM12 7C9.52 7 7.5 9.02 7.5 11.5C7.5 13.98 9.52 16 12 16C14.48 16 16.5 13.98 16.5 11.5C16.5 9.02 14.48 7 12 7ZM12 14C10.62 14 9.5 12.88 9.5 11.5C9.5 10.12 10.62 9 12 9C13.38 9 14.5 10.12 14.5 11.5C14.5 12.88 13.38 14 12 14Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -4849,8 +5018,8 @@ Nablarch 5u21
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4888,7 +5057,12 @@ Nablarch 5u21
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -4942,8 +5116,8 @@ Nablarch 5u21
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4981,7 +5155,12 @@ Nablarch 5u21
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M15 5V12H5.17L4.58 12.59L4 13.17V5H15ZM16 3H3C2.45 3 2 3.45 2 4V18L6 14H16C16.55 14 17 13.55 17 13V4C17 3.45 16.55 3 16 3ZM21 7H19V16H6V18C6 18.55 6.45 19 7 19H18L22 23V8C22 7.45 21.55 7 21 7Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -5061,8 +5240,8 @@ Nablarch 5u21
                                                                 >
                                                                   <RNSVGSvgView
                                                                     align="xMidYMid"
-                                                                    bbHeight={40}
-                                                                    bbWidth={40}
+                                                                    bbHeight="40"
+                                                                    bbWidth="40"
                                                                     fill="none"
                                                                     focusable={false}
                                                                     meetOrSlice={0}
@@ -5101,7 +5280,12 @@ Nablarch 5u21
                                                                       <RNSVGCircle
                                                                         cx="20"
                                                                         cy="20"
-                                                                        fill={4293322470}
+                                                                        fill={
+                                                                          Object {
+                                                                            "payload": 4293322470,
+                                                                            "type": 0,
+                                                                          }
+                                                                        }
                                                                         propList={
                                                                           Array [
                                                                             "fill",
@@ -5111,7 +5295,12 @@ Nablarch 5u21
                                                                       />
                                                                       <RNSVGPath
                                                                         d="M20 20C22.21 20 24 18.21 24 16C24 13.79 22.21 12 20 12C17.79 12 16 13.79 16 16C16 18.21 17.79 20 20 20ZM20 22C17.33 22 12 23.34 12 26V28H28V26C28 23.34 22.67 22 20 22Z"
-                                                                        fill={4290295992}
+                                                                        fill={
+                                                                          Object {
+                                                                            "payload": 4290295992,
+                                                                            "type": 0,
+                                                                          }
+                                                                        }
                                                                         propList={
                                                                           Array [
                                                                             "fill",
@@ -5201,8 +5390,8 @@ Nablarch 5u21
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5240,7 +5429,12 @@ Nablarch 5u21
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM12 16C10.9 16 10 16.9 10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16Z"
-                                                                          fill={4278190080}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4278190080,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -5355,8 +5549,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={18}
-                                                                      bbWidth={18}
+                                                                      bbHeight="18"
+                                                                      bbWidth="18"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5394,7 +5588,12 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M8.9925 1.5C4.8525 1.5 1.5 4.86 1.5 9C1.5 13.14 4.8525 16.5 8.9925 16.5C13.14 16.5 16.5 13.14 16.5 9C16.5 4.86 13.14 1.5 8.9925 1.5ZM9 15C5.685 15 3 12.315 3 9C3 5.685 5.685 3 9 3C12.315 3 15 5.685 15 9C15 12.315 12.315 15 9 15ZM9.375 5.25H8.25V9.75L12.1875 12.1125L12.75 11.19L9.375 9.1875V5.25Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -5467,8 +5666,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5506,7 +5705,12 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 4C7 4 2.73 7.11 1 11.5C2.73 15.89 7 19 12 19C17 19 21.27 15.89 23 11.5C21.27 7.11 17 4 12 4ZM12 17C8.21 17 4.83 14.87 3.18 11.5C4.83 8.13 8.21 6 12 6C15.79 6 19.17 8.13 20.82 11.5C19.17 14.87 15.79 17 12 17ZM12 7C9.52 7 7.5 9.02 7.5 11.5C7.5 13.98 9.52 16 12 16C14.48 16 16.5 13.98 16.5 11.5C16.5 9.02 14.48 7 12 7ZM12 14C10.62 14 9.5 12.88 9.5 11.5C9.5 10.12 10.62 9 12 9C13.38 9 14.5 10.12 14.5 11.5C14.5 12.88 13.38 14 12 14Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -5560,8 +5764,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5599,7 +5803,12 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -5653,8 +5862,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5692,7 +5901,12 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M15 5V12H5.17L4.58 12.59L4 13.17V5H15ZM16 3H3C2.45 3 2 3.45 2 4V18L6 14H16C16.55 14 17 13.55 17 13V4C17 3.45 16.55 3 16 3ZM21 7H19V16H6V18C6 18.55 6.45 19 7 19H18L22 23V8C22 7.45 21.55 7 21 7Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -5867,8 +6081,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5906,7 +6120,12 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM12 16C10.9 16 10 16.9 10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16Z"
-                                                                          fill={4278190080}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4278190080,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -6017,8 +6236,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={18}
-                                                                      bbWidth={18}
+                                                                      bbHeight="18"
+                                                                      bbWidth="18"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6056,7 +6275,12 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M8.9925 1.5C4.8525 1.5 1.5 4.86 1.5 9C1.5 13.14 4.8525 16.5 8.9925 16.5C13.14 16.5 16.5 13.14 16.5 9C16.5 4.86 13.14 1.5 8.9925 1.5ZM9 15C5.685 15 3 12.315 3 9C3 5.685 5.685 3 9 3C12.315 3 15 5.685 15 9C15 12.315 12.315 15 9 15ZM9.375 5.25H8.25V9.75L12.1875 12.1125L12.75 11.19L9.375 9.1875V5.25Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -6129,8 +6353,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6168,7 +6392,12 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 4C7 4 2.73 7.11 1 11.5C2.73 15.89 7 19 12 19C17 19 21.27 15.89 23 11.5C21.27 7.11 17 4 12 4ZM12 17C8.21 17 4.83 14.87 3.18 11.5C4.83 8.13 8.21 6 12 6C15.79 6 19.17 8.13 20.82 11.5C19.17 14.87 15.79 17 12 17ZM12 7C9.52 7 7.5 9.02 7.5 11.5C7.5 13.98 9.52 16 12 16C14.48 16 16.5 13.98 16.5 11.5C16.5 9.02 14.48 7 12 7ZM12 14C10.62 14 9.5 12.88 9.5 11.5C9.5 10.12 10.62 9 12 9C13.38 9 14.5 10.12 14.5 11.5C14.5 12.88 13.38 14 12 14Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -6222,8 +6451,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6261,7 +6490,12 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -6315,8 +6549,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6354,7 +6588,12 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M15 5V12H5.17L4.58 12.59L4 13.17V5H15ZM16 3H3C2.45 3 2 3.45 2 4V18L6 14H16C16.55 14 17 13.55 17 13V4C17 3.45 16.55 3 16 3ZM21 7H19V16H6V18C6 18.55 6.45 19 7 19H18L22 23V8C22 7.45 21.55 7 21 7Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -6522,8 +6761,8 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGSvgView
                                                                           align="xMidYMid"
-                                                                          bbHeight={24}
-                                                                          bbWidth={24}
+                                                                          bbHeight="24"
+                                                                          bbWidth="24"
                                                                           fill="none"
                                                                           focusable={false}
                                                                           meetOrSlice={0}
@@ -6561,7 +6800,12 @@ Flutter 3.0.5 stable
                                                                           >
                                                                             <RNSVGPath
                                                                               d="M9.00002 16.2L4.80002 12L3.40002 13.4L9.00002 19L21 6.99998L19.6 5.59998L9.00002 16.2Z"
-                                                                              fill={4280923894}
+                                                                              fill={
+                                                                                Object {
+                                                                                  "payload": 4280923894,
+                                                                                  "type": 0,
+                                                                                }
+                                                                              }
                                                                               propList={
                                                                                 Array [
                                                                                   "fill",
@@ -6616,8 +6860,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6655,7 +6899,12 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM12 16C10.9 16 10 16.9 10 18C10 19.1 10.9 20 12 20C13.1 20 14 19.1 14 18C14 16.9 13.1 16 12 16Z"
-                                                                          fill={4278190080}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4278190080,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -6792,8 +7041,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={18}
-                                                                      bbWidth={18}
+                                                                      bbHeight="18"
+                                                                      bbWidth="18"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6831,7 +7080,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M8.9925 1.5C4.8525 1.5 1.5 4.86 1.5 9C1.5 13.14 4.8525 16.5 8.9925 16.5C13.14 16.5 16.5 13.14 16.5 9C16.5 4.86 13.14 1.5 8.9925 1.5ZM9 15C5.685 15 3 12.315 3 9C3 5.685 5.685 3 9 3C12.315 3 15 5.685 15 9C15 12.315 12.315 15 9 15ZM9.375 5.25H8.25V9.75L12.1875 12.1125L12.75 11.19L9.375 9.1875V5.25Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -6904,8 +7158,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6943,7 +7197,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M12 4C7 4 2.73 7.11 1 11.5C2.73 15.89 7 19 12 19C17 19 21.27 15.89 23 11.5C21.27 7.11 17 4 12 4ZM12 17C8.21 17 4.83 14.87 3.18 11.5C4.83 8.13 8.21 6 12 6C15.79 6 19.17 8.13 20.82 11.5C19.17 14.87 15.79 17 12 17ZM12 7C9.52 7 7.5 9.02 7.5 11.5C7.5 13.98 9.52 16 12 16C14.48 16 16.5 13.98 16.5 11.5C16.5 9.02 14.48 7 12 7ZM12 14C10.62 14 9.5 12.88 9.5 11.5C9.5 10.12 10.62 9 12 9C13.38 9 14.5 10.12 14.5 11.5C14.5 12.88 13.38 14 12 14Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -6997,8 +7256,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -7036,7 +7295,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -7090,8 +7354,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight={24}
-                                                                      bbWidth={24}
+                                                                      bbHeight="24"
+                                                                      bbWidth="24"
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -7129,7 +7393,12 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGPath
                                                                           d="M15 5V12H5.17L4.58 12.59L4 13.17V5H15ZM16 3H3C2.45 3 2 3.45 2 4V18L6 14H16C16.55 14 17 13.55 17 13V4C17 3.45 16.55 3 16 3ZM21 7H19V16H6V18C6 18.55 6.45 19 7 19H18L22 23V8C22 7.45 21.55 7 21 7Z"
-                                                                          fill={4288585374}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4288585374,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           propList={
                                                                             Array [
                                                                               "fill",
@@ -7175,7 +7444,6 @@ React Native 0.66
                                                           </View>
                                                         </RCTScrollView>
                                                         <RCTSafeAreaView
-                                                          emulateUnlessSupported={true}
                                                           style={
                                                             Array [
                                                               Object {},
@@ -7239,8 +7507,8 @@ React Native 0.66
                                                               >
                                                                 <RNSVGSvgView
                                                                   align="xMidYMid"
-                                                                  bbHeight={24}
-                                                                  bbWidth={24}
+                                                                  bbHeight="24"
+                                                                  bbWidth="24"
                                                                   fill="none"
                                                                   focusable={false}
                                                                   meetOrSlice={0}
@@ -7279,7 +7547,12 @@ React Native 0.66
                                                                     <RNSVGGroup>
                                                                       <RNSVGPath
                                                                         d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                                                                        fill={4294967295}
+                                                                        fill={
+                                                                          Object {
+                                                                            "payload": 4294967295,
+                                                                            "type": 0,
+                                                                          }
+                                                                        }
                                                                         propList={
                                                                           Array [
                                                                             "fill",
@@ -7292,7 +7565,12 @@ React Native 0.66
                                                                         name="clip0_5404_1261"
                                                                       >
                                                                         <RNSVGRect
-                                                                          fill={4294967295}
+                                                                          fill={
+                                                                            Object {
+                                                                              "payload": 4294967295,
+                                                                              "type": 0,
+                                                                            }
+                                                                          }
                                                                           height="24"
                                                                           propList={
                                                                             Array [
@@ -7300,8 +7578,8 @@ React Native 0.66
                                                                             ]
                                                                           }
                                                                           width="24"
-                                                                          x={0}
-                                                                          y={0}
+                                                                          x="0"
+                                                                          y="0"
                                                                         />
                                                                       </RNSVGClipPath>
                                                                     </RNSVGDefs>
@@ -7576,8 +7854,8 @@ React Native 0.66
                                 >
                                   <RNSVGSvgView
                                     align="xMidYMid"
-                                    bbHeight={24}
-                                    bbWidth={24}
+                                    bbHeight="24"
+                                    bbWidth="24"
                                     fill="none"
                                     focusable={false}
                                     meetOrSlice={0}
@@ -7615,7 +7893,12 @@ React Native 0.66
                                     >
                                       <RNSVGPath
                                         d="M9 13.75C6.66 13.75 2 14.92 2 17.25V19H16V17.25C16 14.92 11.34 13.75 9 13.75ZM4.34 17C5.18 16.42 7.21 15.75 9 15.75C10.79 15.75 12.82 16.42 13.66 17H4.34ZM9 12C10.93 12 12.5 10.43 12.5 8.5C12.5 6.57 10.93 5 9 5C7.07 5 5.5 6.57 5.5 8.5C5.5 10.43 7.07 12 9 12ZM9 7C9.83 7 10.5 7.67 10.5 8.5C10.5 9.33 9.83 10 9 10C8.17 10 7.5 9.33 7.5 8.5C7.5 7.67 8.17 7 9 7ZM16.04 13.81C17.2 14.65 18 15.77 18 17.25V19H22V17.25C22 15.23 18.5 14.08 16.04 13.81ZM15 12C16.93 12 18.5 10.43 18.5 8.5C18.5 6.57 16.93 5 15 5C14.46 5 13.96 5.13 13.5 5.35C14.13 6.24 14.5 7.33 14.5 8.5C14.5 9.67 14.13 10.76 13.5 11.65C13.96 11.87 14.46 12 15 12Z"
-                                        fill={4294967295}
+                                        fill={
+                                          Object {
+                                            "payload": 4294967295,
+                                            "type": 0,
+                                          }
+                                        }
                                         propList={
                                           Array [
                                             "fill",
@@ -7645,8 +7928,8 @@ React Native 0.66
                                 >
                                   <RNSVGSvgView
                                     align="xMidYMid"
-                                    bbHeight={24}
-                                    bbWidth={24}
+                                    bbHeight="24"
+                                    bbWidth="24"
                                     fill="none"
                                     focusable={false}
                                     meetOrSlice={0}
@@ -7684,7 +7967,12 @@ React Native 0.66
                                     >
                                       <RNSVGPath
                                         d="M9 13.75C6.66 13.75 2 14.92 2 17.25V19H16V17.25C16 14.92 11.34 13.75 9 13.75ZM4.34 17C5.18 16.42 7.21 15.75 9 15.75C10.79 15.75 12.82 16.42 13.66 17H4.34ZM9 12C10.93 12 12.5 10.43 12.5 8.5C12.5 6.57 10.93 5 9 5C7.07 5 5.5 6.57 5.5 8.5C5.5 10.43 7.07 12 9 12ZM9 7C9.83 7 10.5 7.67 10.5 8.5C10.5 9.33 9.83 10 9 10C8.17 10 7.5 9.33 7.5 8.5C7.5 7.67 8.17 7 9 7ZM16.04 13.81C17.2 14.65 18 15.77 18 17.25V19H22V17.25C22 15.23 18.5 14.08 16.04 13.81ZM15 12C16.93 12 18.5 10.43 18.5 8.5C18.5 6.57 16.93 5 15 5C14.46 5 13.96 5.13 13.5 5.35C14.13 6.24 14.5 7.33 14.5 8.5C14.5 9.67 14.13 10.76 13.5 11.65C13.96 11.87 14.46 12 15 12Z"
-                                        fill={4292927712}
+                                        fill={
+                                          Object {
+                                            "payload": 4292927712,
+                                            "type": 0,
+                                          }
+                                        }
                                         propList={
                                           Array [
                                             "fill",

@@ -1,4 +1,4 @@
-import {ConfigPlugin, withAppBuildGradle} from '@expo/config-plugins';
+import {ConfigPlugin, withAppBuildGradle} from 'expo/config-plugins';
 
 /**
  * このPluginでは、以下を実施しています。

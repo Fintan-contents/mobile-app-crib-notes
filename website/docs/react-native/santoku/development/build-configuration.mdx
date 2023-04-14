@@ -15,7 +15,7 @@ Expoには、アプリのネイティブプロジェクト（`ios`、`android`�
 アプリアイコンや、アプリケーションIDなど多くの設定値は、[Expo config（app.json, app.config.js）](https://docs.expo.dev/versions/latest/config/app/)に指定した値で変更できます。
 
 :::danger
-**このアプリの`Prebuild`はプロキシ環境下で動作しません。**
+**Expo SDK 46以下の`Prebuild`はプロキシ環境下で動作しません。**
 Config Pluginsに対応すると`Prebuild`の実行が必須となります。プロキシ環境下で開発を進めるプロジェクトはご注意ください。
 
 おそらく次のPull Requestに関連する不具合と推測しております。
@@ -23,7 +23,6 @@ Config Pluginsに対応すると`Prebuild`の実行が必須となります。�
 - feat(cli): add proxy support（[https://github.com/expo/expo/pull/19592](https://github.com/expo/expo/pull/19592)）
 
 このPull RequestはExpo SDK 47で取り込まれております。Expo SDK 47以降においては、プロキシ環境下でも`Prebuild`が動作することを確認出来ております。
-しかし、現時点でのこのアプリのExpo SDK対応バージョンは46のため、`Prebuild`はプロキシ環境下で動作しません。
 :::
 
 ## Config Plugins

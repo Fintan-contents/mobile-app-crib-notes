@@ -14,12 +14,12 @@
 		96905EF65AED1B983A6B3ABC /* libPods-StgSantokuApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-StgSantokuApp.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		8F873DCAE8814F5FA5E21A18 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 754A96FA2C6142A496CA5B10 /* InfoPlist.strings */; };
-		09D738ECF17440798ABE3CAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 90D85B0B2EB44EC8A08496E4 /* InfoPlist.strings */; };
-		6A882641AC2A4391858FAF0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19CDCE79E55C484AA6AB2568 /* GoogleService-Info.plist */; };
-		B4C92C30D90642B8B89C26BA /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8357BC7FFDD1403EB465C025 /* noop-file.swift */; };
-		D4901D3AAD364DD7A5258BF2 /* RCTThrowErrorModule.h in Resources */ = {isa = PBXBuildFile; fileRef = A5729219D7F4435B9ECC6AB8 /* RCTThrowErrorModule.h */; };
-		C0A21D44310D46E6A4158FAE /* RCTThrowErrorModule.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0FE9D3E14D46819CDA68BE /* RCTThrowErrorModule.m */; };
+		9E76DD1E2A2D490F8590475D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3C37BFE14CF4BE2965A1818 /* InfoPlist.strings */; };
+		16E68A0736C948B0BE4A74BE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85B5B4C532B04DFF8E64259D /* InfoPlist.strings */; };
+		AB6D6F87BB084B4C90AF2F76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04DD4C0947F24DEAA2442ECF /* GoogleService-Info.plist */; };
+		8044DDFEDE1D442A8C6F0BD5 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1315568FC3A488F837AA581 /* noop-file.swift */; };
+		7B58F64B3D9A4F4C8AA4523A /* RCTThrowErrorModule.h in Resources */ = {isa = PBXBuildFile; fileRef = 6051A06AB8894AC294FBBF1E /* RCTThrowErrorModule.h */; };
+		82F1C3923DB34AC6B77E63D9 /* RCTThrowErrorModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F5EF86BAAD4227B8B9B38D /* RCTThrowErrorModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,12 +37,12 @@
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-StgSantokuApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		754A96FA2C6142A496CA5B10 /* InfoPlist.strings */ = {isa = PBXFileReference; name = "InfoPlist.strings"; path = "ja.lproj/InfoPlist.strings"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.strings; explicitFileType = undefined; includeInIndex = 0; };
-		90D85B0B2EB44EC8A08496E4 /* InfoPlist.strings */ = {isa = PBXFileReference; name = "InfoPlist.strings"; path = "en.lproj/InfoPlist.strings"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.strings; explicitFileType = undefined; includeInIndex = 0; };
-		19CDCE79E55C484AA6AB2568 /* GoogleService-Info.plist */ = {isa = PBXFileReference; name = "GoogleService-Info.plist"; path = "StgSantokuApp/GoogleService-Info.plist"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.xml; explicitFileType = undefined; includeInIndex = 0; };
-		8357BC7FFDD1403EB465C025 /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "StgSantokuApp/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		A5729219D7F4435B9ECC6AB8 /* RCTThrowErrorModule.h */ = {isa = PBXFileReference; name = "RCTThrowErrorModule.h"; path = "StgSantokuApp/RCTThrowErrorModule.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		AD0FE9D3E14D46819CDA68BE /* RCTThrowErrorModule.m */ = {isa = PBXFileReference; name = "RCTThrowErrorModule.m"; path = "StgSantokuApp/RCTThrowErrorModule.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		E3C37BFE14CF4BE2965A1818 /* InfoPlist.strings */ = {isa = PBXFileReference; name = "InfoPlist.strings"; path = "ja.lproj/InfoPlist.strings"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.strings; explicitFileType = undefined; includeInIndex = 0; };
+		85B5B4C532B04DFF8E64259D /* InfoPlist.strings */ = {isa = PBXFileReference; name = "InfoPlist.strings"; path = "en.lproj/InfoPlist.strings"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.strings; explicitFileType = undefined; includeInIndex = 0; };
+		04DD4C0947F24DEAA2442ECF /* GoogleService-Info.plist */ = {isa = PBXFileReference; name = "GoogleService-Info.plist"; path = "StgSantokuApp/GoogleService-Info.plist"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.xml; explicitFileType = undefined; includeInIndex = 0; };
+		F1315568FC3A488F837AA581 /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "StgSantokuApp/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		6051A06AB8894AC294FBBF1E /* RCTThrowErrorModule.h */ = {isa = PBXFileReference; name = "RCTThrowErrorModule.h"; path = "StgSantokuApp/RCTThrowErrorModule.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		B9F5EF86BAAD4227B8B9B38D /* RCTThrowErrorModule.m */ = {isa = PBXFileReference; name = "RCTThrowErrorModule.m"; path = "StgSantokuApp/RCTThrowErrorModule.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +68,10 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				19CDCE79E55C484AA6AB2568 /* GoogleService-Info.plist */,
-				8357BC7FFDD1403EB465C025 /* noop-file.swift */,
-				A5729219D7F4435B9ECC6AB8 /* RCTThrowErrorModule.h */,
-				AD0FE9D3E14D46819CDA68BE /* RCTThrowErrorModule.m */,
+				04DD4C0947F24DEAA2442ECF /* GoogleService-Info.plist */,
+				F1315568FC3A488F837AA581 /* noop-file.swift */,
+				6051A06AB8894AC294FBBF1E /* RCTThrowErrorModule.h */,
+				B9F5EF86BAAD4227B8B9B38D /* RCTThrowErrorModule.m */,
 			);
 			name = StgSantokuApp;
 			sourceTree = "<group>";
@@ -127,8 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				BB2F792C24A3F905000567C9 /* Expo.plist */,
-				D92063A131AC4C52BF8B2AF3 /* ja.lproj */,
-				A1A2A5FD11694A5C8EEC1FC0 /* en.lproj */,
+				CC7E1DE1F2824E3FA7A783F4 /* ja.lproj */,
+				E59E9E0D58B941A49282FA7B /* en.lproj */,
 			);
 			name = Supporting;
 			path = StgSantokuApp/Supporting;
@@ -151,19 +151,19 @@
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
-		D92063A131AC4C52BF8B2AF3 /* ja.lproj */ = {
+		CC7E1DE1F2824E3FA7A783F4 /* ja.lproj */ = {
 			isa = "PBXGroup";
 			children = (
-				754A96FA2C6142A496CA5B10 /* InfoPlist.strings */,
+				E3C37BFE14CF4BE2965A1818 /* InfoPlist.strings */,
 			);
 			name = ja.lproj;
 			sourceTree = "<group>";
 			path = "";
 		};
-		A1A2A5FD11694A5C8EEC1FC0 /* en.lproj */ = {
+		E59E9E0D58B941A49282FA7B /* en.lproj */ = {
 			isa = "PBXGroup";
 			children = (
-				90D85B0B2EB44EC8A08496E4 /* InfoPlist.strings */,
+				85B5B4C532B04DFF8E64259D /* InfoPlist.strings */,
 			);
 			name = en.lproj;
 			sourceTree = "<group>";
@@ -232,9 +232,9 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				8F873DCAE8814F5FA5E21A18 /* InfoPlist.strings in Resources */,
-				09D738ECF17440798ABE3CAC /* InfoPlist.strings in Resources */,
-				6A882641AC2A4391858FAF0C /* GoogleService-Info.plist in Resources */,
+				9E76DD1E2A2D490F8590475D /* InfoPlist.strings in Resources */,
+				16E68A0736C948B0BE4A74BE /* InfoPlist.strings in Resources */,
+				AB6D6F87BB084B4C90AF2F76 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +253,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [[ -f \"$PODS_ROOT/../.xcode.env\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env\"\nfi\nif [[ -f \"$PODS_ROOT/../.xcode.env.local\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.local\"\nfi\n\n# The project root by default is one level up from the ios directory\nexport PROJECT_ROOT=\"$PROJECT_DIR\"/..\n\nif [[ \"$CONFIGURATION\" = *Debug* ]]; then\n  export SKIP_BUNDLING=1\nfi\n`\"$NODE_BINARY\" --print \"require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'\"`\n\n";
+			shellScript = "if [[ -f \"$PODS_ROOT/../.xcode.env\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env\"\nfi\nif [[ -f \"$PODS_ROOT/../.xcode.env.local\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.local\"\nfi\n\n# The project root by default is one level up from the ios directory\nexport PROJECT_ROOT=\"$PROJECT_DIR\"/..\n\nif [[ \"$CONFIGURATION\" = *Debug* ]]; then\n  export SKIP_BUNDLING=1\nfi\nif [[ -z \"$ENTRY_FILE\" ]]; then\n  # Set the entry JS file using the bundler's entry resolution.\n  export ENTRY_FILE=\"$(\"$NODE_BINARY\" -e \"require('expo/scripts/resolveAppEntry')\" $PROJECT_ROOT ios relative | tail -n 1)\"\nfi\n\n`\"$NODE_BINARY\" --print \"require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'\"`\n\n";
 		};
 		08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -328,9 +328,9 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				B4C92C30D90642B8B89C26BA /* noop-file.swift in Sources */,
-				D4901D3AAD364DD7A5258BF2 /* RCTThrowErrorModule.h in Resources */,
-				C0A21D44310D46E6A4158FAE /* RCTThrowErrorModule.m in Sources */,
+				8044DDFEDE1D442A8C6F0BD5 /* noop-file.swift in Sources */,
+				7B58F64B3D9A4F4C8AA4523A /* RCTThrowErrorModule.h in Resources */,
+				82F1C3923DB34AC6B77E63D9 /* RCTThrowErrorModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,7 +350,7 @@
 					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = StgSantokuApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -378,7 +378,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = StgSantokuApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -444,7 +444,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -493,7 +493,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;

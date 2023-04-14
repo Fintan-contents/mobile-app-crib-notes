@@ -41,35 +41,35 @@ module.exports = function () {
       '@react-native/polyfills@2.0.0': { // https://github.com/facebook/react-native/blob/v0.70.5/packages/polyfills/package.json
         licenseUrl: 'https://github.com/facebook/react-native/blob/v0.70.5/LICENSE',
       },
-      'metro-babel-transformer@0.70.3': { // https://github.com/facebook/metro/blob/v0.70.3/packages/metro-babel-transformer/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.70.3/LICENSE',
+      'metro-babel-transformer@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-babel-transformer/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
       },
-      'metro-cache-key@0.70.3': { // https://github.com/facebook/metro/blob/v0.70.3/packages/metro-cache-key/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.70.3/LICENSE',
+      'metro-cache-key@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-cache-key/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
       },
-      'metro-cache@0.70.3': { // https://github.com/facebook/metro/blob/v0.70.3/packages/metro-cache/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.70.3/LICENSE',
+      'metro-cache@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-cache/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
       },
-      'metro-inspector-proxy@0.70.3': { // https://github.com/facebook/metro/blob/v0.70.3/packages/metro-inspector-proxy/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.70.3/LICENSE',
+      'metro-inspector-proxy@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-inspector-proxy/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
       },
-      'metro-minify-uglify@0.70.3': { // https://github.com/facebook/metro/blob/v0.70.3/packages/metro-minify-uglify/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.70.3/LICENSE',
+      'metro-minify-uglify@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-minify-uglify/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
       },
-      'metro-react-native-babel-transformer@0.70.3': { // https://github.com/facebook/metro/blob/v0.70.3/packages/metro-react-native-babel-transformer/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.70.3/LICENSE',
+      'metro-react-native-babel-transformer@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-react-native-babel-transformer/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
       },
-      'metro-runtime@0.70.3': { // https://github.com/facebook/metro/blob/v0.70.3/packages/metro-runtime/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.70.3/LICENSE',
+      'metro-runtime@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-runtime/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
       },
-      'metro-symbolicate@0.70.3': { // https://github.com/facebook/metro/blob/v0.70.3/packages/metro-symbolicate/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.70.3/LICENSE',
+      'metro-symbolicate@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-symbolicate/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
       },
-      'metro-transform-plugins@0.70.3': { // https://github.com/facebook/metro/blob/v0.70.3/packages/metro-transform-plugins/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.70.3/LICENSE',
+      'metro-transform-plugins@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-transform-plugins/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
       },
-      'metro-transform-worker@0.70.3': { // https://github.com/facebook/metro/blob/v0.70.3/packages/metro-transform-worker/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.70.3/LICENSE',
+      'metro-transform-worker@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-transform-worker/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
       },
       'tr46@0.0.3': { // https://github.com/jsdom/tr46/tree/0.0.3
         licenseUrl: 'https://github.com/jsdom/tr46/blob/3a6f29721e7063b9ffd421e461a54beae6170001/LICENSE.md', // v0.0.3 の次の commit で追加されている

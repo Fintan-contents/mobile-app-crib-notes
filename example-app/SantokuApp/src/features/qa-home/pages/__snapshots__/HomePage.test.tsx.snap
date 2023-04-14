@@ -3,7 +3,6 @@
 exports[`Home マウントされたときに正常にレンダリングされること 1`] = `
 Array [
   <RCTSafeAreaView
-    emulateUnlessSupported={true}
     style={
       Array [
         Object {
@@ -168,8 +167,8 @@ Array [
               >
                 <RNSVGSvgView
                   align="xMidYMid"
-                  bbHeight={24}
-                  bbWidth={24}
+                  bbHeight="24"
+                  bbWidth="24"
                   fill="none"
                   focusable={false}
                   meetOrSlice={0}
@@ -207,7 +206,12 @@ Array [
                   >
                     <RNSVGPath
                       d="M3 18H9V16H3V18ZM3 6V8H21V6H3ZM3 13H15V11H3V13Z"
-                      fill={4280361249}
+                      fill={
+                        Object {
+                          "payload": 4280361249,
+                          "type": 0,
+                        }
+                      }
                       propList={
                         Array [
                           "fill",
@@ -245,8 +249,8 @@ Array [
               >
                 <RNSVGSvgView
                   align="xMidYMid"
-                  bbHeight={24}
-                  bbWidth={24}
+                  bbHeight="24"
+                  bbWidth="24"
                   fill="none"
                   focusable={false}
                   meetOrSlice={0}
@@ -284,7 +288,12 @@ Array [
                   >
                     <RNSVGPath
                       d="M6.99999 6H17L11.99 12.3L6.99999 6ZM4.24999 5.61C6.26999 8.2 9.99999 13 9.99999 13V19C9.99999 19.55 10.45 20 11 20H13C13.55 20 14 19.55 14 19V13C14 13 17.72 8.2 19.74 5.61C20.25 4.95 19.78 4 18.95 4H5.03999C4.20999 4 3.73999 4.95 4.24999 5.61Z"
-                      fill={4280361249}
+                      fill={
+                        Object {
+                          "payload": 4280361249,
+                          "type": 0,
+                        }
+                      }
                       propList={
                         Array [
                           "fill",
@@ -322,8 +331,8 @@ Array [
               >
                 <RNSVGSvgView
                   align="xMidYMid"
-                  bbHeight={24}
-                  bbWidth={24}
+                  bbHeight="24"
+                  bbWidth="24"
                   fill="none"
                   focusable={false}
                   meetOrSlice={0}
@@ -361,7 +370,12 @@ Array [
                   >
                     <RNSVGPath
                       d="M21.41 11.58L12.41 2.58C12.05 2.22 11.55 2 11 2H4C2.9 2 2 2.9 2 4V11C2 11.55 2.22 12.05 2.59 12.42L11.59 21.42C11.95 21.78 12.45 22 13 22C13.55 22 14.05 21.78 14.41 21.41L21.41 14.41C21.78 14.05 22 13.55 22 13C22 12.45 21.77 11.94 21.41 11.58ZM13 20.01L4 11V4H11V3.99L20 12.99L13 20.01Z"
-                      fill={4280361249}
+                      fill={
+                        Object {
+                          "payload": 4280361249,
+                          "type": 0,
+                        }
+                      }
                       propList={
                         Array [
                           "fill",
@@ -370,7 +384,12 @@ Array [
                     />
                     <RNSVGPath
                       d="M6.5 8C7.32843 8 8 7.32843 8 6.5C8 5.67157 7.32843 5 6.5 5C5.67157 5 5 5.67157 5 6.5C5 7.32843 5.67157 8 6.5 8Z"
-                      fill={4280361249}
+                      fill={
+                        Object {
+                          "payload": 4280361249,
+                          "type": 0,
+                        }
+                      }
                       propList={
                         Array [
                           "fill",
@@ -386,7 +405,6 @@ Array [
       </View>
     </RCTScrollView>
     <RCTSafeAreaView
-      emulateUnlessSupported={true}
       style={
         Array [
           Object {},
@@ -450,8 +468,8 @@ Array [
           >
             <RNSVGSvgView
               align="xMidYMid"
-              bbHeight={24}
-              bbWidth={24}
+              bbHeight="24"
+              bbWidth="24"
               fill="none"
               focusable={false}
               meetOrSlice={0}
@@ -490,7 +508,12 @@ Array [
                 <RNSVGGroup>
                   <RNSVGPath
                     d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                    fill={4294967295}
+                    fill={
+                      Object {
+                        "payload": 4294967295,
+                        "type": 0,
+                      }
+                    }
                     propList={
                       Array [
                         "fill",
@@ -503,7 +526,12 @@ Array [
                     name="clip0_5404_1261"
                   >
                     <RNSVGRect
-                      fill={4294967295}
+                      fill={
+                        Object {
+                          "payload": 4294967295,
+                          "type": 0,
+                        }
+                      }
                       height="24"
                       propList={
                         Array [
@@ -511,8 +539,8 @@ Array [
                         ]
                       }
                       width="24"
-                      x={0}
-                      y={0}
+                      x="0"
+                      y="0"
                     />
                   </RNSVGClipPath>
                 </RNSVGDefs>
@@ -523,7 +551,6 @@ Array [
       </View>
     </RCTSafeAreaView>
     <RCTSafeAreaView
-      emulateUnlessSupported={true}
       style={
         Array [
           Object {},

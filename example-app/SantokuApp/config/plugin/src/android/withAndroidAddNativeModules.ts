@@ -1,4 +1,4 @@
-import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
+import {ConfigPlugin, withPlugins} from 'expo/config-plugins';
 
 import {withAndroidAddNativeModulePackages} from './withAndroidAddNativeModulePackages';
 import {withAndroidCopyTemplateJavaFile} from './withAndroidCopyTemplateJavaFile';

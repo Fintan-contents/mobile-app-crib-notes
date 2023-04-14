@@ -1,4 +1,4 @@
-import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
+import {ConfigPlugin, withPlugins} from 'expo/config-plugins';
 
 import {CopySplashScreenImagesProps, withAndroidCopySplashScreenImages} from './withAndroidCopySplashScreenImages';
 import {withAndroidCopyTemplateSplashScreenXml} from './withAndroidCopyTemplateSplashScreenXml';

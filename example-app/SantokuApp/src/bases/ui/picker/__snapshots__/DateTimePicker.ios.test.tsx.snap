@@ -121,13 +121,9 @@ Array [
             enabled={true}
             mode="date"
             onChange={[Function]}
+            onPickerDismiss={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "height": 216,
-              }
-            }
             testID="pickerItems"
           />
         </View>
@@ -478,17 +474,13 @@ Array [
             minimumDate={1483228800000}
             mode="date"
             onChange={[Function]}
+            onPickerDismiss={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
-                  "height": 216,
-                },
-                Object {
-                  "backgroundColor": "yellow",
-                },
-              ]
+              Object {
+                "backgroundColor": "yellow",
+              }
             }
             testID="pickerItems"
           />

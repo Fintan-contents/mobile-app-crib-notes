@@ -1,0 +1,260 @@
+---
+title: Expo SDK 47アップグレード
+---
+
+:::info参考
+以下の記事を参考にして、このアプリのExpo SDKを47にアップグレードしました。
+主な変更点とこのアプリで実施したアップグレード手順を紹介します。
+
+- [Expo SDK 47](https://blog.expo.dev/expo-sdk-47-a0f6f5c038af)
+- [Announcing React Native 0.70](https://reactnative.dev/blog/2022/09/05/version-070)
+
+なお、このアプリでは使用していないため、EASやClassic Buildに関する内容は記載しません。
+:::
+
+## Expo SDK 47の主な変更
+
+### React Native 0.70.8 and React 18.1.0
+
+より多くのReact NativeアプリでNew Architectureをサポートしやすくなりました。New Architectureに関する[新しいドキュメント](https://reactnative.dev/blog/2022/09/05/version-070#new-architectures-new-documentation)も公開されています。
+
+また、このバージョンに含まれるHermesでは[Internationalization APIs](https://hermesengine.dev/docs/intl/)もサポートされています。
+
+詳細は、以下のリンク先を参照してください。
+
+- [Announcing React Native 0.70](https://reactnative.dev/blog/2022/09/05/version-070)
+- [React Native CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0708)
+- [React CHANGELOG](https://github.com/facebook/react/blob/main/CHANGELOG.md#1810-april-26-2022)
+
+### Fabricの実験的サポート
+
+Expo SDK 47でFabricをサポートしている画面ライブラリは以下の3つです。
+
+- [expo-av](https://docs.expo.dev/versions/v47.0.0/sdk/av/)
+- [expo-camera](https://docs.expo.dev/versions/v47.0.0/sdk/camera/)
+- [expo-linear-gradient](https://docs.expo.dev/versions/v47.0.0/sdk/linear-gradient/)
+
+まだサポートされていない画面ライブラリは以下になります。
+
+- [expo-apple-authentication](https://docs.expo.dev/versions/v47.0.0/sdk/apple-authentication/)
+- [expo-barcode-scanner](https://docs.expo.dev/versions/v47.0.0/sdk/bar-code-scanner/)
+- [expo-blur](https://docs.expo.dev/versions/v47.0.0/sdk/blur-view/)
+- [expo-gl](https://docs.expo.dev/versions/v47.0.0/sdk/gl-view/)
+
+他の全てのExpoライブラリはNew Architectureと互換性があることを期待できます。
+
+ただし、Managed workflowのアプリにはFabricを有効にする機能がまだありません（Config Pluginsを使用して有効化できますが、推奨されていません）。
+
+### Expo Go for iOSのHermesサポート
+
+HermesがExpo Go for iOSで利用できるようになりました。
+
+また、Hermes inspectorをExpo Goや開発ビルドの開発メニューから直接開けるようになりました。これは、Flipperで利用できるデバッガーと同じもので、Flipper SDKやFlipper desktop app使用時のオーバーヘッドなしで利用できます。
+
+なお、Expo SDK 48ではHermesがデフォルトで有効になります。
+
+### Config Plugins
+
+`expo`パッケージから、`@expo/config-plugins`、`@expo/config`を再エクスポートするようになりました。
+
+`expo`パッケージからインポートすることにより、使用しているExpo SDKのバージョンに依存したConfig Pluginsを使用できます。
+そのため、Expo SDK 47からは`@`なしの`expo/config-plugins`、`expo/config`を使用することが推奨されます。
+
+```typescript
+// Expo SDK 46
+import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
+import {Platform} from '@expo/config';
+
+// Expo SDK 47
+import {ConfigPlugin, withPlugins} from 'expo/config-plugins';
+import {Platform} from 'expo/config';
+```
+
+### Expoがサポートするライブラリや機能
+
+#### ライブラリの更新
+
+Expoが管理しているライブラリの内、メジャーバージョンアップなど大きなリリースがあったものを記載します。
+
+<!-- バージョンごとのドキュメントが見当たらない -->
+- [Expo Module API 1.0](https://docs.expo.dev/modules/overview/)
+  - Expo Module APIの最初の安定バージョンがリリースされ、Native Moduleの開発が容易になります（C++のコードを記載することなくFabricに対応できるなど）。
+<!-- バージョンごとのドキュメントが見当たらない -->
+- [Expo Router ベータ版](https://expo.github.io/router/docs/)
+  - ファイルシステムベースでルーティング可能なナビゲーションライブラリです。
+- [React Native Maps（0.31.1 → 1.3.2）](https://docs.expo.dev/versions/v47.0.0/sdk/map-view/)
+  - Appls MapsやGoogle Mapsを表示するライブラリです。変更内容の詳細は、[React Native Maps CHANGELOG](https://github.com/react-native-maps/react-native-maps/blob/master/CHANGELOG.md#132-2022-09-26)を参照してください。
+
+#### 非推奨となるライブラリ
+
+以下のライブラリが非推奨となりました。
+
+- expo-firebase-*
+  - [expo-firebase-analytics](https://docs.expo.dev/versions/v47.0.0/sdk/firebase-analytics/)、または[expo-firebase-recaptcha](https://docs.expo.dev/versions/v47.0.0/sdk/firebase-recaptcha/)を使用している場合、React Native Firebaseに移行することをお勧めします。詳細は[Migrating from Expo Firebase to React Native Firebase](https://expo.fyi/firebase-migration-guide)ガイドを参照してください。
+
+#### Classic Buildsのサポート終了
+
+Classic Buildsのサポートは終了しました。EAS Buildへの移行は[Migrating from "expo build"](https://docs.expo.dev/build-reference/migrating/)を参照してください。
+
+#### `app.json`の非推奨となっていた項目の削除
+
+以下の項目が`app.json`から削除されました。
+
+<!-- Expo SDK 47のアップグレードブログには`appKey`も削除されたと記載されていますが、`app.json`のドキュメントを見る限り`appKey`が見当たらなかったのでこのドキュメントには記載していません。 -->
+
+- useNextNotificationsApi
+- android.googleSignIn
+- ios.merchantId
+- ios.googleSignIn
+- ios.splash.xib
+
+### iOSの最小サポート対象バージョンが13.0に変更
+
+iOSのサポート対象バージョンが13.0以降になりました。
+
+アクティブなデバイスにおける現在のiOSのバージョン分布は、Appleが公開している[App Storeのデータ](https://developer.apple.com/support/app-store/)で確認できます。
+
+### Expo SDK 44のサポート終了
+
+Expo SDK 44がサポート対象外になりました。Expo SDK 44を使用している場合は、Expo SDK 45以降にアップグレードする必要があります。
+
+## このアプリで実施したアップグレードの手順
+
+このアプリでは、以下の作業を上から順に実施してExpo SDK 47にアップグレードしました。
+
+- Xcode 14にアップグレード
+- [開発・CIに使用しているツールのバージョンを更新](#開発ciに使用しているツールのバージョンを更新)
+- `npm i -g expo-cli`を実行して、Expo CLIのバージョンを最新化
+- `expo-cli upgrade`を実行して、Expo SDKをアップグレード
+- [既存のパッチファイルの更新](#既存のパッチファイルの更新)
+- [expo-cli upgradeで更新されるパッケージに依存するパッケージの更新](#expo-cli-upgradeで更新されるパッケージに依存するパッケージの更新)
+- `node_modules`、`package-lock.json`を削除して、`npm i`を実行
+- [Config Pluginsのimportを`expo/config-plugin`に変更](#config-pluginsのimportをexpoconfig-pluginに変更)
+- `npm run prebuild`を実行してネイティブプロジェクトの再生成
+- [expo-template-blank-typescriptの更新履歴を確認](#expo-template-blank-typescriptの更新履歴を確認)
+- [expo-template-bare-minimumの更新履歴を確認](#expo-template-bare-minimumの更新履歴を確認)
+- [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.69.6&to=0.70.8)を参照して、React Nativeの更新を確認
+  - このアプリで必要な対応は、[expo-template-bare-minimumの更新](https://github.com/expo/expo/commits/sdk-47/templates/expo-template-bare-minimum)で対応されていました。
+- [Expoの更新履歴](https://github.com/expo/expo/blob/main/CHANGELOG.md#4700--2022-10-28)を確認
+  - 一部このアプリで必要な対応がありました。[TSCのエラー対応](#tscのエラー対応)を参照してください。
+- [React Nativeの更新履歴](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0708)を確認
+  - このアプリで必要な対応はありませんでした
+- [TSCのエラー対応](#tscのエラー対応)
+- 自動テストの修正
+  - 自動テストのスナップショット更新（`npm run test -- -u`）のみ対応しました
+- [手動管理しているライセンスの更新](#手動管理しているライセンスの更新)
+
+アップグレードを実施したPull Requestは[こちら](https://github.com/ws-4020/mobile-app-crib-notes/pull/1105)です。
+
+### 開発・CIに使用しているツールのバージョンを更新
+
+Expo SDK 47のアップグレードとは関係ありませんが、このタイミングで開発に使用しているツールのバージョンを更新しました。
+
+| Tool    | from          | to            |
+|---------|---------------|---------------|
+| Node.js | 16.18.0       | 18.15.0       |
+| Java    | zulu-11.58.23 | zulu-11.62.17 |
+
+Node.jsの18系へのアップグレードに伴い、npmのバージョンも9系にアップグレードしています。npmの9系では、[lockfileVersion](https://docs.npmjs.com/cli/v9/configuring-npm/package-lock-json#lockfileversion)に`3`が使用されます。
+
+また、CIに使用しているツールのバージョンも更新しました。
+
+| Tool    | from    | to      |
+|---------|---------|---------|
+| Node.js | 16.18.0 | 18.15.0 |
+| Xcode   | 14.0.1  | 14.2    |
+
+### 既存のパッチファイルの更新
+
+このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/patches/README.md)を参照してください。
+
+- @expo/config-plugins
+- @react-native-community/cli-platform-ios
+- expo-splash-screen
+- react-native-reanimated
+- react-native-elements
+
+`react-native-reanimated`に適用していたパッチは、以下のPRで修正されたためパッチフィルを削除しました。
+
+- [Ensure unmounted components are updated correctly after mounting on iOS](https://github.com/software-mansion/react-native-reanimated/pull/3374)
+
+`@react-native-community/cli-platform-ios`と`expo-splash-screen`は、Expo SDKのアップグレードに伴いバージョンが上がりました。しかし、適用していたパッチファイルはまだ必要な対応だったため、パッチファイルは削除せずに各ライブラリのバージョンに合わせてファイル名をリネームしました。
+
+上記以外のライブラリに関しては、バージョンが変わらなかったため変更はありません。
+
+### expo-cli upgradeで更新されるパッケージに依存するパッケージの更新
+
+Expo SDKのアップグレードに伴い、`jest-expo`のバージョンが上がりました。アップグレードされた`jest-expo`は`react-test-renderer`の`18.1.x`に依存しています。
+
+そのため、このアプリでも依存ライブラリとして追加している`@testing-library/react-native`のバージョンを`18.1.0`にアップグレードしました。
+
+### Config Pluginsのimportを`expo/config-plugin`に変更
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+[Expo SDK 47の主な変更 - Config Plugins](#config-plugins)に記載した通り、`expo`パッケージから、`@expo/config-plugins`、`@expo/config`を再エクスポートするようになりました。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+それに伴い、このアプリでインポートしている`@expo/config-plugins`を`expo/config-plugins`に変更しました。なお、このアプリでは、`@expo/config`を使用していません。
+
+```typescript
+// 変更前
+import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
+
+// 変更後
+import {ConfigPlugin, withPlugins} from 'expo/config-plugins';
+```
+
+### expo-template-blank-typescriptの更新履歴を確認
+
+[expo-template-blank-typescriptの更新履歴](https://github.com/expo/expo/commits/sdk-47/templates/expo-template-blank-typescript)を確認しました。
+
+`expo-cli upgrade`で更新される依存ライブラリのアップグレードが主な変更だっため、このアプリで特別な対応は必要ありませんでした。
+
+### expo-template-bare-minimumの更新履歴を確認
+
+[expo-template-bare-minimumの更新履歴](https://github.com/expo/expo/commits/sdk-47/templates/expo-template-bare-minimum)を確認しました。
+
+このアプリでは[Config Pluginsに対応](./config-plugins.mdx)したので、`expo-template-bare-minimum`の更新に伴う個別の対応は基本的に必要ありません。
+ただし、このアプリで作成しているConfig Pluginsによる変更と、`expo-template-bare-minimum`の更新に伴う変更が競合した場合は、個別に対応する必要があります。
+
+そのため、上記内容を観点に`expo-template-bare-minimum`を確認しましたが、個別に対応する必要はありませんでした。
+
+### TSCのエラー対応
+
+`@react-native-datetimepicker/datetimepicker`の以下のPRで型定義が変更されました。
+
+- [feat(ios): dismiss detection support](https://github.com/react-native-datetimepicker/datetimepicker/pull/671)
+
+iOSの場合は、[`date`が削除](https://github.com/react-native-datetimepicker/datetimepicker/pull/671/files#diff-e9726d469bba0bec8608c095ad5c361aeb95ea53afadd7ab44b462a2eb5e7467L93)されています。
+
+その影響で、このアプリの[DateTimePicker.ios.test.tsx](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/src/bases/ui/picker/DateTimePicker.ios.test.tsx)でTSCエラーが発生しました。
+
+<!-- textlint-disable ja-technical-writing/no-unmatched-pair -->
+```console
+src/bases/ui/picker/DateTimePicker.ios.test.tsx:158:29
+- error TS2339: Property 'date' does not exist on type 'Readonly<Readonly<ViewProps & BaseOptions & { maximumDate?: Date | undefined; minimumDate?: Date | undefined; }> & { locale?: string | undefined; ... 7 more ...; disabled?: boolean | undefined; }>'.
+158     expect(pickerItemsProps.date).toBe(selectedValue.getTime());
+```
+<!-- textlint-enable ja-technical-writing/no-unmatched-pair -->
+
+`@react-native-datetimepicker/datetimepicker`では、選択された値を取得するために[onChange](https://github.com/react-native-datetimepicker/datetimepicker/tree/v6.5.2#onchange-optional)を利用します。
+そのため、直接`date`を参照する必要はないのですが、このアプリでは自動テスト時に`date`を参照して選択した値を検証していました。
+
+`date`は外部に非公開となりましたが、`@react-native-datetimepicker/datetimepicker`の内部では、[`date`をネイティブモジュールに渡しています](https://github.com/react-native-datetimepicker/datetimepicker/blob/v6.5.2/src/datetimepicker.ios.js#L97)。
+自動テスト時の検証としては有効だと考え、以下のように`@ts-ignore`を追加してTSCエラーを回避しました。
+
+```typescript
+// ↓の対応で型定義からdateは削除されましたが、react-native-datetimepickerの内部ではdateを使用しているようなので、selectedValueとdateを比較します
+// https://github.com/react-native-datetimepicker/datetimepicker/pull/671
+// https://github.com/react-native-datetimepicker/datetimepicker/blob/v6.5.2/src/datetimepicker.ios.js#L97
+// @ts-ignore
+expect(pickerItemsProps.date).toBe(selectedValue.getTime());
+```
+
+### 手動管理しているライセンスの更新
+
+このアプリでは、使用しているライブラリのライセンス一覧を出力するスクリプトを用意しています。詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/README.md)を参照してください。
+
+その中で、ライセンス情報が不足していたり、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/managed-license.js)で管理しています。
+
+今回のExpo SDKアップグレードでは、`managed-license.js`で管理している[Metro](https://github.com/facebook/metro/tree/v0.72.3)のパッケージが更新されたため、アップグレード後のバージョンに併せてライセンス情報を更新しました。

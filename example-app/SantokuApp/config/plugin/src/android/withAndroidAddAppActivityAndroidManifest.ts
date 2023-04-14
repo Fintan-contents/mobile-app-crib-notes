@@ -1,4 +1,4 @@
-import {ConfigPlugin, withAndroidManifest} from '@expo/config-plugins';
+import {ConfigPlugin, withAndroidManifest} from 'expo/config-plugins';
 
 /**
  * AppActivityをAndroidManifest.xmlに追加します。

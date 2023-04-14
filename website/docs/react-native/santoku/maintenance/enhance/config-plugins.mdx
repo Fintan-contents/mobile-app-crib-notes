@@ -3,7 +3,7 @@ title: Config Plugins対応
 ---
 
 :::danger
-**このアプリの`Prebuild`はプロキシ環境下で動作しません。**
+**Expo SDK 46以下の`Prebuild`はプロキシ環境下で動作しません。**
 Config Pluginsに対応すると`Prebuild`の実行が必須となります。プロキシ環境下で開発を進めるプロジェクトはご注意ください。
 
 おそらく次のPull Requestに関連する不具合と推測しております。
@@ -11,7 +11,6 @@ Config Pluginsに対応すると`Prebuild`の実行が必須となります。�
 - feat(cli): add proxy support（[https://github.com/expo/expo/pull/19592](https://github.com/expo/expo/pull/19592)）
 
 このPull RequestはExpo SDK 47で取り込まれております。Expo SDK 47以降においては、プロキシ環境下でも`Prebuild`が動作することを確認出来ております。
-しかし、現時点でのこのアプリのExpo SDK対応バージョンは46のため、`Prebuild`はプロキシ環境下で動作しません。
 プロキシ環境下で開発を進めるプロジェクトにおいては、Expo SDK 47へのアップグレード対応と併せてConfig Pluginsに対応することをお勧めします。
 :::
 

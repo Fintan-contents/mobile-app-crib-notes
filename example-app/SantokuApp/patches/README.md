@@ -24,16 +24,6 @@ https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210
 React Native Elementsの3系では上記の変更に追従できていなかったため、以下の修正をしたパッチを当てています。
 * `ThemeProvider`のPropsに`children`を追加
 
-## React Native ReanimatedのuseAnimatedStyleを利用した際に、アニメーションが発生しない事象に対処するパッチ
-
-`useAnimatedStyle`を利用した際に、アニメーションが実行されない事象が発生しました。
-
-関連issueは↓です。
-https://github.com/software-mansion/react-native-reanimated/issues/3296
-
-issueに対応するPRが挙がっていたので、その変更をパッチとして当てています。
-https://github.com/software-mansion/react-native-reanimated/pull/3302
-
 ## Expo Config Pluginsで、iOS用に追加したファイルのIDを取得できない問題に対処するパッチ
 
 `IOSConfig.XcodeUtils.addResourceFileToGroup`でファイルを追加した際に、追加したファイルのIDが取得できません。
