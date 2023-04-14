@@ -1,6 +1,7 @@
 ---
 title: プッシュ通知
 sidebar_label: 概要
+pagination_label: プッシュ通知
 ---
 
 ## プッシュ通知とは
