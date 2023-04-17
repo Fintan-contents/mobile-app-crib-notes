@@ -32,7 +32,7 @@ on:
 
 jobs:
   lint-and-test:
-    name: Lints, Tests
+    name: (${{ github.workflow }}) Lints, Tests
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
     runs-on: macos-12
     env:
