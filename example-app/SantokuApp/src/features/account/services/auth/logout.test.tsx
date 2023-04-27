@@ -20,13 +20,6 @@ describe('AuthenticationService logout', () => {
   const spySecureStorageAdapterDeleteActiveAccountId = jest.spyOn(deleteActiveAccountId, 'deleteActiveAccountId');
   const spySecureStorageAdapterDeletePassword = jest.spyOn(deletePassword, 'deletePassword');
 
-  beforeEach(() => {
-    spyLogoutApi.mockClear();
-    spyRefreshCsrfToken.mockClear();
-    spySecureStorageAdapterLoadActiveAccountId.mockClear();
-    spySecureStorageAdapterDeleteActiveAccountId.mockClear();
-    spySecureStorageAdapterDeletePassword.mockClear();
-  });
   test('ログアウトAPIを呼び出して、セキュアストレージからアクティブアカウントを削除しているかの検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     // const {result} = renderHook(() => useLogout(), {wrapper});

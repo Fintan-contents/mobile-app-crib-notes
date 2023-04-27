@@ -11,4 +11,6 @@ module.exports = {
     '<rootDir>/jest/setup/react-query.js',
     '<rootDir>/jest/setup/useFocusEffect.js',
   ],
+  // https://jestjs.io/ja/docs/configuration#clearmocks-boolean
+  clearMocks: true,
 };

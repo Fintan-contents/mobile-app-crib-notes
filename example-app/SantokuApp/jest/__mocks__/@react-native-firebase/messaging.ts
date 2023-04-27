@@ -40,13 +40,4 @@ if (!__mocks.crashlytics) {
   Object.defineProperty(__mocks, 'messaging', {value: mock});
 }
 
-// テストケースごとにモックは初期化しておく。
-beforeEach(() =>
-  Object.values(mock).forEach(fn => {
-    if (jest.isMockFunction(fn)) {
-      fn.mockClear();
-    }
-  }),
-);
-
 export default () => mock;

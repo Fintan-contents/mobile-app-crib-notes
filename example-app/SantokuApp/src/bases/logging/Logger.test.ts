@@ -33,10 +33,6 @@ describe('Logger isLevelEnabled', () => {
   const mockWarn = jest.spyOn(transport, 'warn').mockImplementation();
   const mockError = jest.spyOn(transport, 'error').mockImplementation();
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
   test('ログレベルをtraceにした場合の検証', () => {
     const log = new Logger({level: 'trace', transports: [transport]});
     logAllMethod(log);
@@ -123,10 +119,6 @@ describe('Logger transport message and errorCode', () => {
   const consoleTransport = new ConsoleTransport();
   const firebaseCrashlyticsTransport = new FirebaseCrashlyticsTransport();
   const mockFormat = jest.spyOn(formatter, 'format');
-
-  beforeAll(() => {
-    jest.clearAllMocks();
-  });
 
   test('traceレベルの場合にTransportにフォーマットされたメッセージを正しく渡しているかの検証', () => {
     const mockConsoleTrace = jest.spyOn(consoleTransport, 'trace').mockImplementation();
