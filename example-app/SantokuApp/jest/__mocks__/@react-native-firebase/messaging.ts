@@ -35,9 +35,4 @@ const mock: Omit<
   setDeliveryMetricsExportToBigQuery: jest.fn(),
 };
 
-// 複数のファイルでmessagingをimportしていた場合に、redefineされないようにモックが存在するか確認
-if (!__mocks.crashlytics) {
-  Object.defineProperty(__mocks, 'messaging', {value: mock});
-}
-
 export default () => mock;
