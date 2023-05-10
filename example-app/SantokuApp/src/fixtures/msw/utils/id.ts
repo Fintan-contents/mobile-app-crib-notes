@@ -1,4 +1,4 @@
-import * as Random from 'expo-random';
+import * as Crypto from 'expo-crypto';
 
 const toNumberAlphabet = (n: number) => {
   return (n % 32).toString(32);
@@ -9,6 +9,6 @@ const toNumberAlphabet = (n: number) => {
  * @returns 半角数字と半角英子文字で構成されたランダム値
  */
 export const generateId = () => {
-  const randomBytes = Random.getRandomBytes(16);
+  const randomBytes = Crypto.getRandomBytes(16);
   return randomBytes.reduce((a, c) => a + toNumberAlphabet(c), '');
 };

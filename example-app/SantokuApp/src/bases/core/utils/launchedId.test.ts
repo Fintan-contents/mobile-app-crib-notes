@@ -1,11 +1,11 @@
-import * as Random from 'expo-random';
+import * as Crypto from 'expo-crypto';
 
 import {launchedId} from './launchedId';
 
 describe('launchedId', () => {
   test('32桁の起動IDが取得できるかの検証', async () => {
     const spy = jest
-      .spyOn(Random, 'getRandomBytesAsync')
+      .spyOn(Crypto, 'getRandomBytesAsync')
       .mockReturnValue(new Promise(resolve => resolve(Uint8Array.from([...Array(32).keys()]))));
     const id = await launchedId();
     expect(spy).toHaveBeenCalledWith(32);

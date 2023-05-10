@@ -18,7 +18,7 @@ jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
 describe('YearMonthPicker only with required props', () => {
   beforeAll(() => {
     const mockDate = new Date(2022, 3);
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(mockDate);
   });
   afterAll(() => {

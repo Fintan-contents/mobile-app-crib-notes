@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TermsAgreementOverlayComponent マウントされたときに正常にレンダリングされること 1`] = `
-Array [
+[
   <View
     style={
-      Object {
+      {
         "bottom": 0,
         "height": 640,
         "position": "absolute",
@@ -13,6 +13,23 @@ Array [
     }
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -26,7 +43,7 @@ Array [
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "bottom": 0,
           "left": 0,
           "position": "absolute",
@@ -37,8 +54,8 @@ Array [
     >
       <View
         animatedStyle={
-          Object {
-            "value": Object {},
+          {
+            "value": {},
           }
         }
         collapsable={false}
@@ -59,7 +76,7 @@ Array [
           }
         }
         style={
-          Object {
+          {
             "backgroundColor": "rgba(0,0,0,0.4)",
             "flex": 1,
           }
@@ -69,7 +86,7 @@ Array [
     <View
       pointerEvents="box-none"
       style={
-        Object {
+        {
           "flex": 1,
           "justifyContent": "flex-end",
           "paddingBottom": 0,
@@ -81,8 +98,8 @@ Array [
     >
       <View
         animatedStyle={
-          Object {
-            "value": Object {},
+          {
+            "value": {},
           }
         }
         collapsable={false}
@@ -104,7 +121,7 @@ Array [
         }
         pointerEvents="box-none"
         style={
-          Object {
+          {
             "paddingHorizontal": 15,
             "paddingVertical": 50,
           }
@@ -112,7 +129,7 @@ Array [
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": "white",
               "borderRadius": 10,
               "height": "100%",
@@ -126,7 +143,7 @@ Array [
         >
           <View
             style={
-              Object {
+              {
                 "alignSelf": "center",
                 "paddingVertical": 10,
               }
@@ -134,7 +151,7 @@ Array [
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#242424",
                   "fontSize": 24,
                   "fontWeight": "bold",
@@ -146,8 +163,8 @@ Array [
           </View>
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "flex": 1,
                   "overflow": "hidden",
                 },
@@ -173,20 +190,20 @@ Array [
               onScroll={[Function]}
               onShouldStartLoadWithRequest={[Function]}
               source={
-                Object {
+                {
                   "uri": "https://www.tis.co.jp/termsofuse/",
                 }
               }
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "flex": 1,
                     "overflow": "hidden",
                   },
-                  Object {
+                  {
                     "backgroundColor": "#ffffff",
                   },
-                  Object {
+                  {
                     "flex": 1,
                   },
                 ]
@@ -198,7 +215,7 @@ Array [
               color="#0000ff"
               size="large"
               style={
-                Object {
+                {
                   "alignItems": "center",
                   "display": "flex",
                   "height": "100%",
@@ -211,7 +228,7 @@ Array [
           </View>
           <View
             style={
-              Object {
+              {
                 "flex": 0,
                 "flexDirection": "row-reverse",
                 "paddingHorizontal": 20,
@@ -221,15 +238,15 @@ Array [
           >
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "borderRadius": 3,
                     "overflow": "hidden",
                   },
-                  Object {
+                  {
                     "borderRadius": 3,
                   },
-                  Object {
+                  {
                     "borderRadius": 8,
                     "width": 90,
                   },
@@ -240,9 +257,20 @@ Array [
               <View
                 accessibilityRole="button"
                 accessibilityState={
-                  Object {
+                  {
                     "busy": false,
+                    "checked": undefined,
                     "disabled": true,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
                   }
                 }
                 accessible={true}
@@ -256,14 +284,14 @@ Array [
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
               >
                 <View
                   style={
-                    Object {
+                    {
                       "alignItems": "center",
                       "backgroundColor": "hsl(208, 8%, 90%)",
                       "borderColor": "#2089dc",
@@ -279,7 +307,7 @@ Array [
                 >
                   <Text
                     style={
-                      Object {
+                      {
                         "color": "hsl(208, 8%, 63%)",
                         "fontSize": 18,
                         "paddingVertical": 1,

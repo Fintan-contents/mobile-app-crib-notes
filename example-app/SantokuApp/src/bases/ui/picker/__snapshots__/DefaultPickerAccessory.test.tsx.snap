@@ -3,7 +3,7 @@
 exports[`PickerAccessory with all props should be applied properly with custom text component: PickerAccessory with all props(custom text component ). 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "red",
       "flexDirection": "row",
       "justifyContent": "flex-end",
@@ -14,6 +14,23 @@ exports[`PickerAccessory with all props should be applied properly with custom t
   testID="PickerAccessory"
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -25,7 +42,7 @@ exports[`PickerAccessory with all props should be applied properly with custom t
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -33,7 +50,7 @@ exports[`PickerAccessory with all props should be applied properly with custom t
   >
     <Text
       style={
-        Object {
+        {
           "backgroundColor": "yellow",
           "color": "grey",
         }
@@ -45,12 +62,29 @@ exports[`PickerAccessory with all props should be applied properly with custom t
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
   />
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -62,7 +96,7 @@ exports[`PickerAccessory with all props should be applied properly with custom t
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -70,7 +104,7 @@ exports[`PickerAccessory with all props should be applied properly with custom t
   >
     <Text
       style={
-        Object {
+        {
           "backgroundColor": "green",
           "color": "black",
         }
@@ -81,6 +115,23 @@ exports[`PickerAccessory with all props should be applied properly with custom t
     </Text>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -92,7 +143,7 @@ exports[`PickerAccessory with all props should be applied properly with custom t
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -100,7 +151,7 @@ exports[`PickerAccessory with all props should be applied properly with custom t
   >
     <Text
       style={
-        Object {
+        {
           "backgroundColor": "aqua",
           "color": "blue",
         }
@@ -116,7 +167,7 @@ exports[`PickerAccessory with all props should be applied properly with custom t
 exports[`PickerAccessory with all props should be applied properly with default text component: PickerAccessory with all props(default text component ). 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "red",
       "flexDirection": "row",
       "justifyContent": "flex-end",
@@ -127,6 +178,23 @@ exports[`PickerAccessory with all props should be applied properly with default 
   testID="PickerAccessory"
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -138,7 +206,7 @@ exports[`PickerAccessory with all props should be applied properly with default 
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -146,7 +214,7 @@ exports[`PickerAccessory with all props should be applied properly with default 
   >
     <Text
       style={
-        Object {
+        {
           "color": "yellow",
           "fontWeight": "bold",
           "paddingHorizontal": 10,
@@ -159,12 +227,29 @@ exports[`PickerAccessory with all props should be applied properly with default 
   </View>
   <View
     style={
-      Object {
+      {
         "flex": 1,
       }
     }
   />
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -176,7 +261,7 @@ exports[`PickerAccessory with all props should be applied properly with default 
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -184,7 +269,7 @@ exports[`PickerAccessory with all props should be applied properly with default 
   >
     <Text
       style={
-        Object {
+        {
           "color": "green",
           "fontWeight": "bold",
           "paddingHorizontal": 10,
@@ -196,6 +281,23 @@ exports[`PickerAccessory with all props should be applied properly with default 
     </Text>
   </View>
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -207,7 +309,7 @@ exports[`PickerAccessory with all props should be applied properly with default 
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
@@ -215,7 +317,7 @@ exports[`PickerAccessory with all props should be applied properly with default 
   >
     <Text
       style={
-        Object {
+        {
           "color": "aqua",
           "fontWeight": "bold",
           "paddingHorizontal": 10,

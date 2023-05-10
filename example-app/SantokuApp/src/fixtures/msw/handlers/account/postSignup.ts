@@ -1,4 +1,4 @@
-import * as Random from 'expo-random';
+import * as Crypto from 'expo-crypto';
 import {AccountRegistration} from 'features/backend/apis/model';
 import {rest} from 'msw';
 
@@ -35,6 +35,6 @@ const toNumberAlphabet = (n: number) => {
  * @returns 半角数字と半角英子文字で構成されたランダム値
  */
 const generateAccountId = (byteCount: number) => {
-  const randomBytes = Random.getRandomBytes(byteCount);
+  const randomBytes = Crypto.getRandomBytes(byteCount);
   return randomBytes.reduce((a, c) => a + toNumberAlphabet(c), '');
 };

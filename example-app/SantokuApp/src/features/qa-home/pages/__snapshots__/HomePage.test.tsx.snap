@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Home マウントされたときに正常にレンダリングされること 1`] = `
-Array [
+[
   <RCTSafeAreaView
     style={
-      Array [
-        Object {
+      [
+        {
           "flex": 1,
         },
       ]
@@ -31,10 +31,10 @@ Array [
         </React.Fragment>
       }
       data={
-        Array [
-          Object {
+        [
+          {
             "navigateToQuestionDetail": [Function],
-            "question": Object {},
+            "question": {},
           },
         ]
       }
@@ -61,16 +61,16 @@ Array [
       scrollEventThrottle={50}
       showsVerticalScrollIndicator={false}
       stickyHeaderIndices={
-        Array [
+        [
           1,
         ]
       }
       style={
-        Array [
-          Object {},
+        [
+          {},
         ]
       }
-      viewabilityConfigCallbackPairs={Array []}
+      viewabilityConfigCallbackPairs={[]}
     >
       <RCTRefreshControl />
       <View>
@@ -79,8 +79,8 @@ Array [
         >
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "paddingHorizontal": 24,
                   "paddingVertical": 32,
                 },
@@ -89,8 +89,8 @@ Array [
           >
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#212121",
                     "fontSize": 20,
                     "fontWeight": "bold",
@@ -105,13 +105,14 @@ Array [
           </View>
         </View>
         <View
+          onFocusCapture={[Function]}
           onLayout={[Function]}
           style={null}
         >
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "backgroundColor": "#FFF5E4",
                   "flexDirection": "row",
@@ -125,8 +126,8 @@ Array [
           >
             <Text
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "color": "#212121",
                     "fontSize": 20,
                     "fontWeight": "bold",
@@ -140,8 +141,8 @@ Array [
             </Text>
             <View
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "alignItems": "center",
                     "flexDirection": "row",
                   },
@@ -149,6 +150,23 @@ Array [
               }
             >
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -160,7 +178,7 @@ Array [
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
@@ -175,18 +193,18 @@ Array [
                   minX={0}
                   minY={0}
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "backgroundColor": "transparent",
                         "borderWidth": 0,
                       },
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 24,
                           "width": 24,
                         },
                       ],
-                      Object {
+                      {
                         "flex": 0,
                         "height": 24,
                         "width": 24,
@@ -199,7 +217,7 @@ Array [
                   <RNSVGGroup
                     fill={null}
                     propList={
-                      Array [
+                      [
                         "fill",
                       ]
                     }
@@ -207,13 +225,13 @@ Array [
                     <RNSVGPath
                       d="M3 18H9V16H3V18ZM3 6V8H21V6H3ZM3 13H15V11H3V13Z"
                       fill={
-                        Object {
+                        {
                           "payload": 4280361249,
                           "type": 0,
                         }
                       }
                       propList={
-                        Array [
+                        [
                           "fill",
                         ]
                       }
@@ -223,14 +241,31 @@ Array [
               </View>
               <View
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "paddingLeft": 32,
                     },
                   ]
                 }
               />
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -242,7 +277,7 @@ Array [
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
@@ -257,18 +292,18 @@ Array [
                   minX={0}
                   minY={0}
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "backgroundColor": "transparent",
                         "borderWidth": 0,
                       },
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 24,
                           "width": 24,
                         },
                       ],
-                      Object {
+                      {
                         "flex": 0,
                         "height": 24,
                         "width": 24,
@@ -281,7 +316,7 @@ Array [
                   <RNSVGGroup
                     fill={null}
                     propList={
-                      Array [
+                      [
                         "fill",
                       ]
                     }
@@ -289,13 +324,13 @@ Array [
                     <RNSVGPath
                       d="M6.99999 6H17L11.99 12.3L6.99999 6ZM4.24999 5.61C6.26999 8.2 9.99999 13 9.99999 13V19C9.99999 19.55 10.45 20 11 20H13C13.55 20 14 19.55 14 19V13C14 13 17.72 8.2 19.74 5.61C20.25 4.95 19.78 4 18.95 4H5.03999C4.20999 4 3.73999 4.95 4.24999 5.61Z"
                       fill={
-                        Object {
+                        {
                           "payload": 4280361249,
                           "type": 0,
                         }
                       }
                       propList={
-                        Array [
+                        [
                           "fill",
                         ]
                       }
@@ -305,14 +340,31 @@ Array [
               </View>
               <View
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "paddingLeft": 32,
                     },
                   ]
                 }
               />
               <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
                 accessible={true}
                 collapsable={false}
                 focusable={true}
@@ -324,7 +376,7 @@ Array [
                 onResponderTerminationRequest={[Function]}
                 onStartShouldSetResponder={[Function]}
                 style={
-                  Object {
+                  {
                     "opacity": 1,
                   }
                 }
@@ -339,18 +391,18 @@ Array [
                   minX={0}
                   minY={0}
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "backgroundColor": "transparent",
                         "borderWidth": 0,
                       },
-                      Array [
-                        Object {
+                      [
+                        {
                           "height": 24,
                           "width": 24,
                         },
                       ],
-                      Object {
+                      {
                         "flex": 0,
                         "height": 24,
                         "width": 24,
@@ -363,7 +415,7 @@ Array [
                   <RNSVGGroup
                     fill={null}
                     propList={
-                      Array [
+                      [
                         "fill",
                       ]
                     }
@@ -371,13 +423,13 @@ Array [
                     <RNSVGPath
                       d="M21.41 11.58L12.41 2.58C12.05 2.22 11.55 2 11 2H4C2.9 2 2 2.9 2 4V11C2 11.55 2.22 12.05 2.59 12.42L11.59 21.42C11.95 21.78 12.45 22 13 22C13.55 22 14.05 21.78 14.41 21.41L21.41 14.41C21.78 14.05 22 13.55 22 13C22 12.45 21.77 11.94 21.41 11.58ZM13 20.01L4 11V4H11V3.99L20 12.99L13 20.01Z"
                       fill={
-                        Object {
+                        {
                           "payload": 4280361249,
                           "type": 0,
                         }
                       }
                       propList={
-                        Array [
+                        [
                           "fill",
                         ]
                       }
@@ -385,13 +437,13 @@ Array [
                     <RNSVGPath
                       d="M6.5 8C7.32843 8 8 7.32843 8 6.5C8 5.67157 7.32843 5 6.5 5C5.67157 5 5 5.67157 5 6.5C5 7.32843 5.67157 8 6.5 8Z"
                       fill={
-                        Object {
+                        {
                           "payload": 4280361249,
                           "type": 0,
                         }
                       }
                       propList={
-                        Array [
+                        [
                           "fill",
                         ]
                       }
@@ -406,15 +458,15 @@ Array [
     </RCTScrollView>
     <RCTSafeAreaView
       style={
-        Array [
-          Object {},
+        [
+          {},
         ]
       }
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "alignItems": "center",
               "bottom": 32,
               "flexDirection": "column",
@@ -426,6 +478,23 @@ Array [
         }
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -437,15 +506,15 @@ Array [
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "opacity": 1,
             }
           }
         >
           <View
             style={
-              Array [
-                Object {
+              [
+                {
                   "alignItems": "center",
                   "backgroundColor": "#29B6F6",
                   "borderRadius": 28,
@@ -455,7 +524,7 @@ Array [
                   "justifyContent": "center",
                   "margin": 8,
                   "shadowColor": "#212121",
-                  "shadowOffset": Object {
+                  "shadowOffset": {
                     "height": 4,
                     "width": 0,
                   },
@@ -476,18 +545,18 @@ Array [
               minX={0}
               minY={0}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "backgroundColor": "transparent",
                     "borderWidth": 0,
                   },
-                  Array [
-                    Object {
+                  [
+                    {
                       "height": 24,
                       "width": 24,
                     },
                   ],
-                  Object {
+                  {
                     "flex": 0,
                     "height": 24,
                     "width": 24,
@@ -500,7 +569,7 @@ Array [
               <RNSVGGroup
                 fill={null}
                 propList={
-                  Array [
+                  [
                     "fill",
                   ]
                 }
@@ -509,13 +578,13 @@ Array [
                   <RNSVGPath
                     d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
                     fill={
-                      Object {
+                      {
                         "payload": 4294967295,
                         "type": 0,
                       }
                     }
                     propList={
-                      Array [
+                      [
                         "fill",
                       ]
                     }
@@ -527,14 +596,14 @@ Array [
                   >
                     <RNSVGRect
                       fill={
-                        Object {
+                        {
                           "payload": 4294967295,
                           "type": 0,
                         }
                       }
                       height="24"
                       propList={
-                        Array [
+                        [
                           "fill",
                         ]
                       }
@@ -552,15 +621,15 @@ Array [
     </RCTSafeAreaView>
     <RCTSafeAreaView
       style={
-        Array [
-          Object {},
+        [
+          {},
         ]
       }
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "position": "absolute",
               "right": 10,
               "top": 10,
@@ -571,8 +640,8 @@ Array [
         <ActivityIndicator
           color="#E0E0E0"
           style={
-            Array [
-              Object {},
+            [
+              {},
             ]
           }
         />

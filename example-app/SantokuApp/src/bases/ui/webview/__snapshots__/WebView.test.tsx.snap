@@ -3,8 +3,8 @@
 exports[`WebView WebViewSourceHtmlでも正常にレンダリングされること 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "flex": 1,
         "overflow": "hidden",
       },
@@ -30,20 +30,20 @@ exports[`WebView WebViewSourceHtmlでも正常にレンダリングされるこ�
     onScroll={[Function]}
     onShouldStartLoadWithRequest={[Function]}
     source={
-      Object {
+      {
         "html": "<h1>test</h1>",
       }
     }
     style={
-      Array [
-        Object {
+      [
+        {
           "flex": 1,
           "overflow": "hidden",
         },
-        Object {
+        {
           "backgroundColor": "#ffffff",
         },
-        Object {
+        {
           "flex": 1,
         },
       ]
@@ -56,7 +56,7 @@ exports[`WebView WebViewSourceHtmlでも正常にレンダリングされるこ�
     color="#0000ff"
     size="large"
     style={
-      Object {
+      {
         "alignItems": "center",
         "display": "flex",
         "height": "100%",
@@ -72,8 +72,8 @@ exports[`WebView WebViewSourceHtmlでも正常にレンダリングされるこ�
 exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "flex": 1,
         "overflow": "hidden",
       },
@@ -99,20 +99,20 @@ exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
     onScroll={[Function]}
     onShouldStartLoadWithRequest={[Function]}
     source={
-      Object {
+      {
         "uri": "https://localhost/",
       }
     }
     style={
-      Array [
-        Object {
+      [
+        {
           "flex": 1,
           "overflow": "hidden",
         },
-        Object {
+        {
           "backgroundColor": "#ffffff",
         },
-        Object {
+        {
           "flex": 1,
         },
       ]
@@ -125,7 +125,7 @@ exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
     color="#0000ff"
     size="large"
     style={
-      Object {
+      {
         "alignItems": "center",
         "display": "flex",
         "height": "100%",

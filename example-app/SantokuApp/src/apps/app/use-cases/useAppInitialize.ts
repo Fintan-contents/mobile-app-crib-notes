@@ -2,7 +2,7 @@ import messaging from '@react-native-firebase/messaging';
 import {handleError} from 'bases/core/errors/handleError';
 import {resolveErrorMessage} from 'bases/message/resolveErrorMessage';
 import {enhanceValidator} from 'bases/validator';
-import {activateKeepAwake} from 'expo-keep-awake';
+import {activateKeepAwakeAsync} from 'expo-keep-awake';
 import {setRefreshSessionInterceptor} from 'features/account/services/auth/refreshSession';
 import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
@@ -31,7 +31,7 @@ type InitializationResult = Initializing | InitializeSuccessResult | InitializeF
 const initializeCoreFeatures = async () => {
   // 開発中は画面がスリープしないように設定
   if (__DEV__) {
-    await activateKeepAwake();
+    await activateKeepAwakeAsync();
   }
 
   // Firebase Crashlyticsの初期化

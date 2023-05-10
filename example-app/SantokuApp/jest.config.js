@@ -4,6 +4,7 @@ module.exports = {
   roots: ['<rootDir>/src', 'jest'],
   setupFiles: [
     '<rootDir>/jest/setup/global.js',
+    '<rootDir>/jest/setup/netinfo.js',
     '<rootDir>/jest/setup/react-native.js',
     '<rootDir>/jest/setup/react-native-gesture-handler.js',
     '<rootDir>/jest/setup/react-native-reanimated.js',

@@ -10,10 +10,7 @@ import {DEFAULT_SLIDE_IN_DURATION, DEFAULT_SLIDE_OUT_DURATION, PickerContainer} 
 // For convenience, disable the relevant rule in this file.
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-// To get react-native-reanimated v2 animations to work with timer mocks, you need to use the `modern` timer.
-// By default, Jest v26 uses `legacy` timer. So if you use `withReanimatedTimer` that use the default timer, animation does not start.
-// https://jestjs.io/ja/docs/timer-mocks
-jest.useFakeTimers('modern');
+jest.useFakeTimers();
 
 // TODO: Jest v27にアップデートできたら、withReanimatedTimerでテストを実装できるか検証する。
 //       （JestのバージョンはExpoに依存しているので、Expoでのアップデートを待っている状態）

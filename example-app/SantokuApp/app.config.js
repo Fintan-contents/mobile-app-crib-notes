@@ -36,7 +36,7 @@ module.exports = ({config}) => {
     ...config,
     name: 'SantokuApp',
     version: '0.1.0',
-    jsEngine: 'jsc',
+    jsEngine: 'hermes',
     primaryColor: '#393939',
     locales: {
       ja: './l10n.ja.json',

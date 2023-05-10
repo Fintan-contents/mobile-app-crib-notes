@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Snackbar Snackbarのhideで、Snackbarが消えることを確認 1`] = `
-Array [
+[
   <Text
     testID="text"
   >
@@ -14,7 +14,7 @@ Array [
 `;
 
 exports[`Snackbar SnackbarのshowWithCloseButtonで、ボタン付きSnackbarが正常に表示されることを確認 1`] = `
-Array [
+[
   <Text
     testID="text"
   >
@@ -26,7 +26,7 @@ Array [
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "bottom": 20,
           "flex": 1,
           "minHeight": 48,
@@ -40,7 +40,7 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#393939",
             "borderRadius": 5,
@@ -53,7 +53,7 @@ Array [
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 20,
               "paddingRight": 10,
@@ -63,7 +63,7 @@ Array [
         >
           <Text
             style={
-              Object {
+              {
                 "color": "red",
               }
             }
@@ -73,7 +73,7 @@ Array [
         </View>
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "flex": 0,
               "justifyContent": "flex-end",
@@ -84,6 +84,23 @@ Array [
           }
         >
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -95,14 +112,14 @@ Array [
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "opacity": 1,
               }
             }
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#85A3F1",
                 }
               }
@@ -118,7 +135,7 @@ Array [
 `;
 
 exports[`Snackbar Snackbarのshowで、Snackbarが正常に表示されることを確認 1`] = `
-Array [
+[
   <Text
     testID="text"
   >
@@ -130,7 +147,7 @@ Array [
     <View
       collapsable={false}
       style={
-        Object {
+        {
           "bottom": 20,
           "flex": 1,
           "minHeight": 48,
@@ -144,7 +161,7 @@ Array [
     >
       <View
         style={
-          Object {
+          {
             "alignItems": "center",
             "backgroundColor": "#393939",
             "borderRadius": 5,
@@ -157,7 +174,7 @@ Array [
       >
         <View
           style={
-            Object {
+            {
               "flex": 1,
               "paddingLeft": 20,
               "paddingRight": 10,
@@ -167,7 +184,7 @@ Array [
         >
           <Text
             style={
-              Object {
+              {
                 "color": "blue",
               }
             }

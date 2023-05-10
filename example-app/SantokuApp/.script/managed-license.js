@@ -32,57 +32,50 @@ module.exports = function () {
       '@react-native/assets@1.0.0': { // https://github.com/facebook/react-native/blob/v0.70.5/packages/assets/package.json
         licenseUrl: 'https://github.com/facebook/react-native/blob/v0.70.5/LICENSE',
       },
-      '@react-native/normalize-color@2.0.0': { // https://github.com/facebook/react-native/blob/v0.70.5/packages/normalize-color/package.json
-        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.70.5/LICENSE',
-      },
       '@react-native/normalize-color@2.1.0': { // https://github.com/facebook/react-native/blob/v0.71.0/packages/normalize-color/package.json
         licenseUrl: 'https://github.com/facebook/react-native/blob/v0.71.0/LICENSE',
       },
       '@react-native/polyfills@2.0.0': { // https://github.com/facebook/react-native/blob/v0.70.5/packages/polyfills/package.json
         licenseUrl: 'https://github.com/facebook/react-native/blob/v0.70.5/LICENSE',
       },
-      'metro-babel-transformer@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-babel-transformer/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
+      'metro-babel-transformer@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-babel-transformer/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-cache-key@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-cache-key/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
+      'metro-cache-key@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-cache-key/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-cache@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-cache/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
+      'metro-cache@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-cache/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-inspector-proxy@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-inspector-proxy/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
+      'metro-inspector-proxy@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-inspector-proxy/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-minify-uglify@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-minify-uglify/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
+      'metro-minify-terser@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-minify-terser/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-react-native-babel-transformer@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-react-native-babel-transformer/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
+      'metro-minify-uglify@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-minify-uglify/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-runtime@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-runtime/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
+      'metro-react-native-babel-transformer@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-react-native-babel-transformer/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-symbolicate@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-symbolicate/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
+      'metro-runtime@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-runtime/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-transform-plugins@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-transform-plugins/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
+      'metro-symbolicate@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-symbolicate/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-transform-worker@0.72.3': { // https://github.com/facebook/metro/blob/v0.72.3/packages/metro-transform-worker/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.72.3/LICENSE',
+      'metro-transform-plugins@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-transform-plugins/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
+      },
+      'metro-transform-worker@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-transform-worker/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
       'tr46@0.0.3': { // https://github.com/jsdom/tr46/tree/0.0.3
         licenseUrl: 'https://github.com/jsdom/tr46/blob/3a6f29721e7063b9ffd421e461a54beae6170001/LICENSE.md', // v0.0.3 の次の commit で追加されている
       },
     },
     gradle: {
-      'com.facebook.fbjni:fbjni-java-only:0.2.2': { // https://github.com/facebookincubator/fbjni
-        licenseName: 'Apache-2.0',
-        licenseUrl: 'https://github.com/facebookincubator/fbjni/blob/v0.2.2/LICENSE',
-      },
-      'org.webkit:android-jsc:r250230': { // https://www.npmjs.com/package/jsc-android
-        exclude: true, // 「Android JSC is installed from npm」なので npm 側のライブラリで管理する
-      },
       'com.parse.bolts:bolts-tasks:1.4.0': { // https://github.com/BoltsFramework/Bolts-Android
         licenseName: 'BSD-3-Clause', // 名称だけ厳密にする(元: BSD License: https://github.com/BoltsFramework/Bolts-Android/blob/1.4.0/LICENSE)
       },

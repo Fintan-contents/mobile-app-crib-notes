@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ReactQueryProvider 子要素を正常にrenderできること 1`] = `
-Array [
+[
   <Text
     testID="test"
   >

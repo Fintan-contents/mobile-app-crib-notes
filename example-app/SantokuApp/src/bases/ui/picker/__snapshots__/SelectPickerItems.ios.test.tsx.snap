@@ -3,13 +3,13 @@
 exports[`SelectPickerItems only with required props renders successfully if item does not exit: SelectPickerItems without item. 1`] = `
 <View>
   <RNCPicker
-    items={Array []}
+    items={[]}
     numberOfLines={1}
     onChange={[Function]}
     selectedIndex={0}
     style={
-      Array [
-        Object {
+      [
+        {
           "height": 216,
         },
         undefined,
@@ -24,14 +24,14 @@ exports[`SelectPickerItems only with required props renders successfully with mo
 <View>
   <RNCPicker
     items={
-      Array [
-        Object {
+      [
+        {
           "label": "test1",
           "testID": undefined,
           "textColor": undefined,
           "value": "1",
         },
-        Object {
+        {
           "label": "test2",
           "testID": undefined,
           "textColor": undefined,
@@ -43,8 +43,8 @@ exports[`SelectPickerItems only with required props renders successfully with mo
     onChange={[Function]}
     selectedIndex={0}
     style={
-      Array [
-        Object {
+      [
+        {
           "height": 216,
         },
         undefined,
@@ -59,14 +59,14 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
 <View>
   <RNCPicker
     items={
-      Array [
-        Object {
+      [
+        {
           "label": "test1",
           "testID": undefined,
           "textColor": 4294901760,
           "value": "key1",
         },
-        Object {
+        {
           "label": "test2",
           "testID": undefined,
           "textColor": 4294967040,
@@ -78,8 +78,8 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
     onChange={[Function]}
     selectedIndex={1}
     style={
-      Array [
-        Object {
+      [
+        {
           "height": 216,
         },
         undefined,

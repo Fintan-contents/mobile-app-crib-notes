@@ -4,7 +4,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
 <View
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "alignItems": "center",
       "justifyContent": "center",
     }
@@ -13,18 +13,18 @@ exports[`SelectPickerItems only with required props renders successfully if item
 >
   <RCTScrollView
     animatedStyle={
-      Object {
-        "value": Object {},
+      {
+        "value": {},
       }
     }
     centerContent={true}
     collapsable={false}
     contentContainerStyle={
-      Object {
+      {
         "paddingVertical": 88,
       }
     }
-    data={Array []}
+    data={[]}
     decelerationRate={0.98}
     forwardedRef={[Function]}
     getItem={[Function]}
@@ -44,21 +44,21 @@ exports[`SelectPickerItems only with required props renders successfully if item
     scrollEventThrottle={50}
     showsVerticalScrollIndicator={false}
     snapToInterval={44}
-    stickyHeaderIndices={Array []}
+    stickyHeaderIndices={[]}
     style={
-      Object {
+      {
         "height": 220,
         "width": "100%",
       }
     }
-    viewabilityConfigCallbackPairs={Array []}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View />
   </RCTScrollView>
   <View
     pointerEvents="none"
     style={
-      Object {
+      {
         "bottom": 0,
         "height": 110,
         "position": "absolute",
@@ -70,7 +70,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
       resizeMode="stretch"
       source={1}
       style={
-        Object {
+        {
           "height": 110,
           "width": "100%",
         }
@@ -80,7 +80,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
   <View
     pointerEvents="none"
     style={
-      Object {
+      {
         "height": 110,
         "position": "absolute",
         "top": 0,
@@ -92,7 +92,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
       resizeMode="stretch"
       source={1}
       style={
-        Object {
+        {
           "height": 110,
           "width": "100%",
         }
@@ -102,7 +102,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
   <View
     pointerEvents="none"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(0,0,0,0.06)",
         "borderColor": "grey",
         "borderRadius": 8,
@@ -119,7 +119,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
 <View
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "alignItems": "center",
       "justifyContent": "center",
     }
@@ -128,24 +128,24 @@ exports[`SelectPickerItems only with required props renders successfully with mo
 >
   <RCTScrollView
     animatedStyle={
-      Object {
-        "value": Object {},
+      {
+        "value": {},
       }
     }
     centerContent={true}
     collapsable={false}
     contentContainerStyle={
-      Object {
+      {
         "paddingVertical": 88,
       }
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "label": "test1",
           "value": "1",
         },
-        Object {
+        {
           "label": "test2",
           "value": "2",
         },
@@ -170,20 +170,38 @@ exports[`SelectPickerItems only with required props renders successfully with mo
     scrollEventThrottle={50}
     showsVerticalScrollIndicator={false}
     snapToInterval={44}
-    stickyHeaderIndices={Array []}
+    stickyHeaderIndices={[]}
     style={
-      Object {
+      {
         "height": 220,
         "width": "100%",
       }
     }
-    viewabilityConfigCallbackPairs={Array []}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -197,7 +215,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "height": 44,
               "justifyContent": "center",
@@ -206,7 +224,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 20,
               }
             }
@@ -217,9 +235,27 @@ exports[`SelectPickerItems only with required props renders successfully with mo
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -233,7 +269,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "height": 44,
               "justifyContent": "center",
@@ -242,7 +278,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
         >
           <Text
             style={
-              Object {
+              {
                 "fontSize": 20,
               }
             }
@@ -257,7 +293,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
   <View
     pointerEvents="none"
     style={
-      Object {
+      {
         "bottom": 0,
         "height": 110,
         "position": "absolute",
@@ -269,7 +305,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
       resizeMode="stretch"
       source={1}
       style={
-        Object {
+        {
           "height": 110,
           "width": "100%",
         }
@@ -279,7 +315,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
   <View
     pointerEvents="none"
     style={
-      Object {
+      {
         "height": 110,
         "position": "absolute",
         "top": 0,
@@ -291,7 +327,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
       resizeMode="stretch"
       source={1}
       style={
-        Object {
+        {
           "height": 110,
           "width": "100%",
         }
@@ -301,7 +337,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
   <View
     pointerEvents="none"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(0,0,0,0.06)",
         "borderColor": "grey",
         "borderRadius": 8,
@@ -318,7 +354,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
 <View
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "alignItems": "center",
       "justifyContent": "center",
     }
@@ -327,45 +363,45 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
 >
   <RCTScrollView
     animatedStyle={
-      Object {
-        "value": Object {},
+      {
+        "value": {},
       }
     }
     centerContent={true}
     collapsable={false}
     contentContainerStyle={
-      Object {
+      {
         "paddingVertical": 120,
       }
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "color": "red",
           "fontFamily": "Roboto",
           "key": "key1",
           "label": "test1",
           "value": "1",
         },
-        Object {
+        {
           "color": "yellow",
           "fontFamily": "SFProText",
           "label": "test2",
           "value": "2",
         },
-        Object {
+        {
           "label": "test3",
           "value": "3",
         },
-        Object {
+        {
           "label": "test4",
           "value": "4",
         },
-        Object {
+        {
           "label": "test5",
           "value": "5",
         },
-        Object {
+        {
           "label": "test6",
           "value": "6",
         },
@@ -390,22 +426,40 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
     scrollEventThrottle={50}
     showsVerticalScrollIndicator={false}
     snapToInterval={60}
-    stickyHeaderIndices={Array []}
+    stickyHeaderIndices={[]}
     style={
-      Object {
+      {
         "height": 300,
         "width": "100%",
       }
     }
     testID="FlatList"
-    viewabilityConfigCallbackPairs={Array []}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -419,7 +473,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "height": 60,
               "justifyContent": "center",
@@ -429,7 +483,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         >
           <Text
             style={
-              Object {
+              {
                 "color": "red",
                 "fontFamily": "Roboto",
                 "fontSize": 24,
@@ -442,10 +496,28 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -459,7 +531,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "height": 60,
               "justifyContent": "center",
@@ -469,7 +541,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         >
           <Text
             style={
-              Object {
+              {
                 "color": "yellow",
                 "fontFamily": "SFProText",
                 "fontSize": 24,
@@ -482,10 +554,28 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -499,7 +589,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "height": 60,
               "justifyContent": "center",
@@ -509,7 +599,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         >
           <Text
             style={
-              Object {
+              {
                 "color": "yellow",
                 "fontFamily": "test-font-Regular",
                 "fontSize": 24,
@@ -522,10 +612,28 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -539,7 +647,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "height": 60,
               "justifyContent": "center",
@@ -549,7 +657,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         >
           <Text
             style={
-              Object {
+              {
                 "color": "yellow",
                 "fontFamily": "test-font-Regular",
                 "fontSize": 24,
@@ -562,10 +670,28 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -579,7 +705,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "height": 60,
               "justifyContent": "center",
@@ -589,7 +715,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         >
           <Text
             style={
-              Object {
+              {
                 "color": "yellow",
                 "fontFamily": "test-font-Regular",
                 "fontSize": 24,
@@ -602,10 +728,28 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
+        onFocusCapture={[Function]}
         style={null}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
           accessible={true}
           collapsable={false}
           focusable={true}
@@ -619,7 +763,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
-            Object {
+            {
               "alignItems": "center",
               "height": 60,
               "justifyContent": "center",
@@ -629,7 +773,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         >
           <Text
             style={
-              Object {
+              {
                 "color": "yellow",
                 "fontFamily": "test-font-Regular",
                 "fontSize": 24,
@@ -646,7 +790,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
   <View
     pointerEvents="none"
     style={
-      Object {
+      {
         "bottom": 0,
         "height": 150,
         "position": "absolute",
@@ -658,7 +802,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
       resizeMode="stretch"
       source={1}
       style={
-        Object {
+        {
           "height": 150,
           "width": "100%",
         }
@@ -668,7 +812,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
   <View
     pointerEvents="none"
     style={
-      Object {
+      {
         "height": 150,
         "position": "absolute",
         "top": 0,
@@ -680,7 +824,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
       resizeMode="stretch"
       source={1}
       style={
-        Object {
+        {
           "height": 150,
           "width": "100%",
         }
@@ -690,7 +834,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
   <View
     pointerEvents="none"
     style={
-      Object {
+      {
         "backgroundColor": "rgba(0,0,0,0.06)",
         "borderColor": "grey",
         "borderRadius": 8,

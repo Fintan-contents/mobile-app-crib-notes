@@ -1,6 +1,6 @@
 import {composePressableStyles} from 'bases/core/utils/composePressableStyles';
 import React, {useMemo} from 'react';
-import {Omit, Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-native';
+import {Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-native';
 import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
