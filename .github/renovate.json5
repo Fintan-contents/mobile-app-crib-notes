@@ -131,6 +131,9 @@
       matchPackagePrefixes: [
         '@docusaurus'
       ],
+      matchPackageNames: [
+        'redocusaurus',
+      ],
       allowedVersions: "/^[0-9]+\\.[0-9]+\\.[0-9]+(-[\\w]+(\\.[0-9]{1,5})?)?$/"
     },
     {
