@@ -94,7 +94,7 @@ jobs:
       - name: Lint (stylelint)
         if: always()
         run: |
-          cd website && npm run -s lint:css | reviewdog -tee -fail-on-error -reporter=github-check -filter-mode=nofilter -f=stylelint -name="stylelint (GitHub Pages)"
+          cd website && npm run -s lint:css -- --no-color | reviewdog -tee -fail-on-error -reporter=github-check -filter-mode=nofilter -f=stylelint -name="stylelint (GitHub Pages)"
 
   build:
     name: (${{ github.workflow }}) Build
