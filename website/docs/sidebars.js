@@ -334,6 +334,14 @@ module.exports = {
         },
         {
           type: 'category',
+          label: 'アプリのアップデート',
+          items: [
+            'react-native/santoku/application-architecture/app-updates/overview',
+            'react-native/santoku/application-architecture/app-updates/forced-app-updates',
+          ],
+        },
+        {
+          type: 'category',
           label: '認証',
           items: [
             'react-native/santoku/application-architecture/auth/overview',
