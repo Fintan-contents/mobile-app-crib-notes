@@ -9,8 +9,8 @@ export const getSystemCsrfToken = rest.get(`${backendUrl}/system/csrf-token`, (r
   return delayedResponse(
     ctx.json<CsrfTokenResponse>({
       csrfTokenValue: generateToken(32),
-      csrfTokenParameterName: 'X-CSRF-TOKEN',
-      csrfTokenHeaderName: 'csrf-token',
+      csrfTokenHeaderName: 'X-CSRF-TOKEN',
+      csrfTokenParameterName: 'csrf-token',
     }),
     ctx.delay(100),
   );
