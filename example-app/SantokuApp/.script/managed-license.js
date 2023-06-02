@@ -94,7 +94,7 @@ module.exports = function () {
       'glog@0.3.5': { // https://github.com/google/glog
         licenseName: 'BSD-3-Clause', // https://code.google.com/archive/p/google-glog/ (元: "Google" https://github.com/facebook/react-native/blob/v0.70.5/third-party-podspecs/glog.podspec#L9)
       },
-      'GoogleDataTransport@9.2.2': {
+      'GoogleDataTransport@9.2.3': {
         licenseName: 'Apache-2.0', // 名称だけ SPDX 形式に変更する (元: Apache)
       },
       'GoogleUtilities@9aa0ad5a7bc171f8bae016300bfcfa3fb8425749': {
