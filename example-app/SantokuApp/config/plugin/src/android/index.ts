@@ -1,6 +1,7 @@
 export * from './withAndroidAddAppActivity';
 export * from './withAndroidAddAppActivityAndroidManifest';
 export * from './withAndroidAddLicensePlugin';
+export * from './withAndroidAddManifestPlaceholders';
 export * from './withAndroidAppBuildGradleForRelease';
 export * from './withAndroidCopyTemplateJavaFile';
 export * from './withAndroidRemoveUsesClearTextTrafficForRelease';
