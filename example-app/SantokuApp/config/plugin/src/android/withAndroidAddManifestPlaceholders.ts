@@ -5,6 +5,8 @@ type ManifestPlaceholderParams = {
   placeholderKey: string;
   // gradle.propertiesやシステムプロパティに設定されているキー
   propertyKey?: string;
+  // gradle.propertiesやシステムプロパティにpropertyKeyで設定したキーが存在しない場合のデフォルト値
+  propertyDefaultValue?: string;
   // 固定値
   fixedValue?: string;
 };
@@ -15,6 +17,7 @@ type ManifestPlaceholderParams = {
  * manifestPlaceholdersに指定する値は、gradle.propertiesやシステムプロパティから取得するか、固定値を設定できます。
  *
  * gradle.propertiesやシステムプロパティから取得する場合は、「propertyKey」を指定します。
+ * 「propertyDefaultValue」を指定すると、「propertyKey」で指定したキーが存在しない場合のデフォルト値を設定できます。
  * 固定値を設定する場合は、「fixedValue」を指定します。
  * 両方指定した場合は、「propertyKey」を優先します。
  *
@@ -22,7 +25,7 @@ type ManifestPlaceholderParams = {
  * [
  *   withAndroidAddManifestPlaceholders,
  *   [
- *     {placeholderKey: 'backendApiKey', propertyKey: 'SANTOKU_BACKEND_API_KEY'}, // gradle.propertiesやシステムプロパティから値を参照
+ *     {placeholderKey: 'backendApiKey', propertyKey: 'SANTOKU_BACKEND_API_KEY', propertyDefaultValue: 'dummyApiKey'}, // gradle.propertiesやシステムプロパティから値を参照
  *     {placeholderKey: 'deepLinkUrl', fixedValue: 'http://localhost'}, // 固定値を設定
  *   ],
  * ],
@@ -57,9 +60,10 @@ const apply = (buildGradle: string, params: ManifestPlaceholderParams[]): string
     })
     .map(data => {
       if (data.propertyKey) {
-        return `if (project.hasProperty('${data.propertyKey}')) {
-            manifestPlaceholders.${data.placeholderKey} = ${data.propertyKey}
-        }`;
+        const manifestPlaceholder = `manifestPlaceholders.${data.placeholderKey} = findProperty('${data.propertyKey}')`;
+        return data.propertyDefaultValue == null
+          ? manifestPlaceholder
+          : `${manifestPlaceholder} ?: '${data.propertyDefaultValue}'`;
       } else {
         // filterでfixedValueが存在していることを保証しているので、ここでは!演算子を使っている
         return `manifestPlaceholders.${data.placeholderKey} = '${data.fixedValue!}'`;
