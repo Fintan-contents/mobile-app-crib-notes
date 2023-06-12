@@ -69,6 +69,7 @@
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.2",
     "formik": "~2.2.9",
+    "jsbarcode": "~3.11.5",
     "msw": "^1.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

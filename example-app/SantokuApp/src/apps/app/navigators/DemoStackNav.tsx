@@ -3,6 +3,7 @@ import {AcknowledgementsScreen} from 'apps/app/screens/acknowledgements/Acknowle
 import {LicenseScreen} from 'apps/app/screens/acknowledgements/LicenseScreen';
 import {AppStateScreen} from 'apps/app/screens/demo-app-state/AppStateScreen';
 import {AuthenticationScreen} from 'apps/app/screens/demo-authentication/AuthenticationScreen';
+import {BarcodeScreen} from 'apps/app/screens/demo-barcode/BarcodeScreen';
 import {ButtonScreen} from 'apps/app/screens/demo-button/ButtonScreen';
 import {CacheScreen} from 'apps/app/screens/demo-cache/CacheScreen';
 import {ConfigScreen} from 'apps/app/screens/demo-config/ConfigScreen';
@@ -133,6 +134,7 @@ export const DemoStackNav: React.FC = () => {
       <nav.Screen name="SearchBarTodoDemo" component={SearchBarTodoDemoScreen} />
       <nav.Screen name="Picker" component={PickerScreen} />
       <nav.Screen name="QRCode" component={QRCodeScreen} />
+      <nav.Screen name="Barcode" component={BarcodeScreen} />
       <nav.Screen
         name="Acknowledgements"
         component={AcknowledgementsScreen}
