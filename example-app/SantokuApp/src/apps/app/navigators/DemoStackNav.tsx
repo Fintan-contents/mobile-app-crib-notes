@@ -19,6 +19,7 @@ import {AppInfoScreen} from 'apps/app/screens/demo-info/AppInfoScreen';
 import {InstructionsScreen} from 'apps/app/screens/demo-instructions/InstructionsScreen';
 import {LocalAuthenticationScreen} from 'apps/app/screens/demo-local-authn/LocalAuthenticationScreen';
 import {LogScreen} from 'apps/app/screens/demo-log/LogScreen';
+import {MapScreen} from 'apps/app/screens/demo-map/MapScreen';
 import {DemoMenuScreen} from 'apps/app/screens/demo-menu/DemoMenuScreen';
 import {MessageScreen} from 'apps/app/screens/demo-message/MessageScreen';
 import {NavigationScreen} from 'apps/app/screens/demo-navigation/NavigationScreen';
@@ -135,6 +136,7 @@ export const DemoStackNav: React.FC = () => {
       <nav.Screen name="Picker" component={PickerScreen} />
       <nav.Screen name="QRCode" component={QRCodeScreen} />
       <nav.Screen name="Barcode" component={BarcodeScreen} />
+      <nav.Screen name="Map" component={MapScreen} />
       <nav.Screen
         name="Acknowledgements"
         component={AcknowledgementsScreen}

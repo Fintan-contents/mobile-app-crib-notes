@@ -1,0 +1,68 @@
+---
+title: 地図表示ライブラリ
+---
+
+Status: Accepted
+
+<!--
+Proposed: 提案中
+Accepted: 採用
+Rejected: 却下
+Superseded: 廃止
+-->
+
+## 要約
+
+<!--
+ADRの決定事項を要約して、3行程度で記載してください。
+-->
+
+このアプリでは地図表示ライブラリにreact-native-mapsを使用します。
+
+## コンテキスト
+
+<!--
+この決定や変更をしなくてはいけない状況や問題などを説明してください。
+-->
+
+地図をアプリ上で表示するためには、React Nativeのライブラリとインターネットを介して地図情報を提供するマップSDKの2つが必要となります。
+ライブラリに依存して使用できるマップSDKが制限されるため、ライブラリ選定のために調査しました。
+
+## 議論
+
+### ライブラリの比較
+
+地図表示ができるReact Native用ライブラリの中で組織的に運営されているものは2つあります。
+比較した内容を以下の表にまとめました。メンテナンス状況は2023年5月時点のものになります。
+
+| ライブラリ名 | 使用できるマップSDK | ExpoSDKに含まれているか | メンテナンス状況                                                                                                  |
+| :---------------- | :---------------- | :---------------- |:---------------------------------------------------------------------------------------------------------|
+| [react-native-maps](https://github.com/react-native-maps/react-native-maps) | iOSは[MapKit](https://developer.apple.com/documentation/mapkit/)か[Google Map](https://developers.google.com/maps/documentation/ios-sdk?_gl=1*m5krb2*_ga*MTM3NTIyMzkwNC4xNjc4MTc3MTY5*_ga_NRWSTWS78N*MTY4MDE1Mjk2My4xNS4wLjE2ODAxNTI5NjMuMC4wLjA.&hl=ja)。Androidは[Google Map](https://developers.google.com/maps/documentation/android-sdk?hl=ja)。 | [○](https://docs.expo.dev/versions/latest/sdk/map-view/) | 数ヶ月おきのマイナーアップデートが継続的に行われている。                                                                             |
+| [rnmapbox](https://github.com/rnmapbox/maps) | [Mapbox Maps SDK for iOS](https://docs.mapbox.com/ios/maps/guides/)、[Mapbox Maps SDK for Android](https://docs.mapbox.com/android/maps/guides/)。 | × | 2023年4月に[v10](https://github.com/rnmapbox/maps/releases/tag/v10.0.0)がリリースされ、その後も継続的にパッチバージョンがリリースされています。 |
+
+:::note
+`react-native-maps`は、OS標準のマップ（iOS: MapKit、Android: GoogleMap）を表示できます。
+
+一方、`rnmapbox`はOS標準のマップではなく、用途に合わせて自由にカスタマイズ可能なマップを表示できます。[株式会社ゼンリンと連携したマップ](https://www.zenrin.co.jp/product/category/iot/api/mapbox/index.html)も提供されています。
+
+地図表示の要件によって、`react-native-maps`と`rnmapbox`のどちらを選択するかを検討してください。
+
+:::
+
+### マップSDKのコスト
+
+| マップSDK    | 使用料 | 使用量制限 | 参考 |
+|:----------| :---------------- | :---------------- | :---------------- |
+| MapKit    | 無料 | 無制限 | [MapKit pricing and requests limit](https://developer.apple.com/forums/thread/127493) |
+| Googleマップ | 無料 | 無制限 | [料金プランとAPIの費用](https://mapsplatform.google.com/intl/ja_ALL/pricing/#:~:text=%E3%81%AA%E3%81%8A%E3%80%81Maps%20Embed%20API%E3%80%81Maps%20SDK%20for%20Android%E3%80%81Maps%20SDK%20for%20iOS%20%E3%81%AB%E9%96%A2%E3%81%97%E3%81%A6%E3%81%AF%E3%80%81%E7%8F%BE%E6%99%82%E7%82%B9%E3%81%A7%E3%81%AF%E4%BD%BF%E7%94%A8%E9%87%8F%E5%88%B6%E9%99%90%E3%81%AF%E3%81%AA%E3%81%8F%E3%80%81%E7%84%A1%E6%96%99%E3%81%A7%E3%81%94%E5%88%A9%E7%94%A8%E3%81%84%E3%81%9F%E3%81%A0%E3%81%91%E3%81%BE%E3%81%99%EF%BC%88API%20%E3%82%84%20SDK%20%E3%81%AE%E4%BD%BF%E7%94%A8%E3%81%AB%E3%82%88%E3%81%A3%E3%81%A6%E3%80%81%E6%AF%8E%E6%9C%88%E3%81%AE%20200%20%E3%83%89%E3%83%AB%E3%81%AE%E3%82%AF%E3%83%AC%E3%82%B8%E3%83%83%E3%83%88%E3%81%8C%E6%B6%88%E8%B2%BB%E3%81%95%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AF%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%E3%80%82) |
+| Mapbox    | 25,000MAUまで無料。それ以上はMAUに応じて課金される。 | 記載なし | [Mapbox pricing](https://www.mapbox.com/pricing/#mapsmaus) |
+
+## 決定
+
+react-native-mapsを使用します。
+理由は以下になります。
+
+- ExpoSDKに含まれていること
+- OS標準のマップが表示できること
+  - iOS: MapKit
+  - Android: Google Map

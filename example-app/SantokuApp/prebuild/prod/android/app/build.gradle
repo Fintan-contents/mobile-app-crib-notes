@@ -120,6 +120,7 @@ android {
 
     namespace 'jp.fintan.mobile.SantokuApp'
     defaultConfig {
+        manifestPlaceholders.googleMapApiKey = findProperty('SANTOKU_APP_GOOGLE_MAP_API_KEY') ?: 'dummyGoogleMapApiKey'
         applicationId 'jp.fintan.mobile.SantokuApp'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion

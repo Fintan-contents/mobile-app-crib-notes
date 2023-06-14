@@ -107,6 +107,10 @@ const demoScreenList: ScreenList[] = [
     to: 'Barcode',
   },
   {
+    title: 'Map',
+    to: 'Map',
+  },
+  {
     title: 'Acknowledgements',
     to: 'Acknowledgements',
   },
