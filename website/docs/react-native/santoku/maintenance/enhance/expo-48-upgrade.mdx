@@ -464,7 +464,7 @@ jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo);
 Jest27以降では、`done`コールバックを使用しているテストで`async`/`await`を使用した非同期関数を使用できません。
 
 ```typescript
-// <- doneコールバックを使用する場合は、asyncを付けれない
+// <- doneコールバックを使用する場合は、asyncを付けられない
 it('200ms経ってからスプラッシュスクリーンが閉じられること', async done => {})
 ```
 
@@ -572,7 +572,7 @@ Activity class {jp.fintan.mobile.SantokuApp.local/jp.fintan.mobile.SantokuApp.lo
 
 #### managed-license.jsの更新
 
-ライセンス情報が不足していたり、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/managed-license.js)で管理しています。
+ライセンス情報が不足しており補完したい、あるいは、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/managed-license.js)で管理しています。
 
 ライセンス情報が不足しているライブラリなどは、以下のコマンドを実行することで確認できます。
 
