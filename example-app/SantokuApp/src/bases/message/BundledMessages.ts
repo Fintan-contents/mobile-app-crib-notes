@@ -63,6 +63,7 @@ export const bundledMessages = {
   'validation.string.loginPassword': '${path}が正しくありません。',
   'validation.number.min': '${label}は${min}以上で入力してください。',
   'validation.number.max': '${label}は${max}以下で入力してください。',
+  'validation.number.integer': '${label}は整数で入力してください。',
   'app.webview.onError': '通信エラーが発生し、コンテンツの取得に失敗しました。ネットワーク環境を確認してください。',
   'app.account.signupError': 'サインアップ後のログインに失敗しました。cause=[{0}]',
   'app.account.サインアップエラータイトル': 'サインアップに失敗しました',

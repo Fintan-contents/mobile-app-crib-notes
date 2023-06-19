@@ -24,7 +24,8 @@ import {DemoMenuScreen} from 'apps/app/screens/demo-menu/DemoMenuScreen';
 import {MessageScreen} from 'apps/app/screens/demo-message/MessageScreen';
 import {NavigationScreen} from 'apps/app/screens/demo-navigation/NavigationScreen';
 import {PickerScreen} from 'apps/app/screens/demo-picker/PickerScreen';
-import {PushNotificationScreen} from 'apps/app/screens/demo-push-notification/PushNotificationScreen';
+import {PushNotificationSenderScreen} from 'apps/app/screens/demo-push-notification/PushNotificationSenderScreen';
+import {PushNotificationStatusScreen} from 'apps/app/screens/demo-push-notification/PushNotificationStatusScreen';
 import {QRCodeScreen} from 'apps/app/screens/demo-qrcode/QRCodeScreen';
 import {CreateTodoDemoScreen} from 'apps/app/screens/demo-react-query/CreateTodoDemoScreen';
 import {DependentQueryDemo1Screen} from 'apps/app/screens/demo-react-query/DependentQueryDemo1Screen';
@@ -119,7 +120,8 @@ export const DemoStackNav: React.FC = () => {
       <nav.Screen name="Authentication" component={AuthenticationScreen} />
       <nav.Screen name="HttpApi" component={HttpApiScreen} />
       <nav.Screen name="Navigation" component={NavigationScreen} />
-      <nav.Screen name="PushNotification" component={PushNotificationScreen} />
+      <nav.Screen name="PushNotificationSender" component={PushNotificationSenderScreen} />
+      <nav.Screen name="PushNotificationStatus" component={PushNotificationStatusScreen} />
       <nav.Screen name="Cache" component={CacheScreen} />
       <nav.Screen name="ListTodoDemo" component={ListTodoDemoScreen} />
       <nav.Screen name="CreateTodoDemo" component={CreateTodoDemoScreen} />

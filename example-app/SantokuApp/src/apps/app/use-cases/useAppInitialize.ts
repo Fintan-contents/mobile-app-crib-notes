@@ -1,6 +1,7 @@
 import messaging from '@react-native-firebase/messaging';
 import {handleError} from 'bases/core/errors/handleError';
 import {resolveErrorMessage} from 'bases/message/resolveErrorMessage';
+import {createMessagingChannels} from 'bases/push-notification/createMessagingChannels';
 import {enhanceValidator} from 'bases/validator';
 import {activateKeepAwakeAsync} from 'expo-keep-awake';
 import {setRefreshSessionInterceptor} from 'features/account/services/auth/refreshSession';
@@ -8,7 +9,6 @@ import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
 
 import {isInitialDataError} from '../errors/initialDataError';
-import {createMessagingChannels} from '../services/createMessagingChannels';
 import {initializeFirebaseCrashlyticsAsync} from '../services/initializeFirebaseCrashlyticsAsync';
 import {loadBundledMessagesAsync} from '../services/loadBundledMessagesAsync';
 import {AppInitialData} from '../types/AppInitialData';

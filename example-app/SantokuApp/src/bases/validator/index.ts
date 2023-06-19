@@ -30,6 +30,7 @@ export const enhanceValidator = () => {
     number: {
       min: m('validation.number.min'),
       max: m('validation.number.max'),
+      integer: m('validation.number.integer'),
     },
   });
 };
