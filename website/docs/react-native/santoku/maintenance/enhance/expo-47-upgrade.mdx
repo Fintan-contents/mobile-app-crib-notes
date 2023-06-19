@@ -166,7 +166,7 @@ Node.jsの18系へのアップグレードに伴い、npmのバージョンも9�
 
 ### 既存のパッチファイルの更新
 
-このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/patches/README.md)を参照してください。
+このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.03/example-app/SantokuApp/patches/README.md)を参照してください。
 
 - @expo/config-plugins
 - @react-native-community/cli-platform-ios
@@ -227,13 +227,13 @@ import {ConfigPlugin, withPlugins} from 'expo/config-plugins';
 
 iOSの場合は、[`date`が削除](https://github.com/react-native-datetimepicker/datetimepicker/pull/671/files#diff-e9726d469bba0bec8608c095ad5c361aeb95ea53afadd7ab44b462a2eb5e7467L93)されています。
 
-その影響で、このアプリの[DateTimePicker.ios.test.tsx](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/src/bases/ui/picker/DateTimePicker.ios.test.tsx)でTSCエラーが発生しました。
+その影響で、このアプリの[DateTimePicker.ios.test.tsx](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.03/example-app/SantokuApp/src/bases/ui/picker/DateTimePicker.ios.test.tsx)でTSCエラーが発生しました。
 
 <!-- textlint-disable ja-technical-writing/no-unmatched-pair -->
 ```console
-src/bases/ui/picker/DateTimePicker.ios.test.tsx:158:29
+src/bases/ui/picker/DateTimePicker.ios.test.tsx:155:29
 - error TS2339: Property 'date' does not exist on type 'Readonly<Readonly<ViewProps & BaseOptions & { maximumDate?: Date | undefined; minimumDate?: Date | undefined; }> & { locale?: string | undefined; ... 7 more ...; disabled?: boolean | undefined; }>'.
-158     expect(pickerItemsProps.date).toBe(selectedValue.getTime());
+155     expect(pickerItemsProps.date).toBe(selectedValue.getTime());
 ```
 <!-- textlint-enable ja-technical-writing/no-unmatched-pair -->
 
@@ -253,8 +253,8 @@ expect(pickerItemsProps.date).toBe(selectedValue.getTime());
 
 ### 手動管理しているライセンスの更新
 
-このアプリでは、使用しているライブラリのライセンス一覧を出力するスクリプトを用意しています。詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/README.md)を参照してください。
+このアプリでは、使用しているライブラリのライセンス一覧を出力するスクリプトを用意しています。詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.03/example-app/SantokuApp/.script/README.md)を参照してください。
 
-その中で、ライセンス情報が不足しており補完したい、あるいは、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/managed-license.js)で管理しています。
+その中で、ライセンス情報が不足しており補完したい、あるいは、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.03/example-app/SantokuApp/.script/managed-license.js)で管理しています。
 
 今回のExpo SDKアップグレードでは、`managed-license.js`で管理している[Metro](https://github.com/facebook/metro/tree/v0.72.3)のパッケージが更新されたため、アップグレード後のバージョンに併せてライセンス情報を更新しました。

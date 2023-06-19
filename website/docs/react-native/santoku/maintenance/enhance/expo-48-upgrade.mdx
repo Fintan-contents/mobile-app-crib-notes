@@ -178,7 +178,7 @@ node_modules/
 
 このアプリでは、`@expo/cli`が使用する`@expo/config-plugins`に以下のパッチを適用しますが、`deduped`が発生するかどうかによってパッチを適用するべきパスが変わってしまいます。
 
-- [Expo Config Pluginsで、iOS用に追加したファイルのIDを取得できない問題に対処するパッチ](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/patches/README.md#expo-config-pluginsでios用に追加したファイルのidを取得できない問題に対処するパッチ)
+- [Expo Config Pluginsで、iOS用に追加したファイルのIDを取得できない問題に対処するパッチ](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.03/example-app/SantokuApp/patches/README.md#expo-config-pluginsでios用に追加したファイルのidを取得できない問題に対処するパッチ)
 
 そのため、`@expo/cli`が使用する`@expo/config-plugins`と同じバージョンを`devDependencies`に追加して、`node_modules`配下の構成を以下のようにしました。
 
@@ -216,7 +216,7 @@ npx expo install --fix
 
 ### 既存のパッチファイルの更新
 
-このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/patches/README.md)を参照してください。
+このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.03/example-app/SantokuApp/patches/README.md)を参照してください。
 
 - @expo/config-plugins
 - expo-splash-screen
@@ -405,7 +405,7 @@ Pull Requestは既にクローズされ`main`ブランチにはマージされ�
 ### Jestのアップグレード対応
 
 Jestは26系から29系にアップグレードされ、メジャーバージョンが3つも上がりました。
-デフォルトのテストランナーが[jest-jasmine2](https://github.com/jestjs/jest/tree/main/packages/jest-jasmine2)から[jest-circus](https://github.com/jestjs/jest/tree/main/packages/jest-circus)に変更されるなど、更新内容は多岐にわたります。
+デフォルトのテストランナーが[jest-jasmine2](https://github.com/jestjs/jest/tree/v26.6.3/packages/jest-jasmine2)から[jest-circus](https://github.com/jestjs/jest/tree/v29.5.0/packages/jest-circus)に変更されるなど、更新内容は多岐にわたります。
 
 更新内容の詳細は以下を参照してください。
 
@@ -568,11 +568,11 @@ Activity class {jp.fintan.mobile.SantokuApp.local/jp.fintan.mobile.SantokuApp.lo
 
 ### 手動管理しているライセンスの更新
 
-このアプリでは、使用しているライブラリのライセンス一覧を出力するスクリプトを用意しています。詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/README.md)を参照してください。
+このアプリでは、使用しているライブラリのライセンス一覧を出力するスクリプトを用意しています。詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.03/example-app/SantokuApp/.script/README.md)を参照してください。
 
 #### managed-license.jsの更新
 
-ライセンス情報が不足しており補完したい、あるいは、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/managed-license.js)で管理しています。
+ライセンス情報が不足しており補完したい、あるいは、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.03/example-app/SantokuApp/.script/managed-license.js)で管理しています。
 
 ライセンス情報が不足しているライブラリなどは、以下のコマンドを実行することで確認できます。
 
@@ -586,4 +586,4 @@ Activity class {jp.fintan.mobile.SantokuApp.local/jp.fintan.mobile.SantokuApp.lo
 このアプリでは、アプリに表示するライセンス名を[SPDX](https://spdx.org/licenses/)に合わせています。
 
 今回のExpo SDKアップグレードでは、一部のライセンスでSPDXに定義されていないライセンス名を使用しているライブラリがありました。
-そのライセンス名（`BSD 3-Clause`）を[list-dependencies.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/master/example-app/SantokuApp/.script/list-dependencies.js)に追加しています。
+そのライセンス名（`BSD 3-Clause`）を[list-dependencies.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.03/example-app/SantokuApp/.script/list-dependencies.js)に追加しています。
