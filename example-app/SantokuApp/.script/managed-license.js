@@ -41,35 +41,47 @@ module.exports = function () {
       'metro-babel-transformer@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-babel-transformer/package.json
         licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-cache-key@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-cache-key/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
+      'metro-babel-transformer@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-babel-transformer/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
       },
-      'metro-cache@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-cache/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
+      'metro-cache-key@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-cache-key/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
       },
-      'metro-inspector-proxy@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-inspector-proxy/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
+      'metro-cache@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-cache/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
       },
-      'metro-minify-terser@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-minify-terser/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
+      'metro-inspector-proxy@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-inspector-proxy/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
       },
-      'metro-minify-uglify@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-minify-uglify/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
+      'metro-minify-terser@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-minify-terser/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
+      },
+      'metro-minify-uglify@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-minify-uglify/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
       },
       'metro-react-native-babel-transformer@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-react-native-babel-transformer/package.json
         licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
+      'metro-react-native-babel-transformer@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-react-native-babel-transformer/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
+      },
       'metro-runtime@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-runtime/package.json
         licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
+      },
+      'metro-runtime@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-runtime/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
       },
       'metro-symbolicate@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-symbolicate/package.json
         licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
       },
-      'metro-transform-plugins@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-transform-plugins/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
+      'metro-symbolicate@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-symbolicate/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
       },
-      'metro-transform-worker@0.73.9': { // https://github.com/facebook/metro/blob/v0.73.9/packages/metro-transform-worker/package.json
-        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.9/LICENSE',
+      'metro-transform-plugins@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-transform-plugins/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
+      },
+      'metro-transform-worker@0.73.10': { // https://github.com/facebook/metro/blob/v0.73.10/packages/metro-transform-worker/package.json
+        licenseUrl: 'https://github.com/facebook/metro/blob/v0.73.10/LICENSE',
       },
       'tr46@0.0.3': { // https://github.com/jsdom/tr46/tree/0.0.3
         licenseUrl: 'https://github.com/jsdom/tr46/blob/3a6f29721e7063b9ffd421e461a54beae6170001/LICENSE.md', // v0.0.3 の次の commit で追加されている
