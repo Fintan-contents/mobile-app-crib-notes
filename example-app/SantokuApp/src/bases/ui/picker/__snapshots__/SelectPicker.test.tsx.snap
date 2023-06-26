@@ -2,6 +2,23 @@
 
 exports[`SelectPicker only with required props renders successfully if invisible: SelectPicker if invisible. 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -29,7 +46,7 @@ exports[`SelectPicker only with required props renders successfully if invisible
 `;
 
 exports[`SelectPicker only with required props renders successfully if visible: SelectPicker if visible. 1`] = `
-Array [
+[
   <Modal
     animationType="fade"
     hardwareAccelerated={false}
@@ -39,6 +56,23 @@ Array [
     visible={true}
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -52,7 +86,7 @@ Array [
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "backgroundColor": "black",
           "bottom": 0,
           "display": "flex",
@@ -68,8 +102,8 @@ Array [
     <View
       pointerEvents="box-none"
       style={
-        Array [
-          Object {
+        [
+          {
             "flex": 1,
             "justifyContent": "flex-end",
           },
@@ -78,10 +112,10 @@ Array [
     >
       <View
         animatedStyle={
-          Object {
-            "value": Object {
-              "transform": Array [
-                Object {
+          {
+            "value": {
+              "transform": [
+                {
                   "translateY": 1000,
                 },
               ],
@@ -91,10 +125,10 @@ Array [
         collapsable={false}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "backgroundColor": "white",
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateY": 1000,
               },
             ],
@@ -104,7 +138,7 @@ Array [
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-end",
               "paddingHorizontal": 10,
@@ -119,14 +153,14 @@ Array [
           <View>
             <RNCPicker
               items={
-                Array [
-                  Object {
+                [
+                  {
                     "label": "test1",
                     "testID": undefined,
                     "textColor": undefined,
                     "value": "1",
                   },
-                  Object {
+                  {
                     "label": "test2",
                     "testID": undefined,
                     "textColor": undefined,
@@ -138,8 +172,8 @@ Array [
               onChange={[Function]}
               selectedIndex={0}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "height": 216,
                   },
                   undefined,
@@ -152,6 +186,23 @@ Array [
     </View>
   </Modal>,
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -180,7 +231,7 @@ Array [
 `;
 
 exports[`SelectPicker with all props should be applied all properly with custom xxx component: SelectPicker all properly with custom xxx component. 1`] = `
-Array [
+[
   <Modal
     animationType="fade"
     hardwareAccelerated={false}
@@ -191,6 +242,23 @@ Array [
     visible={true}
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -204,7 +272,7 @@ Array [
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "backgroundColor": "green",
           "borderColor": "red",
           "bottom": 0,
@@ -221,8 +289,8 @@ Array [
     <View
       pointerEvents="box-none"
       style={
-        Array [
-          Object {
+        [
+          {
             "flex": 1,
             "justifyContent": "flex-end",
           },
@@ -231,10 +299,10 @@ Array [
     >
       <View
         animatedStyle={
-          Object {
-            "value": Object {
-              "transform": Array [
-                Object {
+          {
+            "value": {
+              "transform": [
+                {
                   "translateY": 1000,
                 },
               ],
@@ -244,11 +312,11 @@ Array [
         collapsable={false}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "backgroundColor": "yellow",
             "borderColor": "black",
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateY": 1000,
               },
             ],
@@ -271,6 +339,23 @@ Array [
     </View>
   </Modal>,
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -297,7 +382,7 @@ Array [
 `;
 
 exports[`SelectPicker with all props should be applied all properly with default xxx component: SelectPicker all properly with default xxx component. 1`] = `
-Array [
+[
   <Modal
     animationType="fade"
     hardwareAccelerated={false}
@@ -308,6 +393,23 @@ Array [
     visible={true}
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -321,7 +423,7 @@ Array [
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "backgroundColor": "green",
           "borderColor": "red",
           "bottom": 0,
@@ -338,8 +440,8 @@ Array [
     <View
       pointerEvents="box-none"
       style={
-        Array [
-          Object {
+        [
+          {
             "flex": 1,
             "justifyContent": "flex-end",
           },
@@ -348,10 +450,10 @@ Array [
     >
       <View
         animatedStyle={
-          Object {
-            "value": Object {
-              "transform": Array [
-                Object {
+          {
+            "value": {
+              "transform": [
+                {
                   "translateY": 1000,
                 },
               ],
@@ -361,11 +463,11 @@ Array [
         collapsable={false}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "backgroundColor": "yellow",
             "borderColor": "black",
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateY": 1000,
               },
             ],
@@ -375,7 +477,7 @@ Array [
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": "blue",
               "flexDirection": "row",
               "justifyContent": "flex-end",
@@ -386,6 +488,23 @@ Array [
           testID="pickerAccessory"
         >
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -397,7 +516,7 @@ Array [
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "opacity": 1,
               }
             }
@@ -405,7 +524,7 @@ Array [
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#d9545e",
                   "fontWeight": "bold",
                   "paddingHorizontal": 10,
@@ -417,12 +536,29 @@ Array [
           </View>
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           />
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -434,7 +570,7 @@ Array [
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "opacity": 1,
               }
             }
@@ -442,7 +578,7 @@ Array [
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#4577CC",
                   "fontWeight": "bold",
                   "paddingHorizontal": 10,
@@ -453,6 +589,23 @@ Array [
             </Text>
           </View>
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -464,7 +617,7 @@ Array [
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "opacity": 1,
               }
             }
@@ -472,7 +625,7 @@ Array [
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#4577CC",
                   "fontWeight": "bold",
                   "paddingHorizontal": 10,
@@ -490,14 +643,14 @@ Array [
           <View>
             <RNCPicker
               items={
-                Array [
-                  Object {
+                [
+                  {
                     "label": "test1",
                     "testID": undefined,
                     "textColor": undefined,
                     "value": "1",
                   },
-                  Object {
+                  {
                     "label": "test2",
                     "testID": undefined,
                     "textColor": undefined,
@@ -509,8 +662,8 @@ Array [
               onChange={[Function]}
               selectedIndex={0}
               style={
-                Array [
-                  Object {
+                [
+                  {
                     "height": 216,
                   },
                   undefined,
@@ -524,6 +677,23 @@ Array [
     </View>
   </Modal>,
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -545,7 +715,7 @@ Array [
         editable={false}
         placeholder="please select..."
         style={
-          Object {
+          {
             "color": "red",
           }
         }

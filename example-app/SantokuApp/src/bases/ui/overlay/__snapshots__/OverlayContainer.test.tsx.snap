@@ -6,7 +6,7 @@ exports[`OverlayContainer only with required props renders successfully only wit
 <View
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "flex": 1,
       "justifyContent": "flex-end",
       "paddingBottom": 0,
@@ -18,8 +18,8 @@ exports[`OverlayContainer only with required props renders successfully only wit
 >
   <View
     animatedStyle={
-      Object {
-        "value": Object {},
+      {
+        "value": {},
       }
     }
     collapsable={false}
@@ -40,7 +40,7 @@ exports[`OverlayContainer only with required props renders successfully only wit
       }
     }
     pointerEvents="box-none"
-    style={Object {}}
+    style={{}}
     testID="containerAnimated"
   />
 </View>
@@ -50,7 +50,7 @@ exports[`OverlayContainer with all props should be applied properly: OverlayCont
 <View
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "flex": 1,
       "justifyContent": "flex-end",
       "paddingBottom": 0,
@@ -62,8 +62,8 @@ exports[`OverlayContainer with all props should be applied properly: OverlayCont
 >
   <View
     animatedStyle={
-      Object {
-        "value": Object {},
+      {
+        "value": {},
       }
     }
     collapsable={false}
@@ -85,7 +85,7 @@ exports[`OverlayContainer with all props should be applied properly: OverlayCont
     }
     pointerEvents="box-none"
     style={
-      Object {
+      {
         "backgroundColor": "green",
       }
     }

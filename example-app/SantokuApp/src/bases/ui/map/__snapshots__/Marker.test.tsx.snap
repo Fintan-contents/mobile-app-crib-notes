@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Marker only with required props renders successfully only with required props 1`] = `
+<AIRMapMarker
+  coordinate={
+    {
+      "latitude": 34.7024898,
+      "longitude": 135.494,
+    }
+  }
+  onPress={[Function]}
+  style={
+    [
+      {
+        "backgroundColor": "transparent",
+        "position": "absolute",
+      },
+      undefined,
+    ]
+  }
+  testID="Marker"
+/>
+`;
+
+exports[`Marker with committed props should be applied properly 1`] = `
+<AIRMapMarker
+  coordinate={
+    {
+      "latitude": 34.7024898,
+      "longitude": 135.494,
+    }
+  }
+  draggable={true}
+  image={1}
+  onPress={[Function]}
+  stopPropagation={true}
+  style={
+    [
+      {
+        "backgroundColor": "transparent",
+        "position": "absolute",
+      },
+      undefined,
+    ]
+  }
+  testID="Marker"
+/>
+`;

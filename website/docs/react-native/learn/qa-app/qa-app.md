@@ -1,6 +1,7 @@
 ---
 title: Q&Aアプリの実装
 sidebar_label: 概要
+pagination_label: Q&Aアプリの実装
 hide_table_of_contents: true
 ---
 

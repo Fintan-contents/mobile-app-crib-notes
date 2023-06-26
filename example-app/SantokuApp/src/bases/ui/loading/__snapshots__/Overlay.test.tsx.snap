@@ -4,7 +4,7 @@ exports[`Overlay Overlayが正常にrenderできることを確認: render直後
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "rgba(0, 0, 0, 0.2)",
       "bottom": 0,
@@ -32,7 +32,7 @@ exports[`Overlay Overlayが正常にrenderできることを確認: フェード
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "rgba(0, 0, 0, 0.2)",
       "bottom": 0,

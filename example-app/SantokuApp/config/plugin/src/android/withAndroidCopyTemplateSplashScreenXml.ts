@@ -1,4 +1,4 @@
-import {AndroidConfig, ConfigPlugin, withDangerousMod} from '@expo/config-plugins';
+import {AndroidConfig, ConfigPlugin, withDangerousMod} from 'expo/config-plugins';
 import path from 'path';
 
 import {ANDROID} from '../constants';

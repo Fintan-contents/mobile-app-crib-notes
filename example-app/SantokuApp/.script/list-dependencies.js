@@ -30,6 +30,7 @@ const normalizeLicense = (() => {
     ],
     'BSD-3-Clause': [
       'bsd_3_clauses',
+      'BSD 3-Clause',
     ],
     'BSL-1.0': [
     ],

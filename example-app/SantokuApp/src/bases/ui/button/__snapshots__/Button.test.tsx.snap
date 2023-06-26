@@ -3,23 +3,23 @@
 exports[`Button Buttonが正常にrenderできることを確認 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderRadius": 3,
         "overflow": "hidden",
       },
-      Object {
+      {
         "borderRadius": 3,
       },
-      Object {
+      {
         "borderRadius": 8,
         "width": 90,
       },
-      Object {
+      {
         "backgroundColor": "#fff",
         "overflow": "visible",
         "shadowColor": "rgba(0,0,0, .4)",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 1,
         },
@@ -32,9 +32,20 @@ exports[`Button Buttonが正常にrenderできることを確認 1`] = `
   <View
     accessibilityRole="button"
     accessibilityState={
-      Object {
+      {
         "busy": false,
+        "checked": undefined,
         "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -48,14 +59,14 @@ exports[`Button Buttonが正常にrenderできることを確認 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#2089dc",
           "borderColor": "#2089dc",
@@ -71,7 +82,7 @@ exports[`Button Buttonが正常にrenderできることを確認 1`] = `
     >
       <Text
         style={
-          Object {
+          {
             "color": "white",
             "fontSize": 18,
             "paddingVertical": 1,
@@ -89,23 +100,23 @@ exports[`Button Buttonが正常にrenderできることを確認 1`] = `
 exports[`Button Buttonのprops（buttonStyle / containerStyle）が指定通りrenderに反映されることを確認 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderRadius": 3,
         "overflow": "hidden",
       },
-      Object {
+      {
         "borderRadius": 3,
       },
-      Object {
+      {
         "borderRadius": 8,
         "width": 200,
       },
-      Object {
+      {
         "backgroundColor": "#fff",
         "overflow": "visible",
         "shadowColor": "rgba(0,0,0, .4)",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 1,
         },
@@ -118,9 +129,20 @@ exports[`Button Buttonのprops（buttonStyle / containerStyle）が指定通りr
   <View
     accessibilityRole="button"
     accessibilityState={
-      Object {
+      {
         "busy": false,
+        "checked": undefined,
         "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -134,14 +156,14 @@ exports[`Button Buttonのprops（buttonStyle / containerStyle）が指定通りr
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "red",
           "borderColor": "#2089dc",
@@ -157,7 +179,7 @@ exports[`Button Buttonのprops（buttonStyle / containerStyle）が指定通りr
     >
       <Text
         style={
-          Object {
+          {
             "color": "white",
             "fontSize": 18,
             "paddingVertical": 1,
@@ -175,23 +197,23 @@ exports[`Button Buttonのprops（buttonStyle / containerStyle）が指定通りr
 exports[`Button Buttonのサイズ指定がrenderに反映されることを確認: size full 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderRadius": 3,
         "overflow": "hidden",
       },
-      Object {
+      {
         "borderRadius": 3,
       },
-      Object {
+      {
         "borderRadius": 8,
         "width": "100%",
       },
-      Object {
+      {
         "backgroundColor": "#fff",
         "overflow": "visible",
         "shadowColor": "rgba(0,0,0, .4)",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 1,
         },
@@ -204,9 +226,20 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
   <View
     accessibilityRole="button"
     accessibilityState={
-      Object {
+      {
         "busy": false,
+        "checked": undefined,
         "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -220,14 +253,14 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#2089dc",
           "borderColor": "#2089dc",
@@ -243,7 +276,7 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
     >
       <Text
         style={
-          Object {
+          {
             "color": "white",
             "fontSize": 18,
             "paddingVertical": 1,
@@ -261,23 +294,23 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
 exports[`Button Buttonのサイズ指定がrenderに反映されることを確認: size large 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderRadius": 3,
         "overflow": "hidden",
       },
-      Object {
+      {
         "borderRadius": 3,
       },
-      Object {
+      {
         "borderRadius": 8,
         "width": 260,
       },
-      Object {
+      {
         "backgroundColor": "#fff",
         "overflow": "visible",
         "shadowColor": "rgba(0,0,0, .4)",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 1,
         },
@@ -290,9 +323,20 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
   <View
     accessibilityRole="button"
     accessibilityState={
-      Object {
+      {
         "busy": false,
+        "checked": undefined,
         "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -306,14 +350,14 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#2089dc",
           "borderColor": "#2089dc",
@@ -329,7 +373,7 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
     >
       <Text
         style={
-          Object {
+          {
             "color": "white",
             "fontSize": 18,
             "paddingVertical": 1,
@@ -347,23 +391,23 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
 exports[`Button Buttonのサイズ指定がrenderに反映されることを確認: size middle 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderRadius": 3,
         "overflow": "hidden",
       },
-      Object {
+      {
         "borderRadius": 3,
       },
-      Object {
+      {
         "borderRadius": 8,
         "width": 160,
       },
-      Object {
+      {
         "backgroundColor": "#fff",
         "overflow": "visible",
         "shadowColor": "rgba(0,0,0, .4)",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 1,
         },
@@ -376,9 +420,20 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
   <View
     accessibilityRole="button"
     accessibilityState={
-      Object {
+      {
         "busy": false,
+        "checked": undefined,
         "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -392,14 +447,14 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#2089dc",
           "borderColor": "#2089dc",
@@ -415,7 +470,7 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
     >
       <Text
         style={
-          Object {
+          {
             "color": "white",
             "fontSize": 18,
             "paddingVertical": 1,
@@ -433,23 +488,23 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
 exports[`Button Buttonのサイズ指定がrenderに反映されることを確認: size small 1`] = `
 <View
   style={
-    Array [
-      Object {
+    [
+      {
         "borderRadius": 3,
         "overflow": "hidden",
       },
-      Object {
+      {
         "borderRadius": 3,
       },
-      Object {
+      {
         "borderRadius": 8,
         "width": 90,
       },
-      Object {
+      {
         "backgroundColor": "#fff",
         "overflow": "visible",
         "shadowColor": "rgba(0,0,0, .4)",
-        "shadowOffset": Object {
+        "shadowOffset": {
           "height": 1,
           "width": 1,
         },
@@ -462,9 +517,20 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
   <View
     accessibilityRole="button"
     accessibilityState={
-      Object {
+      {
         "busy": false,
+        "checked": undefined,
         "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
       }
     }
     accessible={true}
@@ -478,14 +544,14 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "opacity": 1,
       }
     }
   >
     <View
       style={
-        Object {
+        {
           "alignItems": "center",
           "backgroundColor": "#2089dc",
           "borderColor": "#2089dc",
@@ -501,7 +567,7 @@ exports[`Button Buttonのサイズ指定がrenderに反映されることを確�
     >
       <Text
         style={
-          Object {
+          {
             "color": "white",
             "fontSize": 18,
             "paddingVertical": 1,

@@ -56,8 +56,11 @@ export type DemoStackParamList = {
   HttpApi: undefined;
   Navigation: undefined;
   Picker: undefined;
-  PushNotification: undefined;
+  PushNotificationSender: undefined;
+  PushNotificationStatus: undefined;
   Cache: undefined;
+  QRCode: undefined;
+  Barcode: undefined;
   ListTodoDemo: undefined;
   CreateTodoDemo: undefined;
   EditTodoDemo: {
@@ -72,6 +75,7 @@ export type DemoStackParamList = {
   GetAccountsMeDemo: undefined;
   SearchFormTodoDemo: undefined;
   SearchBarTodoDemo: undefined;
+  Map: undefined;
 };
 
 export type AppNavigatorOptions = {

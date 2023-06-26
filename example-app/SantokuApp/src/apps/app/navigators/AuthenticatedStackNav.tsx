@@ -65,6 +65,19 @@ const Component: React.FC<Props> = ({initialData}) => {
       <nav.Screen
         name="QuestionAndEventStackNav"
         component={QuestionAndEventPostStackNav}
+        /*
+         presentationに「modal」「transparentModal」「containedModal」「containedTransparentModal」「formSheet」を指定した場合は、
+         端末の向きを変更（横画面⇔縦画面）しても画面の向きが変わらない場合があります。
+         【発生環境】
+           OS: iOS13〜15
+           ※ iOS16では端末の向き変更に画面が追従することを確認しています
+           ※ iOS13未満は動作検証していません
+         【回避方法１】
+            presentationに「card」「fullScreenModal」を指定した場合は、端末の向きを変更すると画面の向きも変わります。（ただし、画面レイアウトも変わります）
+         【回避方法２】
+           Native StackではなくStackのcardStyleInterpolatorにCardStyleInterpolator.forModalPresentationIOSを使用することで、
+           Native Stackのmodalと同様のレイアウトで端末の向き変更にも対応したナビゲーションを実現可能です。
+        */
         options={{presentation: 'modal', headerShown: false}}
       />
     </nav.Navigator>

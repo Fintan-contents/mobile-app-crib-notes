@@ -20,9 +20,9 @@ Visual Studioマーケットプレイスの[React Native Toolsページ](https:/
 
 ### 起動構成を追加する
 
-プロジェクトルート配下の`/.vscode/launch.json`に以下を追加してください。ファイルが無い場合は新規に作成してください。
+プロジェクトルート配下の`.vscode/launch.json`に以下を追加してください。ファイルが無い場合は新規に作成してください。
 
-```json title="/.vscode/launch.json"
+```json title=".vscode/launch.json"
 {
   "configurations": [
     {

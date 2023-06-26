@@ -1,4 +1,3 @@
-const fetch = require('node-fetch'); // TODO: node v18 を使うようになったら削除する [検索用キーワード: 16.18.0]
 /**
  * 外部に同時に複数リクエストして負荷がかからないように直列化する
  */
@@ -16,13 +15,13 @@ const serialFetch = (() => {
   };
 })();
 
-module.exports = new class LicenseTextCache {
+module.exports = new (class LicenseTextCache {
   constructor() {
     this._cache = {};
   }
   /**
-   * 
-   * @param {string} url 
+   *
+   * @param {string} url
    * @returns {Promise<string>} licenseText
    */
   fetch(url) {
@@ -42,4 +41,4 @@ module.exports = new class LicenseTextCache {
     }
     return this._cache[url];
   }
-};
+})();

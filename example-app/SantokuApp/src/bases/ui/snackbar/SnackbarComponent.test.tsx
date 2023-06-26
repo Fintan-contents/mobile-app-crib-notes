@@ -10,7 +10,7 @@ import {SnackbarComponent} from './SnackbarComponent';
 // For convenience, disable the relevant rule in this file.
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-jest.useFakeTimers('modern');
+jest.useFakeTimers();
 
 function getStyle<T>(instance: ReactTestInstance) {
   return instance.props.style as T;

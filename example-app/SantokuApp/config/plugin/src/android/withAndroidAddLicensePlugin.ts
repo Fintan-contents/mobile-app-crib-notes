@@ -1,4 +1,4 @@
-import {ConfigPlugin, withAppBuildGradle} from '@expo/config-plugins';
+import {ConfigPlugin, withAppBuildGradle} from 'expo/config-plugins';
 
 /**
  * libraryのライセンス一覧を取得するpluginを追加します。

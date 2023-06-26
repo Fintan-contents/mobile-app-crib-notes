@@ -34,6 +34,38 @@
 
 ## 更新履歴
 
+### 2023/06/30
+
+#### 🌱 新規コンテンツ（2023/06/30）
+
+- アプリのアップデート
+  - アプリケーション方式
+    - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/app-updates/overview)
+    - [強制アプリアップデート](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/app-updates/forced-app-updates)
+  - Decision Records
+    - [強制アプリアップデート](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-016-forced-app-updates)
+- Expoアップグレード
+  - メンテナンス
+    - [Expo SDK 47アップグレード](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/maintenance/enhance/expo-47-upgrade)
+    - [Expo SDK 48アップグレード](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/maintenance/enhance/expo-48-upgrade)
+- QRコード
+  - 外部設計
+    - [QRコード](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/demo/qrcode/overview)
+- バーコード
+  - 外部設計
+    - [バーコード](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/demo/barcode/overview)
+- 地図表示
+  - 外部設計
+    - [地図表示](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/demo/map/overview)
+  - Decision Records
+    - [地図表示ライブラリ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-017-map-view-library)
+
+#### 🌿 更新コンテンツ（2023/06/30）
+
+- プッシュ通知
+  - 外部設計
+    - [プッシュ通知](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/demo/push-notification/overview)
+
 ### 2023/03/31
 
 #### 🌱 新規コンテンツ（2023/03/31）

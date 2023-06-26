@@ -1,4 +1,4 @@
-import {ConfigPlugin, withAndroidManifest, AndroidConfig} from '@expo/config-plugins';
+import {ConfigPlugin, withAndroidManifest, AndroidConfig} from 'expo/config-plugins';
 import path from 'path';
 
 /**

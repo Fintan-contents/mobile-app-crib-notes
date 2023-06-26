@@ -4,7 +4,7 @@ exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "bottom": 20,
       "flex": 1,
       "minHeight": 48,
@@ -18,7 +18,7 @@ exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#393939",
         "borderRadius": 5,
@@ -31,7 +31,7 @@ exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "paddingLeft": 20,
           "paddingRight": 10,
@@ -41,7 +41,7 @@ exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを
     >
       <Text
         style={
-          Object {
+          {
             "color": "white",
           }
         }
@@ -59,7 +59,7 @@ exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを
 <View
   collapsable={false}
   style={
-    Object {
+    {
       "bottom": 20,
       "flex": 1,
       "minHeight": 48,
@@ -73,7 +73,7 @@ exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを
 >
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#393939",
         "borderRadius": 5,
@@ -86,7 +86,7 @@ exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを
   >
     <View
       style={
-        Object {
+        {
           "flex": 1,
           "paddingLeft": 20,
           "paddingRight": 10,
@@ -96,7 +96,7 @@ exports[`SnackbarComponent SnackbarComponentが正常にrenderできることを
     >
       <Text
         style={
-          Object {
+          {
             "color": "white",
           }
         }

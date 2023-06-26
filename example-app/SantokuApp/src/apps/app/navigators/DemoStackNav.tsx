@@ -3,6 +3,7 @@ import {AcknowledgementsScreen} from 'apps/app/screens/acknowledgements/Acknowle
 import {LicenseScreen} from 'apps/app/screens/acknowledgements/LicenseScreen';
 import {AppStateScreen} from 'apps/app/screens/demo-app-state/AppStateScreen';
 import {AuthenticationScreen} from 'apps/app/screens/demo-authentication/AuthenticationScreen';
+import {BarcodeScreen} from 'apps/app/screens/demo-barcode/BarcodeScreen';
 import {ButtonScreen} from 'apps/app/screens/demo-button/ButtonScreen';
 import {CacheScreen} from 'apps/app/screens/demo-cache/CacheScreen';
 import {ConfigScreen} from 'apps/app/screens/demo-config/ConfigScreen';
@@ -18,11 +19,14 @@ import {AppInfoScreen} from 'apps/app/screens/demo-info/AppInfoScreen';
 import {InstructionsScreen} from 'apps/app/screens/demo-instructions/InstructionsScreen';
 import {LocalAuthenticationScreen} from 'apps/app/screens/demo-local-authn/LocalAuthenticationScreen';
 import {LogScreen} from 'apps/app/screens/demo-log/LogScreen';
+import {MapScreen} from 'apps/app/screens/demo-map/MapScreen';
 import {DemoMenuScreen} from 'apps/app/screens/demo-menu/DemoMenuScreen';
 import {MessageScreen} from 'apps/app/screens/demo-message/MessageScreen';
 import {NavigationScreen} from 'apps/app/screens/demo-navigation/NavigationScreen';
 import {PickerScreen} from 'apps/app/screens/demo-picker/PickerScreen';
-import {PushNotificationScreen} from 'apps/app/screens/demo-push-notification/PushNotificationScreen';
+import {PushNotificationSenderScreen} from 'apps/app/screens/demo-push-notification/PushNotificationSenderScreen';
+import {PushNotificationStatusScreen} from 'apps/app/screens/demo-push-notification/PushNotificationStatusScreen';
+import {QRCodeScreen} from 'apps/app/screens/demo-qrcode/QRCodeScreen';
 import {CreateTodoDemoScreen} from 'apps/app/screens/demo-react-query/CreateTodoDemoScreen';
 import {DependentQueryDemo1Screen} from 'apps/app/screens/demo-react-query/DependentQueryDemo1Screen';
 import {DependentQueryDemo2Screen} from 'apps/app/screens/demo-react-query/DependentQueryDemo2Screen';
@@ -116,7 +120,8 @@ export const DemoStackNav: React.FC = () => {
       <nav.Screen name="Authentication" component={AuthenticationScreen} />
       <nav.Screen name="HttpApi" component={HttpApiScreen} />
       <nav.Screen name="Navigation" component={NavigationScreen} />
-      <nav.Screen name="PushNotification" component={PushNotificationScreen} />
+      <nav.Screen name="PushNotificationSender" component={PushNotificationSenderScreen} />
+      <nav.Screen name="PushNotificationStatus" component={PushNotificationStatusScreen} />
       <nav.Screen name="Cache" component={CacheScreen} />
       <nav.Screen name="ListTodoDemo" component={ListTodoDemoScreen} />
       <nav.Screen name="CreateTodoDemo" component={CreateTodoDemoScreen} />
@@ -131,6 +136,9 @@ export const DemoStackNav: React.FC = () => {
       <nav.Screen name="SearchFormTodoDemo" component={SearchFormTodoDemoScreen} />
       <nav.Screen name="SearchBarTodoDemo" component={SearchBarTodoDemoScreen} />
       <nav.Screen name="Picker" component={PickerScreen} />
+      <nav.Screen name="QRCode" component={QRCodeScreen} />
+      <nav.Screen name="Barcode" component={BarcodeScreen} />
+      <nav.Screen name="Map" component={MapScreen} />
       <nav.Screen
         name="Acknowledgements"
         component={AcknowledgementsScreen}

@@ -10,7 +10,7 @@ ToDoアプリからREST APIを呼び出して、サーバから取得したデ�
 
 共通的な設定をしている`config`と自動生成された`TodosApi`を`backend`からimportします。
 
-```typescript title="/src/services/TodoService.ts"
+```typescript title="src/services/TodoService.ts"
 import {TodosApi, config} from 'backend';
 ```
 
@@ -39,7 +39,7 @@ const putTodo = async (id: number, completed: boolean) => {
 
 `TodoService`を次のソースコードで上書きしてください。
 
-```typescript title="/src/services/TodoService.ts"
+```typescript title="src/services/TodoService.ts"
 import {TodosApi, config} from 'backend';
 
 const todosApi = new TodosApi(config);

@@ -1,4 +1,4 @@
-import * as Random from 'expo-random';
+import * as Crypto from 'expo-crypto';
 
 function toNumberAlphabet(n: number): string {
   return (n % 32).toString(32);
@@ -10,6 +10,6 @@ function toNumberAlphabet(n: number): string {
  * @returns 半角数字と半角英子文字で構成されたランダム値
  */
 export async function randomAsync(byteCount: number): Promise<string> {
-  const randomBytes = await Random.getRandomBytesAsync(byteCount);
+  const randomBytes = await Crypto.getRandomBytesAsync(byteCount);
   return randomBytes.reduce((a, c) => a + toNumberAlphabet(c), '');
 }

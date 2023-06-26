@@ -1,4 +1,4 @@
-import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
+import {ConfigPlugin, withPlugins} from 'expo/config-plugins';
 
 import {withAndroidAddAppActivityAndroidManifest} from './withAndroidAddAppActivityAndroidManifest';
 import {withAndroidCopyMainActivity} from './withAndroidCopyMainActivity';

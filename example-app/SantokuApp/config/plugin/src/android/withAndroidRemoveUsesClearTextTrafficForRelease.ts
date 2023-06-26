@@ -1,4 +1,4 @@
-import {ConfigPlugin, withAndroidManifest} from '@expo/config-plugins';
+import {ConfigPlugin, withAndroidManifest} from 'expo/config-plugins';
 
 /**
  * 「android:usesCleartextTraffic」の設定を削除します。

@@ -143,7 +143,7 @@ html[data-theme="dark"] .header-github-link::before {
   padding-left: 0.5rem;
 }
 
-.tabs-container .margin-vert--md {
+.tabs-container .margin-top--md {
   border: solid 1px var(--ifm-color-gray-200);
   border-radius: 0.5rem;
   margin-top: 0 !important;

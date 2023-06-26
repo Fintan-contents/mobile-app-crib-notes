@@ -13,7 +13,7 @@
 
 # Add any project specific keep options here:
 
-# @generated begin expo-build-properties - expo prebuild (DO NOT MODIFY) sync-274c5ca5fc2c37357ff7bb1be95d6f50aa9c8dc3
+# @generated begin expo-build-properties - expo prebuild (DO NOT MODIFY)
 
 # Firebase ConsoleでCrashlyticsのエラータイトルが表示されない問題に対応
 # https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?hl=ja&platform=android

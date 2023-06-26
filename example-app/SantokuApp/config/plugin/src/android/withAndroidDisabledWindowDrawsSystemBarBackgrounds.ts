@@ -1,4 +1,4 @@
-import {ConfigPlugin, withAndroidStyles} from '@expo/config-plugins';
+import {ConfigPlugin, withAndroidStyles} from 'expo/config-plugins';
 
 /**
  * Avoid image shifting occurs when the splash screen changes from theme background to ImageView shown by expo-splash-screen

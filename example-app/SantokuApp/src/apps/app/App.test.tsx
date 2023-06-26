@@ -28,6 +28,8 @@ beforeEach(() => {
   // テストは成功するものの、エラーログが出力されてしまう。
   // タイマーを使わないようにして、アニメーションを動かさないことで回避しているつもり。
   jest.useFakeTimers();
+  // テスト時は2023/6/1で日付を固定する
+  jest.setSystemTime(new Date(2023, 5, 1, 0, 0, 0, 0));
 });
 
 jest.mock('expo-application', () => {

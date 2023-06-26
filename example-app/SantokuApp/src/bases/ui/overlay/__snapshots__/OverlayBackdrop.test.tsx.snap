@@ -3,7 +3,7 @@
 exports[`OverlayBackdrop only with required props renders successfully only with required props: AnimatedView with invisible. 1`] = `
 <View
   style={
-    Object {
+    {
       "bottom": 0,
       "height": 400,
       "position": "absolute",
@@ -16,7 +16,7 @@ exports[`OverlayBackdrop only with required props renders successfully only with
 exports[`OverlayBackdrop only with required props renders successfully only with required props: AnimatedView with visible. 1`] = `
 <View
   style={
-    Object {
+    {
       "bottom": 0,
       "height": 400,
       "position": "absolute",
@@ -25,6 +25,23 @@ exports[`OverlayBackdrop only with required props renders successfully only with
   }
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -38,7 +55,7 @@ exports[`OverlayBackdrop only with required props renders successfully only with
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "bottom": 0,
         "left": 0,
         "position": "absolute",
@@ -49,8 +66,8 @@ exports[`OverlayBackdrop only with required props renders successfully only with
   >
     <View
       animatedStyle={
-        Object {
-          "value": Object {},
+        {
+          "value": {},
         }
       }
       collapsable={false}
@@ -71,7 +88,7 @@ exports[`OverlayBackdrop only with required props renders successfully only with
         }
       }
       style={
-        Object {
+        {
           "backgroundColor": "rgba(0,0,0,0.4)",
           "flex": 1,
         }
@@ -86,7 +103,7 @@ exports[`OverlayBackdrop with all props should be applied properly: OverlayBackd
 <View
   pointerEvents="box-none"
   style={
-    Object {
+    {
       "bottom": 10,
       "height": 400,
       "position": "absolute",
@@ -97,6 +114,23 @@ exports[`OverlayBackdrop with all props should be applied properly: OverlayBackd
   testID="modal"
 >
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -110,7 +144,7 @@ exports[`OverlayBackdrop with all props should be applied properly: OverlayBackd
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "bottom": 0,
         "display": "none",
         "left": 0,
@@ -123,8 +157,8 @@ exports[`OverlayBackdrop with all props should be applied properly: OverlayBackd
   >
     <View
       animatedStyle={
-        Object {
-          "value": Object {},
+        {
+          "value": {},
         }
       }
       collapsable={false}
@@ -145,7 +179,7 @@ exports[`OverlayBackdrop with all props should be applied properly: OverlayBackd
         }
       }
       style={
-        Object {
+        {
           "backgroundColor": "green",
           "borderColor": "red",
           "flex": 1,

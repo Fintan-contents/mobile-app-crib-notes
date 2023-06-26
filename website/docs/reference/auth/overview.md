@@ -1,6 +1,7 @@
 ---
 title: 認証
 sidebar_label: 概要
+pagination_label: 認証
 ---
 
 ## 認証とは

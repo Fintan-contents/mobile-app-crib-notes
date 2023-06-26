@@ -15,10 +15,10 @@ ToDo登録画面を追加します。まずは画面遷移を確認できるよ�
 
 次のファイルを追加・修正してください。
 
-- `/src/screens/todo/TodoForm.tsx`
-- `/src/screens/todo/index.ts`
+- `src/screens/todo/TodoForm.tsx`
+- `src/screens/todo/index.ts`
 
-```typescript jsx title="/src/screens/todo/TodoForm.tsx"
+```typescript jsx title="src/screens/todo/TodoForm.tsx"
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-```diff title="/src/screens/todo/index.ts"
+```diff title="src/screens/todo/index.ts"
   export * from './TodoBoard';
 + export * from './TodoForm';
 ```
@@ -67,9 +67,9 @@ ToDo一覧からToDo登録画面に遷移できるようにナビゲーション
 `AuthedStackNav`ナビゲータに`TodoForm`という名前でToDo登録画面を追加します。
 次のファイルを修正してください。
 
-- `/src/navigation/AuthedStackNav.tsx`
+- `src/navigation/AuthedStackNav.tsx`
 
-```diff title="/src/navigation/AuthedStackNav.tsx"
+```diff title="src/navigation/AuthedStackNav.tsx"
   import {createStackNavigator} from '@react-navigation/stack';
   import {MainTabNav} from 'navigation/MainTabNav';
   import React from 'react';
@@ -93,9 +93,9 @@ ToDo一覧からToDo登録画面に遷移できるようにナビゲーション
   };
 ```
 
-次に、ToDo一覧画面からの画面遷移を追加します。`/src/screens/todo/TodoBoard.tsx`を修正してください。
+次に、ToDo一覧画面からの画面遷移を追加します。`src/screens/todo/TodoBoard.tsx`を修正してください。
 
-```diff title="/src/screens/todo/TodoBoard.tsx"
+```diff title="src/screens/todo/TodoBoard.tsx"
 + import {useNavigation} from '@react-navigation/native';
   import React from 'react';
   import {StyleSheet, View} from 'react-native';
@@ -129,7 +129,7 @@ ToDo一覧からToDo登録画面に遷移できるようにナビゲーション
 
 まずは、`AuthedStackNav`ナビゲータの`screenOptions.presentation`属性を`modal`に変更します。
 
-```diff title="/src/navigation/AuthedStackNav.tsx"
+```diff title="src/navigation/AuthedStackNav.tsx"
   import {createStackNavigator} from '@react-navigation/stack';
   import {MainTabNav} from 'navigation/MainTabNav';
   import React from 'react';
@@ -155,7 +155,7 @@ ToDo一覧からToDo登録画面に遷移できるようにナビゲーション
 
 次に、ヘッダの右にクローズボタンを追加します。
 
-```diff title="/src/navigation/AuthedStackNav.tsx"
+```diff title="src/navigation/AuthedStackNav.tsx"
 + import {Ionicons} from '@expo/vector-icons';
 + import {useNavigation} from '@react-navigation/native';
   import {createStackNavigator} from '@react-navigation/stack';
@@ -200,7 +200,7 @@ ToDo一覧からToDo登録画面に遷移できるようにナビゲーション
 
 最後に、ヘッダの背景を透明にします。
 
-```diff title="/src/navigation/AuthedStackNav.tsx"
+```diff title="src/navigation/AuthedStackNav.tsx"
   /* ～省略～ */  
   
   export const AuthedStackNav: React.FC = () => {

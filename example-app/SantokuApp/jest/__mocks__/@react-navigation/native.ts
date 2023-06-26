@@ -19,15 +19,6 @@ const mock: jest.Mocked<NavigationProp<ParamListBase>> = {
 
 Object.defineProperty(__mocks, 'navigation', {value: mock});
 
-// テストケースごとにモックは初期化しておく。
-beforeEach(() =>
-  Object.values(mock).forEach(fn => {
-    if (jest.isMockFunction(fn)) {
-      fn.mockClear();
-    }
-  }),
-);
-
 // @react-navigation/nativeのすべてのNamed Exportを列挙するのは大変なので、
 // ES6のexport/import形式ではなく、module.exportsを使ってexportする。
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

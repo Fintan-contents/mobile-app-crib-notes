@@ -14,13 +14,4 @@ const mock: jest.Mocked<typeof SplashScreen> = {
 
 Object.defineProperty(__mocks, 'expoSplashScreen', {value: mock});
 
-// テストケースごとにモックは初期化しておく。
-beforeEach(() =>
-  Object.values(mock).forEach(fn => {
-    if (jest.isMockFunction(fn)) {
-      fn.mockClear();
-    }
-  }),
-);
-
 export default mock;

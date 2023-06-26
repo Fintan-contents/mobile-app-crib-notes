@@ -6,6 +6,7 @@ import stgConfig from './config/app.config.stg.js';
 import {
   withAndroidAddLicensePlugin,
   withAndroidAddAppActivity,
+  withAndroidAddManifestPlaceholders,
   withAndroidEnabledStatusBarTranslucent,
   withAndroidDisabledWindowDrawsSystemBarBackgrounds,
   withAndroidMoveDevSettingsActivityToDebugAndroidManifest,
@@ -36,7 +37,7 @@ module.exports = ({config}) => {
     ...config,
     name: 'SantokuApp',
     version: '0.1.0',
-    jsEngine: 'jsc',
+    jsEngine: 'hermes',
     primaryColor: '#393939',
     locales: {
       ja: './l10n.ja.json',
@@ -56,6 +57,11 @@ module.exports = ({config}) => {
       googleServicesFile: './google-services.json',
       softwareKeyboardLayoutMode: 'resize',
       allowBackup: false,
+      config: {
+        googleMaps: {
+          apiKey: '${googleMapApiKey}',
+        },
+      },
     },
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp',
@@ -113,6 +119,16 @@ module.exports = ({config}) => {
           xxhdpi: 'assets/android/splashscreen/xxhdpi',
           xxxhdpi: 'assets/android/splashscreen/xxxhdpi',
         },
+      ],
+      [
+        withAndroidAddManifestPlaceholders,
+        [
+          {
+            placeholderKey: 'googleMapApiKey',
+            propertyKey: 'SANTOKU_APP_GOOGLE_MAP_API_KEY',
+            propertyDefaultValue: 'dummyGoogleMapApiKey',
+          },
+        ],
       ],
       // 以下のプラグインは、環境毎の設定ファイルで定義します。
       // withAndroidAppBuildGradleForRelease,
