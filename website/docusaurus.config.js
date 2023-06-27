@@ -247,10 +247,11 @@ module.exports = {
     './src/plugins/medium-zoom-docusaurus-plugin',
   ],
   scripts: [
-    {
+    // Add plausible script only when built on GitHub Actions.
+    !!process.env.GITHUB_REPOSITORY && {
       src: 'https://plausible.io/js/script.js',
       defer: true,
-      'data-domain': 'fintan-contents.github.io,all.fintan',
+      'data-domain': `${organization}.github.io,all.fintan`,
     },
-  ],
+  ].filter(Boolean),
 };

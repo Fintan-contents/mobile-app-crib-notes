@@ -4,6 +4,8 @@ trigger:
       - 'master'
   paths:
     include:
+      - '.tool-versions'
+      - '.azure-pipelines/**'
       - 'example-app/SantokuApp'
     exclude:
       - 'example-app/SantokuApp/README.md'
@@ -14,6 +16,8 @@ pr:
       - '*'
   paths:
     include:
+      - '.tool-versions'
+      - '.azure-pipelines/**'
       - 'example-app/SantokuApp'
     exclude:
       - 'example-app/SantokuApp/README.md'

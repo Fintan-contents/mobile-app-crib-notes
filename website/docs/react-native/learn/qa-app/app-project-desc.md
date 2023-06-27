@@ -34,7 +34,7 @@ Q&Aアプリの作成には、次のライブラリを使用します。他に�
 | msw |
 | @mswjs/data |
 | react-native-url-polyfill |
-| expo-random |
+| expo-crypto |
 | yup |
 | orval ※`devDependencies`に追加 |
 

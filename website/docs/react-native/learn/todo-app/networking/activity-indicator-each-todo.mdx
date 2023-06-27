@@ -17,7 +17,7 @@ ToDo一覧の最新化と同じように処理が終わるまで操作をブロ�
 ToDo一覧のインジケータ表示と同じように`State`を追加します。
 処理中のToDoを管理するために`processingTodos`という`State`を追加して、`toggleTodoCompletion`で更新します。
 
-```diff typescript title="/src/screens/todo/TodoBoard.tsx"
+```diff typescript title="src/screens/todo/TodoBoard.tsx"
 export const TodoBoard: React.FC = () => {
    const navigation = useNavigation();
    const {theme} = useContext(ThemeContext);
@@ -66,7 +66,7 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 
 まずは`TodoList.tsx`が処理中のToDoのIDのリスト（`processingTodos`）を受け取れるようにパラメータに追加します。
 
-```diff typescritp title="/src/components/parts/todo/TodoList.tsx"
+```diff typescritp title="src/components/parts/todo/TodoList.tsx"
  interface Props {
    todos: Todo[];
 +  processingTodos: number[];
@@ -88,7 +88,7 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 
 `TodoBoard.tsx`で`TodoList`に`processingTodos`を渡します。
 
-```diff typescript title="/src/screens/todo/TodoBoard.tsx"
+```diff typescript title="src/screens/todo/TodoBoard.tsx"
       <TodoList
         todos={showTodos}
         contentContainerStyle={styles.todoListContainer}
@@ -104,7 +104,7 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 
 `TodoItem.tsx`で`processing`を受け取れるように修正します。
 
-```diff typescript title="/src/components/parts/todo/TodoItem.tsx "
+```diff typescript title="src/components/parts/todo/TodoItem.tsx "
  interface Props {
    id: number;
    text: string;
@@ -119,7 +119,7 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 
 `TodoList.tsx`で判定した値を`TodoItem`に渡します。
 
-```diff typescript title="/src/components/parts/todo/TodoList.tsx"
+```diff typescript title="src/components/parts/todo/TodoList.tsx"
         <TodoItem
           key={todo.id}
           id={todo.id}
@@ -136,7 +136,7 @@ REST APIで正常に処理出来なかった場合、実際には完了状態の
 `TodoItem`に処理状態が渡せたので、処理中のUIを表示するように修正します。
 次のように修正して、ToDoが処理中の場合だけアクティビティインジケータと操作ブロック用のViewを表示しましょう。
 
-```diff typescript title="/src/components/parts/todo/TodoItem.tsx"
+```diff typescript title="src/components/parts/todo/TodoItem.tsx"
  import React, {useCallback} from 'react';
 -import {StyleSheet, View} from 'react-native';
 +import {StyleSheet, View, ActivityIndicator} from 'react-native';

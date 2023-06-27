@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapView with required props for display renders successfully with props for display 1`] = `
+<AIRMap
+  initialRegion={null}
+  onChange={[Function]}
+  onMapReady={[Function]}
+  region={null}
+  showsUserLocation={false}
+  style={
+    {
+      "height": 300,
+      "width": 300,
+    }
+  }
+  testID="MapView"
+/>
+`;
+
+exports[`MapView without props renders successfully without props 1`] = `
+<AIRMap
+  initialRegion={null}
+  onChange={[Function]}
+  onMapReady={[Function]}
+  region={null}
+  showsUserLocation={false}
+  testID="MapView"
+/>
+`;

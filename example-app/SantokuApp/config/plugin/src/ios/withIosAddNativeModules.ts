@@ -1,4 +1,4 @@
-import {ConfigPlugin, IOSConfig, withXcodeProject} from '@expo/config-plugins';
+import {ConfigPlugin, IOSConfig, withXcodeProject} from 'expo/config-plugins';
 import path from 'path';
 
 import {PbxProjectConfig} from './PbxProjectConfig';

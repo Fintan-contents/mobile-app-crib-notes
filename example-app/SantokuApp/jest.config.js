@@ -4,6 +4,7 @@ module.exports = {
   roots: ['<rootDir>/src', 'jest'],
   setupFiles: [
     '<rootDir>/jest/setup/global.js',
+    '<rootDir>/jest/setup/netinfo.js',
     '<rootDir>/jest/setup/react-native.js',
     '<rootDir>/jest/setup/react-native-gesture-handler.js',
     '<rootDir>/jest/setup/react-native-reanimated.js',
@@ -11,4 +12,13 @@ module.exports = {
     '<rootDir>/jest/setup/react-query.js',
     '<rootDir>/jest/setup/useFocusEffect.js',
   ],
+  // https://jestjs.io/ja/docs/configuration#clearmocks-boolean
+  clearMocks: true,
+  moduleNameMapper: {
+    // Barcode.tsxでESMのコードを直接importしているため、以下のエラーが発生する
+    // SyntaxError: Cannot use import statement outside a module
+    // そのため、トランスパイルされたソースコードにマッピングする
+    '^jsbarcode/src/barcodes/CODE128/CODE128$': 'jsbarcode/bin/barcodes/CODE128/CODE128.js',
+    '^jsbarcode/src/barcodes/CODE128/CODE128_AUTO$': 'jsbarcode/bin/barcodes/CODE128/CODE128_AUTO.js',
+  },
 };

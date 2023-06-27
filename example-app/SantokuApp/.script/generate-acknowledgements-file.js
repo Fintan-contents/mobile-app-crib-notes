@@ -13,7 +13,7 @@ const LICENSE_FILE_TEMP_DIR = path.resolve(__dirname, 'license-text/build');
 
 const getLicenseFileHashDigest = (id, filePath) => {
   if (!filePath) {
-    console.warn(`The license file is not found in package. id=[${id}]`)
+    console.warn(`[WARN] The license file is not found in package. id=[${id}]`)
   }
   return getFileHashDigest(id, filePath)
 }
@@ -139,7 +139,7 @@ const main = async () => {
       if (d.licenseFile) return d;
       if (d.licenseText) return saveLicenseFile(d);
       return licenseTextCache.fetch(d.licenseUrl).then(text => {
-        if (text.includes('<body')) console.warn('ライセンステキストにHTML("<body")が含まれています', d.licenseUrl, d.id)
+        if (text.includes('<body')) console.warn('[WARN] ライセンステキストにHTML("<body")が含まれています', d.licenseUrl, d.id)
         d.licenseText = text;
         return saveLicenseFile(d);
       });

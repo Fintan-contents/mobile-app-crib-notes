@@ -1,9 +1,6 @@
 package jp.fintan.mobile.santokuapp.infrastructure.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.messaging.AndroidConfig;
-import com.google.firebase.messaging.AndroidConfig.Priority;
 import com.google.firebase.messaging.AndroidNotification;
 import com.google.firebase.messaging.ApnsConfig;
 import com.google.firebase.messaging.Aps;
@@ -15,11 +12,16 @@ import com.google.firebase.messaging.MessagingErrorCode;
 import com.google.firebase.messaging.MulticastMessage;
 import com.google.firebase.messaging.Notification;
 import com.google.firebase.messaging.SendResponse;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import jp.fintan.mobile.santokuapp.domain.model.account.DeviceToken;
 import jp.fintan.mobile.santokuapp.domain.model.core.ValueObject;
 import jp.fintan.mobile.santokuapp.domain.model.notification.FailureDeviceTokens;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotification;
-import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationPriority;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotificationResult;
 import jp.fintan.mobile.santokuapp.domain.model.notification.PushNotifier;
 import jp.fintan.mobile.santokuapp.domain.model.notification.SuccessDeviceTokens;
@@ -28,31 +30,23 @@ import nablarch.core.log.Logger;
 import nablarch.core.log.LoggerManager;
 import nablarch.core.repository.di.config.externalize.annotation.SystemRepositoryComponent;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 @SystemRepositoryComponent
 public class FcmPushNotifier implements PushNotifier {
   private static final Logger LOGGER = LoggerManager.get(FcmPushNotifier.class);
-  // APNSの通知優先度:NORMAL
-  private static final String APNS_PRIORITY_NORMAL = "5";
-  // APNSの通知優先度:HIGH
-  private static final String APNS_PRIORITY_HIGH = "10";
   // 1度に送信可能なデバイス最大数
   private static final int MAX_SEND_COUNT = 500;
-  // データに設定するキー：type
-  private static final String DATA_KEY_TYPE = "type";
-  // データに設定するキー：params
-  private static final String DATA_KEY_PARAMS = "params";
   // APNsの通知優先度を設定するHTTPヘッダキー
   private static final String APNS_HEADER_KEY_APNS_PRIORITY = "apns-priority";
   // APNsの1度に送信可能なデバイス最大数を設定するHTTPヘッダキー
   private static final String APNS_HEADER_KEY_APNS_EXPIRATION = "apns-expiration";
-  private final ObjectMapper objectMapper = new ObjectMapper();
+  // APNsの折りたたみIDを設定するHTTPヘッダキー
+  private static final String APNS_HEADER_KEY_APNS_COLLAPSE_ID = "apns-collapse-id";
+  // APNsのInterruptionLevelを設定するキー
+  // Firebase Admin SDKで定義されていない項目は、カスタムデータとして設定する
+  private static final String APNS_CUSTOM_DATA_KEY_INTERRUPTION_LEVEL = "interruption-level";
+  // APNsのRelevanceScoreを設定するキー
+  // Firebase Admin SDKで定義されていない項目は、カスタムデータとして設定する
+  private static final String APNS_CUSTOM_DATA_KEY_RELEVANCE_SCORE = "relevance-score";
 
   @Override
   public PushNotificationResult notifyToDevice(
@@ -61,8 +55,6 @@ public class FcmPushNotifier implements PushNotifier {
     final List<DeviceToken> successDeviceTokens = new ArrayList<>();
     final List<DeviceToken> failureDeviceTokens = new ArrayList<>();
     final List<DeviceToken> unregisteredDeviceTokens = new ArrayList<>();
-
-    String params = translateParams(pushNotification.params());
 
     // FCMに1度のリクエストで送信できるMAX数の単位でマルチキャスト送信する
     for (int i = 0; i < deviceTokens.size(); i += MAX_SEND_COUNT) {
@@ -74,16 +66,20 @@ public class FcmPushNotifier implements PushNotifier {
 
       MulticastMessage.Builder multicastMessageBuilder = MulticastMessage.builder();
       multicastMessageBuilder.addAllTokens(fcmTokens);
-      multicastMessageBuilder.putData(DATA_KEY_TYPE, pushNotification.type().value());
-      if (params != null) {
-        multicastMessageBuilder.putData(DATA_KEY_PARAMS, params);
+      if (pushNotification.data() != null) {
+        multicastMessageBuilder.putAllData(pushNotification.data().value());
       }
       multicastMessageBuilder.setNotification(createNotification(pushNotification));
       multicastMessageBuilder.setApnsConfig(createApnsConfig(pushNotification));
       multicastMessageBuilder.setAndroidConfig(createAndroidConfig(pushNotification));
       MulticastMessage multicastMessage = multicastMessageBuilder.build();
 
-      sendMulticast(multicastMessage, requestFcmTokens, successDeviceTokens, failureDeviceTokens, unregisteredDeviceTokens);
+      sendMulticast(
+          multicastMessage,
+          requestFcmTokens,
+          successDeviceTokens,
+          failureDeviceTokens,
+          unregisteredDeviceTokens);
     }
 
     return new PushNotificationResult(
@@ -133,17 +129,6 @@ public class FcmPushNotifier implements PushNotifier {
     }
   }
 
-  private String translateParams(Map<String, Object> params) {
-    if (params != null) {
-      try {
-        return objectMapper.writeValueAsString(params);
-      } catch (JsonProcessingException e) {
-        throw new RuntimeException("Failed to parse params of notification data.", e);
-      }
-    }
-    return null;
-  }
-
   /**
    * FCMのSDKを利用して、dry-run（実際に送信はしないでリクエストを検証）実行してデバイストークンの検証をします
    * dry-run実行後に、エラーコードが「UNREGISTERED」「INVALID_ARGUMENT」の場合は不正なデバイストークンとします
@@ -179,8 +164,12 @@ public class FcmPushNotifier implements PushNotifier {
 
   private Notification createNotification(PushNotification pushNotification) {
     Notification.Builder notificationBuilder = Notification.builder();
-    notificationBuilder.setTitle(pushNotification.title().value());
-    notificationBuilder.setBody(pushNotification.body().value());
+    if (pushNotification.title() != null) {
+      notificationBuilder.setTitle(pushNotification.title().value());
+    }
+    if (pushNotification.body() != null) {
+      notificationBuilder.setBody(pushNotification.body().value());
+    }
     return notificationBuilder.build();
   }
 
@@ -193,11 +182,33 @@ public class FcmPushNotifier implements PushNotifier {
       headers.put(APNS_HEADER_KEY_APNS_EXPIRATION, apnsExpiration);
     }
     if (pushNotification.priority() != null) {
-      headers.put(APNS_HEADER_KEY_APNS_PRIORITY, getApnsPriority(pushNotification.priority()));
+      headers.put(APNS_HEADER_KEY_APNS_PRIORITY, pushNotification.priority().value().toString());
     }
+    if (pushNotification.collapseId() != null) {
+      headers.put(APNS_HEADER_KEY_APNS_COLLAPSE_ID, pushNotification.collapseId().value());
+    }
+
+    Map<String, Object> customData = new HashMap<>();
+    if (pushNotification.interruptionLevel() != null) {
+      customData.put(
+          APNS_CUSTOM_DATA_KEY_INTERRUPTION_LEVEL, pushNotification.interruptionLevel().value());
+    }
+    if (pushNotification.relevanceScore() != null) {
+      customData.put(
+          APNS_CUSTOM_DATA_KEY_RELEVANCE_SCORE, pushNotification.relevanceScore().value());
+    }
+
     ApnsConfig.Builder apnsConfigBuilder = ApnsConfig.builder();
     apnsConfigBuilder.putAllHeaders(headers);
-    Aps aps = Aps.builder().build();
+    Aps.Builder apsBuilder = Aps.builder();
+    if (pushNotification.badge() != null) {
+      apsBuilder.setBadge(pushNotification.badge().value());
+    }
+    if (pushNotification.contentAvailable() != null) {
+      apsBuilder.setContentAvailable(pushNotification.contentAvailable().value());
+    }
+    apsBuilder.putAllCustomData(customData);
+    Aps aps = apsBuilder.build();
     apnsConfigBuilder.setAps(aps);
     return apnsConfigBuilder.build();
   }
@@ -205,31 +216,21 @@ public class FcmPushNotifier implements PushNotifier {
   private AndroidConfig createAndroidConfig(PushNotification pushNotification) {
 
     AndroidConfig.Builder androidConfigBuilder = AndroidConfig.builder();
+    if (pushNotification.collapseKey() != null) {
+      androidConfigBuilder.setCollapseKey(pushNotification.collapseKey().value());
+    }
     if (pushNotification.ttl() != null) {
       androidConfigBuilder.setTtl(pushNotification.ttl().value());
     }
-    if (pushNotification.priority() != null) {
-      androidConfigBuilder.setPriority(getAndroidPriority(pushNotification.priority()));
+
+    AndroidNotification.Builder androidNotificationBuilder = AndroidNotification.builder();
+    if (pushNotification.notificationCount() != null) {
+      androidNotificationBuilder.setNotificationCount(pushNotification.notificationCount().value());
     }
     if (pushNotification.channelId() != null) {
-      AndroidNotification.Builder androidNotificationBuilder = AndroidNotification.builder();
       androidNotificationBuilder.setChannelId(pushNotification.channelId().value());
-      androidConfigBuilder.setNotification(androidNotificationBuilder.build());
     }
+    androidConfigBuilder.setNotification(androidNotificationBuilder.build());
     return androidConfigBuilder.build();
-  }
-
-  private String getApnsPriority(PushNotificationPriority priority) {
-    if (priority == PushNotificationPriority.NORMAL) {
-      return APNS_PRIORITY_NORMAL;
-    }
-    return APNS_PRIORITY_HIGH;
-  }
-
-  private Priority getAndroidPriority(PushNotificationPriority priority) {
-    if (priority == PushNotificationPriority.NORMAL) {
-      return Priority.NORMAL;
-    }
-    return Priority.HIGH;
   }
 }

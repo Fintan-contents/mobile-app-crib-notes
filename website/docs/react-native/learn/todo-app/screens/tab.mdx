@@ -13,12 +13,12 @@ title: Tabナビゲーション
 
 次のファイルを追加・修正してください。
 
-- `/src/screens/settings/UserSetting.tsx`
-- `/src/screens/settings/index.ts`
-- `/src/screens/todo/TodoBoard.tsx`
-- `/src/screens/index.ts`
+- `src/screens/settings/UserSetting.tsx`
+- `src/screens/settings/index.ts`
+- `src/screens/todo/TodoBoard.tsx`
+- `src/screens/index.ts`
 
-```typescript jsx title="/src/screens/settings/UserSetting.tsx"
+```typescript jsx title="src/screens/settings/UserSetting.tsx"
 import {useUserContext} from 'contexts/UserContext';
 import React, {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -45,13 +45,13 @@ const styles = StyleSheet.create({
 });
 ```
 
-```typescript jsx title="/src/screens/settings/index.ts"
+```typescript jsx title="src/screens/settings/index.ts"
 export * from './UserSetting';
 ```
 
 `TodoBoard`はひな形に戻すため下記のコードで上書きしてください。
 
-```typescript jsx  title="/src/screens/todo/TodoBoard.tsx"
+```typescript jsx  title="src/screens/todo/TodoBoard.tsx"
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-```diff title="/src/screens/index.ts"
+```diff title="src/screens/index.ts"
   export * from './auth';
   export * from './home';
   export * from './instructions';
@@ -100,11 +100,11 @@ Tabナビゲータに画面（`TodoBoard`や`UserSetting`）を直接設定し�
 まず、ToDo一覧画面と設定画面をそれぞれ配置するStackナビゲータ（`TodoStackNav`と`SettingsStackNav`）を追加します。
 次のファイルを追加・修正してください。
 
-- `/src/navigation/TodoStackNav.tsx`
-- `/src/navigation/SettingsStackNav.tsx`
-- `/src/navigation/index.ts`
+- `src/navigation/TodoStackNav.tsx`
+- `src/navigation/SettingsStackNav.tsx`
+- `src/navigation/index.ts`
 
-```typescript jsx title="/src/navigation/TodoStackNav.tsx"
+```typescript jsx title="src/navigation/TodoStackNav.tsx"
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {TodoBoard} from 'screens';
@@ -123,7 +123,7 @@ export const TodoStackNav: React.FC = () => (
 );
 ```
 
-```typescript jsx title="/src/navigation/SettingsStackNav.tsx"
+```typescript jsx title="src/navigation/SettingsStackNav.tsx"
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {UserSetting} from 'screens';
@@ -136,7 +136,7 @@ export const SettingsStackNav: React.FC = () => (
 );
 ```
 
-``` diff jsx title="/src/navigation/index.ts"
+``` diff jsx title="src/navigation/index.ts"
   export * from './RootStackNav';
   export * from './UnauthedStackNav';
   export * from './AuthedStackNav';
@@ -150,10 +150,10 @@ export const SettingsStackNav: React.FC = () => (
 
 次のファイルを追加・修正してください。
 
-- `/src/navigation/MainTabNav.tsx`
-- `/src/navigation/index.ts`
+- `src/navigation/MainTabNav.tsx`
+- `src/navigation/index.ts`
 
-```typescript jsx title="/src/navigation/MainTabNav.tsx"
+```typescript jsx title="src/navigation/MainTabNav.tsx"
 import {Ionicons} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
@@ -187,7 +187,7 @@ export const MainTabNav: React.FC = () => {
 };
 ```
 
-``` diff jsx title="/src/navigation/index.ts"
+``` diff jsx title="src/navigation/index.ts"
   export * from './RootStackNav';
   export * from './UnauthedStackNav';
   export * from './AuthedStackNav';
@@ -204,9 +204,9 @@ BottomTabNavigatorに指定できるオプションの種類については[公�
 
 次のファイルを修正してください。
 
-- `/src/navigation/AuthedStackNav.tsx`
+- `src/navigation/AuthedStackNav.tsx`
 
-``` diff jsx title="/src/navigation/AuthedStackNav.tsx"
+``` diff jsx title="src/navigation/AuthedStackNav.tsx"
   import {createStackNavigator} from '@react-navigation/stack';
 + import {MainTabNav} from 'navigation/MainTabNav';
   import React from 'react';

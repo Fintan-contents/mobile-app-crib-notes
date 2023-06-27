@@ -1,4 +1,4 @@
-import {IOSConfig, ConfigPlugin, withDangerousMod} from '@expo/config-plugins';
+import {IOSConfig, ConfigPlugin, withDangerousMod} from 'expo/config-plugins';
 import path from 'path';
 
 import {IOS} from '../constants';

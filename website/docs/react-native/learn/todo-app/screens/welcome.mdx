@@ -13,9 +13,9 @@ import TabItem from '@theme/TabItem';
 
 `App.tsx` ファイルを編集している場合は、[プロジェクト作成時のApp.tsx](https://github.com/ws-4020/rn-spoiler/blob/{@inject:rnSpoilerTag}/template/src/App.tsx)の内容に上書きしてからToDoアプリの実装をはじめてください。
 
-`/src/screens/home/Home.tsx`を`/src/screens/home/Welcome.tsx`にリネームし、次のコードに置き換えてください。
+`src/screens/home/Home.tsx`を`src/screens/home/Welcome.tsx`にリネームし、次のコードに置き換えてください。
 
-```typescript jsx title="/src/screens/home/Welcome.tsx"
+```typescript jsx title="src/screens/home/Welcome.tsx"
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-`/src/screens/home/index.ts`を次の通り修正してください。
+`src/screens/home/index.ts`を次の通り修正してください。
 
 :::note
 次のマークで追加・削除箇所を示します。
@@ -52,14 +52,14 @@ const styles = StyleSheet.create({
 - `-`: 削除
 :::
 
-```diff title="/src/screens/home/index.ts"
+```diff title="src/screens/home/index.ts"
 - export * from './Home';
 + export * from './Welcome';
 ```
 
-最後に`/src/navigation/RootStackNav.tsx`を修正してください。
+最後に`src/navigation/RootStackNav.tsx`を修正してください。
 
-```diff title="/src/navigation/RootStackNav.tsx"
+```diff title="src/navigation/RootStackNav.tsx"
   import {createStackNavigator} from '@react-navigation/stack';
   import React from 'react';
 - import {Home, Instructions} from 'screens';

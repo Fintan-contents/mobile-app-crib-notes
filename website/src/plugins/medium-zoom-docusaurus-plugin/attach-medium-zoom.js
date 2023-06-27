@@ -5,20 +5,16 @@ export default (function () {
     return null;
   }
 
+  let zoomObject;
   const selector = '.markdown img';
 
-  setTimeout(() => {
-    mediumZoom(selector);
-  }, 100);
-
   return {
-    onRouteUpdate({location}) {
-      if (location && location.hash && location.hash.length) {
-        return;
-      }
-
+    onRouteUpdate() {
       setTimeout(() => {
-        mediumZoom(selector);
+        if (zoomObject) {
+          zoomObject.detach();
+        }
+        zoomObject = mediumZoom(selector);
       }, 100);
     },
   };

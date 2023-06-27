@@ -21,7 +21,7 @@ on:
 
 jobs:
   lint:
-    name: Lints
+    name: (${{ github.workflow }}) Lints
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
     runs-on: macos-12
     env:
@@ -36,7 +36,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.18.0'
+          node-version: '18.15.0'
 
       # Cache '.npm' to speed up clean-install when package-lock.json is updated.
       # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.
@@ -94,10 +94,10 @@ jobs:
       - name: Lint (stylelint)
         if: always()
         run: |
-          cd website && npm run -s lint:css | reviewdog -tee -fail-on-error -reporter=github-check -filter-mode=nofilter -f=stylelint -name="stylelint (GitHub Pages)"
+          cd website && npm run -s lint:css -- --no-color | reviewdog -tee -fail-on-error -reporter=github-check -filter-mode=nofilter -f=stylelint -name="stylelint (GitHub Pages)"
 
   build:
-    name: Build
+    name: (${{ github.workflow }}) Build
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout

@@ -1,4 +1,4 @@
-import {ExportedConfigWithProps, XcodeProject} from '@expo/config-plugins';
+import {ExportedConfigWithProps, XcodeProject} from 'expo/config-plugins';
 
 import {PbxProject, PbxProjectXCBuildConfigurationId} from './types/pbxproj';
 

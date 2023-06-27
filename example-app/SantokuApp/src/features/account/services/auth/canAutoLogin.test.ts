@@ -7,11 +7,6 @@ describe('canAutoLogin', () => {
   const spySecureStorageAdapterLoadActiveAccountId = jest.spyOn(loadActiveAccountId, 'loadActiveAccountId');
   const spySecureStorageAdapterLoadPassword = jest.spyOn(loadPassword, 'loadPassword');
 
-  beforeEach(() => {
-    spySecureStorageAdapterLoadActiveAccountId.mockClear();
-    spySecureStorageAdapterLoadPassword.mockClear();
-  });
-
   test('セキュアストレージからクレデンシャルを取得できる場合の検証', async () => {
     spySecureStorageAdapterLoadActiveAccountId.mockResolvedValue('123456789');
     spySecureStorageAdapterLoadPassword.mockResolvedValue('password123');

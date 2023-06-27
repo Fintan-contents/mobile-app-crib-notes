@@ -5,7 +5,7 @@ import {FlatListProps, PressableProps, TextProps, ViewProps} from 'react-native'
 import {Item} from './SelectPicker';
 import {SelectPickerItems} from './SelectPickerItems.android';
 
-jest.useFakeTimers(); // jest.useFakeTimers('legacy') for jest >= 27
+jest.useFakeTimers();
 // call animation
 jest.runAllTimers();
 

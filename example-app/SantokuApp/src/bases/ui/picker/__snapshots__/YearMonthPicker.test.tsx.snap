@@ -2,6 +2,23 @@
 
 exports[`YearMonthPicker only with required props renders successfully if invisible: YearMonthPicker if invisible. 1`] = `
 <View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -29,7 +46,7 @@ exports[`YearMonthPicker only with required props renders successfully if invisi
 `;
 
 exports[`YearMonthPicker only with required props renders successfully if visible: YearMonthPicker if visible. 1`] = `
-Array [
+[
   <Modal
     animationType="fade"
     hardwareAccelerated={false}
@@ -39,6 +56,23 @@ Array [
     visible={true}
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -52,7 +86,7 @@ Array [
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "backgroundColor": "black",
           "bottom": 0,
           "display": "flex",
@@ -68,8 +102,8 @@ Array [
     <View
       pointerEvents="box-none"
       style={
-        Array [
-          Object {
+        [
+          {
             "flex": 1,
             "justifyContent": "flex-end",
           },
@@ -78,10 +112,10 @@ Array [
     >
       <View
         animatedStyle={
-          Object {
-            "value": Object {
-              "transform": Array [
-                Object {
+          {
+            "value": {
+              "transform": [
+                {
                   "translateY": 1000,
                 },
               ],
@@ -91,10 +125,10 @@ Array [
         collapsable={false}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "backgroundColor": "white",
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateY": 1000,
               },
             ],
@@ -104,7 +138,7 @@ Array [
       >
         <View
           style={
-            Object {
+            {
               "flexDirection": "row",
               "justifyContent": "flex-end",
               "paddingHorizontal": 10,
@@ -115,7 +149,7 @@ Array [
         />
         <View
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
@@ -126,7 +160,7 @@ Array [
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
@@ -134,38 +168,38 @@ Array [
             <View>
               <RNCPicker
                 items={
-                  Array [
-                    Object {
+                  [
+                    {
                       "label": "2017",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 2017,
                     },
-                    Object {
+                    {
                       "label": "2018",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 2018,
                     },
-                    Object {
+                    {
                       "label": "2019",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 2019,
                     },
-                    Object {
+                    {
                       "label": "2020",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 2020,
                     },
-                    Object {
+                    {
                       "label": "2021",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 2021,
                     },
-                    Object {
+                    {
                       "label": "2022",
                       "testID": undefined,
                       "textColor": undefined,
@@ -177,8 +211,8 @@ Array [
                 onChange={[Function]}
                 selectedIndex={5}
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "height": 216,
                     },
                     undefined,
@@ -191,7 +225,7 @@ Array [
           <Text />
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
@@ -199,74 +233,74 @@ Array [
             <View>
               <RNCPicker
                 items={
-                  Array [
-                    Object {
+                  [
+                    {
                       "label": "1",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 1,
                     },
-                    Object {
+                    {
                       "label": "2",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 2,
                     },
-                    Object {
+                    {
                       "label": "3",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 3,
                     },
-                    Object {
+                    {
                       "label": "4",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 4,
                     },
-                    Object {
+                    {
                       "label": "5",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 5,
                     },
-                    Object {
+                    {
                       "label": "6",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 6,
                     },
-                    Object {
+                    {
                       "label": "7",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 7,
                     },
-                    Object {
+                    {
                       "label": "8",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 8,
                     },
-                    Object {
+                    {
                       "label": "9",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 9,
                     },
-                    Object {
+                    {
                       "label": "10",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 10,
                     },
-                    Object {
+                    {
                       "label": "11",
                       "testID": undefined,
                       "textColor": undefined,
                       "value": 11,
                     },
-                    Object {
+                    {
                       "label": "12",
                       "testID": undefined,
                       "textColor": undefined,
@@ -278,8 +312,8 @@ Array [
                 onChange={[Function]}
                 selectedIndex={3}
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "height": 216,
                     },
                     undefined,
@@ -295,6 +329,23 @@ Array [
     </View>
   </Modal>,
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -323,7 +374,7 @@ Array [
 `;
 
 exports[`YearMonthPicker with all props should be applied all properly: YearMonthPicker all properly. 1`] = `
-Array [
+[
   <Modal
     animationType="fade"
     hardwareAccelerated={false}
@@ -334,6 +385,23 @@ Array [
     visible={true}
   >
     <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
       accessible={true}
       collapsable={false}
       focusable={true}
@@ -347,7 +415,7 @@ Array [
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "backgroundColor": "green",
           "borderColor": "red",
           "bottom": 0,
@@ -364,8 +432,8 @@ Array [
     <View
       pointerEvents="box-none"
       style={
-        Array [
-          Object {
+        [
+          {
             "flex": 1,
             "justifyContent": "flex-end",
           },
@@ -374,10 +442,10 @@ Array [
     >
       <View
         animatedStyle={
-          Object {
-            "value": Object {
-              "transform": Array [
-                Object {
+          {
+            "value": {
+              "transform": [
+                {
                   "translateY": 1000,
                 },
               ],
@@ -387,11 +455,11 @@ Array [
         collapsable={false}
         onLayout={[Function]}
         style={
-          Object {
+          {
             "backgroundColor": "yellow",
             "borderColor": "black",
-            "transform": Array [
-              Object {
+            "transform": [
+              {
                 "translateY": 1000,
               },
             ],
@@ -401,7 +469,7 @@ Array [
       >
         <View
           style={
-            Object {
+            {
               "backgroundColor": "blue",
               "flexDirection": "row",
               "justifyContent": "flex-end",
@@ -412,6 +480,23 @@ Array [
           testID="pickerAccessory"
         >
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -423,7 +508,7 @@ Array [
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "opacity": 1,
               }
             }
@@ -431,7 +516,7 @@ Array [
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#d9545e",
                   "fontWeight": "bold",
                   "paddingHorizontal": 10,
@@ -443,12 +528,29 @@ Array [
           </View>
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
           />
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -460,7 +562,7 @@ Array [
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "opacity": 1,
               }
             }
@@ -468,7 +570,7 @@ Array [
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#4577CC",
                   "fontWeight": "bold",
                   "paddingHorizontal": 10,
@@ -479,6 +581,23 @@ Array [
             </Text>
           </View>
           <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
@@ -490,7 +609,7 @@ Array [
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Object {
+              {
                 "opacity": 1,
               }
             }
@@ -498,7 +617,7 @@ Array [
           >
             <Text
               style={
-                Object {
+                {
                   "color": "#4577CC",
                   "fontWeight": "bold",
                   "paddingHorizontal": 10,
@@ -512,7 +631,7 @@ Array [
         <View
           pointerEvents="none"
           style={
-            Object {
+            {
               "alignItems": "center",
               "flexDirection": "row",
               "justifyContent": "center",
@@ -523,7 +642,7 @@ Array [
         >
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
@@ -531,38 +650,38 @@ Array [
             <View>
               <RNCPicker
                 items={
-                  Array [
-                    Object {
+                  [
+                    {
                       "label": "2017",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 2017,
                     },
-                    Object {
+                    {
                       "label": "2018",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 2018,
                     },
-                    Object {
+                    {
                       "label": "2019",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 2019,
                     },
-                    Object {
+                    {
                       "label": "2020",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 2020,
                     },
-                    Object {
+                    {
                       "label": "2021",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 2021,
                     },
-                    Object {
+                    {
                       "label": "2022",
                       "testID": undefined,
                       "textColor": 4294967040,
@@ -574,8 +693,8 @@ Array [
                 onChange={[Function]}
                 selectedIndex={5}
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "height": 216,
                     },
                     undefined,
@@ -590,7 +709,7 @@ Array [
           </Text>
           <View
             style={
-              Object {
+              {
                 "flex": 1,
               }
             }
@@ -598,74 +717,74 @@ Array [
             <View>
               <RNCPicker
                 items={
-                  Array [
-                    Object {
+                  [
+                    {
                       "label": "1",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 1,
                     },
-                    Object {
+                    {
                       "label": "2",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 2,
                     },
-                    Object {
+                    {
                       "label": "3",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 3,
                     },
-                    Object {
+                    {
                       "label": "4",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 4,
                     },
-                    Object {
+                    {
                       "label": "5",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 5,
                     },
-                    Object {
+                    {
                       "label": "6",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 6,
                     },
-                    Object {
+                    {
                       "label": "7",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 7,
                     },
-                    Object {
+                    {
                       "label": "8",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 8,
                     },
-                    Object {
+                    {
                       "label": "9",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 9,
                     },
-                    Object {
+                    {
                       "label": "10",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 10,
                     },
-                    Object {
+                    {
                       "label": "11",
                       "testID": undefined,
                       "textColor": 4294967040,
                       "value": 11,
                     },
-                    Object {
+                    {
                       "label": "12",
                       "testID": undefined,
                       "textColor": 4294967040,
@@ -677,8 +796,8 @@ Array [
                 onChange={[Function]}
                 selectedIndex={3}
                 style={
-                  Array [
-                    Object {
+                  [
+                    {
                       "height": 216,
                     },
                     undefined,
@@ -696,6 +815,23 @@ Array [
     </View>
   </Modal>,
   <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
     accessible={true}
     collapsable={false}
     focusable={true}
@@ -717,7 +853,7 @@ Array [
         editable={false}
         placeholder="please select..."
         style={
-          Object {
+          {
             "color": "red",
           }
         }

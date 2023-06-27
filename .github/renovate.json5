@@ -21,6 +21,18 @@
   ],
   packageRules: [
     {
+      // 開発ツールはexpo upgrade時に更新するためRenovateの対象外とします
+      groupName: 'Development tools',
+      enabled: false,
+      matchPackageNames: [
+        'node',
+        'java',
+        'ruby',
+        'cocoapods',
+        'fastlane',
+      ],
+    },
+    {
       // expo upgradeで更新されるパッケージはRenovateの対象外とします
       groupName: 'Expo upgrade',
       enabled: false,
@@ -32,18 +44,15 @@
         '@react-native-masked-view/masked-view',
         '@react-native-picker/picker',
         '@types/react',
-        '@types/react-native',
         'babel-preset-expo',
         'expo',
         'expo-build-properties',
         'expo-crypto',
         'expo-keep-awake',
         'expo-local-authentication',
-        'expo-random',
         'expo-secure-store',
         'expo-splash-screen',
         'jest',
-        'jest-expo',
         'react',
         'react-dom',
         'react-native',
@@ -121,6 +130,9 @@
       groupName: 'Docusaurus',
       matchPackagePrefixes: [
         '@docusaurus'
+      ],
+      matchPackageNames: [
+        'redocusaurus',
       ],
       allowedVersions: "/^[0-9]+\\.[0-9]+\\.[0-9]+(-[\\w]+(\\.[0-9]{1,5})?)?$/"
     },

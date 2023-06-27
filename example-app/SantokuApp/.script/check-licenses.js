@@ -15,7 +15,6 @@ const licenseWhitelist = [
   'Python-2.0',// ≒ BSD
   'BSL-1.0', // [パーミッシブ・ライセンス]
   'Zlib', // [パーミッシブ・ライセンス]
-  // 'LGPL-2.0', // TODO: check
   'Android Software Development Kit License', // TODO: check
 ];
 
@@ -33,6 +32,18 @@ const includeLicenses = (target, licenseList) => {
   }
 };
 
+const compact = dependency => {
+  // `util.inspect` の `maxStringLength` で制限すると file path が壊れる場合があるので文字列の行数で制限するようにした
+  const limitLines = 3;
+  const entries = Object.entries(dependency).map(([k, v]) => {
+    if ((typeof v === 'string') && (v.split(/\n/).length > limitLines)) {
+      v = v.split(/\n/).slice(0, limitLines).join('\n') + '\n...';
+    }
+    return [k, v];
+  });
+  return Object.fromEntries(entries);
+};
+
 listDependencies().then(dependencies => {
   const errors = [];
 
@@ -44,35 +55,35 @@ listDependencies().then(dependencies => {
   if (Object.keys(nameDuplication).length) {
     const message = 'Name Duplication!!!!';
     // errors.push(message); // TODO: name 重複の対応が決まったらチェック内容を変更する
-    console.warn(message, nameDuplication);
+    console.warn('[WARN]', message, nameDuplication);
   }
 
   const suspiciousLicenseFileList = dependencies.filter(d => String(d.licenseFile).match(/README/i));
   if (suspiciousLicenseFileList.length) {
     const message = 'licenseFile is README!!!!';
     // errors.push(message); // TODO: managed-license.js で管理するようにしたらコメントアウトを外す 
-    console.warn(message, Object.fromEntries(suspiciousLicenseFileList.map(({id, licenseFile}) => ([id, licenseFile]))));
+    console.warn('[WARN]', message, Object.fromEntries(suspiciousLicenseFileList.map(({id, licenseFile}) => ([id, licenseFile]))));
   }
 
   const licenseNameNotFoundList = dependencies.filter(d => !d.licenseName);
   if (licenseNameNotFoundList.length) {
     const message = 'License Name NotFound!!!!';
     errors.push(message);
-    console.warn(message, licenseNameNotFoundList);
+    console.warn('[WARN]', message, licenseNameNotFoundList.map(compact));
   }
 
   const ngLicenseList = dependencies.filter(d => !includeLicenses(d.licenseName, licenseWhitelist));
   if (ngLicenseList.length) {
     const message = 'License unsafe!!!!';
     errors.push(message);
-    console.warn(message, ngLicenseList);
+    console.warn('[WARN]', message, ngLicenseList.map(compact));
   }
 
   const licenseTextNotFoundList = dependencies.filter(d => !(d.licenseFile || d.licenseText || d.licenseUrl));
   if (licenseTextNotFoundList.length) {
     const message = 'License Text or Url NotFound!!!!';
     errors.push(message);
-    console.warn(message, licenseTextNotFoundList);
+    console.warn('[WARN]', message, licenseTextNotFoundList.map(compact));
   }
 
   if (errors.length) throw new Error(errors.join('\n'));

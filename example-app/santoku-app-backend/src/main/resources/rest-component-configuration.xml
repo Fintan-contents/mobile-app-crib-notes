@@ -167,6 +167,10 @@
   </component>
 
   <component name="firebaseInitializer" class="jp.fintan.mobile.santokuapp.system.nablarch.FirebaseInitializer"/>
+  <component name="accountInitializer" class="jp.fintan.mobile.santokuapp.system.nablarch.AccountInitializer">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="accountPassword" value="${account.password}"/>
+  </component>
 
   <!-- ハンドラキュー構成 -->
   <component name="webFrontController" class="nablarch.fw.web.servlet.WebFrontController">
@@ -254,6 +258,7 @@
         <component-ref name="dbStore"/>
         <component-ref name="dbExpiration"/>
         <component-ref name="firebaseInitializer"/>
+        <component-ref name="accountInitializer"/>
       </list>
     </property>
   </component>

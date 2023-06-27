@@ -16,11 +16,6 @@ describe('changeAccount', () => {
   });
   const spyRefreshCsrfToken = jest.spyOn(csrfToken, 'refreshCsrfToken').mockImplementation();
 
-  beforeEach(() => {
-    spyLoginApi.mockClear();
-    spyRefreshCsrfToken.mockClear();
-  });
-
   test('セキュアストレージからパスワードを取得してログインAPIを呼び出しているかの検証', async () => {
     const spySecureStorageAdapter = jest.spyOn(loadPassword, 'loadPassword').mockResolvedValue('password123');
     const res = await changeAccount('123456789');

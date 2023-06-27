@@ -84,7 +84,7 @@ const demoScreenList: ScreenList[] = [
   },
   {
     title: 'PushNotification',
-    to: 'PushNotification',
+    to: 'PushNotificationSender',
   },
   {
     title: 'Cache',
@@ -97,6 +97,18 @@ const demoScreenList: ScreenList[] = [
   {
     title: 'Picker',
     to: 'Picker',
+  },
+  {
+    title: 'QRCode',
+    to: 'QRCode',
+  },
+  {
+    title: 'Barcode',
+    to: 'Barcode',
+  },
+  {
+    title: 'Map',
+    to: 'Map',
   },
   {
     title: 'Acknowledgements',

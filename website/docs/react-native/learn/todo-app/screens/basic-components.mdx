@@ -13,11 +13,11 @@ title: 共通コンポーネント
 今回作成するコンポーネントは汎用性があるため、[ToDoアプリプロジェクトの準備](../app-project-desc.md)に示すとおり、`components/basics`に作成します。
 次のファイルを追加してください。
 
-- `/src/components/basics/view/KeyboardView.tsx`
-- `/src/components/basics/view/index.ts`
-- `/src/components/basics/index.ts`
+- `src/components/basics/view/KeyboardView.tsx`
+- `src/components/basics/view/index.ts`
+- `src/components/basics/index.ts`
 
-```typescript jsx title="/src/components/basics/view/KeyboardView.tsx"
+```typescript jsx title="src/components/basics/view/KeyboardView.tsx"
 import React, {ComponentProps} from 'react';
 import {KeyboardAvoidingView, Platform, StyleSheet} from 'react-native';
 
@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
 });
 ```
 
-```typescript jsx title="/src/components/basics/view/index.ts"
+```typescript jsx title="src/components/basics/view/index.ts"
 export * from './KeyboardView';
 ```
 
-```typescript jsx title="/src/components/basics/index.ts"
+```typescript jsx title="src/components/basics/index.ts"
 export * from './view';
 ```
 
@@ -60,10 +60,10 @@ export * from './view';
 
 次のファイルを修正してください。
 
-- `/src/screens/auth/Login.tsx`
-- `/src/screens/todo/TodoForm.tsx`
+- `src/screens/auth/Login.tsx`
+- `src/screens/todo/TodoForm.tsx`
 
-```diff title="/src/screens/auth/Login.tsx"
+```diff title="src/screens/auth/Login.tsx"
 + import {KeyboardView} from 'components/basics';
   import {useUserContext} from 'contexts/UserContext';
   import {useFormik} from 'formik';
@@ -99,7 +99,7 @@ export * from './view';
   /* ～省略～ */
 ```
 
-```diff title="/src/screens/todo/TodoForm.tsx"
+```diff title="src/screens/todo/TodoForm.tsx"
   import {useNavigation} from '@react-navigation/native';
 + import {KeyboardView} from 'components/basics';
   import {useFormik} from 'formik';

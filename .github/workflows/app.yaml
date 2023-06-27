@@ -32,7 +32,7 @@ on:
 
 jobs:
   lint-and-test:
-    name: Lints, Tests
+    name: (${{ github.workflow }}) Lints, Tests
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
     runs-on: macos-12
     env:
@@ -47,7 +47,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.18.0'
+          node-version: '18.15.0'
 
       # Cache '.npm' to speed up clean-install when package-lock.json is updated.
       # Loosened up the restore-keys a bit, as it doesn't have to match the contents of package-lock.json exactly.

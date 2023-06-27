@@ -60,7 +60,7 @@ export const DemoDateTimePicker1: React.FC = () => {
       displayIOS="spinner"
       displayAndroid="calendar"
       pickerAccessoryProps={{deleteLabel: m('消去'), cancelLabel: m('キャンセル'), doneLabel: m('完了')}}
-      pickerItemsProps={{neutralButtonLabel: m('消去')}}
+      pickerItemsProps={{neutralButton: {label: m('消去')}}}
       textInputProps={{style: styles.pickerTextInputStyle}}
       placeholder={`mode:date,${Platform.OS === 'ios' ? 'display: spinner' : 'display: calendar'}`}
     />

@@ -1,4 +1,4 @@
-import {ConfigPlugin, withPlugins} from '@expo/config-plugins';
+import {ConfigPlugin, withPlugins} from 'expo/config-plugins';
 
 import {withAndroidAddNativeModules} from './android/withAndroidAddNativeModules';
 import {withIosAddNativeModules} from './ios/withIosAddNativeModules';
