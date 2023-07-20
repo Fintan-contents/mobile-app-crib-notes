@@ -19,7 +19,7 @@ const apply = (buildGradle: string): string => {
   // plugins block は記述場所に制限がある。他の plugin 追加とコンフリクトしないようにするため既存の biuldGradle を挟み込むように追加する
   return `
 plugins {
-  id "com.jaredsburrows.license" version "0.9.0"
+  id "com.jaredsburrows.license" version "0.9.3"
 }
 ${buildGradle}
 
