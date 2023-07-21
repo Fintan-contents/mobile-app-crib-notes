@@ -41,7 +41,7 @@
     "orval": "npx orval --config ./orval.config.ts"
   },
   "dependencies": {
-    "@mswjs/data": "^0.12.0",
+    "@mswjs/data": "^0.13.0",
     "@notifee/react-native": "~5.7.0",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-native-community/datetimepicker": "6.7.3",
@@ -68,7 +68,7 @@
     "expo-secure-store": "~12.1.1",
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.2",
-    "formik": "~2.2.9",
+    "formik": "~2.4.0",
     "jsbarcode": "~3.11.5",
     "msw": "^1.0.0",
     "react": "18.2.0",
@@ -86,7 +86,7 @@
     "react-native-web": "~0.18.7",
     "react-native-webview": "11.26.0",
     "react-query": "^3.34.8",
-    "yup": "~1.1.0"
+    "yup": "~1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",

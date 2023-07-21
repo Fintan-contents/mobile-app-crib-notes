@@ -13,7 +13,7 @@ module.exports = {
       },
     },
     {
-      files: ['src/plugins/medium-zoom-docusaurus-plugin/index.js'],
+      files: ['src/plugins/medium-zoom-docusaurus-plugin/index.js', 'src/plugins/fix-footnote-order-plugin/index.js'],
       env: {
         node: true,
       },
