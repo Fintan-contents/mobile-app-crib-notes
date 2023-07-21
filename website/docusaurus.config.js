@@ -158,11 +158,6 @@ module.exports = {
       ],
       copyright,
     },
-    // https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-google-gtag
-    // gtag: {
-    //   // You can also use your "G-" Measurement ID here.
-    //   trackingID: isDraft ? 'G-T0BMF70HTK' : 'G-P630FEB9YY',
-    // },
   },
   presets: [
     [
