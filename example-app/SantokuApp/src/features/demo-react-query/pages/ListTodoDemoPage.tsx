@@ -3,7 +3,7 @@ import React, {useCallback} from 'react';
 import {ActivityIndicator, FlatList, Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button, FAB, Icon, ListItem, Text} from 'react-native-elements';
 
-import {useTodosInfinite} from '../services/todo/ useTodosInfinite';
+import {useTodosInfinite} from '../services/todo/useTodosInfinite';
 
 const LoadingIndicator = () => {
   return (
