@@ -1,5 +1,7 @@
 import '@testing-library/jest-native/extend-expect';
 import {render, screen, cleanup, waitFor} from '@testing-library/react-native';
+import ExpoApplication from 'expo-application';
+import ExpoSecureStore from 'expo-secure-store';
 import {initialData} from 'fixtures/msw/datas';
 import {initialDb} from 'fixtures/msw/db';
 import {handlers} from 'fixtures/msw/handlers';
@@ -33,18 +35,14 @@ beforeEach(() => {
 });
 
 jest.mock('expo-application', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const originalModule = jest.requireActual('expo-application');
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  const originalModule = jest.requireActual<typeof ExpoApplication>('expo-application');
   return {
     ...originalModule,
     nativeApplicationVersion: '0.1.0',
   };
 });
 jest.mock('expo-secure-store', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const originalModule = jest.requireActual('expo-secure-store');
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  const originalModule = jest.requireActual<typeof ExpoSecureStore>('expo-secure-store');
   return {
     ...originalModule,
     getItemAsync: jest.fn(() => {
