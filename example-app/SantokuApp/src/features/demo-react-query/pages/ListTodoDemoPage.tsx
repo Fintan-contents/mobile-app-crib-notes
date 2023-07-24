@@ -51,7 +51,9 @@ export const ListTodoDemoPage: React.FC<Props> = ({navigateToCreateTodoDemo, nav
   );
 
   const renderFooter = useCallback(() => {
-    if (!isFetchingNextPage) return null;
+    if (!isFetchingNextPage) {
+      return null;
+    }
 
     return <LoadingIndicator />;
   }, [isFetchingNextPage]);
