@@ -52,11 +52,14 @@
         'expo-local-authentication',
         'expo-secure-store',
         'expo-splash-screen',
+        'expo-status-bar',
         'jest',
+        'jest-expo',
         'react',
         'react-dom',
         'react-native',
         'react-native-gesture-handler',
+        'react-native-maps',
         'react-native-reanimated',
         'react-native-safe-area-context',
         'react-native-screens',
@@ -71,6 +74,8 @@
       groupName: 'Depends on Expo version',
       enabled: false,
       matchPackageNames: [
+        // expo -> @expo/cli
+        '@expo/config-plugins',
         // jest-expo -> jest
         '@types/jest',
         // react, jest-expo -> react-test-renderer
@@ -85,6 +90,8 @@
         'de.undercouch:gradle-download-task',
         // @testing-library/react-native -> jest
         '@testing-library/react-native',
+        // prebuild
+        'androidx.swiperefreshlayout:swiperefreshlayout',
       ],
       matchPackagePrefixes: [
         'com.facebook.flipper',
