@@ -64,7 +64,7 @@ describe('ExpoLocalAuthentication', () => {
     jest.spyOn(ExpoAuthentication, 'authenticateAsync').mockResolvedValueOnce({success: false, error: 'user_cancel'});
     const no = await LocalAuthentication.authenticate({promptMessage: 'test'});
     expect(no.success).toBeFalsy();
-    // @ts-ignore no.successがfalseの場合のみno.errorが存在するため、そのチェックをするように警告がでるが、expectを条件分岐の中に記載すると今度はその警告が出るのでignoreする
+    // @ts-expect-error -- no.successがfalseの場合のみno.errorが存在するため、そのチェックをするように警告がでるが、expectを条件分岐の中に記載すると今度はその警告が出るのでignoreする
     expect(no.error).toBe('user_cancel');
   });
 });

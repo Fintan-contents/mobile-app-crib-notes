@@ -38,6 +38,22 @@ module.exports = {
       },
     },
     {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        // Disallow @ts-<directive> comments or require descriptions after directives.
+        // https://typescript-eslint.io/rules/ban-ts-comment/
+        '@typescript-eslint/ban-ts-comment': [
+          'error',
+          {
+            'ts-expect-error': 'allow-with-description',
+            'ts-ignore': true,
+            'ts-nocheck': true,
+            'ts-check': false,
+          },
+        ],
+      },
+    },
+    {
       files: ['*.tsx'],
       rules: {
         // It is too strict to prohibit passing async functions to `onPress`, so disable the rule in JSX.

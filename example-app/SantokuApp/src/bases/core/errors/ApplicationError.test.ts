@@ -11,7 +11,7 @@ describe.each([false, true])(
   captureStackTraceAvailable => {
     beforeAll(() => {
       if (!captureStackTraceAvailable) {
-        // @ts-ignore
+        // @ts-expect-error -- 検証のためにcaptureStackTraceを削除したいため
         delete Error.captureStackTrace;
       }
     });
@@ -104,7 +104,6 @@ describe.each([false, true])(
     it('given an argument other than message or cause', () => {
       const mock = jest.spyOn(console, 'warn').mockImplementation();
       try {
-        // @ts-ignore
         const sut = new ApplicationError(['array', {key: 'value'}]);
 
         expect(sut.name).toEqual('ApplicationError');
@@ -119,7 +118,6 @@ describe.each([false, true])(
     it('given an argument other than Error', () => {
       const message = 'when the error occurred';
       const cause = {key: 'value'};
-      // @ts-ignore
       const sut = new ApplicationError(message, cause);
 
       expect(sut.message).toEqual(message);
