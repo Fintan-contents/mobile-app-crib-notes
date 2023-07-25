@@ -35,14 +35,21 @@ export const AppWithInitialization: React.FC = () => {
     Alert.alert(initializationResult.title, initializationResult.message);
     return null;
   } else {
-    // RootStackNav、WithFirebaseMessagingHandlersをimportしてしまうと、アプリの初期化処理が完了する前に各画面でimportしているモジュールも読み込まれてしまうため、
-    // アプリの初期化処理が完了した時点でrequireする。
-    // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    /*
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      RootStackNavをimportしてしまうと、アプリの初期化処理が完了する前に各画面でimportしているモジュールも読み込まれてしまうため、
+      アプリの初期化処理が完了した時点でrequireする。
+      requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
+     */
     const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC<
       React.PropsWithChildren<{initialData: AppInitialData}>
     >;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    /*
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      WithFirebaseMessagingHandlersをimportしてしまうと、アプリの初期化処理が完了する前に各画面でimportしているモジュールも読み込まれてしまうため、
+      アプリの初期化処理が完了した時点でrequireする。
+      requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
+    */
     const FirebaseMessagingHandlers = require('./components/FirebaseMessagingHandlers')
       .FirebaseMessagingHandlers as React.FC<React.PropsWithChildren<{initialData: AppInitialData}>>;
 

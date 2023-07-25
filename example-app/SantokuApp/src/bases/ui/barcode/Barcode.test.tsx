@@ -13,8 +13,7 @@ const getSvgProps = (view: ReactTestInstance): SVGProps<any> => {
 
 const getSvgPathProps = (view: ReactTestInstance): PathProps => {
   const svgView = view.children[0] as ReactTestInstance;
-  // svgView.props.childrenがany型になってしまうため、型を強制的に指定
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- svgView.props.childrenがany型になってしまうため、型を強制的に指定
   return svgView.props.children.props as PathProps;
 };
 

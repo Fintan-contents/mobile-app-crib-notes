@@ -4,12 +4,18 @@ import {Button} from 'react-native-elements';
 const {ThrowErrorModule} = NativeModules;
 
 const throwNativeErrorInSyncProcess = async () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
+  /*
+    eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access --
+    デモ画面で検証する用に作成したNative Modulesは型定義を作成していないため
+   */
   await ThrowErrorModule.throwErrorSyncProcess();
 };
 
 const throwNativeErrorInAsyncProcess = async () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
+  /*
+    eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access --
+    デモ画面で検証する用に作成したNative Modulesは型定義を作成していないため
+   */
   await ThrowErrorModule.throwErrorAsyncProcess();
 };
 

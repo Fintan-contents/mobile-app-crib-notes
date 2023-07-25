@@ -5,11 +5,6 @@ import Reanimated from 'react-native-reanimated';
 
 import {DEFAULT_SLIDE_IN_DURATION, DEFAULT_SLIDE_OUT_DURATION, PickerContainer} from './PickerContainer';
 
-// If advancing a timer changes the state of a component, the timer must be run within an act.
-// However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
-// For convenience, disable the relevant rule in this file.
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 jest.useFakeTimers();
 
 // TODO: Jest v27にアップデートできたら、withReanimatedTimerでテストを実装できるか検証する。
@@ -34,7 +29,7 @@ describe('PickerContainer only with required props', () => {
     expect(sut.toJSON()).toBeNull();
   });
 
-  it('renders successfully only with required props', () => {
+  it('renders successfully only with required props', async () => {
     const sut = render(
       <PickerContainer isVisible testID="containerAnimated">
         <View style={{height: 400, width: '100%'}} />
@@ -49,24 +44,24 @@ describe('PickerContainer only with required props', () => {
     expect(sut).toMatchSnapshot('Before animation started');
     expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 1000}]});
 
-    startAnimation();
+    await startAnimation();
 
     // アニメーション中は`transform`が変化すること
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2);
     });
     expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 75}]});
     expect(sut).toMatchSnapshot('Animating (slide in)');
 
     // アニメーションが完了すると`transform`が設定値に到達していること
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2);
     });
     expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 0}]});
     expect(sut).toMatchSnapshot('Just After slide in animation completed');
 
     // アニメーションが完了したあとは変化しないこと
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(10);
     });
     expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 0}]});
@@ -78,24 +73,24 @@ describe('PickerContainer only with required props', () => {
     sut.update(<PickerContainer isVisible={false} />);
     //////////////////////////////////////////////////////////////////////////////////
 
-    startAnimation();
+    await startAnimation();
 
     // アニメーション中は`transform`が変化すること
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2);
     });
     expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 75}]});
     expect(sut).toMatchSnapshot('Animating (slide out)');
 
     // アニメーションが完了するとコンポーネントが消えること
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2);
     });
     expect(sut.container.children).toEqual([]);
     expect(sut).toMatchSnapshot('Just After slide out animation completed');
 
     // アニメーションが完了した後も少し時間を進めて、何も変わらないことを確認する
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(10);
     });
     expect(sut.container.children).toEqual([]);
@@ -104,7 +99,7 @@ describe('PickerContainer only with required props', () => {
 });
 
 describe('PickerContainer with all props', () => {
-  it('should be applied properly', () => {
+  it('should be applied properly', async () => {
     const afterSlideIn = jest.fn();
     /**
      * WithTimingConfigのeasingを取得できなかったため、以下のPropsは検証できていません。
@@ -131,12 +126,12 @@ describe('PickerContainer with all props', () => {
     expect(animatedViewProps.style).toEqual({backgroundColor: 'green', transform: [{translateY: 1000}]});
 
     // slideInDurationで指定した時間の1msc前ではafterSlideInは実行されない
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(199);
     });
     expect(afterSlideIn).not.toHaveBeenCalled();
     // slideInDurationで指定した時間経過後は、afterSlideInが実行される
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(1);
     });
     expect(afterSlideIn).toHaveBeenCalled();
@@ -147,14 +142,14 @@ describe('PickerContainer with all props', () => {
     const afterSlideOut = jest.fn();
     sut.update(<PickerContainer isVisible={false} afterSlideOut={afterSlideOut} slideOutDuration={100} />);
 
-    startAnimation();
+    await startAnimation();
     // slideOutDurationで指定した時間の1msc前ではafterSlideOutは実行されない
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(99);
     });
     expect(afterSlideOut).not.toHaveBeenCalled();
     // slideOutDurationで指定した時間経過後は、afterSlideOutが実行される
-    act(() => {
+    await act(() => {
       jest.advanceTimersByTime(1);
     });
     expect(afterSlideOut).toHaveBeenCalled();

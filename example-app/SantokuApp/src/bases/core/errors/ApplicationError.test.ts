@@ -4,7 +4,7 @@ class ApplicationErrorSubClass extends ApplicationError {}
 const cause = new ApplicationErrorSubClass('root cause');
 const nested = new ApplicationErrorSubClass('nested cause', cause);
 
-// eslint-disable-next-line jest/unbound-method
+// eslint-disable-next-line jest/unbound-method -- Error.captureStackTraceの復元(再代入)にしか使わないため
 const captureStackTrace = Error.captureStackTrace;
 describe.each([false, true])(
   'new ApplicationError() when captureStackTrace availability is %p',
