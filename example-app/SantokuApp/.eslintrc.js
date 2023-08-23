@@ -27,6 +27,11 @@ module.exports = {
       // universe/shared/typescript-analysis: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
       // recommended-requiring-type-checking: https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules
       extends: ['universe/shared/typescript-analysis', 'plugin:@typescript-eslint/recommended-requiring-type-checking'],
+      rules: {
+        // no-restricted-syntaxでfor-in文を禁止しているので、@typescript-eslint/no-for-in-arrayを無効化する
+        // （no-restricted-syntaxはObjectのfor-in文も禁止にできる）
+        '@typescript-eslint/no-for-in-array': 'off',
+      },
       parserOptions: {
         project: './tsconfig.json',
       },
@@ -124,6 +129,15 @@ module.exports = {
     ],
     // https://eslint.org/docs/latest/rules/curly
     curly: ['error', 'all'],
+    // https://eslint.org/docs/latest/rules/no-restricted-syntax
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: 'ForInStatement',
+        message:
+          'for..in loops iterate over the entire prototype chain, which is virtually never what you want. For Array, use array.{forEach,map} instead. For Object, use Object.{keys,values,entries}, and iterate over the resulting array. If it is difficult to describe in method, use for...of.',
+      },
+    ],
     // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html
     'eslint-comments/no-unused-disable': 'error',
     // https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-use.html
