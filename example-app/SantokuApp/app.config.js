@@ -1,5 +1,6 @@
 import deepmerge from 'deepmerge';
 
+import devConfig from './config/app.config.dev.js';
 import localConfig from './config/app.config.local.js';
 import prodConfig from './config/app.config.prod.js';
 import stgConfig from './config/app.config.stg.js';
@@ -18,6 +19,7 @@ import {
 
 const environmentConfig = {
   local: localConfig,
+  dev: devConfig,
   stg: stgConfig,
   prod: prodConfig,
 };

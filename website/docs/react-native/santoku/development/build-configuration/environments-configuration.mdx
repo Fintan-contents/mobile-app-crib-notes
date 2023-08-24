@@ -9,6 +9,7 @@ title: 環境の切り替え
 | 環境 | 概要 |
 |:--|:--|
 | local | ローカル環境で開発する際に使用します。 |
+| dev | expo-dev-clientを有効にしたDebugビルドのアプリを配信する際に使用します。この環境でビルドしたアプリはDeployGateにアップロードして配信されます。 |
 | stg | ステージング環境のアプリを配信する際に使用します。この環境でビルドしたアプリはDeployGateにアップロードして配信されます。 |
 | prod | 本番環境のアプリを配信する際に使用します。この環境でビルドしたアプリはApp StoreやGoogle Play Consoleにアップロードして配信されます。|
 
@@ -34,12 +35,14 @@ Expo configでは、環境変数`ENVIRONMENT`の値によって使用する設�
 以下は設定切り替えの例です。実際の設定は[app.config.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/app.config.js)を参照してください。
 
 ```javascript title=app.config.js
+import devConfig from './config/app.config.dev.js';
 import localConfig from './config/app.config.local.js';
 import prodConfig from './config/app.config.prod.js';
 import stgConfig from './config/app.config.stg.js';
 
 const environmentConfig = {
   local: localConfig,
+  dev: devConfig,
   stg: stgConfig,
   prod: prodConfig,
 };

@@ -19,6 +19,23 @@ npm run ios
 npm run android
 ```
 
+アプリが起動し`Development servers`の選択画面が表示されたら、ローカルで起動しているサーバのURLを選択します。
+通常は`http://localhost:8081`や`http://10.0.2.2:8081`などとなっていることが多いです。
+
+:::note
+WindowsのAndroidエミュレータで起動できなかったり時間のかかったりする場合があります。
+
+- （`npm run android`ではなくインストール済みのアプリを起動する場合）JavaScriptのソースを配信するMetro Bundlerが起動してない
+  - 事前に`npm start`を実行しMetro Bundlerを起動してください
+- （プロキシ環境下の場合）プロキシのバイパス設定をしていない
+  - バイパス設定にMetro BundlerのIPを指定してください
+  - 例
+    - `10.0.2.2`（[ホスト ループバック インターフェースへの特殊エイリアス](https://developer.android.com/studio/run/emulator-networking?hl=ja)）
+    - ホストのプライベートIP（`192.168.0.3`や`172.16.0.4`など）
+- `npm run android`の1回目（Expo 48で確認）
+  - 1回目は諦めて待ってください
+:::
+
 :::note
 Android端末をUSB debugした状態でコマンドを実行すると、エミュレータは起動せず、Android端末でアプリが起動します。
 :::

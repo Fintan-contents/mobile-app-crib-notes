@@ -10,8 +10,8 @@ import React from 'react';
 
 import {App} from './App';
 
-jest.mock('react-native/Libraries/Utilities/DevSettings.js', () => {
-  return {addMenuItem: jest.fn};
+jest.mock('expo-dev-menu', () => {
+  return {registerDevMenuItems: () => Promise.resolve()};
 });
 
 const server = setupServer(...handlers);

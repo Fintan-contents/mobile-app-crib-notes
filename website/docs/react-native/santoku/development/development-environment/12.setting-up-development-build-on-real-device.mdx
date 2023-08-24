@@ -1,0 +1,16 @@
+---
+title: 実機での開発ビルドの使用設定
+---
+
+ビルド環境`dev`のビルドタイプ`Debug`では[開発ビルド](https://docs.expo.dev/develop/development-builds/introduction/)が有効であり、使用する際は追加の設定が必要となります。
+
+1. PCと実機を同一LANに接続して実機とPC間で通信できるようにする
+1. PCで`npm start`を実行してMetro Bundler起動
+1. 実機でアプリを起動
+1. `Development servers`の選択画面でMetro BundlerのURLを指定/選択
+   - `localhost`ではなくプライベートIPアドレスを使用しているものを2のMetro Bundler起動ログから探す
+   - 例：`http://192.168.0.2:19000`
+
+### 参考ページ
+
+- [Use a development build - Expo Documentation](https://docs.expo.dev/develop/development-builds/use-development-builds/)

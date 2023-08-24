@@ -5,9 +5,19 @@ bundle_identifier_base = "jp.fintan.mobile.SantokuApp"
 provisioning_profiles = {
   "#{bundle_identifier_base}" => "SantokuApp AppStore Distribution",
   "#{bundle_identifier_base}.stg" => "SantokuApp Stg Distribution",
+  "#{bundle_identifier_base}.dev" => "SantokuApp Dev Distribution",
 }
 
 environment_options = {
+  dev: {
+    scheme: "DevSantokuApp",
+    configuration: "Debug",
+    workspace: "ios/DevSantokuApp.xcworkspace",
+    export_options: {
+      method: "enterprise",
+      provisioningProfiles: provisioning_profiles,
+    }
+  },
   stg: {
     scheme: "StgSantokuApp",
     configuration: "Release",

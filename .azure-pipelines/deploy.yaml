@@ -6,12 +6,17 @@ parameters:
       laneName: 'stg'
       androidAppPath: 'android/app/build/outputs/bundle/release/app-release.aab'
       iOSAppPath: 'ios/build/santoku-app-stg.ipa'
+    - name: 'dev'
+      laneName: 'dev'
+      androidAppPath: 'android/app/build/outputs/bundle/debug/app-debug.aab'
+      iOSAppPath: 'ios/build/santoku-app-dev.ipa'
 
 variables:
 - group: android
 - group: apple
 - group: deployGate
 - group: santokuAppStg
+- group: santokuAppDev
 - name: appDir
   value: '$(System.DefaultWorkingDirectory)/example-app/SantokuApp'
 - name: branchName

@@ -1,0 +1,25 @@
+trigger: none
+
+pr:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - '.tool-versions'
+      - '.azure-pipelines/**'
+      - 'example-app/SantokuApp'
+    exclude:
+      - 'example-app/SantokuApp/README.md'
+  drafts: false
+
+name: $(date:yyyyMMdd)$(rev:.rr)
+
+extends:
+  template: deploy.yaml
+  parameters:
+    environments:
+      - name: 'dev'
+        laneName: 'dev'
+        androidAppPath: 'android/app/build/outputs/bundle/debug/app-debug.aab'
+        iOSAppPath: 'ios/build/santoku-app-dev.ipa'

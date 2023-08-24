@@ -31,6 +31,14 @@ Prebuild SantokuApp Production Release
 
 Prebuild SantokuApp Staging Release
 
+### ios prebuild_dev
+
+```sh
+[bundle exec] fastlane ios prebuild_dev
+```
+
+Prebuild SantokuApp Dev-Client Debug
+
 ### ios build_prod
 
 ```sh
@@ -46,6 +54,14 @@ Build SantokuApp Production Release
 ```
 
 Build SantokuApp Staging Release
+
+### ios build_dev
+
+```sh
+[bundle exec] fastlane ios build_dev
+```
+
+Build SantokuApp Dev-Client Debug
 
 ----
 
@@ -68,6 +84,14 @@ Prebuild SantokuApp Production Release
 
 Prebuild SantokuApp Staging Release
 
+### android prebuild_dev
+
+```sh
+[bundle exec] fastlane android prebuild_dev
+```
+
+Prebuild SantokuApp Dev-Client Debug
+
 ### android build_prod
 
 ```sh
@@ -83,6 +107,14 @@ Build SantokuApp Production Release
 ```
 
 Build SantokuApp Staging Release
+
+### android build_dev
+
+```sh
+[bundle exec] fastlane android build_dev
+```
+
+Build SantokuApp Dev-Client Debug
 
 ----
 

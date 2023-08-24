@@ -13,7 +13,7 @@ npm, Gradle(Android), CocoaPods(iOS) で使用しているライブラリを返�
 
 ### 前提
 - `npm run prebuild` が実行済
-    - `prebuild:stg`, `prebuild:prod` を含む
+    - `prebuild:dev`, `prebuild:stg`, `prebuild:prod` を含む
 - Root ディレクトリ (このREADMEファイルからみて `../`) で実行
 
 ### 処理概要

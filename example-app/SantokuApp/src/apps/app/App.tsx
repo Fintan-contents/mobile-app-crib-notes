@@ -7,6 +7,7 @@ import {FirebaseCrashlyticsTransport} from 'bases/logging/FirebaseCrashlyticsTra
 import {LoadingOverlay} from 'bases/ui/loading/LoadingOverlay';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {AppThemeProvider} from 'bases/ui/theme/AppThemeProvider';
+import 'expo-dev-client'; // エラー処理の改善: https://docs.expo.dev/develop/development-builds/use-development-builds/
 import React from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
