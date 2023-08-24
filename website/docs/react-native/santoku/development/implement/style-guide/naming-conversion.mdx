@@ -1,0 +1,68 @@
+---
+title: コーディングに関する命名規約
+---
+
+## ディレクトリ名
+
+ディレクトリ名は、ケバブケース記法とします。
+
+以下は本規約に従った命名例です。
+
+```console
+src
+├── features
+│   ├── qa-home
+```
+
+## assetファイル名
+
+画像などのassetファイルは、ケバブケース記法とします。
+
+以下は本規約に従った命名例です。
+
+```console
+beginner-mark.png
+```
+
+## ReactQueryのクエリーキー
+
+React Queryはクエリキーに基づいてクエリをキャッシュ管理します。
+自動生成コードについては、Orvalの生成ルール（URL内のPathとQuery部をクエリキーとして使用）に従います。
+それ以外の独自クエリについては、`サービス名#関数名`をクエリキーとして用います。
+
+以下は本規約に従った独自クエリの命名例です。
+
+```console
+app-updates#requestAppUpdates
+```
+
+## ローカルストレージに格納するキー
+
+`Keychain`や`UserDefaults`、`SharedPreferences`のようなローカルストレージに格納するキーは、`機能モジュール名_項目名`としてください。
+
+以下は本規約に従った命名例です。
+
+```console
+account_activeAccountId
+```
+
+キーを動的に生成する場合は、キーに秘匿情報が入らないように注意してください。
+秘匿情報をキーに設定する必要がある場合は、必ずハッシュ化・暗号化を実施して、平文で設定しないようにしてください。
+例えば、複数アカウントが作成可能なアプリで、アカウント毎のクレデンシャル情報を格納する場合などです。
+
+## TypeScriptソース
+
+### ステレオタイプ
+
+<!-- TODO: ステレオタイプのドキュメントができたら、そのドキュメントへのリンクを追加する -->
+ステレオタイプによっては、クラス名やコンポーネント名などにサフィックスを付けるものがあります。
+
+| ステレオタイプ   | 対象                                     | サフィックス   | 例                 |
+|:----------|:---------------------------------------|:---------|:------------------|
+| Navigator | `React Navigation`のナビゲータを定義しているコンポーネント | StackNav | AccountStackNav   |
+| Screen    | `React Navigation`のScreenで定義するコンポーネント  | Screen   | LoginScreen       |
+| Page      | 画面を表すコンポーネント                           | Page     | LoginPage         |
+| Form      | `Form`定義を返却する`React Hooks`             | Form     | useLoginForm      |
+| Context   | `React Context`の`Provider`を提供するコンポーネント | Provider | AppThemeProvider  |
+| Error     | エラークラス                                 | Error    | UnauthorizedError |
+| Config    | 設定を格納するクラス                             | Config   | AppConfig         |

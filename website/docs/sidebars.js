@@ -588,6 +588,22 @@ module.exports = {
           label: '実装',
           items: [
             'react-native/santoku/development/implement',
+            {
+              type: 'category',
+              label: 'スタイルガイド',
+              items: [
+                'react-native/santoku/development/implement/style-guide/overview',
+                'react-native/santoku/development/implement/style-guide/eslint',
+                'react-native/santoku/development/implement/style-guide/typescript',
+                'react-native/santoku/development/implement/style-guide/editorconfig',
+                'react-native/santoku/development/implement/style-guide/prettier',
+                'react-native/santoku/development/implement/style-guide/lint-ops',
+                'react-native/santoku/development/implement/style-guide/typescript-style-guide',
+                'react-native/santoku/development/implement/style-guide/naming-conversion',
+                'react-native/santoku/development/implement/style-guide/nablarch-javascript-santoku-mapping',
+                'react-native/santoku/development/implement/style-guide/nablarch-java-santoku-mapping',
+              ],
+            },
             'react-native/santoku/development/implement/message-configuration',
             'react-native/santoku/development/implement/logs-implementation',
             'react-native/santoku/development/implement/cautions-on-using-firebase',

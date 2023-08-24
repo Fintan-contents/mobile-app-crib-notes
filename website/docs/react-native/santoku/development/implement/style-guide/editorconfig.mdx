@@ -1,0 +1,35 @@
+---
+title: EditorConfig
+---
+
+[EditorConfig](https://editorconfig.org/)はインデントや改行コードなど、一貫したコードスタイルを維持するのに役立つコードフォーマッタです。
+
+## EditorConfigの実行方法
+
+### エディタ、IDE
+
+エディタやIDEにプラグインなどを設定することで、コーディング中に自動でフォーマットしてくれます。
+
+Visual Studio CodeでEditorConfigを有効にする方法については、[Visual Studio Code - Lint、フォーマッタ](../../tools/vscode.md#lintフォーマッタ)を参照してください。
+
+その他のIDEについては、EditorConfigの公式ページを参照してください。
+
+- [No Plugin Necessary](https://editorconfig.org/#pre-installed)
+- [Download a Plugin](https://editorconfig.org/#download)
+
+## 適用しているルール一覧
+
+このアプリでは、EditorConfigのルールを[.editorconfig](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/.editorconfig)に定義しています。
+
+適用している全てのルールは以下のとおりです。
+
+| オプション | 設定値   |
+|:------|:------|
+| [indent_style](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#indent_style)  | space |
+| [indent_size](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#indent_size)  | 2 |
+| [tab_width](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#tab_width)  | 8 |
+| [end_of_line](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#end_of_line)  | lf    |
+| [charset](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#charset)  | utf-8 |
+| [trim_trailing_whitespace](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#trim_trailing_whitespace)  | true  |
+| [insert_final_newline](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#insert_final_newline)  | true  |
+| [max_line_length](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#max_line_length)  | 120   |

@@ -1,0 +1,99 @@
+---
+title: 静的解析ツールの運用
+---
+
+静的解析ツールの運用方法について記載します。
+
+ここでは、静的解析チェック「違反」という言葉を「設定した静的解析ツールのルールに違反している」という意味で使用します。その際、ルールの重要度（error, warn等）は問いません。
+
+なお、静的解析ツールは以下を表します。
+
+- [ESLint](./eslint.mdx)
+- [TypeScript](./typescript.mdx)
+- [EditorConfig](./editorconfig.mdx)
+- [Prettier](./prettier.mdx)
+
+## 基本的な考え方
+
+### 原則1: 静的解析チェック違反は全て解決します
+
+設定した静的解析ツールのルール違反は全て解決するようにします。違反を暗黙的に許容するような運用にすると、恒常的にルール違反が表示され続け、静的解析チェック違反を修正するモチベーションを失います。
+
+常に違反0件である状態をキープすることを目標とします。
+
+### 原則2: 静的解析チェック違反を解消するために品質を下げてはいけません
+
+開発者は静的解析チェック違反を見つけたら対応をしなければなりません。その際違反を回避するための修正をしたことによって、かえってソースコード品質を落とすようなことがあってはいけません。
+
+静的解析チェックはコード品質を上げるため（下げないため）のものであり、 これを回避するためにコード品質を下げるのは本末転倒です。
+
+### 原則3: 正当な理由があって静的解析チェック違反となる場合、チェック対象から外します
+
+正当な理由がある場合は、静的解析チェック違反となっているソースコードをチェック対象から除外するようにします。
+
+なお、ESLintに[`fix`](https://eslint.org/docs/latest/use/command-line-interface#--fix)オプションを設定することで、コードのフォーマットなど一部ルールへの違反を機械的に修正できます。こういったルールの違反をチェック対象外にする正当な理由は考え難いため、`fix`オプションを活用して必ず修正するようにしてください。
+
+## チェック対象外にする方法
+
+### ESLint
+
+ESLintをチェック対象外にする方法は、公式ページの[Disabling Rules](https://eslint.org/docs/latest/use/configure/rules#disabling-rules)に記載されています。
+
+ただし、`eslint-disable`などを使用してしまうと、ファイル単位でチェック対象外になってしまいます。その場合、対象外にすべきではないコードもチェック対象外となってしまいます。
+
+そのため、チェック対象外にする場合は、以下のどちらかを使用してください。
+
+| コメント                     | 説明                      |
+|:-------------------------|:------------------------|
+| eslint-disable-next-line | 次の行のみチェック対象外にします        |
+| eslint-disable-line      | このコメントがある行のみチェック対象外にします |
+
+また、チェック対象外にする場合は、対象外にするルールと理由をコメントに記載してください。
+
+以下に、チェック対象外にする例を記載します。
+
+```typescript
+new Person(); // eslint-disable-line no-new -- 作成したインスタンスを以降の処理で使用しないため
+
+// eslint-disable-next-line no-new -- 作成したインスタンスを以降の処理で使用しないため
+new Person();
+
+/*
+  eslint-disable-next-line no-new
+  作成したインスタンスを以降の処理で使用しないため
+ */
+new Person();
+```
+
+### TypeScript
+
+TypeScriptをチェック対象外にする方法は、公式ページの[@ts-check](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html#ts-check)に記載されています。
+
+ESLintと同様に、行単位でチェック対象外にするには、`@ts-expect-error`、または`@ts-ignore`を使用する必要があります。
+ただし、`@ts-ignore`は該当行にTypeScriptの違反がない場合に`@ts-ignore`を付けても警告されません。
+
+```typescript
+// @ts-ignore -- 特に警告表示されません
+console.log('Hello, world!'); // TypeScriptの違反にはならないコード
+
+// @ts-expect-error TS2578: Unused '@ts-expect-error' directive.という警告が表示されます
+console.log('Hello, world!'); // TypeScriptの違反にはならないコード
+```
+
+そのため、チェック対象外にする場合は、`@ts-expect-error`を使用してください。
+
+また、チェック対象外にする場合は、対象外にする理由をコメントに記載してください。
+
+以下に、チェック対象外にする例を記載します。
+
+```typescript
+// @ts-expect-error 型定義にcancelはないが、APIのライブラリで呼び出されるため
+promise.cancel = () => source.cancel();
+
+// @ts-expect-error 型定義にcancelはないが、
+// APIのライブラリで呼び出されるため
+promise.cancel = () => source.cancel();
+
+/* @ts-expect-error 型定義にcancelはないが、APIのライブラリで呼び出されるため */
+promise.cancel = () => source.cancel();
+```

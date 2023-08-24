@@ -1,0 +1,66 @@
+---
+title: スタイルガイド
+sidebar_label: 概要
+pagination_label: スタイルガイド
+---
+
+アプリ開発では、コーディング規約を定めることで一貫性を保ち、一定の品質を保証できます。
+
+このアプリでは、ESLintなどの静的解析ツールによる自動チェックと、目視でチェックする規約を定めています。
+
+## 静的解析ツール
+
+ESLintやPrettier、TypeScriptなどの静的解析ツールを導入します。
+
+以下のページでは、これらのツールの設定内容や運用方法について記載します。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+import {PageList} from '../../../../../../src/components';
+const lintOverviews = [
+  {
+    title: 'ESLint',
+    to: '/react-native/santoku/development/implement/style-guide/eslint',
+  },
+  {
+    title: 'TypeScript',
+    to: '/react-native/santoku/development/implement/style-guide/typescript',
+  },
+  {
+    title: 'EditorConfig',
+    to: '/react-native/santoku/development/implement/style-guide/editorconfig',
+  },
+  {
+    title: 'Prettier',
+    to: '/react-native/santoku/development/implement/style-guide/prettier',
+  },
+  {
+    title: '静的解析ツールの運用',
+    to: '/react-native/santoku/development/implement/style-guide/lint-ops',
+  },
+];
+
+<PageList overviews={lintOverviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+## 自動でチェックできない規約
+
+静的解析ツールではチェックできない規約について記載しています。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->
+
+export const guideOverviews = [
+  {
+    title: 'TypeScriptのコーディング規約',
+    to: '/react-native/santoku/development/implement/style-guide/typescript-style-guide',
+  },
+  {
+    title: 'コーディングに関する命名規約',
+    to: '/react-native/santoku/development/implement/style-guide/naming-conversion',
+  },
+];
+
+<PageList overviews={guideOverviews} colSize={12} />
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair -->

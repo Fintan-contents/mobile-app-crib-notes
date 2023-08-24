@@ -1,0 +1,77 @@
+---
+title: Prettier
+---
+
+[Prettier](https://prettier.io/)はJavaScriptやTypeScriptなど、様々な言語をサポートするコードフォーマッタです。
+
+## Prettierの実行方法
+
+### CLI
+
+後述する[ESLintとの連携](#eslintとの連携)により、ESLintの実行時にPrettierが実行されます。
+ESLintの実行方法は、[ESLint - ESLintの実行方法 - CLI](./eslint.mdx#cli)を参照してください。
+
+### エディタ、IDE
+
+エディタやIDEにプラグインなどを設定することで、コーディング中に自動でフォーマットしてくれます。
+
+Visual Studio CodeでPrettierを有効にする方法については、[Visual Studio Code - Lint、フォーマッタ](../../tools/vscode.md#lintフォーマッタ)を参照してください。
+
+その他のエディタやIDEについては、Prettierの公式ページにある[Editor Integration](https://prettier.io/docs/en/editors.html)を参照してください。
+
+## ESLintとの連携
+
+[eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier)を導入して、ESLintの実行時にPrettierを実行します。
+Prettierのルールに準拠していないコードは、ESLintの警告として表示されるようになります。
+
+また、Prettierのいくつかのルールは、ESLintのルールと競合する場合があります。
+
+競合を解決するために、[eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)を導入します。`eslint-config-prettier`は、Prettierと競合するESLintのルールを無効化するためのESLintプラグインです。
+
+:::note
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+`eslint-plugin-prettier`や`eslint-config-prettier`の設定は、[eslint-config-universe](https://github.com/expo/expo/tree/master/packages/eslint-config-universe)の`universe/native`で実施されます。
+
+このアプリでは、`universe/native`を`extends`しているため、`eslint-plugin-prettier`や`eslint-config-prettier`の設定を個別に記載する必要はありません。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+:::
+
+## EditorConfigとの連携
+
+Prettierのいくつかのルールは、[EditorConfig](./editorconfig.mdx)のルールと同じものがあります。
+
+同じルールに対して、PrettierとEditorConfigの両方に設定をした場合はPrettierの設定が優先されます。
+EditorConfigにしか設定をしていない場合は、EditorConfigの設定をPrettierが使用します。
+
+## 適用しているルール一覧
+
+このアプリでは、Prettierのルールを[.prettierrc.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/.prettierrc.js)に定義しています。
+
+適用している全てのルールは以下のとおりです。
+
+| オプション                                                                                                                               | 設定値                                                                   | デフォルト値                                   |
+|:------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------|:-----------------------------------------|
+| [Print Width](https://prettier.io/docs/en/options.html#print-width)                                                                 | [EditorConfig](./editorconfig.mdx#適用しているルール一覧)（`max_line_length`）の設定値 | 80                                       |
+| [Tab Width](https://prettier.io/docs/en/options.html#tab-width)                                                                     | [EditorConfig](./editorconfig.mdx#適用しているルール一覧)（`indent_size`）の設定値     | 2                                        |
+| [Tabs](https://prettier.io/docs/en/options.html#tabs)                                                                               | [EditorConfig](./editorconfig.mdx#適用しているルール一覧)（`indent_style`）の設定値    | false                                    |
+| [Semicolons](https://prettier.io/docs/en/options.html#semicolons)                                                                   | true                                                                  | true                                     |
+| [Quotes](https://prettier.io/docs/en/options.html#quotes)                                                                           | true                                                                  | false                                    |
+| [Quote Props](https://prettier.io/docs/en/options.html#quote-props)                                                                 | as-needed                                                             | as-needed                                |
+| [JSX Quotes](https://prettier.io/docs/en/options.html#jsx-quotes)                                                                   | false                                                                 | false                                    |
+| [Trailing Commas](https://prettier.io/docs/en/options.html#trailing-commas)                                                         | all                                                                   | all                                      |
+| [Bracket Spacing](https://prettier.io/docs/en/options.html#bracket-spacing)                                                         | false                                                                 | true                                     |
+| [Bracket Line](https://prettier.io/docs/en/options.html#bracket-line)                                                               | true                                                                  | false                                    |
+| [\[Deprecated\] JSX Brackets](https://prettier.io/docs/en/options.html#deprecated-jsx-brackets)                                     | true                                                                  | false                                    |
+| [Arrow Function Parentheses](https://prettier.io/docs/en/options.html#arrow-function-parentheses)                                   | avoid                                                                 | always                                   |
+| [Range](https://prettier.io/docs/en/options.html#range)                                                                             | `rangeStart`: 0<br/>`rangeEnd`: Infinity                              | `rangeStart`: 0<br/>`rangeEnd`: Infinity |
+| [Parser](https://prettier.io/docs/en/options.html#parser)                                                                           | None                                                                  | None                                     |
+| [File Path](https://prettier.io/docs/en/options.html#file-path)                                                                     | None                                                                  | None                                     |
+| [Require Pragma](https://prettier.io/docs/en/options.html#require-pragma)                                                           | false                                                                 | false                                    |
+| [Insert Pragma](https://prettier.io/docs/en/options.html#insert-pragma)                                                             | false                                                                 | false                                    |
+| [Prose Wrap](https://prettier.io/docs/en/options.html#prose-wrap)                                                                   | preserve                                                              | preserve                                 |
+| [HTML Whitespace Sensitivity](https://prettier.io/docs/en/options.html#html-whitespace-sensitivity)                                 | css                                                                   | css                                      |
+| [Vue files script and style tags indentation](https://prettier.io/docs/en/options.html#vue-files-script-and-style-tags-indentation) | false                                                                 | false                                    |
+| [End of Line](https://prettier.io/docs/en/options.html#end-of-line)                                                                 | [EditorConfig](./editorconfig.mdx#適用しているルール一覧)（`end_of_line`）の設定値     | lf                                       |
+| [Embedded Language Formatting](https://prettier.io/docs/en/options.html#embedded-language-formatting)                               | auto                                                                  | auto                                     |
+| [Single Attribute Per Line](https://prettier.io/docs/en/options.html#single-attribute-per-line)                                     | false                                                                 | false                                    |

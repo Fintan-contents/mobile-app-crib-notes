@@ -1,0 +1,54 @@
+---
+title: TypeScript
+---
+
+[TypeScript](https://www.typescriptlang.org/)は、JavaScriptに静的な型付けが追加されたプログラミング言語です。
+
+## TypeScriptのルールチェック方法
+
+### CLI
+
+以下のコマンドで実行できます。
+
+```bash
+npm run lint:tsc
+```
+
+### エディタ、IDE
+
+TypeScriptに対応しているエディタやIDEでコーディングすると、コード補完や型チェックなどの機能が使えます。
+
+Visual Studio CodeやJetBrainsのIDE（WebStormなど）は、特に設定なしでTypeScriptに対応しています。その他のエディタやIDEに関しては、使用するエディタやIDEの公式サイトを確認してください。
+
+## TypeScriptの設定
+
+このアプリでは、TypeScriptの設定を[tsconfig.json](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/tsconfig.json)に定義しています。
+
+ここでは、TypeScriptの主な設定である[Compiler Options](https://www.typescriptlang.org/tsconfig#compilerOptions)について、このアプリで設定している項目を記載します。
+なお、Compiler Optionsにデフォルトで設定されている値については記載していません。
+
+:::note
+TypeScriptのCLIで[--showConfig](https://www.typescriptlang.org/docs/handbook/compiler-options.html#compiler-options)オプションを指定すると、設定内容を確認できます。
+
+```bash
+npx tsc --showConfig
+```
+
+:::
+
+| オプション                                                                                                | 設定値                 |
+|:-----------------------------------------------------------------------------------------------------|:--------------------|
+| [target](https://www.typescriptlang.org/tsconfig#target)                                             | esnext              |
+| [module](https://www.typescriptlang.org/tsconfig#module)                                             | commonjs            |
+| [lib](https://www.typescriptlang.org/tsconfig#lib)                                                   | [ "dom", "esnext" ] |
+| [allowJs](https://www.typescriptlang.org/tsconfig#allowJs)                                           | true                |
+| [jsx](https://www.typescriptlang.org/tsconfig#jsx)                                                   | react-native        |
+| [noEmit](https://www.typescriptlang.org/tsconfig#noEmit)                                             | true                |
+| [isolatedModules](https://www.typescriptlang.org/tsconfig#isolatedModules)                           | true                |
+| [strict](https://www.typescriptlang.org/tsconfig#strict)                                             | true                |
+| [moduleResolution](https://www.typescriptlang.org/tsconfig#moduleResolution)                         | node                |
+| [baseUrl](https://www.typescriptlang.org/tsconfig#baseUrl)                                           | ./src               |
+| [allowSyntheticDefaultImports](https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports) | true                |
+| [esModuleInterop](https://www.typescriptlang.org/tsconfig#esModuleInterop)                           | true                |
+| [resolveJsonModule](https://www.typescriptlang.org/tsconfig#resolveJsonModule)                       | true                |
+| [skipLibCheck](https://www.typescriptlang.org/tsconfig#skipLibCheck)                                 | true                |
