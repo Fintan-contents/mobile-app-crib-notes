@@ -604,8 +604,6 @@ module.exports = {
                 'react-native/santoku/development/implement/style-guide/lint-ops',
                 'react-native/santoku/development/implement/style-guide/typescript-style-guide',
                 'react-native/santoku/development/implement/style-guide/naming-conversion',
-                'react-native/santoku/development/implement/style-guide/nablarch-javascript-santoku-mapping',
-                'react-native/santoku/development/implement/style-guide/nablarch-java-santoku-mapping',
               ],
             },
             'react-native/santoku/development/implement/message-configuration',
