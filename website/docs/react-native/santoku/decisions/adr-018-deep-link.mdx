@@ -1,0 +1,82 @@
+---
+title: ディープリンクの実現方式
+---
+
+Status: Accepted
+
+<!--
+Proposed: 提案中
+Accepted: 採用
+Rejected: 却下
+Superseded: 廃止
+-->
+
+## 要約
+
+[過去に議論したディープリンクの実現方式](./adr-004-deep-link.mdx)では、ディープリンクを実現するためにFirebase Dynamic Linksを採用することにしました。
+
+しかし、Firebase Dynamic Linksは廃止されることが[公式のページ](https://firebase.google.com/support/dynamic-links-faq?hl=ja)でアナウンスされました。
+
+そのため、このアプリではOSの機能であるUniversal LinksとAndroid App Linksを利用します。
+
+## コンテキスト
+
+[過去に議論したディープリンクの実現方式](./adr-004-deep-link.mdx)では、ディープリンクを実現するためにFirebase Dynamic Linksを採用することにしました。
+
+しかし、Firebase Dynamic Linksは廃止されることが[公式のページ](https://firebase.google.com/support/dynamic-links-faq?hl=ja)でアナウンスされました。
+
+そのため、ディープリンクの実現方式を再度検討する必要があります。
+
+ここでは、次の3つの方式から選択します。
+
+- OSの機能（[Universal Links](https://developer.apple.com/ios/universal-links/)、[Android App Links](https://developer.android.com/training/app-links)）
+- カスタムURLスキーム
+- サードパーティのサービス
+
+## 議論
+
+### カスタムURLスキームのセキュリティリスク
+
+ディープリンクの3つの実現方式のうち、カスタムURLスキームには回避できないセキュリティのリスクがあります。
+
+カスタムURLスキームは、複数のアプリが同じスキームを設定できるため、OSはURLリンクの対象とするアプリを一意に特定できません。その結果、正規アプリのスキームを偽装した不正アプリによってURLリンクを乗っ取られる可能性があります。
+
+[Appleのドキュメント](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)にも、カスタムURLスキームではなくUniversal Linksを推奨する記載があります。
+
+> While custom URL schemes are an acceptable form of deep linking, universal links are strongly recommended. For more information on universal links, see Allowing apps and websites to link to your content.
+
+そのため、カスタムURLスキームの採用は見送りました。
+
+### OSの機能とサードパーティのサービス
+
+ここで述べるサードパーティのサービスとは、Firebase Dynamic Linksと同等の機能を提供するサービスを表します。
+
+[Dynamic Links のサポート終了に関するよくある質問](https://firebase.google.com/support/dynamic-links-faq?hl=ja)では、Firebase Dynamic Linksの代替サービスとして、次のように記載されています。
+
+> 移行シナリオ 1: Firebase Dynamic Links と同等の機能（ウェブとストアのルーティング、インストール後のディープリンクの遅延、標準ディープリンク、URL の短縮とホスティングおよびディープリンク分析など）がすべて必要な場合。
+>
+> このシナリオでは、他のディープリンク プロバイダ / ベンダー（Bitly、Kochava、AppsFlyer、Adjust など、市場で利用可能な同様なプロバイダ）を使用することをおすすめします。（これらのプロバイダは審査が完了しているわけではありませんが、Firebase Dynamic Links と同様の機能を備えています）。この移行を可能な限り簡単に、かつシームレスに実現するために、Google では、ディープリンク メタデータをエクスポートする機能を提供します。
+
+これらのサービスは、ディープリンク実現に関する工数の削減やマーケティング、ユーザ体験の向上など多くのメリットがあります。
+
+その反面、今回のFirebase Dynamic Linksのように、サービスが終了してしまうリスクを常に抱えていかなければなりません。
+
+また、チームメンバーに代替サービスの過去実績がないため、採用を決断するには情報が不足しています。これらの情報を収集するには多くの時間を費やす必要がありますが、以下を理由に調査は見送りました。
+
+- 現段階でこのアプリが必要としている要件は、Universal LinksやAndroid App Linksが提供する機能で満たすことが可能
+  - [過去に議論したディープリンクの実現方式 - 導線](./adr-004-deep-link.mdx#アプリへの導線)に記載されている内容は、自身でWebサイトを構築することにより対応
+  - [過去に議論したディープリンクの実現方式 - アプリケーションの実装](./adr-004-deep-link.mdx#アプリケーションの実装)に記載されている[AndroidでディーリンクのURLを読み取れないというissue](https://github.com/facebook/react-native/issues/25675)は、以下のコミットで解決されている
+    - [Do not use InteractionManager to wait for Activity](https://github.com/facebook/react-native/commit/3921f05f594691285e79a379897ed698e081a705)
+    - 上記コミットは、React Nativeの[v0.72.0](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0720)でリリースされている
+
+:::note
+[AndroidでディーリンクのURLを読み取れないというissue](https://github.com/facebook/react-native/issues/25675)は、React Nativeのv0.72.0以前の場合、以下のWorkaroundを適用する必要があります。
+
+- [Workaround](https://github.com/facebook/react-native/issues/25675#issuecomment-1278160951)
+:::
+
+そのため、このアプリではOSの機能であるUniversal LinksとAndroid App Linksを採用することにします。
+
+## 決定
+
+ディープリンクの実現方式として、Universal LinksとAndroid App Linksを利用します。
