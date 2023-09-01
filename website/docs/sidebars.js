@@ -33,6 +33,15 @@ module.exports = {
         'reference/notification/client',
       ],
     },
+    {
+      type: 'category',
+      label: 'ディープリンク',
+      items: [
+        'reference/deep-link/overview',
+        'reference/deep-link/universal-links',
+        'reference/deep-link/android-app-links',
+      ],
+    },
   ],
   distribution: [
     {

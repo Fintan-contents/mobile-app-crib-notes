@@ -1,0 +1,174 @@
+---
+title: Universal Links
+---
+
+[Universal Links](https://developer.apple.com/ios/universal-links/)は、iOSが標準機能として提供しているディープリンクです。
+
+Universal Linksとして登録するURLは以下のようなHTTP URLであるため、1つのURLでアプリとウェブサイトの両方に対応できます。
+
+```console
+https://example.com/account/profile
+```
+
+また、後述する[アプリとドメインの関連付け](#アプリとドメインの関連付け)により、このアプリが提供するUniversal Linksを他のアプリに乗っ取られるようなリスクはありません。
+
+## Universal Linksの処理概要
+
+### Universal Linksの登録
+
+1. ユーザは、アプリをインストールする
+1. OSは、アプリとドメインの関連付けを検証して登録する
+
+### Universal Linksの処理
+
+1. ユーザは、ディープリンクURLをタップする
+1. OSは、タップされたディープリンクを処理する
+1. OSは、ディープリンクURLがUniversal Linksとして登録されているかを判断する
+    - 登録されている場合、OSはアプリを開く
+    - 登録されていない場合、OSはブラウザでディープリンクURLを開く
+1. アプリは、起動時のディープリンクURLを受け取るので、そのURLに応じた処理をする
+
+## アプリとドメインの関連付け
+
+Universal Linksは、アプリとドメインを関連付けることでディープリンクURLの安全を保証します。
+
+アプリとドメインの関連付けは、[Supporting associated domains](https://developer.apple.com/documentation/xcode/supporting-associated-domains)に記載されている通り、以下の設定が必要です。
+
+- Associated Domains Entitlementの追加
+- `associated domain file`をウェブサイトに配置
+
+### Associated Domains Entitlementの追加
+
+Associated Domains Entitlementには、アプリと関連付けるドメインを設定します。ここで設定されたドメインから`associated domain file`をダウンロードし、アプリとドメインが関連付けられます。
+
+Associated Domains Entitlementは、以下の手順で追加します。
+
+- XcodeのCapabilitiesから`Associated Domains`を選択
+- 追加されたEntitlementのDomainsに`applinks:[関連付けるドメイン]`を追加
+  - 複数のサブドメインをサポートする場合は、全てのドメインを追加
+
+詳細は、以下のドキュメントを参照してください。
+
+- [Configuring an associated domain](https://developer.apple.com/documentation/xcode/configuring-an-associated-domain)
+
+なお、Xcodeの`Signing & Capabilities`で`Automatically manage signing`を設定していない場合は、追加で以下の手順が必要になります。
+
+- [Apple Developer Program](https://developer.apple.com/programs/)にログイン
+<!-- textlint-disable jtf-style/4.3.7.山かっこ<> -->
+- Apple Developer Programの[Certificates, Identifiers & Profiles > Identifiers](https://developer.apple.com/account/resources/identifiers/list)でアプリのApp IDを選択
+<!-- textlint-enable jtf-style/4.3.7.山かっこ<> -->
+- Capabilitiesに`Associated Domains`を追加
+<!-- textlint-disable jtf-style/4.3.7.山かっこ<> -->
+- Apple Developer Programの[Certificates, Identifiers & Profiles > Profiles](https://developer.apple.com/account/resources/profiles/list)でProvisioning Profileを更新
+<!-- textlint-enable jtf-style/4.3.7.山かっこ<> -->
+- 更新したProvisioning Profileをダウンロードして、XcodeのProvisioning Profileに設定
+
+:::note
+Xcodeの`Signing & Capabilities`で`Automatically manage signing`を設定している場合は、上記手順をXcodeが自動で実施してくれます。
+:::
+
+### `associated domain file`をウェブサイトに配置
+
+`associated domain file`は、アプリと関連付けるドメインに配置するファイルです。ファイル名は`apple-app-site-association`とし、JSON形式で記述します。
+
+このファイルには、関連付けるアプリの`Application Identifier Prefix`や`Bundle Identifier`、Universal Linksとして受け付けるパスなどを指定します。
+
+詳細は、以下のドキュメントを参照してください。
+
+- [Add the associated domain file to your website](https://developer.apple.com/documentation/xcode/supporting-associated-domains#Add-the-associated-domain-file-to-your-website)
+- [applinks](https://developer.apple.com/documentation/bundleresources/applinks)
+
+```json title=apple-app-site-associationの例
+{
+  "applinks": {
+      "details": [
+           {
+             "appIDs": [ "ABCDE12345.com.example.app"],
+             "components": [
+               {
+                  "/": "/account/profile",
+                  "comment": "プロフィール画面を表示する。"
+               },
+               {
+                  "/": "/questions",
+                  "?": { "page": "?*" },
+                 "comment": "質問一覧画面を表示する。クエリパラメータとしてページ番号を受け取る。"
+               }
+             ]
+           }
+       ]
+   }
+}
+```
+
+:::note
+1つのドメインを複数のアプリと関連付けるには、[details](https://developer.apple.com/documentation/bundleresources/applinks/details)に複数のアプリを設定します。
+
+```json
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [ "ABCDE12345.com.example.app1"],
+        "components": [{ "/": "/app1/users"}]
+      },
+      {
+        "appIDs": [ "ABCDE12345.com.example.app2"],
+        "components": [{ "/": "/app2/books"}]
+      }
+    ]
+  }
+}
+```
+
+:::
+
+作成した`associated domain file`は、ウェブサイトの`.well-known`ディレクトリに配置します。
+
+```console
+https://[ドメイン]/.well-known/apple-app-site-association
+```
+
+また、以下の要件を満たして配信する必要があります。
+
+- `Content-Type`が`application/json`である
+- HTTPS接続でアクセスできる
+- リダイレクトなしでアクセスできる（`301`リダイレクトや`302`リダイレクトがない）
+- 複数のサブドメインをサポートしている場合、各ドメインで`associated domain file`を公開する必要がある
+
+ウェブサイトに配置された`associated domain file`は、アプリのインストール時や一定周期で、OSがAppleのCDNを経由してダウンロードします。
+
+:::warning
+[Appleのドキュメント](https://developer.apple.com/documentation/xcode/supporting-associated-domains#Add-the-associated-domains-entitlement-to-your-app)には、ウェブサイトの`associated domain file`がAppleのCDNに反映されるまで最大24時間かかると記載されています。
+
+> Apple’s content delivery network requests the apple-app-site-association file for your domain within 24 hours.
+:::
+
+:::note
+[Appleのドキュメント](https://developer.apple.com/documentation/xcode/supporting-associated-domains#Add-the-associated-domains-entitlement-to-your-app)には、`associated domain file`をダウンロードするタイミングとして以下の記載があります。
+
+> When a user installs your app, the system attempts to download the associated domain file and verify the domains in your entitlement.
+> Devices check for updates approximately once per week after app installation.
+
+アプリのインストール時や、約1週間に一度の頻度で`associated domain file`をダウンロードするようです。
+:::
+
+:::note
+[Appleのドキュメント](https://developer.apple.com/documentation/xcode/supporting-associated-domains#Add-the-associated-domains-entitlement-to-your-app)には、`associated domain file`がAppleのCDN経由でダウンロードされるのは、iOS14以降と記載されています。
+iOS14未満の場合は、ウェブサイトから直接ダウンロードされます。
+
+> Starting with macOS 11 and iOS 14, apps no longer send requests for apple-app-site-association files directly to your web server. Instead, they send these requests to an Apple-managed content delivery network (CDN) dedicated to associated domains.
+
+:::
+
+なお、開発時は`associated domain file`を配置するウェブサイトのアクセスがIPなどにより制限されている場合があります。その場合、AppleのCDNが`associated domain file`にアクセスできません。
+
+上記を解決する手段として、Associated Domains Entitlementで指定したドメインに`alternate mode`を設定する方法があります。
+
+`alternate mode`を設定することでAppleのCDN経由ではなく、ウェブサイトから直接ダウンロードが可能です。
+
+詳細は、[Enable alternate mode for unreachable servers](https://developer.apple.com/documentation/xcode/configuring-an-associated-domain#Enable-alternate-mode-for-unreachable-servers)を参照してください。
+
+:::warning
+`alternate mode`は、開発用のProvisioning Profileで署名されたアプリでしか使用できません。
+:::

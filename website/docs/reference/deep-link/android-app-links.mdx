@@ -1,0 +1,128 @@
+---
+title: Android App Links
+---
+
+[Android App Links](https://developer.android.com/training/app-links)は、Androidが標準機能として提供しているディープリンクです。
+
+Android App Linksとして登録するURLは以下のようなHTTP URLであるため、1つのURLでアプリとウェブサイトの両方に対応できます。
+
+```console
+https://example.com/account/profile
+```
+
+また、後述する[アプリとドメインの関連付け](#アプリとドメインの関連付け)により、このアプリが提供するAndroid App Linksを他のアプリに乗っ取られるようなリスクはありません。
+
+## Android App Linksの処理概要
+
+### Android App Linksの登録
+
+1. ユーザは、アプリをインストールする
+1. OSは、アプリとドメインの関連付けを検証して登録する
+
+### Android App Linksの処理
+
+1. ユーザは、ディープリンクURLをタップする
+1. OSは、タップされたディープリンクを処理する
+1. OSは、ディープリンクURLがAndroid App Linksとして登録されているかを判断する
+    - 登録されている場合、OSはアプリを開く
+    - 登録されていない場合、OSはブラウザでディープリンクURLを開く
+1. アプリは、起動時のディープリンクURLを受け取るので、そのURLに応じた処理をする
+
+## アプリとドメインの関連付け
+
+Android App Linksは、アプリとドメインを関連付けることでディープリンクURLの安全を保証します。
+
+アプリとドメインの関連付けは、[アプリリンクの検証をリクエストする](https://developer.android.com/training/app-links/verify-android-applinks?hl=ja#request-verify)に記載されている通り、以下の設定が必要です。
+
+- `AndroidManifest.xml`にAndroid App Linksの検証を有効にする`intent-filter`を定義
+- Digital Asset Linksファイルをウェブサイトに配置
+
+### `AndroidManifest.xml`にAndroid App Linksの検証を有効にする`intent-filter`を定義
+
+Android App Linksの検証を有効にするには、`AndroidManifest.xml`の`intent-filter`に`android:autoVerify="true"`を定義します。
+
+`intent-filter`内に以下の要素が存在する場合、OSはアプリインストール時に指定されたドメインのDigital Asset Linksファイルを確認し、アプリとドメインの関連付けを検証します。
+
+- action: `android.intent.action.VIEW`
+- category: `android.intent.category.BROWSABLE`
+- category: `android.intent.category.DEFAULT`
+- data scheme: `http`または`https`
+
+```xml title=AndroidManifest.xmlの例
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- ～省略～ -->
+  <application
+    android:name=".MainApplication"
+    <!-- ～省略～ -->
+    >
+    <activity
+      android:name=".MainActivity"
+      <!-- ～省略～ -->
+      >
+      <!-- ～省略～ -->
+      <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="https" android:host="[ドメイン]" android:path="/account/profile" />
+        <data android:scheme="https" android:host="[ドメイン]" android:pathAdvancedPattern="/questions?page=.+" />
+      </intent-filter>
+    </activity>
+  </application>
+</manifest>
+```
+
+`data`には`path`や`pathPrefix`、`path[Advanced]Pattern`などを指定することで、特定のパスのみを対象にできます。
+詳細は、以下を参照してください。
+
+- [`<data>`](https://developer.android.com/guide/topics/manifest/data-element?hl=ja)
+
+### Digital Asset Linksファイルをウェブサイトに配置
+
+[Digital Asset Links](https://developers.google.com/digital-asset-links/v1/getting-started?hl=ja)ファイルは、アプリと関連付けるドメインに配置するファイルです。ファイル名は`assetlinks.json`とし、JSON形式で記述します。
+
+このファイルには、関連付けるアプリのアプリケーションIDとアプリの署名証明書のSHA256フィンガープリントなどを指定します。
+
+詳細は、以下のドキュメントを参照してください。
+
+- [ウェブサイトの関連付けを宣言する](https://developer.android.com/training/app-links/verify-android-applinks?hl=ja#web-assoc)
+
+```json title=assetlinks.jsonの例
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.example.app",
+    "sha256_cert_fingerprints": ["FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C"]
+  }
+}]
+```
+
+:::note
+アプリの署名証明書のSHA256フィンガープリントは`Java Keytool`を使用することで生成できます。
+
+```bash title=release.keystoreからSHA256フィンガープリントを生成
+keytool -list -v -keystore release.keystore
+```
+
+:::
+
+:::note
+1つのドメインを複数のアプリと関連付けることも可能です。詳細は以下を参照してください。
+
+- [1 つのウェブサイトを複数のアプリに関連付ける](https://developer.android.com/training/app-links/verify-android-applinks?hl=ja#multiple-apps)
+:::
+
+Digital Asset Linksファイルは、ウェブサイトの`.well-known`ディレクトリに配置します。
+
+```console
+https://[ドメイン]/.well-known/assetlinks.json
+```
+
+また、以下の要件を満たして配信する必要があります。
+
+- `Content-Type`が`application/json`である
+- HTTPS接続でアクセスできる
+- リダイレクトなしでアクセスできる（`301`リダイレクトや`302`リダイレクトがない）
+- `bot`がアクセスできる（`robots.txt`で`/.well-known/assetlinks.json`のクロールが禁止されていない）
+- 複数のホストドメインをサポートしている場合、各ドメインでDigital Asset Linksファイルを公開する必要がある（詳細は、[複数のホスト用のアプリリンク機能をサポートする](https://developer.android.com/training/app-links/verify-android-applinks?hl=ja#multi-host)を参照）
