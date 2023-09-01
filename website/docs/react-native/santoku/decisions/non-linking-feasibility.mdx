@@ -1,0 +1,74 @@
+---
+title: React Navigationのlinkingを使用しない画面遷移の検討
+---
+
+`linking`を使用しない場合は、ディープリンクの受信や、URLに応じた画面遷移などを自身で実装する必要があります。その反面、自由な画面遷移が実現可能です。
+
+以下は、ディープリンク受信時の画面遷移を実現する例です。
+
+ディープリンクの受信と、URLの解析には[Expo Linking](https://docs.expo.dev/versions/latest/sdk/linking/)を使用しています。
+
+```tsx
+type Props = {
+  navigation: NavigationContainerRef<RootStackParamList>;
+};
+
+export const DeepLinkHandlers: React.FC<Props> = ({navigation}) => {
+  // コールド・ウォームスタート
+  useEffect(() => {
+    Linking.getInitialURL().then(url => {
+      if (url) {
+        // ディープリンクを受信した場合は、アプリ内からディープリンクURLを開き、Linking.addEventListenerで再度受信する。
+        // このように実装することで、アプリの初期画面が表示された後にディープリンクに応じた画面に遷移するため、
+        // 遷移先画面から戻るボタンタップなどで、前の画面に戻ることができる。
+        Linking.openURL(url);
+      }
+    });
+  }, []);
+
+  // ホットスタート
+  useEffect(() => {
+    const subscription = Linking.addEventListener('url', event => {
+      const parsedURL = Linking.parse(event.url);
+
+      if (parsedURL.path?.startsWith('screen-a')) {
+        navigation.dispatch(StackActions.push('StackNavigator1', {screen: 'ScreenA'}));
+      } else if (parsedURL.path?.startsWith('screen-b')) {
+        navigation.navigate('StackNavigator1', {screen: 'ScreenB'});
+      } else if (parsedURL.path?.startsWith('screen-d')) {
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'TabNavigator2',
+                state: {
+                  index: 0,
+                  routes: [{name: 'ScreenD'}],
+                },
+              },
+            ],
+          }),
+        );
+      }
+    });
+    return () => subscription.remove();
+  }, [navigation]);
+
+  return null;
+};
+```
+
+ディープリンクの受信やディープリンクと遷移先画面のマッピングなど、`linking`に比べて実装する部分は多いのですが、それほどコードが複雑化することはない印象です。
+
+ディープリンクの受信処理を自由に実装できるため、[ディープリンクを受信した際の画面遷移に関する仕様](./adr-019-deep-link-navigation.mdx#ディープリンクを受信した際の画面遷移に関する仕様)を全て満たすこともできます。
+
+:::note
+未認証時に受け取ったディープリンクの遷移先画面を、認証後に表示する方法は、[React Navigationの`linking`使用時に検討した方法](./linking-feasibility.mdx#未認証時に受け取ったディープリンクの遷移先画面を認証後に表示する方法)と基本的には同じです。
+
+- ディープリンクを受け取った時点で、そのディープリンクをStateに保持
+  - コールド、ウォームスタートの場合は、[Linking.getInitialURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkinggetinitialurl)内でStateに設定
+  - ホットスタートの場合は、[Linking.addEventListener](https://docs.expo.dev/versions/latest/sdk/linking/#linkingaddeventlistenertype-handler)内でStateに設定
+- 認証後にStateからディープリンクを取得し、[Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl)を使用してそのディープリンクを開く
+  - `Linking.openURL`を使用してアプリ内からディープリンクを開くことにより、`Linking.addEventListener`でディープリンクを再度受信する
+    :::

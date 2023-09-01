@@ -1,0 +1,263 @@
+---
+title: React Navigationのlinkingを使用した画面遷移の検討
+---
+
+React Navigationは、ディープリンクを受信した際、URLに応じた画面へ遷移する`linking`という機能を提供しています。
+
+- [Deep linking](https://reactnavigation.org/docs/deep-linking/)
+- [Configuring links](https://reactnavigation.org/docs/configuring-links/)
+
+React Navigationの`linking`を使用することで、以下のようにURLと遷移先画面のマッピングを集約して管理できます。またURLを解析してくれるため、クエリパラメータやパスパラメータも取得できます。
+
+```tsx
+const config = {
+  screens: {
+    AuthenticatedStackNav: {
+      screens: {
+        QuestionDetail: {
+          // URLのパスが「question/1234」の場合は、QuestionDetail画面に遷移し、パラメータとして「questionId=1234」を渡す
+          path: 'question/:questionId',
+        },
+      },
+    },
+  },
+}
+
+const linking = {
+  prefixes: ['https://example.com'], // <- このアプリで受け付けるURLのプレフィックス
+  config,
+};
+
+return <NavigationContainer linking={linking}>{children}</NavigationContainer>
+```
+
+また、想定していないパスを受け取った場合のデフォルトの画面も指定できます。
+
+```typescript
+const config = {
+  screens: {
+    AuthenticatedStackNav: {
+      screens: {
+        QuestionDetail: {
+          path: 'question/:questionId',
+        },
+      },
+    },
+    NotFound: '*', // <- 想定しないパスを受け取った場合はNotFound画面を表示する
+  },
+};
+```
+
+`initialRouteName`を指定することで、特定の画面を常にスタックの先頭に追加する機能などもあります。
+
+```typescript
+const config = {
+  screens: {
+    AuthenticatedStackNav: {
+      // ディープリンクからQuestionDetail画面を直接開いても、戻るボタンタップ（navigation.goBack()）でHome画面に戻れる
+      initialRouteName: 'Home',
+      screens: {
+        QuestionDetail: {
+          path: 'question/:questionId',
+        },
+      },
+    },
+  },
+};
+```
+
+このように、`linking`はディープリンクを処理する上で非常に便利な機能を提供してくれます。
+
+一方で、認証状態を考慮した画面表示などいくつか検討が必要な点もあったため、以降ではそれらについて記載します。
+
+## 認証状態による画面表示の制御
+
+React Navigationには、[認証フロー](https://reactnavigation.org/docs/auth-flow)に関するドキュメントがあります。しかし、`linking`と認証フローを組み合わせた場合のドキュメントはなく、以下のissueで議論されています。
+
+- [Deep linking with Authentication Flow](https://github.com/react-navigation/react-navigation.github.io/issues/97)
+
+### 受け取ったディープリンクに応じた画面が、未認証で表示してはいけない場合の考慮
+
+認証済の場合は、ディープリンクURLに応じて画面遷移するように、URLと遷移先画面のマッピングを定義します。
+
+未認証の場合は、ディープリンクURLを無視して通常通り起動するように、マッピングは定義しません。
+
+```typescript
+// 認証済みの場合のみ、URLと遷移先画面のマッピングを定義
+const config = isLoggedIn ? {
+  screens: {
+    AuthenticatedStackNav: {
+      initialRouteName: 'Home',
+      screens: {
+        QuestionDetail: {
+          path: 'question/:questionId',
+        },
+      },
+    },
+  },
+} : undefined;
+```
+
+### 未認証時に受け取ったディープリンクの遷移先画面を、認証後に表示する方法
+
+この仕様を実現するための機能がReact Navigationには存在しません。そのため、以下の方法でこの機能を実現します。
+
+- ディープリンクを受け取った時点で、そのディープリンクをグローバルなStateに保持
+  - コールド、ウォームスタートの場合は、[linking.getInitialURL](https://reactnavigation.org/docs/navigation-container#linkinggetinitialurl)内でStateに設定
+  - ホットスタートの場合は、[linking.subscribe](https://reactnavigation.org/docs/navigation-container#linkingsubscribe)内でStateに設定
+- 認証後にStateからディープリンクを取得し、[Linking.openURL](https://reactnative.dev/docs/linking#openurl)を使用してそのディープリンクを開く
+  - `Linking.openURL`を使用してアプリ内からディープリンクを開くことにより、`linking`に設定したURLと遷移先画面のマッピングに従って画面遷移が行われる
+
+## ディープリンクの遷移先画面で戻るボタンをタップした場合の動作
+
+### `linking`のデフォルト動作の確認
+
+`linking`を使用して画面遷移する場合、`navigation.navigate`を使用した場合と同様の動作になります。
+
+`navigation.navigate`は、[Moving between screens - Summary](https://reactnavigation.org/docs/navigating/#summary)に記載されている通り、以下の特徴を持っています。
+
+- 対象の画面がナビゲーションスタック内に存在している場合は、その画面まで戻る
+- 対象の画面がナビゲーションスタック内に存在していなければ、画面をスタックに追加する
+
+ナビゲーションスタックの状態によっては、ディープリンクをタップする前に表示していた画面に`navigation.goBack`などで戻れない事が予想できます。
+
+以下に例を記載します。
+
+ユーザは、アプリで`ScreenC`を表示しています。
+
+```markdown title=ナビゲーションスタック（ディープリンクタップ前）
+- StackNavigator1
+  - ScreenA
+  - ScreenB
+  - ScreenC <- この画面が表示されている
+```
+
+ユーザが`ScreenB`に遷移するディープリンクをタップすると、スタック内に既に存在する`ScreenB`まで戻ります。
+
+```markdown title=ナビゲーションスタック（ディープリンクタップ後）
+- StackNavigator1
+  - ScreenA
+  - ScreenB <- この画面が表示されている
+```
+
+この場合、`ScreenB`から`navigation.goBack`を実行した場合、`ScreenA`に戻ってしまいます。
+
+もう1つ例を記載します。
+
+ユーザは、アプリで`StackNavigator2`内の`ScreenF`を表示しています。
+
+```markdown title=ナビゲーションスタック（ディープリンクタップ前）
+- StackNavigator1
+  - ScreenA
+  - ScreenB
+  - ScreenC
+- StackNavigator2
+  - ScreenD
+  - ScreenE
+  - ScreenF <- この画面が表示されている
+```
+
+ユーザが`ScreenB`に遷移するディープリンクをタップすると、まず`StackNavigator1`まで戻ります。その後、`StackNavigator1`のスタック内に存在する`ScreenB`まで戻ります。
+
+```markdown title=ナビゲーションスタック（ディープリンクタップ後）
+- StackNavigator1
+  - ScreenA
+  - ScreenB <- この画面が表示されている
+```
+
+この場合、`ScreenB`から`navigation.goBack`を実行した場合、`ScreenA`に戻ってしまいます。
+
+これらの挙動を回避する方法として、以下を検討しました。
+
+- `linking.getActionFromState`を使用して、Navigation actionを設定する
+- 遷移先画面の`Screen.getId`で、ディープリンク受信時は常にユニークなIDを返却する
+
+### `linking.getActionFromState`を使用して、Navigation actionを設定する
+
+`linking.getActionFromState`は、[Navigation action](https://reactnavigation.org/docs/navigation-actions)を設定するための関数です。引数で、[Navigation state](https://reactnavigation.org/docs/navigation-state/)を受け取るため、画面に応じてNavigation actionを設定できます。
+
+```tsx
+import {NavigationContainer, getActionFromState as getOriginalActionFromState} from '@react-navigation/native';
+
+const getActionFromState: typeof getOriginalActionFromState = useCallback((state, options) => {
+  const action = getOriginalActionFromState(state, options);
+  // 画面に応じてNavigation actionを設定
+  if (ScreenAの場合) {
+    return {...action, type: 'PUSH'};
+  } else if (ScreenBの場合) {
+    return {...action, type: 'NAVIGATE'};
+  } else {
+    return {...action, type: 'RESET'};
+  }
+}, []);
+
+const linking = {
+  ...
+  getActionFromState,
+};
+
+return <NavigationContainer linking={linking}>{children}</NavigationContainer>;
+```
+
+しかし、`linking.getActionFromState`は、React Navigationのドキュメントでは公開されておらず、積極的に使用するには不安が残ります。また、Navigation stateの構造は複雑であるため、遷移先画面に応じた条件分岐の作成は難しくなると考えられます。
+
+:::note
+`linking`には、[Advanced cases](https://reactnavigation.org/docs/configuring-links#advanced-cases)に記載されているように、[linking.getStateFromPath](https://reactnavigation.org/docs/navigation-container#linkinggetstatefrompath)という機能もあります。
+
+この機能を使用することにより、URLからNavigation stateの状態を自由に作成できます。
+
+そのため、`linking.getActionFromState`と`linking.getStateFromPath`を組み合わせることで、自由度の高い画面遷移が実現可能です。
+
+しかし、これらの実装は非常に複雑な処理になることが予想されます。URLの解析やNavigation stateの生成を自身で実装することは、`linking`を使うことで得られる多くのメリットを失います。
+:::
+
+### 遷移先画面の`Screen.getId`で、ディープリンク受信時は常にユニークなIDを返却する
+
+`navigation.navigate`は、[Screen.name](https://reactnavigation.org/docs/screen/#name)と[Screen.getId](https://reactnavigation.org/docs/screen/#getid)の返却値によって、画面遷移の挙動が変わります。
+
+同一の`name`と`getId`の返却値を持つScreenがナビゲーションスタックに存在している場合、その画面まで戻ります。そうではない場合、画面をナビゲーションスタックに追加します。
+
+この特徴を利用して、ディープリンク受信時は`getId`からユニークなIDを返却することで、`navigation.push`と同様の挙動を実現できます。
+
+```tsx
+// クエリパラメータとして、linking=trueを受け取った場合は、ユニークなIDを返却する
+export const RootStackNavigator: React.FC = () => {
+  return (
+    <nav.Navigator>
+      <nav.Screen
+        name="StackNavigator1"
+        component={StackNavigator1}
+        getId={({params}) => {
+          if (params?.screen === 'ScreenB') {
+            return params.params?.linking ? String(Date.now()) : undefined;
+          }
+          return undefined;
+        }}
+      />
+    </nav.Navigator>
+  );
+};
+
+const StackNavigator1: React.FC = () => {
+  return (
+    <nav.Navigator>
+      <nav.Screen name="ScreenA" component={ScreenA} />
+      <nav.Screen
+        name="ScreenB"
+        component={ScreenB}
+        getId={({params}) => (params.linking ? String(Date.now()) : undefined)}
+      />
+      <nav.Screen name="ScreenC" component={ScreenC} />
+    </nav.Navigator>
+  );
+};
+```
+
+しかし、この方法の場合は、Navigation actionとして`NAVIGATE`と`PUSH`以外のものを使用できません。
+
+:::note
+`Screen.getId`を使用してNavigation actionを`PUSH`に変更する方法は、以下のissueで議論されています。
+
+- [Linking for stack to call 'push' action instead 'navigate'](https://github.com/react-navigation/react-navigation/issues/9090)
+
+:::

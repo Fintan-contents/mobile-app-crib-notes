@@ -695,6 +695,15 @@ module.exports = {
         'react-native/santoku/decisions/adr-016-forced-app-updates',
         'react-native/santoku/decisions/adr-017-map-view-library',
         'react-native/santoku/decisions/adr-018-deep-link',
+        {
+          type: 'category',
+          label: 'ディープリンク受信時の画面遷移',
+          items: [
+            'react-native/santoku/decisions/adr-019-deep-link-navigation',
+            'react-native/santoku/decisions/linking-feasibility',
+            'react-native/santoku/decisions/non-linking-feasibility',
+          ],
+        },
       ],
     },
   ],
