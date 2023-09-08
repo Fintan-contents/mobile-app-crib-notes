@@ -4,68 +4,27 @@ sidebar_label: 概要
 pagination_label: ディープリンク
 ---
 
-ディープリンクとは、AndroidやiOSでURLのリンクを開くとアプリが起動する仕組みのことです。ディープリンクから起動されたとき、アプリではそのURLを取得できます。
+ディープリンクとは、iOSやAndroidでURLのリンクを開くとアプリが起動する仕組みのことです。ディープリンクから起動されたとき、アプリではそのURLを取得できます。
 
-ディープリンクからアプリを起動したときに、そのURLに応じた画面を表示したり、URLパラメータに従った初期値を設定するなど、幅広く活用できます。このようにディープリンクを利用することで、ユーザが簡単に目的を達成できるようになります。
+ディープリンクからアプリを起動したときに、そのURLに応じた画面を表示したり、URLパラメータに従った初期値を設定するなど、幅広く活用できます。
 
-このアプリでもディープリンクを利用し、実現するために[Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links)を採用します。以降、その実現方式を記載します。
+## ディープリンクの実現方法
 
-## 全体の構成
+このアプリでは、ディープリンクを実現する方法として、OSの標準機能である[Universal Links](https://developer.apple.com/ios/universal-links/)と[Android App Links](https://developer.android.com/training/app-links)を使用します。
 
-Firebase Dynamic LinksはOSの機能（[Universal Link（iOS）](https://developer.apple.com/ios/universal-links/)、[App Links(Android)](https://developer.android.com/training/app-links#add-app-links)）を拡張したFirebaseの機能です。
+:::warning
+ディープリンクを実現する方法としては、カスタムURLスキームもあります。
 
-以降、次の用語を使ってその全体像を紹介します。
+カスタムURLスキームは、複数のアプリが同じスキームを設定できるため、OSはURLリンクの対象とするアプリを一意に特定できません。その結果、正規アプリのスキームを偽装した不正アプリによってURLリンクを乗っ取られる可能性があります。
 
-|用語|説明|
-|:-------|:--|
-|ディープリンクURL|ユーザが開くURLで、OSがドメインとの関連を検証するときに利用するURLです。OSの検証が成功するとアプリケーションに渡されます。Dynamic Linksではパラメータ部分にコンテンツリンクURLなどを保持します。|
-|コンテンツリンクURL|アプリで表示したいコンテンツをあらわすURLです。（OSの機能だけの場合はディープリンクURLと同じです）Dynamic Linksではアプリと関連付けていないドメインのURLも渡すことができます。|
-|ウェブサイト|ディープリンクURLを開いたときにアプリケーションがインストールされていないときに開くサイトです。|
-|[プレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)|iOSでディープリンクURLに対応するアプリケーションがインストールされていない場合に表示されるページです。|
-|フォールバックURL[^1]|アプリがインストールされていない場合にユーザを誘導するURLです。Androidではウェブサイトから自動でリダイレクトされ、iOSではプレビューページに配置されるボタンから誘導します。App StoreやGoogle Playなどアプリのインストール用のURLを設定します。|
+[Appleのドキュメント](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)にも、カスタムURLスキームではなくUniversal Linksを推奨する記載があります。
 
-OSの機能ではディープリンクURLを開くと、下記の図のようにOSがアプリとディープリンクURL（ドメイン）の関連を検証します。
-インストールされているアプリケーションとドメインが相互に関連を持っていることが検証できると、対象のアプリケーションを起動してディープリンクURLを渡します。
+> While custom URL schemes are an acceptable form of deep linking, universal links are strongly recommended.
 
-アプリケーションとドメインを関連付ける方法については、次のサイトを参照してください。
-
-- [iOS でダイナミック リンクを受信する](https://firebase.google.com/docs/dynamic-links/ios/receive)[^2]
-- [Android で Firebase Dynamic Links を受信する](https://firebase.google.com/docs/dynamic-links/android/receive)
-
-[^1]:ユーザがiOSやAndroid以外のOSでアクセスした場合、フォールバックURLではなく、コンテンツリンクURLをブラウザで開きます。
-[^2]:iOSで[関連するドメイン（Associated Domains）](https://help.apple.com/developer-account/#/dev21218dfd6)の機能を利用するためにはADPかADEPライセンスが必要です。
-
-![overview](./overview.drawio.png)
-
-OSの機能では、アプリをインストールしていなければディープリンクURLのウェブサイトを表示します。（ウェブサイトがなければエラー画面が表示されます）
-
-Firebase Dynamic Linksの拡張機能では、未インストールのユーザがディープリンクURLを開くとアプリのインストールページ（フォールバックURL）に誘導します。この際、Androidでは自動的にフォールバックURLが表示され、iOSではフォールバックURLへのリンクのあるプレビューページが表示されます。
-さらに、ユーザがアプリをインストールして起動すると①で開いた[ディープリンクURLをアプリに渡せる](https://firebase.google.com/docs/dynamic-links/operating-system-integrations)ため、ユーザがもう一度ディープリンクを開く必要が有りません。
-
-## 利用するライブラリ
-
-React NativeでFirebase Dynamic Linksを利用するために[React Native Firebase Dynamic Links](https://rnfirebase.io/dynamic-links/usage)を利用します。
-
-:::note
-React NativeにはOS機能の範囲のディープリンクを扱うLinkingという機能が含まれていますが、ディープリンクURLからコンテンツリンクURLを取得する機能はありません。また、全体の構成にて破線で示しているDynamic Linksの拡張機能にも対応していません。
+そのため、このアプリではカスタムURLスキームを使用しません。
 :::
-
-React Native Firebaseの導入については[React Native Fireabase](https://rnfirebase.io/)と[Dynamic Link](https://rnfirebase.io/dynamic-links/usage)を参照してください。
-
-## ディープリンクURLに対応するウェブサイト
-
-アプリケーションがインストールされていない場合、ブラウザでディープリンクのURLが開かれます。ディープリンクのURLに対応するウェブサイトが存在していないと、ユーザはコンテンツへの導線を失います。インストールしていないユーザの導線を確保するために、ディープリンクを利用する場合はウェブサイトも一緒に準備することが望ましいです。
-
-このアプリでは、ウェブサイトとしてDynamic Linksがデフォルトで提供するウェブサイトと[アプリのプレビューページ](https://firebase.google.com/docs/dynamic-links/link-previews#app_preview_pages)を利用します。ウェブサイトやプレビューページではURLに対応するコンテンツ自体は表示できませんが、ストアなどに誘導できるため、ユーザが導線を失うことにはなりません。
-
-## 環境の切り替え
-
-開発やテストは本番環境とは切り離された環境で実施します。ディープリンクに関しても同じように「テスト用のアプリを起動するディープリンクURL」と「本番アプリを起動するディープリンクURL」を分ける必要があります。
-
-これまで説明してきたとおり、ディープリンクではディープリンクURLに対してアプリIDと証明書の組み合わせを確認して、起動するアプリケーションが決定されます。このとき利用されるのはドメイン名だけではなく、URLのパス部分も含めて確認されます。
-
-これらを利用して、ディープリンクURLのドメイン部分とパス部分の組み合わせに応じて、起動するアプリが変わるように設定します。
 
 ## 関連する決定事項
 
-- [ディープリンクの実現方式](../../decisions/adr-004-deep-link.mdx)
+- [ディープリンクの実現方式](../../decisions/adr-018-deep-link.mdx)
+- [ディープリンク受信時の画面遷移](../../decisions/adr-019-deep-link-navigation.mdx)
