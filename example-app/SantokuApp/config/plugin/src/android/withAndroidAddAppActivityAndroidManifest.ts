@@ -17,17 +17,12 @@ export const withAndroidAddAppActivityAndroidManifest: ConfigPlugin = config => 
       throw new Error('MainActivity does not exist in AndroidManifest application.');
     }
     const mainActivity = {
+      ...originalMainActivity,
       $: {
         'android:name': '.MainActivity',
         'android:theme': '@style/Theme.App.SplashScreen',
         'android:exported': 'true' as 'true',
       },
-      'intent-filter': [
-        {
-          action: [{$: {'android:name': 'android.intent.action.MAIN'}}],
-          category: [{$: {'android:name': 'android.intent.category.LAUNCHER'}}],
-        },
-      ],
     };
     const restApplication =
       androidManifest.manifest.application?.filter(a => a.$['android:name'] !== '.MainApplication') ?? [];
