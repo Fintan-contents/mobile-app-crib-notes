@@ -65,12 +65,12 @@ Superseded: 廃止
 
 - 現段階でこのアプリが必要としている要件は、Universal LinksやAndroid App Linksが提供する機能で満たすことが可能
   - [過去に議論したディープリンクの実現方式 - 導線](./adr-004-deep-link.mdx#アプリへの導線)に記載されている内容は、自身でWebサイトを構築することにより対応
-  - [過去に議論したディープリンクの実現方式 - アプリケーションの実装](./adr-004-deep-link.mdx#アプリケーションの実装)に記載されている[AndroidでディーリンクのURLを読み取れないというissue](https://github.com/facebook/react-native/issues/25675)は、以下のコミットで解決されている
+  - [過去に議論したディープリンクの実現方式 - アプリケーションの実装](./adr-004-deep-link.mdx#アプリケーションの実装)に記載されている[AndroidでディープリンクのURLを読み取れないというissue](https://github.com/facebook/react-native/issues/25675)は、以下のコミットで解決されている
     - [Do not use InteractionManager to wait for Activity](https://github.com/facebook/react-native/commit/3921f05f594691285e79a379897ed698e081a705)
     - 上記コミットは、React Nativeの[v0.72.0](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0720)でリリースされている
 
 :::note
-[AndroidでディーリンクのURLを読み取れないというissue](https://github.com/facebook/react-native/issues/25675)は、React Nativeのv0.72.0以前の場合、以下のWorkaroundを適用する必要があります。
+[AndroidでディープリンクのURLを読み取れないというissue](https://github.com/facebook/react-native/issues/25675)は、React Nativeのv0.72.0以前の場合、以下のWorkaroundを適用する必要があります。
 
 - [Workaround](https://github.com/facebook/react-native/issues/25675#issuecomment-1278160951)
 :::
