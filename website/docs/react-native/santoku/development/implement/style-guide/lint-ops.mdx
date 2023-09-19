@@ -93,7 +93,17 @@ promise.cancel = () => source.cancel();
 // @ts-expect-error 型定義にcancelはないが、
 // APIのライブラリで呼び出されるため
 promise.cancel = () => source.cancel();
+```
 
-/* @ts-expect-error 型定義にcancelはないが、APIのライブラリで呼び出されるため */
+:::note
+`@ts-expect-error`は、以下のように`/* */`を使用した複数行のコメントには使用できません。
+
+```typescript
+/*
+  @ts-expect-error 型定義にcancelはないが、
+  APIのライブラリで呼び出されるため
+ */
 promise.cancel = () => source.cancel();
 ```
+
+:::

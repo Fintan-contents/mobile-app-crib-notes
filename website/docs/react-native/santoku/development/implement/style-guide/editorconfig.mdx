@@ -23,13 +23,13 @@ Visual Studio CodeでEditorConfigを有効にする方法については、[Visu
 
 適用している全てのルールは以下のとおりです。
 
-| オプション | 設定値   |
-|:------|:------|
-| [indent_style](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#indent_style)  | space |
-| [indent_size](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#indent_size)  | 2 |
-| [tab_width](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#tab_width)  | 8 |
-| [end_of_line](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#end_of_line)  | lf    |
-| [charset](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#charset)  | utf-8 |
-| [trim_trailing_whitespace](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#trim_trailing_whitespace)  | true  |
-| [insert_final_newline](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#insert_final_newline)  | true  |
-| [max_line_length](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#max_line_length)  | 120   |
+| オプション                                                                                                                          | 設定値   | 説明                                                                    |
+|:-------------------------------------------------------------------------------------------------------------------------------|:------|:----------------------------------------------------------------------|
+| [indent_style](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#indent_style)                         | space | インデントにはスペースを利用します。                                                    |
+| [indent_size](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#indent_size)                           | 2     | インデントサイズは2にします。                                                       |
+| [tab_width](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#tab_width)                               | 8     | タブ文字は8文字幅で表示します（Tabが紛れていることがわかりやすくなるようにするため）。                         |
+| [end_of_line](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#end_of_line)                           | lf    | 改行コードはLFに統一します（batなど一部のファイルの改行コードは`.gitattributes`で強制的にCRLFに変更されます）。 |
+| [charset](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#charset)                                   | utf-8 | 文字コードはUTF-8にします。                                                      |
+| [trim_trailing_whitespace](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#trim_trailing_whitespace) | true  | 行末の空白はトリムします。                                                         |
+| [insert_final_newline](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#insert_final_newline)         | true  | ファイル末尾に改行を入れます。                                                       |
+| [max_line_length](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#max_line_length)                   | 120   | 一行の長さは120文字までにします。                                                    |

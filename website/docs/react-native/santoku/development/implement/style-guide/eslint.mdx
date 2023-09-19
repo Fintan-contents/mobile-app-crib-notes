@@ -35,6 +35,11 @@ Visual Studio CodeでESLintを有効にする方法については、[Visual Stu
 
 このアプリでは、ESLintのルールを[.eslintrc.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/.eslintrc.js)に定義しています。
 
+基本的には、Expoが提供している[eslint-config-universe](https://github.com/expo/expo/tree/master/packages/eslint-config-universe)の設定をベースとしています。
+その他、[eslint-plugin-react-hooks](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)など、推奨ルールを提供しているプラグインの設定も取り込んでいます。
+
+ただし、一部のルールについては、推奨設定から変更しています。変更したルールについては、以降に記載するルール一覧の該当箇所に理由を記載しているので、そちらを参照してください。
+
 適用している全てのルールは以下のとおりです。
 
 :::note
@@ -50,202 +55,224 @@ npx eslint --print-config src/apps/app/App.tsx
 
 ### [@typescript-eslint](https://typescript-eslint.io/)
 
-|ルール|レベル|
-|:--|:--|
-|[@typescript-eslint/array-type](https://typescript-eslint.io/rules/array-type)|warn|
-|[@typescript-eslint/await-thenable](https://typescript-eslint.io/rules/await-thenable)|error|
-|[@typescript-eslint/ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment)|error|
-|[@typescript-eslint/ban-types](https://typescript-eslint.io/rules/ban-types)|error|
-|[@typescript-eslint/consistent-type-assertions](https://typescript-eslint.io/rules/consistent-type-assertions)|warn|
-|[@typescript-eslint/no-dupe-class-members](https://typescript-eslint.io/rules/no-dupe-class-members)|warn|
-|[@typescript-eslint/no-extra-non-null-assertion](https://typescript-eslint.io/rules/no-extra-non-null-assertion)|warn|
-|[@typescript-eslint/no-floating-promises](https://typescript-eslint.io/rules/no-floating-promises)|error|
-|[@typescript-eslint/no-implied-eval](https://typescript-eslint.io/rules/no-implied-eval)|error|
-|[@typescript-eslint/no-misused-promises](https://typescript-eslint.io/rules/no-misused-promises)|error|
-|[@typescript-eslint/no-redeclare](https://typescript-eslint.io/rules/no-redeclare)|warn|
-|[@typescript-eslint/no-throw-literal](https://typescript-eslint.io/rules/no-throw-literal)|warn|
-|[@typescript-eslint/no-unnecessary-type-assertion](https://typescript-eslint.io/rules/no-unnecessary-type-assertion)|error|
-|[@typescript-eslint/no-unsafe-argument](https://typescript-eslint.io/rules/no-unsafe-argument)|error|
-|[@typescript-eslint/no-unsafe-assignment](https://typescript-eslint.io/rules/no-unsafe-assignment)|error|
-|[@typescript-eslint/no-unsafe-call](https://typescript-eslint.io/rules/no-unsafe-call)|error|
-|[@typescript-eslint/no-unsafe-member-access](https://typescript-eslint.io/rules/no-unsafe-member-access)|error|
-|[@typescript-eslint/no-unsafe-return](https://typescript-eslint.io/rules/no-unsafe-return)|error|
-|[@typescript-eslint/no-unused-vars](https://typescript-eslint.io/rules/no-unused-vars)|warn|
-|[@typescript-eslint/no-useless-constructor](https://typescript-eslint.io/rules/no-useless-constructor)|warn|
-|[@typescript-eslint/prefer-nullish-coalescing](https://typescript-eslint.io/rules/prefer-nullish-coalescing)|warn|
-|[@typescript-eslint/prefer-optional-chain](https://typescript-eslint.io/rules/prefer-optional-chain)|warn|
-|[@typescript-eslint/require-await](https://typescript-eslint.io/rules/require-await)|error|
-|[@typescript-eslint/restrict-plus-operands](https://typescript-eslint.io/rules/restrict-plus-operands)|error|
-|[@typescript-eslint/restrict-template-expressions](https://typescript-eslint.io/rules/restrict-template-expressions)|error|
-|[@typescript-eslint/unbound-method](https://typescript-eslint.io/rules/unbound-method)|error|
+TypeScriptに特化したルールを提供するプラグインです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[@typescript-eslint/array-type](https://typescript-eslint.io/rules/array-type)|warn|-|
+|[@typescript-eslint/await-thenable](https://typescript-eslint.io/rules/await-thenable)|error|-|
+|[@typescript-eslint/ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、このアプリでは`ts-check`と`ts-expect-error`だけを使用できるようにこのルールを設定しています。`ts-ignore`を除外している理由は、[チェック対象外にする方法 - TypeScript](./lint-ops.mdx#typescript)を参照してください。|
+|[@typescript-eslint/ban-types](https://typescript-eslint.io/rules/ban-types)|error|-|
+|[@typescript-eslint/consistent-type-assertions](https://typescript-eslint.io/rules/consistent-type-assertions)|warn|-|
+|[@typescript-eslint/no-dupe-class-members](https://typescript-eslint.io/rules/no-dupe-class-members)|warn|-|
+|[@typescript-eslint/no-extra-non-null-assertion](https://typescript-eslint.io/rules/no-extra-non-null-assertion)|warn|-|
+|[@typescript-eslint/no-floating-promises](https://typescript-eslint.io/rules/no-floating-promises)|error|-|
+|[@typescript-eslint/no-implied-eval](https://typescript-eslint.io/rules/no-implied-eval)|error|-|
+|[@typescript-eslint/no-misused-promises](https://typescript-eslint.io/rules/no-misused-promises)|error|推奨設定でもこのルールはerrorレベルで設定されています。<br/><br/>ただし、このアプリではJSXの場合だけオプションの[checksVoidReturn: attributes](https://typescript-eslint.io/rules/no-misused-promises/#checksvoidreturn)を`false`に設定しています。JSX内でコンポーネントのイベントハンドラなどに渡す関数は、`Promise`を返却することが多々あります。そのため、JSX内でコンポーネントの属性に渡す関数に関しては、戻り値が`void`かをチェックしないように変更しています。|
+|[@typescript-eslint/no-redeclare](https://typescript-eslint.io/rules/no-redeclare)|warn|-|
+|[@typescript-eslint/no-throw-literal](https://typescript-eslint.io/rules/no-throw-literal)|warn|-|
+|[@typescript-eslint/no-unnecessary-type-assertion](https://typescript-eslint.io/rules/no-unnecessary-type-assertion)|error|-|
+|[@typescript-eslint/no-unsafe-argument](https://typescript-eslint.io/rules/no-unsafe-argument)|error|-|
+|[@typescript-eslint/no-unsafe-assignment](https://typescript-eslint.io/rules/no-unsafe-assignment)|error|-|
+|[@typescript-eslint/no-unsafe-call](https://typescript-eslint.io/rules/no-unsafe-call)|error|-|
+|[@typescript-eslint/no-unsafe-member-access](https://typescript-eslint.io/rules/no-unsafe-member-access)|error|-|
+|[@typescript-eslint/no-unsafe-return](https://typescript-eslint.io/rules/no-unsafe-return)|error|-|
+|[@typescript-eslint/no-unused-vars](https://typescript-eslint.io/rules/no-unused-vars)|warn|-|
+|[@typescript-eslint/no-useless-constructor](https://typescript-eslint.io/rules/no-useless-constructor)|warn|-|
+|[@typescript-eslint/prefer-nullish-coalescing](https://typescript-eslint.io/rules/prefer-nullish-coalescing)|warn|-|
+|[@typescript-eslint/prefer-optional-chain](https://typescript-eslint.io/rules/prefer-optional-chain)|warn|-|
+|[@typescript-eslint/require-await](https://typescript-eslint.io/rules/require-await)|error|-|
+|[@typescript-eslint/restrict-plus-operands](https://typescript-eslint.io/rules/restrict-plus-operands)|error|-|
+|[@typescript-eslint/restrict-template-expressions](https://typescript-eslint.io/rules/restrict-template-expressions)|error|-|
+|[@typescript-eslint/unbound-method](https://typescript-eslint.io/rules/unbound-method)|error|-|
 
 ### [eslint](https://eslint.org/docs/latest)
 
-|ルール|レベル|
-|:--|:--|
-|[curly](https://eslint.org/docs/latest/rules/curly)|error|
-|[eqeqeq](https://eslint.org/docs/latest/rules/eqeqeq)|warn|
-|[no-array-constructor](https://eslint.org/docs/latest/rules/no-array-constructor)|warn|
-|[no-caller](https://eslint.org/docs/latest/rules/no-caller)|warn|
-|[no-case-declarations](https://eslint.org/docs/latest/rules/no-case-declarations)|warn|
-|[no-compare-neg-zero](https://eslint.org/docs/latest/rules/no-compare-neg-zero)|warn|
-|[no-cond-assign](https://eslint.org/docs/latest/rules/no-cond-assign)|warn|
-|[no-constant-condition](https://eslint.org/docs/latest/rules/no-constant-condition)|warn|
-|[no-debugger](https://eslint.org/docs/latest/rules/no-debugger)|warn|
-|[no-delete-var](https://eslint.org/docs/latest/rules/no-delete-var)|error|
-|[no-duplicate-case](https://eslint.org/docs/latest/rules/no-duplicate-case)|error|
-|[no-empty-character-class](https://eslint.org/docs/latest/rules/no-empty-character-class)|warn|
-|[no-empty-pattern](https://eslint.org/docs/latest/rules/no-empty-pattern)|warn|
-|[no-eval](https://eslint.org/docs/latest/rules/no-eval)|warn|
-|[no-ex-assign](https://eslint.org/docs/latest/rules/no-ex-assign)|warn|
-|[no-extend-native](https://eslint.org/docs/latest/rules/no-extend-native)|warn|
-|[no-extra-bind](https://eslint.org/docs/latest/rules/no-extra-bind)|warn|
-|[no-extra-boolean-cast](https://eslint.org/docs/latest/rules/no-extra-boolean-cast)|warn|
-|[no-fallthrough](https://eslint.org/docs/latest/rules/no-fallthrough)|warn|
-|[no-global-assign](https://eslint.org/docs/latest/rules/no-global-assign)|warn|
-|[no-inner-declarations](https://eslint.org/docs/latest/rules/no-inner-declarations)|warn|
-|[no-invalid-regexp](https://eslint.org/docs/latest/rules/no-invalid-regexp)|error|
-|[no-irregular-whitespace](https://eslint.org/docs/latest/rules/no-irregular-whitespace)|warn|
-|[no-iterator](https://eslint.org/docs/latest/rules/no-iterator)|warn|
-|[no-label-var](https://eslint.org/docs/latest/rules/no-label-var)|warn|
-|[no-labels](https://eslint.org/docs/latest/rules/no-labels)|warn|
-|[no-lone-blocks](https://eslint.org/docs/latest/rules/no-lone-blocks)|warn|
-|[no-multi-assign](https://eslint.org/docs/latest/rules/no-multi-assign)|warn|
-|[no-new](https://eslint.org/docs/latest/rules/no-new)|warn|
-|[no-new-func](https://eslint.org/docs/latest/rules/no-new-func)|warn|
-|[no-new-object](https://eslint.org/docs/latest/rules/no-new-object)|warn|
-|[no-octal](https://eslint.org/docs/latest/rules/no-octal)|warn|
-|[no-octal-escape](https://eslint.org/docs/latest/rules/no-octal-escape)|warn|
-|[no-proto](https://eslint.org/docs/latest/rules/no-proto)|warn|
-|[no-restricted-syntax](https://eslint.org/docs/latest/rules/no-restricted-syntax)|error|
-|[no-return-assign](https://eslint.org/docs/latest/rules/no-return-assign)|warn|
-|[no-script-url](https://eslint.org/docs/latest/rules/no-script-url)|warn|
-|[no-self-assign](https://eslint.org/docs/latest/rules/no-self-assign)|warn|
-|[no-self-compare](https://eslint.org/docs/latest/rules/no-self-compare)|warn|
-|[no-sequences](https://eslint.org/docs/latest/rules/no-sequences)|warn|
-|[no-shadow-restricted-names](https://eslint.org/docs/latest/rules/no-shadow-restricted-names)|warn|
-|[no-sparse-arrays](https://eslint.org/docs/latest/rules/no-sparse-arrays)|warn|
-|[no-throw-literal](https://eslint.org/docs/latest/rules/no-throw-literal)|warn|
-|[no-unneeded-ternary](https://eslint.org/docs/latest/rules/no-unneeded-ternary)|warn|
-|[no-unused-expressions](https://eslint.org/docs/latest/rules/no-unused-expressions)|warn|
-|[no-unused-labels](https://eslint.org/docs/latest/rules/no-unused-labels)|warn|
-|[no-useless-computed-key](https://eslint.org/docs/latest/rules/no-useless-computed-key)|warn|
-|[no-useless-concat](https://eslint.org/docs/latest/rules/no-useless-concat)|warn|
-|[no-useless-escape](https://eslint.org/docs/latest/rules/no-useless-escape)|warn|
-|[no-useless-rename](https://eslint.org/docs/latest/rules/no-useless-rename)|warn|
-|[no-useless-return](https://eslint.org/docs/latest/rules/no-useless-return)|warn|
-|[no-var](https://eslint.org/docs/latest/rules/no-var)|error|
-|[no-void](https://eslint.org/docs/latest/rules/no-void)|warn|
-|[no-with](https://eslint.org/docs/latest/rules/no-with)|warn|
-|[object-shorthand](https://eslint.org/docs/latest/rules/object-shorthand)|warn|
-|[prefer-const](https://eslint.org/docs/latest/rules/prefer-const)|error|
-|[prefer-promise-reject-errors](https://eslint.org/docs/latest/rules/prefer-promise-reject-errors)|warn|
-|[prefer-rest-params](https://eslint.org/docs/latest/rules/prefer-rest-params)|error|
-|[prefer-spread](https://eslint.org/docs/latest/rules/prefer-spread)|error|
-|[radix](https://eslint.org/docs/latest/rules/radix)|warn|
-|[use-isnan](https://eslint.org/docs/latest/rules/use-isnan)|error|
-|[yoda](https://eslint.org/docs/latest/rules/yoda)|warn|
+ESLintが提供するルールです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[curly](https://eslint.org/docs/latest/rules/curly)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、制御構文中（`if`文など）の括弧を必ず明示することで、コードが統一され可読性が高まると考え、errorレベルに変更しています。|
+|[eqeqeq](https://eslint.org/docs/latest/rules/eqeqeq)|warn|-|
+|[no-array-constructor](https://eslint.org/docs/latest/rules/no-array-constructor)|warn|-|
+|[no-caller](https://eslint.org/docs/latest/rules/no-caller)|warn|-|
+|[no-case-declarations](https://eslint.org/docs/latest/rules/no-case-declarations)|warn|-|
+|[no-compare-neg-zero](https://eslint.org/docs/latest/rules/no-compare-neg-zero)|warn|-|
+|[no-cond-assign](https://eslint.org/docs/latest/rules/no-cond-assign)|warn|-|
+|[no-constant-condition](https://eslint.org/docs/latest/rules/no-constant-condition)|warn|-|
+|[no-debugger](https://eslint.org/docs/latest/rules/no-debugger)|warn|-|
+|[no-delete-var](https://eslint.org/docs/latest/rules/no-delete-var)|error|-|
+|[no-duplicate-case](https://eslint.org/docs/latest/rules/no-duplicate-case)|error|-|
+|[no-empty-character-class](https://eslint.org/docs/latest/rules/no-empty-character-class)|warn|-|
+|[no-empty-pattern](https://eslint.org/docs/latest/rules/no-empty-pattern)|warn|-|
+|[no-eval](https://eslint.org/docs/latest/rules/no-eval)|warn|-|
+|[no-ex-assign](https://eslint.org/docs/latest/rules/no-ex-assign)|warn|-|
+|[no-extend-native](https://eslint.org/docs/latest/rules/no-extend-native)|warn|-|
+|[no-extra-bind](https://eslint.org/docs/latest/rules/no-extra-bind)|warn|-|
+|[no-extra-boolean-cast](https://eslint.org/docs/latest/rules/no-extra-boolean-cast)|warn|-|
+|[no-fallthrough](https://eslint.org/docs/latest/rules/no-fallthrough)|warn|-|
+|[no-global-assign](https://eslint.org/docs/latest/rules/no-global-assign)|warn|-|
+|[no-inner-declarations](https://eslint.org/docs/latest/rules/no-inner-declarations)|warn|-|
+|[no-invalid-regexp](https://eslint.org/docs/latest/rules/no-invalid-regexp)|error|-|
+|[no-irregular-whitespace](https://eslint.org/docs/latest/rules/no-irregular-whitespace)|warn|-|
+|[no-iterator](https://eslint.org/docs/latest/rules/no-iterator)|warn|-|
+|[no-label-var](https://eslint.org/docs/latest/rules/no-label-var)|warn|-|
+|[no-labels](https://eslint.org/docs/latest/rules/no-labels)|warn|-|
+|[no-lone-blocks](https://eslint.org/docs/latest/rules/no-lone-blocks)|warn|-|
+|[no-multi-assign](https://eslint.org/docs/latest/rules/no-multi-assign)|warn|-|
+|[no-new](https://eslint.org/docs/latest/rules/no-new)|warn|-|
+|[no-new-func](https://eslint.org/docs/latest/rules/no-new-func)|warn|-|
+|[no-new-object](https://eslint.org/docs/latest/rules/no-new-object)|warn|-|
+|[no-octal](https://eslint.org/docs/latest/rules/no-octal)|warn|-|
+|[no-octal-escape](https://eslint.org/docs/latest/rules/no-octal-escape)|warn|-|
+|[no-proto](https://eslint.org/docs/latest/rules/no-proto)|warn|-|
+|[no-restricted-syntax](https://eslint.org/docs/latest/rules/no-restricted-syntax)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、`prototype`も取得してループする`for...in`文を禁止したいため、このルールを設定しています。<br/><br/>なお、同様の機能を持つルールとして`@typescript-eslint/no-for-in-array`もあります。<br/>しかし、`no-restricted-syntax`はオブジェクトの`for...in`文も禁止できるため、こちらのルールを設定して`@typescript-eslint/no-for-in-array`をoffにしています。|
+|[no-return-assign](https://eslint.org/docs/latest/rules/no-return-assign)|warn|-|
+|[no-script-url](https://eslint.org/docs/latest/rules/no-script-url)|warn|-|
+|[no-self-assign](https://eslint.org/docs/latest/rules/no-self-assign)|warn|-|
+|[no-self-compare](https://eslint.org/docs/latest/rules/no-self-compare)|warn|-|
+|[no-sequences](https://eslint.org/docs/latest/rules/no-sequences)|warn|-|
+|[no-shadow-restricted-names](https://eslint.org/docs/latest/rules/no-shadow-restricted-names)|warn|-|
+|[no-sparse-arrays](https://eslint.org/docs/latest/rules/no-sparse-arrays)|warn|-|
+|[no-throw-literal](https://eslint.org/docs/latest/rules/no-throw-literal)|warn|-|
+|[no-unneeded-ternary](https://eslint.org/docs/latest/rules/no-unneeded-ternary)|warn|-|
+|[no-unused-expressions](https://eslint.org/docs/latest/rules/no-unused-expressions)|warn|-|
+|[no-unused-labels](https://eslint.org/docs/latest/rules/no-unused-labels)|warn|-|
+|[no-useless-computed-key](https://eslint.org/docs/latest/rules/no-useless-computed-key)|warn|-|
+|[no-useless-concat](https://eslint.org/docs/latest/rules/no-useless-concat)|warn|-|
+|[no-useless-escape](https://eslint.org/docs/latest/rules/no-useless-escape)|warn|-|
+|[no-useless-rename](https://eslint.org/docs/latest/rules/no-useless-rename)|warn|-|
+|[no-useless-return](https://eslint.org/docs/latest/rules/no-useless-return)|warn|-|
+|[no-var](https://eslint.org/docs/latest/rules/no-var)|error|-|
+|[no-void](https://eslint.org/docs/latest/rules/no-void)|warn|-|
+|[no-with](https://eslint.org/docs/latest/rules/no-with)|warn|-|
+|[object-shorthand](https://eslint.org/docs/latest/rules/object-shorthand)|warn|-|
+|[prefer-const](https://eslint.org/docs/latest/rules/prefer-const)|error|-|
+|[prefer-promise-reject-errors](https://eslint.org/docs/latest/rules/prefer-promise-reject-errors)|warn|-|
+|[prefer-rest-params](https://eslint.org/docs/latest/rules/prefer-rest-params)|error|-|
+|[prefer-spread](https://eslint.org/docs/latest/rules/prefer-spread)|error|-|
+|[radix](https://eslint.org/docs/latest/rules/radix)|warn|-|
+|[use-isnan](https://eslint.org/docs/latest/rules/use-isnan)|error|-|
+|[yoda](https://eslint.org/docs/latest/rules/yoda)|warn|-|
 
 ### [eslint-plugin-deprecation](https://github.com/gund/eslint-plugin-deprecation)
 
-|ルール|レベル|
-|:--|:--|
-|[deprecation/deprecation](https://github.com/gund/eslint-plugin-deprecation)|error|
+非推奨コードの使用を検出するプラグインです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[deprecation/deprecation](https://github.com/gund/eslint-plugin-deprecation)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、非推奨コードの使用は自動的に検知したいためこのルールを設定しています。|
 
 ### [eslint-plugin-eslint-comments](https://mysticatea.github.io/eslint-plugin-eslint-comments)
 
-|ルール|レベル|
-|:--|:--|
-|[eslint-comments/disable-enable-pair](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/disable-enable-pair.html)|error|
-|[eslint-comments/no-aggregating-enable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-aggregating-enable.html)|error|
-|[eslint-comments/no-duplicate-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-duplicate-disable.html)|error|
-|[eslint-comments/no-unlimited-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unlimited-disable.html)|error|
-|[eslint-comments/no-unused-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html)|error|
-|[eslint-comments/no-unused-enable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-enable.html)|error|
-|[eslint-comments/no-use](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-use.html)|error|
-|[eslint-comments/require-description](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/require-description.html)|error|
+`eslint-disable`のようなディレクティブコメントの使用に関するルールを提供するプラグインです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[eslint-comments/disable-enable-pair](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/disable-enable-pair.html)|error|-|
+|[eslint-comments/no-aggregating-enable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-aggregating-enable.html)|error|-|
+|[eslint-comments/no-duplicate-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-duplicate-disable.html)|error|-|
+|[eslint-comments/no-unlimited-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unlimited-disable.html)|error|-|
+|[eslint-comments/no-unused-disable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、不要にESLintがチェック対象外になっていないかを検知したいため、このルールを設定しています。|
+|[eslint-comments/no-unused-enable](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-enable.html)|error|-|
+|[eslint-comments/no-use](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-use.html)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、`eslint-disable`などを使用してしまうとファイル単位でESLintのチェック対象外となってしまいます。そのため、`eslint-disable-next-line`、`eslint-disable-line`のみを許可して、チェック対象外にするスコープを限定するようにしています。|
+|[eslint-comments/require-description](https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/require-description.html)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、ESLintのチェック対象外とした理由を必ず記載する運用にするため、このルールを設定しています。|
 
 ### [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import)
 
-|ルール|レベル|
-|:--|:--|
-|[import/export](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/export.md)|error|
-|[import/first](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/first.md)|warn|
-|[import/namespace](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/namespace.md)|error|
-|[import/no-default-export](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md)|error|
-|[import/no-duplicates](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md)|error|
-|[import/order](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md)|warn|
+ES moduleの`import`/`export`構文に関するルールを提供するプラグインです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[import/export](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/export.md)|error|-|
+|[import/first](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/first.md)|warn|-|
+|[import/namespace](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/namespace.md)|error|-|
+|[import/no-default-export](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、このアプリでは[TypeScriptのコーディング規約](./typescript-style-guide.mdx#1つのファイルにつき1つの-export-にしてください)でnamed exportを推奨しています。そのため、このルールを設定しています。|
+|[import/no-duplicates](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md)|error|-|
+|[import/order](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md)|warn|-|
 
 ### [eslint-plugin-jest](https://github.com/jest-community/eslint-plugin-jest)
 
-|ルール|レベル|
-|:--|:--|
-|[jest/expect-expect](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/expect-expect.md)|warn|
-|[jest/no-alias-methods](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-alias-methods.md)|error|
-|[jest/no-commented-out-tests](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-commented-out-tests.md)|warn|
-|[jest/no-conditional-expect](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-conditional-expect.md)|error|
-|[jest/no-deprecated-functions](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-deprecated-functions.md)|error|
-|[jest/no-disabled-tests](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-disabled-tests.md)|warn|
-|[jest/no-done-callback](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-done-callback.md)|error|
-|[jest/no-export](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-export.md)|error|
-|[jest/no-focused-tests](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-focused-tests.md)|error|
-|[jest/no-identical-title](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-identical-title.md)|error|
-|[jest/no-interpolation-in-snapshots](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-interpolation-in-snapshots.md)|error|
-|[jest/no-jasmine-globals](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-jasmine-globals.md)|error|
-|[jest/no-mocks-import](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-mocks-import.md)|error|
-|[jest/no-standalone-expect](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-standalone-expect.md)|error|
-|[jest/no-test-prefixes](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-test-prefixes.md)|error|
-|[jest/unbound-method](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/unbound-method.md)|error|
-|[jest/valid-describe-callback](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-describe-callback.md)|error|
-|[jest/valid-expect](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-expect.md)|error|
-|[jest/valid-expect-in-promise](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-expect-in-promise.md)|error|
-|[jest/valid-title](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-title.md)|error|
+Jestに関するルールを提供するプラグインです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[jest/expect-expect](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/expect-expect.md)|warn|-|
+|[jest/no-alias-methods](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-alias-methods.md)|error|-|
+|[jest/no-commented-out-tests](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-commented-out-tests.md)|warn|-|
+|[jest/no-conditional-expect](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-conditional-expect.md)|error|-|
+|[jest/no-deprecated-functions](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-deprecated-functions.md)|error|-|
+|[jest/no-disabled-tests](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-disabled-tests.md)|warn|-|
+|[jest/no-done-callback](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-done-callback.md)|error|-|
+|[jest/no-export](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-export.md)|error|-|
+|[jest/no-focused-tests](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-focused-tests.md)|error|-|
+|[jest/no-identical-title](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-identical-title.md)|error|-|
+|[jest/no-interpolation-in-snapshots](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-interpolation-in-snapshots.md)|error|-|
+|[jest/no-jasmine-globals](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-jasmine-globals.md)|error|-|
+|[jest/no-mocks-import](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-mocks-import.md)|error|-|
+|[jest/no-standalone-expect](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-standalone-expect.md)|error|-|
+|[jest/no-test-prefixes](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/no-test-prefixes.md)|error|-|
+|[jest/unbound-method](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/unbound-method.md)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、同様の機能を持つ`@typescript-eslint/unbound-method`をerrorレベルで設定しています。それをJest用に拡張したこのルールも設定すべきと考え、このルールを設定しています。<br/><br/>なお、対象がテストファイル（`*.test.ts`、`*.test.tsx`）の場合は`@typescript-eslint/unbound-method`をoffにして、このルールのみ適用するようにしています。|
+|[jest/valid-describe-callback](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-describe-callback.md)|error|-|
+|[jest/valid-expect](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-expect.md)|error|-|
+|[jest/valid-expect-in-promise](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-expect-in-promise.md)|error|-|
+|[jest/valid-title](https://github.com/jest-community/eslint-plugin-jest/blob/main/docs/rules/valid-title.md)|error|-|
 
 ### [eslint-plugin-node](https://github.com/mysticatea/eslint-plugin-node)
 
-|ルール|レベル|
-|:--|:--|
-|[node/handle-callback-err](https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/handle-callback-err.md)|warn|
-|[node/no-new-require](https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/no-new-require.md)|warn|
+Node.jsに関するルールを提供するプラグインです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[node/handle-callback-err](https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/handle-callback-err.md)|warn|-|
+|[node/no-new-require](https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/no-new-require.md)|warn|-|
 
 ### [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier)
 
-|ルール|レベル|
-|:--|:--|
-|[prettier/prettier](https://github.com/prettier/eslint-plugin-prettier)|warn|
+ESLintでPrettierを実行し、Prettierのルールに違反する箇所をESLintの警告やエラーとして検出するプラグインです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[prettier/prettier](https://github.com/prettier/eslint-plugin-prettier)|warn|-|
 
 ### [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react)
 
-|ルール|レベル|
-|:--|:--|
-|[react/jsx-boolean-value](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)|warn|
-|[react/jsx-curly-brace-presence](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-curly-brace-presence.md)|warn|
-|[react/jsx-fragments](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-fragments.md)|warn|
-|[react/jsx-no-bind](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md)|warn|
-|[react/jsx-no-duplicate-props](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-duplicate-props.md)|error|
-|[react/jsx-no-undef](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-undef.md)|error|
-|[react/jsx-uses-react](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-uses-react.md)|warn|
-|[react/jsx-uses-vars](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md)|warn|
-|[react/no-access-state-in-setstate](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-access-state-in-setstate.md)|warn|
-|[react/no-did-mount-set-state](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-did-mount-set-state.md)|warn|
-|[react/no-did-update-set-state](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-did-update-set-state.md)|warn|
-|[react/no-direct-mutation-state](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-direct-mutation-state.md)|warn|
-|[react/no-redundant-should-component-update](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-redundant-should-component-update.md)|warn|
-|[react/no-this-in-sfc](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-this-in-sfc.md)|warn|
-|[react/no-unknown-property](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-unknown-property.md)|warn|
-|[react/no-will-update-set-state](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-will-update-set-state.md)|warn|
-|[react/require-render-return](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/require-render-return.md)|warn|
-|[react/self-closing-comp](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)|warn|
+Reactに関するルールを提供するプラグインです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[react/jsx-boolean-value](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)|warn|-|
+|[react/jsx-curly-brace-presence](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-curly-brace-presence.md)|warn|-|
+|[react/jsx-fragments](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-fragments.md)|warn|-|
+|[react/jsx-no-bind](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md)|warn|-|
+|[react/jsx-no-duplicate-props](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-duplicate-props.md)|error|-|
+|[react/jsx-no-undef](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-undef.md)|error|-|
+|[react/jsx-uses-react](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-uses-react.md)|warn|-|
+|[react/jsx-uses-vars](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md)|warn|-|
+|[react/no-access-state-in-setstate](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-access-state-in-setstate.md)|warn|-|
+|[react/no-did-mount-set-state](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-did-mount-set-state.md)|warn|-|
+|[react/no-did-update-set-state](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-did-update-set-state.md)|warn|-|
+|[react/no-direct-mutation-state](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-direct-mutation-state.md)|warn|-|
+|[react/no-redundant-should-component-update](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-redundant-should-component-update.md)|warn|-|
+|[react/no-this-in-sfc](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-this-in-sfc.md)|warn|-|
+|[react/no-unknown-property](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-unknown-property.md)|warn|-|
+|[react/no-will-update-set-state](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/no-will-update-set-state.md)|warn|-|
+|[react/require-render-return](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/require-render-return.md)|warn|-|
+|[react/self-closing-comp](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)|warn|-|
 
 ### [eslint-plugin-react-hooks](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)
 
-|ルール|レベル|
-|:--|:--|
-|[react-hooks/exhaustive-deps](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)|warn|
-|[react-hooks/rules-of-hooks](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)|error|
+React Hooksに関するルールを提供するプラグインです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[react-hooks/exhaustive-deps](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)|warn|-|
+|[react-hooks/rules-of-hooks](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)|error|-|
 
 ### [eslint-plugin-strict-dependencies](https://github.com/knowledge-work/eslint-plugin-strict-dependencies)
 
-|ルール|レベル|
-|:--|:--|
-|[strict-dependencies/strict-dependencies](https://github.com/knowledge-work/eslint-plugin-strict-dependencies)|error|
+`Module`の依存性に関するルールを提供するプラグインです。
+
+|ルール|レベル|推奨設定からの変更|
+|:--|:--|:--|
+|[strict-dependencies/strict-dependencies](https://github.com/knowledge-work/eslint-plugin-strict-dependencies)|error|推奨設定ではこのルールはoffになっています。<br/><br/>このアプリでは、[機能レイヤーの依存関係](../../../application-architecture/application-structure/overview.mdx#機能レイヤーの依存関係)に準拠した設定をしています。|
