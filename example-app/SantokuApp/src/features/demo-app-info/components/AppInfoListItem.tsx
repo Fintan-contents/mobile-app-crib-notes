@@ -1,4 +1,3 @@
-import React from 'react';
 import {Text, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
 
@@ -11,7 +10,7 @@ type AppInfoListItemProps = {
   item: AppInfoItemData;
 };
 
-export const AppInfoListItem: React.FC<AppInfoListItemProps> = ({item}) => {
+export const AppInfoListItem = ({item}: AppInfoListItemProps) => {
   return !item.name ? null : (
     <ListItem bottomDivider>
       <ListItem.Content>

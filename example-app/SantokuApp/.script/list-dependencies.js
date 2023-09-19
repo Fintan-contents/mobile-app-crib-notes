@@ -51,6 +51,8 @@ const normalizeLicense = (() => {
     ],
     Zlib: [
     ],
+    'MPL-2.0': [
+    ],
     // Deprecated
     'GPL-2.0': [ // 警告対策, 採用することはない, 現在存在するのはデュアルライセンスの片方
     ],

@@ -17,9 +17,12 @@ const startAnimation = () =>
 jest.runAllTimers();
 
 jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
-  get: jest.fn().mockReturnValue({width: 400, height: 1000}),
-  set: jest.fn(),
-  addEventListener: jest.fn().mockReturnValue({remove: jest.fn()}),
+  __esModule: true,
+  default: {
+    get: jest.fn().mockReturnValue({width: 400, height: 1000}),
+    set: jest.fn(),
+    addEventListener: jest.fn().mockReturnValue({remove: jest.fn()}),
+  },
 }));
 
 describe('PickerContainer only with required props', () => {
@@ -50,7 +53,7 @@ describe('PickerContainer only with required props', () => {
     await act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2);
     });
-    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 75}]});
+    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 74.00333333333333}]});
     expect(sut).toMatchSnapshot('Animating (slide in)');
 
     // アニメーションが完了すると`transform`が設定値に到達していること
@@ -79,7 +82,7 @@ describe('PickerContainer only with required props', () => {
     await act(() => {
       jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2);
     });
-    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 75}]});
+    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 76.00333333333333}]});
     expect(sut).toMatchSnapshot('Animating (slide out)');
 
     // アニメーションが完了するとコンポーネントが消えること
@@ -143,14 +146,14 @@ describe('PickerContainer with all props', () => {
     sut.update(<PickerContainer isVisible={false} afterSlideOut={afterSlideOut} slideOutDuration={100} />);
 
     await startAnimation();
-    // slideOutDurationで指定した時間の1msc前ではafterSlideOutは実行されない
+    // slideOutDurationで指定した時間の10msc前ではafterSlideOutは実行されない
     await act(() => {
-      jest.advanceTimersByTime(99);
+      jest.advanceTimersByTime(90);
     });
     expect(afterSlideOut).not.toHaveBeenCalled();
     // slideOutDurationで指定した時間経過後は、afterSlideOutが実行される
     await act(() => {
-      jest.advanceTimersByTime(1);
+      jest.advanceTimersByTime(10);
     });
     expect(afterSlideOut).toHaveBeenCalled();
   });

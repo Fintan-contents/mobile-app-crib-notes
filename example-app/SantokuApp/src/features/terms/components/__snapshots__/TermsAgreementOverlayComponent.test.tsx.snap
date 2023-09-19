@@ -63,16 +63,38 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
           FadeIn {
             "build": [Function],
             "callbackV": [Function],
+            "dampingV": undefined,
+            "delayV": undefined,
             "durationV": 300,
+            "easingV": undefined,
+            "initialValues": undefined,
+            "massV": undefined,
+            "overshootClampingV": undefined,
             "randomizeDelay": false,
+            "restDisplacementThresholdV": undefined,
+            "restSpeedThresholdV": undefined,
+            "rotateV": undefined,
+            "stiffnessV": undefined,
+            "type": undefined,
           }
         }
         exiting={
           FadeOut {
             "build": [Function],
             "callbackV": [Function],
+            "dampingV": undefined,
+            "delayV": undefined,
             "durationV": 300,
+            "easingV": undefined,
+            "initialValues": undefined,
+            "massV": undefined,
+            "overshootClampingV": undefined,
             "randomizeDelay": false,
+            "restDisplacementThresholdV": undefined,
+            "restSpeedThresholdV": undefined,
+            "rotateV": undefined,
+            "stiffnessV": undefined,
+            "type": undefined,
           }
         }
         style={
@@ -107,16 +129,38 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
           FadeIn {
             "build": [Function],
             "callbackV": [Function],
+            "dampingV": undefined,
+            "delayV": undefined,
             "durationV": 300,
+            "easingV": undefined,
+            "initialValues": undefined,
+            "massV": undefined,
+            "overshootClampingV": undefined,
             "randomizeDelay": false,
+            "restDisplacementThresholdV": undefined,
+            "restSpeedThresholdV": undefined,
+            "rotateV": undefined,
+            "stiffnessV": undefined,
+            "type": undefined,
           }
         }
         exiting={
           FadeOut {
             "build": [Function],
             "callbackV": [Function],
+            "dampingV": undefined,
+            "delayV": undefined,
             "durationV": 300,
+            "easingV": undefined,
+            "initialValues": undefined,
+            "massV": undefined,
+            "overshootClampingV": undefined,
             "randomizeDelay": false,
+            "restDisplacementThresholdV": undefined,
+            "restSpeedThresholdV": undefined,
+            "rotateV": undefined,
+            "stiffnessV": undefined,
+            "type": undefined,
           }
         }
         pointerEvents="box-none"
@@ -176,10 +220,18 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
               androidLayerType="software"
               cacheEnabled={true}
               decelerationRate={0.998}
+              fraudulentWebsiteWarningEnabled={true}
+              hasOnFileDownload={false}
               injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
               injectedJavaScriptForMainFrameOnly={true}
               javaScriptEnabled={true}
-              messagingEnabled={true}
+              messagingEnabled={false}
+              messagingModuleName=""
+              newSource={
+                {
+                  "uri": "https://www.tis.co.jp/termsofuse/",
+                }
+              }
               onContentProcessDidTerminate={[Function]}
               onHttpError={[Function]}
               onLoadingError={[Function]}

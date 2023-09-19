@@ -11,7 +11,7 @@ declare namespace jest {
   }
 }
 
-declare module 'react-native-reanimated/lib/reanimated2/jestUtils' {
+declare module 'react-native-reanimated/lib/module/reanimated2/jestUtils' {
   import {ReactTestInstance} from 'react-test-renderer';
   import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
   export const withReanimatedTimer: (test: () => unknown) => void;

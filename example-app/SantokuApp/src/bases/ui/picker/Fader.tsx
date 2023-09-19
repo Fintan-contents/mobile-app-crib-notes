@@ -40,7 +40,7 @@ export const Fader: React.FC<FaderProps> = ({
       case FaderPosition.TOP:
         return {
           containerStyle: {...staticStyles.containerTop, height: size},
-          imageStyle: {height: size, width: '100%'},
+          imageStyle: {height: size, width: '100%'} as const,
           imageSource: gradientTopImage,
         };
       case FaderPosition.BOTTOM:
@@ -49,7 +49,7 @@ export const Fader: React.FC<FaderProps> = ({
             ...staticStyles.containerBottom,
             height: size,
           },
-          imageStyle: {height: size, width: '100%'},
+          imageStyle: {height: size, width: '100%'} as const,
           imageSource: gradientBottomImage,
         };
     }

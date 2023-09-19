@@ -9,8 +9,6 @@
     <key>EXUpdatesLaunchWaitMs</key>
     <integer>0</integer>
     <key>EXUpdatesSDKVersion</key>
-    <string>48.0.0</string>
-    <key>EXUpdatesURL</key>
-    <string>https://exp.host/@anonymous/santoku-app</string>
+    <string>49.0.0</string>
   </dict>
 </plist>

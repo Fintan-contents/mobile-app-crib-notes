@@ -1,4 +1,3 @@
-import React from 'react';
 import {Text, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
 
@@ -11,7 +10,7 @@ type ConfigListItemProps = {
   item: ConfigItemData;
 };
 
-export const ConfigListItem: React.FC<ConfigListItemProps> = ({item}) => {
+export const ConfigListItem = ({item}: ConfigListItemProps) => {
   return !item.name ? null : (
     <ListItem bottomDivider>
       <ListItem.Content>

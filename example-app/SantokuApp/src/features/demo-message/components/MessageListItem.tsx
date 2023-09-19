@@ -1,4 +1,3 @@
-import React from 'react';
 import {Text, View} from 'react-native';
 import {ListItem} from 'react-native-elements';
 
@@ -11,7 +10,7 @@ type MessageListItemProps = {
   item: MessageItemData;
 };
 
-export const MessageListItem: React.FC<MessageListItemProps> = ({item}) => {
+export const MessageListItem = ({item}: MessageListItemProps) => {
   return !item.name ? null : (
     <ListItem bottomDivider>
       <ListItem.Content>

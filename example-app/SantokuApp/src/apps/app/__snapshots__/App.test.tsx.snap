@@ -826,7 +826,6 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                             >
                                               <View
                                                 collapsable={false}
-                                                forwardedRef={[Function]}
                                                 handlerTag={1}
                                                 handlerType="PanGestureHandler"
                                                 needsOffscreenAlphaCompositing={false}
@@ -1270,6 +1269,7 @@ React Native 0.66
                                                           <RCTRefreshControl />
                                                           <View>
                                                             <View
+                                                              collapsable={false}
                                                               onLayout={[Function]}
                                                             >
                                                               <View
@@ -7919,7 +7919,14 @@ React Native 0.66
                                                                       ]
                                                                     }
                                                                   >
-                                                                    <RNSVGGroup>
+                                                                    <RNSVGGroup
+                                                                      fill={
+                                                                        {
+                                                                          "payload": 4278190080,
+                                                                          "type": 0,
+                                                                        }
+                                                                      }
+                                                                    >
                                                                       <RNSVGPath
                                                                         d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
                                                                         fill={
@@ -7937,6 +7944,12 @@ React Native 0.66
                                                                     </RNSVGGroup>
                                                                     <RNSVGDefs>
                                                                       <RNSVGClipPath
+                                                                        fill={
+                                                                          {
+                                                                            "payload": 4278190080,
+                                                                            "type": 0,
+                                                                          }
+                                                                        }
                                                                         name="clip0_5404_1261"
                                                                       >
                                                                         <RNSVGRect

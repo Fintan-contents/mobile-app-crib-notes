@@ -8,9 +8,12 @@ import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
 
 jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
-  get: jest.fn().mockReturnValue({width: 400, height: 1000}),
-  set: jest.fn(),
-  addEventListener: jest.fn().mockReturnValue({remove: jest.fn()}),
+  __esModule: true,
+  default: {
+    get: jest.fn().mockReturnValue({width: 400, height: 1000}),
+    set: jest.fn(),
+    addEventListener: jest.fn().mockReturnValue({remove: jest.fn()}),
+  },
 }));
 
 describe('DateTimePicker only with required props', () => {

@@ -1,0 +1,884 @@
+---
+title: Expo SDK 49アップグレード
+---
+
+:::info参考
+以下の記事を参考にして、このアプリのExpo SDKを49にアップグレードしました。
+主な変更点とこのアプリで実施したアップグレード手順を紹介します。
+
+- [Expo SDK 49. Today we’re announcing the release of… | by Brent Vatne | Exposition](https://blog.expo.dev/expo-sdk-49-c6d398cdf740)
+- [React Native 0.72 - Symlink Support, Better Errors, and more · React Native](https://reactnative.dev/blog/2023/06/21/0.72-metro-package-exports-symlinks)
+
+なお、使用される可能性の低いEASとReact Native Webに関する内容は記載しません。
+:::
+
+## Expo SDK 49の主な変更
+
+### React Native `v0.72.4`
+
+詳細は、以下のリンク先を参照してください。
+
+- [React Native 0.72 - Symlink Support, Better Errors, and more · React Native](https://reactnative.dev/blog/2023/06/21/0.72-metro-package-exports-symlinks)
+- [React Native CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0724)
+
+Reactのバージョンは変更されておらず、依然として`v18.2.0`です。
+
+非推奨となっていた以下のコンポーネントは、React Native `v0.72.0`で削除されたことに注意してください。
+コミュニティパッケージへの移行が推奨されています。
+
+- [Slider](https://reactnative.dev/docs/next/slider)
+  - 推奨移行先： [@react-native-community/slider](https://www.npmjs.com/package/@react-native-community/slider)
+- [DatePickerIOS](https://reactnative.dev/docs/next/datepickerios)
+  - 推奨移行先： [@react-native-community/datetimepicker](https://www.npmjs.com/package/@react-native-community/datetimepicker)
+- [ProgressViewIOS](https://reactnative.dev/docs/next/progressviewios)
+  - 推奨移行先： [@react-native-community/progress-view](https://www.npmjs.com/package/@react-native-community/progress-view)
+
+### デバッグ機能の改善
+
+#### ネットワークデバッグ
+
+アプリが`expo-dev-client`またはExpo Goで実行されるときのネットワークリクエストをJSデバッガーで確認できるようになりました。
+
+#### React devtoolsとExpo CLIの連携
+
+`Shift`+`m`を押して「Start React devtools」を選択することで起動できるようになりました。
+
+#### VS Codeでのデバッグ
+
+[Expo Tools Extension](https://marketplace.visualstudio.com/items?itemName=expo.vscode-expo-tools)を使用して、VS CodeからアプリのJavaScriptコードを直接デバッグするための実験的なサポートが追加されました。
+
+### TypeScript バージョン `^5.1.3`
+
+SDK 48までは`^4.9.4`が使用されていました。
+
+TypeScript `^5`の詳細は、以下のリンク先を参照してください。
+
+- [TypeScript: Documentation - TypeScript 5.0](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html)
+- [TypeScript: Documentation - TypeScript 5.1](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-1.html)
+
+:::info他のライブラリでサポートされていない`v5.2.2`が使われないようにするため、`^5.1.3`ではなく`~5.1.3`指定を推奨します。
+
+`@typescript-eslint/typescript-estree`(`v5`)が`v5.1.x`までしかサポートしていません。
+
+[typescript-eslint/packages/typescript-estree/src/parseSettings/warnAboutTSVersion.ts at v5.62.0 · typescript-eslint/typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/blob/v5.62.0/packages/typescript-estree/src/parseSettings/warnAboutTSVersion.ts#L9)
+
+> `const SUPPORTED_TYPESCRIPT_VERSIONS = '>=3.3.1 <5.2.0';`
+
+関係するライブラリの依存関係は以下のとおりです。
+
+- `expo-module-scripts`(`v3.0.x`)
+  - `eslint-config-universe`(`v11`)
+    - `@typescript-eslint`(`v5`)
+:::
+
+### Expoがサポートするライブラリや機能
+
+#### ライブラリの更新
+
+Expoが管理しているライブラリの内、メジャーバージョンアップなど大きなリリースがあったものを記載します。
+
+- [expo-router](https://docs.expo.dev/routing/introduction/) `v2.0`
+  - 参考：[Announcing Expo Router v2. Expo Router v1 has been an incredible… | by Evan Bacon | Exposition](https://blog.expo.dev/introducing-expo-router-v2-3850fd5c3ca1)
+- [sentry-expo](https://docs.expo.dev/guides/using-sentry/) `v7.0`
+  - 参考：[Migration for React Native | Sentry Documentation](https://docs.sentry.io/platforms/react-native/migration/#from-4x-to-5x)
+- [@react-native-community/datetimepicker](https://www.npmjs.com/package/@react-native-community/datetimepicker?activeTab=readme) `v7`
+  - [破壊的変更は無いですがNew Architectureがサポートされました](https://github.com/react-native-datetimepicker/datetimepicker/releases/tag/v7.0.0)
+- [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/) `v3`
+  - Reanimated API `v1`のサポートが削除されました。`v2`とは互換性があります
+  - 参考：[Announcing Reanimated 3. Reanimated 3 release candidate is out…](https://blog.swmansion.com/announcing-reanimated-3-16167428c5f7)
+- [expo-blur](https://docs.expo.dev/versions/latest/sdk/blur-view/)
+  - デフォルトで静的レンダリング時にぼかしが有効になりました
+- [expo-face-detector](https://docs.expo.dev/versions/latest/sdk/facedetector/)
+  - Expo Goでの`expo-face-detector`のサポート削除されましたが、これまでと同様に、Expo Goの外部でライブラリを引き続き使用できます
+- [expo-gl](https://docs.expo.dev/versions/latest/sdk/gl-view/)
+  - ReanimatedワークレットからGLViewを使用するには、明示的なプロパティ`enableExperimentalWorkletSupport`が必要になりました
+  - 参考：[Pull Request #22613 · expo/expo](https://github.com/expo/expo/pull/22613)
+
+詳細やその他の変更は、以下のリンク先を参照してください。
+
+- [expo/CHANGELOG.md at main · expo/expo](https://github.com/expo/expo/blob/main/CHANGELOG.md#4900--2023-06-27)
+
+#### Expo Module APIの改善
+
+ローカル モジュールが導入されました。
+これにより、ライブラリを作成したり、アプリのネイティブ プロジェクトを管理したりせずに、アプリ内でネイティブ コードを作成できるようになります。
+SDK 49のプロジェクトで以下のコマンドを実行することで試すことができます。
+
+```shell title="ローカルモジュールの作成コマンド"
+npx create-expo-module --local
+```
+
+さらに、コンポーネント参照にネイティブの非同期関数を追加できるようになりました。
+同期関数はJavaScriptValue、JavaScriptObject、JavaScriptFunctionなどのJS型の引数を受け取ることができるようになりました。
+
+詳細は、[JavaScript values](https://docs.expo.dev/modules/module-api/#javascript-values)を参照してください。
+
+#### (iOSシミュレータ)Expo GoのAppleシリコン上でのネイティブ実行サポート
+
+TestFlightビルドを使用して、シミュレーターを使用せずにAppleシリコンMac上でExpo Goを直接実行もできます。
+ただし、UIの問題がいくつかあり、修正中です。
+
+Appleシリコン上でネイティブ実行の詳細は、以下のリンク先を参照してください。
+
+- [iPhone and iPad apps on Apple silicon Macs - Apple Developer](https://developer.apple.com/macos/iphone-and-ipad-apps/)
+
+#### 開発ビルドのフラグ(`--dev-client`)の削除
+
+`npx expo start --dev-client`の`--dev-client`フラグは必要なくなりました。
+
+`expo-dev-client`パッケージがプロジェクトにインストールされている場合、デフォルトで開発ビルドがターゲットになります。
+
+キーボードショートカット`s`（switch）を使用して、開発ビルドとExpo Goターゲットを切り替えることができます。
+これにより、QRコードが指すURLと、キーボードショートカット`a`（Android）と`i`（iOS）で起動するURLが変更されます。
+
+#### `expo export:embed`
+
+`Bundle React Native code and images`ビルドフェーズの`@react-native-community/cli`バンドルコマンドが置き換わりました。
+これにより、カスタムエントリポイントのサポートを追加できるようになりました。
+`package.json`の`main`を変更して、任意のソースファイルを指すようにできます。
+Expo Routerを使用していない場合は、新しいエントリファイルで[registerRootComponent](https://docs.expo.dev/versions/latest/sdk/register-root-component/)を使用する必要があります。
+
+#### Expo CLIのMetroの環境変数のサポート
+
+React Nativeエコシステムの既存のアプローチには、変数を更新するためにBabelキャッシュをクリアする必要があるなどの問題がありました。
+
+新しいアプローチでは、プロセスをExpo Metro構成に統合し、JavaScriptエコシステムで一般的な規則に従って環境変数名の接頭辞に`PUBLIC`を含めて、これらの問題が解決されます。
+
+SDK 49では、`EXPO_PUBLIC_`プレフィックスを付けて[`.env`や`.env.local`などのファイル](https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use)で変数を定義でき、それらが使用される場合はアプリのJavaScriptに組み込まれます。
+
+詳細は、以下のリンク先を参照してください。
+
+- [metro.config.js - Expo Documentation](https://docs.expo.dev/versions/v49.0.0/config/metro/#client-environment-variables)
+
+#### パッケージのバージョン検証の選択的オプトアウト
+
+環境によっては、Expoが推奨するバージョンとは異なるパッケージのバージョンを使用したい場合があります。
+
+`package.json`の`expo.install.exclude`のキーがサポートされるようになり、`expo start`などで行われる検証から除外するパッケージを指定できるようになります。
+
+詳細は、以下のリンク先を参照してください。
+
+- [Expo CLI - Expo Documentation](https://docs.expo.dev/more/expo-cli/#configuring-dependency-validation)
+
+#### scheme (app config)
+
+以前は、追加のschemeを設定するにはConfig Pluginsを使用する必要がありました。
+文字列の配列または文字列を使用できるようになりました。
+
+```js title="app.config.js"
+scheme: ['myapp', 'fb1234'],
+// or
+scheme: 'myapp',
+```
+
+#### New Architecture/Fabricのサポート
+
+`expo-dev-client`でFabricが実験的にサポートされました。
+`npx create-expo-app@latest -e with-new-arch` で試すことができます。
+
+新しいアーキテクチャをまだサポートしていない唯一のモジュールは`expo-updates`です。
+
+#### Android Expo Modules
+
+Gradle 8を使うようになりました。
+
+マイグレーションする方法については、以下のリンク先を参照してください。
+
+- [fyi/expo-modules-gradle8-migration.md at main · expo/fyi](https://github.com/expo/fyi/blob/main/expo-modules-gradle8-migration.md)
+
+#### Expo CLI
+
+すべてのプロジェクトでデフォルトのポート19000ではなく8081を使用するようになりました。
+
+#### JSCのリモートデバッグ無効化(Expo Goおよび`expo-dev-client`)
+
+JSCリモートデバッグは、Hermesによるデバッグに比べて特にうまく機能することはなく、時間の経過とともに信頼性が低くなってしまいました。
+
+詳細については、以下のReact Nativeへのプル リクエストを参照してください。
+これは次のReact Nativeリリースに含まれる予定です。
+
+- [Remove remote debugging from dev menu by gabrieldonadel · Pull Request #36754 · facebook/react-native](https://github.com/facebook/react-native/pull/36754#pullrequestreview-1400288340)
+
+#### Expo Constants
+
+`Constants.manifest`が非推奨です。代わりに、`Constants.expoConfig`を使用してください。
+
+詳細は、以下のリンク先を参照してください。
+
+- [fyi/why-constants-expoconfig.md at main · expo/fyi](https://github.com/expo/fyi/blob/main/why-constants-expoconfig.md)
+
+#### `expo-auth-session`
+
+[expo-auth-session](https://docs.expo.dev/versions/v49.0.0/sdk/auth-session/)の`useProxy`と`AuthSession.startAsync`が削除されました。
+
+認証プロバイダーがカスタムschemeにリダイレクトしない問題を回避するために認証プロキシを使用していた場合は、[Expo Goから開発ビルドに切り替え](https://docs.expo.dev/workflow/customizing/)、ネイティブSDKの使用が推奨されています。
+
+#### android:usesCleartextTraffic
+
+システムのデフォルト値を使うようになりました。
+
+デバッグ ビルドでは明示的に`true`が設定されますが、他のビルドタイプ（例：リリースビルド）では指定されていません。
+つまり、API 27以下ではデフォルトで`true`、API 28以降ではデフォルトで`false`になります。
+
+セキュリティで保護されていないエンドポイントへのネットワークリクエストが存在する場合は、[expo-build-properties](https://docs.expo.dev/versions/v49.0.0/sdk/build-properties/)を使って`true`にする必要があります。
+
+#### iOS用アイコンの簡素化
+
+Xcode 14以降では自動的にサイズ変更される単一の`1024x1024`画像を使用してアプリアイコンを簡素化できます。
+そのため、Expoではprebuild時に`1024x1024`画像のみを生成するようになりました。
+
+- [Xcode 14 Release Notes | Apple Developer Documentation](https://developer.apple.com/documentation/xcode-release-notes/xcode-14-release-notes#Asset-Catalogs)
+- [feat(prebuild): Generate universal 1024x1024 iOS icon only. by EvanBacon · Pull Request #22833 · expo/expo](https://github.com/expo/expo/pull/22833)
+
+### Expo SDK 46のサポート終了
+
+Expo SDK 46がサポート対象外になりました。Expo SDK 46を使用している場合は、Expo SDK 47以降にアップグレードする必要があります。
+
+なお、次のリリースではExpo SDK47と48のサポートが終了する見込みのようです。
+
+## このアプリで実施したアップグレードの手順
+
+このアプリでは、[Expo SDK 48 から 49 にアップグレードする方法](https://blog.expo.dev/expo-sdk-49-c6d398cdf740#a25b)を参考に、以下の作業を実施してExpo SDK 49にアップグレードしました。
+
+1. `npm install expo@^49.0.0`を実行して、Expo SDKをアップグレード
+1. `npx expo install --fix`を実行して、Expoが管理するライブラリのアップグレード
+   - TypeScript `v5.2.x`ではなく`v5.1.x`を使用するため`npm install typescript@~5.1.3`を追加で実行（[参考](#typescript-バージョン-513)）
+1. [既存のパッチファイルの更新](#既存のパッチファイルの更新)
+1. [`jest-expo`のアップグレード](#jest-expoのアップグレード)
+1. [`npx expo-doctor@latest`を実行してプロジェクトの依存関係に問題がないか確認](#npx-expo-doctorlatestを実行してプロジェクトの依存関係に問題がないか確認)
+1. [tscチェック](#tscチェック)
+   - [DimensionValueの厳密化](#dimensionvalueの厳密化)
+   - [WebView.onScroll](#webviewonscroll)
+   - [FunctionComponent](#functioncomponent)
+1. [test修正](#test修正)
+   - [`react-native-reanimated` `v3`対応](#react-native-reanimated-v3対応)
+   - [`react-native`のDimensionsのmock失敗の対応](#react-nativeのdimensionsのmock失敗の対応)
+   - [`jest.advanceTimersByTime`を`act`でwrap](#jestadvancetimersbytimeをactでwrap)
+   - [`jest-mock`での`expo-constants`のdeprecated warn対応](#jest-mockでのexpo-constantsのdeprecated-warn対応)
+   - [アニメーション中のAnimatedStyleの僅かな変化に対応](#アニメーション中のanimatedstyleの僅かな変化に対応)
+   - [slideOutDurationテストの時間指定が厳密すぎるとテストが落ちる問題修正](#slideoutdurationテストの時間指定が厳密すぎるとテストが落ちる問題修正)
+   - [keyExtractorの呼び出しが増えて落ちるようになったテスト修正](#keyextractorの呼び出しが増えて落ちるようになったテスト修正)
+   - snapshot更新
+1. [warn対応](#warn対応)
+   - [TypeScriptバージョンに対応しているtypescript-eslintに更新](#typescriptバージョンに対応しているtypescript-eslintに更新)
+   - [deprecated対応（JSX.Element → React.JSX.Element）](#deprecated対応jsxelement--reactjsxelement)
+   - [initialScrollIndexの範囲外警告に対応](#initialscrollindexの範囲外警告に対応)
+1. `npm run prebuild`を実行してネイティブプロジェクトの再生成
+1. [buildエラー修正](#buildエラー修正)
+   - [`app.notifee:core`を見つけられない問題対応](#appnotifeecoreを見つけられない問題対応)
+1. renovate除外設定更新
+   - 使用しなくなった`androidx.swiperefreshlayout:swiperefreshlayout`を削除
+1. [不要になったConfig Plugins`withAndroidRemoveUsesClearTextTrafficForRelease`を削除](#不要になったconfig-pluginswithandroidremoveusescleartexttrafficforreleaseを削除)
+1. [Proguardルールの更新](#proguardルールの更新)
+   - [`react-native-svg`用ルールの削除](#react-native-svg用ルールの削除)
+1. [Expoの更新履歴の確認と対応](#expoの更新履歴の確認と対応)
+1. [React Nativeの更新履歴の確認と対応](#react-nativeの更新履歴の確認と対応)
+1. [`expo-template-blank-typescript`の更新履歴の確認と対応](#expo-template-blank-typescriptの更新履歴の確認と対応)
+1. [`expo-template-bare-minimum`の更新履歴の確認と対応](#expo-template-bare-minimumの更新履歴の確認と対応)
+   - [`.gitignore`の更新](#gitignoreの更新)
+1. [React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/?from=0.71.8&to=0.72.3)を参照して、React Nativeの更新を確認
+   - このアプリで必要な対応は、[`expo-template-bare-minimum`の更新](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)で対応されていました
+1. [手動管理しているライセンスの更新](#手動管理しているライセンスの更新)
+   - [`managed-license.js`の更新](#managed-licensejsの更新)
+   - [新規ライセンスに対応](#新規ライセンスに対応)
+
+アップグレードを実施したPull Requestは[ws-4020/mobile-app-crib-notes#1221](https://github.com/ws-4020/mobile-app-crib-notes/pull/1221)です。
+
+### 既存のパッチファイルの更新
+
+このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。
+パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.07/example-app/SantokuApp/patches/README.md)を参照してください。
+
+- `react-native`
+- `@expo/config-plugins`
+- `expo-splash-screen`
+- `react-native-elements`
+
+`react-native`に適用していたパッチは、以下のPRで修正されたためパッチフィルを削除しました。
+
+- [fix: fix virtualizedList scrollToEnd for 0 items by Andarius · Pull Request #36067 · facebook/react-native](https://github.com/facebook/react-native/pull/36067)
+
+`@expo/config-plugins`と`expo-splash-screen`は、Expo SDKのアップグレードに伴いバージョンが上がりました。しかし、適用していたパッチファイルはまだ必要な対応だったため、パッチファイルは削除せずに各ライブラリのバージョンに合わせてファイル名をリネームしました。
+
+`react-native-elements`に関しては、バージョンが変わらなかったため変更はありません。
+
+### `jest-expo`のアップグレード
+
+`jest-expo`だけは`npx expo install --fix`でバージョンが上がらなかったので、手動で`^49.0.0`に変更しました。
+
+参考： [Expo SDK 48アップグレード #jest-expoのアップグレード](./expo-48-upgrade.mdx#jest-expoのアップグレード)
+
+### `npx expo-doctor@latest`を実行してプロジェクトの依存関係に問題がないか確認
+
+以下の実行結果のように`@expo/config-plugins`バージョンの問題が検知されました。
+
+```text title="npx expo-doctor@latestの実行結果"
+✔ Check Expo config for common issues
+✖ Check package.json for common issues
+✔ Check dependencies for packages that should not be installed directly
+✔ Check npm/ yarn versions
+✔ Check for common project setup issues
+✔ Check Expo config (app.json/ app.config.js) schema
+✔ Check for legacy global CLI installed locally
+✔ Check that packages match versions required by installed Expo SDK
+✔ Check that native modules do not use incompatible support packages
+✖ Check that native modules use compatible support package versions for installed Expo SDK
+
+Detailed check results:
+
+Expected package @expo/config-plugins@~7.2.2
+Found invalid:
+  @expo/config-plugins@5.0.4
+  @expo/config-plugins@5.0.4
+  (for more info, run: npm why @expo/config-plugins)
+Advice: Upgrade dependencies that are using the invalid package versions.
+
+The following scripts in package.json conflict with the contents of node_modules/.bin: orval.
+
+One or more checks failed, indicating possible issues with the project
+```
+
+しかし、前回（Expo48への更新時）と同様に`@react-native-firebase`の更新が必要であるため保留としました。
+
+```text title="@expo/config-pluginsのバージョン"
+$ npm ls @expo/config-plugins
+santoku-app@1.0.0 /path/to/mobile-app-crib-notes/example-app/SantokuApp
+├── @expo/config-plugins@7.2.5
+├─┬ @react-native-firebase/app@16.4.6
+│ └── @expo/config-plugins@5.0.4
+├─┬ @react-native-firebase/crashlytics@16.4.6
+│ └── @expo/config-plugins@5.0.4
+├─┬ expo-splash-screen@0.20.5
+│ └─┬ @expo/prebuild-config@6.2.6
+│   └── @expo/config-plugins@7.2.5 deduped
+└─┬ expo@49.0.8
+  ├─┬ @expo/cli@0.10.11
+  │ └── @expo/config-plugins@7.2.5 deduped
+  ├── @expo/config-plugins@7.2.5 deduped
+  └─┬ @expo/config@8.1.2
+    └── @expo/config-plugins@7.2.5 deduped
+```
+
+### tscチェック
+
+`npm run lint:tsc`でTypeScriptの型をチェックしました。
+
+#### DimensionValueの厳密化
+
+`react-native`の`v0.72.0`ではDimensionの型定義が厳密になりました。
+
+- [Improve handling of invalid DimensionValue usage (#36346) · facebook/react-native@02e29ab](https://github.com/facebook/react-native/commit/02e29abeada3d78dd7d90d1d89049cd1517afb55)
+
+```diff title="interface FlexStyle"
+-width?: number | string | undefined;
++width?: DimensionValue | undefined;
+```
+
+```ts
+export type DimensionValue =
+  | number
+  | 'auto'
+  | `${number}%`
+  | Animated.AnimatedNode
+  | null;
+```
+
+style定義の型推論で`${number}%`ではなく`string`として認識されてしまう問題が起きたので、`as const`を追加しました。
+
+```diff title="src/bases/ui/picker/Fader.tsx"
+       case FaderPosition.TOP:
+         return {
+           containerStyle: {...staticStyles.containerTop, height: size},
+-          imageStyle: {height: size, width: '100%'},
++          imageStyle: {height: size, width: '100%'} as const,
+           imageSource: gradientTopImage,
+         };
+```
+
+#### WebView.onScroll
+
+`react-native-webview`のFabric対応で`onScroll`の型定義が変更されました。
+
+- [feat: Fabric support (#2686) · react-native-webview/react-native-webview@5558e28](https://github.com/react-native-webview/react-native-webview/commit/5558e28feab2e8bd881450f155e642cf1e66caad)
+
+```diff title="WebViewProps"
+-onScroll?: (event: WebViewScrollEvent) => void;
++onScroll?: ComponentProps<typeof NativeWebViewComponent>['onScroll'];
+```
+
+これは整理すると以下になります。
+
+```diff
+-onScroll?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
++onScroll?: (event: NativeSyntheticEvent<ScrollEvent>) => void | Promise<void>;
+```
+
+`onScroll`の型不一致エラーになったので、以下のように対応しました。
+
+```diff title="src/bases/ui/webview/WebView.tsx"
+-  const handleScroll = useCallback(
+-    (event: WebViewScrollEvent) => {
++  const handleScroll = useCallback<Exclude<WebViewProps['onScroll'], undefined>>(
++    async event => {
+       if (isUriChanged && event.nativeEvent.contentOffset.y > 0) {
+```
+
+#### FunctionComponent
+
+`React.FC`(`FunctionComponent`)の返り値の型定義が`ReactElement`から`ReactNode`に変更されました。
+
+- [🤖 Merge PR #65135 \[react\] Allow returning ReactNode from function com… · DefinitelyTyped/DefinitelyTyped@443451c](https://github.com/DefinitelyTyped/DefinitelyTyped/commit/443451ccc5db3adf1865853e152636f1a9ba5dd5)
+
+```diff title="namespace React"
+    interface FunctionComponent<P = {}> {
+-        (props: P, context?: any): ReactElement<any, any> | null;
++        (props: P, context?: any): ReactNode;
+```
+
+```ts title="namespace React"
+    type ReactNode =
+        | ReactElement
+        | string
+        | number
+        | Iterable<ReactNode>
+        // 略
+```
+
+`FlatList`の`renderItem`は`ReactNode`ではなく`ReactElement`を要求しているため、型不一致エラーとなりました。
+そこで、`renderItem`に渡す関数には`React.FC`を使わないように変更しました。
+
+```tsx title="src/features/demo-app-info/components/AppInfoTemplate.tsx"
+return <FlatList data={items} renderItem={AppInfoListItem} keyExtractor={keyExtractor} testID={testID} />;
+```
+
+```ts title="interface FlatListProps<ItemT>"
+  renderItem: ListRenderItem<ItemT> | null | undefined;
+```
+
+```ts
+export type ListRenderItem<ItemT> = (
+  info: ListRenderItemInfo<ItemT>,
+) => React.ReactElement | null;
+```
+
+```diff title="src/features/demo-app-info/components/AppInfoListItem.tsx"
+-export const AppInfoListItem: React.FC<AppInfoListItemProps> = ({item}) => {
++export const AppInfoListItem = ({item}: AppInfoListItemProps) => {
+```
+
+### test修正
+
+#### `react-native-reanimated` `v3`対応
+
+`react-native-reanimated` `v3`でディレクトリ構造が変わりました。
+それに合わせてimportや型定義ファイルを変更しました。
+
+```diff
+-react-native-reanimated/lib/reanimated2/
++react-native-reanimated/lib/module/reanimated2/
+```
+
+また、`setUpTests()`のimportが短縮できるようになっていたので変更しました。
+
+- [Testing with Jest | React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/guides/testing/)
+
+```diff title="jest/setup/react-native-reanimated.js"
+ // https://docs.swmansion.com/react-native-reanimated/docs/guides/testing
+-require('react-native-reanimated/lib/reanimated2/jestUtils').setUpTests();
++require('react-native-reanimated').setUpTests();
+```
+
+#### `react-native`のDimensionsのmock失敗の対応
+
+`Dimensions`がES moduleに変更されました。
+
+- [ESM Dimensions · facebook/react-native@c52ed25](https://github.com/facebook/react-native/commit/c52ed258bf182fc435c5ed46ca5b41cff474f2c5)
+
+```diff
+-module.exports = Dimensions;
++export default Dimensions;
+```
+
+```diff title="node_modules/react-native/index.js"
+   get Dimensions(): Dimensions {
+-    return require('./Libraries/Utilities/Dimensions');
++    return require('./Libraries/Utilities/Dimensions').default;
+   },
+```
+
+そのため、mockする際は`__esModule: true`を指定するように変更しました。
+
+- [モック関数 · Jest](https://jestjs.io/ja/docs/29.5/mock-functions#%E9%83%A8%E5%88%86%E7%9A%84%E3%81%AA%E3%83%A2%E3%83%83%E3%82%AF)
+
+```diff title="src/bases/ui/picker/DateTimePicker.ios.test.tsx"
+ jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
+-  get: jest.fn().mockReturnValue({width: 400, height: 1000}),
+-  set: jest.fn(),
+-  addEventListener: jest.fn().mockReturnValue({remove: jest.fn()}),
++  __esModule: true,
++  default: {
++    get: jest.fn().mockReturnValue({width: 400, height: 1000}),
++    set: jest.fn(),
++    addEventListener: jest.fn().mockReturnValue({remove: jest.fn()}),
++  },
+ }));
+```
+
+#### `jest.advanceTimersByTime`を`act`でwrap
+
+以下の警告が出るようになっていたため、`act`でwrapするように変更しました。
+
+- Warning: An update to ForwardRef inside a test was not wrapped in act(...).
+- When testing, code that causes React state updates should be wrapped into act(...):
+
+```diff title="src/bases/ui/snackbar/SnackbarComponent.test.tsx"
+   it('SnackbarComponent表示中にpropsでhideを指定した場合、SnackbarComponentが消えることを確認', async () => {
+     render(<SnackbarComponent message="テストメッセージ" />);
+ 
+-    jest.advanceTimersByTime(FADE_IN_DURATION);
++    await act(() => {
++      jest.advanceTimersByTime(FADE_IN_DURATION);
++    });
+     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
+```
+
+#### `jest-mock`での`expo-constants`のdeprecated warn対応
+
+[Expo SDK 49の主な変更 - Expoがサポートするライブラリや機能 - Expo Constants](#expo-constants)に記載した通り、Constants.manifestが非推奨になりました。
+mockする際に[スプレッド構文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax)を使ってアクセスすると`warn`ログが出力されるようになっています。
+そのため、スプレッド構文ではなく[Proxy](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Proxy)を使って上書きするようにしています。
+
+```diff title="jest/__mocks__/expo-constants.ts"
+ import ExpoConstants from 'expo-constants';
+ 
+-export const Constants: typeof ExpoConstants = {
+-  ...ExpoConstants,
++import {wrapProperty} from '../utils/wrapProperty';
++
++export const Constants = wrapProperty(ExpoConstants, {
+   expoConfig: {
+     name: 'SantokuApp',
+     slug: 'santokuApp',
+@@ -16,6 +17,6 @@ export const Constants: typeof ExpoConstants = {
+       mswEnabled: false,
+     },
+   },
+-};
++});
+```
+
+```ts title="jest/utils/wrapProperty.ts"
+function hasOwnProperty<T, K extends PropertyKey>(obj: T, propertyKey: K): obj is T & Record<K, unknown> {
+  return Object.prototype.hasOwnProperty.call(obj, propertyKey);
+}
+
+/**
+ * `{...original, [key]: value}`だとgetterにdeprecated warn logが存在する場合warnログが出てしまう問題対策
+ */
+export function wrapProperty<T extends object>(original: T, propertyObj: object): T {
+  return new Proxy(original, {
+    get(target, name, ...rest) {
+      if (hasOwnProperty(propertyObj, name)) {
+        return propertyObj[name];
+      }
+      return Reflect.get(target, name, ...rest);
+    },
+  });
+}
+```
+
+#### アニメーション中のAnimatedStyleの僅かな変化に対応
+
+アニメーション中の`translateY`の値が以前と僅かに異なっていました。
+値が以前と同じことが必須ではなく差分も小さいため、理由の調査はせず、テストコードを更新しました。
+
+```diff title="src/bases/ui/picker/PickerContainer.test.tsx"
+@@ -53,7 +53,7 @@ describe('PickerContainer only with required props', () => {
+     await act(() => {
+       jest.advanceTimersByTime(DEFAULT_SLIDE_IN_DURATION / 2);
+     });
+-    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 75}]});
++    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 74.00333333333333}]});
+     expect(sut).toMatchSnapshot('Animating (slide in)');
+ 
+     // アニメーションが完了すると`transform`が設定値に到達していること
+@@ -82,7 +82,7 @@ describe('PickerContainer only with required props', () => {
+     await act(() => {
+       jest.advanceTimersByTime(DEFAULT_SLIDE_OUT_DURATION / 2);
+     });
+-    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 75}]});
++    expect(animatedView).toHaveAnimatedStyle({transform: [{translateY: 76.00333333333333}]});
+     expect(sut).toMatchSnapshot('Animating (slide out)');
+ 
+     // アニメーションが完了するとコンポーネントが消えること
+```
+
+#### slideOutDurationテストの時間指定が厳密すぎるとテストが落ちる問題修正
+
+今まではアニメーション終了1ms前のタイミングでアニメーション終了のcallbackが呼ばれないことを期待したテストをしていましたが、callbackが呼ばれるようになっていました。
+1msは小さすぎ、誤差の影響と考えられるため10msに変更しました。
+
+```diff title="src/bases/ui/picker/PickerContainer.test.tsx"
+@@ -146,14 +146,14 @@ describe('PickerContainer with all props', () => {
+     sut.update(<PickerContainer isVisible={false} afterSlideOut={afterSlideOut} slideOutDuration={100} />);
+ 
+     await startAnimation();
+-    // slideOutDurationで指定した時間の1msc前ではafterSlideOutは実行されない
++    // slideOutDurationで指定した時間の10msc前ではafterSlideOutは実行されない
+     await act(() => {
+-      jest.advanceTimersByTime(99);
++      jest.advanceTimersByTime(90);
+     });
+     expect(afterSlideOut).not.toHaveBeenCalled();
+     // slideOutDurationで指定した時間経過後は、afterSlideOutが実行される
+     await act(() => {
+-      jest.advanceTimersByTime(1);
++      jest.advanceTimersByTime(10);
+     });
+     expect(afterSlideOut).toHaveBeenCalled();
+   });
+```
+
+#### keyExtractorの呼び出しが増えて落ちるようになったテスト修正
+
+`react-native`の`FlatList`の`keyExtractor`の呼び出しが増えていました。
+2回目にindex=1が呼ばれるのは内部実装に依存していたため、`toHaveBeenNthCalledWith`の替わりに`toHaveBeenCalledWith`を使うようにしました。
+
+```diff title="src/bases/ui/picker/SelectPickerItems.android.test.tsx"
+     expect(flatListProps.contentContainerStyle).toEqual({paddingVertical: 120});
+     expect(flatListProps.snapToInterval).toBe(60);
+-    expect(keyExtractor).toHaveBeenNthCalledWith(
+-      1,
++    // `value: '1'` だけ2回呼ばれるのでtoHaveBeenNthCalledWithを使わない
++    expect(keyExtractor).toHaveBeenCalledWith(
+       {value: '1', label: 'test1', key: 'key1', color: 'red', fontFamily: 'Roboto'},
+       0,
+     );
+-    expect(keyExtractor).toHaveBeenNthCalledWith(
+-      2,
++    expect(keyExtractor).toHaveBeenCalledWith(
+       {value: '2', label: 'test2', color: 'yellow', fontFamily: 'SFProText'},
+       1,
+     );
+```
+
+### warn対応
+
+#### TypeScriptバージョンに対応しているtypescript-eslintに更新
+
+以下のライブラリがTypeScript`~5.1.3`をサポートしていなかったため、バージョンアップしました。
+
+- @typescript-eslint/eslint-plugin
+- @typescript-eslint/parser
+
+```text title="発生していたWARNログ"
+WARNING: You are currently running a version of TypeScript which is not officially supported by @typescript-eslint/typescript-estree.
+
+You may find that it works just fine, or you may not.
+
+SUPPORTED TYPESCRIPT VERSIONS: >=3.3.1 <5.1.0
+
+YOUR TYPESCRIPT VERSION: 5.1.6
+
+Please only submit bug reports when using the officially supported version.
+```
+
+```shell title="実行コマンド"
+npm update @typescript-eslint/eslint-plugin @typescript-eslint/parser
+```
+
+#### deprecated対応（JSX.Element → React.JSX.Element）
+
+以下のcommitで`JSX`namespaceが`React`namespaceの下に移動され、`JSX`は非推奨となりました。
+
+- [\[react\] Add JSX namespace to React namespace (#64464) · DefinitelyTyped/DefinitelyTyped@f1b2559](https://github.com/DefinitelyTyped/DefinitelyTyped/commit/f1b25591890978a92c610ce575ea2ba2bbde6a89)
+
+これに対応するため`JSX.Element`を`React.JSX.Element`に変更しました。
+
+```diff title="src/bases/ui/picker/useSelectPickerItems.ts"
+ type SelectPickerItemsTypes<ItemT> = {
+   selectedValue?: React.Key | ItemT;
+-  children?: JSX.Element | JSX.Element[];
++  children?: React.JSX.Element | React.JSX.Element[];
+   items: Item<ItemT>[];
+   itemHeight: number;
+```
+
+#### initialScrollIndexの範囲外警告に対応
+
+`react-native` `v0.72.0`から`FlatList`（`VirtualizedList`）の`initialScrollIndex`に`-1`（負の値）を指定するとwarnログがでるようになりました。
+
+> initialScrollIndex "-1" is not valid (list has 0 items)
+
+- [Gracefully handle out-of-bounds initialScrollIndex · facebook/react-native@aab9df3](https://github.com/facebook/react-native/commit/aab9df37102b6b8661a9e22ee8ae63166c8c632e)
+
+これは、`items`が空か`selectedValue`が不正で`items`に含まれてないというレアケースでしか問題になりません。
+しかし、テストケースに`items=[]`が存在するため、以下のように`-1`のときは`null`にする対応をしました。
+
+```diff title="src/bases/ui/picker/SelectPickerItems.android.tsx"
+@@ -120,7 +120,7 @@ <AnimatedFlatList
+         renderItem={renderItem}
+         decelerationRate={DECELERATION_RATE}
+         getItemLayout={getItemLayout}
+-        initialScrollIndex={selectedIndex}
++        initialScrollIndex={selectedIndex !== -1 ? selectedIndex : null}
+         centerContent
+         testID={flatListTestID}
+       />
+```
+
+### buildエラー修正
+
+#### `app.notifee:core`を見つけられない問題対応
+
+`npm run android`を実行すると以下のエラーが出ました。
+
+> Could not find any matches for app.notifee:core:+ as no versions of app.notifee:core are available.
+
+`expo-build-properties`プラグインの`android.extraMavenRepos[]`を追加する必要がありました。
+
+```diff title="app.config.js"
+@@ -94,6 +94,10 @@
+ -keep public class com.horcrux.svg.** {*;}
+ `,
+             enableProguardInReleaseBuilds: true,
++            extraMavenRepos: [
++              // notifee Expo49対応: https://github.com/invertase/notifee/issues/808
++              '$rootDir/../../../node_modules/@notifee/react-native/android/libs',
++            ],
+           },
+           ios: {
+```
+
+参考Issueは以下です。
+
+- [Expo SDK 49 compatibility issue · Issue #808 · invertase/notifee](https://github.com/invertase/notifee/issues/808)
+
+### 不要になったConfig Plugins`withAndroidRemoveUsesClearTextTrafficForRelease`を削除
+
+今までは暗号化してないhttp通信を禁止するために、`android:usesCleartextTraffic`を削除するConfig Pluginsを作成し使用していました。
+
+- [config/plugin/src/android/withAndroidRemoveUsesClearTextTrafficForRelease.ts](https://github.com/ws-4020/mobile-app-crib-notes/blob/v2023.07/example-app/SantokuApp/config/plugin/src/android/withAndroidRemoveUsesClearTextTrafficForRelease.ts)
+
+しかし、[Expo SDK 49の主な変更 - Expoがサポートするライブラリや機能 - android:usesCleartextTraffic](#androidusescleartexttraffic)に記載した通り、Expo側で対応されました。
+そのため、不要となったConfig Pluginsを削除しました。
+
+### Proguardルールの更新
+
+各ルールが現在も必要か、コメントのリンク先の更新などが無いかを確認しました。
+
+#### `react-native-svg`用ルールの削除
+
+`react-native-svg` `v13.7.0`からライブラリ側で自動的にルールを含めるようになりました。
+
+- [Include proguard config (#1842) · software-mansion/react-native-svg@1637580](https://github.com/software-mansion/react-native-svg/commit/16375807327ec8e94cde91a7cbee771c48bf0c69)
+
+そのため、`app.config.js`で`expo-build-properties`プラグインの`android.extraProguardRules`でルールを追加する必要はなくなりました。
+
+```diff title="app.config.js"
+ -keep class expo.modules.ExpoModulesPackageList { *; }
+-
+-# https://github.com/software-mansion/react-native-svg#problems-with-proguard
+--keep public class com.horcrux.svg.** {*;}
+ `,
+             enableProguardInReleaseBuilds: true,
+```
+
+### Expoの更新履歴の確認と対応
+
+Expoの[CHANGELOG](https://github.com/expo/expo/blob/sdk-49/CHANGELOG.md#4900--2023-06-27)を参照して、Expo SDKとExpoが管理するライブラリの更新内容を確認しました。
+
+ここまでの対応以外に追加で必要なものはありませんでした。
+
+### React Nativeの更新履歴の確認と対応
+
+React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0724)を参照して、React Nativeの更新内容を確認しました。
+
+ここまでの対応以外に追加で必要なものはありませんでした。
+
+### `expo-template-blank-typescript`の更新履歴の確認と対応
+
+[`expo-template-blank-typescript`の更新履歴](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-blank-typescript)を確認しました。
+
+`npm install expo@^49.0.0`、`npx expo install --fix`で更新される依存ライブラリのアップグレードが主な変更でした。そのため、このアプリで特別な対応は必要ありませんでした。
+
+### `expo-template-bare-minimum`の更新履歴の確認と対応
+
+[`expo-template-bare-minimum`の更新履歴](https://github.com/expo/expo/commits/sdk-49/templates/expo-template-bare-minimum)を確認しました。
+
+このアプリでは[Config Pluginsに対応](./config-plugins.mdx)しているので、`expo-template-bare-minimum`の更新に伴う個別の対応は基本的に必要ありません。
+ただし、以下の場合は個別に対応する必要があります。
+
+- このアプリで作成しているConfig Pluginsによる変更と、`expo-template-bare-minimum`の更新に伴う変更が競合した場合
+- [Prebuild](../../development/build-configuration.mdx#prebuild)時に生成されないファイル
+
+上記内容を観点に`expo-template-bare-minimum`の更新履歴を確認しました。
+
+#### `.gitignore`の更新
+
+`expo-template-bare-minimum`の以下のコミットで、`.gitignore`が更新されていました。
+
+- [update template gitignores (#22650) · expo/expo@5636a05](https://github.com/expo/expo/commit/5636a057028afc308bc011bf4ae71589a456c534)
+
+大きな変更は、重複の削除でした。
+つまり、Android, Xcode関連ファイルは `android/`, `ios/` の `.gitignore` に記載されているため削除されました。
+
+```diff title=.gitignore
+-# Xcode
+-#
+-build/
+-*.pbxuser
+-!default.pbxuser
+-*.mode1v3
+-!default.mode1v3
+-*.mode2v3
+-!default.mode2v3
+-*.perspectivev3
+-!default.perspectivev3
+-xcuserdata
+-*.xccheckout
+-*.moved-aside
+-DerivedData
+-*.hmap
+-*.ipa
+-*.xcuserstate
+-project.xcworkspace
+-
+-# Android/IntelliJ
+-#
+-build/
+-.idea
+-.gradle
+-local.properties
+-*.iml
+-*.hprof
+```
+
+:::caution
+このアプリでは、prebuild時のファイルコピー処理に不具合があり、`prebuild/`ディレクトリの一部ファイルがignoreされなくなりました。
+不具合は`android/`,`ios/`ディレクトリの`.gitignore`が`prebuild/`ディレクトリにコピーされないもので、以下のPull Requestで対処しました。
+
+- [🐛: prebuild時に.始まりのファイル(.gitignoreなど)がコピーされてない問題を修正 · Pull Request #1225 · ws-4020/mobile-app-crib-notes](https://github.com/ws-4020/mobile-app-crib-notes/pull/1225)
+:::
+
+### 手動管理しているライセンスの更新
+
+このアプリでは、使用しているライブラリのライセンス一覧を出力するスクリプトを用意しています。詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.07/example-app/SantokuApp/.script/README.md)を参照してください。
+
+#### `managed-license.js`の更新
+
+ライセンス情報が不足しており補完したい、あるいは、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.07/example-app/SantokuApp/.script/managed-license.js)で管理しています。
+
+ライセンス情報が不足しているライブラリなどは、以下のコマンドを実行することで確認できます。
+
+- `node .script/check-licenses.js`
+
+実行した結果、いくつかのライブラリのライセンス情報を更新する必要がありました。
+
+#### 新規ライセンスに対応
+
+このアプリでは、アプリに使用しても問題ないライセンスを管理してチェックできるようにしています。
+
+今回のExpo SDKアップグレードでは、[Mozilla Public License 2.0](https://spdx.org/licenses/MPL-2.0.html)（`MPL-2.0`）のライブラリが増えました。
+`MPL-2.0`は準コピーレフト型ライセンスであり使用しても問題ありません。
+そのライセンス名（`MPL-2.0`）を[check-licenses.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2023.07/example-app/SantokuApp/.script/check-licenses.js)の`licenseWhitelist`に追加しています。

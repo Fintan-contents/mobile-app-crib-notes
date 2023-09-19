@@ -120,7 +120,7 @@ export const SelectPickerItems = <ItemT extends unknown>({
         renderItem={renderItem}
         decelerationRate={DECELERATION_RATE}
         getItemLayout={getItemLayout}
-        initialScrollIndex={selectedIndex}
+        initialScrollIndex={selectedIndex !== -1 ? selectedIndex : null}
         centerContent
         testID={flatListTestID}
       />

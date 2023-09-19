@@ -130,7 +130,9 @@ describe('SnackbarComponent', () => {
   it('SnackbarComponent表示中にpropsでhideを指定した場合、SnackbarComponentが消えることを確認', async () => {
     render(<SnackbarComponent message="テストメッセージ" />);
 
-    jest.advanceTimersByTime(FADE_IN_DURATION);
+    await act(() => {
+      jest.advanceTimersByTime(FADE_IN_DURATION);
+    });
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
 
     screen.update(<SnackbarComponent message="テストメッセージ" hide />);
@@ -142,7 +144,7 @@ describe('SnackbarComponent', () => {
     expect(screen.queryByText('テストメッセージ')).toBeNull();
   });
 
-  it('SnackbarComponentに指定したpropsがrenderに反映されていることを確認', () => {
+  it('SnackbarComponentに指定したpropsがrenderに反映されていることを確認', async () => {
     /**
      * 下記項目は対象外
      * - autoHideDuration / fadeInDuration / fadeOutDuration / forceFadeOutDuration / hideFadeOutDuration
@@ -164,7 +166,9 @@ describe('SnackbarComponent', () => {
       />,
     );
 
-    jest.advanceTimersByTime(FADE_IN_DURATION);
+    await act(() => {
+      jest.advanceTimersByTime(FADE_IN_DURATION);
+    });
 
     expect(screen.queryByText('テストメッセージ')).not.toBeNull();
     expect(getStyle<TextStyle>(screen.getByText('テストメッセージ')).color).toBe('black');
