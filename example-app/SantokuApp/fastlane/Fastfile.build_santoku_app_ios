@@ -38,7 +38,7 @@ environment_options = {
   },
 }
 
-private_lane :build_santoku_app_ios do |options|
+private_lane :build_santoku_app_ios do
   # CocoaPodsの依存パッケージをインストールする
   # https://docs.fastlane.tools/actions/cocoapods/
   cocoapods(
@@ -49,7 +49,7 @@ private_lane :build_santoku_app_ios do |options|
     silent: false,
   )
 
-  environment = options[:environment]
+  environment = ENV["ENVIRONMENT"]
   env_options = environment_options[environment.to_sym]
 
   build_ios_app({

@@ -57,24 +57,34 @@ npm run pod-install
 
 ## ビルドタイプに応じたアプリ起動
 
-アプリをデバイスにインストールして起動するには、以下のコマンドを実行します。
+アプリをデバイスにインストールして起動するコマンドは、ビルドタイプに応じて異なります。
+
+また、[環境の切り替え](#環境の切り替え)と同様に、コマンドのサフィックスに環境名を指定します。
+
+:::noteコマンドのサフィックスに環境名を指定する理由
+[環境の切り替え](#環境の切り替え)に記載したコマンドを実行することで、基本的にはアプリの環境が切り替わります。
+
+ただし、[アプリ特有の設定値](./app-constants.mdx)に関しては、アプリのビルド時やMetroBundlerの起動時に環境変数`ENVIRONMENT`を設定することで、環境に応じた値が読み込まれます。
+
+そのため、環境ごとのコマンドを用意して、そのコマンド内で環境変数`ENVIRONMENT`を設定しています。
+:::
 
 ### デバッグビルド
 
-#### Android
-
-```bash
-npm run android
-```
-
-#### iOS
-
-```bash
-npm run ios 
-```
+| 環境    | Android                | iOS                |
+|:------|:-----------------------|:-------------------|
+| local | `npm run android`      | `npm run ios`      |
+| dev   | `npm run android:dev`  | `npm run ios:dev`  |
+| stg   | `npm run android:stg`  | `npm run ios:stg`  |
+| prod  | `npm run android:prod` | `npm run ios:prod` |
 
 :::note
-既にアプリをインストール済みの場合は、`npm start`を実行してMetro Bundlerを立ち上げるだけでも問題ありません。
+既にアプリをインストール済みの場合は、以下のコマンドを実行してMetro Bundlerを立ち上げるだけでも問題ありません。
+
+- `npm start`（local環境）
+- `npm run start:dev`（dev環境）
+- `npm run start:stg`（stg環境）
+- `npm run start:prod`（prod環境）
 
 ただし、local環境で`npm start`を実行した場合は、以下の制約があります。
 
@@ -90,18 +100,9 @@ Expo CLIは、シミュレータの起動とアプリの起動を実施するの
 
 ### リリースビルド
 
-<!-- markdownlint-disable MD024 -->
-
-#### Android
-
-```bash
-npm run android -- --variant release
-```
-
-#### iOS
-
-```bash
-npm run ios -- --configuration Release
-```
-
-<!-- markdownlint-enable MD024 -->
+| 環境    | Android                                     | iOS                                           |
+|:------|:--------------------------------------------|:----------------------------------------------|
+| local | `npm run android -- --variant release`      | `npm run ios -- --configuration Release`      |
+| dev   | `npm run android:dev -- --variant release`  | `npm run ios:dev -- --configuration Release`  |
+| stg   | `npm run android:stg -- --variant release`  | `npm run ios:stg -- --configuration Release`  |
+| prod  | `npm run android:prod -- --variant release` | `npm run ios:prod -- --configuration Release` |
