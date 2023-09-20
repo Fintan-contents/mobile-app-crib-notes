@@ -34,6 +34,69 @@
 
 ## 更新履歴
 
+### 2023/09/29
+
+#### 🌱 新規コンテンツ（2023/09/29）
+
+- スタイルガイド
+  - アプリケーション方式
+    - [アプリケーション構造](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/application-structure/overview)（サンプルアプリケーションの[README](https://github.com/ws-4020/mobile-app-crib-notes/blob/master/example-app/SantokuApp/README.md)から移動）
+  - 開発ガイド
+    - 実装
+      - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/style-guide/overview)
+      - [ESLint](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/style-guide/eslint)
+      - [TypeScript](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/style-guide/typescript)
+      - [EditorConfig](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/style-guide/editorconfig)
+      - [Prettier](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/style-guide/prettier)
+      - [静的解析ツールの運用](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/style-guide/lint-ops)
+      - [TypeScriptコーディング規約](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/style-guide/typescript-style-guide)
+      - [コーディングに関する命名規約](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/style-guide/naming-conversion)
+- ディープリンク
+  - アプリケーション方式
+    - [Universal Links](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/deep-link/universal-links)
+    - [Android App Links](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/deep-link/android-app-links)
+  - 外部設計
+    - [ディープリンク](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/design/demo/deep-link/overview)
+  - Decision Records
+    - [ディープリンクの実現方式](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-018-deep-link)
+    - ディープリンク受信時の画面遷移
+      - [本文](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-019-deep-link-navigation)
+      - [React Navigationのlinkingを使用した画面遷移の検討](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/linking-feasibility)
+      - [React Navigationのlinkingを使用しない画面遷移の検討](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/non-linking-feasibility)
+- Expoアップグレード
+  - メンテナンス
+    - [Expo SDK 49アップグレード](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/maintenance/enhance/expo-49-upgrade)
+- expo-dev-clientの導入
+  - 開発ガイド
+    - 開発環境
+      - [実機での開発ビルドの使用設定](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/setting-up-development-build-on-real-device)
+
+#### 🌿 更新コンテンツ（2023/09/29）
+
+- ディープリンク
+  - アプリケーション方式
+    - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/deep-link/overview)
+    - [ディープリンクの処理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/deep-link/process-deep-link)
+    - [アプリ起動後の初期化処理](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/life-cycle-management/initialization)
+  - Decision Records
+    - [ディープリンクの実現方式（廃止）](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/decisions/adr-004-deep-link)
+- expo-dev-clientの導入
+  - 開発ガイド
+    - 開発環境
+      - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment)
+      - [基本的なセットアップ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/basic-setup)
+      - [Firebaseの機能を利用する](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/use-firebase)
+      - [Androidアプリの配布用ビルドの設定](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/setting-up-android-distribution-build)
+      - [iOSアプリの配布用ビルドの設定](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/development-environment/setting-up-ios-distribution-build)
+    - 実装
+      - [Firebaseの機能を利用する際の注意点](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/cautions-on-using-firebase)
+    - ビルド
+      - [環境の切り替え](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/environments-configuration)
+      - [Config Pluginsの適用](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/apply-plugins)
+      - [ビルドタイプ](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/build-type)
+      - [Firebaseの設定ファイル](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/firebase-setting-file)
+      - [環境やビルドタイプに応じたアプリ起動](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/build-configuration/app-launch-per-build-settings)
+
 ### 2023/06/30
 
 #### 🌱 新規コンテンツ（2023/06/30）
