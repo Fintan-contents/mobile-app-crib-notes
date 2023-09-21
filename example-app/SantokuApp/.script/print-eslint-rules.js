@@ -7,6 +7,7 @@ const eslint = {
   url: 'https://eslint.org/docs/latest',
   rulesRootPath: 'rules',
   hasPagePerRule: true,
+  description: 'ESLintが提供するルールです。',
 };
 
 /**
@@ -25,6 +26,7 @@ const plugins = [
     url: 'https://typescript-eslint.io/',
     rulesRootPath: 'rules',
     hasPagePerRule: true,
+    description: 'TypeScriptに特化したルールを提供するプラグインです。',
   },
   {
     name: 'eslint-plugin-import',
@@ -33,6 +35,7 @@ const plugins = [
     rulesRootPath: 'blob/main/docs/rules',
     extension: '.md',
     hasPagePerRule: true,
+    description: 'ES moduleの`import`/`export`構文に関するルールを提供するプラグインです。',
   },
   {
     name: 'eslint-plugin-eslint-comments',
@@ -41,16 +44,19 @@ const plugins = [
     rulesRootPath: 'rules',
     extension: '.html',
     hasPagePerRule: true,
+    description: '`eslint-disable`のようなディレクティブコメントの使用に関するルールを提供するプラグインです。',
   },
   {
     name: 'eslint-plugin-react-hooks',
     prefix: 'react-hooks',
     url: 'https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks',
+    description: 'React Hooksに関するルールを提供するプラグインです。',
   },
   {
     name: 'eslint-plugin-prettier',
     prefix: 'prettier',
     url: 'https://github.com/prettier/eslint-plugin-prettier',
+    description: 'ESLintでPrettierを実行し、Prettierのルールに違反する箇所をESLintの警告やエラーとして検出するプラグインです。',
   },
   {
     name: 'eslint-plugin-react',
@@ -59,16 +65,19 @@ const plugins = [
     rulesRootPath: 'blob/master/docs/rules',
     extension: '.md',
     hasPagePerRule: true,
+    description: 'Reactに関するルールを提供するプラグインです。',
   },
   {
     name: 'eslint-plugin-strict-dependencies',
     prefix: 'strict-dependencies',
     url: 'https://github.com/knowledge-work/eslint-plugin-strict-dependencies',
+    description: '`Module`の依存性に関するルールを提供するプラグインです。',
   },
   {
     name: 'eslint-plugin-deprecation',
     prefix: 'deprecation',
     url: 'https://github.com/gund/eslint-plugin-deprecation',
+    description: '非推奨コードの使用を検出するプラグインです。',
   },
   {
     name: 'eslint-plugin-node',
@@ -77,6 +86,7 @@ const plugins = [
     rulesRootPath: 'blob/master/docs/rules',
     extension: '.md',
     hasPagePerRule: true,
+    description: 'Node.jsに関するルールを提供するプラグインです。',
   },
   {
     name: 'eslint-plugin-jest',
@@ -85,6 +95,7 @@ const plugins = [
     rulesRootPath: 'blob/main/docs/rules',
     extension: '.md',
     hasPagePerRule: true,
+    description: 'Jestに関するルールを提供するプラグインです。',
   },
 ];
 
@@ -108,23 +119,29 @@ const generateRuleUrl = ({prefix, url, rulesRootPath, extension = '', hasPagePer
   return url;
 };
 
-const tableHeader = `|ルール|レベル|\n|:--|:--|`;
-const transformToTableRow = ({rule, ruleUrl, level}) => `|[${rule}](${ruleUrl})|${level}|`;
+const tableHeader = `|ルール|レベル|推奨設定からの変更|\n|:--|:--|:--|`;
+const transformToTableRow = ({rule, ruleUrl, level}) => `|[${rule}](${ruleUrl})|${level}|-|`;
 const transformToH3 = ({pluginName, pluginUrl}) => `### [${pluginName}](${pluginUrl})`;
 
 /**
  * ESLintのルール一覧をマークダウン形式で標準出力します。
  * 出力形式は以下とします。
  * H3: プラグイン名
- * Table: ルール名とレベルの一覧
+ * プラグイン概要
+ * Table: 以下のカラムを表示します。
+ *   - ルール名
+ *   - レベル
+ *   - 推奨設定からの変更（このツールでは、全て「-」を設定）
  *
  * e.g.
  * ### [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin)
- 
- * |ルール|レベル|
- * |:--|:--|
- * |[@typescript-eslint/array-type](https:/github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules/array-type.md)|warn|
- * |[@typescript-eslint/await-thenable](https:/github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules/await-thenable.md)|error|
+ *
+ * TypeScriptに特化したルールを提供するプラグインです。
+
+ * |ルール|レベル|推奨設定からの変更|
+ * |:--|:--|:--|
+ * |[@typescript-eslint/array-type](https:/github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules/array-type.md)|warn|-|
+ * |[@typescript-eslint/await-thenable](https:/github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules/await-thenable.md)|error|-|
  */
 const print = json => {
   const jsonObject = JSON.parse(json);
@@ -149,6 +166,7 @@ const print = json => {
     const pluginName = plugin.name;
     const pluginUrl = plugin.url;
     const ruleUrl = generateRuleUrl({...plugin, rule});
+    const description = plugin.description;
 
     rules.push({
       pluginName,
@@ -156,6 +174,7 @@ const print = json => {
       rule,
       ruleUrl,
       level,
+      description,
     });
   }
 
@@ -165,10 +184,11 @@ const print = json => {
     .sort((a, b) => a[0].localeCompare(b[0])) // プラグイン名でsort
     .map(([pluginName, rules]) => {
       const pluginUrl = rules[0].pluginUrl;
+      const description = rules[0].description;
       rules.sort((a, b) => a.rule.localeCompare(b.rule)); // ルール名でsort
       const h3 = transformToH3({pluginName, pluginUrl});
       const rows = rules.map(transformToTableRow);
-      return `${h3}\n\n${tableHeader}\n${rows.join('\n')}`;
+      return `${h3}\n\n${description}\n\n${tableHeader}\n${rows.join('\n')}`;
     });
 
   // プラグインとそのルール一覧を標準出力
