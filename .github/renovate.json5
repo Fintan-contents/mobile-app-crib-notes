@@ -49,6 +49,7 @@
         'expo-build-properties',
         'expo-crypto',
         'expo-keep-awake',
+        'expo-linking',
         'expo-local-authentication',
         'expo-secure-store',
         'expo-splash-screen',

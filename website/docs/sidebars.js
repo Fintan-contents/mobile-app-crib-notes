@@ -564,6 +564,7 @@ module.exports = {
             'react-native/santoku/design/demo/qrcode/overview',
             'react-native/santoku/design/demo/barcode/overview',
             'react-native/santoku/design/demo/map/overview',
+            'react-native/santoku/design/demo/deep-link/overview',
           ],
         },
       ],

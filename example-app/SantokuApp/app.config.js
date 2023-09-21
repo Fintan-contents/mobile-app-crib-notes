@@ -16,6 +16,7 @@ import {
   withAndroidFlexibleSplashScreen,
   withIosOverrideStoryboard,
 } from './config/app.plugin.js';
+import {DEEP_LINK_DOMAIN} from './config/constants/deepLink';
 
 const environmentConfig = {
   local: localConfig,
@@ -23,6 +24,7 @@ const environmentConfig = {
   stg: stgConfig,
   prod: prodConfig,
 };
+
 /**
  * アプリ全体のベースとなる設定です。
  * 環境毎に違う設定値は、prodの設定を定義しています。（一部のプラグインを除く）
@@ -64,6 +66,10 @@ module.exports = ({config}) => {
           apiKey: '${googleMapApiKey}',
         },
       },
+      // 環境毎の設定値をマージするために使用しているdeepmergeは、配列は上書きされない。
+      // intentFiltersをここに定義してしまうと、環境毎の設定で上書きできないため、app.config.prod.jsで定義する。
+      // https://www.npmjs.com/package/deepmerge
+      // intentFilters: [...],
     },
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp',
@@ -74,6 +80,7 @@ module.exports = ({config}) => {
         CFBundleAllowMixedLocalizations: true,
         UIBackgroundModes: ['fetch', 'remote-notification'],
       },
+      associatedDomains: [`applinks:${DEEP_LINK_DOMAIN}`],
     },
     disabledPlugins: [
       // default plugin を無効化するために patch-package を使用して機能拡張している

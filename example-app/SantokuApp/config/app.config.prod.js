@@ -1,9 +1,15 @@
 const withAndroidAppBuildGradleForRelease = require('./app.plugin.js').withAndroidAppBuildGradleForRelease;
 const withIosEnabledATS = require('./app.plugin.js').withIosEnabledATS;
 const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
+const generateDeepLinkIntentFilter = require('./utils/generateDeepLinkIntentFilter');
+
+const deepLinkIntentFilter = generateDeepLinkIntentFilter();
 
 module.exports = config => {
   return {
+    android: {
+      intentFilters: [deepLinkIntentFilter],
+    },
     plugins: [
       // このアプリで用意しているAndroid用のプラグイン
       withAndroidAppBuildGradleForRelease,

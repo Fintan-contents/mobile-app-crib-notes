@@ -1,0 +1,26 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "jp.fintan.mobile.SantokuApp.stg",
+      "sha256_cert_fingerprints": ["2A:B5:1E:6C:D8:8A:4E:B3:4C:8C:A8:7C:37:8D:56:9E:29:23:7D:AB:E1:11:C6:BE:13:58:98:55:05:F8:20:D2"]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "jp.fintan.mobile.SantokuApp.dev",
+      "sha256_cert_fingerprints": ["01:AD:D7:52:B3:D1:EE:C8:E2:79:DD:C4:0D:27:DA:14:FF:D8:AF:F0:32:0A:94:05:8F:7C:E6:C9:A7:85:B7:16"]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "jp.fintan.mobile.SantokuApp.local",
+      "sha256_cert_fingerprints": ["FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C"]
+    }
+  }
+]

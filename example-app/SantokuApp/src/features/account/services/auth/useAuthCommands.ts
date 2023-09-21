@@ -9,7 +9,13 @@ import {signup} from './signup';
 import {useIsLoggedIn} from '../../client-states/useIsLoggedIn';
 import {useAccountCommands} from '../account/useAccountCommands';
 
-const defaultQueryFilters = {predicate: (query: Query) => query.queryHash !== hashQueryKey(['account', 'isLoggedIn'])};
+const defaultQueryFilters = {
+  predicate: (query: Query) =>
+    !(
+      query.queryHash === hashQueryKey(['account', 'isLoggedIn']) ||
+      query.queryHash === hashQueryKey(['deep-link', 'url'])
+    ),
+};
 
 export const useAuthCommands = () => {
   const queryClient = useQueryClient();

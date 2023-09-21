@@ -10,18 +10,37 @@ import React, {useMemo} from 'react';
 import {AccountStackNav} from './AccountStackNav';
 import {HomeStackNav} from './HomeStackNav';
 import {MainTabParamList} from './types';
+import {useRedirectDeepLinkUrl} from '../client-states/useRedirectDeepLinkUrl';
 import {withInitialData} from '../components/withInitialData';
+import {parseDeepLinkUrl} from '../services/deep-link/parseDeepLinkUrl';
+import {DeepLink, deepLinks} from '../use-cases/deep-link/deepLinks';
 
 const nav = createBottomTabNavigator<MainTabParamList>();
 
-const getInitialRouteName = (initialData: AppInitialData): keyof MainTabParamList => {
+const getInitialRouteName = (
+  initialData: AppInitialData,
+  deepLinks: DeepLink[],
+  deepLinkUrl?: string,
+): keyof MainTabParamList => {
+  if (deepLinkUrl) {
+    const parsedUrl = parseDeepLinkUrl(deepLinkUrl);
+    if (!parsedUrl) {
+      return 'HomeStackNav';
+    }
+    const found = deepLinks.find(deepLink => deepLink.matchUrl(parsedUrl));
+    return found?.mainTabNavInitialRouteName ?? 'HomeStackNav';
+  }
   return 'HomeStackNav';
 };
 type Props = {
   initialData: AppInitialData;
 };
 const Component: React.FC<Props> = ({initialData}) => {
-  const initialRouteName = useMemo(() => getInitialRouteName(initialData), [initialData]);
+  const [redirectDeepLinkUrl] = useRedirectDeepLinkUrl();
+  const initialRouteName = useMemo(
+    () => getInitialRouteName(initialData, deepLinks, redirectDeepLinkUrl),
+    [initialData, redirectDeepLinkUrl],
+  );
   const theme = useTheme<RestyleTheme>();
 
   return (

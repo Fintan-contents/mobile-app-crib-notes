@@ -1,5 +1,9 @@
 const withIosDisabledATS = require('./app.plugin.js').withIosDisabledATS;
 const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
+const generateDeepLinkIntentFilter = require('./utils/generateDeepLinkIntentFilter');
+
+const deepLinkPathPrefix = 'dev';
+const deepLinkIntentFilter = generateDeepLinkIntentFilter(deepLinkPathPrefix);
 
 module.exports = config => {
   return {
@@ -10,6 +14,7 @@ module.exports = config => {
         foregroundImage: './assets/android/ic_launcher_foreground_dev.png',
       },
       googleServicesFile: './google-services-dummy.json',
+      intentFilters: [deepLinkIntentFilter],
     },
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp.dev',
@@ -34,6 +39,7 @@ module.exports = config => {
     extra: {
       mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',
       mobileAppCribNotesRepositoryUrl: 'https://github.com/ws-4020/mobile-app-crib-notes',
+      deepLinkPathPrefix,
     },
   };
 };

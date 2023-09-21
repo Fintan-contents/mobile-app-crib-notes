@@ -9,6 +9,8 @@ import {refreshCsrfToken} from 'features/backend/utils/refreshCsrfToken';
 import {useCallback, useMemo, useState} from 'react';
 
 import {isInitialDataError} from '../errors/initialDataError';
+import {getInitialDeepLinkUrl} from '../services/deep-link/getInitialDeepLinkUrl';
+import {getOnceWarmStartDeepLink} from '../services/deep-link/warmStartDeepLink';
 import {initializeFirebaseCrashlyticsAsync} from '../services/initializeFirebaseCrashlyticsAsync';
 import {loadBundledMessagesAsync} from '../services/loadBundledMessagesAsync';
 import {AppInitialData} from '../types/AppInitialData';
@@ -49,10 +51,11 @@ const loadData = async () => {
   // このアプリでは初期画面の決定に利用するのみで、それ以外の個別の処理は行わない
   const notification = (await messaging().getInitialNotification()) ?? undefined;
 
-  // TODO: ディープリンクから起動した場合のパラメータ取得
+  const warmStartDeepLink = getOnceWarmStartDeepLink();
+  const deepLinkUrl = warmStartDeepLink ?? (await getInitialDeepLinkUrl());
 
   // TODO: キャッシュの削除
-  const initialData = {notification};
+  const initialData = {notification, deepLinkUrl};
   return {initialData};
 };
 
