@@ -105,8 +105,15 @@ const config = isLoggedIn ? {
 - ディープリンクを受け取った時点で、そのディープリンクをグローバルなStateに保持
   - コールド、ウォームスタートの場合は、[linking.getInitialURL](https://reactnavigation.org/docs/navigation-container#linkinggetinitialurl)内でStateに設定
   - ホットスタートの場合は、[linking.subscribe](https://reactnavigation.org/docs/navigation-container#linkingsubscribe)内でStateに設定
-- 認証後にStateからディープリンクを取得し、[Linking.openURL](https://reactnative.dev/docs/linking#openurl)を使用してそのディープリンクを開く
-  - `Linking.openURL`を使用してアプリ内からディープリンクを開くことにより、`linking`に設定したURLと遷移先画面のマッピングに従って画面遷移が行われる
+- 認証後にStateからディープリンクを取得し、ディープリンクに応じた画面へ遷移
+  - `linking`のマッピング定義に従って自動遷移させる方法はないため、独自実装で画面を遷移させる必要がある
+
+:::note
+認証後にStateからディープリンクを取得し、[Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl)を使用してそのディープリンクを開く方法も検討しました。
+`Linking.openURL`を使用してアプリ内からディープリンクを開くことにより、`linking`に設定したURLと遷移先画面のマッピングに従って画面遷移が行われると考えたためです。
+
+しかし、この方法ではiOSの場合に画面遷移が行われず、ブラウザでディープリンクが開かれてしまいました。
+:::
 
 ## ディープリンクの遷移先画面で戻るボタンをタップした場合の動作
 

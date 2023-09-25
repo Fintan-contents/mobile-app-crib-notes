@@ -9,53 +9,64 @@ title: React Navigationのlinkingを使用しない画面遷移の検討
 ディープリンクの受信と、URLの解析には[Expo Linking](https://docs.expo.dev/versions/latest/sdk/linking/)を使用しています。
 
 ```tsx
-type Props = {
-  navigation: NavigationContainerRef<RootStackParamList>;
+/**
+ * ディープリンクURLに応じた画面に遷移させる処理です。
+ */
+const handleDeepLink = (url: string, navigation: NavigationContainerRef<RootStackParamList>) => {
+  const parsedURL = Linking.parse(url);
+
+  if (parsedURL.path?.startsWith('screen-a')) {
+    navigation.dispatch(StackActions.push('StackNavigator1', {screen: 'ScreenA'}));
+  } else if (parsedURL.path?.startsWith('screen-b')) {
+    navigation.navigate('StackNavigator1', {screen: 'ScreenB'});
+  } else if (parsedURL.path?.startsWith('screen-d')) {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'TabNavigator2',
+            state: {
+              index: 0,
+              routes: [{name: 'ScreenD'}],
+            },
+          },
+        ],
+      }),
+    );
+  }
 };
 
-export const DeepLinkHandlers: React.FC<Props> = ({navigation}) => {
+/**
+ * ディープリンクを受信するコンポーネントです。
+ *
+ * このコンポーネントは、NavigationContainerの親コンポーネント（もしくはそれより上位のコンポーネント）として、
+ * 配置する必要があります。
+ * NavigationContainerよりも上位に配置することで、NavigationContainerの初期化が完了した後に、
+ * このコンポーネントのuseEffectが処理されます。
+ * useEffect内では、NavigationContainerのnavigationRefを使用して、ディープリンクURLに応じた画面遷移を行います。
+ */
+export const DeepLinkHandler: React.FC<
+  PropsWithChildren<{navigation: NavigationContainerRef<RootStackParamList>}>
+> = ({navigation, children}) => {
   // コールド・ウォームスタート
   useEffect(() => {
     Linking.getInitialURL().then(url => {
       if (url) {
-        // ディープリンクを受信した場合は、アプリ内からディープリンクURLを開き、Linking.addEventListenerで再度受信する。
-        // このように実装することで、アプリの初期画面が表示された後にディープリンクに応じた画面に遷移するため、
-        // 遷移先画面から戻るボタンタップなどで、前の画面に戻ることができる。
-        Linking.openURL(url);
+        handleDeepLink(url, navigation);
       }
     });
-  }, []);
+  }, [navigation]);
 
   // ホットスタート
   useEffect(() => {
     const subscription = Linking.addEventListener('url', event => {
-      const parsedURL = Linking.parse(event.url);
-
-      if (parsedURL.path?.startsWith('screen-a')) {
-        navigation.dispatch(StackActions.push('StackNavigator1', {screen: 'ScreenA'}));
-      } else if (parsedURL.path?.startsWith('screen-b')) {
-        navigation.navigate('StackNavigator1', {screen: 'ScreenB'});
-      } else if (parsedURL.path?.startsWith('screen-d')) {
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [
-              {
-                name: 'TabNavigator2',
-                state: {
-                  index: 0,
-                  routes: [{name: 'ScreenD'}],
-                },
-              },
-            ],
-          }),
-        );
-      }
+      handleDeepLink(event.url, navigation);
     });
     return () => subscription.remove();
   }, [navigation]);
 
-  return null;
+  return <>{children}</>;
 };
 ```
 
@@ -69,6 +80,5 @@ export const DeepLinkHandlers: React.FC<Props> = ({navigation}) => {
 - ディープリンクを受け取った時点で、そのディープリンクをStateに保持
   - コールド、ウォームスタートの場合は、[Linking.getInitialURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkinggetinitialurl)内でStateに設定
   - ホットスタートの場合は、[Linking.addEventListener](https://docs.expo.dev/versions/latest/sdk/linking/#linkingaddeventlistenertype-handler)内でStateに設定
-- 認証後にStateからディープリンクを取得し、[Linking.openURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkingopenurlurl)を使用してそのディープリンクを開く
-  - `Linking.openURL`を使用してアプリ内からディープリンクを開くことにより、`Linking.addEventListener`でディープリンクを再度受信する
-    :::
+- 認証後にStateからディープリンクを取得し、ディープリンクに応じた画面へ遷移
+:::
