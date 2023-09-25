@@ -4,7 +4,7 @@ sidebar_label: 概要
 pagination_label: ディープリンク
 ---
 
-ディープリンクとは、iOSやAndroidでURLのリンクを開くとアプリが起動する仕組みのことです。ディープリンクから起動されたとき、アプリではそのURLを取得できます。
+ディープリンクとは、iOSやAndroidでURLのリンクを開くとアプリが起動する仕組みのことです。
 
 ディープリンクからアプリを起動したときに、そのURLに応じた画面を表示したり、URLパラメータに従った初期値を設定するなど、幅広く活用できます。
 
@@ -29,3 +29,9 @@ pagination_label: ディープリンク
 
 > While custom URL schemes are an acceptable form of deep linking, universal links are strongly recommended.
 :::
+
+## ディープリンクの注意点
+
+### URLには機密情報を含めない
+
+ユーザに連携するディープリンクのURLには機密情報を含めないように注意が必要です。また、認証後にしか参照できないような情報もURLには含めず、URLタップ後に起動したアプリ内で取得する必要があります。

@@ -43,9 +43,9 @@ Associated Domains Entitlementには、アプリと関連付けるドメイン�
 
 Associated Domains Entitlementは、以下の手順で追加します。
 
-- XcodeのCapabilitiesから`Associated Domains`を選択
-- 追加されたEntitlementのDomainsに`applinks:[関連付けるドメイン]`を追加
-  - 複数のサブドメインをサポートする場合は、全てのドメインを追加
+1. XcodeのCapabilitiesから`Associated Domains`を選択
+1. 追加されたEntitlementのDomainsに`applinks:[関連付けるドメイン]`を追加
+    - 複数のサブドメインをサポートする場合は、全てのドメインを追加
 
 詳細は、以下のドキュメントを参照してください。
 
@@ -53,15 +53,15 @@ Associated Domains Entitlementは、以下の手順で追加します。
 
 なお、Xcodeの`Signing & Capabilities`で`Automatically manage signing`を設定していない場合は、追加で以下の手順が必要になります。
 
-- [Apple Developer Program](https://developer.apple.com/programs/)にログイン
+1. [Apple Developer Program](https://developer.apple.com/programs/)にログイン
 <!-- textlint-disable jtf-style/4.3.7.山かっこ<> -->
-- Apple Developer Programの[Certificates, Identifiers & Profiles > Identifiers](https://developer.apple.com/account/resources/identifiers/list)でアプリのApp IDを選択
+1. Apple Developer Programの[Certificates, Identifiers & Profiles > Identifiers](https://developer.apple.com/account/resources/identifiers/list)でアプリのApp IDを選択
 <!-- textlint-enable jtf-style/4.3.7.山かっこ<> -->
-- Capabilitiesに`Associated Domains`を追加
+1. Capabilitiesに`Associated Domains`を追加
 <!-- textlint-disable jtf-style/4.3.7.山かっこ<> -->
-- Apple Developer Programの[Certificates, Identifiers & Profiles > Profiles](https://developer.apple.com/account/resources/profiles/list)でProvisioning Profileを更新
+1. Apple Developer Programの[Certificates, Identifiers & Profiles > Profiles](https://developer.apple.com/account/resources/profiles/list)でProvisioning Profileを更新
 <!-- textlint-enable jtf-style/4.3.7.山かっこ<> -->
-- 更新したProvisioning Profileをダウンロードして、XcodeのProvisioning Profileに設定
+1. 更新したProvisioning Profileをダウンロードして、XcodeのProvisioning Profileに設定
 
 :::note
 Xcodeの`Signing & Capabilities`で`Automatically manage signing`を設定している場合は、上記手順をXcodeが自動で実施してくれます。

@@ -21,17 +21,23 @@ Superseded: 廃止
 
 ## コンテキスト
 
-[過去に議論したディープリンクの実現方式](./adr-004-deep-link.mdx)では、ディープリンクを実現するためにFirebase Dynamic Linksを採用することにしました。
-
-しかし、Firebase Dynamic Linksは廃止されることが[公式のページ](https://firebase.google.com/support/dynamic-links-faq?hl=ja)でアナウンスされました。
-
-そのため、ディープリンクの実現方式を再度検討する必要があります。
+要約に記載のとおり、Firebase Dynamic Linksは廃止されるため、ディープリンクの実現方式を再度検討する必要があります。
 
 ここでは、次の3つの方式から選択します。
 
 - OSの機能（[Universal Links](https://developer.apple.com/ios/universal-links/)、[Android App Links](https://developer.android.com/training/app-links)）
 - カスタムURLスキーム
 - サードパーティのサービス
+
+用語は以下のとおりです。
+
+| 用語                     | 説明                                        |
+|:-----------------------|:------------------------------------------|
+| ディープリンク                | URLに紐付いたモバイルアプリを起動する機能                    |
+| カスタムURLスキーム            | `mailto:`のようにスキームに任意のプレフィックスを指定したURL      |
+| Universal Links        | iOSがOSの機能としてサポートしているディープリンク               |
+| Android App Links      | AndroidがOSの機能としてサポートしているディープリンク           |
+| Firebase Dynamic Links | App Links、Universal Linksを拡張したFirebaseの機能 |
 
 ## 議論
 

@@ -64,8 +64,10 @@ Android App Linksの検証を有効にするには、`AndroidManifest.xml`の`in
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="https" android:host="[ドメイン]" android:path="/account/profile" />
-        <data android:scheme="https" android:host="[ドメイン]" android:pathAdvancedPattern="/questions?page=.+" />
+        <data android:scheme="https"/>
+        <data android:host="[ドメイン]"/>
+        <data android:path="/account/profile" />
+        <data android:pathAdvancedPattern="/questions?page=.+" />
       </intent-filter>
     </activity>
   </application>

@@ -74,12 +74,14 @@ module.exports = config => {
           data: [
             {
               scheme: 'https',
+            },
+            {
               host: 'reactnativesandbox.z11.web.core.windows.net',
+            },
+            {
               pathPattern: `/stg/question/.*`,
             },
             {
-              scheme: 'https',
-              host: 'reactnativesandbox.z11.web.core.windows.net',
               path: `/stg/demo/app-info`,
             },
           ],
@@ -107,12 +109,14 @@ module.exports = config => {
       <!-- ～省略～ -->
       >
       <!-- ～省略～ -->
-      <intent-filter android:autoVerify="true">
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:pathPattern="/stg/question/.*"/>
-        <data android:scheme="https" android:host="reactnativesandbox.z11.web.core.windows.net" android:path="/stg/demo/app-info"/>
+      <intent-filter android:autoVerify="true" data-generated="true">
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+        <data android:scheme="https"/>
+        <data android:host="reactnativesandbox.z11.web.core.windows.net"/>
+        <data android:pathPattern="/stg/question/.*"/>
+        <data android:path="/stg/demo/app-info"/>
       </intent-filter>
     </activity>
   </application>
