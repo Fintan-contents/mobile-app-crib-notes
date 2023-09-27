@@ -30,7 +30,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
     getItem={[Function]}
     getItemCount={[Function]}
     getItemLayout={[Function]}
-    initialScrollIndex={-1}
+    initialScrollIndex={null}
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
     onLayout={[Function]}

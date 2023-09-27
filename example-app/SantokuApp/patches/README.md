@@ -63,14 +63,11 @@ node_modules/
 
 この対応により、パッチを適用するパスは常に`node_modules/@expo/config-plugins`になります。
 
-## [react-native] FlatListでデータが0件の場合に`scrollToEnd`を呼び出すとエラーが発生する問題に対処するパッチ
+## [@expo/config-plugins] デフォルトpluginを無効化できるようにするパッチ
 
-FlatListでデータが0件の場合に`scrollToEnd`を呼び出すと以下のエラーが発生します。
+`expo prebuild`時にデフォルトpluginに含まれる`withScheme`pluginによってカスタムスキーマが追加されてしまいます。
+追加されたカスタムスキーマの記述を削除するためのpluginを新規作成するより、該当pluginを無効化したほうがシンプルなためExpo Config Pluginsにパッチを当てて機能拡張しました。
 
-> ERROR  Invariant Violation: Tried to get frame for out of range index -1, js engine: hermes
+※ 現在は `withPlugins` に渡されている plugin のみが対象です(`withRunOnce`, `withStaticPlugin` は対象外)。
 
-この問題に対するissueとPull Requestは以下になります。
-* https://github.com/facebook/react-native/issues/36066
-* https://github.com/facebook/react-native/pull/36067
-
-Pull Requestは既にクローズされ`main`ブランチにはマージされていますが、このアプリで使用している`react-native`のバージョンにはまだ入っていないため、パッチを当てています。
+`app.config.js`の`disabledPlugins`にpluginの`name`を追加すれば除外できます。

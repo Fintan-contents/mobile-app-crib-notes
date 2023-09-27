@@ -1,5 +1,6 @@
 import deepmerge from 'deepmerge';
 
+import devConfig from './config/app.config.dev.js';
 import localConfig from './config/app.config.local.js';
 import prodConfig from './config/app.config.prod.js';
 import stgConfig from './config/app.config.stg.js';
@@ -15,12 +16,15 @@ import {
   withAndroidFlexibleSplashScreen,
   withIosOverrideStoryboard,
 } from './config/app.plugin.js';
+import {DEEP_LINK_DOMAIN} from './config/constants/deepLink';
 
 const environmentConfig = {
   local: localConfig,
+  dev: devConfig,
   stg: stgConfig,
   prod: prodConfig,
 };
+
 /**
  * アプリ全体のベースとなる設定です。
  * 環境毎に違う設定値は、prodの設定を定義しています。（一部のプラグインを除く）
@@ -62,6 +66,10 @@ module.exports = ({config}) => {
           apiKey: '${googleMapApiKey}',
         },
       },
+      // 環境毎の設定値をマージするために使用しているdeepmergeは、配列は上書きされない。
+      // intentFiltersをここに定義してしまうと、環境毎の設定で上書きできないため、app.config.prod.jsで定義する。
+      // https://www.npmjs.com/package/deepmerge
+      // intentFilters: [...],
     },
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp',
@@ -72,7 +80,12 @@ module.exports = ({config}) => {
         CFBundleAllowMixedLocalizations: true,
         UIBackgroundModes: ['fetch', 'remote-notification'],
       },
+      associatedDomains: [`applinks:${DEEP_LINK_DOMAIN}`],
     },
+    disabledPlugins: [
+      // default plugin を無効化するために patch-package を使用して機能拡張している
+      'withScheme', // カスタムスキーマ 削除
+    ],
     plugins: [
       [
         'expo-build-properties',
@@ -85,13 +98,14 @@ module.exports = ({config}) => {
 -keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
 
 # ExpoModulesPakage.ktから、自動生成されたクラスを参照するためにクラス名を利用しているので、クラス名が変わるとアプリが起動しなくなる。
-# https://github.com/expo/expo/blob/sdk-43/packages/expo/android/src/main/java/expo/modules/ExpoModulesPackage.kt#L22
+# https://github.com/expo/expo/blob/sdk-49/packages/expo/android/src/main/java/expo/modules/ExpoModulesPackage.kt#L23
 -keep class expo.modules.ExpoModulesPackageList { *; }
-
-# https://github.com/software-mansion/react-native-svg#problems-with-proguard
--keep public class com.horcrux.svg.** {*;}
 `,
             enableProguardInReleaseBuilds: true,
+            extraMavenRepos: [
+              // notifee Expo49対応: https://github.com/invertase/notifee/issues/808
+              '$rootDir/../../../node_modules/@notifee/react-native/android/libs',
+            ],
           },
           ios: {
             useFrameworks: 'static',
@@ -132,7 +146,6 @@ module.exports = ({config}) => {
       ],
       // 以下のプラグインは、環境毎の設定ファイルで定義します。
       // withAndroidAppBuildGradleForRelease,
-      // withAndroidRemoveUsesClearTextTrafficForRelease,
 
       // このアプリで用意しているiOS用のプラグイン
       withIosRemoveCFBundleUrlTypes,

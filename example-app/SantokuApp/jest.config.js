@@ -14,6 +14,12 @@ module.exports = {
   ],
   // https://jestjs.io/ja/docs/configuration#clearmocks-boolean
   clearMocks: true,
+  coveragePathIgnorePatterns: [
+    '<rootDir>/src/features/backend/apis/',
+    '<rootDir>/src/features/sandbox/apis/',
+    '<rootDir>/src/apps/app/screens/',
+    '<rootDir>/src/features/[^/]+/pages/',
+  ],
   moduleNameMapper: {
     // Barcode.tsxでESMのコードを直接importしているため、以下のエラーが発生する
     // SyntaxError: Cannot use import statement outside a module

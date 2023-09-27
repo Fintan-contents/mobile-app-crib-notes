@@ -75,6 +75,7 @@ exports[`Home マウントされたときに正常にレンダリングされる
       <RCTRefreshControl />
       <View>
         <View
+          collapsable={false}
           onLayout={[Function]}
         >
           <View
@@ -574,7 +575,14 @@ exports[`Home マウントされたときに正常にレンダリングされる
                   ]
                 }
               >
-                <RNSVGGroup>
+                <RNSVGGroup
+                  fill={
+                    {
+                      "payload": 4278190080,
+                      "type": 0,
+                    }
+                  }
+                >
                   <RNSVGPath
                     d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
                     fill={
@@ -592,6 +600,12 @@ exports[`Home マウントされたときに正常にレンダリングされる
                 </RNSVGGroup>
                 <RNSVGDefs>
                   <RNSVGClipPath
+                    fill={
+                      {
+                        "payload": 4278190080,
+                        "type": 0,
+                      }
+                    }
                     name="clip0_5404_1261"
                   >
                     <RNSVGRect

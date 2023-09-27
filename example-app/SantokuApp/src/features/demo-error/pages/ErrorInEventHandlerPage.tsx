@@ -7,7 +7,7 @@ const throwJsErrorInSyncProcess = () => {
 };
 
 const throwJsErrorInAsyncProcess = () => {
-  // eslint-disable-next-line no-void
+  // eslint-disable-next-line no-void -- 検証のためにあえてcatchをしないため、voidを使用して無視するようにしている
   void new Promise(() => {
     throw new Error('Error has occurred in asynchronous process of EventHandler.');
   });

@@ -25,14 +25,27 @@ platform :ios do
     prebuild_santoku_app_ios(environment: "stg")
   end
 
+  desc "Prebuild SantokuApp Dev-Client Debug"
+  lane :prebuild_dev do
+    prebuild_santoku_app_ios(environment: "dev")
+  end
+
   desc "Build SantokuApp Production Release"
   lane :build_prod do
-    build_santoku_app_ios(environment: "prod")
+    ENV["ENVIRONMENT"] = "prod"
+    build_santoku_app_ios()
   end
 
   desc "Build SantokuApp Staging Release"
   lane :build_stg do
-    build_santoku_app_ios(environment: "stg")
+    ENV["ENVIRONMENT"] = "stg"
+    build_santoku_app_ios()
+  end
+
+  desc "Build SantokuApp Dev-Client Debug"
+  lane :build_dev do
+    ENV["ENVIRONMENT"] = "dev"
+    build_santoku_app_ios()
   end
 
 end
@@ -49,14 +62,27 @@ platform :android do
     prebuild_santoku_app_android(environment: "stg")
   end
 
+  desc "Prebuild SantokuApp Dev-Client Debug"
+  lane :prebuild_dev do
+    prebuild_santoku_app_android(environment: "dev")
+  end
+
   desc "Build SantokuApp Production Release"
   lane :build_prod do
+    ENV["ENVIRONMENT"] = "prod"
     build_android_app(task: "bundle", build_type: "Release", project_dir: "android")
   end
 
   desc "Build SantokuApp Staging Release"
   lane :build_stg do
+    ENV["ENVIRONMENT"] = "stg"
     build_android_app(task: "bundle", build_type: "Release", project_dir: "android")
+  end
+
+  desc "Build SantokuApp Dev-Client Debug"
+  lane :build_dev do
+    ENV["ENVIRONMENT"] = "dev"
+    build_android_app(task: "bundle", build_type: "Debug", project_dir: "android")
   end
 
 end

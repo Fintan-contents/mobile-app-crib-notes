@@ -4,14 +4,14 @@ class ApplicationErrorSubClass extends ApplicationError {}
 const cause = new ApplicationErrorSubClass('root cause');
 const nested = new ApplicationErrorSubClass('nested cause', cause);
 
-// eslint-disable-next-line jest/unbound-method
+// eslint-disable-next-line jest/unbound-method -- Error.captureStackTraceの復元(再代入)にしか使わないため
 const captureStackTrace = Error.captureStackTrace;
 describe.each([false, true])(
   'new ApplicationError() when captureStackTrace availability is %p',
   captureStackTraceAvailable => {
     beforeAll(() => {
       if (!captureStackTraceAvailable) {
-        // @ts-ignore
+        // @ts-expect-error -- 検証のためにcaptureStackTraceを削除したいため
         delete Error.captureStackTrace;
       }
     });
@@ -104,7 +104,6 @@ describe.each([false, true])(
     it('given an argument other than message or cause', () => {
       const mock = jest.spyOn(console, 'warn').mockImplementation();
       try {
-        // @ts-ignore
         const sut = new ApplicationError(['array', {key: 'value'}]);
 
         expect(sut.name).toEqual('ApplicationError');
@@ -119,7 +118,6 @@ describe.each([false, true])(
     it('given an argument other than Error', () => {
       const message = 'when the error occurred';
       const cause = {key: 'value'};
-      // @ts-ignore
       const sut = new ApplicationError(message, cause);
 
       expect(sut.message).toEqual(message);

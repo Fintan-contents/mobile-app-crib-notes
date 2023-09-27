@@ -1,6 +1,5 @@
 declare namespace jest {
   import Reanimated from 'react-native-reanimated';
-  // eslint-disable-next-line import/no-duplicates
   import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
 
   interface Matchers<R> {
@@ -12,9 +11,8 @@ declare namespace jest {
   }
 }
 
-declare module 'react-native-reanimated/lib/reanimated2/jestUtils' {
+declare module 'react-native-reanimated/lib/module/reanimated2/jestUtils' {
   import {ReactTestInstance} from 'react-test-renderer';
-  // eslint-disable-next-line import/no-duplicates
   import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
   export const withReanimatedTimer: (test: () => unknown) => void;
   export const advanceAnimationByTime: (time: number) => void;

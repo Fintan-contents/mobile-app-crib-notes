@@ -54,8 +54,11 @@ IgnoreURLs:
   - https://marketplace.visualstudio.com/items\?itemName=2gua.rainbow-brackets
   - https://marketplace.visualstudio.com/items\?itemName=yzhang.markdown-all-in-one
   - https://marketplace.visualstudio.com/items\?itemName=byCedric.vscode-expo
+  - https://marketplace.visualstudio.com/items\?itemName=expo.vscode-expo-tools
   # 403になってしまうので無視
   - https://blog.expo.dev/
+  # ディープリンクのURLに使用しているドメインは無視
+  - https://reactnativesandbox.z11.web.core.windows.net
 # タイムアウトでビルドが失敗するので、外部リンクのエラーは警告とし手動で問題ないかを確認とする。
 IgnoreExternalBrokenLinks: true
 # タイムアウトでビルドが失敗すると困るので、余裕を持って長めに設定しておく。

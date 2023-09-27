@@ -1,7 +1,8 @@
 import ExpoConstants from 'expo-constants';
 
-export const Constants: typeof ExpoConstants = {
-  ...ExpoConstants,
+import {wrapProperty} from '../utils/wrapProperty';
+
+export const Constants = wrapProperty(ExpoConstants, {
   expoConfig: {
     name: 'SantokuApp',
     slug: 'santokuApp',
@@ -16,6 +17,6 @@ export const Constants: typeof ExpoConstants = {
       mswEnabled: false,
     },
   },
-};
+});
 
 export default Constants;

@@ -10,7 +10,13 @@ import {loadActiveAccountId} from 'features/secure-storage/services/loadActiveAc
 import {hashQueryKey, Query, QueryClient} from 'react-query';
 import {QueryFilters} from 'react-query/types/core/utils';
 
-const defaultQueryFilters = {predicate: (query: Query) => query.queryHash !== hashQueryKey(['account', 'isLoggedIn'])};
+const defaultQueryFilters = {
+  predicate: (query: Query) =>
+    !(
+      query.queryHash === hashQueryKey(['account', 'isLoggedIn']) ||
+      query.queryHash === hashQueryKey(['deep-link', 'url'])
+    ),
+};
 
 export const clientLogout = async (queryClient?: QueryClient, queryRemovalFilters?: QueryFilters): Promise<void> => {
   const accountId = await loadActiveAccountId();

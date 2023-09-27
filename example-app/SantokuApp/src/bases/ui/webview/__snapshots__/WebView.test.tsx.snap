@@ -16,10 +16,18 @@ exports[`WebView WebViewSourceHtmlでも正常にレンダリングされるこ�
     androidLayerType="software"
     cacheEnabled={true}
     decelerationRate={0.998}
+    fraudulentWebsiteWarningEnabled={true}
+    hasOnFileDownload={false}
     injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
     injectedJavaScriptForMainFrameOnly={true}
     javaScriptEnabled={true}
-    messagingEnabled={true}
+    messagingEnabled={false}
+    messagingModuleName=""
+    newSource={
+      {
+        "html": "<h1>test</h1>",
+      }
+    }
     onContentProcessDidTerminate={[Function]}
     onHttpError={[Function]}
     onLoadingError={[Function]}
@@ -85,10 +93,18 @@ exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
     androidLayerType="software"
     cacheEnabled={true}
     decelerationRate={0.998}
+    fraudulentWebsiteWarningEnabled={true}
+    hasOnFileDownload={false}
     injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
     injectedJavaScriptForMainFrameOnly={true}
     javaScriptEnabled={true}
-    messagingEnabled={true}
+    messagingEnabled={false}
+    messagingModuleName=""
+    newSource={
+      {
+        "uri": "https://localhost/",
+      }
+    }
     onContentProcessDidTerminate={[Function]}
     onHttpError={[Function]}
     onLoadingError={[Function]}

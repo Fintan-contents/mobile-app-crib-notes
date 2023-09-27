@@ -3,7 +3,7 @@ import React, {useCallback} from 'react';
 import {ActivityIndicator, FlatList, Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button, FAB, Icon, ListItem, Text} from 'react-native-elements';
 
-import {useTodosInfinite} from '../services/todo/ useTodosInfinite';
+import {useTodosInfinite} from '../services/todo/useTodosInfinite';
 
 const LoadingIndicator = () => {
   return (
@@ -51,7 +51,9 @@ export const ListTodoDemoPage: React.FC<Props> = ({navigateToCreateTodoDemo, nav
   );
 
   const renderFooter = useCallback(() => {
-    if (!isFetchingNextPage) return null;
+    if (!isFetchingNextPage) {
+      return null;
+    }
 
     return <LoadingIndicator />;
   }, [isFetchingNextPage]);

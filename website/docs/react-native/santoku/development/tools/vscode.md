@@ -30,14 +30,14 @@ Visual Studioマーケットプレイスの[React Native Toolsページ](https:/
       "cwd": "${workspaceFolder}",
       "type": "reactnative",
       "request": "attach",
-      "port": "19000"
+      "port": "8081"
     }
   ]
 }
 ```
 
 :::info
-portにはMetro Bundlerのポート番号を指定してください。デフォルトはExpoの場合19000、Expoを使用しない場合は8081です。
+portにはMetro Bundlerのポート番号を指定してください。デフォルトは8081です。
 
 ポート番号をデフォルトから変更している場合はその番号を指定してください。
 :::

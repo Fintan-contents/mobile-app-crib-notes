@@ -1,0 +1,105 @@
+diff --git a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
+index 8a1fc4e..a72436c 100644
+--- a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
++++ b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.d.ts
+@@ -14,13 +14,15 @@ export declare function getHackyProjectName(projectRoot: string, config: ExpoCon
+  * Add a resource file (ex: `SplashScreen.storyboard`, `Images.xcassets`) to an Xcode project.
+  * This is akin to creating a new code file in Xcode with `⌘+n`.
+  */
+-export declare function addResourceFileToGroup({ filepath, groupName, isBuildFile, project, verbose, targetUuid, }: {
++export declare function addResourceFileToGroup({ filepath, groupName, isBuildFile, project, verbose, targetUuid, fileUuid, fileRef, }: {
+     filepath: string;
+     groupName: string;
+     isBuildFile?: boolean;
+     project: XcodeProject;
+     verbose?: boolean;
+     targetUuid?: string;
++    fileUuid?: string;
++    fileRef?: string;
+ }): XcodeProject;
+ /**
+  * Add a build source file (ex: `AppDelegate.m`, `ViewController.swift`) to an Xcode project.
+@@ -33,7 +35,7 @@ export declare function addBuildSourceFileToGroup({ filepath, groupName, project
+     verbose?: boolean;
+     targetUuid?: string;
+ }): XcodeProject;
+-export declare function addFileToGroupAndLink({ filepath, groupName, project, verbose, addFileToProject, targetUuid, }: {
++export declare function addFileToGroupAndLink({ filepath, groupName, project, verbose, addFileToProject, targetUuid, fileUuid, fileRef, }: {
+     filepath: string;
+     groupName: string;
+     project: XcodeProject;
+@@ -43,6 +45,8 @@ export declare function addFileToGroupAndLink({ filepath, groupName, project, ve
+         file: PBXFile;
+         project: XcodeProject;
+     }) => void;
++    fileUuid?: string;
++    fileRef?: string;
+ }): XcodeProject;
+ export declare function getApplicationNativeTarget({ project, projectName, }: {
+     project: XcodeProject;
+diff --git a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js
+index f2ff872..f39fd90 100644
+--- a/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js
++++ b/node_modules/@expo/config-plugins/build/ios/utils/Xcodeproj.js
+@@ -146,7 +146,9 @@ function addResourceFileToGroup({
+   isBuildFile,
+   project,
+   verbose,
+-  targetUuid
++  targetUuid,
++  fileUuid,
++  fileRef,
+ }) {
+   return addFileToGroupAndLink({
+     filepath,
+@@ -154,6 +156,8 @@ function addResourceFileToGroup({
+     project,
+     verbose,
+     targetUuid,
++    fileUuid,
++    fileRef,
+     addFileToProject({
+       project,
+       file
+@@ -204,7 +208,9 @@ function addFileToGroupAndLink({
+   project,
+   verbose,
+   addFileToProject,
+-  targetUuid
++  targetUuid,
++  fileUuid,
++  fileRef,
+ }) {
+   const group = pbxGroupByPathOrAssert(project, groupName);
+   const file = createProjectFileForGroup({
+@@ -225,8 +231,16 @@ function addFileToGroupAndLink({
+     const applicationNativeTarget = project.getTarget('com.apple.product-type.application');
+     file.target = applicationNativeTarget === null || applicationNativeTarget === void 0 ? void 0 : applicationNativeTarget.uuid;
+   }
+-  file.uuid = project.generateUuid();
+-  file.fileRef = project.generateUuid();
++  if (fileUuid) {
++    file.uuid = fileUuid;
++  } else {
++    file.uuid = project.generateUuid();
++  }
++  if (fileRef) {
++    file.fileRef = fileRef;
++  } else {
++    file.fileRef = project.generateUuid();
++  }
+   addFileToProject({
+     project,
+     file
+diff --git a/node_modules/@expo/config-plugins/build/plugins/withPlugins.js b/node_modules/@expo/config-plugins/build/plugins/withPlugins.js
+index 3623bd4..e389145 100644
+--- a/node_modules/@expo/config-plugins/build/plugins/withPlugins.js
++++ b/node_modules/@expo/config-plugins/build/plugins/withPlugins.js
+@@ -27,6 +27,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
+  */
+ const withPlugins = (config, plugins) => {
+   (0, _assert().default)(Array.isArray(plugins), 'withPlugins expected a valid array of plugins or plugin module paths');
++  plugins = plugins.filter(p => !(config.disabledPlugins || []).includes(p.name));
+   return plugins.reduce((prev, plugin) => (0, _withStaticPlugin().withStaticPlugin)(prev, {
+     plugin
+   }), config);

@@ -37,7 +37,10 @@
 以下のコマンドをこのプルリクエストのコメントとして投稿すると、
 Azure Pipeline上でSantokuAppをビルドしてDeployGateへアップロードできます。
 
+- /azp run deploy-stg
+- /azp run deploy-dev
 - /azp run deploy-all
+  - `stg`, `dev` の両方
 
 <!-- 該当するものがなければ、このセクション（この行から「## Otherの前の行まで）を削除してください。 -->
 ## Devices

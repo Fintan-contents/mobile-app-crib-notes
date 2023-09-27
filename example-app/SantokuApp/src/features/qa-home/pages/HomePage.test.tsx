@@ -52,8 +52,10 @@ const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
 
 describe('Home', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
-    // メッセージのロード前にHomePageをimportしてしまうとエラーになるため、メッセージのロード後にrequireします
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    /*
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      メッセージのロード前にHomePageをimportしてしまうとエラーになるため、メッセージのロード後にrequireします
+     */
     const HomePage = require('./HomePage').HomePage as React.FC<React.PropsWithChildren<HomePageProps>>;
     render(
       <HomePage navigateToQuestionDetail={() => {}} navigateToQuestionAndEventPost={() => {}} setHeader={() => {}} />,

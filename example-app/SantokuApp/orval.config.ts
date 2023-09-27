@@ -1,5 +1,10 @@
 import {defineConfig} from 'orval';
 
+/*
+  eslint-disable-next-line import/no-default-export --
+  Orvalのドキュメントに記載の通り、default exportする
+  https://orval.dev/reference/configuration/overview
+ */
 export default defineConfig({
   backend: {
     output: {
