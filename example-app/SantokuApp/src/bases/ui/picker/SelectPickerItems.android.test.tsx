@@ -106,7 +106,7 @@ describe('SelectPickerItems with all props', () => {
     expect(flatListProps.style).toEqual({height: 300, width: '100%'});
     expect(flatListProps.contentContainerStyle).toEqual({paddingVertical: 120});
     expect(flatListProps.snapToInterval).toBe(60);
-    // `value: '1'` だけ2回呼ばれるのでtoHaveBeenNthCalledWithを使わない
+    // `value: '1'` だけ2回呼ばれるのでtoHaveBeenNthCalledWithを使用しない
     expect(keyExtractor).toHaveBeenCalledWith(
       {value: '1', label: 'test1', key: 'key1', color: 'red', fontFamily: 'Roboto'},
       0,

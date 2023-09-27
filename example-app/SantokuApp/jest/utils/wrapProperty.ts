@@ -3,7 +3,7 @@ function hasOwnProperty<T, K extends PropertyKey>(obj: T, propertyKey: K): obj i
 }
 
 /**
- * `{...original, [key]: value}`だとgetterにdeprecated warn logが存在する場合warnログが出てしまう問題対策
+ * `{...original, [key]: value}`だとgetterにdeprecated warn logが存在する場合警告ログが出てしまう問題対策
  */
 export function wrapProperty<T extends object>(original: T, propertyObj: object): T {
   return new Proxy(original, {
