@@ -27,16 +27,38 @@ exports[`OverlayContainer only with required props renders successfully only wit
       FadeIn {
         "build": [Function],
         "callbackV": [Function],
+        "dampingV": undefined,
+        "delayV": undefined,
         "durationV": 300,
+        "easingV": undefined,
+        "initialValues": undefined,
+        "massV": undefined,
+        "overshootClampingV": undefined,
         "randomizeDelay": false,
+        "restDisplacementThresholdV": undefined,
+        "restSpeedThresholdV": undefined,
+        "rotateV": undefined,
+        "stiffnessV": undefined,
+        "type": undefined,
       }
     }
     exiting={
       FadeOut {
         "build": [Function],
         "callbackV": [Function],
+        "dampingV": undefined,
+        "delayV": undefined,
         "durationV": 300,
+        "easingV": undefined,
+        "initialValues": undefined,
+        "massV": undefined,
+        "overshootClampingV": undefined,
         "randomizeDelay": false,
+        "restDisplacementThresholdV": undefined,
+        "restSpeedThresholdV": undefined,
+        "rotateV": undefined,
+        "stiffnessV": undefined,
+        "type": undefined,
       }
     }
     pointerEvents="box-none"
@@ -71,16 +93,38 @@ exports[`OverlayContainer with all props should be applied properly: OverlayCont
       ZoomIn {
         "build": [Function],
         "callbackV": [Function],
+        "dampingV": undefined,
+        "delayV": undefined,
         "durationV": 500,
+        "easingV": undefined,
+        "initialValues": undefined,
+        "massV": undefined,
+        "overshootClampingV": undefined,
         "randomizeDelay": false,
+        "restDisplacementThresholdV": undefined,
+        "restSpeedThresholdV": undefined,
+        "rotateV": undefined,
+        "stiffnessV": undefined,
+        "type": undefined,
       }
     }
     exiting={
       ZoomOut {
         "build": [Function],
         "callbackV": [Function],
+        "dampingV": undefined,
+        "delayV": undefined,
         "durationV": 300,
+        "easingV": undefined,
+        "initialValues": undefined,
+        "massV": undefined,
+        "overshootClampingV": undefined,
         "randomizeDelay": false,
+        "restDisplacementThresholdV": undefined,
+        "restSpeedThresholdV": undefined,
+        "rotateV": undefined,
+        "stiffnessV": undefined,
+        "type": undefined,
       }
     }
     pointerEvents="box-none"

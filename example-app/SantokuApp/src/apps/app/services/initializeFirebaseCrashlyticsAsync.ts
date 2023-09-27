@@ -5,9 +5,11 @@ import {firebaseConfig} from 'bases/firebase/FirebaseConfig';
 
 export const initializeFirebaseCrashlyticsAsync = async () => {
   if (!firebaseConfig.isDummy) {
-    // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
-    // 型は、typeofで明示するようにします。
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    /*
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
+      型は、typeofで明示するようにします。
+     */
     const crashlytics = require('@react-native-firebase/crashlytics').default as typeof crashlyticsModule;
     // アプリの起動IDを設定
     try {

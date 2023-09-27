@@ -2,9 +2,9 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator, NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {handleError} from 'bases/core/errors/handleError';
 import {m} from 'bases/message/Message';
+import {registerDevMenuItems} from 'expo-dev-menu';
 import {useIsLoggedIn} from 'features/account/client-states/useIsLoggedIn';
 import React, {useEffect, useMemo} from 'react';
-import {DevSettings} from 'react-native';
 
 import {useAuthenticatedStackNav} from './AuthenticatedStackNav';
 import {DemoStackNav} from './DemoStackNav';
@@ -86,9 +86,14 @@ export const RootStackNav: React.FC<{initialData: AppInitialData}> = ({initialDa
 
   useEffect(() => {
     if (__DEV__) {
-      DevSettings.addMenuItem('Go to Demo', () => {
-        navigation.navigate('DemoStackNav', {screen: 'DemoMenu'});
-      });
+      registerDevMenuItems([
+        {
+          name: 'Go to Demo',
+          callback: () => {
+            navigation.navigate('DemoStackNav', {screen: 'DemoMenu'});
+          },
+        },
+      ]).catch(console.warn);
     }
   }, [navigation]);
 

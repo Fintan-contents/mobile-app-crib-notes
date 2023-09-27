@@ -40,9 +40,11 @@ describe('LoginScreen', () => {
     (useGetAccountsMeTerms as jest.Mock).mockReturnValue({refetch: () => {}});
     (useGetTerms as jest.Mock).mockReturnValue({refetch: () => {}});
     (usePostAccountsMeTerms as jest.Mock).mockReturnValue({mutateAsync: () => {}});
-    // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
-    // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    /*
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
+      requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
+     */
     const Page = require('./LoginPage').LoginPage as React.FC<React.PropsWithChildren<LoginPageProps>>;
     render(<Page navigateToCreateAccount={() => {}} />, {
       wrapper: Wrapper,

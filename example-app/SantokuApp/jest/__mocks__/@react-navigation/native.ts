@@ -19,9 +19,11 @@ const mock: jest.Mocked<NavigationProp<ParamListBase>> = {
 
 Object.defineProperty(__mocks, 'navigation', {value: mock});
 
-// @react-navigation/nativeのすべてのNamed Exportを列挙するのは大変なので、
-// ES6のexport/import形式ではなく、module.exportsを使ってexportする。
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+/*
+  eslint-disable-next-line @typescript-eslint/no-unsafe-assignment --
+  @react-navigation/nativeのすべてのNamed Exportを列挙するのは大変なので、
+  ES6のexport/import形式ではなく、module.exportsを使ってexportする。
+ */
 module.exports = {
   ...jest.requireActual('@react-navigation/native'),
   useNavigation: () => mock,

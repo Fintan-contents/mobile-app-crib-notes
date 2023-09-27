@@ -1,8 +1,10 @@
 const withAndroidAppBuildGradleForRelease = require('./app.plugin.js').withAndroidAppBuildGradleForRelease;
-const withAndroidRemoveUsesClearTextTrafficForRelease =
-  require('./app.plugin.js').withAndroidRemoveUsesClearTextTrafficForRelease;
 const withIosEnabledATS = require('./app.plugin.js').withIosEnabledATS;
 const withIosSetCredentials = require('./app.plugin.js').withIosSetCredentials;
+const generateDeepLinkIntentFilter = require('./utils/generateDeepLinkIntentFilter');
+
+const deepLinkPathPrefix = 'stg';
+const deepLinkIntentFilter = generateDeepLinkIntentFilter(deepLinkPathPrefix);
 
 module.exports = config => {
   return {
@@ -12,6 +14,7 @@ module.exports = config => {
       adaptiveIcon: {
         foregroundImage: './assets/android/ic_launcher_foreground_stg.png',
       },
+      intentFilters: [deepLinkIntentFilter],
     },
     ios: {
       bundleIdentifier: 'jp.fintan.mobile.SantokuApp.stg',
@@ -20,7 +23,6 @@ module.exports = config => {
     plugins: [
       // このアプリで用意しているAndroid用のプラグイン
       withAndroidAppBuildGradleForRelease,
-      withAndroidRemoveUsesClearTextTrafficForRelease,
 
       // このアプリで用意しているiOS用のプラグイン
       withIosEnabledATS,
@@ -36,6 +38,7 @@ module.exports = config => {
     extra: {
       mobileAppCribNotesWebsiteUrl: 'https://ws-4020.github.io/mobile-app-crib-notes',
       mobileAppCribNotesRepositoryUrl: 'https://github.com/ws-4020/mobile-app-crib-notes',
+      deepLinkPathPrefix,
     },
   };
 };

@@ -2,44 +2,97 @@
 title: ディープリンクの処理
 ---
 
-ディープリンクURLをアプリケーションで処理する方法について記載します。
+ディープリンクをアプリケーションで処理する方法について記載します。
 
-## アプリケーションの状態とディープリンクURLの取得
+## ディープリンクタップ時の処理フロー
 
-React Native Firebase Dynamic LinksではディープリンクURLを取得するための[API](https://rnfirebase.io/dynamic-links/usage#listening-for-dynamic-links)は次の2つがあります。
+ユーザがディープリンクをタップすると、アプリがフォアグランドで表示されます。
+その際のアプリスタートの種類によりディープリンクの取り扱いが変わります。
+アプリスタートの種類には次のものがあります。
 
-- [コールドスタート、ウォームスタート](../life-cycle-management/overview.mdx#コールドスタートウォームスタート)では[getInitialLink](https://rnfirebase.io/reference/dynamic-links#getInitialLink)でディープリンクURLを取得します。
-  - iOSでは[不具合に対応するため](./react-native-firebase.mdx)にReact Native Linkingを利用します。
-- [ホットスタート](../life-cycle-management/overview.mdx#ホットスタート)では[onLink](https://rnfirebase.io/reference/dynamic-links#onLink)でディープリンクURLを取得します。
+- コールドスタート
+- ウォームスタート
+- ホットスタート
 
-どちらの場合でもディープリンクURLからコンテンツリンクURLを取得し、画面遷移を判定して、コンテンツリンクURLのパラメータを処理します。コンテンツリンクURLのパラメータは[ディープリンクURLの構成](./create-deep-link.mdx#ディープリンクurlの構成ルール)にあるとおり、スクリーンとパラメータを受け取ります。
+アプリスタートの種類の詳細は[アプリスタートの種類に応じた初期化処理](../life-cycle-management/overview.mdx#アプリスタートの種類に応じた初期化処理)を参照してください。
 
-[Universal Linksの警告](https://developer.apple.com/documentation/xcode/supporting-universal-links-in-your-app)にもあるようにコンテンツリンクURLが妥当なURLかどうかを検証して、ユーザに情報を表示するなど安全なアクションにとどめてください。コンテンツリンクURLが想定されない値の場合はアプリケーションで利用しません。
+処理フローは以下になります。
 
-### コンテンツリンクURLの保持
+### コールドスタートの場合
 
-コンテンツリンクURLをアプリケーションが取得した後、認証が必要などの理由で、コンテンツに対応するページへ遷移できないケースがあります。このような場合は、該当ページでコンテンツリンクURLを取得するために、コンテクストに設定するか画面間で持ち回る必要があります。
+![ディープリンクタップ時(Quit)の処理フロー](tap-deep-link-when-quit.drawio.png)
 
-コンテンツリンクURLをコンテクストに設定してしまうとクリアするタイミングなどの設計が難しく、管理が煩雑になります。そのため、コンテンツリンクURLを参照する範囲を決めて、ナビゲーションのパラメータとして画面間で持ち回るように設計します。
+コールドスタートの場合、Expo Linkingの[getInitialURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkinggetinitialurl)で取得したURLに応じた処理（画面遷移など）を行います。
 
-:::note
-[ユーザー エクスペリエンスを向上させる](https://developer.android.com/training/app-links/deep-linking#handling-intents)でも記載されているようにディープリンクから該当のページへの遷移までに多くの画面をまたがないことが好ましいです。
-:::
+### ウォームスタートの場合
 
-### iOS14以降でのクリップボード利用の通知
+#### iOS
 
-iOSのみですが、Firebase Dynamic Linksは、アプリがまだインストールされていないときに開いたディープリンクURLを利用するために、次のようにクリップボードを利用します。
+コールドスタートの場合と同様の処理フローになります。Expo Linkingの[getInitialURL](https://docs.expo.dev/versions/latest/sdk/linking/#linkinggetinitialurl)で取得したURLに応じた処理（画面遷移など）を行います。
 
-- ブラウザで表示したプレビューページからフォールバックURLへ遷移する際に、ディープリンクURLをクリップボードにコピー
-- インストール後に初めて起動したアプリは、クリップボードの値を読み込む
+#### Android
 
-iOS14以降ではクリップボードを読み取るとOSが通知を表示する仕様となっています。そのため、初めてアプリケーションを起動したときのみ、クリップボードに値が存在していると、「`<アプリ名>にSafariからペースト`」のような通知が表示されます。
+![ディープリンクタップ時(Kill)の処理フロー](tap-deep-link-when-kill.drawio.png)
 
-Firebase SDKの設定で[この機能を無効にする](https://firebase.google.com/docs/dynamic-links/ios/receive?hl=ja#set-up-firebase-and-the-dynamic-links-sdk)こともできますが、インストール後にそのまま起動してディープリンクURLを読み取る機能が利用できません。ドキュメントの警告に記載があるように`matchType`の値が`week`程度になり、このアプリでは`matchType`が`unique`でないディープリンクURLは利用しないためです。[^1]
-
-[^1]: 詳しくは[こちら](./react-native-firebase.mdx#他のユーザが開いたディープリンクurlを読み取る可能性がある)を参照してください。
+Androidのウォームスタートの場合、前回起動時にExpo Linkingの[addEventListener](https://docs.expo.dev/versions/latest/sdk/linking/#linkingaddeventlistenertype-handler)に設定した処理が呼ばれます。
+この中でURLに応じた処理（画面遷移など）を行います。
 
 :::note
-初回起動時にディープリンクから開かれたとしても、クリップボードの値がURL形式であればクリップボードを読み取ります。
-ただし、起動したときのディープリングURLが優先されるため、クリップボードから読み取ったという通知は出ますが、クリップボードの値は利用されないというケースもあります。
+Androidは、[android:launchMode](https://developer.android.com/guide/topics/manifest/activity-element?hl=ja#lmode)によってActivityの起動方法が変わります。
+
+`android:launchMode`の`singleTask`は、ウォームスタート時にActivityのインスタンスが作成されません。この場合、ディープリンクのURLはExpo Linkingの`addEventListener`で取得できます。
+
+一方、`android:launchMode`の`standard`などは、ウォームスタート時にActivityのインスタンスが作成されます。この場合、ディープリンクのURLはExpo Linkingの`getInitialURL`で取得できます。
+
+このアプリでは、Expoの[expo-template-bare-minimum](https://github.com/expo/expo/blob/main/templates/expo-template-bare-minimum/android/app/src/main/AndroidManifest.xml#L24)に合わせて、`android:launchMode`を`singleTask`に設定しています。
+`android:launchMode`を`standard`変更することで、コールドスタートやiOSのウォームスタートと挙動を合わせることもできます。
+しかし、Activityの起動変更がアプリに及ぼす影響を完全に把握できていません。
+
+そのため、`android:launchMode`は`singleTask`にして、Expo Linkingの`addEventListener`で取得する方法としています。
 :::
+
+:::note
+ウォームスタート時は、コンポーネントが再マウントされますが、モジュールの再読み込みはされません。`App.tsx`のtop levelなどで実行した処理は、ウォームスタート時に再実行されることはありません。
+
+そのため、このアプリでは`addEventListener`の実行を、`App.tsx`のtop levelで実行しています。
+
+詳細は、[App.tsx](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/apps/app/App.tsx)を参照してください。
+:::
+
+### ホットスタートの場合
+
+![ディープリンクタップ時(Background)の処理フロー](tap-deep-link-when-background.drawio.png)
+
+ホットスタートの場合、Expo Linkingの[addEventListener](https://docs.expo.dev/versions/latest/sdk/linking/#linkingaddeventlistenertype-handler)に設定した処理が呼ばれます。
+この中でURLに応じた処理（画面遷移など）を行います。
+
+## ディープリンクに応じた画面遷移
+
+このアプリでは、ディープリンクに応じた画面を表示します。その画面から戻るボタンをタップした場合は、以下の仕様とします。
+
+- 基本的には、ディープリンクをタップする前に表示していた画面に戻す
+- 遷移先画面がボトムタブを表示しているナビゲーター（[Bottom Tabs Navigator](https://reactnavigation.org/docs/bottom-tab-navigator/)）の場合は、前の画面へ戻れないようにする
+
+ディープリンクをタップする前に表示していた画面に戻すためには、画面遷移時の[Navigation action](https://reactnavigation.org/docs/navigation-actions)として`PUSH`を使用します。
+
+`Bottom Tabs Navigator`に遷移する場合は、`NAVIGATE`を使用します。このアプリでは、`Bottom Tabs Navigator`をログイン（自動ログイン含む）後の初期画面としてNavigation Stackの最初に必ず設定しています。そのため、`NAVIGATE`で画面遷移することによりNavigation Stackの最初まで戻り、前の画面に戻れなくなります。
+
+:::note
+画面遷移に関しては、以下のDecision Recordに詳細な検証結果を記載しているので、こちらも参照してください。
+
+- [ディープリンク受信時の画面遷移](../../decisions/adr-019-deep-link-navigation.mdx)
+:::
+
+### 認証状態の考慮
+
+未認証時にディープリンクを受け取った場合は、ディープリンクを無視して通常通り起動するようにします。
+
+その後、ユーザが認証した場合は、未認証時に受け取ったディープリンクの遷移先画面を表示します。
+
+## ディープリンクのバリデーション
+
+ディープリンクによっては、パスパラメータやクエリパラメータを取得して、画面表示時などに使用する場合があります。
+
+これらのパラメータは、攻撃者によってアプリが意図しない値を設定される場合があります。そのため、取得したパラメータは必ずバリデーションを実施します。
+
+バリデーションエラーとなった場合は、ディープリンクを無視して通常通り起動するようにします。

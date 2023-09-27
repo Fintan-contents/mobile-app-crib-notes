@@ -8,9 +8,12 @@ import {PickerBackdropProps} from './PickerBackdrop';
 import {PickerContainerProps} from './PickerContainer';
 
 jest.doMock('react-native/Libraries/Utilities/Dimensions', () => ({
-  get: jest.fn().mockReturnValue({width: 400, height: 1000}),
-  set: jest.fn(),
-  addEventListener: jest.fn().mockReturnValue({remove: jest.fn()}),
+  __esModule: true,
+  default: {
+    get: jest.fn().mockReturnValue({width: 400, height: 1000}),
+    set: jest.fn(),
+    addEventListener: jest.fn().mockReturnValue({remove: jest.fn()}),
+  },
 }));
 
 describe('DateTimePicker only with required props', () => {
@@ -152,17 +155,14 @@ describe('DateTimePicker with all props', () => {
     // assert PickerItems
     const pickerItems = screen.getByTestId('pickerItems');
     const pickerItemsProps = pickerItems.props as DateTimePickerItemsIOSProps;
-    // ↓の対応で型定義からdateは削除されましたが、react-native-datetimepickerの内部ではdateを使用しているようなので、selectedValueとdateを比較します
     // https://github.com/react-native-datetimepicker/datetimepicker/pull/671
     // https://github.com/react-native-datetimepicker/datetimepicker/blob/v6.5.2/src/datetimepicker.ios.js#L97
-    // @ts-ignore
+    // @ts-expect-error -- ↑の対応で型定義からdateは削除されましたが、react-native-datetimepickerの内部ではdateを使用しているようなので、selectedValueとdateを比較します
     expect(pickerItemsProps.date).toBe(selectedValue.getTime());
     expect(pickerItemsProps.maximumDate).toBe(maximumDate.getTime());
     expect(pickerItemsProps.minimumDate).toBe(minimumDate.getTime());
     expect(pickerItemsProps.mode).toBe('date');
-    // displayはdisplayIOSというPropでレンダリングされます
-    // @ts-ignore
-    // @ts-ignore
+    // @ts-expect-error -- displayはdisplayIOSというPropでレンダリングされます
     expect(pickerItemsProps.displayIOS).toBe('spinner');
     const pickerItemsStyle = pickerItemsProps.style as ViewStyle;
     const flattenPickerItemsStyle = StyleSheet.flatten(pickerItemsStyle);

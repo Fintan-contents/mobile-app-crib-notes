@@ -13,7 +13,7 @@ npm, Gradle(Android), CocoaPods(iOS) で使用しているライブラリを返�
 
 ### 前提
 - `npm run prebuild` が実行済
-    - `prebuild:stg`, `prebuild:prod` を含む
+    - `prebuild:dev`, `prebuild:stg`, `prebuild:prod` を含む
 - Root ディレクトリ (このREADMEファイルからみて `../`) で実行
 
 ### 処理概要
@@ -86,3 +86,42 @@ node .script/check-licenses.js quick
 scriptでライセンス情報を取得できない場合の手動管理用ファイルです。
 
 このscriptを開発者が直接 `node` を使って実行することはありません。
+
+## [print-eslint-rules.js](./print-eslint-rules.js)
+適用されているESLintのルールを標準出力します。
+
+`eslint`の[--print-config](https://eslint.org/docs/latest/use/command-line-interface#--print-config)オプションを指定して実行した結果を、マークダウン形式で出力します。
+出力形式は以下です。
+
+```markdown
+### [プラグイン名](プラグインのURL)
+|ルール|レベル|
+|:--|:--|
+|[ルール名](ルール名のURL)|レベル|
+```
+
+### --print-configに指定するファイル
+
+下記のように引数をしないで実行した場合、`--print-config`には`src/apps/app/App.tsx`が指定されます。
+
+```bash
+node .script/print-eslint-rules.js
+```
+
+この場合、テストファイルのみに適用している`jest`関連のルールは出力されません。
+`jest`関連のルールも出力したい場合は、以下のコマンドを実行して、出力されたルール一覧から`jest`に関する部分を取得してください。
+
+```bash
+node .script/print-eslint-rules.js src/apps/app/App.test.tsx
+```
+
+### ESLintプラグイン・ルール情報の定義
+
+ESLintプラグインやルールのURLなどの情報は、`print-eslint-rules.js`に定義しています。
+定義が足りない場合は、 以下のような警告ログを出力されます。
+
+```console
+[WARN] プラグイン情報が定義されていません。ルール名: jest/unbound-method
+```
+
+必要に応じて、`print-eslint-rules.js`にプラグイン情報を定義してください。

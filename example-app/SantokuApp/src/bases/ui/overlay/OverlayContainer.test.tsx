@@ -6,11 +6,6 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {MODAL_CONTAINER_DEFAULT_ENTERING, MODAL_CONTAINER_DEFAULT_EXITING, OverlayContainer} from './OverlayContainer';
 
-// If advancing a timer changes the state of a component, the timer must be run within an act.
-// However, since act is `Thenable`, ESLint will issue a warning if you do not do something like await.
-// For convenience, disable the relevant rule in this file.
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 jest.useFakeTimers();
 
 // TODO: Jest v27にアップデートできたら、withReanimatedTimerでテストを実装できるか検証する。

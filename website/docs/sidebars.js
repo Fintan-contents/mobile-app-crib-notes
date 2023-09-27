@@ -33,6 +33,15 @@ module.exports = {
         'reference/notification/client',
       ],
     },
+    {
+      type: 'category',
+      label: 'ディープリンク',
+      items: [
+        'reference/deep-link/overview',
+        'reference/deep-link/universal-links',
+        'reference/deep-link/android-app-links',
+      ],
+    },
   ],
   distribution: [
     {
@@ -325,6 +334,10 @@ module.exports = {
           id: 'react-native/santoku/application-architecture/system-configuration/overview',
         },
         {
+          type: 'doc',
+          id: 'react-native/santoku/application-architecture/application-structure/overview',
+        },
+        {
           type: 'category',
           label: 'アプリのライフサイクル管理',
           items: [
@@ -382,9 +395,9 @@ module.exports = {
           label: 'ディープリンク',
           items: [
             'react-native/santoku/application-architecture/deep-link/overview',
+            'react-native/santoku/application-architecture/deep-link/universal-links',
+            'react-native/santoku/application-architecture/deep-link/android-app-links',
             'react-native/santoku/application-architecture/deep-link/process-deep-link',
-            'react-native/santoku/application-architecture/deep-link/create-deep-link',
-            'react-native/santoku/application-architecture/deep-link/react-native-firebase',
           ],
         },
         {
@@ -551,6 +564,7 @@ module.exports = {
             'react-native/santoku/design/demo/qrcode/overview',
             'react-native/santoku/design/demo/barcode/overview',
             'react-native/santoku/design/demo/map/overview',
+            'react-native/santoku/design/demo/deep-link/overview',
           ],
         },
       ],
@@ -588,6 +602,20 @@ module.exports = {
           label: '実装',
           items: [
             'react-native/santoku/development/implement',
+            {
+              type: 'category',
+              label: 'スタイルガイド',
+              items: [
+                'react-native/santoku/development/implement/style-guide/overview',
+                'react-native/santoku/development/implement/style-guide/eslint',
+                'react-native/santoku/development/implement/style-guide/typescript',
+                'react-native/santoku/development/implement/style-guide/editorconfig',
+                'react-native/santoku/development/implement/style-guide/prettier',
+                'react-native/santoku/development/implement/style-guide/lint-ops',
+                'react-native/santoku/development/implement/style-guide/typescript-style-guide',
+                'react-native/santoku/development/implement/style-guide/naming-conversion',
+              ],
+            },
             'react-native/santoku/development/implement/message-configuration',
             'react-native/santoku/development/implement/logs-implementation',
             'react-native/santoku/development/implement/cautions-on-using-firebase',
@@ -646,6 +674,7 @@ module.exports = {
           label: 'エンハンス',
           items: [
             'react-native/santoku/maintenance/enhance',
+            'react-native/santoku/maintenance/enhance/expo-49-upgrade',
             'react-native/santoku/maintenance/enhance/expo-48-upgrade',
             'react-native/santoku/maintenance/enhance/expo-47-upgrade',
             'react-native/santoku/maintenance/enhance/config-plugins',
@@ -676,6 +705,16 @@ module.exports = {
         'react-native/santoku/decisions/adr-015-android-head-up-notification',
         'react-native/santoku/decisions/adr-016-forced-app-updates',
         'react-native/santoku/decisions/adr-017-map-view-library',
+        'react-native/santoku/decisions/adr-018-deep-link',
+        {
+          type: 'category',
+          label: 'ディープリンク受信時の画面遷移',
+          items: [
+            'react-native/santoku/decisions/adr-019-deep-link-navigation',
+            'react-native/santoku/decisions/linking-feasibility',
+            'react-native/santoku/decisions/non-linking-feasibility',
+          ],
+        },
       ],
     },
   ],

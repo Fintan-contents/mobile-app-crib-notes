@@ -11,7 +11,7 @@ title: ビルドタイプ
 デバッグビルドの場合は、主に開発を便利にする機能が有効になります。
 
 - React Nativeアプリケーションの定数`__DEV__`
-- ホットリロードや[LogBox](https://reactnative.dev/docs/debugging#logbox)などの開発機能
+- ホットリロードや[LogBox](https://reactnative.dev/docs/debugging#logbox)、[expo-dev-client](https://www.npmjs.com/package/expo-dev-client)などの開発機能
 
 なお、適用するConfig Pluginsによってはリリースビルドのみ、もしくはデバッグビルドのみに反映されるものもありますが、それらは[Config Pluginsの適用](./apply-plugins.mdx)を参照してください。
 
@@ -24,12 +24,11 @@ title: ビルドタイプ
 - fastlane
   - DeployGate、App StoreやGoogle Playからアプリを配信する際に使用
 
-| 環境 | ビルド方法 | ビルドタイプ |
+| ビルド方法 | 環境 | ビルドタイプ |
 |:--|:--|:--|
-| local | npm scripts | デバッグビルド |
-| stg | npm scripts | デバッグビルド |
-| stg | fastlane | リリースビルド |
-| prod | npm scripts | デバッグビルド |
-| prod | fastlane | リリースビルド |
+| npm scripts | (すべて) | デバッグビルド |
+| fastlane | dev | デバッグビルド |
+| fastlane | stg | リリースビルド |
+| fastlane | prod | リリースビルド |
 
 npm scriptsに関してはオプションを指定することで容易にリリースビルドができます。詳細は[ビルドタイプに応じたアプリ起動 - リリースビルド](./app-launch-per-build-settings#リリースビルド)を参照してください。

@@ -111,6 +111,10 @@ const demoScreenList: ScreenList[] = [
     to: 'Map',
   },
   {
+    title: 'DeepLink',
+    to: 'DeepLink',
+  },
+  {
     title: 'Acknowledgements',
     to: 'Acknowledgements',
   },

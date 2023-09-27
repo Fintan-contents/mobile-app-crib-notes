@@ -69,11 +69,11 @@ Windowsは`ユーザー環境変数`に設定してください。また、`%USE
 
 最後に、各コマンドラインツールのディレクトリを`PATH`に追加します。
 
-| コマンドラインツール                                                                                    | 設定例（macOS）                                |
-|:----------------------------------------------------------------------------------------------------|:----------------------------------------------|
-| [Android SDK プラットフォーム ツール](https://developer.android.com/studio/command-line#tools-platform) | `$ANDROID_SDK_ROOT/platform-tools`            |
-| [Android SDK コマンドライン ツール](https://developer.android.com/studio/command-line#tools-sdk)        | `$ANDROID_SDK_ROOT/cmdline-tools/latest/bin` |
-| [Android エミュレータ](https://developer.android.com/studio/command-line#tools-emulator)              | `$ANDROID_SDK_ROOT/emulator`                  |
+| コマンドラインツール                                                                                    | 設定例（macOS）                                | 設定例（Windows）                              |
+|:----------------------------------------------------------------------------------------------------|:----------------------------------------------|:---------------------------------------------|
+| [Android SDK プラットフォーム ツール](https://developer.android.com/studio/command-line#tools-platform) | `$ANDROID_SDK_ROOT/platform-tools`            | `%ANDROID_SDK_ROOT%\platform-tools`          |
+| [Android SDK コマンドライン ツール](https://developer.android.com/studio/command-line#tools-sdk)        | `$ANDROID_SDK_ROOT/cmdline-tools/latest/bin` | `%ANDROID_SDK_ROOT%\cmdline-tools\latest\bin` |
+| [Android エミュレータ](https://developer.android.com/studio/command-line#tools-emulator)              | `$ANDROID_SDK_ROOT/emulator`                  | `%ANDROID_SDK_ROOT%\emulator`                 |
 
 :::danger warning
 **`$ANDROID_SDK_ROOT/tools`が`PATH`に含まれている場合、`PATH`から削除してください。**古いバージョンのAndroid Studioをインストールしていた場合や、インストール方法を紹介した古い記事などを参照してインストールした場合に、特に注意してください。分かりづらいエラーが発生して解決できないというケースがしばしば見られます。

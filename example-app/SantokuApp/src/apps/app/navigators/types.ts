@@ -76,6 +76,7 @@ export type DemoStackParamList = {
   SearchFormTodoDemo: undefined;
   SearchBarTodoDemo: undefined;
   Map: undefined;
+  DeepLink: undefined;
 };
 
 export type AppNavigatorOptions = {

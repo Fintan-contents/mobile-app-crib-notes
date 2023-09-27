@@ -75,16 +75,38 @@ exports[`OverlayBackdrop only with required props renders successfully only with
         FadeIn {
           "build": [Function],
           "callbackV": [Function],
+          "dampingV": undefined,
+          "delayV": undefined,
           "durationV": 300,
+          "easingV": undefined,
+          "initialValues": undefined,
+          "massV": undefined,
+          "overshootClampingV": undefined,
           "randomizeDelay": false,
+          "restDisplacementThresholdV": undefined,
+          "restSpeedThresholdV": undefined,
+          "rotateV": undefined,
+          "stiffnessV": undefined,
+          "type": undefined,
         }
       }
       exiting={
         FadeOut {
           "build": [Function],
           "callbackV": [Function],
+          "dampingV": undefined,
+          "delayV": undefined,
           "durationV": 300,
+          "easingV": undefined,
+          "initialValues": undefined,
+          "massV": undefined,
+          "overshootClampingV": undefined,
           "randomizeDelay": false,
+          "restDisplacementThresholdV": undefined,
+          "restSpeedThresholdV": undefined,
+          "rotateV": undefined,
+          "stiffnessV": undefined,
+          "type": undefined,
         }
       }
       style={
@@ -166,16 +188,38 @@ exports[`OverlayBackdrop with all props should be applied properly: OverlayBackd
         ZoomIn {
           "build": [Function],
           "callbackV": [Function],
+          "dampingV": undefined,
+          "delayV": undefined,
           "durationV": 500,
+          "easingV": undefined,
+          "initialValues": undefined,
+          "massV": undefined,
+          "overshootClampingV": undefined,
           "randomizeDelay": false,
+          "restDisplacementThresholdV": undefined,
+          "restSpeedThresholdV": undefined,
+          "rotateV": undefined,
+          "stiffnessV": undefined,
+          "type": undefined,
         }
       }
       exiting={
         ZoomOut {
           "build": [Function],
           "callbackV": [Function],
+          "dampingV": undefined,
+          "delayV": undefined,
           "durationV": 300,
+          "easingV": undefined,
+          "initialValues": undefined,
+          "massV": undefined,
+          "overshootClampingV": undefined,
           "randomizeDelay": false,
+          "restDisplacementThresholdV": undefined,
+          "restSpeedThresholdV": undefined,
+          "rotateV": undefined,
+          "stiffnessV": undefined,
+          "type": undefined,
         }
       }
       style={

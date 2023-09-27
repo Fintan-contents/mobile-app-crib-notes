@@ -7,6 +7,7 @@ import {BarcodeScreen} from 'apps/app/screens/demo-barcode/BarcodeScreen';
 import {ButtonScreen} from 'apps/app/screens/demo-button/ButtonScreen';
 import {CacheScreen} from 'apps/app/screens/demo-cache/CacheScreen';
 import {ConfigScreen} from 'apps/app/screens/demo-config/ConfigScreen';
+import {DeepLinkScreen} from 'apps/app/screens/demo-deep-link/DeepLinkScreen';
 import {ErrorCaseScreen} from 'apps/app/screens/demo-error/ErrorCaseScreen';
 import {ErrorInEventHandlerScreen} from 'apps/app/screens/demo-error/ErrorInEventHandlerScreen';
 import {ErrorInNativeModuleScreen} from 'apps/app/screens/demo-error/ErrorInNativeModuleScreen';
@@ -139,6 +140,7 @@ export const DemoStackNav: React.FC = () => {
       <nav.Screen name="QRCode" component={QRCodeScreen} />
       <nav.Screen name="Barcode" component={BarcodeScreen} />
       <nav.Screen name="Map" component={MapScreen} />
+      <nav.Screen name="DeepLink" component={DeepLinkScreen} />
       <nav.Screen
         name="Acknowledgements"
         component={AcknowledgementsScreen}

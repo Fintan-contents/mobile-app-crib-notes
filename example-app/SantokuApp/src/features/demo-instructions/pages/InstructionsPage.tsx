@@ -74,9 +74,12 @@ export const InstructionsPage: React.FC = () => {
   );
 };
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 const styles = StyleSheet.create({
   scrollView: {
+    /*
+      eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access --
+      Colorsの型定義がないためLintエラーになるが、元ソースをそのまま使用したいため、Lintを無効化する
+     */
     backgroundColor: Colors.lighter,
   },
   engine: {
@@ -84,6 +87,10 @@ const styles = StyleSheet.create({
     right: 0,
   },
   body: {
+    /*
+      eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access --
+      Colorsの型定義がないためLintエラーになるが、元ソースをそのまま使用したいため、Lintを無効化する
+     */
     backgroundColor: Colors.white,
   },
   sectionContainer: {
@@ -93,18 +100,30 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',
+    /*
+      eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access --
+      Colorsの型定義がないためLintエラーになるが、元ソースをそのまま使用したいため、Lintを無効化する
+     */
     color: Colors.black,
   },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
     fontWeight: '400',
+    /*
+      eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access --
+      Colorsの型定義がないためLintエラーになるが、元ソースをそのまま使用したいため、Lintを無効化する
+     */
     color: Colors.dark,
   },
   highlight: {
     fontWeight: '700',
   },
   footer: {
+    /*
+      eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access --
+      Colorsの型定義がないためLintエラーになるが、元ソースをそのまま使用したいため、Lintを無効化する
+     */
     color: Colors.dark,
     fontSize: 12,
     fontWeight: '600',

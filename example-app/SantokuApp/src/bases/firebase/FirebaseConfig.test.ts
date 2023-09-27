@@ -29,10 +29,10 @@ const mockDummySettings = {
 describe('Firebase Config', () => {
   test('指定した名前でFirebaseインスタンスが生成されることの検証', () => {
     const spy = jest.spyOn(firebase, 'app');
-    // eslint-disable-next-line no-new
+    // eslint-disable-next-line no-new -- 作成したインスタンスは以降の検証で使用しないため
     new FirebaseConfig('testApp');
     expect(spy).toHaveBeenCalledWith('testApp');
-    // eslint-disable-next-line no-new
+    // eslint-disable-next-line no-new -- 作成したインスタンスは以降の検証で使用しないため
     new FirebaseConfig();
     expect(spy).toHaveBeenCalledWith(undefined);
     spy.mockRestore();

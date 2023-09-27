@@ -1,0 +1,37 @@
+---
+title: ディープリンク
+sidebar_label: 概要
+pagination_label: ディープリンク
+---
+
+ディープリンクとは、iOSやAndroidでURLのリンクを開くとアプリが起動する仕組みのことです。
+
+ディープリンクからアプリを起動したときに、そのURLに応じた画面の表示や、URLパラメータに従った初期値の設定など、幅広く活用できます。
+
+## ディープリンクの実現方法
+
+ディープリンクを実現する方法として、OSの標準機能では以下の選択肢があります。
+
+- カスタムURLスキーム
+- [Universal Links](https://developer.apple.com/ios/universal-links/)（iOS）
+- [Android App Links](https://developer.android.com/training/app-links)（Android）
+
+ディープリンクの3つの実現方式のうち、カスタムURLスキームにはアプリに設定したスキームが他のアプリに乗っ取られるリスクがあります。
+
+一方で、Universal Links、Android App Linksは、アプリとウェブサイトのドメインを関連付けることにより、安全にディープリンクを実現できます。
+
+そのため、ディープリンクの実現方法としては、Universal LinksとAndroid App Linksが推奨されます。
+
+:::warning
+カスタムURLスキームは、複数のアプリが同じスキームを設定できるため、OSはURLリンクの対象とするアプリを一意に特定できません。その結果、正規アプリのスキームを偽装した不正アプリによってURLリンクを乗っ取られる可能性があります。
+
+[Appleのドキュメント](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)にも、カスタムURLスキームではなくUniversal Linksを推奨する記載があります。
+
+> While custom URL schemes are an acceptable form of deep linking, universal links are strongly recommended.
+:::
+
+## ディープリンクの注意点
+
+### URLには機密情報を含めない
+
+ユーザに連携するディープリンクのURLには機密情報を含めないように注意が必要です。また、認証後にしか参照できないような情報もURLには含めず、URLタップ後に起動したアプリ内で取得する必要があります。

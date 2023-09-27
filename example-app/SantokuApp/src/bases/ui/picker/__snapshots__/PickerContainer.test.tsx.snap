@@ -18,7 +18,7 @@ exports[`PickerContainer only with required props renders successfully only with
         "value": {
           "transform": [
             {
-              "translateY": 75,
+              "translateY": 74.00333333333333,
             },
           ],
         },
@@ -67,7 +67,7 @@ exports[`PickerContainer only with required props renders successfully only with
         "value": {
           "transform": [
             {
-              "translateY": 75,
+              "translateY": 76.00333333333333,
             },
           ],
         },

@@ -1,0 +1,35 @@
+---
+title: EditorConfig
+---
+
+[EditorConfig](https://editorconfig.org/)はインデントや改行コードなど、一貫したコードスタイルを維持するのに役立つコードフォーマッタです。
+
+## EditorConfigの実行方法
+
+### エディタ、IDE
+
+エディタやIDEにプラグインなどを設定することで、コーディング中に自動でフォーマットしてくれます。
+
+Visual Studio CodeでEditorConfigを有効にする方法については、[Visual Studio Code - Lint、フォーマッタ](../../tools/vscode.md#lintフォーマッタ)を参照してください。
+
+その他のIDEについては、EditorConfigの公式ページを参照してください。
+
+- [No Plugin Necessary](https://editorconfig.org/#pre-installed)
+- [Download a Plugin](https://editorconfig.org/#download)
+
+## 適用しているルール一覧
+
+このアプリでは、EditorConfigのルールを[.editorconfig](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/.editorconfig)に定義しています。
+
+適用している全てのルールは以下のとおりです。
+
+| オプション                                                                                                                          | 設定値   | 説明                                                                    |
+|:-------------------------------------------------------------------------------------------------------------------------------|:------|:----------------------------------------------------------------------|
+| [indent_style](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#indent_style)                         | space | インデントにはスペースを利用します。                                                    |
+| [indent_size](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#indent_size)                           | 2     | インデントサイズは2にします。                                                       |
+| [tab_width](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#tab_width)                               | 8     | タブ文字は8文字幅で表示します（Tabが紛れていることがわかりやすくなるようにするため）。                         |
+| [end_of_line](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#end_of_line)                           | lf    | 改行コードはLFに統一します（batなど一部のファイルの改行コードは`.gitattributes`で強制的にCRLFに変更されます）。 |
+| [charset](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#charset)                                   | utf-8 | 文字コードはUTF-8にします。                                                      |
+| [trim_trailing_whitespace](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#trim_trailing_whitespace) | true  | 行末の空白はトリムします。                                                         |
+| [insert_final_newline](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#insert_final_newline)         | true  | ファイル末尾に改行を入れます。                                                       |
+| [max_line_length](https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#max_line_length)                   | 120   | 一行の長さは120文字までにします。                                                    |

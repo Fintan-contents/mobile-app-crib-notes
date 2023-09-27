@@ -7,7 +7,7 @@ import {useListMiddleIndex} from './useListMiddleIndex';
 
 type SelectPickerItemsTypes<ItemT> = {
   selectedValue?: React.Key | ItemT;
-  children?: JSX.Element | JSX.Element[];
+  children?: React.JSX.Element | React.JSX.Element[];
   items: Item<ItemT>[];
   itemHeight: number;
   numberOfLines: number;

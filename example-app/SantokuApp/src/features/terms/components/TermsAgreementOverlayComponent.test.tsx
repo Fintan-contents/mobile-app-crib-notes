@@ -26,9 +26,6 @@ beforeAll(async () => {
 
 describe('TermsAgreementOverlayComponent', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
-    // importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
-    // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     render(
       <TermsAgreementOverlayComponent
         visible

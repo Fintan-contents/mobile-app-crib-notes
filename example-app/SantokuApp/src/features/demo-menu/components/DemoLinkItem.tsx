@@ -1,4 +1,3 @@
-import React from 'react';
 import {GestureResponderEvent} from 'react-native';
 import {ListItem} from 'react-native-elements';
 
@@ -12,7 +11,7 @@ export type DemoLinkItemData = {
   onPress: (event: GestureResponderEvent) => void;
 };
 
-export const DemoLinkItem: React.FC<DemoLinkItemProps> = ({item: {title, onPress}}) => (
+export const DemoLinkItem = ({item: {title, onPress}}: DemoLinkItemProps) => (
   <ListItem bottomDivider onPress={onPress}>
     <ListItem.Content>
       <ListItem.Title>{title}</ListItem.Title>
