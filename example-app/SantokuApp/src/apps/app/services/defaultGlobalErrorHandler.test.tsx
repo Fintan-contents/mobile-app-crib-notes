@@ -1,5 +1,5 @@
 import {act} from '@testing-library/react-native';
-import {AxiosError} from 'axios';
+import {AxiosError, AxiosHeaders} from 'axios';
 import {setHandleError} from 'bases/core/errors/handleError';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import * as clientLogout from 'features/account/services/auth/clientLogout';
@@ -25,14 +25,14 @@ describe('defaultGlobalErrorHandler', () => {
     const axiosError = new AxiosError(
       'error',
       '',
-      {},
+      {headers: new AxiosHeaders()},
       {},
       {
         status: 400,
         statusText: 'Bad Request',
         data: {},
         headers: {},
-        config: {},
+        config: {headers: new AxiosHeaders()},
       },
     );
     const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
@@ -47,14 +47,14 @@ describe('defaultGlobalErrorHandler', () => {
     const axiosError = new AxiosError(
       'error',
       '',
-      {},
+      {headers: new AxiosHeaders()},
       {},
       {
         status: 401,
         statusText: 'Unauthorized',
         data: {},
         headers: {},
-        config: {},
+        config: {headers: new AxiosHeaders()},
       },
     );
     const spyClientLogout = jest.spyOn(clientLogout, 'clientLogout').mockImplementation(() => {
@@ -83,14 +83,14 @@ describe('defaultGlobalErrorHandler', () => {
     const axiosError = new AxiosError(
       'error',
       '',
-      {},
+      {headers: new AxiosHeaders()},
       {},
       {
         status: 403,
         statusText: 'Forbidden',
         data: {},
         headers: {},
-        config: {},
+        config: {headers: new AxiosHeaders()},
       },
     );
     const spyAlert = jest.spyOn(Alert, 'alert');
@@ -110,14 +110,14 @@ describe('defaultGlobalErrorHandler', () => {
     const axiosError = new AxiosError(
       'error',
       '',
-      {},
+      {headers: new AxiosHeaders()},
       {},
       {
         status: 404,
         statusText: 'Not Found',
         data: {},
         headers: {},
-        config: {},
+        config: {headers: new AxiosHeaders()},
       },
     );
     const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
@@ -132,14 +132,14 @@ describe('defaultGlobalErrorHandler', () => {
     const axiosError = new AxiosError(
       'error',
       '',
-      {},
+      {headers: new AxiosHeaders()},
       {},
       {
         status: 412,
         statusText: 'Precondition Failed',
         data: {},
         headers: {},
-        config: {},
+        config: {headers: new AxiosHeaders()},
       },
     );
     const spyAlert = jest.spyOn(Alert, 'alert');
@@ -159,14 +159,14 @@ describe('defaultGlobalErrorHandler', () => {
     const axiosError = new AxiosError(
       'error',
       '',
-      {},
+      {headers: new AxiosHeaders()},
       {},
       {
         status: 429,
         statusText: 'Too Many Requests',
         data: {},
         headers: {},
-        config: {},
+        config: {headers: new AxiosHeaders()},
       },
     );
     const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
@@ -183,14 +183,14 @@ describe('defaultGlobalErrorHandler', () => {
     const axiosError = new AxiosError(
       'error',
       '',
-      {},
+      {headers: new AxiosHeaders()},
       {},
       {
         status: 503,
         statusText: 'Service Unavailable',
         data: {},
         headers: {},
-        config: {},
+        config: {headers: new AxiosHeaders()},
       },
     );
     const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
@@ -207,14 +207,14 @@ describe('defaultGlobalErrorHandler', () => {
     const axiosError = new AxiosError(
       'error',
       '',
-      {},
+      {headers: new AxiosHeaders()},
       {},
       {
         status: 504,
         statusText: 'Gateway Timeout',
         data: {},
         headers: {},
-        config: {},
+        config: {headers: new AxiosHeaders()},
       },
     );
     const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});
@@ -231,14 +231,14 @@ describe('defaultGlobalErrorHandler', () => {
     const axiosError = new AxiosError(
       'error',
       '',
-      {},
+      {headers: new AxiosHeaders()},
       {},
       {
         status: 500,
         statusText: 'Internal Server Error',
         data: {message: 'message', code: 'errorCode'},
         headers: {},
-        config: {},
+        config: {headers: new AxiosHeaders()},
       },
     );
     const spySnackbar = jest.spyOn(Snackbar, 'show').mockImplementation(() => {});

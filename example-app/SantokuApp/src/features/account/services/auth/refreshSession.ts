@@ -37,7 +37,12 @@ const setRefreshSessionInterceptor = () => {
       if (error.response?.status === 401) {
         try {
           await refreshSession();
-          return await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.request(error.config);
+          if (error.config) {
+            return await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.request(error.config);
+          } else {
+            // レスポンスとしてステータスコードが返却されているのに、リクエストのConfigが存在しない場合は基本的に想定していない
+            handleError(new RuntimeError('Axios request config is not found.', 'RefreshSessionError'));
+          }
         } catch (e) {
           handleError(new RuntimeError(e, 'RefreshSessionError'));
           throw error;

@@ -1,4 +1,4 @@
-import {AxiosError} from 'axios';
+import {AxiosError, AxiosHeaders} from 'axios';
 import {setHandleError} from 'bases/core/errors/handleError';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {Mutation, QueryClient} from 'react-query';
@@ -18,14 +18,14 @@ describe('defaultGlobalMutationErrorHandler', () => {
   const axiosError = new AxiosError(
     'error',
     '',
-    {},
+    {headers: new AxiosHeaders()},
     {},
     {
       status: 500,
       statusText: 'Internal Server Error',
       data: {message: 'message', code: 'errorCode'},
       headers: {},
-      config: {},
+      config: {headers: new AxiosHeaders()},
     },
   );
 

@@ -1,3 +1,4 @@
+import {AxiosHeaders} from 'axios';
 import * as accountApi from 'features/backend/apis/account/account';
 import {AccountLoginResponseStatus} from 'features/backend/apis/model';
 import * as csrfToken from 'features/backend/utils/refreshCsrfToken';
@@ -21,7 +22,7 @@ describe('autoLogin', () => {
     status: 200,
     statusText: 'ok',
     headers: {},
-    config: {},
+    config: {headers: new AxiosHeaders()},
   });
   const spyRefreshCsrfToken = jest.spyOn(csrfToken, 'refreshCsrfToken').mockImplementation();
   const spySecureStorageAdapterLoadActiveAccountId = jest.spyOn(loadActiveAccountId, 'loadActiveAccountId');

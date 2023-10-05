@@ -94,10 +94,8 @@ const setCsrfTokenHeader = (csrfTokenHeaderName: string, csrfTokenValue: string)
 };
 
 const setAxiosResponseInterceptor = (
-  onFulfilled: (
-    value: AxiosResponse<any, any>,
-  ) => (AxiosResponse<any, any> | Promise<AxiosResponse<any, any>>) | undefined,
-  onRejected: (error: any) => any | undefined,
+  onFulfilled?: (value: AxiosResponse<any, any>) => AxiosResponse<any, any> | Promise<AxiosResponse<any, any>>,
+  onRejected?: (error: any) => any,
 ) => {
   BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
 };

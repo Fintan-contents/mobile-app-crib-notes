@@ -1,3 +1,4 @@
+import {AxiosHeaders} from 'axios';
 import * as accountApi from 'features/backend/apis/account/account';
 import * as csrfToken from 'features/backend/utils/refreshCsrfToken';
 import * as deleteActiveAccountId from 'features/secure-storage/services/deleteActiveAccountId';
@@ -13,7 +14,7 @@ describe('AuthenticationService logout', () => {
     status: 200,
     statusText: 'ok',
     headers: {},
-    config: {},
+    config: {headers: new AxiosHeaders()},
   });
   const spyRefreshCsrfToken = jest.spyOn(csrfToken, 'refreshCsrfToken').mockImplementation();
   const spySecureStorageAdapterLoadActiveAccountId = jest.spyOn(loadActiveAccountId, 'loadActiveAccountId');

@@ -1,3 +1,4 @@
+import {AxiosHeaders} from 'axios';
 import * as generatePassword from 'bases/core/utils/generatePassword';
 import * as accountApi from 'features/backend/apis/account/account';
 
@@ -19,7 +20,7 @@ describe('signup', () => {
       status: 200,
       statusText: 'ok',
       headers: {},
-      config: {},
+      config: {headers: new AxiosHeaders()},
     });
     const spyLogin = jest.spyOn(login, 'login').mockResolvedValue({
       status: 'COMPLETE',

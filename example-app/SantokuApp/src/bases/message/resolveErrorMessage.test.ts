@@ -1,4 +1,4 @@
-import {AxiosError} from 'axios';
+import {AxiosError, AxiosHeaders} from 'axios';
 import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
 import {loadMessages} from 'bases/message/Message';
 
@@ -14,14 +14,14 @@ describe('resolveApiErrorMessage', () => {
       new AxiosError(
         'error',
         '',
-        {},
+        {headers: new AxiosHeaders()},
         {},
         {
           status: 500,
           statusText: 'Internal Server Error',
           data: {},
           headers: {},
-          config: {},
+          config: {headers: new AxiosHeaders()},
         },
       ),
     );
