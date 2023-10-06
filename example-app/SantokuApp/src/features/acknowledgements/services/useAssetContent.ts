@@ -14,5 +14,5 @@ const loadAssetContent = async (moduleId: number | undefined) => {
 };
 
 export const useAssetContent = (moduleId?: number) => {
-  return useQuery(['acknowledgements', 'assetContent'], () => loadAssetContent(moduleId));
+  return useQuery(['acknowledgements', 'assetContent', moduleId], () => loadAssetContent(moduleId));
 };
