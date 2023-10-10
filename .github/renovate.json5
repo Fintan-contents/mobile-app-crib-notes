@@ -48,6 +48,7 @@
         'expo',
         'expo-build-properties',
         'expo-crypto',
+        'expo-dev-client',
         'expo-keep-awake',
         'expo-linking',
         'expo-local-authentication',
