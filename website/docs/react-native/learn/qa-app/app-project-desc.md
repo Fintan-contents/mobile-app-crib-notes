@@ -318,7 +318,7 @@ export const yup = Yup;
 
 ```typescript title="src/apps/app/use-cases/useAppInitializer.ts"
 import {enhanceValidator} from "bases/validator";
-import {activateKeepAwake} from "expo-keep-awake";
+import {activateKeepAwakeAsync} from "expo-keep-awake";
 import {useCallback, useMemo, useState} from "react";
 
 import { loadBundledMessagesAsync } from "../services/loadBundledMessagesAsync";
@@ -340,7 +340,7 @@ type InitializationResult = Initializing | InitializeSuccessResult | InitializeF
 const initializeCoreFeatures = async () => {
   // 開発中は画面がスリープしないように設定
   if (__DEV__) {
-    await activateKeepAwake();
+    await activateKeepAwakeAsync();
   }
 
   // アプリ内で使用するメッセージのロード
