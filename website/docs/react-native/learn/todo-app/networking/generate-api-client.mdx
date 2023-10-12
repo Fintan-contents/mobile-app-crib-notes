@@ -77,7 +77,7 @@ npm install -D @openapitools/openapi-generator-cli
 1. 以下のコマンドを実行
 
 ```bash
-java -jar -Dhttp.proxyHost=[プロキシホスト] -Dhttp.proxyPort=[プロキシポート] -Dhttps.proxyHost=[プロキシホスト] -Dhttps.proxyPort=[プロキシポート] generate -g typescript-fetch -i https://raw.githubusercontent.com/{@inject: organization}/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
+java -Dhttp.proxyHost=[プロキシホスト] -Dhttp.proxyPort=[プロキシポート] -Dhttps.proxyHost=[プロキシホスト] -Dhttps.proxyPort=[プロキシポート] -jar openapi-generator-cli-6.2.1.jar generate -g typescript-fetch -i https://raw.githubusercontent.com/{@inject: organization}/mobile-app-hands-on-backend/main/rest-api-specification/openapi.yaml -o src/backend/generated-rest-client --additional-properties supportsES6=true,typescriptThreePlus=true
 ```
 
 :::
