@@ -912,6 +912,99 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                                 data={
                                                                   [
                                                                     {
+                                                                      "accountId": "santoku",
+                                                                      "content": "2022年話題の技術を触ってみる勉強会です。
+日時：2022年5月31日（火） 14:00〜15:00
+
+■参加資格
+制限なし
+",
+                                                                      "endDate": "2024-06-01T00:00:00.000Z",
+                                                                      "eventId": "1",
+                                                                      "likes": 1,
+                                                                      "profile": {
+                                                                        "avatarImageUrl": "undefinedsantoku-avatar.png",
+                                                                        "nickname": "santoku",
+                                                                        "points": 1000,
+                                                                        "totalPoints": 3000,
+                                                                        "type": [],
+                                                                      },
+                                                                      "title": "【勉強会】今話題の技術を触ってみよう",
+                                                                    },
+                                                                    {
+                                                                      "accountId": "santoku",
+                                                                      "content": "TCP/IPについて勉強します。
+日時：2022年6月2日（木） 18:00〜19:00
+
+■参加資格
+制限なし
+
+■概要
+マスタリングTCP/IP 入門を読みながら、不明点などを議論していくスタイルです。
+",
+                                                                      "endDate": "2024-06-01T00:00:00.000Z",
+                                                                      "eventId": "2",
+                                                                      "likes": 3,
+                                                                      "profile": {
+                                                                        "avatarImageUrl": "undefinedsantoku-avatar.png",
+                                                                        "nickname": "santoku",
+                                                                        "points": 1000,
+                                                                        "totalPoints": 3000,
+                                                                        "type": [],
+                                                                      },
+                                                                      "title": "【勉強会】TCP/IPについて",
+                                                                    },
+                                                                    {
+                                                                      "accountId": "admin",
+                                                                      "content": "React NativeのNew Architectureに関するイベントです。
+日時：2022年6月9日（木） 18:00〜20:00
+
+■参加資格
+制限なし
+
+■概要
+React NativeのNew Architectureは、さまざまな理由により導入に踏み切ってない方も多いかと思います。
+まだまだ少ない事例の中、実際にNew Architectureを導入した開発者に、導入して感じたことを話して頂きます。
+",
+                                                                      "endDate": "2024-06-01T00:00:00.000Z",
+                                                                      "eventId": "3",
+                                                                      "likes": 10,
+                                                                      "profile": {
+                                                                        "avatarImageUrl": "",
+                                                                        "nickname": "santoku.administrator.techlead.1234567890123456789",
+                                                                        "points": 99999999,
+                                                                        "totalPoints": 99999999,
+                                                                        "type": [
+                                                                          "administrator",
+                                                                          "techlead",
+                                                                        ],
+                                                                      },
+                                                                      "title": "【イベント】React Native - New Architecture",
+                                                                    },
+                                                                    {
+                                                                      "accountId": "santoku",
+                                                                      "content": "Open ID Connectの勉強会。
+日時：2023年1月17日（火） 18:00〜19:00
+
+■参加資格
+制限なし
+
+■概要
+Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追っていきます。
+",
+                                                                      "endDate": "2024-06-01T00:00:00.000Z",
+                                                                      "eventId": "4",
+                                                                      "likes": 5,
+                                                                      "profile": {
+                                                                        "avatarImageUrl": "undefinedsantoku-avatar.png",
+                                                                        "nickname": "santoku",
+                                                                        "points": 1000,
+                                                                        "totalPoints": 3000,
+                                                                        "type": [],
+                                                                      },
+                                                                      "title": "【勉強会】OIDC",
+                                                                    },
+                                                                    {
                                                                       "accountId": "admin",
                                                                       "content": "Cloud Native時代のトレーサビリティ
 日時：2023年7月14日（金） 17:00〜19:00
@@ -1321,6 +1414,1101 @@ React Native 0.66
                                                                       ]
                                                                     }
                                                                   />
+                                                                  <View
+                                                                    style={
+                                                                      [
+                                                                        {
+                                                                          "flexDirection": "row",
+                                                                        },
+                                                                      ]
+                                                                    }
+                                                                  >
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "paddingLeft": 8,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    />
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "backgroundColor": "#FFFFFF",
+                                                                            "borderRadius": 8,
+                                                                            "elevation": 2,
+                                                                            "justifyContent": "space-between",
+                                                                            "marginVertical": 2,
+                                                                            "paddingHorizontal": 24,
+                                                                            "paddingVertical": 16,
+                                                                            "shadowColor": "#212121",
+                                                                            "shadowOffset": {
+                                                                              "height": 2,
+                                                                              "width": 0,
+                                                                            },
+                                                                            "shadowOpacity": 0.1,
+                                                                            "shadowRadius": 0,
+                                                                            "width": -48,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    >
+                                                                      <Text
+                                                                        ellipsizeMode="tail"
+                                                                        numberOfLines={3}
+                                                                        style={
+                                                                          [
+                                                                            {
+                                                                              "color": "#000000",
+                                                                              "fontSize": 22,
+                                                                              "fontWeight": "bold",
+                                                                              "letterSpacing": 0.18,
+                                                                              "lineHeight": 34,
+                                                                              "textDecorationLine": "underline",
+                                                                            },
+                                                                          ]
+                                                                        }
+                                                                      >
+                                                                        【勉強会】今話題の技術を触ってみよう
+                                                                      </Text>
+                                                                      <View
+                                                                        style={
+                                                                          [
+                                                                            {
+                                                                              "alignItems": "center",
+                                                                              "flexDirection": "row",
+                                                                              "justifyContent": "space-between",
+                                                                              "marginTop": 16,
+                                                                            },
+                                                                          ]
+                                                                        }
+                                                                      >
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "alignItems": "center",
+                                                                                "flexDirection": "row",
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        >
+                                                                          <RNSVGSvgView
+                                                                            align="xMidYMid"
+                                                                            bbHeight="24"
+                                                                            bbWidth="24"
+                                                                            fill="none"
+                                                                            focusable={false}
+                                                                            meetOrSlice={0}
+                                                                            minX={0}
+                                                                            minY={0}
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "backgroundColor": "transparent",
+                                                                                  "borderWidth": 0,
+                                                                                },
+                                                                                [
+                                                                                  {
+                                                                                    "height": 24,
+                                                                                    "width": 24,
+                                                                                  },
+                                                                                ],
+                                                                                {
+                                                                                  "flex": 0,
+                                                                                  "height": 24,
+                                                                                  "width": 24,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                            vbHeight={48}
+                                                                            vbWidth={48}
+                                                                          >
+                                                                            <RNSVGGroup
+                                                                              fill={null}
+                                                                              propList={
+                                                                                [
+                                                                                  "fill",
+                                                                                ]
+                                                                              }
+                                                                            >
+                                                                              <RNSVGPath
+                                                                                d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
+                                                                                fill={
+                                                                                  {
+                                                                                    "payload": 4288585374,
+                                                                                    "type": 0,
+                                                                                  }
+                                                                                }
+                                                                                propList={
+                                                                                  [
+                                                                                    "fill",
+                                                                                  ]
+                                                                                }
+                                                                              />
+                                                                            </RNSVGGroup>
+                                                                          </RNSVGSvgView>
+                                                                          <View
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "paddingHorizontal": 4,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          />
+                                                                          <Text
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "color": "#212121",
+                                                                                  "fontSize": 14,
+                                                                                  "letterSpacing": 0.25,
+                                                                                  "lineHeight": 20,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            1
+                                                                          </Text>
+                                                                        </View>
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "paddingLeft": 32,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "alignItems": "flex-end",
+                                                                                "flex": 1,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        >
+                                                                          <Text
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "color": "#000000",
+                                                                                  "fontSize": 18,
+                                                                                  "fontWeight": "600",
+                                                                                  "letterSpacing": 0.15,
+                                                                                  "lineHeight": 22,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            santoku
+                                                                          </Text>
+                                                                          <View
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "alignItems": "center",
+                                                                                  "flexDirection": "row",
+                                                                                  "justifyContent": "space-between",
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            <Text
+                                                                              style={
+                                                                                [
+                                                                                  {
+                                                                                    "color": "#212121",
+                                                                                    "fontSize": 14,
+                                                                                    "letterSpacing": 0.25,
+                                                                                    "lineHeight": 20,
+                                                                                  },
+                                                                                ]
+                                                                              }
+                                                                            >
+                                                                              999+
+                                                                              /
+                                                                              999+
+                                                                            </Text>
+                                                                          </View>
+                                                                        </View>
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "paddingLeft": 16,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                        <Image
+                                                                          source={
+                                                                            {
+                                                                              "uri": "undefinedsantoku-avatar.png",
+                                                                            }
+                                                                          }
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "borderRadius": 20,
+                                                                                "height": 40,
+                                                                                "width": 40,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                      </View>
+                                                                    </View>
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "paddingLeft": 8,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    />
+                                                                  </View>
+                                                                  <View
+                                                                    style={
+                                                                      [
+                                                                        {
+                                                                          "flexDirection": "row",
+                                                                        },
+                                                                      ]
+                                                                    }
+                                                                  >
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "paddingLeft": 8,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    />
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "backgroundColor": "#FFFFFF",
+                                                                            "borderRadius": 8,
+                                                                            "elevation": 2,
+                                                                            "justifyContent": "space-between",
+                                                                            "marginVertical": 2,
+                                                                            "paddingHorizontal": 24,
+                                                                            "paddingVertical": 16,
+                                                                            "shadowColor": "#212121",
+                                                                            "shadowOffset": {
+                                                                              "height": 2,
+                                                                              "width": 0,
+                                                                            },
+                                                                            "shadowOpacity": 0.1,
+                                                                            "shadowRadius": 0,
+                                                                            "width": -48,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    >
+                                                                      <Text
+                                                                        ellipsizeMode="tail"
+                                                                        numberOfLines={3}
+                                                                        style={
+                                                                          [
+                                                                            {
+                                                                              "color": "#000000",
+                                                                              "fontSize": 22,
+                                                                              "fontWeight": "bold",
+                                                                              "letterSpacing": 0.18,
+                                                                              "lineHeight": 34,
+                                                                              "textDecorationLine": "underline",
+                                                                            },
+                                                                          ]
+                                                                        }
+                                                                      >
+                                                                        【勉強会】TCP/IPについて
+                                                                      </Text>
+                                                                      <View
+                                                                        style={
+                                                                          [
+                                                                            {
+                                                                              "alignItems": "center",
+                                                                              "flexDirection": "row",
+                                                                              "justifyContent": "space-between",
+                                                                              "marginTop": 16,
+                                                                            },
+                                                                          ]
+                                                                        }
+                                                                      >
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "alignItems": "center",
+                                                                                "flexDirection": "row",
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        >
+                                                                          <RNSVGSvgView
+                                                                            align="xMidYMid"
+                                                                            bbHeight="24"
+                                                                            bbWidth="24"
+                                                                            fill="none"
+                                                                            focusable={false}
+                                                                            meetOrSlice={0}
+                                                                            minX={0}
+                                                                            minY={0}
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "backgroundColor": "transparent",
+                                                                                  "borderWidth": 0,
+                                                                                },
+                                                                                [
+                                                                                  {
+                                                                                    "height": 24,
+                                                                                    "width": 24,
+                                                                                  },
+                                                                                ],
+                                                                                {
+                                                                                  "flex": 0,
+                                                                                  "height": 24,
+                                                                                  "width": 24,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                            vbHeight={48}
+                                                                            vbWidth={48}
+                                                                          >
+                                                                            <RNSVGGroup
+                                                                              fill={null}
+                                                                              propList={
+                                                                                [
+                                                                                  "fill",
+                                                                                ]
+                                                                              }
+                                                                            >
+                                                                              <RNSVGPath
+                                                                                d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
+                                                                                fill={
+                                                                                  {
+                                                                                    "payload": 4288585374,
+                                                                                    "type": 0,
+                                                                                  }
+                                                                                }
+                                                                                propList={
+                                                                                  [
+                                                                                    "fill",
+                                                                                  ]
+                                                                                }
+                                                                              />
+                                                                            </RNSVGGroup>
+                                                                          </RNSVGSvgView>
+                                                                          <View
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "paddingHorizontal": 4,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          />
+                                                                          <Text
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "color": "#212121",
+                                                                                  "fontSize": 14,
+                                                                                  "letterSpacing": 0.25,
+                                                                                  "lineHeight": 20,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            3
+                                                                          </Text>
+                                                                        </View>
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "paddingLeft": 32,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "alignItems": "flex-end",
+                                                                                "flex": 1,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        >
+                                                                          <Text
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "color": "#000000",
+                                                                                  "fontSize": 18,
+                                                                                  "fontWeight": "600",
+                                                                                  "letterSpacing": 0.15,
+                                                                                  "lineHeight": 22,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            santoku
+                                                                          </Text>
+                                                                          <View
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "alignItems": "center",
+                                                                                  "flexDirection": "row",
+                                                                                  "justifyContent": "space-between",
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            <Text
+                                                                              style={
+                                                                                [
+                                                                                  {
+                                                                                    "color": "#212121",
+                                                                                    "fontSize": 14,
+                                                                                    "letterSpacing": 0.25,
+                                                                                    "lineHeight": 20,
+                                                                                  },
+                                                                                ]
+                                                                              }
+                                                                            >
+                                                                              999+
+                                                                              /
+                                                                              999+
+                                                                            </Text>
+                                                                          </View>
+                                                                        </View>
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "paddingLeft": 16,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                        <Image
+                                                                          source={
+                                                                            {
+                                                                              "uri": "undefinedsantoku-avatar.png",
+                                                                            }
+                                                                          }
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "borderRadius": 20,
+                                                                                "height": 40,
+                                                                                "width": 40,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                      </View>
+                                                                    </View>
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "paddingLeft": 8,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    />
+                                                                  </View>
+                                                                  <View
+                                                                    style={
+                                                                      [
+                                                                        {
+                                                                          "flexDirection": "row",
+                                                                        },
+                                                                      ]
+                                                                    }
+                                                                  >
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "paddingLeft": 8,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    />
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "backgroundColor": "#FFFFFF",
+                                                                            "borderRadius": 8,
+                                                                            "elevation": 2,
+                                                                            "justifyContent": "space-between",
+                                                                            "marginVertical": 2,
+                                                                            "paddingHorizontal": 24,
+                                                                            "paddingVertical": 16,
+                                                                            "shadowColor": "#212121",
+                                                                            "shadowOffset": {
+                                                                              "height": 2,
+                                                                              "width": 0,
+                                                                            },
+                                                                            "shadowOpacity": 0.1,
+                                                                            "shadowRadius": 0,
+                                                                            "width": -48,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    >
+                                                                      <Text
+                                                                        ellipsizeMode="tail"
+                                                                        numberOfLines={3}
+                                                                        style={
+                                                                          [
+                                                                            {
+                                                                              "color": "#000000",
+                                                                              "fontSize": 22,
+                                                                              "fontWeight": "bold",
+                                                                              "letterSpacing": 0.18,
+                                                                              "lineHeight": 34,
+                                                                              "textDecorationLine": "underline",
+                                                                            },
+                                                                          ]
+                                                                        }
+                                                                      >
+                                                                        【イベント】React Native - New Architecture
+                                                                      </Text>
+                                                                      <View
+                                                                        style={
+                                                                          [
+                                                                            {
+                                                                              "alignItems": "center",
+                                                                              "flexDirection": "row",
+                                                                              "justifyContent": "space-between",
+                                                                              "marginTop": 16,
+                                                                            },
+                                                                          ]
+                                                                        }
+                                                                      >
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "alignItems": "center",
+                                                                                "flexDirection": "row",
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        >
+                                                                          <RNSVGSvgView
+                                                                            align="xMidYMid"
+                                                                            bbHeight="24"
+                                                                            bbWidth="24"
+                                                                            fill="none"
+                                                                            focusable={false}
+                                                                            meetOrSlice={0}
+                                                                            minX={0}
+                                                                            minY={0}
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "backgroundColor": "transparent",
+                                                                                  "borderWidth": 0,
+                                                                                },
+                                                                                [
+                                                                                  {
+                                                                                    "height": 24,
+                                                                                    "width": 24,
+                                                                                  },
+                                                                                ],
+                                                                                {
+                                                                                  "flex": 0,
+                                                                                  "height": 24,
+                                                                                  "width": 24,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                            vbHeight={48}
+                                                                            vbWidth={48}
+                                                                          >
+                                                                            <RNSVGGroup
+                                                                              fill={null}
+                                                                              propList={
+                                                                                [
+                                                                                  "fill",
+                                                                                ]
+                                                                              }
+                                                                            >
+                                                                              <RNSVGPath
+                                                                                d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
+                                                                                fill={
+                                                                                  {
+                                                                                    "payload": 4288585374,
+                                                                                    "type": 0,
+                                                                                  }
+                                                                                }
+                                                                                propList={
+                                                                                  [
+                                                                                    "fill",
+                                                                                  ]
+                                                                                }
+                                                                              />
+                                                                            </RNSVGGroup>
+                                                                          </RNSVGSvgView>
+                                                                          <View
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "paddingHorizontal": 4,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          />
+                                                                          <Text
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "color": "#212121",
+                                                                                  "fontSize": 14,
+                                                                                  "letterSpacing": 0.25,
+                                                                                  "lineHeight": 20,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            10
+                                                                          </Text>
+                                                                        </View>
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "paddingLeft": 32,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "alignItems": "flex-end",
+                                                                                "flex": 1,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        >
+                                                                          <Text
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "color": "#000000",
+                                                                                  "fontSize": 18,
+                                                                                  "fontWeight": "600",
+                                                                                  "letterSpacing": 0.15,
+                                                                                  "lineHeight": 22,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            santoku.administrator.techlead.1234567890123456789
+                                                                          </Text>
+                                                                          <View
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "alignItems": "center",
+                                                                                  "flexDirection": "row",
+                                                                                  "justifyContent": "space-between",
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            <Text
+                                                                              style={
+                                                                                [
+                                                                                  {
+                                                                                    "color": "#212121",
+                                                                                    "fontSize": 14,
+                                                                                    "letterSpacing": 0.25,
+                                                                                    "lineHeight": 20,
+                                                                                  },
+                                                                                ]
+                                                                              }
+                                                                            >
+                                                                              999+
+                                                                              /
+                                                                              999+
+                                                                            </Text>
+                                                                          </View>
+                                                                        </View>
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "paddingLeft": 16,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                        <RNSVGSvgView
+                                                                          align="xMidYMid"
+                                                                          bbHeight="40"
+                                                                          bbWidth="40"
+                                                                          fill="none"
+                                                                          focusable={false}
+                                                                          meetOrSlice={0}
+                                                                          minX={0}
+                                                                          minY={0}
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "backgroundColor": "transparent",
+                                                                                "borderWidth": 0,
+                                                                              },
+                                                                              [
+                                                                                {
+                                                                                  "height": 40,
+                                                                                  "width": 40,
+                                                                                },
+                                                                              ],
+                                                                              {
+                                                                                "flex": 0,
+                                                                                "height": 40,
+                                                                                "width": 40,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                          vbHeight={40}
+                                                                          vbWidth={40}
+                                                                        >
+                                                                          <RNSVGGroup
+                                                                            fill={null}
+                                                                            propList={
+                                                                              [
+                                                                                "fill",
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            <RNSVGCircle
+                                                                              cx="20"
+                                                                              cy="20"
+                                                                              fill={
+                                                                                {
+                                                                                  "payload": 4293322470,
+                                                                                  "type": 0,
+                                                                                }
+                                                                              }
+                                                                              propList={
+                                                                                [
+                                                                                  "fill",
+                                                                                ]
+                                                                              }
+                                                                              r="20"
+                                                                            />
+                                                                            <RNSVGPath
+                                                                              d="M20 20C22.21 20 24 18.21 24 16C24 13.79 22.21 12 20 12C17.79 12 16 13.79 16 16C16 18.21 17.79 20 20 20ZM20 22C17.33 22 12 23.34 12 26V28H28V26C28 23.34 22.67 22 20 22Z"
+                                                                              fill={
+                                                                                {
+                                                                                  "payload": 4290295992,
+                                                                                  "type": 0,
+                                                                                }
+                                                                              }
+                                                                              propList={
+                                                                                [
+                                                                                  "fill",
+                                                                                ]
+                                                                              }
+                                                                            />
+                                                                          </RNSVGGroup>
+                                                                        </RNSVGSvgView>
+                                                                      </View>
+                                                                    </View>
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "paddingLeft": 8,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    />
+                                                                  </View>
+                                                                  <View
+                                                                    style={
+                                                                      [
+                                                                        {
+                                                                          "flexDirection": "row",
+                                                                        },
+                                                                      ]
+                                                                    }
+                                                                  >
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "paddingLeft": 8,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    />
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "backgroundColor": "#FFFFFF",
+                                                                            "borderRadius": 8,
+                                                                            "elevation": 2,
+                                                                            "justifyContent": "space-between",
+                                                                            "marginVertical": 2,
+                                                                            "paddingHorizontal": 24,
+                                                                            "paddingVertical": 16,
+                                                                            "shadowColor": "#212121",
+                                                                            "shadowOffset": {
+                                                                              "height": 2,
+                                                                              "width": 0,
+                                                                            },
+                                                                            "shadowOpacity": 0.1,
+                                                                            "shadowRadius": 0,
+                                                                            "width": -48,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    >
+                                                                      <Text
+                                                                        ellipsizeMode="tail"
+                                                                        numberOfLines={3}
+                                                                        style={
+                                                                          [
+                                                                            {
+                                                                              "color": "#000000",
+                                                                              "fontSize": 22,
+                                                                              "fontWeight": "bold",
+                                                                              "letterSpacing": 0.18,
+                                                                              "lineHeight": 34,
+                                                                              "textDecorationLine": "underline",
+                                                                            },
+                                                                          ]
+                                                                        }
+                                                                      >
+                                                                        【勉強会】OIDC
+                                                                      </Text>
+                                                                      <View
+                                                                        style={
+                                                                          [
+                                                                            {
+                                                                              "alignItems": "center",
+                                                                              "flexDirection": "row",
+                                                                              "justifyContent": "space-between",
+                                                                              "marginTop": 16,
+                                                                            },
+                                                                          ]
+                                                                        }
+                                                                      >
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "alignItems": "center",
+                                                                                "flexDirection": "row",
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        >
+                                                                          <RNSVGSvgView
+                                                                            align="xMidYMid"
+                                                                            bbHeight="24"
+                                                                            bbWidth="24"
+                                                                            fill="none"
+                                                                            focusable={false}
+                                                                            meetOrSlice={0}
+                                                                            minX={0}
+                                                                            minY={0}
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "backgroundColor": "transparent",
+                                                                                  "borderWidth": 0,
+                                                                                },
+                                                                                [
+                                                                                  {
+                                                                                    "height": 24,
+                                                                                    "width": 24,
+                                                                                  },
+                                                                                ],
+                                                                                {
+                                                                                  "flex": 0,
+                                                                                  "height": 24,
+                                                                                  "width": 24,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                            vbHeight={48}
+                                                                            vbWidth={48}
+                                                                          >
+                                                                            <RNSVGGroup
+                                                                              fill={null}
+                                                                              propList={
+                                                                                [
+                                                                                  "fill",
+                                                                                ]
+                                                                              }
+                                                                            >
+                                                                              <RNSVGPath
+                                                                                d="M2 42H10V18H2V42ZM46 20C46 17.8 44.2 16 42 16H29.38L31.28 6.86L31.34 6.22C31.34 5.4 31 4.64 30.46 4.1L28.34 2L15.18 15.18C14.44 15.9 14 16.9 14 18V38C14 40.2 15.8 42 18 42H36C37.66 42 39.08 41 39.68 39.56L45.72 25.46C45.9 25 46 24.52 46 24V20Z"
+                                                                                fill={
+                                                                                  {
+                                                                                    "payload": 4288585374,
+                                                                                    "type": 0,
+                                                                                  }
+                                                                                }
+                                                                                propList={
+                                                                                  [
+                                                                                    "fill",
+                                                                                  ]
+                                                                                }
+                                                                              />
+                                                                            </RNSVGGroup>
+                                                                          </RNSVGSvgView>
+                                                                          <View
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "paddingHorizontal": 4,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          />
+                                                                          <Text
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "color": "#212121",
+                                                                                  "fontSize": 14,
+                                                                                  "letterSpacing": 0.25,
+                                                                                  "lineHeight": 20,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            5
+                                                                          </Text>
+                                                                        </View>
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "paddingLeft": 32,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "alignItems": "flex-end",
+                                                                                "flex": 1,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        >
+                                                                          <Text
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "color": "#000000",
+                                                                                  "fontSize": 18,
+                                                                                  "fontWeight": "600",
+                                                                                  "letterSpacing": 0.15,
+                                                                                  "lineHeight": 22,
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            santoku
+                                                                          </Text>
+                                                                          <View
+                                                                            style={
+                                                                              [
+                                                                                {
+                                                                                  "alignItems": "center",
+                                                                                  "flexDirection": "row",
+                                                                                  "justifyContent": "space-between",
+                                                                                },
+                                                                              ]
+                                                                            }
+                                                                          >
+                                                                            <Text
+                                                                              style={
+                                                                                [
+                                                                                  {
+                                                                                    "color": "#212121",
+                                                                                    "fontSize": 14,
+                                                                                    "letterSpacing": 0.25,
+                                                                                    "lineHeight": 20,
+                                                                                  },
+                                                                                ]
+                                                                              }
+                                                                            >
+                                                                              999+
+                                                                              /
+                                                                              999+
+                                                                            </Text>
+                                                                          </View>
+                                                                        </View>
+                                                                        <View
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "paddingLeft": 16,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                        <Image
+                                                                          source={
+                                                                            {
+                                                                              "uri": "undefinedsantoku-avatar.png",
+                                                                            }
+                                                                          }
+                                                                          style={
+                                                                            [
+                                                                              {
+                                                                                "borderRadius": 20,
+                                                                                "height": 40,
+                                                                                "width": 40,
+                                                                              },
+                                                                            ]
+                                                                          }
+                                                                        />
+                                                                      </View>
+                                                                    </View>
+                                                                    <View
+                                                                      style={
+                                                                        [
+                                                                          {
+                                                                            "paddingLeft": 8,
+                                                                          },
+                                                                        ]
+                                                                      }
+                                                                    />
+                                                                  </View>
                                                                   <View
                                                                     style={
                                                                       [

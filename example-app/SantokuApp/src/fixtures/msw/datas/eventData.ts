@@ -4,6 +4,11 @@ import {partnerAccount} from './accountMinData';
 import {db} from '../db';
 
 export const eventData = () => {
+  const date = new Date();
+  // 常に募集中のイベントを用意するため、日付を1年後に設定する
+  date.setFullYear(date.getFullYear() + 1);
+  const formattedDate = date.toISOString();
+
   db.event.create({
     eventId: '1',
     title: '【勉強会】今話題の技術を触ってみよう',
@@ -13,7 +18,7 @@ export const eventData = () => {
 ■参加資格
 制限なし
 `,
-    endDate: '2022-06-01T10:00:00Z',
+    endDate: formattedDate,
     likes: 1,
     ...santokuAccount,
   });
@@ -29,7 +34,7 @@ export const eventData = () => {
 ■概要
 マスタリングTCP/IP 入門を読みながら、不明点などを議論していくスタイルです。
 `,
-    endDate: '2022-06-03T10:00:00Z',
+    endDate: formattedDate,
     likes: 3,
     ...santokuAccount,
   });
@@ -46,7 +51,7 @@ export const eventData = () => {
 React NativeのNew Architectureは、さまざまな理由により導入に踏み切ってない方も多いかと思います。
 まだまだ少ない事例の中、実際にNew Architectureを導入した開発者に、導入して感じたことを話して頂きます。
 `,
-    endDate: '2022-06-10T10:00:00Z',
+    endDate: formattedDate,
     likes: 10,
     ...adminAccount,
   });
@@ -62,7 +67,7 @@ React NativeのNew Architectureは、さまざまな理由により導入に踏�
 ■概要
 Keycloakを使用しながら、実際にOpen ID Connectの各種フローを追っていきます。
 `,
-    endDate: '2023-01-18T10:00:00Z',
+    endDate: formattedDate,
     likes: 5,
     ...santokuAccount,
   });

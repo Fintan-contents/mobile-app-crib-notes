@@ -16,6 +16,12 @@ jest.mock('expo-dev-menu', () => {
 
 const server = setupServer(...handlers);
 beforeAll(async () => {
+  // 画面遷移時のアニメーションが、コンポーネントのアンマウント後にステートを更新してしまうようで、
+  // テストは成功するものの、エラーログが出力されてしまう。
+  // タイマーを使わないようにして、アニメーションを動かさないことで回避しているつもり。
+  jest.useFakeTimers();
+  // テスト時は2023/6/1(UTC)で日付を固定する。CIとlocalで差が出ないようにISO書式で指定する
+  jest.setSystemTime(new Date('2023-06-01T00:00:00+00:00'));
   initialDb();
   await initialData();
   server.listen();
@@ -23,15 +29,6 @@ beforeAll(async () => {
 afterAll(() => {
   server.close();
   cleanup();
-});
-
-beforeEach(() => {
-  // 画面遷移時のアニメーションが、コンポーネントのアンマウント後にステートを更新してしまうようで、
-  // テストは成功するものの、エラーログが出力されてしまう。
-  // タイマーを使わないようにして、アニメーションを動かさないことで回避しているつもり。
-  jest.useFakeTimers();
-  // テスト時は2023/6/1で日付を固定する
-  jest.setSystemTime(new Date(2023, 5, 1, 0, 0, 0, 0));
 });
 
 jest.mock('expo-application', () => {
