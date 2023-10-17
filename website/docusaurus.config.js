@@ -236,6 +236,10 @@ module.exports = {
             from: '/docs', // string | string[]
             to: '/reference', // string
           },
+          {
+            from: '/react-native/learn/advance/react-navigation-param', // string | string[]
+            to: '/react-native/learn/basic-concepts/react-navigation-basics/param', // string
+          },
         ],
       },
     ],

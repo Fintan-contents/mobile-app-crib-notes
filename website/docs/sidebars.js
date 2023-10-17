@@ -159,6 +159,7 @@ module.exports = {
             'react-native/learn/basic-concepts/react-navigation-basics/stack',
             'react-native/learn/basic-concepts/react-navigation-basics/modal',
             'react-native/learn/basic-concepts/react-navigation-basics/tab',
+            'react-native/learn/basic-concepts/react-navigation-basics/param',
           ],
         },
       ],
@@ -261,11 +262,6 @@ module.exports = {
         },
         'react-native/learn/qa-app/exercise-advanced',
       ],
-    },
-    {
-      type: 'category',
-      label: '応用編',
-      items: ['react-native/learn/advance/react-navigation-param'],
     },
   ],
   pitfalls: [
