@@ -1,8 +1,10 @@
 import {NavigationProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {DemoStackParamList} from 'apps/app/navigators/types';
+import {setStatusBarStyle} from 'expo-status-bar';
 import {DemoMenuPage} from 'features/demo-menu/pages/DemoMenuPage';
-import React, {useMemo} from 'react';
+import React, {useMemo, useEffect} from 'react';
+import {Platform} from 'react-native';
 
 type ScreenList = {
   title: string;
@@ -129,5 +131,12 @@ const addOnPressHandlerToItems = (navigation: NavigationProp<DemoStackParamList>
 
 export const DemoMenuScreen: React.FC<NativeStackScreenProps<DemoStackParamList, 'DemoMenu'>> = ({navigation}) => {
   const demoItems = useMemo(() => demoScreenList.map(addOnPressHandlerToItems(navigation)), [navigation]);
+  useEffect(() => {
+    return navigation.addListener('focus', () => {
+      if (Platform.OS === 'ios') {
+        setStatusBarStyle('dark');
+      }
+    });
+  }, [navigation]);
   return <DemoMenuPage items={demoItems} />;
 };

@@ -1,7 +1,8 @@
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackNavigationOptions, NativeStackScreenProps} from '@react-navigation/native-stack';
+import {setStatusBarStyle} from 'expo-status-bar';
 import {HomePage} from 'features/qa-home/pages/HomePage';
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 
 import {AuthenticatedStackParamList, HomeStackParamList} from '../../navigators/types';
 
@@ -25,6 +26,12 @@ export const HomeScreen: React.FC<
     (options: NativeStackNavigationOptions) => navigation.setOptions(options),
     [navigation],
   );
+
+  useEffect(() => {
+    return navigation.addListener('focus', () => {
+      setStatusBarStyle('light');
+    });
+  }, [navigation]);
 
   return (
     <HomePage

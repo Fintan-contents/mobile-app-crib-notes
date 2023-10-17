@@ -50,7 +50,6 @@ const nav = createNativeStackNavigator<DemoStackParamList>();
 
 export const DemoStackNav: React.FC = () => {
   const {CloseThisNavigatorButton} = useCloseThisNavigatorButton();
-
   return (
     <nav.Navigator
       initialRouteName="DemoMenu"
