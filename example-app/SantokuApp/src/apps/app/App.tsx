@@ -2,6 +2,7 @@ import {setHandleError} from 'bases/core/errors/handleError';
 import {setHandleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
 import {setHandleErrorWithSnackbar} from 'bases/core/errors/handleErrorWithSnackbar';
 import {firebaseConfig} from 'bases/firebase/FirebaseConfig';
+import {FirebaseCrashlyticsWorkaround} from 'bases/firebase/crashlytics/FirebaseCrashlyticsWorkaround';
 import {createLogger, setLogger} from 'bases/logging';
 import {FirebaseCrashlyticsTransport} from 'bases/logging/FirebaseCrashlyticsTransport';
 import {LoadingOverlay} from 'bases/ui/loading/LoadingOverlay';
@@ -93,14 +94,16 @@ export const App = ({isHeadless}: AppProperties) => {
   }
 
   return (
-    <GestureHandlerRootView style={StyleSheet.absoluteFill}>
-      <SafeAreaProvider>
-        <AppThemeProvider>
-          <AppWithInitialization />
-          <LoadingOverlay.Component />
-          <Snackbar.Component />
-        </AppThemeProvider>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+    <FirebaseCrashlyticsWorkaround>
+      <GestureHandlerRootView style={StyleSheet.absoluteFill}>
+        <SafeAreaProvider>
+          <AppThemeProvider>
+            <AppWithInitialization />
+            <LoadingOverlay.Component />
+            <Snackbar.Component />
+          </AppThemeProvider>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
+    </FirebaseCrashlyticsWorkaround>
   );
 };

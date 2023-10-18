@@ -19,6 +19,14 @@ title: エラーの発生箇所と処理方法
 
 ただし、Promiseで発生したエラーに関しては、Firebase Crashlytics SDKで捕捉できないため、必ず個別にエラー処理を実施してください。
 
+:::warning
+JavaScriptエンジンがHermesの場合、iOSではReactコンポーネントで発生したエラーがFirebase Crashlyticsに送信されない事象を確認しています。
+
+回避策として、React.Componentの[componentDidCatch](https://ja.react.dev/reference/react/Component#componentdidcatch)でエラーを再度throwすることで、Firebase Crashlyticsにクラッシュログが送信されます。
+
+詳細は、[FirebaseCrashlyticsWorkaround.tsx](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/bases/firebase/crashlytics/FirebaseCrashlyticsWorkaround.tsx)を参照してください。
+:::
+
 :::caution
 Firebase Crashlyticsにログを送信するタイミングは、アプリを再起動した時になります。即座にログが送信されないことに注意してください。
 :::
