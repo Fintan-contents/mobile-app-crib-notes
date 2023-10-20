@@ -95,7 +95,7 @@ module.exports = {
               to: 'react-native/santoku',
             },
             {
-              label: 'Pitfalls',
+              label: 'Trouble shooting',
               to: 'react-native/common-pitfalls',
             },
           ],
@@ -133,7 +133,7 @@ module.exports = {
               to: 'react-native/santoku',
             },
             {
-              label: 'Pitfalls',
+              label: 'Trouble shooting',
               to: 'react-native/common-pitfalls',
             },
           ],

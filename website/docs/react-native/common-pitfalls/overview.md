@@ -25,6 +25,10 @@ const overviews = [
   {
     title: 'Xcodeでビルドが失敗する',
     to: '/react-native/common-pitfalls/cant-build-in-xcode',
+  },
+  {
+    title: 'キャッシュが残ってファイルの更新ができない',
+    to: '/react-native/common-pitfalls/clear-cache',
   }
 ]
 

@@ -278,6 +278,7 @@ module.exports = {
         'react-native/common-pitfalls/debug-keystore-not-found',
         'react-native/common-pitfalls/react-native-cli-uninstall',
         'react-native/common-pitfalls/cant-build-in-xcode',
+        'react-native/common-pitfalls/clear-cache',
       ],
     },
   ],
