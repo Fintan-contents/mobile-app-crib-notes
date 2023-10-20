@@ -31,7 +31,7 @@ Reactを学ぶには[React公式サイト](https://ja.react.dev/)が一番お勧
 
 Reactを利用したことがない人は「クイックスタート」からはじめてください。「LEARN REACT」の内容まで理解できていれば、最低限のReactの知識が身に付いています。わからない箇所があれば学習してください。
 
-また、「APIリファレンス」もありますので適宜参照してください（`useCallback`や`useMemo`など使用頻度が高いものは、あらかじめ読んで理解しておくことをお勧めします）。
+また、「APIリファレンス」に書かれている下記のフックは使用頻度が高いので、あらかじめ読んで理解しておくことをお勧めします。
 
 - [クイックスタート](https://ja.react.dev/learn)
 - [インストール](https://ja.react.dev/learn/installation)
@@ -39,3 +39,7 @@ Reactを利用したことがない人は「クイックスタート」からは
 - [APIリファレンス](https://ja.react.dev/reference)
   - [useCallback](https://ja.react.dev/reference/react/useCallback)
   - [useMemo](https://ja.react.dev/reference/react/useMemo)
+  - [useEffect](https://ja.react.dev/reference/react/useEffect)
+  - [useState](https://ja.react.dev/reference/react/useState)
+  - [useRef](https://ja.react.dev/reference/react/useRef)
+  - [useContext](https://ja.react.dev/reference/react/useContext)
