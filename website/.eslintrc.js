@@ -1,6 +1,6 @@
 module.exports = {
   // universe/native: https://github.com/expo/expo/tree/master/packages/eslint-config-universe
-  // react-hooks: https://ja.reactjs.org/docs/hooks-rules.html
+  // react-hooks: https://ja.react.dev/learn/editor-setup#linting
   extends: ['universe/web', 'plugin:react-hooks/recommended'],
   overrides: [
     {

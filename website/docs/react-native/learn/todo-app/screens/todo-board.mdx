@@ -378,12 +378,12 @@ Reactのよくある問題として、画面が破棄（アンマウント）さ
 上記コードでは、`isActive`フラグでその問題に対処しています。
 `useEffect`に指定した関数の戻り値で関数を返すと、その関数が画面の破棄（アンマウント）時に実行されます。
 そのなかで`isActive`フラグを`false`に設定しているため、画面が破棄された後に`TodoService.getTodos`メソッドの非同期応答が動作しても、ステートは更新されません。
-詳細は、React公式ドキュメントの[フックでデータの取得をどのように行うのですか？](https://ja.reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks)を参照してください。
+詳細は、React公式ドキュメントの[エフェクトを使ったデータフェッチ](https://ja.react.dev/reference/react/useEffect#fetching-data-with-effects)を参照してください。
 :::
 
 :::info
-`toggleTodoCompletion`では**[関数型の更新](https://ja.reactjs.org/docs/hooks-reference.html#functional-updates)**を利用しています。
-[React公式ドキュメント](https://ja.reactjs.org/docs/faq-state.html#what-is-the-difference-between-passing-an-object-or-a-function-in-setstate)も参照してみてください。
+`toggleTodoCompletion`では**[関数型の更新](https://ja.react.dev/reference/react/useState#updating-state-based-on-the-previous-state)**を利用しています。
+[React公式ドキュメント](https://ja.react.dev/reference/react/useState#examples-updater)も参照してみてください。
 :::
 
 修正できたら実行してください。

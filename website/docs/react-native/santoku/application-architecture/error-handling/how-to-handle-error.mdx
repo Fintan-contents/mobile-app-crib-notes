@@ -55,7 +55,7 @@ Firebase Crashlyticsの動作設定は、設定ファイルのFirebase.jsonで�
 
 Reactコンポーネントでは、JSXやコンポーネントのライフサイクルに応じた処理（`componentDidMount`や`useEffect`など）でエラーが発生します。
 
-JSXでエラーが発生した場合は、[Error Boundary](https://ja.reactjs.org/docs/error-boundaries.html)でエラーを捕捉します。該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
+JSXでエラーが発生した場合は、[Error Boundary](https://ja.react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary)でエラーを捕捉します。該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
 
 ```typescript jsx title='Error Boundaryの例'
 const Avator = () => {
