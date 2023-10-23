@@ -39,7 +39,7 @@ export const AppWithInitialization: React.FC = () => {
     return null;
   } else {
     /*
-      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires --
       RootStackNavをimportしてしまうと、アプリの初期化処理が完了する前に各画面でimportしているモジュールも読み込まれてしまうため、
       アプリの初期化処理が完了した時点でrequireする。
       requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
@@ -48,7 +48,7 @@ export const AppWithInitialization: React.FC = () => {
       React.PropsWithChildren<{initialData: AppInitialData}>
     >;
     /*
-      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires --
       WithFirebaseMessagingHandlersをimportしてしまうと、アプリの初期化処理が完了する前に各画面でimportしているモジュールも読み込まれてしまうため、
       アプリの初期化処理が完了した時点でrequireする。
       requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。

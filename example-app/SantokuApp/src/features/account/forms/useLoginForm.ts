@@ -19,7 +19,7 @@ const loginFormValidationSchema = yup.object().shape({
 });
 
 type LoginFormParams = {
-  onSubmit: (values: LoginFormValues, formikHelpers: FormikHelpers<LoginFormValues>) => void | Promise<any>;
+  onSubmit: (values: LoginFormValues, formikHelpers: FormikHelpers<LoginFormValues>) => void | Promise<unknown>;
 };
 export const useLoginForm = (params: LoginFormParams = {onSubmit: () => {}}) => {
   const form = useFormik({

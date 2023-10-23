@@ -53,7 +53,7 @@ export type SelectPickerItemsProps<ItemT> = Omit<
   itemTextTestIDPrefix?: string;
 };
 
-export const SelectPickerItems = <ItemT extends unknown>(props: SelectPickerItemsProps<ItemT>) => {
+export const SelectPickerItems = <ItemT,>(props: SelectPickerItemsProps<ItemT>) => {
   React.useEffect(() => {
     log.warn(`SelectPickerItems is not supported on: ${Platform.OS}`);
   }, []);

@@ -93,11 +93,8 @@ const setCsrfTokenHeader = (csrfTokenHeaderName: string, csrfTokenValue: string)
   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
 };
 
-const setAxiosResponseInterceptor = (
-  onFulfilled?: (value: AxiosResponse<any, any>) => AxiosResponse<any, any> | Promise<AxiosResponse<any, any>>,
-  onRejected?: (error: any) => any,
-) => {
-  BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
+const setAxiosResponseInterceptor: typeof Axios.interceptors.response.use = (onFulfilled, onRejected) => {
+  return BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
 };
 
 export {

@@ -3,7 +3,7 @@ import {Pressable, PressableProps, StyleSheet, Text, TextProps} from 'react-nati
 
 import {Item} from './SelectPicker';
 
-export type SelectPickerItemType<ItemT extends unknown> = {
+export type SelectPickerItemType<ItemT> = {
   item: Item<ItemT>;
   index: number;
   offset: number;
@@ -14,7 +14,7 @@ export type SelectPickerItemType<ItemT extends unknown> = {
   textProps?: TextProps;
 };
 
-const Component = <ItemT extends unknown>({
+const Component = <ItemT,>({
   item: {label, inputLabel, key, value, ...itemPropsStyle},
   itemHeight,
   pressableProps,

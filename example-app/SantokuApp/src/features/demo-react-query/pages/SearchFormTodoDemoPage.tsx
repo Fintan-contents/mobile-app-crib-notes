@@ -36,8 +36,7 @@ export const SearchFormTodoDemoPage: React.FC = () => {
         {isError && <Text>TODO一覧の取得に失敗しました。</Text>}
         {!isFetching && todos && todos.length === 0 && <Text>TODO一覧の検索結果が0件です。</Text>}
         {!isFetching &&
-          todos &&
-          todos.map(todo => {
+          todos?.map(todo => {
             return <Text key={todo.id}>{todo.title}</Text>;
           })}
       </View>

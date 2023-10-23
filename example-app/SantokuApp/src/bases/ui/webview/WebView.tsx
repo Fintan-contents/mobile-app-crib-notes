@@ -93,7 +93,7 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
       if (isUriChanged && event.nativeEvent.contentOffset.y > 0) {
         // URLが変わった直後の、オフセットが0ではないスクロールイベントでは、onScrollEndは発生させない。
         setIsUriChanged(false);
-      } else if ((onScrollEnd || onScrollEndOnce) && loadEnd) {
+      } else if ((onScrollEnd ?? onScrollEndOnce) && loadEnd) {
         // 小数点の誤差があるため、1px分は丸め誤差として扱う
         const scrollY = event.nativeEvent.contentOffset.y + event.nativeEvent.layoutMeasurement.height + 1;
         if (event.nativeEvent.contentSize.height <= scrollY) {

@@ -25,8 +25,7 @@ export const DisabledQueryDemoPage: React.FC = () => {
           {isIdle && <Text>データ読み込み停止中</Text>}
           {isLoading && <ActivityIndicator size="large" />}
           {isSuccess &&
-            todos &&
-            todos.map((todo, index) => {
+            todos?.map((todo, index) => {
               return <Text key={index}>{todo.title}</Text>;
             })}
           {isError && <Text>Todo一覧の取得に失敗しました</Text>}

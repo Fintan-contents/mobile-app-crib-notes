@@ -5,7 +5,7 @@ import {Platform} from 'react-native';
 import {App} from './App';
 
 type AppProperties = {
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export const AppWithMsw = ({isHeadless}: AppProperties) => {

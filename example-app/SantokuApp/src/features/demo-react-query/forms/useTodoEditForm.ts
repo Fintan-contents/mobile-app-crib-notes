@@ -9,7 +9,7 @@ export type TodoEditFormValues = {
 };
 
 type TodoEditFormParams = {
-  onSubmit: (values: TodoEditFormValues, formikHelpers: FormikHelpers<TodoEditFormValues>) => void | Promise<any>;
+  onSubmit: (values: TodoEditFormValues, formikHelpers: FormikHelpers<TodoEditFormValues>) => void | Promise<unknown>;
 };
 
 export const useTodoEditForm = (params: TodoEditFormParams = {onSubmit: () => {}}) => {

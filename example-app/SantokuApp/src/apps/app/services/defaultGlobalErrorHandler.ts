@@ -33,9 +33,13 @@ res.body=[${JSON.stringify(error.response?.data, null, 2)}]
 };
 
 const showRequireLoginDialog = (queryClient: QueryClient) => {
-  clientLogout(queryClient).finally(() => {
-    Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
-  });
+  clientLogout(queryClient)
+    .catch(() => {
+      // clientLogoutの中で必要に応じてログ出力しているので、ここでは何もしない
+    })
+    .finally(() => {
+      Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
+    });
 };
 
 export const defaultGlobalErrorHandler = (queryClient: QueryClient) => {

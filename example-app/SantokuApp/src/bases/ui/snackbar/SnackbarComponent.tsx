@@ -184,7 +184,7 @@ export const SnackbarComponent: React.FC<SnackbarProps> = props => {
       forceFadeout(props.forceFadeOutDuration, show);
       return;
     }
-    if (fadeInAnimationRef.current || fadeOutAnimationRef.current) {
+    if (fadeInAnimationRef.current ?? fadeOutAnimationRef.current) {
       forceFadeout(props.forceFadeOutDuration, show);
       return;
     }

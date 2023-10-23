@@ -57,7 +57,7 @@ function useSetClientStateFunction<S>(queryKey: QueryKey): SetClientState<S> {
   return useCallback(
     (value: S | SetClientStateFunction<S>) => {
       const newValue = isSetClientStateFunction(value) ? value(queryClient.getQueryData(queryKey)) : value;
-      queryClient.setQueryData<S | null>(queryKey, newValue === undefined ? null : newValue);
+      queryClient.setQueryData<S | null>(queryKey, newValue ?? null);
     },
     [queryClient, queryKey],
   );

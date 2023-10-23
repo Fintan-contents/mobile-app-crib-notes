@@ -22,7 +22,7 @@ import {addDeepLinkListener} from './services/deep-link/addDeepLinkListener';
 import {setWarmStartDeepLink} from './services/deep-link/warmStartDeepLink';
 
 type AppProperties = {
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 setLogger(

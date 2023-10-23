@@ -16,7 +16,7 @@ const profileFormValidationSchema = yup.object().shape({
 });
 
 type ProfileFormParams = {
-  onSubmit: (values: ProfileFormValues, formikHelpers: FormikHelpers<ProfileFormValues>) => void | Promise<any>;
+  onSubmit: (values: ProfileFormValues, formikHelpers: FormikHelpers<ProfileFormValues>) => void | Promise<unknown>;
 };
 export const useProfileRegistrationForm = (params: ProfileFormParams = {onSubmit: () => {}}) => {
   const form = useFormik({

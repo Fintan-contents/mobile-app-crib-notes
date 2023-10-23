@@ -31,6 +31,6 @@ export class RuntimeError extends ErrorWrapper {
   }
 }
 
-export function isRuntimeError(error?: any): error is RuntimeError {
+export function isRuntimeError(error?: unknown): error is RuntimeError {
   return error != null && typeof error === 'object' && error instanceof RuntimeError;
 }

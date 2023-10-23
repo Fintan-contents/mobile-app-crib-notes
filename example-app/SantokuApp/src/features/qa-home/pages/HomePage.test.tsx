@@ -53,7 +53,7 @@ const Wrapper: React.FC<React.PropsWithChildren> = ({children}) => {
 describe('Home', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
     /*
-      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires --
       メッセージのロード前にHomePageをimportしてしまうとエラーになるため、メッセージのロード後にrequireします
      */
     const HomePage = require('./HomePage').HomePage as React.FC<React.PropsWithChildren<HomePageProps>>;

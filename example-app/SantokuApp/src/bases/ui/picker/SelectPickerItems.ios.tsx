@@ -14,7 +14,7 @@ type SelectPickerItemsIOS<ItemT> = Omit<
   | 'itemTextTestIDPrefix'
 >;
 
-export const SelectPickerItems = <ItemT extends unknown>({
+export const SelectPickerItems = <ItemT,>({
   selectedValue,
   onValueChange,
   items,

@@ -105,7 +105,7 @@ export type SelectPickerProps<ItemT> = {
 
 const DEFAULT_DURATION = 300;
 
-export const SelectPicker = <ItemT extends unknown>(props: SelectPickerProps<ItemT>) => {
+export const SelectPicker = <ItemT,>(props: SelectPickerProps<ItemT>) => {
   const {isVisible, inputValue, handleBackdropPress, onValueChange, open, handleDelete, handleCancel, handleDone} =
     useSelectPicker<ItemT>(props);
   const {

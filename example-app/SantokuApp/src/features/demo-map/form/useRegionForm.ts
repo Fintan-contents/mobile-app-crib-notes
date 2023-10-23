@@ -12,7 +12,7 @@ export type RegionFormKeys = keyof RegionFormValues;
 
 type RegionFormParams = {
   initialValues: RegionFormValues;
-  onSubmit: (values: RegionFormValues, formikHelpers: FormikHelpers<RegionFormValues>) => void | Promise<any>;
+  onSubmit: (values: RegionFormValues, formikHelpers: FormikHelpers<RegionFormValues>) => void | Promise<unknown>;
 };
 
 const defaultRegion = {

@@ -6,7 +6,7 @@ import {firebaseConfig} from 'bases/firebase/FirebaseConfig';
 export const initializeFirebaseCrashlyticsAsync = async () => {
   if (!firebaseConfig.isDummy) {
     /*
-      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires --
       requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
       型は、typeofで明示するようにします。
      */

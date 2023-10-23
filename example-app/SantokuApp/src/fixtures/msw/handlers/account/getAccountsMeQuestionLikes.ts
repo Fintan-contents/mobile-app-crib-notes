@@ -32,42 +32,48 @@ export const getAccountsMeQuestionLikes = rest.get(
       const al = answerLike.map(al => ({answerId: al.answerId, liked: true, commentId: []}));
 
       // answerCommentLikesを{questionId: string; answerId: string; liked: boolean; commentId: string[]}形式に変更
-      const answerComment = answerCommentLike.reduce((acc, curr) => {
-        if (curr.questionId in acc) {
-          acc[curr.answerId] = {
-            answerId: curr.answerId,
-            liked: false,
-            commentId: [...acc[curr.questionId].commentId, curr.commentId],
-          };
-          return acc;
-        }
-        acc[curr.answerId] = {
-          answerId: curr.answerId,
-          liked: false,
-          commentId: [curr.commentId],
-        };
-        return acc;
-      }, {} as {[key: string]: {answerId: string; liked: boolean; commentId: string[]}});
-      const acl = Object.values(answerComment);
-
-      // alとaclをマージ
-      const answer = Object.values(
-        [...al, ...acl].reduce((acc, curr) => {
-          if (curr.answerId in acc) {
+      const answerComment = answerCommentLike.reduce(
+        (acc, curr) => {
+          if (curr.questionId in acc) {
             acc[curr.answerId] = {
               answerId: curr.answerId,
-              liked: acc[curr.answerId].liked || curr.liked,
-              commentId: [...acc[curr.answerId].commentId, ...curr.commentId],
+              liked: false,
+              commentId: [...acc[curr.questionId].commentId, curr.commentId],
             };
             return acc;
           }
           acc[curr.answerId] = {
             answerId: curr.answerId,
-            liked: curr.liked,
-            commentId: [...curr.commentId],
+            liked: false,
+            commentId: [curr.commentId],
           };
           return acc;
-        }, {} as {[key: string]: {answerId: string; liked: boolean; commentId: string[]}}),
+        },
+        {} as {[key: string]: {answerId: string; liked: boolean; commentId: string[]}},
+      );
+      const acl = Object.values(answerComment);
+
+      // alとaclをマージ
+      const answer = Object.values(
+        [...al, ...acl].reduce(
+          (acc, curr) => {
+            if (curr.answerId in acc) {
+              acc[curr.answerId] = {
+                answerId: curr.answerId,
+                liked: acc[curr.answerId].liked || curr.liked,
+                commentId: [...acc[curr.answerId].commentId, ...curr.commentId],
+              };
+              return acc;
+            }
+            acc[curr.answerId] = {
+              answerId: curr.answerId,
+              liked: curr.liked,
+              commentId: [...curr.commentId],
+            };
+            return acc;
+          },
+          {} as {[key: string]: {answerId: string; liked: boolean; commentId: string[]}},
+        ),
       );
 
       return delayedResponse(

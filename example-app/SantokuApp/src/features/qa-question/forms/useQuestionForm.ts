@@ -23,7 +23,7 @@ const questionFormValidationSchema = yup.object().shape({
 });
 
 type QuestionFormParams = {
-  onSubmit: (values: QuestionFormValues, formikHelpers: FormikHelpers<QuestionFormValues>) => void | Promise<any>;
+  onSubmit: (values: QuestionFormValues, formikHelpers: FormikHelpers<QuestionFormValues>) => void | Promise<unknown>;
 };
 export const useQuestionForm = (params: QuestionFormParams = {onSubmit: () => {}}) => {
   const form = useFormik({

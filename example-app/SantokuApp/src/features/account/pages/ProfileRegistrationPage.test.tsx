@@ -36,7 +36,7 @@ describe('ProfileRegistrationScreen', () => {
   it('マウントされたときに正常にレンダリングされること', () => {
     (useGetTerms as jest.Mock).mockReturnValue({refetch: () => {}});
     /*
-      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires --
       importでLoginScreenを読み込むと、メッセージのロードが完了する前にメッセージを読み込んでしまうため、requireで取得する
       requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
      */

@@ -4,7 +4,7 @@ import {ListTodoByCursorParams, ListTodoInfiniteResponse} from 'features/sandbox
 import {useCallback, useState} from 'react';
 import {InfiniteData, useQueryClient} from 'react-query';
 
-const translateTodos = (data?: InfiniteData<AxiosResponse<ListTodoInfiniteResponse, any>>) => {
+const translateTodos = (data?: InfiniteData<AxiosResponse<ListTodoInfiniteResponse>>) => {
   if (data) {
     const pages = data.pages;
     return pages.map(page => page.data.content).flat();

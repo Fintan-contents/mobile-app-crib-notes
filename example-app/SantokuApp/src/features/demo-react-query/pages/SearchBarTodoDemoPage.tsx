@@ -2,12 +2,13 @@ import {useDebounceState} from 'bases/core/utils/useDebounceState';
 import React, {useEffect} from 'react';
 import {ActivityIndicator, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {SearchBar as DefaultSearchBar} from 'react-native-elements';
+import {SearchBarBaseProps} from 'react-native-elements/dist/searchbar/SearchBar';
 
 import {useTodosPage} from '../services/todo/useTodosPage';
 
 // 次の不具合で型エラーがでるため暫定対処
 // https://stackoverflow.com/questions/68401996/typescript-error-when-using-searchbar-from-react-native-elements
-const SearchBar = DefaultSearchBar as unknown as React.FC<any>;
+const SearchBar = DefaultSearchBar as unknown as React.FC<SearchBarBaseProps>;
 
 export const SearchBarTodoDemoPage: React.FC = () => {
   const {isFetching, isError, todos, setPageParams} = useTodosPage();
@@ -20,7 +21,7 @@ export const SearchBarTodoDemoPage: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <SearchBar placeholder="ページ番号" value={inputPage} onChangeText={setInputPage} />
+        <SearchBar placeholder="ページ番号" value={inputPage} onChangeText={setInputPage} platform="default" />
         {isFetching && <ActivityIndicator color="#0000ff" />}
         {isError && <Text>TODO一覧の取得に失敗しました。</Text>}
         {todos && todos.length === 0 && <Text>TODO一覧の検索結果が0件です。</Text>}

@@ -6,7 +6,7 @@ import {ReactTestInstance} from 'react-test-renderer';
 
 import {Barcode, CODE_SET_CHARACTERS, START_CHARACTERS} from './Barcode';
 
-const getSvgProps = (view: ReactTestInstance): SVGProps<any> => {
+const getSvgProps = (view: ReactTestInstance): SVGProps<unknown> => {
   const svgView = view.children[0] as ReactTestInstance;
   return svgView.props;
 };

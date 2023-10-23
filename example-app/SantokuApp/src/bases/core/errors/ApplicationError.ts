@@ -31,6 +31,6 @@ export class ApplicationError extends ErrorWrapper {
   }
 }
 
-export function isApplicationError(error?: any): error is ApplicationError {
+export function isApplicationError(error?: unknown): error is ApplicationError {
   return error != null && typeof error === 'object' && error instanceof ApplicationError;
 }

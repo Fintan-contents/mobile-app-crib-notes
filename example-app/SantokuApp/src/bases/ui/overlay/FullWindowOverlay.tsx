@@ -10,7 +10,7 @@ import {Platform, View} from 'react-native';
 export const FullWindowOverlay = (props: {children: React.ReactNode}) => {
   if (Platform.OS === 'ios') {
     /*
-      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access --
+      eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires --
       iOS以外の場合にreact-native-screensのFullWindowOverlayを使用すると警告が出るので、iOSの場合のみ使用します。
       requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
      */

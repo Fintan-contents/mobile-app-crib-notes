@@ -14,7 +14,7 @@ type SelectPickerItemsTypes<ItemT> = {
   onValueChange?: (itemValue: ItemT, itemIndex: number) => void;
 };
 
-export const useSelectPickerItems = <ItemT extends unknown>({
+export const useSelectPickerItems = <ItemT>({
   selectedValue,
   items,
   itemHeight,
@@ -110,7 +110,7 @@ export const useSelectPickerItems = <ItemT extends unknown>({
   const height = useMemo(() => itemHeight * numberOfLines, [itemHeight, numberOfLines]);
 
   const getItemLayout = useCallback(
-    (_data: any, index: number) => {
+    (_data: unknown, index: number) => {
       return {length: itemHeight, offset: itemHeight * index, index};
     },
     [itemHeight],

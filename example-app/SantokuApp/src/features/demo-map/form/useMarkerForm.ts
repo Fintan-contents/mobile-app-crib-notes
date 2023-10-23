@@ -21,7 +21,7 @@ const markerFormInitialValues = {
 };
 
 type MarkerFormParams = {
-  onSubmit: (values: MarkerFormValues, formikHelpers: FormikHelpers<MarkerFormValues>) => void | Promise<any>;
+  onSubmit: (values: MarkerFormValues, formikHelpers: FormikHelpers<MarkerFormValues>) => void | Promise<unknown>;
 };
 
 const markerFormValidationSchema = yup.object().shape({

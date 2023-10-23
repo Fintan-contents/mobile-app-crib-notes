@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 
 import {Box} from './index';
 import {StyledSpacingKeys} from './types';
@@ -7,7 +7,7 @@ export const getSpacedChildren = (
   children: React.ReactNode[] | React.ReactNode,
   space: StyledSpacingKeys,
   direction: 'row' | 'column',
-): any => {
+): ReactNode => {
   const childrenArray = React.Children.toArray(children);
 
   const spacingProp: object = direction === 'row' ? {pl: space} : {pt: space};

@@ -8,7 +8,10 @@ export type TodoSearchFormValues = {
 };
 
 type TodoSearchFormParams = {
-  onSubmit: (values: TodoSearchFormValues, formikHelpers: FormikHelpers<TodoSearchFormValues>) => void | Promise<any>;
+  onSubmit: (
+    values: TodoSearchFormValues,
+    formikHelpers: FormikHelpers<TodoSearchFormValues>,
+  ) => void | Promise<unknown>;
 };
 
 export const useTodoSearchForm = (params: TodoSearchFormParams = {onSubmit: () => {}}) => {
