@@ -53,22 +53,6 @@ exports[`App マウントされたときに正常にレンダリングされる�
         swipeDirection="horizontal"
       >
         <View
-          backButtonInCustomView={false}
-          backTitleVisible={true}
-          backgroundColor="#fafafa"
-          color="rgb(0, 122, 255)"
-          direction="ltr"
-          disableBackButtonMenu={false}
-          hidden={true}
-          hideBackButton={false}
-          largeTitleHideShadow={false}
-          title="AuthenticatedStackNav"
-          titleColor="#000000"
-          titleFontSize={17}
-          topInsetEnabled={false}
-          translucent={false}
-        />
-        <View
           accessibilityElementsHidden={false}
           importantForAccessibility="auto"
           style={
@@ -79,6 +63,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
           }
         >
           <View
+            collapsable={false}
             style={
               [
                 {
@@ -134,21 +119,6 @@ exports[`App マウントされたときに正常にレンダリングされる�
                   swipeDirection="horizontal"
                 >
                   <View
-                    backButtonInCustomView={false}
-                    backTitleVisible={true}
-                    backgroundColor="rgb(255, 255, 255)"
-                    color="rgb(0, 122, 255)"
-                    direction="ltr"
-                    disableBackButtonMenu={false}
-                    hidden={true}
-                    hideBackButton={false}
-                    largeTitleHideShadow={false}
-                    title="MainTabNav"
-                    titleColor="rgb(28, 28, 30)"
-                    topInsetEnabled={false}
-                    translucent={false}
-                  />
-                  <View
                     accessibilityElementsHidden={false}
                     importantForAccessibility="auto"
                     style={
@@ -159,6 +129,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                     }
                   >
                     <View
+                      collapsable={false}
                       style={
                         [
                           {
@@ -9611,11 +9582,42 @@ React Native 0.66
                       </View>
                     </View>
                   </View>
+                  <View
+                    backButtonInCustomView={false}
+                    backTitleVisible={true}
+                    backgroundColor="rgb(255, 255, 255)"
+                    color="rgb(0, 122, 255)"
+                    direction="ltr"
+                    disableBackButtonMenu={false}
+                    hidden={true}
+                    hideBackButton={false}
+                    largeTitleHideShadow={false}
+                    title="MainTabNav"
+                    titleColor="rgb(28, 28, 30)"
+                    topInsetEnabled={false}
+                    translucent={false}
+                  />
                 </View>
               </View>
             </View>
           </View>
         </View>
+        <View
+          backButtonInCustomView={false}
+          backTitleVisible={true}
+          backgroundColor="#fafafa"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={true}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="AuthenticatedStackNav"
+          titleColor="#000000"
+          titleFontSize={17}
+          topInsetEnabled={false}
+          translucent={false}
+        />
       </View>
     </View>
   </View>
