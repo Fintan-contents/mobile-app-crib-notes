@@ -9,7 +9,6 @@ module.exports = {
     '<rootDir>/jest/setup/react-native-gesture-handler.js',
     '<rootDir>/jest/setup/react-native-reanimated.js',
     '<rootDir>/jest/setup/react-native-safe-area-context.js',
-    '<rootDir>/jest/setup/react-query.js',
     '<rootDir>/jest/setup/useFocusEffect.js',
   ],
   // https://jestjs.io/ja/docs/configuration#clearmocks-boolean

@@ -5,14 +5,34 @@ import {Button, Text} from 'react-native-elements';
 import {useItemInfo} from '../services/item/useItemInfo';
 
 export const DependentQueryDemo2Page: React.FC = () => {
-  const {data: itemInfo, isIdle, isLoading, isRefetching, isSuccess, isError, refetch, reload} = useItemInfo(1);
+  const {
+    data: itemInfo,
+    isLoading,
+    isSuccess,
+    isError,
+    isIdle,
+    isPaused,
+    isFetching,
+    isRefetching,
+    isInitialLoading,
+    refetch,
+    reload,
+  } = useItemInfo(1);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}>
         <View>
           <Text h4>Query Status</Text>
-          <Text>{`isIdle: ${isIdle.toString()}, isLoading: ${isLoading.toString()}, isFetching: ${isRefetching.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>
+          <Text>{`isLoading: ${isLoading.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>
+        </View>
+        <View>
+          <Text h4>Fetch Status</Text>
+          <Text>{`isIdle: ${isIdle.toString()}, isFetching: ${isFetching.toString()}, isPaused: ${isPaused.toString()}`}</Text>
+        </View>
+        <View>
+          <Text h4>Other Status</Text>
+          <Text>{`isRefetching: ${isRefetching.toString()}, isInitialLoading: ${isInitialLoading.toString()}`}</Text>
         </View>
         <View>
           <Text h4>Query Data</Text>

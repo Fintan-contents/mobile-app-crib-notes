@@ -21,6 +21,7 @@ export const ListTodoDemoPage: React.FC<Props> = ({navigateToCreateTodoDemo, nav
   const {
     todos,
     status,
+    fetchStatus,
     isSuccess,
     isError,
     isLoading,
@@ -63,6 +64,7 @@ export const ListTodoDemoPage: React.FC<Props> = ({navigateToCreateTodoDemo, nav
       <View style={styles.header}>
         <Text h4>Todo List (InfiniteQuery)</Text>
         <Text>Query Status: {status}</Text>
+        <Text>Fetch Status: {fetchStatus}</Text>
         <Text>isRefetching: {isRefetching.toString()}</Text>
         <Text>isFetchingNextPage: {isFetchingNextPage.toString()}</Text>
       </View>

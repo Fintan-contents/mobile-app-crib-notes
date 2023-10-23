@@ -1,3 +1,4 @@
+import {useQueryClient} from '@tanstack/react-query';
 import {AxiosResponse} from 'axios';
 import {QuestionAndAnswer} from 'features/backend/apis/model';
 import {
@@ -5,7 +6,6 @@ import {
   getGetListQuestionsQueryKey,
   usePostQuestions,
 } from 'features/backend/apis/question/question';
-import {useQueryClient} from 'react-query';
 
 export const useQuestionCommands = () => {
   const queryClient = useQueryClient();

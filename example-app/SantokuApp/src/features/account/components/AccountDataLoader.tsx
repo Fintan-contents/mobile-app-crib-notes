@@ -8,7 +8,7 @@ import {useAccountData} from '../services/account/useAccountData';
 export const AccountDataLoader: React.FC<React.PropsWithChildren> = ({children}) => {
   const [isLoggedIn] = useIsLoggedIn();
   const isAutoLoggedIn = useRef(isLoggedIn).current;
-  const {isLoading, isLoadingError, errorUpdateCount, error} = useAccountData({
+  const {isInitialLoading, isLoadingError, errorUpdateCount, error} = useAccountData({
     enabled: isLoggedIn,
     meta: {disableGlobalErrorHandler: true},
   });
@@ -23,7 +23,12 @@ export const AccountDataLoader: React.FC<React.PropsWithChildren> = ({children})
     }
   }, [error, errorUpdateCount, isAutoLoggedIn, isLoadingError]);
 
-  if (isAutoLoggedIn && (isLoading || isLoadingError)) {
+  /**
+   * 未ログインの場合はアカウント情報を取得ないので、isLoadingが常にtrueになってしまう。
+   * そのため、isInitialLoading(isFetching && isLoading)で判定する。
+   * @see https://tanstack.com/query/v4/docs/react/reference/useQuery
+   */
+  if (isAutoLoggedIn && (isInitialLoading || isLoadingError)) {
     return null;
   }
   return <>{children}</>;

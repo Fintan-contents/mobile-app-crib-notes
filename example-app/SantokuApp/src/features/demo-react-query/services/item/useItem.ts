@@ -1,5 +1,5 @@
+import {useQuery} from '@tanstack/react-query';
 import {useCallback} from 'react';
-import {useQuery} from 'react-query';
 
 // 商品
 type Item = {
@@ -74,9 +74,12 @@ export const useItem = (id: number) => {
   const amount = amountQuery.data;
 
   const queries = [itemQuery, itemType0Query, itemType1Query, amountQuery];
-  const isIdle = queries.every(query => query.isIdle);
+  const isIdle = queries.every(query => query.fetchStatus === 'idle');
+  const isPaused = queries.every(query => query.isPaused);
+  const isFetching = queries.some(query => query.isFetching);
   const isLoading = queries.some(query => query.isLoading);
   const isRefetching = queries.some(query => query.isRefetching);
+  const isInitialLoading = queries.some(query => query.isInitialLoading);
   const isSuccess = queries.every(query => query.isSuccess);
   const isError = queries.some(query => query.isError);
   const reload = useCallback(() => {
@@ -87,8 +90,11 @@ export const useItem = (id: number) => {
   return {
     item: {...item, rate, amount},
     isIdle,
+    isPaused,
+    isFetching,
     isLoading,
     isRefetching,
+    isInitialLoading,
     isSuccess,
     isError,
     refetch: itemQuery.refetch,

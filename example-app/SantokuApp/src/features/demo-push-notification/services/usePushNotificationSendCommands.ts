@@ -1,6 +1,6 @@
+import {useMutation} from '@tanstack/react-query';
 import axios from 'axios';
 import {AppConfig} from 'bases/core/configs/AppConfig';
-import {useMutation} from 'react-query';
 
 import {Data} from '../types/Data';
 

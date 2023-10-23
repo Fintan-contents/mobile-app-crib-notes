@@ -1,3 +1,4 @@
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {render, screen, waitFor} from '@testing-library/react-native';
 import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
 import {loadMessages} from 'bases/message/Message';
@@ -9,7 +10,6 @@ import {useGetTerms} from 'features/backend/apis/terms/terms';
 import {TermsAgreementOverlay} from 'features/terms/components/TermsAgreementOverlay';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {LoginPageProps} from './LoginPage';
 

@@ -1,7 +1,7 @@
+import {Mutation, QueryClient} from '@tanstack/react-query';
 import {AxiosError, AxiosHeaders} from 'axios';
 import {setHandleError} from 'bases/core/errors/handleError';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
-import {Mutation, QueryClient} from 'react-query';
 
 import {defaultGlobalMutationErrorHandler} from './defaultGlobalMutationErrorHandler';
 import {loadBundledMessagesAsync} from './loadBundledMessagesAsync';

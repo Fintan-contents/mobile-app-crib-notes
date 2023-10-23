@@ -6,6 +6,7 @@ import {Platform} from 'react-native';
 export const requestAppUpdates = async (
   type: typeof Platform.OS,
   version: typeof Application.nativeApplicationVersion,
+  signal?: AbortSignal,
 ) => {
   if (type !== 'ios' && type !== 'android') {
     throw new ApplicationError(`Not supported type. type=[${type}]`);
@@ -14,6 +15,6 @@ export const requestAppUpdates = async (
     throw new ApplicationError(`Invalid version. version=[${String(version)}]`);
   }
 
-  const response = await getAppUpdates(type, version);
+  const response = await getAppUpdates(type, version, signal);
   return response.data;
 };

@@ -1,15 +1,18 @@
+import {useQuery} from '@tanstack/react-query';
 import {Asset} from 'expo-asset';
 import * as FileSystem from 'expo-file-system';
-import {useQuery} from 'react-query';
 
 const loadAssetContent = async (moduleId: number | undefined) => {
   if (moduleId == null) {
-    return;
+    // useQueryのqueryFnからundefinedを返却するとエラーがthrowされてしまうため、nullを返却する
+    return null;
   }
   return Asset.loadAsync(moduleId).then(assets => {
     if (assets?.length && assets[0].localUri) {
       return FileSystem.readAsStringAsync(assets[0].localUri, {encoding: 'utf8'});
     }
+    // useQueryのqueryFnからundefinedを返却するとエラーがthrowされてしまうため、nullを返却する
+    return null;
   });
 };
 

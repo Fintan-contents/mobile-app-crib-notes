@@ -1,7 +1,7 @@
 import NetInfo from '@react-native-community/netinfo';
+import {focusManager, onlineManager, QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React, {useEffect, useMemo} from 'react';
 import {AppState, AppStateStatus, Platform} from 'react-native';
-import {focusManager, onlineManager, QueryClient, QueryClientProvider} from 'react-query';
 
 import {defaultMutationCache, defaultQueryCache} from '../services/defaultCache';
 import {defaultOptions} from '../services/defaultOptions';
@@ -18,6 +18,16 @@ export const ReactQueryProvider: React.FC<React.PropsWithChildren> = ({children}
       queryCache: defaultQueryCache(queryClient),
       mutationCache: defaultMutationCache(queryClient),
       defaultOptions,
+      // no more errors on the console for tests
+      // https://tanstack.com/query/v4/docs/react/guides/testing#turn-off-network-error-logging
+      logger:
+        process.env.NODE_ENV === 'test'
+          ? {
+              log: () => {},
+              warn: () => {},
+              error: () => {},
+            }
+          : undefined,
     });
   }, []);
 

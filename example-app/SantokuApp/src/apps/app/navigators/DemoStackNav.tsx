@@ -126,7 +126,7 @@ export const DemoStackNav: React.FC = () => {
       <nav.Screen name="ListTodoDemo" component={ListTodoDemoScreen} />
       <nav.Screen name="CreateTodoDemo" component={CreateTodoDemoScreen} />
       <nav.Screen name="EditTodoDemo" component={EditTodoDemoScreen} />
-      <nav.Screen name="ReactQueryDemo" component={ReactQueryDemoScreen} />
+      <nav.Screen name="ReactQueryDemo" component={ReactQueryDemoScreen} options={{title: 'TanStackQueryDemo'}} />
       <nav.Screen name="DisabledQueryDemo" component={DisabledQueryDemoScreen} />
       <nav.Screen name="DependentQueryDemo1" component={DependentQueryDemo1Screen} />
       <nav.Screen name="DependentQueryDemo2" component={DependentQueryDemo2Screen} />

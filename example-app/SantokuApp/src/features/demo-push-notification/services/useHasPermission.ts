@@ -1,5 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
-import {useQuery} from 'react-query';
+import {useQuery} from '@tanstack/react-query';
 
 const hasPermission = () => {
   return messaging().hasPermission();

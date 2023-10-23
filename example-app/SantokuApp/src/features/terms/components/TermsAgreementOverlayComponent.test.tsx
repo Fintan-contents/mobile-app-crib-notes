@@ -1,4 +1,5 @@
 import '@testing-library/jest-native/extend-expect';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {render, screen} from '@testing-library/react-native';
 import {AppConfig} from 'bases/core/configs/AppConfig';
 import {BundledMessagesLoader} from 'bases/message/BundledMessageLoader';
@@ -6,7 +7,6 @@ import {loadMessages} from 'bases/message/Message';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {TermsAgreementOverlayComponent} from './TermsAgreementOverlayComponent';
 

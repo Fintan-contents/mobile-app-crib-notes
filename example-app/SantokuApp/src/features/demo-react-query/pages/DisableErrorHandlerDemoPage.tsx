@@ -1,7 +1,7 @@
+import {useQuery} from '@tanstack/react-query';
 import React, {useCallback} from 'react';
 import {Alert, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-elements';
-import {useQuery} from 'react-query';
 
 const queryErrorFn = () => {
   throw new Error('リクエストエラー');
@@ -12,14 +12,14 @@ const onError = () => {
 };
 
 export const DisableErrorHandlerDemoPage: React.FC = () => {
-  const query1 = useQuery('dummy1', queryErrorFn, {
+  const query1 = useQuery(['dummy1'], queryErrorFn, {
     enabled: false,
   });
-  const query2 = useQuery('dummy2', queryErrorFn, {
+  const query2 = useQuery(['dummy2'], queryErrorFn, {
     enabled: false,
     onError,
   });
-  const query3 = useQuery('dummy3', queryErrorFn, {
+  const query3 = useQuery(['dummy3'], queryErrorFn, {
     enabled: false,
     meta: {disableGlobalErrorHandler: true},
     onError,

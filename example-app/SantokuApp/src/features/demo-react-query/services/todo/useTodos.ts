@@ -1,7 +1,7 @@
+import {useQueryClient} from '@tanstack/react-query';
 import {getListTodoQueryKey, useListTodo} from 'features/sandbox/apis/api';
 import {ListTodoParams} from 'features/sandbox/apis/model/listTodoParams';
 import {useCallback, useState} from 'react';
-import {useQueryClient} from 'react-query';
 
 export const useTodos = (
   initialListParams?: ListTodoParams,

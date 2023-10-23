@@ -60,7 +60,7 @@ const FileName: React.FC<{fileName?: string}> = ({fileName}) => {
     </View>
   );
 };
-const FileContent: React.FC<{isLoading: boolean; content?: string}> = ({isLoading, content}) => {
+const FileContent: React.FC<{isLoading: boolean; content?: string | null}> = ({isLoading, content}) => {
   return (
     <View style={styles.fileContentContainer}>
       {isLoading ? (

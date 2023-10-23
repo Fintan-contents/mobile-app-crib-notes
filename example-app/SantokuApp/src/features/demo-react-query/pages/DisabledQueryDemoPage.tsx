@@ -5,10 +5,19 @@ import {Button, Text} from 'react-native-elements';
 import {useTodos} from '../services/todo/useTodos';
 
 export const DisabledQueryDemoPage: React.FC = () => {
-  const {todos, status, isIdle, isLoading, isSuccess, isError, refetch, reset, queryOption, setQueryOption} = useTodos(
-    undefined,
-    {enabled: false},
-  );
+  const {
+    todos,
+    status,
+    fetchStatus,
+    isLoading,
+    isInitialLoading,
+    isSuccess,
+    isError,
+    refetch,
+    reset,
+    queryOption,
+    setQueryOption,
+  } = useTodos(undefined, {enabled: false});
   const toggleEnabled = useCallback(
     () => setQueryOption({enabled: !queryOption.enabled}),
     [queryOption.enabled, setQueryOption],
@@ -18,12 +27,13 @@ export const DisabledQueryDemoPage: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text>Query Status: {status}</Text>
+      <Text>Fetch Status: {fetchStatus}</Text>
       <Text>Query Enabled: {queryOption.enabled ? 'true' : 'false'}</Text>
       <View style={styles.block}>
         <Text h4>Query Data</Text>
         <ScrollView>
-          {isIdle && <Text>データ読み込み停止中</Text>}
-          {isLoading && <ActivityIndicator size="large" />}
+          {isLoading && <Text>データ読み込み停止中</Text>}
+          {isInitialLoading && <ActivityIndicator size="large" />}
           {isSuccess &&
             todos?.map((todo, index) => {
               return <Text key={index}>{todo.title}</Text>;

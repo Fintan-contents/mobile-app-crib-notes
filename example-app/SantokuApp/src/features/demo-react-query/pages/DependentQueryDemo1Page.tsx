@@ -5,20 +5,40 @@ import {Button, Text} from 'react-native-elements';
 import {useItem} from '../services/item/useItem';
 
 export const DependentQueryDemo1Page: React.FC = () => {
-  const {item, isIdle, isLoading, isRefetching, isSuccess, isError, refetch, reload} = useItem(1);
+  const {
+    item,
+    isLoading,
+    isSuccess,
+    isError,
+    isIdle,
+    isPaused,
+    isFetching,
+    isRefetching,
+    isInitialLoading,
+    refetch,
+    reload,
+  } = useItem(1);
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch} />}>
         <View>
           <Text h4>Query Status</Text>
-          <Text>{`isIdle: ${isIdle.toString()}, isLoading: ${isLoading.toString()}, isRefetching: ${isRefetching.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>
+          <Text>{`isLoading: ${isLoading.toString()}, isSuccess: ${isSuccess.toString()}, isError: ${isError.toString()}`}</Text>
+        </View>
+        <View>
+          <Text h4>Fetch Status</Text>
+          <Text>{`isIdle: ${isIdle.toString()}, isFetching: ${isFetching.toString()}, isPaused: ${isPaused.toString()}`}</Text>
+        </View>
+        <View>
+          <Text h4>Other Status</Text>
+          <Text>{`isRefetching: ${isRefetching.toString()}, isInitialLoading: ${isInitialLoading.toString()}`}</Text>
         </View>
         <View>
           <Text h4>Query Data</Text>
           {isError && <Text>データの取得に失敗しました</Text>}
-          {isLoading && <ActivityIndicator size="large" color="blue" />}
-          {!isLoading && (
+          {isInitialLoading && <ActivityIndicator size="large" color="blue" />}
+          {!isInitialLoading && (
             <>
               <Text>商品取得結果</Text>
               <View style={styles.details}>

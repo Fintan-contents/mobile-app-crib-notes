@@ -93,7 +93,7 @@ const demoScreenList: ScreenList[] = [
     to: 'Cache',
   },
   {
-    title: 'ReactQuery',
+    title: 'TanStack Query',
     to: 'ReactQueryDemo',
   },
   {

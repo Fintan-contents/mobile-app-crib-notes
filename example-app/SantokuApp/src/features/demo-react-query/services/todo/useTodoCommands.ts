@@ -1,3 +1,4 @@
+import {useQueryClient} from '@tanstack/react-query';
 import {
   getGetTodoQueryKey,
   getListTodoByCursorQueryKey,
@@ -6,7 +7,6 @@ import {
   usePostTodo,
   usePutTodo,
 } from 'features/sandbox/apis/api';
-import {useQueryClient} from 'react-query';
 
 export const useTodoCommands = () => {
   const queryClient = useQueryClient();

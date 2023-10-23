@@ -62,6 +62,9 @@ describe('App', () => {
       () => {
         screen.rerender(<App />);
         expect(screen.queryByTestId('HomePage')).not.toBeNull();
+        // データ取得後のSnapshotを取りたいため、EventとQuestionのデータが1件でも取得できていることを確認
+        expect(screen.queryByText('【イベント】トレーサビリティ')).not.toBeNull();
+        expect(screen.queryByText('C言語のchar型は何ビットでしょうか')).not.toBeNull();
         expect(screen).toMatchSnapshot();
       },
       {timeout: 60000},

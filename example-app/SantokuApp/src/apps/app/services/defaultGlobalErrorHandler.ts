@@ -1,3 +1,4 @@
+import {QueryClient} from '@tanstack/react-query';
 import axios from 'axios';
 import {isApplicationError} from 'bases/core/errors/ApplicationError';
 import {handleError} from 'bases/core/errors/handleError';
@@ -7,7 +8,6 @@ import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {clientLogout} from 'features/account/services/auth/clientLogout';
 import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
 import {Alert} from 'react-native';
-import {QueryClient} from 'react-query';
 
 const outDebugLog = (error: unknown) => {
   try {

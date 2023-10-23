@@ -1,10 +1,10 @@
+import {QueryClient} from '@tanstack/react-query';
 import {act} from '@testing-library/react-native';
 import {AxiosError, AxiosHeaders} from 'axios';
 import {setHandleError} from 'bases/core/errors/handleError';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import * as clientLogout from 'features/account/services/auth/clientLogout';
 import {Alert} from 'react-native';
-import {QueryClient} from 'react-query';
 
 import {defaultGlobalErrorHandler} from './defaultGlobalErrorHandler';
 import {loadBundledMessagesAsync} from './loadBundledMessagesAsync';

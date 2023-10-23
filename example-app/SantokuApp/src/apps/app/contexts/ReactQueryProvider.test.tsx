@@ -1,8 +1,8 @@
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {render, screen} from '@testing-library/react-native';
 import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import React from 'react';
 import {Text} from 'react-native';
-import {QueryClient, QueryClientProvider} from 'react-query';
 
 import {ReactQueryProvider} from './ReactQueryProvider';
 

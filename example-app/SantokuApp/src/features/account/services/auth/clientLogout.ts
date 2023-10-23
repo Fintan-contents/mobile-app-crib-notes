@@ -2,13 +2,12 @@
  * クライアント側のログアウト処理を実施します。
  */
 import crashlytics from '@react-native-firebase/crashlytics';
+import {hashQueryKey, Query, QueryClient, QueryFilters} from '@tanstack/react-query';
 import {handleError} from 'bases/core/errors/handleError';
 import {deleteFcmToken} from 'bases/firebase/messaging/deleteFcmToken';
 import {deleteActiveAccountId} from 'features/secure-storage/services/deleteActiveAccountId';
 import {deletePassword} from 'features/secure-storage/services/deletePassword';
 import {loadActiveAccountId} from 'features/secure-storage/services/loadActiveAccountId';
-import {hashQueryKey, Query, QueryClient} from 'react-query';
-import {QueryFilters} from 'react-query/types/core/utils';
 
 const defaultQueryFilters = {
   predicate: (query: Query) =>

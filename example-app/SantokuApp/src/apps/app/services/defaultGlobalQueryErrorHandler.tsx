@@ -1,5 +1,5 @@
+import {Query, QueryClient, QueryKey} from '@tanstack/react-query';
 import {defaultGlobalErrorHandler} from 'apps/app/services/defaultGlobalErrorHandler';
-import {Query, QueryClient, QueryKey} from 'react-query';
 
 export const defaultGlobalQueryErrorHandler = (queryClient: QueryClient) => {
   const defaultErrorHandler = defaultGlobalErrorHandler(queryClient);

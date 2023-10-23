@@ -1,7 +1,6 @@
+import type {QueryKey} from '@tanstack/react-query';
+import {hashQueryKey, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useCallback, useMemo, useRef} from 'react';
-import type {QueryKey} from 'react-query';
-import {hashQueryKey, useQuery, useQueryClient} from 'react-query';
-export type ClientStateKey = string | number | QueryKey;
 export type InitialClientState<S> = S | (() => S);
 export type SetClientStateFunction<S> = (prevState: S | undefined) => S;
 export type SetClientState<S> = (value: S | SetClientStateFunction<S>) => void;
@@ -10,16 +9,16 @@ export type ClientStateOptions = {
   preserveAfterUnmount?: boolean;
 };
 export function useClientState<S = undefined>(
-  key: ClientStateKey,
+  key: QueryKey,
   options?: ClientStateOptions,
 ): ClientStateAndSetClientState<S | undefined>;
 export function useClientState<S>(
-  key: ClientStateKey,
+  key: QueryKey,
   initialState: InitialClientState<S>,
   options?: ClientStateOptions,
 ): ClientStateAndSetClientState<S>;
 export function useClientState<S>(
-  key: ClientStateKey,
+  key: QueryKey,
   initialState?: InitialClientState<S | undefined>,
   // preserveAfterUnmount: boolean = false,
   options: ClientStateOptions = {preserveAfterUnmount: false},
@@ -34,22 +33,21 @@ export function useClientState<S>(
   const setState = useSetClientStateFunction<S | undefined>(queryKey);
   return [state, setState];
 }
-export function useOnlySetClientState<S>(key: ClientStateKey) {
+export function useOnlySetClientState<S>(key: QueryKey) {
   const queryKey = useStableQueryKey(key);
   return useSetClientStateFunction<S>(queryKey);
 }
-function useStableQueryKey(key: ClientStateKey): unknown[] {
-  const queryKeyRef = useRef(ensureArrayKey(key));
+function useStableQueryKey(key: QueryKey): QueryKey {
+  const queryKeyRef = useRef(key);
   const queryKeyHashRef = useRef(hashQueryKey(queryKeyRef.current));
   return useMemo(() => {
-    const newQueryKey = ensureArrayKey(key);
-    const newQueryKeyHash = hashQueryKey(newQueryKey);
-    if (queryKeyHashRef.current === newQueryKeyHash) {
+    const keyHash = hashQueryKey(key);
+    if (queryKeyHashRef.current === keyHash) {
       return queryKeyRef.current;
     }
-    queryKeyRef.current = newQueryKey;
-    queryKeyHashRef.current = newQueryKeyHash;
-    return newQueryKey;
+    queryKeyRef.current = key;
+    queryKeyHashRef.current = keyHash;
+    return key;
   }, [key]);
 }
 function useSetClientStateFunction<S>(queryKey: QueryKey): SetClientState<S> {
@@ -64,7 +62,4 @@ function useSetClientStateFunction<S>(queryKey: QueryKey): SetClientState<S> {
 }
 function isSetClientStateFunction<S>(arg: S | SetClientStateFunction<S>): arg is SetClientStateFunction<S> {
   return typeof arg === 'function';
-}
-function ensureArrayKey(key: ClientStateKey): unknown[] {
-  return Array.isArray(key) ? key : [key];
 }
