@@ -1,7 +1,6 @@
 ---
 title: Q&Aアプリプロジェクトの説明
 sidebar_label: Q&Aアプリプロジェクトの説明
-hide_table_of_contents: true
 ---
 
 ## Q&Aアプリプロジェクトの準備

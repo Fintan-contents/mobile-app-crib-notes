@@ -1,7 +1,6 @@
 ---
 title: イベント一覧画面の実装
 sidebar_label: 画面の実装
-hide_table_of_contents: true
 ---
 
 イベント一覧画面を作成します。

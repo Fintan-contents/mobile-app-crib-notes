@@ -1,6 +1,5 @@
 ---
 title: React Nativeの学習
-hide_table_of_contents: true
 sidebar_label: はじめに
 ---
 
