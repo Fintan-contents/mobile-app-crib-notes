@@ -53,7 +53,7 @@ npx expo install <package-name> -- -D
 iOSアプリを開発をする場合は、macOSで次のコマンドを実行して必要なライブラリをインストールしてください。
 
 ```bash
-npx pod-install
+npm run pod-install
 ```
 
 :::info
