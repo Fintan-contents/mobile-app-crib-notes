@@ -240,6 +240,10 @@ module.exports = {
             from: '/react-native/learn/advance/react-navigation-param', // string | string[]
             to: '/react-native/learn/basic-concepts/react-navigation-basics/param', // string
           },
+          {
+            from: '/react-native/santoku/application-architecture/http-api/http-api-react-query', // string | string[]
+            to: '/react-native/santoku/application-architecture/http-api/http-api-tanstack-query', // string
+          },
         ],
       },
     ],

@@ -384,7 +384,7 @@ module.exports = {
           label: 'HTTP API通信',
           items: [
             'react-native/santoku/application-architecture/http-api/overview',
-            'react-native/santoku/application-architecture/http-api/http-api-react-query',
+            'react-native/santoku/application-architecture/http-api/http-api-tanstack-query',
           ],
         },
         {
