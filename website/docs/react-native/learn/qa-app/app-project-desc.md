@@ -154,8 +154,9 @@ Q&Aアプリでは、[axios](https://axios-http.com/)と[TanStack Query](https:/
 - `.eslintrc.js`
 
 ```typescript title="src/features/backend/utils/customInstance.ts"
-  import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+  import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, GenericAbortSignal} from 'axios';
 - import {AppConfig} from 'bases/core/configs/AppConfig';
+  import {log} from 'bases/logging';
   import {applicationName, nativeApplicationVersion} from 'expo-application';
   import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
   import {Platform} from 'react-native';
@@ -183,13 +184,8 @@ Q&Aアプリでは、[axios](https://axios-http.com/)と[TanStack Query](https:/
 -   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
 - };
 - 
-- const setAxiosResponseInterceptor = (
--   onFulfilled: (
--     value: AxiosResponse<any, any>,
--   ) => (AxiosResponse<any, any> | Promise<AxiosResponse<any, any>>) | undefined,
--   onRejected: (error: any) => any | undefined,
-- ) => {
--   BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
+- const setAxiosResponseInterceptor: typeof Axios.interceptors.response.use = (onFulfilled, onRejected) => {
+-   return BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
 - };
 - 
 - export {
@@ -265,7 +261,11 @@ TanStack Queryのデフォルトオプションや、エラーハンドリング
 /* ～省略～ */
 
 - const showRequireLoginDialog = (queryClient: QueryClient) => {
--   clientLogout(queryClient).finally(() => {
+-   clientLogout(queryClient)
+-   .catch(() => {
+-     // clientLogoutの中で必要に応じてログ出力しているので、ここでは何もしない
+-   })
+-   .finally(() => {
 -     Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
 -   });
 - };
@@ -402,7 +402,7 @@ export const AppWithInitialization: React.FC = () => {
     // RootStackNav、WithFirebaseMessagingHandlersをimportしてしまうと、アプリの初期化処理が完了する前に各画面でimportしているモジュールも読み込まれてしまうため、
     // アプリの初期化処理が完了した時点でrequireする。
     // requireした場合の型はanyとなってしまいESLintエラーが発生しますが無視します。
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires
     const RootStackNav = require('./navigators/RootStackNav').RootStackNav as React.FC;
     return (
       <NavigationContainer>
