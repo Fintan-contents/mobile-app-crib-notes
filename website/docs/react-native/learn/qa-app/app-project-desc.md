@@ -320,7 +320,7 @@ import {enhanceValidator} from "bases/validator";
 import {activateKeepAwakeAsync} from "expo-keep-awake";
 import {useCallback, useMemo, useState} from "react";
 
-import { loadBundledMessagesAsync } from "../services/loadBundledMessagesAsync";
+import {loadBundledMessagesAsync} from "../services/loadBundledMessagesAsync";
 
 type Initializing = {
   code: 'Initializing';
@@ -369,6 +369,7 @@ export const useAppInitialize = () => {
 
 ```typescript jsx title="src/apps/app/AppWithInitialization.tsx"
 import {NavigationContainer} from '@react-navigation/native';
+import {RuntimeError} from 'bases/core/errors/RuntimeError';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 
@@ -389,7 +390,7 @@ export const AppWithInitialization: React.FC = () => {
   useEffect(() => {
     // 初期化処理に失敗した場合はアプリをクラッシュ扱いで終了
     if (initializationError) {
-      throw initializationError;
+      throw new RuntimeError('Failed to initialize app.', initializationError);
     }
   }, [initializationError]);
 
