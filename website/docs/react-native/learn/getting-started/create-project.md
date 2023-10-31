@@ -73,3 +73,19 @@ npm ERR! to accept an incorrect (and potentially broken) dependency resolution.
 1. `cd <YourAppName>`（`<YourAppName>`は実際に作成したときの値に変更してください）
 2. `npm install --legacy-peer-deps`
 :::
+
+### Visual Studio Code用の推奨設定
+
+作成されたプロジェクトにはVisual Studio Code用のファイルが含まれています。
+
+- 拡張機能一覧（`.vscode/extensions.json`）
+- 推奨設定（`.vscode/settings.json`）
+
+`Extensions`→`Recommended`で表示される`WORKSPACE RECOMMENDATIONS`に表示される拡張機能をインストールすると、以下のメリットがあります。
+
+- エディター上での警告表示
+- ファイル保存時の自動フォーマット・自動修正
+
+インストールした拡張機能は違うプロジェクトでも引き継がれるので、この作業は初回のみで十分です。
+
+その他の有用な拡張機能については[開発に利用するツールの「Visual Studio Code」ページ](../../santoku/development/tools/vscode.md)を参照ください。
