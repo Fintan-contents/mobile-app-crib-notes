@@ -20,7 +20,7 @@ React Nativeを利用した開発経験が浅い方向けに、実際にアプ�
 
 - [アプリの実装前に](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts)
 
-    アプリを実装する前に必要となる前提知識を確認した後、React NativeとReact Navigationの基本を学習します。
+    アプリを実装する前にReact NativeとReact Navigationの基本を学習します。
 
 - [ToDoアプリの実装](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/todo-app)
 

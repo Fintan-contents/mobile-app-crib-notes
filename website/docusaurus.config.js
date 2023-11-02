@@ -241,6 +241,10 @@ module.exports = {
             to: '/react-native/learn/basic-concepts/react-navigation-basics/param', // string
           },
           {
+            from: '/react-native/learn/basic-concepts/pre-requisites', // string | string[]
+            to: '/react-native/pre-requisites', // string
+          },
+          {
             from: '/react-native/santoku/application-architecture/http-api/http-api-react-query', // string | string[]
             to: '/react-native/santoku/application-architecture/http-api/http-api-tanstack-query', // string
           },

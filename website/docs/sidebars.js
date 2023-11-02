@@ -97,6 +97,10 @@ module.exports = {
       id: 'react-native/learn',
     },
     {
+      type: 'doc',
+      id: 'react-native/pre-requisites',
+    },
+    {
       type: 'category',
       label: 'Getting Started',
       items: [
@@ -111,7 +115,6 @@ module.exports = {
       label: 'アプリの実装前に',
       items: [
         'react-native/learn/basic-concepts',
-        'react-native/learn/basic-concepts/pre-requisites',
         {
           type: 'category',
           label: 'React Nativeの基本',

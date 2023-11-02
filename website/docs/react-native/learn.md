@@ -24,7 +24,7 @@ const overviews = [
   {
     title: 'アプリの実装前に',
     to: '/react-native/learn/basic-concepts',
-    summary: <>React Nativeでアプリを実装し始める前に最低限必要となる前提知識や、React NativeとReact Navigationの基本的な知識について学びます。</>
+    summary: <>React Nativeでアプリを実装し始める前にReact NativeとReact Navigationの基本的な知識について学びます。</>
   },
   {
     title: 'ToDoアプリの実装',
