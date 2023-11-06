@@ -425,6 +425,10 @@ module.exports = {
           type: 'doc',
           id: 'react-native/santoku/application-architecture/cache-management/overview',
         },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/application-architecture/third-party-libraries/overview',
+        },
       ],
     },
     {
