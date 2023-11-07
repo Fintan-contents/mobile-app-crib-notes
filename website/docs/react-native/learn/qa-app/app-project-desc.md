@@ -147,6 +147,21 @@ TanStack Query、SWRなど、いくつかのHTTP API通信ライブラリをサ�
 
 Q&Aアプリでは、[axios](https://axios-http.com/)と[TanStack Query](https://tanstack.com/query/v4)を使用します。
 
+:::note info
+TanStack Queryの作者のブログに公開されている以下のページでは、TanStack Queryの使用方法が分かりやすくまとめられています。公式のドキュメントと併せて参考にしてください。
+
+1. [Practical React Query](https://tkdodo.eu/blog/practical-react-query)
+1. [React Query Data Transformations](https://tkdodo.eu/blog/react-query-data-transformations)
+1. [React Query Render Optimizations](https://tkdodo.eu/blog/react-query-render-optimizations)
+1. [Status Checks in React Query](https://tkdodo.eu/blog/status-checks-in-react-query)
+:::
+
+:::warning
+TanStack Queryは非同期処理の状態やキャッシュの管理、TypeScriptのサポートなど、開発する上で非常に便利な機能を提供しています。これらを有効活用することにより、開発効率の向上など多くのメリットがあるため、QAアプリではTanStack Queryを導入しています。
+
+ただし、背景やキャッシュ管理などの仕組みについて理解する必要があるため、十分な知識を持たない人にとってはパフォーマンスが低下する一因となります。そのため、プロジェクトで導入する場合は慎重に検討してください。
+:::
+
 | コピーファイル |
 |--|
 | src/features/backend/utils/customInstance.ts |
