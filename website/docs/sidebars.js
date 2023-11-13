@@ -225,6 +225,7 @@ module.exports = {
                 'react-native/learn/qa-app/exercise-basic-home-components',
                 'react-native/learn/qa-app/exercise-basic-home-screen',
                 'react-native/learn/qa-app/exercise-basic-home-api',
+                'react-native/learn/qa-app/exercise-basic-home-test-case',
               ],
             },
             {
@@ -233,6 +234,7 @@ module.exports = {
               items: [
                 'react-native/learn/qa-app/exercise-basic-list-event-screen',
                 'react-native/learn/qa-app/exercise-basic-list-event-api',
+                'react-native/learn/qa-app/exercise-basic-list-event-test-case',
               ],
             },
             {
@@ -242,6 +244,7 @@ module.exports = {
                 'react-native/learn/qa-app/exercise-basic-detail-question-components',
                 'react-native/learn/qa-app/exercise-basic-detail-question-screen',
                 'react-native/learn/qa-app/exercise-basic-detail-question-api',
+                'react-native/learn/qa-app/exercise-basic-detail-question-test-case',
               ],
             },
             {
@@ -250,6 +253,7 @@ module.exports = {
               items: [
                 'react-native/learn/qa-app/exercise-basic-detail-event-screen',
                 'react-native/learn/qa-app/exercise-basic-detail-event-api',
+                'react-native/learn/qa-app/exercise-basic-detail-event-test-case',
               ],
             },
             {
@@ -259,6 +263,7 @@ module.exports = {
                 'react-native/learn/qa-app/exercise-basic-input-components',
                 'react-native/learn/qa-app/exercise-basic-input-screen',
                 'react-native/learn/qa-app/exercise-basic-input-api',
+                'react-native/learn/qa-app/exercise-basic-input-test-case',
               ],
             },
           ],
