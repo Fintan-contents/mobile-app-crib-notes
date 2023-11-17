@@ -9,7 +9,15 @@ import TabItem from '@theme/TabItem';
 
 iOSアプリはiPhoneシミュレータ、AndroidアプリはAndroidエミュレータで起動するのが基本です。また、今回作成したプロジェクトはExpoを利用しているので、Expo Goというアプリでも実行できます。
 
-React Nativeアプリの実行方法と仕組みをかんたんに説明します。
+ここでは、React Nativeアプリの実行方法と仕組みをかんたんに説明します。
+
+:::note
+以下のページでは、React NativeやExpoの概要と、開発時の起動構成について説明しています。そちらも参考にしてください。
+
+- [React Nativeとは](../basic-concepts/what-is-react-native.mdx)
+- [Expoとは](../basic-concepts/what-is-expo.mdx)
+
+:::
 
 実行方法で紹介しているコマンドは、全てプロジェクトのルートディレクトリ（`package.json`のあるディレクトリ）で実行してください。
 
@@ -31,8 +39,9 @@ React Nativeアプリの実行方法と仕組みをかんたんに説明しま�
 
 ![Image](expo-build.png)
 
-Expo Goを利用する場合、ストア公開されているExpo Goアプリを端末にインストールして使用するため、アプリのビルドは不要です。
-Expo Goは、Expoで作られたアプリをビルドすることなく簡単に実機で動かすことができるアプリです。Expo SDKに含まれないネイティブモジュールを利用していなければ、アプリを実行できます。[App Store](https://apps.apple.com/jp/app/expo-go/id982107779), [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent)からインストールしてください。
+Expo Goについては、[Expo Goを使用した開発](../basic-concepts/what-is-expo.mdx#expo-goを使用した開発)を参照してください。
+
+はじめに、[App Store](https://apps.apple.com/jp/app/expo-go/id982107779), [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent)からExpo Goをインストールします。
 
 Expo Goをインストールしたら、Expoの標準では提供されていないConfig Pluginをビルドします。
 

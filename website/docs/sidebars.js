@@ -115,6 +115,8 @@ module.exports = {
       label: 'アプリの実装前に',
       items: [
         'react-native/learn/basic-concepts',
+        'react-native/learn/basic-concepts/what-is-react-native',
+        'react-native/learn/basic-concepts/what-is-expo',
         {
           type: 'category',
           label: 'React Nativeの基本',

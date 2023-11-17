@@ -4,8 +4,7 @@ sidebar_label: 概要
 pagination_label: React Nativeの基本
 ---
 
-React Nativeは、Facebookが作成したオープンソースのモバイルアプリケーションフレームワークです。
-Reactとそれぞれのプラットフォームのネイティブ機能を使用して、Android、およびiOSアプリを構築します。
+[React Nativeとは](./what-is-react-native.mdx)で説明した通り、React Nativeは、Reactベースのモバイルアプリケーションフレームワークです。
 JavaScriptを用いてプラットフォームのAPIにアクセスし、Reactコンポーネントを用いてUIの外観と動作を記述します。
 
 画面の描画には、ネイティブUI部品に対応する特別なコンポーネントを用います。
