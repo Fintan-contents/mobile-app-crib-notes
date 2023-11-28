@@ -6,7 +6,7 @@ import {requestAppUpdates} from './requestAppUpdates';
 
 export const useAppUpdates = () => {
   const query = useQuery(
-    ['app-updates#requestAppUpdates'],
+    ['app-updates', 'requestAppUpdates'],
     ({signal}) => requestAppUpdates(Platform.OS, Application.nativeApplicationVersion, signal),
     {staleTime: Infinity},
   );

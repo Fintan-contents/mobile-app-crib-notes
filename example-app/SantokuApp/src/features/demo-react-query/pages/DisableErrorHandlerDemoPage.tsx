@@ -12,14 +12,14 @@ const onError = () => {
 };
 
 export const DisableErrorHandlerDemoPage: React.FC = () => {
-  const query1 = useQuery(['dummy1'], queryErrorFn, {
+  const query1 = useQuery(['disableErrorHandler', 'queryErrorFn1'], queryErrorFn, {
     enabled: false,
   });
-  const query2 = useQuery(['dummy2'], queryErrorFn, {
+  const query2 = useQuery(['disableErrorHandler', 'queryErrorFn2'], queryErrorFn, {
     enabled: false,
     onError,
   });
-  const query3 = useQuery(['dummy3'], queryErrorFn, {
+  const query3 = useQuery(['disableErrorHandler', 'queryErrorFn3'], queryErrorFn, {
     enabled: false,
     meta: {disableGlobalErrorHandler: true},
     onError,
