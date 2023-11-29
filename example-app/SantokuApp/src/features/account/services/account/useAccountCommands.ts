@@ -32,8 +32,9 @@ export const useAccountCommands = () => {
     loadAccountData: loadAccountDataMutation.mutateAsync,
     updateDeviceToken: updateDeviceTokenMutation.mutateAsync,
     agreeTerms: agreeTermsMutation.mutateAsync,
-    isLoadingAccountData: agreeTermsMutation.isLoading,
+    isLoadingAccountData: loadAccountDataMutation.isLoading,
     isAgreeingTerms: agreeTermsMutation.isLoading,
-    isProcessing: agreeTermsMutation.isLoading || agreeTermsMutation.isLoading,
+    isProcessing:
+      loadAccountDataMutation.isLoading || updateDeviceTokenMutation.isLoading || agreeTermsMutation.isLoading,
   };
 };
