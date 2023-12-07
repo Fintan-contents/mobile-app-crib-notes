@@ -64,26 +64,43 @@ TypeScriptに特化したルールを提供するプラグインです。
 |[@typescript-eslint/ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、このアプリでは`ts-check`と`ts-expect-error`だけを使用できるようにこのルールを設定しています。`ts-ignore`を除外している理由は、[チェック対象外にする方法 - TypeScript](./lint-ops.mdx#typescript)を参照してください。|
 |[@typescript-eslint/ban-types](https://typescript-eslint.io/rules/ban-types)|error|-|
 |[@typescript-eslint/consistent-type-assertions](https://typescript-eslint.io/rules/consistent-type-assertions)|warn|-|
+|[@typescript-eslint/no-array-constructor](https://typescript-eslint.io/rules/no-array-constructor)|error|-|
+|[@typescript-eslint/no-base-to-string](https://typescript-eslint.io/rules/no-base-to-string)|error|-|
 |[@typescript-eslint/no-dupe-class-members](https://typescript-eslint.io/rules/no-dupe-class-members)|warn|-|
-|[@typescript-eslint/no-extra-non-null-assertion](https://typescript-eslint.io/rules/no-extra-non-null-assertion)|warn|-|
+|[@typescript-eslint/no-duplicate-enum-values](https://typescript-eslint.io/rules/no-duplicate-enum-values)|error|-|
+|[@typescript-eslint/no-duplicate-type-constituents](https://typescript-eslint.io/rules/no-duplicate-type-constituents)|error|-|
+|[@typescript-eslint/no-explicit-any](https://typescript-eslint.io/rules/no-explicit-any)|error|-|
+|[@typescript-eslint/no-extra-non-null-assertion](https://typescript-eslint.io/rules/no-extra-non-null-assertion)|error|-|
 |[@typescript-eslint/no-floating-promises](https://typescript-eslint.io/rules/no-floating-promises)|error|-|
 |[@typescript-eslint/no-implied-eval](https://typescript-eslint.io/rules/no-implied-eval)|error|-|
+|[@typescript-eslint/no-loss-of-precision](https://typescript-eslint.io/rules/no-loss-of-precision)|error|-|
+|[@typescript-eslint/no-misused-new](https://typescript-eslint.io/rules/no-misused-new)|error|-|
 |[@typescript-eslint/no-misused-promises](https://typescript-eslint.io/rules/no-misused-promises)|error|推奨設定でもこのルールはerrorレベルで設定されています。<br/><br/>ただし、このアプリではJSXの場合だけオプションの[checksVoidReturn: attributes](https://typescript-eslint.io/rules/no-misused-promises/#checksvoidreturn)を`false`に設定しています。JSX内でコンポーネントのイベントハンドラなどに渡す関数は、`Promise`を返却することが多々あります。そのため、JSX内でコンポーネントの属性に渡す関数に関しては、戻り値が`void`かをチェックしないように変更しています。|
+|[@typescript-eslint/no-namespace](https://typescript-eslint.io/rules/no-namespace)|error|-|
+|[@typescript-eslint/no-non-null-asserted-optional-chain](https://typescript-eslint.io/rules/no-non-null-asserted-optional-chain)|error|-|
 |[@typescript-eslint/no-redeclare](https://typescript-eslint.io/rules/no-redeclare)|warn|-|
+|[@typescript-eslint/no-redundant-type-constituents](https://typescript-eslint.io/rules/no-redundant-type-constituents)|error|-|
+|[@typescript-eslint/no-this-alias](https://typescript-eslint.io/rules/no-this-alias)|error|-|
 |[@typescript-eslint/no-throw-literal](https://typescript-eslint.io/rules/no-throw-literal)|warn|-|
 |[@typescript-eslint/no-unnecessary-type-assertion](https://typescript-eslint.io/rules/no-unnecessary-type-assertion)|error|-|
+|[@typescript-eslint/no-unnecessary-type-constraint](https://typescript-eslint.io/rules/no-unnecessary-type-constraint)|error|-|
 |[@typescript-eslint/no-unsafe-argument](https://typescript-eslint.io/rules/no-unsafe-argument)|error|-|
 |[@typescript-eslint/no-unsafe-assignment](https://typescript-eslint.io/rules/no-unsafe-assignment)|error|-|
 |[@typescript-eslint/no-unsafe-call](https://typescript-eslint.io/rules/no-unsafe-call)|error|-|
+|[@typescript-eslint/no-unsafe-declaration-merging](https://typescript-eslint.io/rules/no-unsafe-declaration-merging)|error|-|
+|[@typescript-eslint/no-unsafe-enum-comparison](https://typescript-eslint.io/rules/no-unsafe-enum-comparison)|error|-|
 |[@typescript-eslint/no-unsafe-member-access](https://typescript-eslint.io/rules/no-unsafe-member-access)|error|-|
 |[@typescript-eslint/no-unsafe-return](https://typescript-eslint.io/rules/no-unsafe-return)|error|-|
-|[@typescript-eslint/no-unused-vars](https://typescript-eslint.io/rules/no-unused-vars)|warn|-|
+|[@typescript-eslint/no-unused-vars](https://typescript-eslint.io/rules/no-unused-vars)|error|-|
 |[@typescript-eslint/no-useless-constructor](https://typescript-eslint.io/rules/no-useless-constructor)|warn|-|
+|[@typescript-eslint/no-var-requires](https://typescript-eslint.io/rules/no-var-requires)|error|-|
+|[@typescript-eslint/prefer-as-const](https://typescript-eslint.io/rules/prefer-as-const)|error|-|
 |[@typescript-eslint/prefer-nullish-coalescing](https://typescript-eslint.io/rules/prefer-nullish-coalescing)|warn|-|
 |[@typescript-eslint/prefer-optional-chain](https://typescript-eslint.io/rules/prefer-optional-chain)|warn|-|
 |[@typescript-eslint/require-await](https://typescript-eslint.io/rules/require-await)|error|-|
 |[@typescript-eslint/restrict-plus-operands](https://typescript-eslint.io/rules/restrict-plus-operands)|error|-|
 |[@typescript-eslint/restrict-template-expressions](https://typescript-eslint.io/rules/restrict-template-expressions)|error|-|
+|[@typescript-eslint/triple-slash-reference](https://typescript-eslint.io/rules/triple-slash-reference)|error|-|
 |[@typescript-eslint/unbound-method](https://typescript-eslint.io/rules/unbound-method)|error|-|
 
 ### [eslint](https://eslint.org/docs/latest)
@@ -94,7 +111,6 @@ ESLintが提供するルールです。
 |:--|:--|:--|
 |[curly](https://eslint.org/docs/latest/rules/curly)|error|推奨設定ではこのルールはoffになっています。<br/><br/>しかし、制御構文中（`if`文など）の括弧を必ず明示することで、コードが統一され可読性が高まると考え、errorレベルに変更しています。|
 |[eqeqeq](https://eslint.org/docs/latest/rules/eqeqeq)|warn|-|
-|[no-array-constructor](https://eslint.org/docs/latest/rules/no-array-constructor)|warn|-|
 |[no-caller](https://eslint.org/docs/latest/rules/no-caller)|warn|-|
 |[no-case-declarations](https://eslint.org/docs/latest/rules/no-case-declarations)|warn|-|
 |[no-compare-neg-zero](https://eslint.org/docs/latest/rules/no-compare-neg-zero)|warn|-|
@@ -153,6 +169,7 @@ ESLintが提供するルールです。
 |[prefer-spread](https://eslint.org/docs/latest/rules/prefer-spread)|error|-|
 |[radix](https://eslint.org/docs/latest/rules/radix)|warn|-|
 |[use-isnan](https://eslint.org/docs/latest/rules/use-isnan)|error|-|
+|[valid-typeof](https://eslint.org/docs/latest/rules/valid-typeof)|error|-|
 |[yoda](https://eslint.org/docs/latest/rules/yoda)|warn|-|
 
 ### [eslint-plugin-deprecation](https://github.com/gund/eslint-plugin-deprecation)
