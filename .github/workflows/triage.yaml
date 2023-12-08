@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Label according to modified files
         # https://github.com/marketplace/actions/labeler
-        uses: actions/labeler@master
+        uses: actions/labeler@v4
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
           # Default is '.github/labeler.yml', but we use 'yaml' as an extension of YAML files.
