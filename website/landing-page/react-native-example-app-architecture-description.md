@@ -34,6 +34,29 @@
 
 ## 更新履歴
 
+### 2023/12/25
+
+#### 🌱 新規コンテンツ（2023/12/25）
+
+- サードパーティライブラリの導入
+  - アプリケーション方式
+    - [サードパーティライブラリの導入](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/third-party-libraries/overview)
+
+#### 🌿 更新コンテンツ（2023/12/25）
+
+- TanStack Query（旧React Query）をv4にアップグレード
+  - アプリケーション方式
+    - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/http-api/overview)
+    - [TanStack Queryを用いたHTTP API通信](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/http-api/http-api-tanstack-query)
+  - 開発ガイド
+    - 実装
+      - [HTTP APIの呼び出し](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/http-api)
+      - スタイルガイド
+        - [コーディングに関する命名規約](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/development/implement/style-guide/naming-conversion)
+- Reactコンポーネントで発生した未処理のエラーがFirebase Crashlyticsに送信されない問題の対応
+  - アプリケーション方式
+    - [エラーの発生箇所と処理方法](https://ws-4020.github.io/mobile-app-crib-notes/react-native/santoku/application-architecture/error-handling/how-to-handle-error)
+
 ### 2023/09/29
 
 #### 🌱 新規コンテンツ（2023/09/29）
