@@ -57,7 +57,10 @@ const Screen = () => {
 - 通信中にコンポーネントがアンマウントされた場合のキャンセル処理がない
 
 :::note
-上記を考慮したデータ取得の方法は、（React公式ドキュメント「[パフォーマンス最適化](https://ja.reactjs.org/docs/hooks-faq.html#performance-optimizations)」のヒント欄で紹介されている）[こちらの記事](https://www.robinwieruch.de/react-hooks-fetch-data/)をご覧ください。
+上記を考慮したデータ取得の方法は、（React公式ドキュメント「[エフェクトを使ったデータフェッチ](https://ja.react.dev/reference/react/useEffect#fetching-data-with-effects)」で紹介されている）以下の記事をご覧ください。
+
+- [How to fetch data with React Hooks](https://www.robinwieruch.de/react-hooks-fetch-data/)
+- [Fixing Race Conditions in React with useEffect - Max Rozen](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)
 :::
 
 これらに対応したデータ取得処理を実装すると、多くのコード記述が必要となります。

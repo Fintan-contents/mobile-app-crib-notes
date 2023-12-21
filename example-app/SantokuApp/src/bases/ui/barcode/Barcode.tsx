@@ -97,7 +97,7 @@ export type BarcodeProps = {
   /**
    * エラー発生時に呼び出されるコールバック関数
    */
-  onError?: (err: any) => void;
+  onError?: (err: unknown) => void;
 };
 
 const initialBarcode = {

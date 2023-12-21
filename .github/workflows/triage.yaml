@@ -10,12 +10,12 @@ on:
 
 jobs:
   triage:
-    # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
-    runs-on: ubuntu-20.04
+    # https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
+    runs-on: ubuntu-22.04
     steps:
       - name: Label according to modified files
         # https://github.com/marketplace/actions/labeler
-        uses: actions/labeler@master
+        uses: actions/labeler@v4
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
           # Default is '.github/labeler.yml', but we use 'yaml' as an extension of YAML files.

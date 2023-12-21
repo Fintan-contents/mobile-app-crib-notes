@@ -1,5 +1,5 @@
 ---
-title: ハマりがちな落とし穴
+title: トラブルシューティング
 sidebar_label: はじめに
 ---
 

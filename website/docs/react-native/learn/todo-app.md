@@ -2,7 +2,6 @@
 title: ToDoアプリの実装
 sidebar_label: 概要
 pagination_label: ToDoアプリの実装
-hide_table_of_contents: true
 ---
 
 このハンズオンで作成するToDoアプリは[Webベースのハンズオン](https://fintan-contents.github.io/spa-restapi-handson/)と同じようなアプリケーションです。

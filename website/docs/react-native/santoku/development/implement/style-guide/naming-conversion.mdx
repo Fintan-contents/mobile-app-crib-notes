@@ -28,16 +28,16 @@ src
 beginner-mark.png
 ```
 
-## ReactQueryのクエリーキー
+## TanStack Queryのクエリキー
 
-React Queryはクエリキーに基づいてクエリをキャッシュ管理します。
+TanStack Queryはクエリキーに基づいてクエリをキャッシュ管理します。
 自動生成コードについては、Orvalの生成ルール（URL内のPathとQuery部をクエリキーとして使用）に従います。
-それ以外の独自クエリについては、`サービス名#関数名`をクエリキーとして用います。
+それ以外の独自クエリについては、`[サービス名, 関数名]`をクエリキーとして用います。
 
 以下は本規約に従った独自クエリの命名例です。
 
 ```console
-app-updates#requestAppUpdates
+['app-updates', 'requestAppUpdates']
 ```
 
 ## ローカルストレージに格納するキー

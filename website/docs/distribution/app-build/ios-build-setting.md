@@ -108,7 +108,7 @@ Mac端末にダウンロードした証明書をダブルクリックすると�
 1. Xcodeの左ペインでプロジェクトをクリック＞「TARGETS」で通常の（TestsやtvOSなどではない）TARGETを指定＞「Signing & Capabilities」＞「All」を選択
 1. 「Automatically manage signing」のチェックを外す
 1. 「Provisioning Profile」のプルダウンで「Import Profile…」を選択
-1. 開発用プロビジョニングプロファイル（Apple Development）を指定
+1. 開発用プロビジョニングプロファイル（Development）を指定
 1. 「Bundle Identifier」にアプリ管理者から教えてもらったApp IDを指定
 
 ##### トラブルシューティング

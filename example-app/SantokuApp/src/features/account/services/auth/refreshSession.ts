@@ -1,3 +1,19 @@
+/**
+ * Copyright 2023 TIS Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import axios, {AxiosResponse} from 'axios';
 import {ApplicationError} from 'bases/core/errors/ApplicationError';
 import {RuntimeError} from 'bases/core/errors/RuntimeError';
@@ -37,7 +53,12 @@ const setRefreshSessionInterceptor = () => {
       if (error.response?.status === 401) {
         try {
           await refreshSession();
-          return await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.request(error.config);
+          if (error.config) {
+            return await BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.request(error.config);
+          } else {
+            // レスポンスとしてステータスコードが返却されているのに、リクエストのConfigが存在しない場合は基本的に想定していない
+            handleError(new RuntimeError('Axios request config is not found.', 'RefreshSessionError'));
+          }
         } catch (e) {
           handleError(new RuntimeError(e, 'RefreshSessionError'));
           throw error;

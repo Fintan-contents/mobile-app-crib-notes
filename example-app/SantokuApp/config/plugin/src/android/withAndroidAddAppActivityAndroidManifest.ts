@@ -21,7 +21,7 @@ export const withAndroidAddAppActivityAndroidManifest: ConfigPlugin = config => 
       $: {
         'android:name': '.MainActivity',
         'android:theme': '@style/Theme.App.SplashScreen',
-        'android:exported': 'true' as 'true',
+        'android:exported': 'true' as const,
       },
     };
     const restApplication =

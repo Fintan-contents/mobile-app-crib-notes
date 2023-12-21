@@ -97,6 +97,10 @@ module.exports = {
       id: 'react-native/learn',
     },
     {
+      type: 'doc',
+      id: 'react-native/pre-requisites',
+    },
+    {
       type: 'category',
       label: 'Getting Started',
       items: [
@@ -111,7 +115,8 @@ module.exports = {
       label: 'アプリの実装前に',
       items: [
         'react-native/learn/basic-concepts',
-        'react-native/learn/basic-concepts/pre-requisites',
+        'react-native/learn/basic-concepts/what-is-react-native',
+        'react-native/learn/basic-concepts/what-is-expo',
         {
           type: 'category',
           label: 'React Nativeの基本',
@@ -159,6 +164,7 @@ module.exports = {
             'react-native/learn/basic-concepts/react-navigation-basics/stack',
             'react-native/learn/basic-concepts/react-navigation-basics/modal',
             'react-native/learn/basic-concepts/react-navigation-basics/tab',
+            'react-native/learn/basic-concepts/react-navigation-basics/param',
           ],
         },
       ],
@@ -212,6 +218,15 @@ module.exports = {
         'react-native/learn/qa-app/app-project-desc',
         {
           type: 'category',
+          label: 'Q&Aアプリの実装前に',
+          items: [
+            'react-native/learn/qa-app/pre-app-implementation',
+            'react-native/learn/qa-app/about-implementation-selection',
+            'react-native/learn/qa-app/about-component-units',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Q&Aアプリの実装（基本編）',
           items: [
             {
@@ -221,6 +236,7 @@ module.exports = {
                 'react-native/learn/qa-app/exercise-basic-home-components',
                 'react-native/learn/qa-app/exercise-basic-home-screen',
                 'react-native/learn/qa-app/exercise-basic-home-api',
+                'react-native/learn/qa-app/exercise-basic-home-test-case',
               ],
             },
             {
@@ -229,6 +245,7 @@ module.exports = {
               items: [
                 'react-native/learn/qa-app/exercise-basic-list-event-screen',
                 'react-native/learn/qa-app/exercise-basic-list-event-api',
+                'react-native/learn/qa-app/exercise-basic-list-event-test-case',
               ],
             },
             {
@@ -238,6 +255,7 @@ module.exports = {
                 'react-native/learn/qa-app/exercise-basic-detail-question-components',
                 'react-native/learn/qa-app/exercise-basic-detail-question-screen',
                 'react-native/learn/qa-app/exercise-basic-detail-question-api',
+                'react-native/learn/qa-app/exercise-basic-detail-question-test-case',
               ],
             },
             {
@@ -246,6 +264,7 @@ module.exports = {
               items: [
                 'react-native/learn/qa-app/exercise-basic-detail-event-screen',
                 'react-native/learn/qa-app/exercise-basic-detail-event-api',
+                'react-native/learn/qa-app/exercise-basic-detail-event-test-case',
               ],
             },
             {
@@ -255,17 +274,13 @@ module.exports = {
                 'react-native/learn/qa-app/exercise-basic-input-components',
                 'react-native/learn/qa-app/exercise-basic-input-screen',
                 'react-native/learn/qa-app/exercise-basic-input-api',
+                'react-native/learn/qa-app/exercise-basic-input-test-case',
               ],
             },
           ],
         },
         'react-native/learn/qa-app/exercise-advanced',
       ],
-    },
-    {
-      type: 'category',
-      label: '応用編',
-      items: ['react-native/learn/advance/react-navigation-param'],
     },
   ],
   pitfalls: [
@@ -282,6 +297,7 @@ module.exports = {
         'react-native/common-pitfalls/debug-keystore-not-found',
         'react-native/common-pitfalls/react-native-cli-uninstall',
         'react-native/common-pitfalls/cant-build-in-xcode',
+        'react-native/common-pitfalls/clear-cache',
       ],
     },
   ],
@@ -387,7 +403,7 @@ module.exports = {
           label: 'HTTP API通信',
           items: [
             'react-native/santoku/application-architecture/http-api/overview',
-            'react-native/santoku/application-architecture/http-api/http-api-react-query',
+            'react-native/santoku/application-architecture/http-api/http-api-tanstack-query',
           ],
         },
         {
@@ -424,6 +440,10 @@ module.exports = {
         {
           type: 'doc',
           id: 'react-native/santoku/application-architecture/cache-management/overview',
+        },
+        {
+          type: 'doc',
+          id: 'react-native/santoku/application-architecture/third-party-libraries/overview',
         },
       ],
     },

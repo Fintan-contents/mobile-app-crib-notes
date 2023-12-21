@@ -1,7 +1,6 @@
 ---
 title: 質問詳細画面の実装
 sidebar_label: 画面の実装
-hide_table_of_contents: true
 ---
 
 質問詳細画面を作成します。

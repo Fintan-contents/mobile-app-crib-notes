@@ -55,14 +55,14 @@ Orvalを実行すると、OpenAPI Specification内に記載した各APIに対し
 カスタマイズする必要のないAPI呼び出しについては自動生成されたCustom Hookをimportしてそのままexportします。
 
 自動生成されたCustom Hookは、APIのHTTPメソッドやOrval設定によって3種類に分けられます。
-それぞれがReact QueryのuseQuery, useInfiniteQuery, useMutationの3種類に対応しています。
+それぞれがTanStack QueryのuseQuery, useInfiniteQuery, useMutationの3種類に対応しています。
 それぞれの使い方は以下のとおりです。
 
 #### データ取得 (useQuery)
 
 HTTPメソッドがGETのAPIに対しては、基本的にはuseQueryをベースとしたCustom Hookが自動生成されます。
 第一引数にはクエリパラメータ、第二引数にはオプションを設定できます。
-指定できるオプションや戻り値は、React Queryの[useQuery](https://react-query.tanstack.com/reference/useQuery)とほぼ同様です。
+指定できるオプションや戻り値は、TanStack Queryの[useQuery](https://tanstack.com/query/v4/docs/react/reference/useQuery)とほぼ同様です。
 利用時のコード例は以下のようになります。
 
 ```typescript
@@ -104,7 +104,7 @@ const SampleScreen: React.FC = () => {
 
 OrvalのConfigファイル内でuseInfinite:trueに設定したAPIに対しては、useInfiniteQueryをベースとしたCustom Hookが自動生成されます。
 第一引数にはクエリパラメータ、第二引数にはオプションを設定できます。
-指定できるオプションや戻り値は、React Queryの[useInfiniteQuery](https://react-query.tanstack.com/reference/useInfiniteQuery)とほぼ同様です。
+指定できるオプションや戻り値は、TanStack Queryの[useInfiniteQuery](https://tanstack.com/query/v4/docs/react/reference/useInfiniteQuery)とほぼ同様です。
 利用時のコード例は以下のようになります。
 
 ```typescript
@@ -163,7 +163,7 @@ const SampleScreen: React.FC = () => {
 #### データ更新・削除 (useMutation)
 
 HTTPメソッドがPOST, PUT, DELETEなどのAPIに対しては、useMutationをベースとしたCustom Hookが自動生成されます。
-基本的な使い方や指定できるオプションは、React Queryの[useMutation](https://react-query.tanstack.com/reference/useMutation)とほぼ同様です。
+基本的な使い方や指定できるオプションは、TanStack Queryの[useMutation](https://tanstack.com/query/v4/docs/react/reference/useMutation)とほぼ同様です。
 
 ```typescript
 import axios from 'axios';
@@ -227,10 +227,10 @@ const SampleScreen: React.FC = () => {
 
 データを更新しても、それ以前に取得したクエリのキャッシュデータは残ったままです。
 クエリのキャッシュデータは、マウントされている全ての画面で利用されなくなった後、さらにcacheTime（デフォルト5分）が経過するまではそのまま利用されます。
-このアプリではstaleTimeを0に設定しているため、こうしたデータはReact Queryによる次のrefetchのタイミングで更新されます。
+このアプリではstaleTimeを0に設定しているため、こうしたデータはTanStack Queryによる次のrefetchのタイミングで更新されます。
 しかし古いクエリキャッシュはなるべくすぐに無効化・更新することが望ましいです。
 
-React Queryでは、クエリキャッシュを無効化する方法として、InvalidateとResetが用意されています。
+TanStack Queryでは、クエリキャッシュを無効化する方法として、InvalidateとResetが用意されています。
 Invalidateの場合は、古いデータを画面表示したまま、最新データを取得します。
 Resetの場合は、古いデータを削除して画面表示されないようにした上で、最新データを取得します。
 このアプリでは、更新系のAPI呼び出し成功時にResetを用いて関連する古いクエリキャッシュを無効化するよう、サービス層のCustom HookでonSuccessの処理を追加します。
@@ -323,7 +323,7 @@ const SampleScreen: React.FC = () => {
 ```
 
 Pull To Refresh操作には、ScrollViewのrefreshControlを用います。
-onRefreshでReact Queryのrefetch関数を呼びだすことで、データを再取得します。
+onRefreshでTanStack Queryのrefetch関数を呼びだすことで、データを再取得します。
 データの再取得はバックグラウンドで実行され、取得完了までは取得済みのデータが表示されます。
 再取得中の状態はisRefetchingで判断します。
 このフラグは、`isFetching && !isLoading`と同じです。
@@ -404,11 +404,11 @@ const SampleScreen: React.FC = () => {
 ```
 
 データ取得中のインジケータ表示の条件にisFetchingを使っていることに注意してください。
-検索条件が変わった場合、React Queryはキャッシュがある場合はそのデータを返し、バックグラウンドでクエリを実行します。
-その場合、isLoadingではなくisFetchingで判断しないと、以前の検索結果が表示されます。
-isLoadingはまだキャッシュがないかつクエリ実行中にtrueとなります。
+検索条件が変わった場合、TanStack Queryはキャッシュがある場合はそのデータを返し、バックグラウンドでクエリを実行します。
+その場合、isInitialLoadingではなくisFetchingで判断しないと、以前の検索結果が表示されます。
+isInitialLoadingはまだキャッシュがないかつクエリ実行中にtrueとなります。
 一方で、isFetchingはキャッシュの有無に関係なくクエリ実行中はtrueとなります。
-ページング表示する画面などにおいては、キャッシュがあれば表示し、なければインジケータを表示するためにisLoadingを用いた方がいいでしょう。
+ページング表示する画面などにおいては、キャッシュがあれば表示し、なければインジケータを表示するためにisInitialLoadingを用いた方がいいでしょう。
 画面の仕様に応じて、適宜使い分けてください。
 
 ### インクリメンタルサーチ（逐次検索）
@@ -524,15 +524,17 @@ const useDependentQueryDemo = () => {
 
 ```typescript
   // 並列で実行したクエリの総合的な結果をもとに画面描画を切り替える場合はそれぞれのクエリのstatusを統合する
-  const queryResults = [itemQuery, itemType0Query, itemType1Query, amountQuery];
-  const isIdle = queryResults.every(query => query.isIdle);
-  const isLoading = queryResults.some(query => query.isLoading);
-  const isRefetching = queryResults.some(query => query.isRefetching);
-  const isSuccess = queryResults.every(query => query.isSuccess);
-  const isError = queryResults.some(query => query.isError);
+  const queries = [itemQuery, itemType0Query, itemType1Query, amountQuery];
+  const isIdle = queries.every(query => query.fetchStatus === 'idle');
+  const isFetching = queries.some(query => query.isFetching);
+  const isLoading = queries.some(query => query.isLoading);
+  const isInitialLoading = queries.some(query => query.isInitialLoading);
+  const isRefetching = queries.some(query => query.isRefetching);
+  const isSuccess = queries.every(query => query.isSuccess);
+  const isError = queries.some(query => query.isError);
 ```
 
-上記コードから分かる通り、React Queryで複数のクエリを連結するのはやや複雑です。
+上記コードから分かる通り、TanStack Queryで複数のクエリを連結するのはやや複雑です。
 条件が複雑になる場合や、複数のAPIをループで呼びだす場合などは、非同期関数に纏めたほうが分かりやすいです。
 次のコードは、上記例を非同期関数に書き換えたものです。
 非同期関数に纏めることで、コードがシンプルになります。
@@ -630,9 +632,9 @@ const SampleScreen: React.FC = () => {
 }
 ```
 
-FlatListのonEndReachedでReact QueryのfetchNextPage関数を呼びだすことで、リストの末尾へスクロールした際にデータを追加取得します。
+FlatListのonEndReachedでTanStack QueryのfetchNextPage関数を呼びだすことで、リストの末尾へスクロールした際にデータを追加取得します。
 データの追加取得中は、ListFooterComponentに指定したインジケータが表示されます。
-FlatListのonRefreshでReact Queryのrefetch関数を呼びだすことで、Pull To Refresh操作でデータを再取得ができます。
+FlatListのonRefreshでTanStack Queryのrefetch関数を呼びだすことで、Pull To Refresh操作でデータを再取得ができます。
 refreshingの条件に注意してください。isRefetchingのみだとデータの追加読込み時も対象となるため、`isRefetching && !isFetchingNextPage`の条件で再読み込みと判断します。
 maxToRenderPerBatchはスクロールでレンダリングされる項目量です。
 APIに指定する最大取得件数（limit）と合わせておくといいでしょう。

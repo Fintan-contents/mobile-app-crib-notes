@@ -1,3 +1,19 @@
+/**
+ * Copyright 2023 TIS Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import {LikedQuestionResponse} from 'features/backend/apis/model';
 import {rest} from 'msw';
 
@@ -41,16 +57,19 @@ export const getAccountsMeLikes = rest.get(`${backendUrl}/accounts/me/likes`, (r
     /**
      * questionCommentLikesをLikedQuestionResponseと同じ形式に変更
      */
-    const questionComment = questionCommentLikes.reduce((acc, curr) => {
-      const accCommentId = curr.questionId in acc ? acc[curr.questionId].commentId : [];
-      acc[curr.questionId] = {
-        questionId: curr.questionId,
-        liked: false,
-        commentId: [...accCommentId, curr.commentId],
-        answer: [],
-      };
-      return acc;
-    }, {} as {[key: string]: LikedQuestionResponse});
+    const questionComment = questionCommentLikes.reduce(
+      (acc, curr) => {
+        const accCommentId = curr.questionId in acc ? acc[curr.questionId].commentId : [];
+        acc[curr.questionId] = {
+          questionId: curr.questionId,
+          liked: false,
+          commentId: [...accCommentId, curr.commentId],
+          answer: [],
+        };
+        return acc;
+      },
+      {} as {[key: string]: LikedQuestionResponse},
+    );
     const qcl = Object.values(questionComment);
 
     /**
@@ -60,38 +79,44 @@ export const getAccountsMeLikes = rest.get(`${backendUrl}/accounts/me/likes`, (r
     const al = answerLikes.map(al => ({questionId: al.questionId, answerId: al.answerId, liked: true, commentId: []}));
 
     // answerCommentLikesを{questionId: string; answerId: string; liked: boolean; commentId: string[]}形式に変更
-    const answerComment = answerCommentLikes.reduce((acc, curr) => {
-      const accCommentId = curr.questionId in acc ? acc[curr.questionId].commentId : [];
-      acc[curr.questionId] = {
-        questionId: curr.questionId,
-        answerId: curr.answerId,
-        liked: false,
-        commentId: [...accCommentId, curr.commentId],
-      };
-      return acc;
-    }, {} as {[key: string]: {questionId: string; answerId: string; liked: boolean; commentId: string[]}});
+    const answerComment = answerCommentLikes.reduce(
+      (acc, curr) => {
+        const accCommentId = curr.questionId in acc ? acc[curr.questionId].commentId : [];
+        acc[curr.questionId] = {
+          questionId: curr.questionId,
+          answerId: curr.answerId,
+          liked: false,
+          commentId: [...accCommentId, curr.commentId],
+        };
+        return acc;
+      },
+      {} as {[key: string]: {questionId: string; answerId: string; liked: boolean; commentId: string[]}},
+    );
     const acl = Object.values(answerComment);
 
     // alとaclをマージして、LikedQuestionResponseと同じ形式に変更
     const answer = Object.values(
-      [...al, ...acl].reduce((acc, curr) => {
-        const accAnswer = curr.questionId in acc ? acc[curr.questionId].answer : [];
-        const found = accAnswer.find(a => a.answerId === curr.answerId);
-        acc[curr.questionId] = {
-          questionId: curr.questionId,
-          liked: false,
-          commentId: [],
-          answer: [
-            ...accAnswer.filter(a => a.answerId !== curr.answerId),
-            {
-              answerId: curr.answerId,
-              liked: found?.liked ? true : curr.liked,
-              commentId: [...(found?.commentId ?? []), ...curr.commentId],
-            },
-          ],
-        };
-        return acc;
-      }, {} as {[key: string]: LikedQuestionResponse}),
+      [...al, ...acl].reduce(
+        (acc, curr) => {
+          const accAnswer = curr.questionId in acc ? acc[curr.questionId].answer : [];
+          const found = accAnswer.find(a => a.answerId === curr.answerId);
+          acc[curr.questionId] = {
+            questionId: curr.questionId,
+            liked: false,
+            commentId: [],
+            answer: [
+              ...accAnswer.filter(a => a.answerId !== curr.answerId),
+              {
+                answerId: curr.answerId,
+                liked: found?.liked ? true : curr.liked,
+                commentId: [...(found?.commentId ?? []), ...curr.commentId],
+              },
+            ],
+          };
+          return acc;
+        },
+        {} as {[key: string]: LikedQuestionResponse},
+      ),
     );
 
     /**
@@ -99,18 +124,21 @@ export const getAccountsMeLikes = rest.get(`${backendUrl}/accounts/me/likes`, (r
      * レスポンスを作成
      */
     const questionResponse = Object.values(
-      [...ql, ...qcl, ...answer].reduce((acc, curr) => {
-        const accLiked = curr.questionId in acc ? acc[curr.questionId].liked ?? false : false;
-        const accCommentId = curr.questionId in acc ? acc[curr.questionId].commentId : [];
-        const accAnswer = curr.questionId in acc ? acc[curr.questionId].answer : [];
-        acc[curr.questionId] = {
-          questionId: curr.questionId,
-          liked: accLiked || curr.liked,
-          commentId: [...accCommentId, ...curr.commentId],
-          answer: [...accAnswer, ...curr.answer],
-        };
-        return acc;
-      }, {} as {[key: string]: LikedQuestionResponse}),
+      [...ql, ...qcl, ...answer].reduce(
+        (acc, curr) => {
+          const accLiked = curr.questionId in acc ? acc[curr.questionId].liked ?? false : false;
+          const accCommentId = curr.questionId in acc ? acc[curr.questionId].commentId : [];
+          const accAnswer = curr.questionId in acc ? acc[curr.questionId].answer : [];
+          acc[curr.questionId] = {
+            questionId: curr.questionId,
+            liked: accLiked || curr.liked,
+            commentId: [...accCommentId, ...curr.commentId],
+            answer: [...accAnswer, ...curr.answer],
+          };
+          return acc;
+        },
+        {} as {[key: string]: LikedQuestionResponse},
+      ),
     );
 
     return delayedResponse(ctx.json([...eventResponse, ...questionResponse]));
