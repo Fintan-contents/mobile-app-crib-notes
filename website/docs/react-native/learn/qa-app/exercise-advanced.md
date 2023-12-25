@@ -1,7 +1,6 @@
 ---
 title: Q&Aアプリの実装（応用編）
 sidebar_label: Q&Aアプリの実装（応用編）
-hide_table_of_contents: true
 ---
 
 Q&Aアプリの実装（基本編）で作成したアプリに対して、以下の変更を加えてください。

@@ -17,7 +17,7 @@
 
 * [extensible-custom-error](https://github.com/necojackarc/extensible-custom-error)
   * ライセンス： https://github.com/necojackarc/extensible-custom-error/blob/52d56448d9f535835a9ffbc7e447b951555c08c2/README.md
-  * 利用箇所： [ApplicationError.ts](example-app/SantokuApp/src/bases/core/errors/ApplicationError.ts)
+  * 利用箇所： [ErrorWrapper.ts](example-app/SantokuApp/src/bases/core/errors/ErrorWrapper.ts)
 * [react-native-barcode-generator](https://github.com/Kichiyaki/react-native-barcode-generator)
   * ライセンス： https://github.com/Kichiyaki/react-native-barcode-generator/blob/22f020eacf47fe23f0e311732ec801068db14fbc/LICENSE
   * 利用箇所： [Barcode.tsx](example-app/SantokuApp/src/bases/ui/barcode/Barcode.tsx)

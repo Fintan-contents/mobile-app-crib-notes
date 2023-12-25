@@ -22,7 +22,7 @@ const copyright = `<div class="no-content">
 
 const injectOptions = {
   organization,
-  rnSpoilerTag: 'v2023.9.0',
+  rnSpoilerTag: 'v2023.12.0',
 };
 
 module.exports = {
@@ -95,7 +95,7 @@ module.exports = {
               to: 'react-native/santoku',
             },
             {
-              label: 'Pitfalls',
+              label: 'Trouble shooting',
               to: 'react-native/common-pitfalls',
             },
           ],
@@ -133,7 +133,7 @@ module.exports = {
               to: 'react-native/santoku',
             },
             {
-              label: 'Pitfalls',
+              label: 'Trouble shooting',
               to: 'react-native/common-pitfalls',
             },
           ],
@@ -235,6 +235,18 @@ module.exports = {
           {
             from: '/docs', // string | string[]
             to: '/reference', // string
+          },
+          {
+            from: '/react-native/learn/advance/react-navigation-param', // string | string[]
+            to: '/react-native/learn/basic-concepts/react-navigation-basics/param', // string
+          },
+          {
+            from: '/react-native/learn/basic-concepts/pre-requisites', // string | string[]
+            to: '/react-native/pre-requisites', // string
+          },
+          {
+            from: '/react-native/santoku/application-architecture/http-api/http-api-react-query', // string | string[]
+            to: '/react-native/santoku/application-architecture/http-api/http-api-tanstack-query', // string
           },
         ],
       },

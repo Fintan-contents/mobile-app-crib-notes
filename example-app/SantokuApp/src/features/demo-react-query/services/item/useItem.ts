@@ -1,5 +1,21 @@
+/**
+ * Copyright 2023 TIS Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import {useQuery} from '@tanstack/react-query';
 import {useCallback} from 'react';
-import {useQuery} from 'react-query';
 
 // 商品
 type Item = {
@@ -49,16 +65,24 @@ export const useItem = (id: number) => {
   // 並列クエリ
   // 商品取得APIを呼び出した後、商品種別に応じて異なるAPIで割引率を取得する
   // その後、商品の価格と割引率を入力として金額計算APIを呼び出す
-  const itemQuery = useQuery<Item>(['item'], () => getItem(id));
+  const itemQuery = useQuery<Item>(['item', 'getItem'], () => getItem(id));
   const item = itemQuery.data;
 
-  const itemType0Query = useQuery<ItemRate>(['itemType0', itemQuery.data], () => getItemType0(itemQuery.data!), {
-    enabled: itemQuery.isSuccess && itemQuery.data.type === 0,
-  });
+  const itemType0Query = useQuery<ItemRate>(
+    ['item', 'getItemType0', itemQuery.data],
+    () => getItemType0(itemQuery.data!),
+    {
+      enabled: itemQuery.isSuccess && itemQuery.data.type === 0,
+    },
+  );
 
-  const itemType1Query = useQuery<ItemRate>(['itemType1', itemQuery.data], () => getItemType1(itemQuery.data!), {
-    enabled: itemQuery.isSuccess && itemQuery.data.type === 1,
-  });
+  const itemType1Query = useQuery<ItemRate>(
+    ['item', 'getItemType1', itemQuery.data],
+    () => getItemType1(itemQuery.data!),
+    {
+      enabled: itemQuery.isSuccess && itemQuery.data.type === 1,
+    },
+  );
 
   const rate =
     itemQuery.isSuccess && itemType0Query.isSuccess
@@ -68,15 +92,18 @@ export const useItem = (id: number) => {
       : undefined;
   const amountQueryParams = itemQuery.data && rate ? {price: itemQuery.data.price, rate} : undefined;
 
-  const amountQuery = useQuery(['amount', amountQueryParams], () => getAmount(amountQueryParams!), {
+  const amountQuery = useQuery(['item', 'getAmount', amountQueryParams], () => getAmount(amountQueryParams!), {
     enabled: !!amountQueryParams,
   });
   const amount = amountQuery.data;
 
   const queries = [itemQuery, itemType0Query, itemType1Query, amountQuery];
-  const isIdle = queries.every(query => query.isIdle);
+  const isIdle = queries.every(query => query.fetchStatus === 'idle');
+  const isPaused = queries.every(query => query.isPaused);
+  const isFetching = queries.some(query => query.isFetching);
   const isLoading = queries.some(query => query.isLoading);
   const isRefetching = queries.some(query => query.isRefetching);
+  const isInitialLoading = queries.some(query => query.isInitialLoading);
   const isSuccess = queries.every(query => query.isSuccess);
   const isError = queries.some(query => query.isError);
   const reload = useCallback(() => {
@@ -87,8 +114,11 @@ export const useItem = (id: number) => {
   return {
     item: {...item, rate, amount},
     isIdle,
+    isPaused,
+    isFetching,
     isLoading,
     isRefetching,
+    isInitialLoading,
     isSuccess,
     isError,
     refetch: itemQuery.refetch,

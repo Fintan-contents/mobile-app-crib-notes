@@ -19,3 +19,5 @@ rules:
     patterns: Cocoapods
   - expected: ToDo
     patterns: Todo
+  - expected: クエリ
+    patterns: クエリー

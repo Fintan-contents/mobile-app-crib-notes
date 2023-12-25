@@ -1,3 +1,19 @@
+/**
+ * Copyright 2023 TIS Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import {m} from 'bases/message/Message';
 import {yup} from 'bases/validator';
 import {FormikHelpers, useFormik} from 'formik';
@@ -19,7 +35,7 @@ const loginFormValidationSchema = yup.object().shape({
 });
 
 type LoginFormParams = {
-  onSubmit: (values: LoginFormValues, formikHelpers: FormikHelpers<LoginFormValues>) => void | Promise<any>;
+  onSubmit: (values: LoginFormValues, formikHelpers: FormikHelpers<LoginFormValues>) => void | Promise<unknown>;
 };
 export const useLoginForm = (params: LoginFormParams = {onSubmit: () => {}}) => {
   const form = useFormik({

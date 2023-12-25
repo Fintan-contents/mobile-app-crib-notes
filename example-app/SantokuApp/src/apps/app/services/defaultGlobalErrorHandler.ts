@@ -1,3 +1,20 @@
+/**
+ * Copyright 2023 TIS Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import {QueryClient} from '@tanstack/react-query';
 import axios from 'axios';
 import {isApplicationError} from 'bases/core/errors/ApplicationError';
 import {handleError} from 'bases/core/errors/handleError';
@@ -7,7 +24,6 @@ import {Snackbar} from 'bases/ui/snackbar/Snackbar';
 import {clientLogout} from 'features/account/services/auth/clientLogout';
 import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
 import {Alert} from 'react-native';
-import {QueryClient} from 'react-query';
 
 const outDebugLog = (error: unknown) => {
   try {
@@ -15,10 +31,10 @@ const outDebugLog = (error: unknown) => {
       log.debug(
         `
 Backend API Request Error:
-req.url=[${error.config.url ?? ''}]
-req.method=[${error.config.method ?? ''}]
-req.headers=[${JSON.stringify(error.config.headers, null, 2)}]
-req.body=[${JSON.stringify(error.config.data, null, 2)}]
+req.url=[${error.config?.url ?? ''}]
+req.method=[${error.config?.method ?? ''}]
+req.headers=[${JSON.stringify(error.config?.headers, null, 2)}]
+req.body=[${JSON.stringify(error.config?.data, null, 2)}]
 res.status=[${error.response?.status ?? ''}]
 res.statusText=[${error.response?.statusText ?? ''}]
 res.headers=[${JSON.stringify(error.response?.headers, null, 2)}]
@@ -33,9 +49,13 @@ res.body=[${JSON.stringify(error.response?.data, null, 2)}]
 };
 
 const showRequireLoginDialog = (queryClient: QueryClient) => {
-  clientLogout(queryClient).finally(() => {
-    Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
-  });
+  clientLogout(queryClient)
+    .catch(() => {
+      // clientLogoutの中で必要に応じてログ出力しているので、ここでは何もしない
+    })
+    .finally(() => {
+      Alert.alert(m('fw.error.再ログインタイトル'), m('fw.error.再ログイン本文'));
+    });
 };
 
 export const defaultGlobalErrorHandler = (queryClient: QueryClient) => {

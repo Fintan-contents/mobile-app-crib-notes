@@ -2,7 +2,6 @@
 title: Q&Aアプリの実装
 sidebar_label: 概要
 pagination_label: Q&Aアプリの実装
-hide_table_of_contents: true
 ---
 
 [ToDoアプリの実装](/react-native/learn/todo-app)が完了した方向けのコンテンツです。ここでは、より実践的なアプリを作成します。
@@ -22,6 +21,11 @@ const overviews = [
     title: 'Q&Aアプリプロジェクトの説明',
     to: '/react-native/learn/qa-app/app-project-desc',
     summary: <>Q&Aアプリの開発に利用するReact Nativeプロジェクトを準備・設定します。</>
+  },
+  {
+    title: 'Q&Aアプリの実装前に',
+    to: '/react-native/learn/qa-app/pre-app-implementation',
+    summary: <>Q&Aアプリの実装前に、実装方法の検討時の進め方やコンポーネントの分割単位について理解します。</>
   },
   {
     title: 'Q&Aアプリの実装（基本編）',

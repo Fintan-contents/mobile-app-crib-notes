@@ -1,3 +1,19 @@
+/**
+ * Copyright 2023 TIS Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import {LikedQuestionResponse} from 'features/backend/apis/model';
 import {rest} from 'msw';
 
@@ -32,42 +48,48 @@ export const getAccountsMeQuestionLikes = rest.get(
       const al = answerLike.map(al => ({answerId: al.answerId, liked: true, commentId: []}));
 
       // answerCommentLikesを{questionId: string; answerId: string; liked: boolean; commentId: string[]}形式に変更
-      const answerComment = answerCommentLike.reduce((acc, curr) => {
-        if (curr.questionId in acc) {
-          acc[curr.answerId] = {
-            answerId: curr.answerId,
-            liked: false,
-            commentId: [...acc[curr.questionId].commentId, curr.commentId],
-          };
-          return acc;
-        }
-        acc[curr.answerId] = {
-          answerId: curr.answerId,
-          liked: false,
-          commentId: [curr.commentId],
-        };
-        return acc;
-      }, {} as {[key: string]: {answerId: string; liked: boolean; commentId: string[]}});
-      const acl = Object.values(answerComment);
-
-      // alとaclをマージ
-      const answer = Object.values(
-        [...al, ...acl].reduce((acc, curr) => {
-          if (curr.answerId in acc) {
+      const answerComment = answerCommentLike.reduce(
+        (acc, curr) => {
+          if (curr.questionId in acc) {
             acc[curr.answerId] = {
               answerId: curr.answerId,
-              liked: acc[curr.answerId].liked || curr.liked,
-              commentId: [...acc[curr.answerId].commentId, ...curr.commentId],
+              liked: false,
+              commentId: [...acc[curr.questionId].commentId, curr.commentId],
             };
             return acc;
           }
           acc[curr.answerId] = {
             answerId: curr.answerId,
-            liked: curr.liked,
-            commentId: [...curr.commentId],
+            liked: false,
+            commentId: [curr.commentId],
           };
           return acc;
-        }, {} as {[key: string]: {answerId: string; liked: boolean; commentId: string[]}}),
+        },
+        {} as {[key: string]: {answerId: string; liked: boolean; commentId: string[]}},
+      );
+      const acl = Object.values(answerComment);
+
+      // alとaclをマージ
+      const answer = Object.values(
+        [...al, ...acl].reduce(
+          (acc, curr) => {
+            if (curr.answerId in acc) {
+              acc[curr.answerId] = {
+                answerId: curr.answerId,
+                liked: acc[curr.answerId].liked || curr.liked,
+                commentId: [...acc[curr.answerId].commentId, ...curr.commentId],
+              };
+              return acc;
+            }
+            acc[curr.answerId] = {
+              answerId: curr.answerId,
+              liked: curr.liked,
+              commentId: [...curr.commentId],
+            };
+            return acc;
+          },
+          {} as {[key: string]: {answerId: string; liked: boolean; commentId: string[]}},
+        ),
       );
 
       return delayedResponse(

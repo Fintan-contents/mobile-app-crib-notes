@@ -1,0 +1,38 @@
+---
+title: Q&Aアプリの実装前に
+sidebar_label: 概要
+pagination_label: Q&Aアプリの実装前に - 概要
+---
+
+ToDoアプリではほとんどの機能に対してコード例を記載していましたが、Q&Aアプリではコード例を明示していません。
+参考プロジェクトとして[サンプルアプリ（SantokuApp）](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp)はありますが、基本的には自身で開発を進めていくことになります。
+
+開発を進めていく中で、実装方法がいくつか考えられるものもあります。これらをどのように決めていくかは、開発を進める上で重要なポイントです。
+
+ここでは、画面のヘッダーを例に実装方法を決めるまでの過程を順に説明します。実装方法の検討時の進め方として、1つの参考にしてみてください。
+
+<!-- textlint-disable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair,ja-technical-writing/no-doubled-joshi -->
+
+import {PageList} from '../../../../src/components';
+const aboutImplementationOptions = [
+  {
+    title: '実装方法の検討について',
+    to: '/react-native/learn/qa-app/about-implementation-selection',
+  },
+]
+const designSystem = [
+  {
+    title: 'コンポーネントの分割について',
+    to: '/react-native/learn/qa-app/about-component-units',
+  },
+]
+
+<!-- textlint-enable ja-technical-writing/sentence-length,ja-technical-writing/max-comma,ja-spacing/ja-no-space-around-parentheses,jtf-style/3.3.かっこ類と隣接する文字の間のスペースの有無,ja-technical-writing/ja-no-mixed-period,ja-technical-writing/no-unmatched-pair,ja-technical-writing/no-doubled-joshi -->
+
+<PageList overviews={aboutImplementationOptions} colSize={12} />
+
+また、アプリ開発ではコンポーネントを適切に分割することも重要なポイントです。例えば、画面を1つのコンポーネント内に実装すると、コードが肥大化してしまいます。また、他の画面で同じような表示をする場合に再利用できません。
+
+次のページでは、コンポーネントをどのような単位で分割していくべきかについて説明します。
+
+<PageList overviews={designSystem} colSize={12} />

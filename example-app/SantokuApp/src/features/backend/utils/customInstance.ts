@@ -1,5 +1,22 @@
-import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+/**
+ * Copyright 2023 TIS Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import Axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, GenericAbortSignal} from 'axios';
 import {AppConfig} from 'bases/core/configs/AppConfig';
+import {log} from 'bases/logging';
 import {applicationName, nativeApplicationVersion} from 'expo-application';
 import {RequestTimeoutError} from 'features/backend/errors/RequestTimeoutError';
 import {Platform} from 'react-native';
@@ -31,42 +48,94 @@ const getDefaultAxiosConfig = () => {
   } as AxiosRequestConfig;
 };
 
+/**
+ * 指定されたsignalを組み合わせて、一つのsignalを返却します。
+ *
+ * ＜参考＞
+ * MDNには、AbortSignal.anyというメソッドが存在していますが、React Nativeではまだ実装されていないようです。
+ * https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal#browser_compatibility
+ * https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
+ */
+const combineSignals = (...signals: (AbortSignal | GenericAbortSignal)[]) => {
+  const controller = new AbortController();
+  const signal = controller.signal;
+  const removeListeners: (() => void)[] = [];
+  const handleChildSignalAbort = () => {
+    controller.abort();
+  };
+
+  for (const s of signals) {
+    if (s.aborted) {
+      // 既にabortされている場合は、新しいsignalをabortします
+      controller.abort();
+      break;
+    }
+    if (s.addEventListener) {
+      s.addEventListener('abort', handleChildSignalAbort);
+    } else {
+      log.warn('AbortSignal.addEventListener is undefined');
+      continue;
+    }
+    if (s.removeEventListener) {
+      /*
+        eslint-disable-next-line @typescript-eslint/no-unsafe-return --
+        removeEventListenerの戻り値は特に使用しないため、ESLintの警告を無視しています
+       */
+      removeListeners.push(() => s.removeEventListener?.('abort', handleChildSignalAbort));
+    } else {
+      log.warn('AbortSignal.removeEventListener is undefined');
+    }
+  }
+  const cleanup = () => removeListeners.forEach(r => r());
+  // React NativeはaddEventListenerのOptionとしてsignalがサポートされていないため、abortした場合に自動でListenerを削除できません
+  // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L495
+  // https://developer.mozilla.org/ja/docs/Web/API/EventTarget/addEventListener
+  signal.onabort = cleanup;
+  return {signal, cleanup};
+};
+
 const customInstance = <T>(
   axiosInstance: AxiosInstance,
 ): ((config: AxiosRequestConfig) => Promise<AxiosResponse<T>>) => {
   const defaultAxiosConfig = getDefaultAxiosConfig();
   return (config: AxiosRequestConfig) => {
-    // TODO: React Native / Expo のバージョンアップ時にJestを27以降にバージョンアップできたらCancelTokenからAbortControllerへ移行する
-    const source = Axios.CancelToken.source();
+    const timeoutAbortController = new AbortController();
+    const timeoutSignal = timeoutAbortController.signal;
+    const combinedSignal = config.signal
+      ? combineSignals(timeoutSignal, config.signal)
+      : {signal: timeoutSignal, cleanup: undefined};
+
     const requestConfig = {
       ...defaultAxiosConfig,
       ...config,
-      cancelToken: source.token,
+      signal: combinedSignal.signal,
     };
+
     const promise = axiosInstance(requestConfig);
 
-    // @ts-expect-error -- cancelは型定義にはないが定義するとReact Queryによって呼ばれる
-    // ただし、AbortSignalへの移行を検討した方が良さそう
-    // https://tanstack.com/query/v3/docs/react/guides/query-cancellation#old-cancel-function
-    promise.cancel = () => {
-      source.cancel('Query was cancelled by React Query');
-    };
-
+    // MDNには、AbortSignal.timeoutが存在しますが、React Nativeではまだ実装されていないようです。
+    // https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static
+    // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
+    // そのため、setTimeoutを使用して、timeoutを実現します。
     let timeoutId: NodeJS.Timeout | null;
     if (REQUEST_TIMEOUT) {
       timeoutId = setTimeout(() => {
         timeoutId = null;
-        source.cancel('Query was cancelled by Request Timeout');
+        // MDNには、AbortController.abortの引数としてreasonを受け取れるように記載されていますが、React Nativeでは実装されていないようです。
+        // https://developer.mozilla.org/ja/docs/Web/API/AbortSignal/abort_static
+        // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L527
+        timeoutAbortController.abort();
       }, REQUEST_TIMEOUT);
     }
 
     return promise
       .catch(error => {
-        // TODO: AbortControllerへの移行時に処理を見直す
-        // AbortControllerでabortした場合はErrorにはならず、responseがundefinedになる
         if (Axios.isCancel(error)) {
-          const cancelError = error as {message: string};
-          if (cancelError.message === 'Query was cancelled by Request Timeout') {
+          if (timeoutSignal.aborted) {
+            // MDNには、AbortSignal.reasonが存在しますが、React Nativeでは実装されていないようです。
+            // https://developer.mozilla.org/ja/docs/Web/API/AbortSignal/reason
+            // https://github.com/facebook/react-native/blob/v0.72.5/packages/react-native/types/modules/globals.d.ts#L480
+            // そのため、AbortSignalのreasonをthrowしないで、RequestTimeoutErrorを直接throwしています。
             throw new RequestTimeoutError('Request Timeout');
           }
         }
@@ -76,6 +145,7 @@ const customInstance = <T>(
         if (timeoutId) {
           clearTimeout(timeoutId);
         }
+        combinedSignal.cleanup?.();
       });
   };
 };
@@ -93,13 +163,8 @@ const setCsrfTokenHeader = (csrfTokenHeaderName: string, csrfTokenValue: string)
   BACKEND_AXIOS_INSTANCE_WITHOUT_REFRESH_SESSION.defaults.headers.common[csrfTokenHeaderName] = csrfTokenValue;
 };
 
-const setAxiosResponseInterceptor = (
-  onFulfilled: (
-    value: AxiosResponse<any, any>,
-  ) => (AxiosResponse<any, any> | Promise<AxiosResponse<any, any>>) | undefined,
-  onRejected: (error: any) => any | undefined,
-) => {
-  BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
+const setAxiosResponseInterceptor: typeof Axios.interceptors.response.use = (onFulfilled, onRejected) => {
+  return BACKEND_AXIOS_INSTANCE.interceptors.response.use(onFulfilled, onRejected);
 };
 
 export {

@@ -11,7 +11,7 @@ module.exports = {
     'preset-ja-technical-writing': {
       'sentence-length': {
         max: 100,
-        exclusionPatterns: ['/\\(.*\\)/'],
+        skipPatterns: ['/\\(.*\\)/'],
       },
       'ja-no-mixed-period': {
         allowPeriodMarks: [':::'],
@@ -26,7 +26,7 @@ module.exports = {
           '非機能要件評価',
           '内閣府消費動向調査',
           '利用規約同意画面',
-          '利用規約同意状態確認'
+          '利用規約同意状態確認',
         ],
       },
     },

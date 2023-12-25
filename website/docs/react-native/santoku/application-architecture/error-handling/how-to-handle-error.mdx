@@ -19,6 +19,14 @@ title: エラーの発生箇所と処理方法
 
 ただし、Promiseで発生したエラーに関しては、Firebase Crashlytics SDKで捕捉できないため、必ず個別にエラー処理を実施してください。
 
+:::warning
+JavaScriptエンジンがHermesの場合、iOSではReactコンポーネントで発生したエラーがFirebase Crashlyticsに送信されない事象を確認しています。
+
+回避策として、React.Componentの[componentDidCatch](https://ja.react.dev/reference/react/Component#componentdidcatch)でエラーを再度throwすることで、Firebase Crashlyticsにクラッシュログが送信されます。
+
+詳細は、[FirebaseCrashlyticsWorkaround.tsx](https://github.com/{@inject:organization}/mobile-app-crib-notes/tree/master/example-app/SantokuApp/src/bases/firebase/crashlytics/FirebaseCrashlyticsWorkaround.tsx)を参照してください。
+:::
+
 :::caution
 Firebase Crashlyticsにログを送信するタイミングは、アプリを再起動した時になります。即座にログが送信されないことに注意してください。
 :::
@@ -47,7 +55,7 @@ Firebase Crashlyticsの動作設定は、設定ファイルのFirebase.jsonで�
 
 Reactコンポーネントでは、JSXやコンポーネントのライフサイクルに応じた処理（`componentDidMount`や`useEffect`など）でエラーが発生します。
 
-JSXでエラーが発生した場合は、[Error Boundary](https://ja.reactjs.org/docs/error-boundaries.html)でエラーを捕捉します。該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
+JSXでエラーが発生した場合は、[Error Boundary](https://ja.react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary)でエラーを捕捉します。該当のコンポーネントを`Error Boundary`でラップしてエラー処理を実施してください。
 
 ```typescript jsx title='Error Boundaryの例'
 const Avator = () => {
@@ -91,14 +99,20 @@ const Component = () => {
 
 ```typescript jsx title=await式を使用した場合のtry...catchの例
 const Component = () => {
-  useEffect(() => {
+  const callAsyncFunction = useCallback(async () => {
     try {
       const result = await asyncFunction();
       // 正常時の処理
-    } catch(e) {
+    } catch (e) {
       // エラー処理
     }
   }, [asyncFunction]);
+
+  useEffect(() => {
+    callAsyncFunction().catch(() => {
+      // callAsyncFunctionでエラーハンドリングを実施しているので、ここでは特に何もしない
+    });
+  }, [callAsyncFunction]);
 
   /* ～省略～ */
 };

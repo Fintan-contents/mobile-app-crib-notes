@@ -24,10 +24,11 @@ import TabItem from '@theme/TabItem';
 | macOS, Windows | Node.js              | [アクティブLTS](https://github.com/nodejs/release#release-schedule) | Node.js 16以降であれば学習には問題ないはずですが、このコンテンツはアクティブLTSを前提にして書かれています。                                                |
 | macOS, Windows | Java Development Kit | 11                                                   | ディストリビューションにはこだわりなし                                                                                         |
 | macOS, Windows | Android Studio       | 最新                                                  | インストール後に[Android仮想デバイスの作成](#android仮想デバイスの作成)と[Android SDKのコマンドラインツールの設定](#android-sdkのコマンドラインツールの設定)が必要です。 |
-| macOS          | Xcode                | 13                                                   | [異なるバージョンのXcodeを共存させる](../../santoku/development/development-environment/90.use-multiple-version-xcode.mdx) |
+| macOS, Windows | Git                  | 最新                                                  | Homebrew(macOS), [公式ページ](https://git-scm.com/download/win)(Windows)でインストール |
+| macOS          | Xcode                | 最新                                                  | App Storeでインストール<br/>※ [異なるバージョンのXcodeを共存させる](../../santoku/development/development-environment/90.use-multiple-version-xcode.mdx) |
 | macOS          | CocoaPods            | 最新                                                  | [Ruby, CocoaPodsのインストール](#ruby-cocoapodsのインストール)                                                            |
 
-これらに加えて、少し便利に開発するために次のツールも導入してください。ドキュメント内の手順は、これらのツールがインストールされていることを前提にしています。
+これらに加えて、少し便利に開発するために次のツールも導入してください。
 
 | OS    | ツール      | 用途                                                        | おすすめのインストール方法                                |
 |:------|:-----------|:-----------------------------------------------------------|:------------------------------------------------------|
@@ -52,7 +53,7 @@ Android Studioをインストールした後、Android SDKに含まれる各種�
 
 Android StudioでSDK Managerを開き、SDK Toolsタブで以下のツールにチェックが付いていることを確認してください。チェックが付いていない場合は、チェックを付けて「Apply」もしくは「OK」を押してインストールしてください。
 
-* Android SDK Command-line Tools (latest)
+* Android SDK Command-line Tools (10.0)
 * Android SDK Platform-Tools
 * Android Emulator
 
@@ -72,14 +73,27 @@ Windowsは`ユーザー環境変数`に設定してください。また、`%USE
 | コマンドラインツール                                                                                    | 設定例（macOS）                                | 設定例（Windows）                              |
 |:----------------------------------------------------------------------------------------------------|:----------------------------------------------|:---------------------------------------------|
 | [Android SDK プラットフォーム ツール](https://developer.android.com/studio/command-line#tools-platform) | `$ANDROID_SDK_ROOT/platform-tools`            | `%ANDROID_SDK_ROOT%\platform-tools`          |
-| [Android SDK コマンドライン ツール](https://developer.android.com/studio/command-line#tools-sdk)        | `$ANDROID_SDK_ROOT/cmdline-tools/latest/bin` | `%ANDROID_SDK_ROOT%\cmdline-tools\latest\bin` |
+| [Android SDK コマンドライン ツール](https://developer.android.com/studio/command-line#tools-sdk)        | `$ANDROID_SDK_ROOT/cmdline-tools/10.0/bin` | `%ANDROID_SDK_ROOT%\cmdline-tools\10.0\bin` |
 | [Android エミュレータ](https://developer.android.com/studio/command-line#tools-emulator)              | `$ANDROID_SDK_ROOT/emulator`                  | `%ANDROID_SDK_ROOT%\emulator`                 |
 
 :::danger warning
 **`$ANDROID_SDK_ROOT/tools`が`PATH`に含まれている場合、`PATH`から削除してください。**古いバージョンのAndroid Studioをインストールしていた場合や、インストール方法を紹介した古い記事などを参照してインストールした場合に、特に注意してください。分かりづらいエラーが発生して解決できないというケースがしばしば見られます。
 :::
 
-macOSでの`~/.zshrc`への設定例は次のようになります。
+<!--
+現時点（2023年10月）ではまだReact NativeでJDK17をサポートしていないです。
+[公式ドキュメント](https://reactnative.dev/docs/environment-setup)のインストール手順でJDK11を推奨しています。
+Java17が推奨されるReact Nativeバージョンになり次第、下記を修正する必要があります。
+また、何が変わるかについて調査する必要があります。
+
+* [インストールするツール](/react-native/learn/getting-started/setting-up-development-environment#インストールするツール)のJavaバージョンを変更
+* [Expoアップグレードガイド](/react-native/santoku/maintenance/enhance)のJavaバージョン変更
+* [Android SDKのコマンドラインツールの設定](/react-native/learn/getting-started/setting-up-development-environment#android-sdkのコマンドラインツールの設定)の「Android SDK コマンドライン ツール」のパスに`latest`に変更
+-->
+
+macOSでの`~/.zprofile`への設定例は次のようになります。[^2]
+
+[^2]: `~/.zprofile`はZsh用ファイルです。macOS Catalina（10.15）以降のデフォルトのログインシェルはZshです。Zsh以外を使用している場合は各自で対応するファイルに読み替えてください。
 
 ```bash
 # Android CLI environment variables
@@ -89,7 +103,7 @@ export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 # Android CLI PATHs
 #   https://developer.android.com/studio/command-line
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
+export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/10.0/bin
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 ```
 
@@ -104,17 +118,103 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 * `emulator -list-avds`
   * 作成済みの仮想デバイスが表示されます。
 
+:::note info
+
+* macOSで現在の起動中のシェルを確認する方法
+  * ターミナルを開き`echo $SHELL`を実行します。
+* macOSのバージョンごとのデフォルトのログインシェル
+  * macOS Catalina（10.15）以前： デフォルトのログインシェルはBashです。
+  * macOS Catalina（10.15）以降： デフォルトのログインシェルはZshです。
+* macOSでシェルに応じて環境設定ファイルを設定する方法
+  * ログインシェルがBashの場合
+    * 環境変数の設定は`~/.bash_profile`ファイルで行います。
+    * 環境設定は`.bashrc`ファイルで行います（`.bashrc`ファイルが存在しない場合、`touch ~/.bashrc`で生成できます）。
+  * ログインシェルがZshの場合
+    * 環境変数の設定は`~/.zprofile`ファイルで行います。
+    * 環境設定は`.zshrc`ファイルで行います（`.zshrc`ファイルが存在しない場合、`touch ~/.zshrc`で生成できます）。
+
+※ `ln -s ~/.bash_profile ~/.zprofile`コマンドを使用して、BashとZsh両方同じ設定を共有できます。
+:::
+
 ### Ruby, CocoaPodsのインストール
 
 macOSには、デフォルトでRubyがインストールされているので、`sudo gem install cocoapods`を実行することで[CocoaPods](https://cocoapods.org)をインストールできます。
 
 システム全体にBundlerをインストールするのは避けたい場合や、開発に特権ユーザを利用したくない場合はシステムとは別のRubyをインストールし、その中にBundlerをインストールしてください。[asdf-vm](https://asdf-vm.com/)などのツールを利用すると、システムとは別のRubyを簡単にインストールできます。
+インストールおよび使い方については、[asdfのインストール](/react-native/learn/getting-started/setting-up-development-environment#asdfのインストール)を参考にしてください。
 
 :::danger warning
 Appleシリコン搭載のMacコンピュータでは、Rubyのバージョンが2.7.x未満の場合にCocoaPodsのインストールでエラーが発生します。
 
 Homebrewやasdf-vmなどのツールを利用して、**使用するRubyのバージョンを2.7.x以上にアップデートしてください。**
 :::
+
+### asdfのインストール
+
+#### Bashの場合
+
+```bash
+# 依存関係をインストール
+brew install coreutils curl git
+
+# Homebrewを使用してインストール
+brew install asdf
+
+# asdf.shを.bashrcに追加
+echo -e "\n. \"$(brew --prefix asdf)/libexec/asdf.sh\"" >> ~/.bashrc
+```
+
+#### Zshの場合
+
+```bash
+# 依存関係をインストール
+brew install coreutils curl git
+
+# Homebrewを使用してインストール
+brew install asdf
+
+# asdf.shを.zshrcに追加
+echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+```
+
+:::note info
+asdfは複数のプログラミング言語やランタイム環境のバージョン管理を効果的にサポートするライブラリです。詳細は[asdfの特徴](https://github.com/asdf-vm/asdf#why-use-asdf)と[asdf公式ドキュメント](https://asdf-vm.com/#/plugins-all)を参照してください。
+:::
+
+### asdfの使い方およびプラグイン管理
+
+#### 使い方
+
+```bash
+# プラグインをインストール
+asdf plugin add nodejs
+
+# バージョンをインストール
+asdf install nodejs 18.15.0
+
+# バージョンを設定(.tool-versionsに追加される)
+asdf local nodejs 18.15.0
+```
+
+#### プラグイン管理
+
+```bash
+# 追加
+asdf plugin add <name> <git-url>
+# 例) asdf plugin add elm https://github.com/vic/asdf-elm
+
+# 照会
+asdf plugin list
+
+# アップデート
+asdf plugin update --all
+asdf plugin update <name>
+# 例) asdf plugin update erlang
+
+# 削除
+asdf plugin remove <name>
+# 例) asdf plugin remove erlang
+```
 
 ## プロキシ設定
 
@@ -139,14 +239,14 @@ npmやCocoaPodsなど多くのツールは環境変数に設定したプロキ�
 
 <TabItem value="mac">
 
-`~/.bash_profile`に、以下の内容を追記してください。
+`~/.zprofile`に、以下の内容を追記してください。
 
 ```console
 export http_proxy=http://プロキシアドレス:ポート番号
 export https_proxy=http://プロキシアドレス:ポート番号
 ```
 
-この設定を追記した後`source ~/.bash_profile`を実行すると、プロキシ設定が反映されるようになります。
+この設定を追記した後`source ~/.zprofile`を実行すると、プロキシ設定が反映されるようになります。
 </TabItem>
 <TabItem value="win">
 

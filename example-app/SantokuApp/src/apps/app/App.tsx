@@ -1,7 +1,24 @@
+/**
+ * Copyright 2023 TIS Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import {setHandleError} from 'bases/core/errors/handleError';
 import {setHandleErrorWithAlert} from 'bases/core/errors/handleErrorWithAlert';
 import {setHandleErrorWithSnackbar} from 'bases/core/errors/handleErrorWithSnackbar';
 import {firebaseConfig} from 'bases/firebase/FirebaseConfig';
+import {FirebaseCrashlyticsWorkaround} from 'bases/firebase/crashlytics/FirebaseCrashlyticsWorkaround';
 import {createLogger, setLogger} from 'bases/logging';
 import {FirebaseCrashlyticsTransport} from 'bases/logging/FirebaseCrashlyticsTransport';
 import {LoadingOverlay} from 'bases/ui/loading/LoadingOverlay';
@@ -21,7 +38,7 @@ import {addDeepLinkListener} from './services/deep-link/addDeepLinkListener';
 import {setWarmStartDeepLink} from './services/deep-link/warmStartDeepLink';
 
 type AppProperties = {
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 setLogger(
@@ -93,14 +110,16 @@ export const App = ({isHeadless}: AppProperties) => {
   }
 
   return (
-    <GestureHandlerRootView style={StyleSheet.absoluteFill}>
-      <SafeAreaProvider>
-        <AppThemeProvider>
-          <AppWithInitialization />
-          <LoadingOverlay.Component />
-          <Snackbar.Component />
-        </AppThemeProvider>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+    <FirebaseCrashlyticsWorkaround>
+      <GestureHandlerRootView style={StyleSheet.absoluteFill}>
+        <SafeAreaProvider>
+          <AppThemeProvider>
+            <AppWithInitialization />
+            <LoadingOverlay.Component />
+            <Snackbar.Component />
+          </AppThemeProvider>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
+    </FirebaseCrashlyticsWorkaround>
   );
 };

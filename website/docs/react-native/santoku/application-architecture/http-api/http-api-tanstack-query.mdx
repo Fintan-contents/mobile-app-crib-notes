@@ -1,5 +1,5 @@
 ---
-title: React Queryを用いたHTTP API通信
+title: TanStack Queryを用いたHTTP API通信
 ---
 
 ## クライアントコードの自動生成
@@ -22,29 +22,31 @@ HTTP API通信部分に焦点を当てたアプリケーション構造を以下
 - 自動生成したデータモデルはどこからでも使用できます。
 - 業務ルールの実装やデータ変換などは、サービスの役割とします。
 
-## React Queryのデフォルト設定
+## TanStack Queryのデフォルト設定
 
-React Queryには多数のオプションが用意されています。
+TanStack Queryには多数のオプションが用意されています。
 これらのオプションは、全てのクエリやミューテーションに適用するデフォルト値を設定出来ます。
 また、クエリ・ミューテーション毎にその値を上書きできます。
 
 このアプリで設定するデフォルト値を以下に示します。
-なお、ここで示していないオプション、および設定値が空白のものは、React Queryが用意するデフォルト値に従います。
+なお、ここで示していないオプション、および設定値が空白のものは、TanStack Queryが用意するデフォルト値に従います。
 
 ### クエリのデフォルトオプション
 
-|オプション|デフォルト値|設定値|説明|
-|:--|:--|:--|:--|
-|queryFn|||[Default Query Function](https://react-query.tanstack.com/guides/default-query-function)で紹介されているとおり、デフォルトのクエリ関数を定義出来ます。|
-|retry|3|`false`|クエリ失敗時のリトライ回数です。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は3です。このアプリでは、[HTTP API 通信のリトライ](./http-api-error-handling.mdx#http-api通信のリトライ)に従いリトライはユーザ自身の判断とします。`false`をデフォルト値として設定します（リトライしません）。|
-|retryOnMount|`true`||マウント時にリトライするかどうかを示します。デフォルト値は`true`です。|
-|retryDelay|Exponential Backoff||リトライ時の遅延間隔を示します。デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。|
-|staleTime|0||クエリが「新しい」ものから「古くなる」までの期間です。クエリが「新しい」限り、クエリは取得済みのデータを返すため、ネットワークリクエストは発生しません。クエリが「古い」場合、クエリは取得済みのデータを返し、特定の条件下にてバックグラウンドで再フェッチします。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は0です（フェッチ後すぐ古くなる）。|
-|cacheTime|5 &ast; 60 &ast; 1000||未使用なクエリを削除するまでの期間です。クエリを使用するすべてのコンポーネントがアンマウントされると、そのクエリは未使用となります。[Important Defaults](https://react-query.tanstack.com/guides/important-defaults)で示されるとおり、デフォルト値は5分です。|
-|refetchOnMount|`true`||マウント時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。|
-|refetchOnWindowFocus|`true`||ウィンドウフォーカス時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。|
-|refetchOnReconnect|`true`||再接続時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。|
-|structuralSharing|`true`||デフォルト（`true`）では、クエリ結果のデータの中身が変更されていない場合、データの参照が変更されません。これによりアプリのパフォーマンス向上が望めます。|
+|オプション|デフォルト値|設定値| 説明                                                                                                                                                                                                                                                            |
+|:--|:--|:--|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|queryFn|||[Default Query Function](https://tanstack.com/query/v4/docs/react/guides/default-query-function)で紹介されているとおり、デフォルトのクエリ関数を定義出来ます。                                                                                                                               |
+|retry|3|`false`|クエリ失敗時のリトライ回数です。[Important Defaults](https://tanstack.com/query/v4/docs/react/guides/important-defaults)で示されるとおり、デフォルト値は3です。このアプリでは、[HTTP API 通信のリトライ](./http-api-error-handling.mdx#http-api通信のリトライ)に従いリトライはユーザ自身の判断とします。`false`をデフォルト値として設定します（リトライしません）。   |
+|retryOnMount|`true`||マウント時にリトライするかどうかを示します。デフォルト値は`true`です。                                                                                                                                                                                                                        |
+|retryDelay|Exponential Backoff||リトライ時の遅延間隔を示します。デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。                                                                                                                                                                                       |
+|staleTime|0||クエリが「新しい」ものから「古くなる」までの期間です。クエリが「新しい」限り、クエリは取得済みのデータを返すため、ネットワークリクエストは発生しません。クエリが「古い」場合、クエリは取得済みのデータを返し、特定の条件下にてバックグラウンドで再フェッチします。[Important Defaults](https://tanstack.com/query/v4/docs/react/guides/important-defaults)で示されるとおり、デフォルト値は0です（フェッチ後すぐ古くなる）。    |
+|cacheTime|5 &ast; 60 &ast; 1000||未使用なクエリを削除するまでの期間です。クエリを使用するすべてのコンポーネントがアンマウントされると、そのクエリは未使用となります。[Important Defaults](https://tanstack.com/query/v4/docs/react/guides/important-defaults)で示されるとおり、デフォルト値は5分です。                                                                               |
+|refetchOnMount|`true`||マウント時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。                                                                                                                                                                                                |
+|refetchOnWindowFocus|`true`||ウィンドウフォーカス時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。                                                                                                                                                                                          |
+|refetchOnReconnect|`true`||再接続時に再フェッチするかどうかを示します。デフォルト（`true`）では、データが古くなっている場合に再フェッチします。                                                                                                                                                                                                 |
+|structuralSharing|`true`||デフォルト（`true`）では、クエリ結果のデータの中身が変更されていない場合、データの参照が変更されません。これによりアプリのパフォーマンス向上が望めます。                                                                                                                                                                               |
+|networkMode|`online`|`offlineFirst`|デフォルト（`online`）では、オフラインの場合にクエリが実行されません。このアプリでは、`offlineFirst`を設定してネットワークの状態に関わらず一度はクエリを実行するようにしています（TanStack Queryのv3と同じ動作です）。<br/><br/>オフライン時は、[HTTP APIからレスポンスが返却されない場合のエラーハンドリング](./http-api-error-handling#http-apiからレスポンスが返却されない場合のエラーハンドリング)に従ってハンドリングされます。|
+|notifyOnChangeProps|||デフォルトでは、レンダリング中に使用している項目のみがtracking対象となります。コンポーネントは、tracking対象となった項目が変更された場合のみ再レンダリングされます。|
 
 ### ミューテーションのデフォルトオプション
 
@@ -52,12 +54,14 @@ React Queryには多数のオプションが用意されています。
 |:--|:--|:--|:--|
 |retry|0||ミューテーション失敗時のリトライ回数です。デフォルト値は0です。|
 |retryDelay|Exponential Backoff||リトライ時の遅延間隔を示します。デフォルトでは、リトライの度に指数関数的に待ち時間が増えていきます（Exponential Backoff）。|
+|cacheTime|5 &ast; 60 &ast; 1000||未使用なミューテーションを削除するまでの期間です。ミューテーションを使用するすべてのコンポーネントがアンマウントされると、そのミューテーションは未使用となります。デフォルト値は5分です。|
+|networkMode|`online`|`offlineFirst`|デフォルト（`online`）では、オフラインの場合にミューテーションが実行されません。このアプリでは、`offlineFirst`を設定してネットワークの状態に関わらず一度はミューテーションを実行するようにしています（TanStack Queryのv3と同じ動作です）。<br/><br/>オフライン時は、[HTTP APIからレスポンスが返却されない場合のエラーハンドリング](./http-api-error-handling#http-apiからレスポンスが返却されない場合のエラーハンドリング)に従ってハンドリングされます。|
 
-## クエリーキーの管理
+## クエリキーの管理
 
-React Queryはクエリキーに基づいてクエリをキャッシュ管理します。
+TanStack Queryはクエリキーに基づいてクエリをキャッシュ管理します。
 自動生成コードについては、Orvalの生成ルール（URL内のPathとQuery部をクエリキーとして使用）に従います。
-それ以外の独自クエリについては、`サービス名#関数名`をクエリキーとして用います。
+それ以外の独自クエリについては、`[サービス名, 関数名]`をクエリキーとして用います。
 
 ## データ更新時のキャッシュの扱いについて
 
@@ -100,7 +104,7 @@ const mutation = useMutation(addTodo, {
 
 ### エラーハンドリングの共通化
 
-`QueryClient`のデフォルトオプションを利用すると、各クエリ毎のエラーハンドリングをデフォルト設定できます。
+`QueryClient`のデフォルトオプションを利用すると、各クエリのエラーハンドリングをデフォルト設定できます。
 しかしながら、上記方法だと次の課題が発生します。
 
 - `useQuery`の`onError`に独自のハンドラ関数を個別設定すると、`QueryClient`のデフォルトオプションに設定したものが上書きされる
@@ -111,8 +115,8 @@ const mutation = useMutation(addTodo, {
 ミューテーションについても同様の対策とします。
 詳細は次のドキュメントを参照してください。
 
-- [QueryCache - Global callbacks](https://react-query.tanstack.com/reference/QueryCache#global-callbacks)
-- [MutationCache - Global callbacks](https://react-query.tanstack.com/reference/MutationCache#global-callbacks)
+- [QueryCache - Global callbacks](https://tanstack.com/query/v4/docs/react/reference/QueryCache#global-callbacks)
+- [MutationCache - Global callbacks](https://tanstack.com/query/v4/docs/react/reference/MutationCache#global-callbacks)
 
 個別にエラー処理を実施するためグローバルエラーハンドリングが不要な場合は、以下のいずれかで無効化できます。
 
@@ -144,10 +148,10 @@ HTTPステータスコード401が返却された場合、新しいセッショ�
 ## ページネーションと無限スクロール方式
 
 リモートにある膨大なデータから、アプリ内で必要なデータのみを取得して表示するには、ページネーションや無限スクロールへの対応が必要です。
-React Queryには、ページネーションや無限スクロールの仕組みが用意されています。
+TanStack Queryには、ページネーションや無限スクロールの仕組みが用意されています。
 
-- [Paginated / Lagged Queries](https://react-query.tanstack.com/guides/paginated-queries)
-- [Infinite Queries](https://react-query.tanstack.com/guides/infinite-queries)
+- [Paginated / Lagged Queries](https://tanstack.com/query/v4/docs/react/guides/paginated-queries)
+- [Infinite Queries](https://tanstack.com/query/v4/docs/react/guides/infinite-queries)
 
 上記仕組みを実現するため、バックエンドAPIの仕様を次のとおり統一します。
 
@@ -180,7 +184,7 @@ APIごとに必要な項目のみ取捨選択することとします。
 
 ### 無限スクロール
 
-React Queryの`useInfiniteQuery`フックは、読み込んだページのキャッシュデータを配列（`data.pages`）で保持します。
+TanStack Queryの`useInfiniteQuery`フックは、読み込んだページのキャッシュデータを配列（`data.pages`）で保持します。
 追加読込みをしたレスポンスデータは、その配列にページとして追加されます。
 無限スクロールのよくある例として、アプリはそのキャッシュデータを1つの画面に全て表示します。
 その為、ページネーションAPIの仕様を無限スクロールに利用した場合、次の恐れがあります。
@@ -207,3 +211,31 @@ React Queryの`useInfiniteQuery`フックは、読み込んだページのキャ
 
 それぞれの項目は、無限スクロールを実現するすべてのAPIに用意する必要はありません。
 APIごとに必要な項目のみ取捨選択することとします。
+
+## クエリのキャンセル
+
+[Query Cancellation](https://tanstack.com/query/v4/docs/react/guides/query-cancellation)に記載されている通り、TanStack Queryはクエリ関数に[AbortSignal](https://developer.mozilla.org/ja/docs/Web/API/AbortSignal)を渡してくれます。
+そのAbortSignalを、axiosに渡すことでHTTP API通信のキャンセルが可能です。
+
+Orvalで自動生成されたコードは、クエリ関数でAbortSignalを受け取りaxiosへ渡すようになっています。
+
+Orvalで自動生成されたカスタムフックを使用しない場合は、AbortSignalを受け取るように自前で実装する必要があります。
+
+```typescript
+const query = useQuery(
+  ['app-updates', 'requestAppUpdates'],
+  ({signal}) => requestAppUpdates(params, signal),
+);
+```
+
+上記のように実装したクエリのキーを、`queryClient.cancelQueries`に渡すことで、HTTP API通信をキャンセルできます。
+
+```tsx
+const queryClient = useQueryClient();
+
+return (
+  <Pressable onPress={() => queryClient.cancelQueries(['app-updates', 'requestAppUpdates'])}>
+    <Text>Cancel</Text>
+  </Pressable>
+);
+```

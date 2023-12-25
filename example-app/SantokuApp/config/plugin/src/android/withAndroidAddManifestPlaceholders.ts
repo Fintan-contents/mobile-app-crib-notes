@@ -48,6 +48,10 @@ export const withAndroidAddManifestPlaceholders: ConfigPlugin<ManifestPlaceholde
 const apply = (buildGradle: string, params: ManifestPlaceholderParams[]): string => {
   const manifestPlaceholders = params
     .filter(data => {
+      /*
+        eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing --
+        ||を??にすると、propertyKeyが空文字でfixedValueに値が設定されている場合に、elseの分岐に入ってしまうため
+       */
       if (data.propertyKey || data.fixedValue != null) {
         // fixedValueは空文字も許容する
         return true;

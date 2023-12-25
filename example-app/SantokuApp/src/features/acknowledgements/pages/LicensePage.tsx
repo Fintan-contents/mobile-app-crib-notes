@@ -1,3 +1,19 @@
+/**
+ * Copyright 2023 TIS Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import React, {useCallback} from 'react';
 import {ActivityIndicator, ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Icon, Text} from 'react-native-elements';
@@ -60,7 +76,7 @@ const FileName: React.FC<{fileName?: string}> = ({fileName}) => {
     </View>
   );
 };
-const FileContent: React.FC<{isLoading: boolean; content?: string}> = ({isLoading, content}) => {
+const FileContent: React.FC<{isLoading: boolean; content?: string | null}> = ({isLoading, content}) => {
   return (
     <View style={styles.fileContentContainer}>
       {isLoading ? (

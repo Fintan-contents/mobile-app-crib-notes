@@ -10,7 +10,7 @@ React Nativeのバージョンが0.69.5にアップグレードされました�
 
 #### React 18
 
-React Native 0.69では、デフォルトでReact 18が有効化されています。React 18はSuspenseのサポートやAutomatic Batching、Transitionsなど[多くの機能がリリース](https://ja.reactjs.org/blog/2022/03/29/react-v18.html)されています。それらの多くは、**Concurrent Rendering**という基盤に支えられています。
+React Native 0.69では、デフォルトでReact 18が有効化されています。React 18はSuspenseのサポートやAutomatic Batching、Transitionsなど[多くの機能がリリース](https://ja.react.dev/blog/2022/03/29/react-v18)されています。それらの多くは、**Concurrent Rendering**という基盤に支えられています。
 
 React Nativeでは、**New Architectureを有効化する**ことでConcurrent Renderingを使用できます。
 
@@ -206,7 +206,7 @@ NSDictionary *appProperties = [RNFBMessagingModule addCustomPropsToUserProps:ini
 
 Expoをはじめとするエコシステムでは、New Architectureを完全にサポートしているライブラリはまだ少ないです。このアプリも、依存しているライブラリがNew Architectureに対応するまでは有効化できないのが現状です。
 
-そのため、React 18の対応としては、React 18アップグレードガイドに記載されている[TypeScript 型定義の変更](https://ja.reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html)のみを実施しました。型定義の全ての変更は、[React 18の型定義に関するPull Request](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210)に記載されています。
+そのため、React 18の対応としては、React 18アップグレードガイドに記載されている[TypeScript 型定義の変更](https://ja.react.dev/blog/2022/03/08/react-18-upgrade-guide#updates-to-typescript-definitions)のみを実施しました。型定義の全ての変更は、[React 18の型定義に関するPull Request](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210)に記載されています。
 
 このアプリでは、`Removal of implicit children`の変更のみが該当しました。対応するコンポーネントの数が多かったので、React 18アップグレードガイドでも紹介されている[types-react-codemod](https://github.com/eps1lon/types-react-codemod)を利用して修正しました。
 
@@ -319,5 +319,5 @@ CIに使用しているツールのバージョンも更新しました。
 
 - [Expo SDK 46](https://blog.expo.dev/expo-sdk-46-c2a1655f63f7)
 - [Announcing React Native 0.69](https://reactnative.dev/blog/2022/06/21/version-069)
-- [React v18.0](https://ja.reactjs.org/blog/2022/03/29/react-v18.html)
-- [React 18 アップグレードガイド](https://ja.reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html)
+- [React v18.0](https://ja.react.dev/blog/2022/03/29/react-v18)
+- [React 18 アップグレードガイド](https://ja.react.dev/blog/2022/03/08/react-18-upgrade-guide)

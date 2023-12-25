@@ -20,7 +20,7 @@ React Nativeを利用した開発経験が浅い方向けに、実際にアプ�
 
 - [アプリの実装前に](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts)
 
-    アプリを実装する前に必要となる前提知識を確認した後、React NativeとReact Navigationの基本を学習します。
+    アプリを実装する前にReact NativeやExpo、React Navigationの基本を学習します。
 
 - [ToDoアプリの実装](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/todo-app)
 
@@ -30,7 +30,7 @@ React Nativeを利用した開発経験が浅い方向けに、実際にアプ�
 
     ToDoアプリの実装が完了した方向けのコンテンツです。ここでは、「Q&Aアプリ」を題材としてより実践的なアプリを作成します。
 
-React Nativeを利用して開発を進める中で挙がったFAQ（[ハマりがちな落とし穴](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls)）を紹介しています。もし学習を進める中で困ったこと（アプリ起動時のエラー等）があれば参考にしてみてください。
+React Nativeを利用して開発を進める中で挙がったFAQ（[トラブルシューティング](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls)）を紹介しています。もし学習を進める中で困ったこと（アプリ起動時のエラー等）があれば参考にしてみてください。
 
 ## 前提と学習に必要な期間
 
@@ -41,6 +41,61 @@ React Nativeを利用して開発を進める中で挙がったFAQ（[ハマり�
 ---
 
 ## 更新履歴
+
+### 2023/12/25
+
+#### 🌱 新規コンテンツ（2023/12/25）
+
+- React NativeとExpoの概要を学習するコンテンツを追加
+  - アプリの実装前に
+    - [React Nativeとは](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts/what-is-react-native)
+    - [Expoとは](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/basic-concepts/what-is-expo)
+- Q&Aアプリの実装前に学習するコンテンツを追加
+  - Q&Aアプリの実装
+    - Q&Aアプリの実装前に
+      - [概要](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/pre-app-implementation)
+      - [実装方法の検討について](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/about-implementation-selection)
+      - [コンポーネントの分割について](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/about-component-units)
+- Q&Aアプリの単体テストに関するコンテンツを追加
+  - Q&Aアプリの実装
+    - Q&Aアプリの実装（基本編）
+      - 一覧画面（ホーム画面）
+        - [単体テストの実施](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/exercise-basic-home-test-case)
+      - イベント一覧画面
+        - [単体テストの実施](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/exercise-basic-list-event-test-case)
+      - 質問詳細画面
+        - [単体テストの実施](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/exercise-basic-detail-question-test-case)
+      - イベント詳細画面
+        - [単体テストの実施](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/exercise-basic-detail-event-test-case)
+      - 入力画面
+        - [単体テストの実施](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/exercise-basic-input-test-case)
+- キャッシュが残ってファイルが更新できない場合の対処方法を追加
+  - トラブルシューティング
+    - アプリを実行できない
+      - [キャッシュが残ってファイルの更新ができない](https://ws-4020.github.io/mobile-app-crib-notes/react-native/common-pitfalls/clear-cache)
+
+#### 🌿 更新コンテンツ（2023/12/25）
+
+- Reactの公式ドキュメントを参照している箇所は、[新しい公式ドキュメント](https://ja.react.dev/)を参照するように変更
+- 前提知識に、React Nativeで使用する技術の概要を追加
+  - [前提知識](https://ws-4020.github.io/mobile-app-crib-notes/react-native/pre-requisites)
+- Visual Studio Code用の推奨設定を追加
+  - Getting Started
+    - [プロジェクトの作成](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/getting-started/create-project)
+- Q&Aアプリで使用するTanStack Query（旧React Query）をv4にアップグレード
+  - Q&Aアプリの実装
+    - [Q&Aアプリプロジェクトの説明](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/app-project-desc)
+- TanStack Query（旧React Query）の使用方法に関する参考サイトを追加
+  - Q&Aアプリの実装
+    - [Q&Aアプリプロジェクトの説明](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/app-project-desc)
+- TanStack Query（旧React Query）導入時の注意点を追加
+  - Q&Aアプリの実装
+    - [Q&Aアプリプロジェクトの説明](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/app-project-desc)
+- コンポーネント作成時の注意点を追加
+  - Q&Aアプリの実装
+    - Q&Aアプリの実装（基本編）
+      - 一覧画面（ホーム画面）
+        - [表示部品の作成](https://ws-4020.github.io/mobile-app-crib-notes/react-native/learn/qa-app/exercise-basic-home-components)
 
 ### 2022/12/12
 
