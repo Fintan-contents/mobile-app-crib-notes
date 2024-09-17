@@ -85,7 +85,14 @@ export type SnackbarHideProps = {
 
 export type SnackbarProps = SnackbarShowProps & SnackbarHideProps;
 
-export const SnackbarComponent: React.FC<SnackbarProps> = props => {
+export const SnackbarComponent: React.FC<SnackbarProps> = ({
+  autoHideDuration = 4000,
+  fadeInDuration = 1000,
+  fadeOutDuration = 1000,
+  forceFadeOutDuration = 300,
+  hideFadeOutDuration = 300,
+  ...props
+}) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const fadeInAnimationRef = useRef<CompositeAnimation>();
   const fadeOutAnimationRef = useRef<CompositeAnimation>();
@@ -115,10 +122,10 @@ export const SnackbarComponent: React.FC<SnackbarProps> = props => {
       actionHandler: props.actionHandler,
       actionText: props.actionText,
       actionTextStyle: props.actionTextStyle,
-      autoHideDuration: props.autoHideDuration,
-      fadeInDuration: props.fadeInDuration,
-      fadeOutDuration: props.fadeOutDuration,
-      forceFadeOutDuration: props.forceFadeOutDuration,
+      autoHideDuration,
+      fadeInDuration,
+      fadeOutDuration,
+      forceFadeOutDuration,
       message: props.message,
       messageTextStyle: props.messageTextStyle,
       positionStyle: props.positionStyle,
@@ -128,15 +135,15 @@ export const SnackbarComponent: React.FC<SnackbarProps> = props => {
 
     const fadeInAnimationConfig = {
       toValue: 1,
-      duration: props.fadeInDuration,
+      duration: fadeInDuration,
       useNativeDriver: true,
     };
     animationStart(fadeInAnimationRef, fadeInAnimationConfig, ({finished}) => {
       if (finished) {
         const fadeOutAnimationConfig = {
           toValue: 0,
-          delay: props.autoHideDuration,
-          duration: props.fadeOutDuration,
+          delay: autoHideDuration,
+          duration: fadeOutDuration,
           useNativeDriver: true,
         };
         animationStart(fadeOutAnimationRef, fadeOutAnimationConfig, () => {
@@ -155,10 +162,10 @@ export const SnackbarComponent: React.FC<SnackbarProps> = props => {
     props.actionHandler,
     props.actionText,
     props.actionTextStyle,
-    props.autoHideDuration,
-    props.fadeInDuration,
-    props.fadeOutDuration,
-    props.forceFadeOutDuration,
+    autoHideDuration,
+    fadeInDuration,
+    fadeOutDuration,
+    forceFadeOutDuration,
     props.message,
     props.messageTextStyle,
     props.positionStyle,
@@ -190,22 +197,22 @@ export const SnackbarComponent: React.FC<SnackbarProps> = props => {
 
   React.useEffect(() => {
     if (props.hide) {
-      forceFadeout(props.hideFadeOutDuration);
+      forceFadeout(hideFadeOutDuration);
       return;
     }
     if (!props.message) {
       return;
     }
     if (barrierFadeOutAnimationRef.current) {
-      forceFadeout(props.forceFadeOutDuration, show);
+      forceFadeout(forceFadeOutDuration, show);
       return;
     }
     if (fadeInAnimationRef.current ?? fadeOutAnimationRef.current) {
-      forceFadeout(props.forceFadeOutDuration, show);
+      forceFadeout(forceFadeOutDuration, show);
       return;
     }
     show();
-  }, [show, forceFadeout, props.hide, props.message, props.hideFadeOutDuration, props.forceFadeOutDuration]);
+  }, [show, forceFadeout, props.hide, props.message, hideFadeOutDuration, forceFadeOutDuration]);
 
   const snackbarStyle = StyleSheet.flatten([styles.snackbar, props.style]);
 
@@ -237,14 +244,6 @@ export const SnackbarComponent: React.FC<SnackbarProps> = props => {
       </View>
     </Animated.View>
   );
-};
-
-SnackbarComponent.defaultProps = {
-  autoHideDuration: 4000,
-  fadeInDuration: 1000,
-  fadeOutDuration: 1000,
-  forceFadeOutDuration: 300,
-  hideFadeOutDuration: 300,
 };
 
 const styles = StyleSheet.create({

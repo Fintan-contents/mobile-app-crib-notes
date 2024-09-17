@@ -29,7 +29,7 @@ export type OverlayProps = {
 export const Overlay: React.FC<React.PropsWithChildren<OverlayProps>> = ({
   visible,
   onHideEnd,
-  fadeDuration,
+  fadeDuration = 200,
   style,
   ...props
 }) => {
@@ -87,10 +87,6 @@ export const Overlay: React.FC<React.PropsWithChildren<OverlayProps>> = ({
       )}
     </>
   );
-};
-
-Overlay.defaultProps = {
-  fadeDuration: 200,
 };
 
 const styles = StyleSheet.create({

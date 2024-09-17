@@ -82,7 +82,20 @@ const isUriSource = (source?: WebViewSource): source is WebViewSourceUri => {
  *   - スクロールが存在しないページでは、onScrollEnd/onScrollEndOnceイベントは発生しません。
  *
  */
-export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props, ref) {
+export const WebView = React.forwardRef<RNWebView, Props>(function WebView(
+  {
+    // androidLayerType：WebViewの再レンダー時にクラッシュする可能性がある問題の回避策
+    // https://github.com/react-native-webview/react-native-webview/issues/1915
+    androidLayerType = 'software',
+    startInLoadingState = true,
+    // iOSでスクロールしたときに滑らかにスクロールするようにしておく。
+    // https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#decelerationrate
+    decelerationRate = 'normal',
+    renderLoading = () => <ActivityIndicator style={styles.indicator} size="large" color="#0000ff" />,
+    ...props
+  },
+  ref,
+) {
   const [loadEnd, setLoadEnd] = useState(false);
   const [scrollEndCalled, setScrollEndCalled] = useState(false);
   const {onScrollEnd, onScrollEndOnce, onLoadStart, onLoadProgress, onError, errorMessage, ...webViewProps} = props;
@@ -161,17 +174,6 @@ export const WebView = React.forwardRef<RNWebView, Props>(function WebView(props
     />
   );
 });
-
-WebView.defaultProps = {
-  // androidLayerType：WebViewの再レンダー時にクラッシュする可能性がある問題の回避策
-  // https://github.com/react-native-webview/react-native-webview/issues/1915
-  androidLayerType: 'software',
-  startInLoadingState: true,
-  // iOSでスクロールしたときに滑らかにスクロールするようにしておく。
-  // https://github.com/react-native-webview/react-native-webview/blob/master/docs/Reference.md#decelerationrate
-  decelerationRate: 'normal',
-  renderLoading: () => <ActivityIndicator style={styles.indicator} size="large" color="#0000ff" />,
-};
 
 const styles = StyleSheet.create({
   container: {
