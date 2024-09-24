@@ -186,8 +186,8 @@ exports[`Home マウントされたときに正常にレンダリングされる
               >
                 <RNSVGSvgView
                   align="xMidYMid"
-                  bbHeight="24"
-                  bbWidth="24"
+                  bbHeight={24}
+                  bbWidth={24}
                   fill="none"
                   focusable={false}
                   meetOrSlice={0}
@@ -285,8 +285,8 @@ exports[`Home マウントされたときに正常にレンダリングされる
               >
                 <RNSVGSvgView
                   align="xMidYMid"
-                  bbHeight="24"
-                  bbWidth="24"
+                  bbHeight={24}
+                  bbWidth={24}
                   fill="none"
                   focusable={false}
                   meetOrSlice={0}
@@ -384,8 +384,8 @@ exports[`Home マウントされたときに正常にレンダリングされる
               >
                 <RNSVGSvgView
                   align="xMidYMid"
-                  bbHeight="24"
-                  bbWidth="24"
+                  bbHeight={24}
+                  bbWidth={24}
                   fill="none"
                   focusable={false}
                   meetOrSlice={0}
@@ -538,8 +538,8 @@ exports[`Home マウントされたときに正常にレンダリングされる
           >
             <RNSVGSvgView
               align="xMidYMid"
-              bbHeight="24"
-              bbWidth="24"
+              bbHeight={24}
+              bbWidth={24}
               fill="none"
               focusable={false}
               meetOrSlice={0}
@@ -622,8 +622,8 @@ exports[`Home マウントされたときに正常にレンダリングされる
                         ]
                       }
                       width="24"
-                      x="0"
-                      y="0"
+                      x={0}
+                      y={0}
                     />
                   </RNSVGClipPath>
                 </RNSVGDefs>

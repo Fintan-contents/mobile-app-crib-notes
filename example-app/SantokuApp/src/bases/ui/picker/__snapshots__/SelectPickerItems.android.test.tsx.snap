@@ -13,11 +13,6 @@ exports[`SelectPickerItems only with required props renders successfully if item
 >
   <RCTScrollView
     CellRendererComponent={[Function]}
-    animatedStyle={
-      {
-        "value": {},
-      }
-    }
     centerContent={true}
     collapsable={false}
     contentContainerStyle={
@@ -32,6 +27,11 @@ exports[`SelectPickerItems only with required props renders successfully if item
     getItemCount={[Function]}
     getItemLayout={[Function]}
     initialScrollIndex={null}
+    jestAnimatedStyle={
+      {
+        "value": {},
+      }
+    }
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
@@ -129,11 +129,6 @@ exports[`SelectPickerItems only with required props renders successfully with mo
 >
   <RCTScrollView
     CellRendererComponent={[Function]}
-    animatedStyle={
-      {
-        "value": {},
-      }
-    }
     centerContent={true}
     collapsable={false}
     contentContainerStyle={
@@ -159,6 +154,11 @@ exports[`SelectPickerItems only with required props renders successfully with mo
     getItemCount={[Function]}
     getItemLayout={[Function]}
     initialScrollIndex={0}
+    jestAnimatedStyle={
+      {
+        "value": {},
+      }
+    }
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
@@ -183,12 +183,12 @@ exports[`SelectPickerItems only with required props renders successfully with mo
   >
     <View>
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {},
           }
         }
-        collapsable={false}
         style={{}}
       >
         <View
@@ -242,12 +242,12 @@ exports[`SelectPickerItems only with required props renders successfully with mo
         </View>
       </View>
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {},
           }
         }
-        collapsable={false}
         style={{}}
       >
         <View
@@ -375,11 +375,6 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
 >
   <RCTScrollView
     CellRendererComponent={[Function]}
-    animatedStyle={
-      {
-        "value": {},
-      }
-    }
     centerContent={true}
     collapsable={false}
     contentContainerStyle={
@@ -426,6 +421,11 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
     getItemCount={[Function]}
     getItemLayout={[Function]}
     initialScrollIndex={0}
+    jestAnimatedStyle={
+      {
+        "value": {},
+      }
+    }
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
@@ -451,12 +451,12 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
   >
     <View>
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {},
           }
         }
-        collapsable={false}
         style={{}}
       >
         <View
@@ -514,12 +514,12 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {},
           }
         }
-        collapsable={false}
         style={{}}
       >
         <View
@@ -577,12 +577,12 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {},
           }
         }
-        collapsable={false}
         style={{}}
       >
         <View
@@ -640,12 +640,12 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {},
           }
         }
-        collapsable={false}
         style={{}}
       >
         <View
@@ -703,12 +703,12 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {},
           }
         }
-        collapsable={false}
         style={{}}
       >
         <View
@@ -766,12 +766,12 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {},
           }
         }
-        collapsable={false}
         style={{}}
       >
         <View

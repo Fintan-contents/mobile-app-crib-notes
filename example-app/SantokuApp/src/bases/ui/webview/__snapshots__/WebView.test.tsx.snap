@@ -2,19 +2,15 @@
 
 exports[`WebView WebViewSourceHtmlでも正常にレンダリングされること 1`] = `
 <View
-  androidLayerType="software"
-  decelerationRate="normal"
   onError={[Function]}
   onLoadProgress={[Function]}
   onLoadStart={[Function]}
   onScroll={[Function]}
-  renderLoading={[Function]}
   source={
     {
       "html": "<h1>test</h1>",
     }
   }
-  startInLoadingState={true}
   style={
     {
       "flex": 1,
@@ -26,19 +22,15 @@ exports[`WebView WebViewSourceHtmlでも正常にレンダリングされるこ�
 
 exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
 <View
-  androidLayerType="software"
-  decelerationRate="normal"
   onError={[Function]}
   onLoadProgress={[Function]}
   onLoadStart={[Function]}
   onScroll={[Function]}
-  renderLoading={[Function]}
   source={
     {
       "uri": "https://localhost/",
     }
   }
-  startInLoadingState={true}
   style={
     {
       "flex": 1,

@@ -110,7 +110,8 @@ exports[`DateTimePicker only with required props renders successfully if visible
       }
     >
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {
               "transform": [
@@ -121,7 +122,6 @@ exports[`DateTimePicker only with required props renders successfully if visible
             },
           }
         }
-        collapsable={false}
         onLayout={[Function]}
         style={
           {
@@ -277,7 +277,8 @@ exports[`DateTimePicker with all props should be applied all properly with custo
       }
     >
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {
               "transform": [
@@ -288,7 +289,6 @@ exports[`DateTimePicker with all props should be applied all properly with custo
             },
           }
         }
-        collapsable={false}
         onLayout={[Function]}
         style={
           {
@@ -428,7 +428,8 @@ exports[`DateTimePicker with all props should be applied all properly with defau
       }
     >
       <View
-        animatedStyle={
+        collapsable={false}
+        jestAnimatedStyle={
           {
             "value": {
               "transform": [
@@ -439,7 +440,6 @@ exports[`DateTimePicker with all props should be applied all properly with defau
             },
           }
         }
-        collapsable={false}
         onLayout={[Function]}
         style={
           {

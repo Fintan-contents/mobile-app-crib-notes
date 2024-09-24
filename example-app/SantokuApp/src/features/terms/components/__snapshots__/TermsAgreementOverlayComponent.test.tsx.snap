@@ -53,11 +53,6 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
       }
     >
       <View
-        animatedStyle={
-          {
-            "value": {},
-          }
-        }
         collapsable={false}
         entering={
           FadeIn {
@@ -99,6 +94,11 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
             "rotateV": undefined,
             "stiffnessV": undefined,
             "type": undefined,
+          }
+        }
+        jestAnimatedStyle={
+          {
+            "value": {},
           }
         }
         style={
@@ -123,11 +123,6 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
       }
     >
       <View
-        animatedStyle={
-          {
-            "value": {},
-          }
-        }
         collapsable={false}
         entering={
           FadeIn {
@@ -169,6 +164,11 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
             "rotateV": undefined,
             "stiffnessV": undefined,
             "type": undefined,
+          }
+        }
+        jestAnimatedStyle={
+          {
+            "value": {},
           }
         }
         pointerEvents="box-none"
@@ -214,20 +214,16 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
             </Text>
           </View>
           <View
-            androidLayerType="software"
-            decelerationRate="normal"
             onError={[Function]}
             onHttpError={[Function]}
             onLoadProgress={[Function]}
             onLoadStart={[Function]}
             onScroll={[Function]}
-            renderLoading={[Function]}
             source={
               {
                 "uri": "https://www.tis.co.jp/termsofuse/",
               }
             }
-            startInLoadingState={true}
             style={
               {
                 "flex": 1,
