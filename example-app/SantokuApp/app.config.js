@@ -112,6 +112,7 @@ module.exports = ({config}) => {
           },
         },
       ],
+      ['expo-secure-store'],
       ['@react-native-firebase/app'],
       ['@react-native-firebase/crashlytics'],
       // このアプリで用意しているAndroid/iOS共通のプラグイン
