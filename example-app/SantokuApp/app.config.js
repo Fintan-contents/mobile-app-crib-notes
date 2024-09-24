@@ -81,6 +81,9 @@ module.exports = ({config}) => {
         UIBackgroundModes: ['fetch', 'remote-notification'],
       },
       associatedDomains: [`applinks:${DEEP_LINK_DOMAIN}`],
+      entitlements: {
+        'aps-environment': 'development',
+      },
     },
     disabledPlugins: [
       // default plugin を無効化するために patch-package を使用して機能拡張している
