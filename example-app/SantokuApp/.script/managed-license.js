@@ -29,11 +29,8 @@ module.exports = function () {
         licenseName: 'MIT',
         licenseUrl: 'https://github.com/ogt/valid-url/blob/v1.0.9/LICENSE',
       },
-      '@react-native/normalize-color@2.1.0': { // https://github.com/facebook/react-native/blob/v0.71.0/packages/normalize-color/package.json
-        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.71.0/LICENSE',
-      },
-      '@react-native/metro-babel-transformer@0.73.15': { // https://github.com/facebook/react-native/blob/v0.73.6/packages/react-native-babel-transformer/package.json
-        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.73.6/LICENSE',
+      '@react-native/metro-babel-transformer@0.74.87': { // https://github.com/facebook/react-native/blob/v0.74.5/packages/react-native-babel-transformer/package.json
+        licenseUrl: 'https://github.com/facebook/react-native/blob/v0.74.5/LICENSE',
       },
       'metro-babel-transformer@0.80.12': { // https://github.com/facebook/metro/blob/v0.80.12/packages/metro-babel-transformer/package.json
         licenseUrl: 'https://github.com/facebook/metro/blob/v0.80.12/LICENSE',
@@ -67,16 +64,12 @@ module.exports = function () {
       'com.parse.bolts:bolts-tasks:1.4.0': { // https://github.com/BoltsFramework/Bolts-Android
         licenseName: 'BSD-3-Clause', // 名称だけ厳密にする(元: BSD License: https://github.com/BoltsFramework/Bolts-Android/blob/1.4.0/LICENSE)
       },
-      'app.notifee:core:202108261754': { // https://github.com/invertase/notifee/tree/%40notifee/react-native%405.7.0/packages/react-native/android/libs/app/notifee/core/202108261754
-        licenseName: 'Apache-2.0',
-        licenseUrl: 'https://github.com/invertase/notifee/blob/%40notifee/react-native%405.7.0/LICENSE', // https://notifee.app/license-terms/
-      },
     },
     cocoapods: {
       'glog@0.3.5': { // https://github.com/google/glog
         licenseName: 'BSD-3-Clause', // https://code.google.com/archive/p/google-glog/ (元: "Google" https://github.com/facebook/react-native/blob/v0.70.5/third-party-podspecs/glog.podspec#L9)
       },
-      'SocketRocket@0.6.1': { // https://github.com/facebookincubator/SocketRocket/blob/0.6.1/LICENSE
+      'SocketRocket@0.7.0': { // https://github.com/facebookincubator/SocketRocket/blob/0.7.0/LICENSE
         licenseName: 'BSD-3-Clause', // 名称だけ SPDX 形式に変更する (元: BSD)
       },
     },
