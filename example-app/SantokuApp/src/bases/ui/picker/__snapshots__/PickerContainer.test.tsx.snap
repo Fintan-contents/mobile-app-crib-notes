@@ -265,6 +265,7 @@ exports[`PickerContainer with all props should be applied properly: PickerContai
       }
     }
     onLayout={[Function]}
+    pointerEvents="none"
     style={
       {
         "backgroundColor": "green",

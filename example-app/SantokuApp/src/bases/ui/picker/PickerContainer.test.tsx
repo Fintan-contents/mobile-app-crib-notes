@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import {fireEvent, render, act} from '@testing-library/react-native';
+import {fireEvent, render, act, renderHook} from '@testing-library/react-native';
 import React from 'react';
 import {View, ViewProps} from 'react-native';
-import {AnimatedProps} from 'react-native-reanimated';
+import {AnimatedProps, useAnimatedProps} from 'react-native-reanimated';
 
 import {DEFAULT_SLIDE_IN_DURATION, DEFAULT_SLIDE_OUT_DURATION, PickerContainer} from './PickerContainer';
 
@@ -120,18 +120,23 @@ describe('PickerContainer only with required props', () => {
 describe('PickerContainer with all props', () => {
   it('should be applied properly', async () => {
     const afterSlideIn = jest.fn();
+    const {result: animatedProps} = renderHook(() =>
+      useAnimatedProps(() => {
+        return {
+          pointerEvents: 'none',
+        } as const;
+      }, []),
+    );
     /**
      * WithTimingConfigのeasingを取得できなかったため、以下のPropsは検証できていません。
      * - slideIntConfig
      * - slideOutConfig
-     *
-     * animatedPropsは取得できなかったため（Snapshot上にも存在していない）、検証できていません
      */
     const sut = render(
       <PickerContainer
         isVisible
         testID="animatedView"
-        animatedProps={{pointerEvents: 'none'}}
+        animatedProps={animatedProps.current}
         style={{backgroundColor: 'green'}}
         slideInDuration={200}
         afterSlideIn={afterSlideIn}
@@ -143,6 +148,7 @@ describe('PickerContainer with all props', () => {
     // assert animatedView
     const animatedViewProps = animatedView.props as AnimatedProps<ViewProps>;
     expect(animatedViewProps.style).toEqual({backgroundColor: 'green', transform: [{translateY: 1000}]});
+    expect(animatedViewProps.pointerEvents).toEqual('none');
 
     // slideInDurationで指定した時間の1msc前ではafterSlideInは実行されない
     await act(() => {
