@@ -44,9 +44,9 @@ stages:
           versionSpec: '3.1'
           addToPath: true
       - task: NodeTool@0
-        displayName: 'Use Node.js 18.15.0'
+        displayName: 'Use Node.js 20.17.0'
         inputs:
-          versionSpec: '18.15.0'
+          versionSpec: '20.17.0'
       - task: JavaToolInstaller@0
         inputs:
           versionSpec: '17'
@@ -164,9 +164,9 @@ stages:
         inputs:
           script: 'sudo xcode-select --switch /Applications/Xcode_15.4.app'
       - task: NodeTool@0
-        displayName: 'Use Node.js 18.15.0'
+        displayName: 'Use Node.js 20.17.0'
         inputs:
-          versionSpec: '18.15.0'
+          versionSpec: '20.17.0'
       - task: Cache@2
         displayName: Cache npm
         inputs:
