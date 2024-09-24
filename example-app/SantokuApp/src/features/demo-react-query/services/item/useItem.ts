@@ -88,8 +88,8 @@ export const useItem = (id: number) => {
     itemQuery.isSuccess && itemType0Query.isSuccess
       ? itemType0Query.data.rate
       : itemQuery.isSuccess && itemType1Query.isSuccess
-      ? itemType1Query.data.rate
-      : undefined;
+        ? itemType1Query.data.rate
+        : undefined;
   const amountQueryParams = itemQuery.data && rate ? {price: itemQuery.data.price, rate} : undefined;
 
   const amountQuery = useQuery(['item', 'getAmount', amountQueryParams], () => getAmount(amountQueryParams!), {

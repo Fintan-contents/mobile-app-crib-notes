@@ -36,7 +36,7 @@ export const TabBar: React.FC<React.PropsWithChildren<TabBarProps>> = ({children
               key={index}
               isActive={item.props.isActive ?? isActive}
               text={item.props.text}
-              onPress={item.props.onPress ?? !isActive ? () => onChange(index) : undefined}
+              onPress={(item.props.onPress ?? !isActive) ? () => onChange(index) : undefined}
             />
           );
         })}

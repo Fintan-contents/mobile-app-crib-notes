@@ -126,7 +126,7 @@ export const getAccountsMeLikes = rest.get(`${backendUrl}/accounts/me/likes`, (r
     const questionResponse = Object.values(
       [...ql, ...qcl, ...answer].reduce(
         (acc, curr) => {
-          const accLiked = curr.questionId in acc ? acc[curr.questionId].liked ?? false : false;
+          const accLiked = curr.questionId in acc ? (acc[curr.questionId].liked ?? false) : false;
           const accCommentId = curr.questionId in acc ? acc[curr.questionId].commentId : [];
           const accAnswer = curr.questionId in acc ? acc[curr.questionId].answer : [];
           acc[curr.questionId] = {
