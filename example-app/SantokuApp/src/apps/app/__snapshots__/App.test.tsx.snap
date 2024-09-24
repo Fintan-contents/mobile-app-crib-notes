@@ -391,8 +391,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                   >
                                                     <RNSVGSvgView
                                                       align="xMidYMid"
-                                                      bbHeight="24"
-                                                      bbWidth="24"
+                                                      bbHeight={24}
+                                                      bbWidth={24}
                                                       fill="none"
                                                       focusable={false}
                                                       meetOrSlice={0}
@@ -552,8 +552,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                     >
                                                       <RNSVGSvgView
                                                         align="xMidYMid"
-                                                        bbHeight="24"
-                                                        bbWidth="24"
+                                                        bbHeight={24}
+                                                        bbWidth={24}
                                                         fill="none"
                                                         focusable={false}
                                                         meetOrSlice={0}
@@ -651,8 +651,8 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                                     >
                                                       <RNSVGSvgView
                                                         align="xMidYMid"
-                                                        bbHeight="24"
-                                                        bbWidth="24"
+                                                        bbHeight={24}
+                                                        bbWidth={24}
                                                         fill="none"
                                                         focusable={false}
                                                         meetOrSlice={0}
@@ -1487,8 +1487,8 @@ React Native 0.66
                                                                         >
                                                                           <RNSVGSvgView
                                                                             align="xMidYMid"
-                                                                            bbHeight="24"
-                                                                            bbWidth="24"
+                                                                            bbHeight={24}
+                                                                            bbWidth={24}
                                                                             fill="none"
                                                                             focusable={false}
                                                                             meetOrSlice={0}
@@ -1747,8 +1747,8 @@ React Native 0.66
                                                                         >
                                                                           <RNSVGSvgView
                                                                             align="xMidYMid"
-                                                                            bbHeight="24"
-                                                                            bbWidth="24"
+                                                                            bbHeight={24}
+                                                                            bbWidth={24}
                                                                             fill="none"
                                                                             focusable={false}
                                                                             meetOrSlice={0}
@@ -2007,8 +2007,8 @@ React Native 0.66
                                                                         >
                                                                           <RNSVGSvgView
                                                                             align="xMidYMid"
-                                                                            bbHeight="24"
-                                                                            bbWidth="24"
+                                                                            bbHeight={24}
+                                                                            bbWidth={24}
                                                                             fill="none"
                                                                             focusable={false}
                                                                             meetOrSlice={0}
@@ -2158,8 +2158,8 @@ React Native 0.66
                                                                         />
                                                                         <RNSVGSvgView
                                                                           align="xMidYMid"
-                                                                          bbHeight="40"
-                                                                          bbWidth="40"
+                                                                          bbHeight={40}
+                                                                          bbWidth={40}
                                                                           fill="none"
                                                                           focusable={false}
                                                                           meetOrSlice={0}
@@ -2322,8 +2322,8 @@ React Native 0.66
                                                                         >
                                                                           <RNSVGSvgView
                                                                             align="xMidYMid"
-                                                                            bbHeight="24"
-                                                                            bbWidth="24"
+                                                                            bbHeight={24}
+                                                                            bbWidth={24}
                                                                             fill="none"
                                                                             focusable={false}
                                                                             meetOrSlice={0}
@@ -2582,8 +2582,8 @@ React Native 0.66
                                                                         >
                                                                           <RNSVGSvgView
                                                                             align="xMidYMid"
-                                                                            bbHeight="24"
-                                                                            bbWidth="24"
+                                                                            bbHeight={24}
+                                                                            bbWidth={24}
                                                                             fill="none"
                                                                             focusable={false}
                                                                             meetOrSlice={0}
@@ -2733,8 +2733,8 @@ React Native 0.66
                                                                         />
                                                                         <RNSVGSvgView
                                                                           align="xMidYMid"
-                                                                          bbHeight="40"
-                                                                          bbWidth="40"
+                                                                          bbHeight={40}
+                                                                          bbWidth={40}
                                                                           fill="none"
                                                                           focusable={false}
                                                                           meetOrSlice={0}
@@ -2897,8 +2897,8 @@ React Native 0.66
                                                                         >
                                                                           <RNSVGSvgView
                                                                             align="xMidYMid"
-                                                                            bbHeight="24"
-                                                                            bbWidth="24"
+                                                                            bbHeight={24}
+                                                                            bbWidth={24}
                                                                             fill="none"
                                                                             focusable={false}
                                                                             meetOrSlice={0}
@@ -3048,8 +3048,8 @@ React Native 0.66
                                                                         />
                                                                         <RNSVGSvgView
                                                                           align="xMidYMid"
-                                                                          bbHeight="40"
-                                                                          bbWidth="40"
+                                                                          bbHeight={40}
+                                                                          bbWidth={40}
                                                                           fill="none"
                                                                           focusable={false}
                                                                           meetOrSlice={0}
@@ -3293,8 +3293,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3392,8 +3392,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3491,8 +3491,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3607,8 +3607,8 @@ React Native 0.66
                                                                 >
                                                                   <RNSVGSvgView
                                                                     align="xMidYMid"
-                                                                    bbHeight="40"
-                                                                    bbWidth="40"
+                                                                    bbHeight={40}
+                                                                    bbWidth={40}
                                                                     fill="none"
                                                                     focusable={false}
                                                                     meetOrSlice={0}
@@ -3774,8 +3774,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -3944,8 +3944,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="18"
-                                                                      bbWidth="18"
+                                                                      bbHeight={18}
+                                                                      bbWidth={18}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4061,8 +4061,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4159,8 +4159,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4257,8 +4257,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4494,8 +4494,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4684,8 +4684,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="18"
-                                                                      bbWidth="18"
+                                                                      bbHeight={18}
+                                                                      bbWidth={18}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4801,8 +4801,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4899,8 +4899,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -4997,8 +4997,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5234,8 +5234,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5425,8 +5425,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="18"
-                                                                      bbWidth="18"
+                                                                      bbHeight={18}
+                                                                      bbWidth={18}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5542,8 +5542,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5640,8 +5640,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5738,8 +5738,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -5951,8 +5951,8 @@ React Native 0.66
                                                                       >
                                                                         <RNSVGSvgView
                                                                           align="xMidYMid"
-                                                                          bbHeight="24"
-                                                                          bbWidth="24"
+                                                                          bbHeight={24}
+                                                                          bbWidth={24}
                                                                           fill="none"
                                                                           focusable={false}
                                                                           meetOrSlice={0}
@@ -6067,8 +6067,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6243,8 +6243,8 @@ Nablarch 5u21
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="18"
-                                                                      bbWidth="18"
+                                                                      bbHeight={18}
+                                                                      bbWidth={18}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6360,8 +6360,8 @@ Nablarch 5u21
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6458,8 +6458,8 @@ Nablarch 5u21
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6556,8 +6556,8 @@ Nablarch 5u21
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -6681,8 +6681,8 @@ Nablarch 5u21
                                                                 >
                                                                   <RNSVGSvgView
                                                                     align="xMidYMid"
-                                                                    bbHeight="40"
-                                                                    bbWidth="40"
+                                                                    bbHeight={40}
+                                                                    bbWidth={40}
                                                                     fill="none"
                                                                     focusable={false}
                                                                     meetOrSlice={0}
@@ -6848,8 +6848,8 @@ Nablarch 5u21
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -7024,8 +7024,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="18"
-                                                                      bbWidth="18"
+                                                                      bbHeight={18}
+                                                                      bbWidth={18}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -7141,8 +7141,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -7239,8 +7239,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -7337,8 +7337,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -7574,8 +7574,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -7746,8 +7746,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="18"
-                                                                      bbWidth="18"
+                                                                      bbHeight={18}
+                                                                      bbWidth={18}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -7863,8 +7863,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -7961,8 +7961,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -8059,8 +8059,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -8272,8 +8272,8 @@ Flutter 3.0.5 stable
                                                                       >
                                                                         <RNSVGSvgView
                                                                           align="xMidYMid"
-                                                                          bbHeight="24"
-                                                                          bbWidth="24"
+                                                                          bbHeight={24}
+                                                                          bbWidth={24}
                                                                           fill="none"
                                                                           focusable={false}
                                                                           meetOrSlice={0}
@@ -8388,8 +8388,8 @@ Flutter 3.0.5 stable
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -8586,8 +8586,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="18"
-                                                                      bbWidth="18"
+                                                                      bbHeight={18}
+                                                                      bbWidth={18}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -8703,8 +8703,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -8801,8 +8801,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -8899,8 +8899,8 @@ React Native 0.66
                                                                   >
                                                                     <RNSVGSvgView
                                                                       align="xMidYMid"
-                                                                      bbHeight="24"
-                                                                      bbWidth="24"
+                                                                      bbHeight={24}
+                                                                      bbWidth={24}
                                                                       fill="none"
                                                                       focusable={false}
                                                                       meetOrSlice={0}
@@ -9062,8 +9062,8 @@ React Native 0.66
                                                               >
                                                                 <RNSVGSvgView
                                                                   align="xMidYMid"
-                                                                  bbHeight="24"
-                                                                  bbWidth="24"
+                                                                  bbHeight={24}
+                                                                  bbWidth={24}
                                                                   fill="none"
                                                                   focusable={false}
                                                                   meetOrSlice={0}
@@ -9146,8 +9146,8 @@ React Native 0.66
                                                                             ]
                                                                           }
                                                                           width="24"
-                                                                          x="0"
-                                                                          y="0"
+                                                                          x={0}
+                                                                          y={0}
                                                                         />
                                                                       </RNSVGClipPath>
                                                                     </RNSVGDefs>
@@ -9446,8 +9446,8 @@ React Native 0.66
                                 >
                                   <RNSVGSvgView
                                     align="xMidYMid"
-                                    bbHeight="24"
-                                    bbWidth="24"
+                                    bbHeight={24}
+                                    bbWidth={24}
                                     fill="none"
                                     focusable={false}
                                     meetOrSlice={0}
@@ -9520,8 +9520,8 @@ React Native 0.66
                                 >
                                   <RNSVGSvgView
                                     align="xMidYMid"
-                                    bbHeight="24"
-                                    bbWidth="24"
+                                    bbHeight={24}
+                                    bbWidth={24}
                                     fill="none"
                                     focusable={false}
                                     meetOrSlice={0}
