@@ -31,15 +31,24 @@ exports[`App マウントされたときに正常にレンダリングされる�
     >
       <View
         enabled={true}
+        fullScreenSwipeShadowEnabled={false}
+        hasLargeHeader={false}
         isNativeStack={true}
         nativeBackButtonDismissalEnabled={false}
         onAppear={[Function]}
         onDisappear={[Function]}
         onDismissed={[Function]}
+        onGestureCancel={[Function]}
         onHeaderBackButtonClicked={[Function]}
         onNativeDismissCancelled={[Function]}
+        onWillAppear={[Function]}
         onWillDisappear={[Function]}
         replaceAnimation="push"
+        sheetAllowedDetents="large"
+        sheetCornerRadius={-1}
+        sheetExpandsWhenScrolledToEdge={true}
+        sheetGrabberVisible={false}
+        sheetLargestUndimmedDetent="all"
         stackPresentation="push"
         style={
           {
@@ -97,15 +106,24 @@ exports[`App マウントされたときに正常にレンダリングされる�
               >
                 <View
                   enabled={true}
+                  fullScreenSwipeShadowEnabled={false}
+                  hasLargeHeader={false}
                   isNativeStack={true}
                   nativeBackButtonDismissalEnabled={false}
                   onAppear={[Function]}
                   onDisappear={[Function]}
                   onDismissed={[Function]}
+                  onGestureCancel={[Function]}
                   onHeaderBackButtonClicked={[Function]}
                   onNativeDismissCancelled={[Function]}
+                  onWillAppear={[Function]}
                   onWillDisappear={[Function]}
                   replaceAnimation="push"
+                  sheetAllowedDetents="large"
+                  sheetCornerRadius={-1}
+                  sheetExpandsWhenScrolledToEdge={true}
+                  sheetGrabberVisible={false}
+                  sheetLargestUndimmedDetent="all"
                   stackPresentation="push"
                   style={
                     {
@@ -737,6 +755,7 @@ exports[`App マウントされたときに正常にレンダリングされる�
                                           <View
                                             accessibilityElementsHidden={false}
                                             closing={false}
+                                            collapsable={false}
                                             gestureVelocityImpact={0.3}
                                             importantForAccessibility="auto"
                                             onClose={[Function]}
@@ -1318,7 +1337,7 @@ React Native 0.66
                                                           refreshing={false}
                                                           removeClippedSubviews={false}
                                                           renderItem={[Function]}
-                                                          scrollEventThrottle={50}
+                                                          scrollEventThrottle={0.0001}
                                                           showsVerticalScrollIndicator={false}
                                                           stickyHeaderIndices={
                                                             [

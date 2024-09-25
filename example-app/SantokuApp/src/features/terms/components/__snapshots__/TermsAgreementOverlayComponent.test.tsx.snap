@@ -63,6 +63,7 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
           FadeIn {
             "build": [Function],
             "callbackV": [Function],
+            "dampingRatioV": undefined,
             "dampingV": undefined,
             "delayV": undefined,
             "durationV": 300,
@@ -71,6 +72,7 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
             "massV": undefined,
             "overshootClampingV": undefined,
             "randomizeDelay": false,
+            "reduceMotionV": "system",
             "restDisplacementThresholdV": undefined,
             "restSpeedThresholdV": undefined,
             "rotateV": undefined,
@@ -82,6 +84,7 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
           FadeOut {
             "build": [Function],
             "callbackV": [Function],
+            "dampingRatioV": undefined,
             "dampingV": undefined,
             "delayV": undefined,
             "durationV": 300,
@@ -90,6 +93,7 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
             "massV": undefined,
             "overshootClampingV": undefined,
             "randomizeDelay": false,
+            "reduceMotionV": "system",
             "restDisplacementThresholdV": undefined,
             "restSpeedThresholdV": undefined,
             "rotateV": undefined,
@@ -129,6 +133,7 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
           FadeIn {
             "build": [Function],
             "callbackV": [Function],
+            "dampingRatioV": undefined,
             "dampingV": undefined,
             "delayV": undefined,
             "durationV": 300,
@@ -137,6 +142,7 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
             "massV": undefined,
             "overshootClampingV": undefined,
             "randomizeDelay": false,
+            "reduceMotionV": "system",
             "restDisplacementThresholdV": undefined,
             "restSpeedThresholdV": undefined,
             "rotateV": undefined,
@@ -148,6 +154,7 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
           FadeOut {
             "build": [Function],
             "callbackV": [Function],
+            "dampingRatioV": undefined,
             "dampingV": undefined,
             "delayV": undefined,
             "durationV": 300,
@@ -156,6 +163,7 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
             "massV": undefined,
             "overshootClampingV": undefined,
             "randomizeDelay": false,
+            "reduceMotionV": "system",
             "restDisplacementThresholdV": undefined,
             "restSpeedThresholdV": undefined,
             "rotateV": undefined,
@@ -206,78 +214,26 @@ exports[`TermsAgreementOverlayComponent マウントされたときに正常に�
             </Text>
           </View>
           <View
-            style={
-              [
-                {
-                  "flex": 1,
-                  "overflow": "hidden",
-                },
-                undefined,
-              ]
+            androidLayerType="software"
+            decelerationRate="normal"
+            onError={[Function]}
+            onHttpError={[Function]}
+            onLoadProgress={[Function]}
+            onLoadStart={[Function]}
+            onScroll={[Function]}
+            renderLoading={[Function]}
+            source={
+              {
+                "uri": "https://www.tis.co.jp/termsofuse/",
+              }
             }
-          >
-            <RNCWebView
-              androidLayerType="software"
-              cacheEnabled={true}
-              decelerationRate={0.998}
-              fraudulentWebsiteWarningEnabled={true}
-              hasOnFileDownload={false}
-              injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
-              injectedJavaScriptForMainFrameOnly={true}
-              javaScriptEnabled={true}
-              messagingEnabled={false}
-              messagingModuleName=""
-              newSource={
-                {
-                  "uri": "https://www.tis.co.jp/termsofuse/",
-                }
+            startInLoadingState={true}
+            style={
+              {
+                "flex": 1,
               }
-              onContentProcessDidTerminate={[Function]}
-              onHttpError={[Function]}
-              onLoadingError={[Function]}
-              onLoadingFinish={[Function]}
-              onLoadingProgress={[Function]}
-              onLoadingStart={[Function]}
-              onMessage={[Function]}
-              onScroll={[Function]}
-              onShouldStartLoadWithRequest={[Function]}
-              source={
-                {
-                  "uri": "https://www.tis.co.jp/termsofuse/",
-                }
-              }
-              style={
-                [
-                  {
-                    "flex": 1,
-                    "overflow": "hidden",
-                  },
-                  {
-                    "backgroundColor": "#ffffff",
-                  },
-                  {
-                    "flex": 1,
-                  },
-                ]
-              }
-              textInteractionEnabled={true}
-              useSharedProcessPool={true}
-            />
-            <ActivityIndicator
-              color="#0000ff"
-              size="large"
-              style={
-                {
-                  "alignItems": "center",
-                  "display": "flex",
-                  "height": "100%",
-                  "justifyContent": "center",
-                  "position": "absolute",
-                  "width": "100%",
-                }
-              }
-            />
-          </View>
+            }
+          />
           <View
             style={
               {

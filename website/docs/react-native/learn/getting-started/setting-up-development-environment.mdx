@@ -21,8 +21,8 @@ import TabItem from '@theme/TabItem';
 
 | OS             | ツール                | バージョン                                             | その他                                                                                                         |
 |:---------------|:---------------------|:-----------------------------------------------------|:------------------------------------------------------------------------------------------------------------|
-| macOS, Windows | Node.js              | [アクティブLTS](https://github.com/nodejs/release#release-schedule) | Node.js 16以降であれば学習には問題ないはずですが、このコンテンツはアクティブLTSを前提にして書かれています。                                                |
-| macOS, Windows | Java Development Kit | 11                                                   | ディストリビューションにはこだわりなし                                                                                         |
+| macOS, Windows | Node.js              | [アクティブLTS](https://github.com/nodejs/release#release-schedule) | Node.js 18以降であれば学習には問題ないはずですが、このコンテンツはアクティブLTSを前提にして書かれています。                                                |
+| macOS, Windows | Java Development Kit | 17                                                   | ディストリビューションにはこだわりなし                                                                                         |
 | macOS, Windows | Android Studio       | 最新                                                  | インストール後に[Android仮想デバイスの作成](#android仮想デバイスの作成)と[Android SDKのコマンドラインツールの設定](#android-sdkのコマンドラインツールの設定)が必要です。 |
 | macOS, Windows | Git                  | 最新                                                  | Homebrew(macOS), [公式ページ](https://git-scm.com/download/win)(Windows)でインストール |
 | macOS          | Xcode                | 最新                                                  | App Storeでインストール<br/>※ [異なるバージョンのXcodeを共存させる](../../santoku/development/development-environment/90.use-multiple-version-xcode.mdx) |
@@ -53,7 +53,7 @@ Android Studioをインストールした後、Android SDKに含まれる各種�
 
 Android StudioでSDK Managerを開き、SDK Toolsタブで以下のツールにチェックが付いていることを確認してください。チェックが付いていない場合は、チェックを付けて「Apply」もしくは「OK」を押してインストールしてください。
 
-* Android SDK Command-line Tools (10.0)
+* Android SDK Command-line Tools (latest)
 * Android SDK Platform-Tools
 * Android Emulator
 
@@ -73,23 +73,12 @@ Windowsは`ユーザー環境変数`に設定してください。また、`%USE
 | コマンドラインツール                                                                                    | 設定例（macOS）                                | 設定例（Windows）                              |
 |:----------------------------------------------------------------------------------------------------|:----------------------------------------------|:---------------------------------------------|
 | [Android SDK プラットフォーム ツール](https://developer.android.com/studio/command-line#tools-platform) | `$ANDROID_SDK_ROOT/platform-tools`            | `%ANDROID_SDK_ROOT%\platform-tools`          |
-| [Android SDK コマンドライン ツール](https://developer.android.com/studio/command-line#tools-sdk)        | `$ANDROID_SDK_ROOT/cmdline-tools/10.0/bin` | `%ANDROID_SDK_ROOT%\cmdline-tools\10.0\bin` |
+| [Android SDK コマンドライン ツール](https://developer.android.com/studio/command-line#tools-sdk)        | `$ANDROID_SDK_ROOT/cmdline-tools/latest/bin` | `%ANDROID_SDK_ROOT%\cmdline-tools\latest\bin` |
 | [Android エミュレータ](https://developer.android.com/studio/command-line#tools-emulator)              | `$ANDROID_SDK_ROOT/emulator`                  | `%ANDROID_SDK_ROOT%\emulator`                 |
 
 :::danger warning
 **`$ANDROID_SDK_ROOT/tools`が`PATH`に含まれている場合、`PATH`から削除してください。**古いバージョンのAndroid Studioをインストールしていた場合や、インストール方法を紹介した古い記事などを参照してインストールした場合に、特に注意してください。分かりづらいエラーが発生して解決できないというケースがしばしば見られます。
 :::
-
-<!--
-現時点（2023年10月）ではまだReact NativeでJDK17をサポートしていないです。
-[公式ドキュメント](https://reactnative.dev/docs/environment-setup)のインストール手順でJDK11を推奨しています。
-Java17が推奨されるReact Nativeバージョンになり次第、下記を修正する必要があります。
-また、何が変わるかについて調査する必要があります。
-
-* [インストールするツール](/react-native/learn/getting-started/setting-up-development-environment#インストールするツール)のJavaバージョンを変更
-* [Expoアップグレードガイド](/react-native/santoku/maintenance/enhance)のJavaバージョン変更
-* [Android SDKのコマンドラインツールの設定](/react-native/learn/getting-started/setting-up-development-environment#android-sdkのコマンドラインツールの設定)の「Android SDK コマンドライン ツール」のパスに`latest`に変更
--->
 
 macOSでの`~/.zprofile`への設定例は次のようになります。[^2]
 
@@ -103,7 +92,7 @@ export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 # Android CLI PATHs
 #   https://developer.android.com/studio/command-line
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/10.0/bin
+export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 ```
 

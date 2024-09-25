@@ -75,6 +75,7 @@ exports[`OverlayBackdrop only with required props renders successfully only with
         FadeIn {
           "build": [Function],
           "callbackV": [Function],
+          "dampingRatioV": undefined,
           "dampingV": undefined,
           "delayV": undefined,
           "durationV": 300,
@@ -83,6 +84,7 @@ exports[`OverlayBackdrop only with required props renders successfully only with
           "massV": undefined,
           "overshootClampingV": undefined,
           "randomizeDelay": false,
+          "reduceMotionV": "system",
           "restDisplacementThresholdV": undefined,
           "restSpeedThresholdV": undefined,
           "rotateV": undefined,
@@ -94,6 +96,7 @@ exports[`OverlayBackdrop only with required props renders successfully only with
         FadeOut {
           "build": [Function],
           "callbackV": [Function],
+          "dampingRatioV": undefined,
           "dampingV": undefined,
           "delayV": undefined,
           "durationV": 300,
@@ -102,6 +105,7 @@ exports[`OverlayBackdrop only with required props renders successfully only with
           "massV": undefined,
           "overshootClampingV": undefined,
           "randomizeDelay": false,
+          "reduceMotionV": "system",
           "restDisplacementThresholdV": undefined,
           "restSpeedThresholdV": undefined,
           "rotateV": undefined,
@@ -188,6 +192,7 @@ exports[`OverlayBackdrop with all props should be applied properly: OverlayBackd
         ZoomIn {
           "build": [Function],
           "callbackV": [Function],
+          "dampingRatioV": undefined,
           "dampingV": undefined,
           "delayV": undefined,
           "durationV": 500,
@@ -196,6 +201,7 @@ exports[`OverlayBackdrop with all props should be applied properly: OverlayBackd
           "massV": undefined,
           "overshootClampingV": undefined,
           "randomizeDelay": false,
+          "reduceMotionV": "system",
           "restDisplacementThresholdV": undefined,
           "restSpeedThresholdV": undefined,
           "rotateV": undefined,
@@ -207,6 +213,7 @@ exports[`OverlayBackdrop with all props should be applied properly: OverlayBackd
         ZoomOut {
           "build": [Function],
           "callbackV": [Function],
+          "dampingRatioV": undefined,
           "dampingV": undefined,
           "delayV": undefined,
           "durationV": 300,
@@ -215,6 +222,7 @@ exports[`OverlayBackdrop with all props should be applied properly: OverlayBackd
           "massV": undefined,
           "overshootClampingV": undefined,
           "randomizeDelay": false,
+          "reduceMotionV": "system",
           "restDisplacementThresholdV": undefined,
           "restSpeedThresholdV": undefined,
           "rotateV": undefined,

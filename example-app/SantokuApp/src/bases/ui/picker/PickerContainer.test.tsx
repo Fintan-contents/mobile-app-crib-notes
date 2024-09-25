@@ -17,7 +17,7 @@
 import {fireEvent, render, act} from '@testing-library/react-native';
 import React from 'react';
 import {View, ViewProps} from 'react-native';
-import Reanimated from 'react-native-reanimated';
+import {AnimatedProps} from 'react-native-reanimated';
 
 import {DEFAULT_SLIDE_IN_DURATION, DEFAULT_SLIDE_OUT_DURATION, PickerContainer} from './PickerContainer';
 
@@ -141,7 +141,7 @@ describe('PickerContainer with all props', () => {
     const animatedView = sut.getByTestId('animatedView');
 
     // assert animatedView
-    const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
+    const animatedViewProps = animatedView.props as AnimatedProps<ViewProps>;
     expect(animatedViewProps.style).toEqual({backgroundColor: 'green', transform: [{translateY: 1000}]});
 
     // slideInDurationで指定した時間の1msc前ではafterSlideInは実行されない

@@ -36,12 +36,12 @@ stages:
     - job: build_${{environment.name}}
       displayName: 'build ${{environment.name}}'
       pool:
-        # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
-        vmImage: macOS-13
+        # https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md
+        vmImage: macOS-14
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.1.4'
+          versionSpec: '3.1'
           addToPath: true
       - task: NodeTool@0
         displayName: 'Use Node.js 18.15.0'
@@ -49,7 +49,7 @@ stages:
           versionSpec: '18.15.0'
       - task: JavaToolInstaller@0
         inputs:
-          versionSpec: '11'
+          versionSpec: '17'
           jdkArchitectureOption: 'x64'
           jdkSourceOption: 'PreInstalled'
       - task: Cache@2
@@ -134,12 +134,12 @@ stages:
     - job: build_${{environment.name}}
       displayName: 'build ${{environment.name}}'
       pool:
-        # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
-        vmImage: macOS-13
+        # https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md
+        vmImage: macOS-14
       steps:
       - task: UseRubyVersion@0
         inputs:
-          versionSpec: '3.1.4'
+          versionSpec: '3.1'
           addToPath: true
       - task: InstallAppleCertificate@2
         displayName: 'Install an Apple certificate for ${{environment.name}}'
@@ -160,9 +160,9 @@ stages:
         inputs:
           provProfileSecureFile: $(${{environment.name}}_AppleDistributionProvisioningProfileSecureFileName)
       - task: CmdLine@2
-        displayName: 'Use Xcode 14.2'
+        displayName: 'Use Xcode 15.4'
         inputs:
-          script: 'sudo xcode-select --switch /Applications/Xcode_14.2.app'
+          script: 'sudo xcode-select --switch /Applications/Xcode_15.4.app'
       - task: NodeTool@0
         displayName: 'Use Node.js 18.15.0'
         inputs:

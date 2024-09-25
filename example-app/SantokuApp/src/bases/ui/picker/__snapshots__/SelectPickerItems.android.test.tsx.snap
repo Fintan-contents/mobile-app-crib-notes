@@ -12,6 +12,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
   testID="SelectPickerItems"
 >
   <RCTScrollView
+    CellRendererComponent={[Function]}
     animatedStyle={
       {
         "value": {},
@@ -41,7 +42,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
     onScrollEndDrag={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
+    scrollEventThrottle={1}
     showsVerticalScrollIndicator={false}
     snapToInterval={44}
     stickyHeaderIndices={[]}
@@ -127,6 +128,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
   testID="SelectPickerItems"
 >
   <RCTScrollView
+    CellRendererComponent={[Function]}
     animatedStyle={
       {
         "value": {},
@@ -167,7 +169,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
     onScrollEndDrag={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
+    scrollEventThrottle={1}
     showsVerticalScrollIndicator={false}
     snapToInterval={44}
     stickyHeaderIndices={[]}
@@ -181,8 +183,13 @@ exports[`SelectPickerItems only with required props renders successfully with mo
   >
     <View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        animatedStyle={
+          {
+            "value": {},
+          }
+        }
+        collapsable={false}
+        style={{}}
       >
         <View
           accessibilityState={
@@ -235,8 +242,13 @@ exports[`SelectPickerItems only with required props renders successfully with mo
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        animatedStyle={
+          {
+            "value": {},
+          }
+        }
+        collapsable={false}
+        style={{}}
       >
         <View
           accessibilityState={
@@ -362,6 +374,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
   testID="SelectPickerItems"
 >
   <RCTScrollView
+    CellRendererComponent={[Function]}
     animatedStyle={
       {
         "value": {},
@@ -423,7 +436,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
     onScrollEndDrag={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
+    scrollEventThrottle={1}
     showsVerticalScrollIndicator={false}
     snapToInterval={60}
     stickyHeaderIndices={[]}
@@ -438,8 +451,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
   >
     <View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        animatedStyle={
+          {
+            "value": {},
+          }
+        }
+        collapsable={false}
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
@@ -496,8 +514,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        animatedStyle={
+          {
+            "value": {},
+          }
+        }
+        collapsable={false}
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
@@ -554,8 +577,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        animatedStyle={
+          {
+            "value": {},
+          }
+        }
+        collapsable={false}
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
@@ -612,8 +640,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        animatedStyle={
+          {
+            "value": {},
+          }
+        }
+        collapsable={false}
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
@@ -670,8 +703,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        animatedStyle={
+          {
+            "value": {},
+          }
+        }
+        collapsable={false}
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
@@ -728,8 +766,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        animatedStyle={
+          {
+            "value": {},
+          }
+        }
+        collapsable={false}
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"

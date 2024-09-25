@@ -19,10 +19,10 @@ import {log} from 'bases/logging';
 import React from 'react';
 import {Platform, StyleProp, TextStyle} from 'react-native';
 
-import {Item} from './SelectPicker';
+import {Item, ItemSelectionKey} from './SelectPicker';
 
 export type SelectPickerItemsProps<ItemT> = Omit<
-  PickerProps<React.Key | ItemT>,
+  PickerProps<ItemSelectionKey | ItemT>,
   'enabled' | 'mode' | 'prompt' | 'dropdownIconColor' | 'dropdownIconRippleColor' | 'onFocus' | 'onBlur' | 'style'
 > & {
   items: Item<ItemT>[];

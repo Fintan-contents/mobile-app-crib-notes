@@ -17,7 +17,7 @@
 import {fireEvent, render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {PressableProps, ViewProps} from 'react-native';
-import Reanimated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
+import {AnimatedProps, ZoomIn, ZoomOut} from 'react-native-reanimated';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {OVERLAY_BACKDROP_DEFAULT_ENTERING, OVERLAY_BACKDROP_DEFAULT_EXITING, OverlayBackdrop} from './OverlayBackdrop';
@@ -48,7 +48,7 @@ describe('OverlayBackdrop only with required props', () => {
   it('renders successfully only with required props', () => {
     render(<OverlayBackdrop isVisible testID="backdropAnimated" />, {wrapper: Wrapper});
     const animatedView = screen.getByTestId('backdropAnimated');
-    const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
+    const animatedViewProps = animatedView.props as AnimatedProps<ViewProps>;
     // Animated.Viewのentering/exitingをテストで実行することができなかったため、entering/exitingにデフォルトアニメーションが設定されていることのみを確認する。
     expect(screen).toMatchSnapshot('AnimatedView with visible.');
     expect(animatedView).not.toBeNull();
@@ -129,7 +129,7 @@ describe('OverlayBackdrop with all props', () => {
     expect(onLongPress).toHaveBeenCalledTimes(1);
 
     // assert animatedView
-    const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
+    const animatedViewProps = animatedView.props as AnimatedProps<ViewProps>;
     expect(animatedViewProps.style).toEqual({flex: 1, backgroundColor: 'green', borderColor: 'red'});
     expect(animatedViewProps.entering).toBe(entering);
     expect(animatedViewProps.exiting).toBe(exiting);

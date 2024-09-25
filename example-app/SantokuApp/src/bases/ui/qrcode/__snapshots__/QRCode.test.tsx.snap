@@ -237,7 +237,6 @@ exports[`QRCode QRCodeが正常にrenderできることを確認 1`] = `
           }
           height="50"
           meetOrSlice={1}
-          src={null}
           width="50"
           x="0"
           y="0"

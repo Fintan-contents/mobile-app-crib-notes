@@ -116,11 +116,13 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
     fireEvent.press(pressableContainer);
 
     const yearPicker = screen.getByTestId('yearPicker');
-    const yearPickerProps = yearPicker.props as SelectPickerItemsProps<string>;
-    expect(yearPickerProps.items).toEqual([{value: 2022, label: '2022'}]);
+    const yearPickerProps = yearPicker.props as SelectPickerItemsProps<number>;
+    // iOS版のPicker（PickerIOS.ios.js）では、PickerItemのvalueをString関数で文字列に変換してネイティブコンポーネントに渡している。
+    // そのため、期待値を文字列とする必要がある。
+    expect(yearPickerProps.items).toEqual([{value: '2022', label: '2022'}]);
     const monthPicker = screen.getByTestId('monthPicker');
-    const monthPickerProps = monthPicker.props as SelectPickerItemsProps<string>;
-    expect(monthPickerProps.items).toEqual([{value: 4, label: '4'}]);
+    const monthPickerProps = monthPicker.props as SelectPickerItemsProps<number>;
+    expect(monthPickerProps.items).toEqual([{value: '4', label: '4'}]);
   });
 
   it('same year and different month', () => {
@@ -138,15 +140,15 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
     fireEvent.press(pressableContainer);
 
     const yearPicker = screen.getByTestId('yearPicker');
-    const yearPickerProps = yearPicker.props as SelectPickerItemsProps<string>;
-    expect(yearPickerProps.items).toEqual([{value: 2022, label: '2022'}]);
+    const yearPickerProps = yearPicker.props as SelectPickerItemsProps<number>;
+    expect(yearPickerProps.items).toEqual([{value: '2022', label: '2022'}]);
     const monthPicker = screen.getByTestId('monthPicker');
-    const monthPickerProps = monthPicker.props as SelectPickerItemsProps<string>;
+    const monthPickerProps = monthPicker.props as SelectPickerItemsProps<number>;
     expect(monthPickerProps.items).toEqual([
-      {value: 1, label: '1'},
-      {value: 2, label: '2'},
-      {value: 3, label: '3'},
-      {value: 4, label: '4'},
+      {value: '1', label: '1'},
+      {value: '2', label: '2'},
+      {value: '3', label: '3'},
+      {value: '4', label: '4'},
     ]);
   });
 
@@ -165,26 +167,26 @@ describe('YearMonthPicker with various maximum and minimum yearMonth', () => {
     fireEvent.press(pressableContainer);
 
     const yearPicker = screen.getByTestId('yearPicker');
-    const yearPickerProps = yearPicker.props as SelectPickerItemsProps<string>;
+    const yearPickerProps = yearPicker.props as SelectPickerItemsProps<number>;
     expect(yearPickerProps.items).toEqual([
-      {value: 2021, label: '2021'},
-      {value: 2022, label: '2022'},
+      {value: '2021', label: '2021'},
+      {value: '2022', label: '2022'},
     ]);
     const monthPicker = screen.getByTestId('monthPicker');
-    const monthPickerProps = monthPicker.props as SelectPickerItemsProps<string>;
+    const monthPickerProps = monthPicker.props as SelectPickerItemsProps<number>;
     expect(monthPickerProps.items).toEqual([
-      {value: 1, label: '1'},
-      {value: 2, label: '2'},
-      {value: 3, label: '3'},
-      {value: 4, label: '4'},
-      {value: 5, label: '5'},
-      {value: 6, label: '6'},
-      {value: 7, label: '7'},
-      {value: 8, label: '8'},
-      {value: 9, label: '9'},
-      {value: 10, label: '10'},
-      {value: 11, label: '11'},
-      {value: 12, label: '12'},
+      {value: '1', label: '1'},
+      {value: '2', label: '2'},
+      {value: '3', label: '3'},
+      {value: '4', label: '4'},
+      {value: '5', label: '5'},
+      {value: '6', label: '6'},
+      {value: '7', label: '7'},
+      {value: '8', label: '8'},
+      {value: '9', label: '9'},
+      {value: '10', label: '10'},
+      {value: '11', label: '11'},
+      {value: '12', label: '12'},
     ]);
   });
 

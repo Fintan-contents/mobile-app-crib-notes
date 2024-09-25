@@ -1,0 +1,817 @@
+---
+title: Expo SDK 50アップグレード
+---
+
+:::info参考
+以下の記事を参考にして、このアプリのExpo SDKを50にアップグレードしました。
+主な変更点とこのアプリで実施したアップグレード手順を紹介します。
+
+- [Expo SDK 50 - Expo Changelog](https://expo.dev/changelog/2024/01-18-sdk-50)
+- [React Native 0.73 - Debugging Improvements, Stable Symlink Support, and more · React Native](https://reactnative.dev/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks)
+
+なお、使用される可能性の低いEASとReact Native Webに関する内容は記載しません。
+:::
+
+## Expo SDK 50の主な変更
+
+### React Native `v0.73.6`
+
+詳細は、以下のリンク先を参照してください。
+
+- [React Native 0.73 - Debugging Improvements, Stable Symlink Support, and more · React Native](https://reactnative.dev/blog/2023/12/06/0.73-debugging-improvements-stable-symlinks)
+- [React Native CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0736)
+
+Reactのバージョンは変更されておらず、依然として`v18.2.0`です。
+
+非推奨となっていた以下のコンポーネントは、React Native `v0.73.0`で削除されました。以下に挙げるコミュニティライブラリなどへの移行が必要です。
+
+- [ProgressBarAndroid](https://reactnative.dev/docs/progressbarandroid)
+  - [@react-native-community/progress-bar-android](https://github.com/react-native-progress-view/progress-bar-android)
+  - [progressbar - React Native Directory](https://reactnative.directory/?search=progressbar)
+- [ProgressViewIOS](https://reactnative.dev/docs/progressviewios)
+  - [@react-native-community/progress-view](https://github.com/react-native-progress-view/progress-view)
+  - [progressview - React Native Directory](https://reactnative.directory/?search=progressview)
+
+### プラットフォームに関連する破壊的変更
+
+Android、iOSのプラットフォーム関連で以下のような変更がされています。
+
+- Androidの最低サポートバージョンが、**Android 6 (API 23)**に変更されました
+- iOSの最低サポートバージョンが、**13.4**に変更されました
+- Android Gradle Pluginのバージョンが8になり、**Java 17**が必須となりました
+  - Androidアプリをビルドする場合は、Java 17をインストールする必要があります
+- Node.jsのバージョンは**18**以上が必須となりました
+- React Nativeのテンプレートに含まれるAndroid用の`Main*`クラスがJavaからKotlinに変更されました
+  - `MainApplication.java` → `MainApplication.kt`
+  - `MainActivity.java` → `MainActivity.kt`
+
+### Dev toolsの改善
+
+デバッグに利用できる[Dev tools plugin](https://docs.expo.dev/debugging/devtools-plugins/)が導入されました。以下のようなライブラリでの開発を効率化するためのプラグインが公開されているようです。
+
+- [React Navigation](https://docs.expo.dev/debugging/devtools-plugins/#react-navigation)
+- [Apollo Client](https://docs.expo.dev/debugging/devtools-plugins/#apollo-client)
+- [React Query](https://docs.expo.dev/debugging/devtools-plugins/#react-query)
+- [Redux](https://docs.expo.dev/debugging/devtools-plugins/#redux)
+- [TinyBase](https://docs.expo.dev/debugging/devtools-plugins/#tinybase)
+
+サンプルアプリではまだ利用していませんが、これらのライブラリを利用している場合はDev toolsの利用を検討してみると良さそうです。
+
+### `@react-native-picker/picker`のiOSでの振る舞い変更
+
+`@react-native-picker/picker`が、iOSでは`value`を必ず文字列化するように変更されました。そのため、以下のようなコードでも**iOSでは`setCount`に文字列が渡されます**。
+
+```tsx
+const CountPicker = () => {
+  const [count, setCount] = useState<number>();
+  return (
+    <Picker selectedValue={count} onValueChange={setCount}>
+      <Picker.Item label="Count 1" value={1} />
+      <Picker.Item label="Count 2" value={2} />
+    </Picker>
+  );
+};
+```
+
+この変更の影響に関して、以下のようなIssueが報告されています。`value`として文字列以外を渡している場合は注意してください。
+
+- [Picker 2.6+ transforms numeric values to strings](https://github.com/react-native-picker/picker/issues/538)
+- [Selected value jumps back to first value when "Done" is tapped - Picker library v2.6.1, iOS only](https://github.com/react-native-picker/picker/issues/540)
+
+例えば、以下のようにPickerを実装している場合、この変更によって項目を選択できなくなってしまうので注意してください。
+
+```tsx
+import {useCallback,useState} from "react";
+import {Picker} from "@react-native-picker/picker";
+
+type ItemType = {value: number};
+const ITEMS = [{value: 1}, {value: 2}, {value: 3}, {value: 4}];
+const DEFAULT = ITEMS[0];
+const CountPicker = () => {
+  const [selected, setSelected] = useState<ItemType>(DEFAULT);
+  const onValueChange = useCallback(
+    // iOSでは、選択された値（sel）として文字列化されたvalueが渡されてしまう。
+    // そのため、find内での比較で一致するものが見つからず、結果としてselectedが変更されない
+    (sel: number) => setSelected(ITEMS.find(item => item.value === sel) ?? DEFAULT),
+    [],
+  );
+  return (
+    <Picker selectedValue={selected?.value} onValueChange={onValueChange}>
+      {ITEMS.map(item => (
+        <Picker.Item label={String(item.value)} value={item.value} />
+      ))}
+    </Picker>
+  );
+};
+```
+
+なお、`@react-native-picker/piker`をラップしている`react-native-picker-select`では、数値を`value`として渡していると項目が選択できなくなります。
+
+- [Not able to select Number values since @react-native-picker/picker upgrade to 2.6.1](https://github.com/lawnstarter/react-native-picker-select/issues/530)
+
+### ネイティブプロジェクトの更新ヘルパー
+
+ネイティブプロジェクトのアップグレードの参考になるように、[Native project upgrade helper](https://docs.expo.dev/bare/upgrade/)がExpoから提供されるようになりました。
+
+React Nativeコミュニティのプロジェクトテンプレート向けには、以前から[React Native Upgrade Helper](https://react-native-community.github.io/upgrade-helper/)が提供されていましたが、そのExpoテンプレート版になります。
+
+たとえば、SDK 49からSDK 50への修正にあたって更新されたExpoテンプレートのネイティブプロジェクトファイルは、以下のURLで確認できます。
+
+[https://docs.expo.dev/bare/upgrade/?fromSdk=49&toSdk=50](https://docs.expo.dev/bare/upgrade/?fromSdk=49&toSdk=50)
+
+自分たちで管理しているネイティブプロジェクトファイルに対してこれらの修正を加えることで、テンプレートの状態をSDK 50のデフォルト状態に合わせることができます。
+
+このアプリのようにExpo prebuildを利用した[Continuous Native Generation (CNG)](https://docs.expo.dev/workflow/continuous-native-generation/)を採用している場合、これらの変更はネイティブプロジェクトの生成時に自動的に反映されます。そういった場合でも、具体的にどのような変更が加わったのかを把握するために活用できます。
+
+### `URL`および`URLSearchParams`の組み込み
+
+React Nativeで`URL`や`URLSearchParam`の全機能を利用するためには、`react-native-url-polyfill`などのポリフィルを利用する必要がありました。
+
+Expo SDK 50ではこれらの標準APIがExpoのランタイムに組み込まれたので、ポリフィルは不要になりました。
+
+詳細は[URL - Expo Documentation](https://docs.expo.dev/versions/v50.0.0/sdk/url/)を参照してください。
+
+### Xcodeからアプリを起動した場合、Metro Bundlerが起動しないように変更
+
+Xcodeからアプリを起動したり、ビルドした場合にMetro Bundlerが自動的には起動しなくなりました。ビルドの際は特に問題ありませんが、アプリを起動する際は別途Metro Bundlerを立ち上げる必要があります。
+
+### Expoがサポートするライブラリや機能
+
+以下に挙げる変更点の詳細やその他の変更については、[ExpoのChangelog](https://github.com/expo/expo/blob/main/CHANGELOG.md#5000--2023-12-12)を参照してください。
+
+#### ライブラリの更新
+
+- [expo-router](https://docs.expo.dev/router/introduction/) `v3`
+  - 参考：[Expo Router v3: API Routes, bundle splitting, speed improvements, and more](https://expo.dev/changelog/2024/01-23-router-3)
+- [expo-font](https://docs.expo.dev/versions/v50.0.0/sdk/font/)
+  - Config Pluginを利用して、フォントをネイティブリソースとして追加できるようになりました。詳細については、Expoの[Fontについてのガイド](https://docs.expo.dev/develop/user-interface/fonts/#use-a-custom-font)も参考にしてください。
+- [expo-secure-store](https://docs.expo.dev/versions/v50.0.0/sdk/securestore/)
+  - 同期的に処理する`getItem`と`setItem`が追加されました。
+  - キーが存在しない場合の振る舞いがiOSとAndroidで統一され、`null`を返すようになりました。修正前はAndroidでは例外が送出されていました。
+  - iOSで顔認証を利用する場合に必要となる`NSFaceIDUsageDescription`を、`app.config.js`で設定できるようになりました。詳細は[Expo SecureStore](https://docs.expo.dev/versions/v50.0.0/sdk/securestore/)を参照してください。
+- [@expo/metro-config](https://docs.expo.dev/guides/customizing-metro/)
+  - `tsconfig.json`で設定した`paths`が自動で読み込まれるようになり、設定なしでもpath aliasが正しく解決されるようになりました。
+  - ただし、Jestの実行時などには有効にはならないようです。
+- [babel-preset-expo](https://github.com/expo/expo/tree/main/packages/babel-preset-expo#readme)
+  - React Native ReanimatedのBabelプラグインが自動的に有効化されるようになりました。
+  - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)を[@expo/vector-icons](https://docs.expo.dev/guides/icons/)にエイリアスする設定がMetro Resolverに移動されました。
+    それに伴って、[babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver)が依存関係から取り除かれました。
+    - このアプリではJestなどでもpath aliasを扱えるようにbabel-preset-module-resolverを利用する必要があります。そのため、`devDependencies`に明示的に追加して対応しました。
+
+#### ライブラリの新機能
+
+- [expo-sqlite/next](https://docs.expo.dev/versions/v50.0.0/sdk/sqlite-next/)
+  - 全面的に書き直され、同期APIやPrepared Statement、Blobデータ型などが利用できるようになりました。
+  - SDK 50では`expo-sqlite/next`として公開されていますが、SDK 51では`expo-sqlite`がこの新SDKに置き換えられています。
+- [expo-camera/next](https://docs.expo.dev/versions/v50.0.0/sdk/camera-next/)
+  - Androidでは、推奨されているCameraXを利用するように変更されています。
+  - iOS向けには、[DataScannerViewController](https://developer.apple.com/documentation/visionkit/datascannerviewcontroller)のサポートが追加されました。
+  - 顔検出機能など利用される頻度が低い機能は削除されました。frame processorを利用するなどの高度な用途向けには[react-native-vision-camera](https://github.com/mrousavy/react-native-vision-camera)の利用が推奨されています。
+  - SDK 50では`expo-camera/next`として公開されていますが、SDK 51では`expo-camera`がこの新SDKに置き換えられています。
+  - 詳細は[expo-camera/next is ready for a close up](https://expo.dev/blog/expo-camera-next)を参照してください。
+- [@expo/fingerprint](https://github.com/expo/expo/tree/main/packages/%40expo/fingerprint)
+  - `npx @expo/fingerprint .`で、ネイティブモジュールなども含めたアプリのフィンガープリントを取得できるようになりました。
+  - この機能を利用することで、ビルドされたアプリとJavaScriptバンドルが整合性のあるバージョンとなっているかを検証できるようになります。
+
+#### ライブラリの廃止
+
+- [sentry-expo](https://github.com/expo/sentry-expo)
+  - Sentryの提供する公式ライブラリ[@sentry/react-native](https://docs.sentry.io/platforms/react-native/)がExpoをサポートするようになったため、sentry-expoは廃止予定となりました。
+  - 移行ガイドは[Migrating from sentry-expo to @sentry/react-native](https://github.com/expo/fyi/blob/main/sentry-expo-migration.md)を参照してください。
+  - `@sentry/react-native`の導入方法については[Use Sentry - Expo Documentation](https://docs.expo.dev/guides/using-sentry/)を参照してください。
+
+## このアプリで実施したアップグレードの手順
+
+このアプリでは、[Expo 50へのアップグレード方法](https://expo.dev/changelog/2024/01-18-sdk-50#%EF%B8%8F-upgrading-your-app)を参考に、以下の作業を実施してExpo SDK 50にアップグレードしました。
+
+アップグレードを実施したプルリクエストは[Pull Request #1321 · ws-4020/mobile-app-crib-notes](https://github.com/ws-4020/mobile-app-crib-notes/pull/1321)です。
+
+1. [Expoのアップグレード](#expoのアップグレード)
+1. [Expoが管理するライブラリのアップグレード](#expoが管理するライブラリのアップグレード)
+1. [バージョンの整合性が取れなくなったライブラリのアップグレード](#バージョンの整合性が取れなくなったライブラリのアップグレード)
+1. [依存ライブラリから除外されたライブラリのインストール](#依存ライブラリから除外されたライブラリのインストール)
+1. [不要となったライブラリのアンインストール](#不要となったライブラリのアンインストール)
+1. [React Navigationのバージョンを更新](#react-navigationのバージョンを更新)
+1. [`npx expo-doctor`でバージョン整合性を確認](#npx-expo-doctorでバージョン整合性を確認)
+1. [既存パッチファイルの更新](#既存パッチファイルの更新)
+1. [ビルドなどに利用するツールのバージョンを更新](#ビルドなどに利用するツールのバージョンを更新)
+1. [Config Pluginの修正](#config-pluginの修正)
+1. [静的解析エラーの修正](#静的解析エラーの修正)
+1. [自動テストの失敗を修正](#自動テストの失敗を修正)
+1. [`@react-native-picker/picker`の変更に伴う修正](#react-native-pickerpickerの変更に伴う修正)
+1. [ライセンス情報を更新](#ライセンス情報を更新)
+
+### Expoのアップグレード
+
+`npm install expo@^50.0.0`を実行して、Expo SDK 50の`expo`パッケージをインストールします。
+
+### Expoが管理するライブラリのアップグレード
+
+`npx expo install --fix`を実行して、Expoが管理するライブラリをアップグレードします。ただ、今回は一部のパッケージが更新されず、後で実行する`npx expo-doctor`で検知されました。
+
+それらのパッケージは手動で後ほどアップグレードします。
+
+### バージョンの整合性が取れなくなったライブラリのアップグレード
+
+Expoが管理するライブラリに依存しているライブラリの一部でバージョンの整合性が取れなくなってしまったため、整合性の取れるバージョンに更新しました。
+
+- [react-native-qrcode-svg](https://github.com/Expensify/react-native-qrcode-svg)
+  - このライブラリが依存しているreact-native-svgが14系に更新されたため、対応するバージョンに更新しました。
+  <!-- eslint-disable-next-line jtf-style/1.1.3.箇条書き -->
+  - `npm i react-native-qrcode-svg@~6.3.0`
+- [@expo/config-plugins](https://docs.expo.dev/config-plugins/introduction/)
+  - `npm i -D @expo/config-plugins@~7.9.2` <!-- eslint-disable-line jtf-style/1.1.3.箇条書き -->
+
+### 依存ライブラリから除外されたライブラリのインストール
+
+リリースノートには記載がなかったのですが、SDK 49では`expo`の依存関係に含まれていた`expo-application`が、SDK 50では含まれなくなっていました。そのため、このアプリの依存関係に含めるように修正しました。
+
+- `npx expo install expo-application`
+
+また[ライブラリの更新](#ライブラリの更新)でも触れていますが、`babel-preset-expo`の更新で`babel-plugin-module-resolver`が依存関係に含まれなくなりました。このアプリではJest実行時などにもpath aliasを解決する必要があり`babel.config.js`での設定を削除できなかったため、依存関係に含めるように修正しました。
+
+- `npm i -D babel-plugin-module-resolver`
+
+### 不要となったライブラリのアンインストール
+
+`URL`と`URLSearchParam`がExpoに組み込まれ、`react-native-url-polyfill`は不要となったためアンインストールしました。
+
+- `npm uninstall react-native-url-polyfill`
+- SantokuAppルートディレクトリの`index.js`から`import 'react-native-url-polyfill/auto';`を削除
+
+### React Navigationのバージョンを更新
+
+今回のExpo SDKバージョンアップに必須ではありませんでしたが、リグレッションテストの効率などを考慮してあわせてアップグレードしました。
+
+```console
+npm i @react-navigation/bottom-tabs@~6.6.0 @react-navigation/drawer@~6.7.0 @react-navigation/native-stack@~6.11.0 @react-navigation/stack@~6.4.0
+```
+
+### `npx expo-doctor`でバージョン整合性を確認
+
+`npx expo-doctor`で確認したところ、いくつかのライブラリのバージョンについて警告が出力されました。
+
+```console
+ ❯❯❯ npx expo-doctor
+...略...
+The following packages should be updated for best compatibility with the installed expo version:
+  @types/react@18.2.31 - expected version: ~18.2.45
+  babel-preset-expo@9.5.2 - expected version: ^10.0.0
+  jest-expo@49.0.0 - expected version: ~50.0.4
+  typescript@5.1.6 - expected version: ^5.3.0
+Your project may not work correctly until you install the correct versions of the packages.
+Found outdated dependencies
+Advice: Use 'npx expo install --check' to review and upgrade your dependencies.
+```
+
+通常は、アドバイス通り`npx expo install --check`を実行して正しいバージョンに修正するのが望ましいです。しかし、このアプリではTypeScriptが他ライブラリ（`msw@1.3.2`）と競合してしまったため`~5.1.3`のままとする必要がありました。
+そのため、以下のコマンドでバージョンを更新しました。
+
+- `npm i -D @types/react@~18.2.45 babel-preset-expo@^10.0.0 jest-expo@^50.0.4`
+
+### 既存パッチファイルの更新
+
+このアプリでは、[patch-package](https://github.com/ds300/patch-package)を使用して、以下のライブラリにパッチファイルを適用していました。
+パッチ内容の詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2024.10/example-app/SantokuApp/patches/README.md)を参照してください。
+
+- `@expo/config-plugins`
+- `expo-splash-screen`
+- `react-native-elements`
+
+`expo-splash-screen`は、Expo SDKのアップグレードに伴いバージョンが上がりました。しかし、適用していたパッチファイルはまだ必要な対応だったため、パッチファイルは削除せずに各ライブラリのバージョンに合わせてファイル名をリネームしました。
+
+`@expo/config-plugins`はまだ必要な対応だったのですが、バージョンの更新に起因してパッチが失敗するようになりました。修正内容には変更はなかったため、利用しているバージョンでのパッチが成功するようにパッチファイルを作成し直して対応しました。
+
+`react-native-elements`に関しては、バージョンが変わらなかったため変更はありません。
+
+### ビルドなどに利用するツールのバージョンを更新
+
+Expo SDK 50から、Javaなどの必要バージョンが変更されています。このアプリの使っているビルド環境にインストールされているRubyのバージョンも変更されていたため、Rubyについてもバージョンを変更しました。
+また、`npm run pod-install`を実行したところFirebase SDKのインストールにCocoaPods 1.12以上が必要というエラーが表示されました。この対応として、CocoaPodsのバージョンも更新しました。
+
+- Java: JDK 17
+- Ruby: 3.1.6
+- CocoaPods: 1.15.2
+
+### Config Pluginの修正
+
+このアプリでは、以下の変更のためにExpo config pluginでAndroidの`MainApplication.java`と`MainActivity.java`に修正を加えていました。
+
+- スプラッシュスクリーン表示用のアクティビティ追加
+- テスト用のネイティブモジュール追加
+
+今回のアップグレードでJavaファイルではなくKotlinファイルが利用されるようになったため、Config Pluginに修正を加えて対応しました。
+
+- テンプレートファイルの修正
+  - スプラッシュスクリーン表示用のアクティビティとして用意していたテンプレートファイル（`MainActivity.java`）をKotlin（`MainActivity.kt`）に変更
+  - テンプレートファイルのコピー処理の対象拡張子を`java`から`kt`に変更
+  - 関連ファイル
+    - `config/plugin/src/android/withAndroidAppActivity.ts`
+    - `config/plugin/src/android/withAndroidCopyMainActivity.ts`
+- ネイティブモジュール追加のコード片を修正
+  - `MainApplication.java`ではなく`MainApplication.kt`を対象に処理を実施するように修正
+  - 置換用のコード片がJava用になっていたので、Kotlin用のものを追加
+    - 関連ファイル
+      - `config/plugin/src/android/withAndroidAddNativeModulePakcages.ts`
+
+### 静的解析エラーの修正
+
+#### 削除されたAPIをモックから削除
+
+今回のアップグレードで、`expo-splash-screen`から`hide`と`preventAutoHide`というAPIが廃止されていました。
+
+Jestでのテスト用に`expo-splash-screen`のモックを用意しているのですが、そこで型エラーとなっていたのでモックしていた部分を削除して対応しました。
+
+```diff
+ import SplashScreen from 'expo-splash-screen';
+
+ export const preventAutoHideAsync = jest.fn(() => Promise.resolve(true));
+ export const hideAsync = jest.fn(() => Promise.resolve(true));
+-export const hide = jest.fn();
+-export const preventAutoHide = jest.fn();
+
+ const mock: jest.Mocked<typeof SplashScreen> = {
+   preventAutoHideAsync,
+   hideAsync,
+-  hide,
+-  preventAutoHide,
+ };
+
+ Object.defineProperty(__mocks, 'expoSplashScreen', {value: mock});
+
+ export default mock;
+```
+
+#### React Native Reanimatedで廃止予定となった型の修正
+
+React Native Reanimatedのv3.5.0で、`Reanimated.AnimateProps`が廃止予定とされました。
+
+デフォルトエクスポートから`AnimateProps`を利用するのではなく、名前付きエクスポートされた`AnimatedProps`（微妙に型名が変わっていることに注意）を利用するように修正しました。
+
+```diff title="AnimatedPropsを利用するように修正"
+ import {composePressableStyles} from 'bases/core/utils/composePressableStyles';
+ import React, {useMemo} from 'react';
+ import {Modal as RNModal, ModalProps, Pressable, PressableProps, StyleSheet, ViewProps} from 'react-native';
+-import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
++import {AnimatedProps, WithTimingConfig} from 'react-native-reanimated';
+
+ import {useModalBackdrop} from './useModalBackdrop';
+
+ // 〜〜中略〜〜
+
+ // React Native ReanimatedのLayout Animationsを使用すると↓の不具合が発生するため、'exiting'・'entering'の指定ができないようにしています。
+ // https://github.com/software-mansion/react-native-reanimated/issues/2906
+-export type ModalBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exiting' | 'entering'> & {
++export type ModalBackdropProps = Omit<AnimatedProps<ViewProps>, 'exiting' | 'entering'> & {
+   isVisible: boolean;
+   onPress?: () => unknown;
+   afterFadeIn?: (finished?: boolean) => unknown;
+```
+
+#### React Native Reanimatedで公開されている型の変更に対応
+
+React Native Reanimatedからはもともと`Keyframe`という型が公開されていたのですが、クラスが公開されるように変更されました。
+
+ただ、単純に`typeof Keyframe`と変更してもエラーが解消せず、公開されていない`ReanimatedKeyframe`を利用する必要がありました。
+
+公開されていない型の利用は避けておきたかったので、以下のような型を独自に定義して利用するように修正しました。
+
+```typescript title="ReanimatedKeyframe.ts"
+import {ReduceMotion} from 'react-native-reanimated';
+
+// WORKAROUND: React Native ReanimatedのKeyframeを引数として受ける際に利用できる適切な型がなかったので、独自に定義して利用しています。
+
+export interface ReanimatedKeyframe {
+  duration(durationMs: number): this;
+  delay(delayMs: number): this;
+  reduceMotion(reduceMotionV: ReduceMotion): this;
+  withCallback(callback: (finished: boolean) => void): this;
+}
+```
+
+`Keyframe`の利用箇所は、以下のように修正しています。
+
+```diff title="OverlayContainer.tsx"
+ import {useSafeAreaInsets} from 'react-native-safe-area-context';
++
++import {ReanimatedKeyframe} from './ReanimatedKeyframe';
+
+ // 〜〜〜中略〜〜〜
+
+   /**
+    * enteringに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
+    * withCallbackで実行する関数は、enteringCallbackで指定してください。
+    */
+-  entering?: BaseAnimationBuilder | Keyframe;
++  entering?: BaseAnimationBuilder | ReanimatedKeyframe;
+   /**
+    * exitingに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
+    * withCallbackで実行する関数は、exitingCallbackで指定してください。
+    */
+-  exiting?: BaseAnimationBuilder | Keyframe;
++  exiting?: BaseAnimationBuilder | ReanimatedKeyframe;
+ };
+```
+
+#### 不要になった型定義ファイルを削除
+
+React Native Reanimatedの以前のバージョンではJest拡張などの型定義が提供されていなかったのですが、現在は提供されるようになっていたため、該当するファイルを削除しました。
+
+```diff title="削除したファイル（src/@types/react-native-reanimated-jest-util.d.ts）"
+-declare namespace jest {
+-  import Reanimated from 'react-native-reanimated';
+-  import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
+-
+-  interface Matchers<R> {
+-    toHaveAnimatedStyle(
+-      style:
+-        | Reanimated.AnimateStyle<ViewStyle | ImageStyle | TextStyle>[]
+-        | Reanimated.AnimateStyle<ViewStyle | ImageStyle | TextStyle>,
+-    ): R;
+-  }
+-}
+-
+-declare module 'react-native-reanimated/lib/module/reanimated2/jestUtils' {
+-  import {ReactTestInstance} from 'react-test-renderer';
+-  import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
+-  export const withReanimatedTimer: (test: () => unknown) => void;
+-  export const advanceAnimationByTime: (time: number) => void;
+-  export const advanceAnimationByFrame: (count: number) => void;
+-  export const getAnimatedStyle: <T = ViewStyle | ImageStyle | TextStyle>(instance: ReactTestInstance) => T;
+-}
+```
+
+### 自動テストの失敗を修正
+
+#### React Native WebViewのモックを追加
+
+テストを実行したところ、`WebView`利用箇所で以下のようなエラーが発生してしまいテストが失敗するようになっていました。
+
+```console
+mobile-app-crib-notes/example-app/SantokuApp/node_modules/react-native-webview/lib/RNCWebViewNativeComponent.js: Could not find component config for native component
+
+      18 | import React, {useCallback, useEffect, useState} from 'react';
+      19 | import {ActivityIndicator, StyleSheet} from 'react-native';
+    > 20 | import {WebView as RNWebView, WebViewProps} from 'react-native-webview';
+         | ^
+      21 | import {
+      22 |   WebViewErrorEvent,
+      23 |   WebViewNavigationEvent,
+
+      at throwIfConfigNotfound (node_modules/@react-native/codegen/lib/parsers/error-utils.js:285:11)
+      at findComponentConfig (node_modules/@react-native/codegen/lib/parsers/parsers-commons.js:896:3)
+      at buildComponentSchema (node_modules/@react-native/codegen/lib/parsers/flow/components/index.js:24:32)
+      at buildSchemaFromConfigType (node_modules/@react-native/codegen/lib/parsers/parsers-commons.js:462:34)
+      at buildSchema (node_modules/@react-native/codegen/lib/parsers/parsers-commons.js:526:10)
+      at FlowParser.parseString (node_modules/@react-native/codegen/lib/parsers/flow/parser.js:134:12)
+      at parseFile (node_modules/babel-preset-expo/node_modules/@react-native/babel-plugin-codegen/index.js:36:23)
+      at generateViewConfig (node_modules/babel-preset-expo/node_modules/@react-native/babel-plugin-codegen/index.js:49:18)
+```
+
+以下のIssueなどを参考に、`WebView`のモックを追加して対応しました。
+
+- [Jest fails on v12.0.2](https://github.com/react-native-webview/react-native-webview/issues/2934)
+- [Could not find component config for native component](https://github.com/react-native-webview/react-native-webview/issues/3233)
+
+```typescript jsx title="jest/__mocks__/react-native-webview.tsx"
+import {forwardRef, useImperativeHandle} from 'react';
+import {View} from 'react-native';
+import {type WebView as RNWebView, WebViewProps} from 'react-native-webview';
+
+const refOverride = {
+  goBack: jest.fn(),
+  goForward: jest.fn(),
+  reload: jest.fn(),
+  stopLoading: jest.fn(),
+  injectJavaScript: jest.fn(),
+  requestFocus: jest.fn(),
+  postMessage: jest.fn(),
+  context: jest.fn(),
+  setState: jest.fn(),
+  forceUpdate: jest.fn(),
+  render: jest.fn(),
+  state: jest.fn(),
+};
+const MockWebView = forwardRef<RNWebView, WebViewProps>((props, ref) => {
+  useImperativeHandle(ref, () => ({...refOverride, props, refs: {}}), [props]);
+  return <View {...props} />;
+});
+
+export const WebView = MockWebView;
+export default MockWebView;
+```
+
+#### React Native Reanimatedの`runOnJS`実行タイミングの変更
+
+React Native Reanimatedの`runOnJS`を使っているコールバック関数が、正しく呼び出されることのテストが失敗するようになっていました。
+
+コールバック関数をマイクロタスクキューに追加するよう変更されていたので、以下のように修正してコールバック関数が実行されるのを待つように修正しました。
+
+```diff
+ import {useWorkletCallback} from './useWorkletCallback';
+
+ describe('useWorkletCallback', () => {
+-  it('should be called callback if callback exits', () => {
++  it('should be called callback if callback exits', async () => {
+     const callback = jest.fn();
+     const {result} = renderHook(props => useWorkletCallback(props), {initialProps: callback});
+     const hook = result.current;
+     hook(true);
++    // runOnJSで追加されたコールバックはマイクロタスクとして追加されるので、キューが消化されるのを待たないといけない。
++    await Promise.resolve();
+     expect(callback).toHaveBeenCalledWith(true);
+   });
+ });
+```
+
+#### `act`外での状態更新という警告の修正
+
+React Native Reanimatedのアニメーションを伴う操作をテストしている箇所で、以下のような警告が出力されるようになっていました。
+
+```console
+Warning: An update to PickerBackdrop inside a test was not wrapped in act(...).
+When testing, code that causes React state updates should be wrapped into act(...):
+```
+
+React Native Testing Libraryの`fireEvent`を利用している箇所だったので、同じくライブラリから提供されている`waitFor`を利用するように変更しました。（テスト関数自体を`async`に変更する必要があります）
+
+```diff
+-    fireEvent.press(deleteLink);
++    await waitFor(() => {
++      fireEvent.press(deleteLink);
++    });
+```
+
+### `@react-native-picker/picker`の変更に伴う修正
+
+[`@react-native-picker/picker`のiOSでの振る舞い変更](#react-native-pickerpickerのiosでの振る舞い変更)に記載した通り、iOSでは`Picker.Item`に渡した`value`が強制的に文字列化されてしまいます。また、`Picker`の`onValueChange`にも文字列化された値が渡されるようになっています。
+
+このアプリで独自に実装しているPicker部品にも影響があったため、`SelectPicker`と`YearMonthPicker`に以下のような修正を加えました。（修正内容が大きくなってしまうので、主要部分のみ抜き出しています）
+
+#### 値に`string`もしくは`number`以外を持つ場合は、要素を特定するための`key`を必須とするように変更
+
+`@react-native-picker/picker`は`Picker`の`selectedValue`として、`string`もしくは`nubmer`が渡されることを期待しています。これは、`Picker`内の`Picker.Item#value`と一致する必要があります。
+
+```typescript jsx title="node_modules/@react-native-picker/picker/typings/Picker.d.ts"
+  /**
+   * Value matching value of one of the items. Can be a string or an integer.
+   */
+  selectedValue?: T;
+```
+
+そこで、`SelectPicker`から`Picker`と`Picker.Item`に渡す値が`string`もしくは`number`となるように、`SelectPicker`に渡す要素の型を変更しました。
+
+```diff title="SelectPicker.ts"
++export type ItemSelectionKey = string | number;
+ export type Item<T> = {
+   label: string;
+   value: T;
+   inputLabel?: string;
+-  key?: React.Key;
+   color?: string;
+   fontFamily?: string;
+-};
++} & (T extends ItemSelectionKey
++  ? {
++      // valueがstringもしくはnumberの場合は、value自体をkeyの代わりに利用できるので任意としています。
++      key?: ItemSelectionKey;
++    }
++  : {
++      // valueがstringでもnumberでもない場合は、valueをkeyとしては利用できないので、必須としています。
++      key: ItemSelectionKey;
++    });
+```
+
+上記の差分に含まれてしまっていますが、もともと`key`は`React.Key`としていましたが`string`か`number`のみ設定できるように変更しています。
+
+#### iOSの場合のみ、選択中要素を取得する際に文字列化した値が一致することを条件とするように変更
+
+`SelectPicker`に渡された`items`から選択中の要素を抽出する処理において、iOSでのみ抽出に利用する値を文字列化して比較した値が一致することを条件とするよう修正しました。
+
+```diff title="useSelectPicker.ts"
+   const getSelectedItem = useCallback(
+-    (key?: React.Key | ItemT) => {
+-      return items.find(item => item.key === key || item.value === key);
++    (key?: ItemSelectionKey | ItemT) => {
++      return items.find(item => {
++        if (Platform.OS === 'ios') {
++          // @react-native-picker/pickerは、iOSではpickerに渡されたvalueを強制的に文字列化してしまいます。
++          // そのため、onValueChangeに渡されてくる値は文字列となり、valueが文字列でなかった場合は直接比較しても一致しません。
++          // ここでは、@react-native-picker/pickerの内部処理と同様に、双方を文字列化して比較することで、選択中の要素を取得します。
++          return String(item.key) === String(key) || String(item.value) === String(key);
++        }
++        return item.key === key || item.value === key;
++      });
+     },
+     [items],
+   );
+```
+
+#### `YearMonthPicker`で`onSelectedItemChange`を呼びだす際に強制的に数値型に変換するように修正
+
+`YearMonthPicker`では選択中の年月をコールバック関数に渡す処理があるのですが、iOSではこのとき渡される値が文字列化されてしまっていました。
+
+もともとのコードでは`number`に型アサーションしていたのですが、強制的に数値に戻すように修正しました。
+
+```diff title="useYearMonthPicker"
+   const onValueChangeYear = useCallback(
+     (value: React.Key) => {
+-      const year = value as number;
+-      onSelectedItemChange?.(getSelectedYearMonth({year, month: selectedMonth}));
++      // iOSではvalueが強制的にstringに変換されてしまうので、number型に変換する。
++      onSelectedItemChange?.(getSelectedYearMonth({year: Number(value), month: selectedMonth}));
+     },
+     [getSelectedYearMonth, onSelectedItemChange, selectedMonth],
+   );
+   const onValueChangeMonth = useCallback(
+     (value: React.Key) => {
+-      const month = value as number;
+-      onSelectedItemChange?.(getSelectedYearMonth({year: selectedYear, month}));
++      // iOSではvalueが強制的にstringに変換されてしまうので、number型に変換する。
++      onSelectedItemChange?.(getSelectedYearMonth({year: selectedYear, month: Number(value)}));
+     },
+     [getSelectedYearMonth, onSelectedItemChange, selectedYear],
+   );
+```
+
+#### テストの期待値を修正
+
+iOS環境として実行された場合には文字列化されてしまうことの影響で、`@react-native-picker/picker`に渡されている値のテストが失敗するようになっていました。
+
+以下のように期待値を修正して対応しました。
+
+```diff
+     const yearPicker = screen.getByTestId('yearPicker');
+-    const yearPickerProps = yearPicker.props as SelectPickerItemsProps<string>;
+-    expect(yearPickerProps.items).toEqual([{value: 2022, label: '2022'}]);
++    const yearPickerProps = yearPicker.props as SelectPickerItemsProps<number>;
++    // iOS版のPicker（PickerIOS.ios.js）では、PickerItemのvalueをString関数で文字列に変換してネイティブコンポーネントに渡している。
++    // そのため、期待値を文字列とする必要がある。
++    expect(yearPickerProps.items).toEqual([{value: '2022', label: '2022'}]);
+     const monthPicker = screen.getByTestId('monthPicker');
+-    const monthPickerProps = monthPicker.props as SelectPickerItemsProps<string>;
+-    expect(monthPickerProps.items).toEqual([{value: 4, label: '4'}]);
++    const monthPickerProps = monthPicker.props as SelectPickerItemsProps<number>;
++    expect(monthPickerProps.items).toEqual([{value: '4', label: '4'}]);
+   });
+```
+
+### Expoの更新履歴確認と対応
+
+Expoの[CHANGELOG](https://github.com/expo/expo/blob/sdk-50/CHANGELOG.md#5000--2023-12-12)を参照して、Expo SDKとExpoが管理するライブラリの更新内容を確認しました。
+
+ここまでの対応以外に追加で必要なものはありませんでした。
+
+### React Nativeの更新履歴確認と対応
+
+React Nativeの[CHANGELOG](https://github.com/facebook/react-native/blob/main/CHANGELOG.md#v0736)を参照して、React Nativeの更新内容を確認しました。
+
+#### Androidでの`ScrollView#onMomentumEnd`の不具合修正
+
+今回のアップグレード前は、AndroidでScrollViewのスクロール終了時処理（[onMomentumEnd](https://reactnative.dev/docs/scrollview#onmomentumscrollend)）が複数回呼び出されてしまうという不具合がありました。
+
+React Native 0.73.0でこの不具合が修正されました。
+
+- [(Android/ScrollView) Fix onMomentumScrollEnd being called multiple times](https://github.com/facebook/react-native/pull/32433)
+
+このアプリで実装しているPickerでは、Android向け部品の中でこの問題を回避するための処理を追加していました。今回のアップグレードで不要になっていることが確認できたので、対策していた部分を削除しました。
+
+```diff title="useSelectPickerItems.ts"
+   const scrollHandler = useAnimatedScrollHandler(e => {
+     offset.value = e.contentOffset.y;
+   });
+-  // // 1回のスクロールで、onMomentumScrollEndが複数回実行されてしまう事象に対応
+-  // https://github.com/facebook/react-native/issues/32696
+-  const canMomentum = useRef(false);
+-  const onMomentumScrollBegin = useCallback(() => (canMomentum.current = true), []);
+-
+   const middleIndex = useListMiddleIndex({itemHeight, listSize: items.length});
+
+   const selectedIndex = useMemo(() => {
+
+   // 〜〜〜中略〜〜〜
+
+   const handleValueChange = useCallback(
+     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+-      if (canMomentum.current) {
+-        canMomentum.current = false;
+-        const {index, value} = getRowItemAtOffset(event.nativeEvent.contentOffset.y);
+-        _onChange(value, index);
+-      }
++      const {index, value} = getRowItemAtOffset(event.nativeEvent.contentOffset.y);
++      _onChange(value, index);
+     },
+     [_onChange, getRowItemAtOffset],
+   );
+
+   // 〜〜〜中略〜〜〜
+
+   return {
+     offset,
+     flatListRef,
+     handleValueChange,
+     scrollToPassedIndex,
+     scrollHandler,
+     selectedIndex,
+     height,
+     selectItem,
+     getItemLayout,
+-    onMomentumScrollBegin,
+   };
+ };
+```
+
+```diff title="SelectPickerItems.android.tsx"
+   const {
+     offset,
+     height,
+     handleValueChange,
+     scrollToPassedIndex,
+     selectedIndex,
+     selectItem,
+     getItemLayout,
+     flatListRef,
+     scrollHandler,
+-    onMomentumScrollBegin,
+   } = useSelectPickerItems<ItemT>({
+     selectedValue,
+     items,
+
+   // 〜〜〜中略〜〜〜
+
+       <Reanimated.FlatList
+         data={items}
+         keyExtractor={keyExtractor ?? defaultKeyExtractor}
+         style={StyleSheet.flatten([itemsHeightStyle, styles.items])}
+         onScroll={scrollHandler}
+         onMomentumScrollEnd={handleValueChange}
+-        onMomentumScrollBegin={onMomentumScrollBegin}
+         showsVerticalScrollIndicator={false}
+         onLayout={scrollToPassedIndex}
+         ref={flatListRef}
+```
+
+#### CocoaPodsのバージョン
+
+React Native v0.73.3時点ではCocoaPodsの最新版が`1.15.0`だったようなのですが、このバージョンに不具合があったようでv1.15系は利用しないように制限されていました。
+
+- [Avoid using Cocoapods 1.15 until it fixes an issue affection RN.](https://github.com/facebook/react-native/pull/42702)
+- [CocoaPods 1.15.0 : File exists @ syserr_fail2_in Error - Workaround available](https://github.com/facebook/react-native/issues/42698)
+
+しかし、このアプリでのアップデート時点ではこの不具合を修正した`1.15.2`が公開されており、React Nativeで利用するバージョンも修正されています。
+
+- [feat: remove upper limit for Cocoapods version (allow for 1.15.2)](https://github.com/facebook/react-native/pull/45099)
+
+ビルドエラーも発生していないことから、今回のアップグレードではCocoaPods `1.15.2`を利用するよう修正しました。
+
+### `expo-template-blank-typescript`の更新履歴確認と対応
+
+[`expo-template-blank-typescript`の更新履歴](https://github.com/expo/expo/commits/sdk-50/templates/expo-template-blank-typescript)を確認しました。
+
+`npm install expo@^50.0.0`、`npx expo install --fix`で更新される依存ライブラリのアップグレードが主な変更でした。そのため、このアプリで特別な対応は必要ありませんでした。
+
+### `expo-template-bare-minimum`の更新履歴確認と対応
+
+このアプリでは[Config Pluginsに対応](./config-plugins.mdx)しているので、`expo-template-bare-minimum`の更新に伴う個別の対応は基本的に必要ありません。
+ただし、以下の場合は個別に対応する必要があるため、この観点に絞って[`expo-template-bare-minimum`の更新履歴](https://github.com/expo/expo/commits/sdk-50/templates/expo-template-bare-minimum)を確認しました。
+
+- このアプリで作成しているConfig Pluginsによる変更と、`expo-template-bare-minimum`の更新に伴う変更が競合した場合
+- [Prebuild](../../development/build-configuration.mdx#prebuild)時に生成・更新されないファイル
+- `android/`, `ios/`以外のファイル（`.gitignore`など）
+
+ここまでの対応以外に追加で必要なものはありませんでした。
+
+### ライセンス情報を更新
+
+このアプリでは、使用しているライブラリのライセンス一覧を出力するスクリプトを用意しています。詳細は、[こちら](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2024.10/example-app/SantokuApp/.script/README.md)を参照してください。
+
+#### `managed-license.js`の更新
+
+ライセンス情報が不足しており補完したい、あるいは、開発時のみ使用するため除外したいライブラリとバージョンを[managed-license.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2024.10/example-app/SantokuApp/.script/managed-license.js)で管理しています。
+
+ライセンス情報が不足しているライブラリなどは、以下のコマンドを実行することで確認できます。
+
+- `node .script/check-licenses.js`
+
+実行した結果、いくつかのライブラリのライセンス情報を更新する必要があったので以下を実施しました。
+
+- 使用ライブラリの名前更新
+- 使用ライブラリのバージョン更新
+- 使用ライブラリのライセンスファイルURL更新
+- 新規ライブラリ情報の追加
+- 使用しなくなったライブラリ情報の削除
+
+#### 新規ライセンスへの対応
+
+このアプリでは、アプリに使用しても問題ないライセンスを管理してチェックできるようにしています。
+
+今回のExpo SDKアップグレードでは、[Blue Oak Model License 1.0.0](https://spdx.org/licenses/BlueOak-1.0.0.html)（`BlueOak-1.0.0`）のライブラリが増えました。
+`BlueOak-1.0.0`はApacheライセンスやMITライセンスと似たパーミッシブ・ライセンスであり、ライセンス明記以外の対応は必要ないため使用可としました。
+そのライセンス名（`BlueOak-1.0.0`）を[check-licenses.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2024.10/example-app/SantokuApp/.script/check-licenses.js)の`licenseWhitelist`に追加しています。
+
+また、以下のライセンスについてSPDX表記ではなく正式名で記載しているライブラリがあったため、[list-dependencies.js](https://github.com/{@inject:organization}/mobile-app-crib-notes/blob/v2024.10/example-app/SantokuApp/.script/list-dependencies.js)の`aliasList`に追加しました。
+
+- `Boost Software License`
+  - `BSL-1.0`のエイリアスとして追加
+- `Blue Oak Model License`
+  - `BlueOak-1.0.0`のエイリアスとして追加

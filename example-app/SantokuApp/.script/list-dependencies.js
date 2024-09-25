@@ -25,6 +25,9 @@ const normalizeLicense = (() => {
       'Apache 2.0',
       'Apache-2',
     ],
+    'BlueOak-1.0.0': [
+      'Blue Oak Model License',
+    ],
     'BSD-2-Clause': [
       'Simplified BSD License', // https://opensource.org/license/bsd-license-php/
     ],
@@ -33,6 +36,7 @@ const normalizeLicense = (() => {
       'BSD 3-Clause',
     ],
     'BSL-1.0': [
+      'Boost Software License'
     ],
     'CC-BY-4.0': [
     ],
@@ -146,7 +150,7 @@ class PodfileParser {
       return [name, version];
     });
     this._versionMap = Object.fromEntries(versionList);
-  
+
     const checksumList = [
       ...lockFileText.matchAll(/^  ([^:]+): ([a-z0-9]+)$/mg),
     ].map(([_all, name, version]) => {
@@ -300,7 +304,7 @@ const listAndroidDependencies = () => {
  */
 
 /**
- * 
+ *
  * @returns {Promise<Dependency[]>} dependencies
  */
 module.exports = function listDependencies() {
