@@ -2,6 +2,8 @@ import ExpoConstants from 'expo-constants';
 
 import {wrapProperty} from '../utils/wrapProperty';
 
+export * from 'expo-constants';
+
 export const Constants = wrapProperty(ExpoConstants, {
   expoConfig: {
     name: 'SantokuApp',

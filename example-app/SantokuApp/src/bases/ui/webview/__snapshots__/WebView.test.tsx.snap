@@ -2,154 +2,48 @@
 
 exports[`WebView WebViewSourceHtmlでも正常にレンダリングされること 1`] = `
 <View
-  style={
-    [
-      {
-        "flex": 1,
-        "overflow": "hidden",
-      },
-      undefined,
-    ]
+  androidLayerType="software"
+  decelerationRate="normal"
+  onError={[Function]}
+  onLoadProgress={[Function]}
+  onLoadStart={[Function]}
+  onScroll={[Function]}
+  renderLoading={[Function]}
+  source={
+    {
+      "html": "<h1>test</h1>",
+    }
   }
->
-  <RNCWebView
-    androidLayerType="software"
-    cacheEnabled={true}
-    decelerationRate={0.998}
-    fraudulentWebsiteWarningEnabled={true}
-    hasOnFileDownload={false}
-    injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
-    injectedJavaScriptForMainFrameOnly={true}
-    javaScriptEnabled={true}
-    messagingEnabled={false}
-    messagingModuleName=""
-    newSource={
-      {
-        "html": "<h1>test</h1>",
-      }
+  startInLoadingState={true}
+  style={
+    {
+      "flex": 1,
     }
-    onContentProcessDidTerminate={[Function]}
-    onHttpError={[Function]}
-    onLoadingError={[Function]}
-    onLoadingFinish={[Function]}
-    onLoadingProgress={[Function]}
-    onLoadingStart={[Function]}
-    onMessage={[Function]}
-    onScroll={[Function]}
-    onShouldStartLoadWithRequest={[Function]}
-    source={
-      {
-        "html": "<h1>test</h1>",
-      }
-    }
-    style={
-      [
-        {
-          "flex": 1,
-          "overflow": "hidden",
-        },
-        {
-          "backgroundColor": "#ffffff",
-        },
-        {
-          "flex": 1,
-        },
-      ]
-    }
-    testID="webview"
-    textInteractionEnabled={true}
-    useSharedProcessPool={true}
-  />
-  <ActivityIndicator
-    color="#0000ff"
-    size="large"
-    style={
-      {
-        "alignItems": "center",
-        "display": "flex",
-        "height": "100%",
-        "justifyContent": "center",
-        "position": "absolute",
-        "width": "100%",
-      }
-    }
-  />
-</View>
+  }
+  testID="webview"
+/>
 `;
 
 exports[`WebView WebViewが正常にrenderできることを確認 1`] = `
 <View
-  style={
-    [
-      {
-        "flex": 1,
-        "overflow": "hidden",
-      },
-      undefined,
-    ]
+  androidLayerType="software"
+  decelerationRate="normal"
+  onError={[Function]}
+  onLoadProgress={[Function]}
+  onLoadStart={[Function]}
+  onScroll={[Function]}
+  renderLoading={[Function]}
+  source={
+    {
+      "uri": "https://localhost/",
+    }
   }
->
-  <RNCWebView
-    androidLayerType="software"
-    cacheEnabled={true}
-    decelerationRate={0.998}
-    fraudulentWebsiteWarningEnabled={true}
-    hasOnFileDownload={false}
-    injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
-    injectedJavaScriptForMainFrameOnly={true}
-    javaScriptEnabled={true}
-    messagingEnabled={false}
-    messagingModuleName=""
-    newSource={
-      {
-        "uri": "https://localhost/",
-      }
+  startInLoadingState={true}
+  style={
+    {
+      "flex": 1,
     }
-    onContentProcessDidTerminate={[Function]}
-    onHttpError={[Function]}
-    onLoadingError={[Function]}
-    onLoadingFinish={[Function]}
-    onLoadingProgress={[Function]}
-    onLoadingStart={[Function]}
-    onMessage={[Function]}
-    onScroll={[Function]}
-    onShouldStartLoadWithRequest={[Function]}
-    source={
-      {
-        "uri": "https://localhost/",
-      }
-    }
-    style={
-      [
-        {
-          "flex": 1,
-          "overflow": "hidden",
-        },
-        {
-          "backgroundColor": "#ffffff",
-        },
-        {
-          "flex": 1,
-        },
-      ]
-    }
-    testID="webview"
-    textInteractionEnabled={true}
-    useSharedProcessPool={true}
-  />
-  <ActivityIndicator
-    color="#0000ff"
-    size="large"
-    style={
-      {
-        "alignItems": "center",
-        "display": "flex",
-        "height": "100%",
-        "justifyContent": "center",
-        "position": "absolute",
-        "width": "100%",
-      }
-    }
-  />
-</View>
+  }
+  testID="webview"
+/>
 `;

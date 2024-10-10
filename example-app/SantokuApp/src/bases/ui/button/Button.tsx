@@ -35,16 +35,12 @@ export type ButtonProps = RNEButtonProps & {
 };
 
 export const Button: React.FC<ButtonProps> = props => {
-  const {size, ...buttonProps} = props;
+  const {size, raised = true, ...buttonProps} = props;
   const widthStyle = {width: buttonWidthSizes[size ?? 'small']};
   const buttonStyle = StyleSheet.flatten([styles.button, widthStyle, buttonProps.buttonStyle]);
   const containerStyle = StyleSheet.flatten([styles.container, widthStyle, buttonProps.containerStyle]);
 
-  return <RNEButton {...buttonProps} buttonStyle={buttonStyle} containerStyle={containerStyle} />;
-};
-
-Button.defaultProps = {
-  raised: true,
+  return <RNEButton raised={raised} {...buttonProps} buttonStyle={buttonStyle} containerStyle={containerStyle} />;
 };
 
 const styles = StyleSheet.create({

@@ -19,11 +19,13 @@ import {renderHook} from '@testing-library/react-native';
 import {useWorkletCallback} from './useWorkletCallback';
 
 describe('useWorkletCallback', () => {
-  it('should be called callback if callback exits', () => {
+  it('should be called callback if callback exits', async () => {
     const callback = jest.fn();
     const {result} = renderHook(props => useWorkletCallback(props), {initialProps: callback});
     const hook = result.current;
     hook(true);
+    // runOnJSで追加されたコールバックはマイクロタスクとして追加されるので、キューが消化されるのを待たないといけない。
+    await Promise.resolve();
     expect(callback).toHaveBeenCalledWith(true);
   });
 });

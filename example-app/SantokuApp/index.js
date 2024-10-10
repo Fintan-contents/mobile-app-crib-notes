@@ -2,11 +2,6 @@ import 'react-native-gesture-handler';
 import messaging from '@react-native-firebase/messaging';
 import {registerRootComponent} from 'expo';
 import * as SplashScreen from 'expo-splash-screen';
-// React NativeではURLやURLSearchParamsの一部メソッドが実装されていません。
-// https://github.com/facebook/react-native/blob/main/Libraries/Blob/URL.js
-// それらを使用するため、react-native-url-polyfillを適用します。
-// なお、SantokuAppではOpenAPI Generatorを使用して生成したコードの中で、URL#searchやURLSearchParamsを利用しています。
-import 'react-native-url-polyfill/auto';
 
 import {App} from './src/apps/app/App';
 import {AppWithMsw} from './src/apps/app/AppWithMsw';

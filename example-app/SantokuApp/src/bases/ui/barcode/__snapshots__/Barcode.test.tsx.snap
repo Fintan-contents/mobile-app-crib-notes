@@ -12,8 +12,8 @@ exports[`Barcode only with required props renders successfully only with require
   testID="Barcode"
 >
   <RNSVGSvgView
-    bbHeight="100"
-    bbWidth="378"
+    bbHeight={100}
+    bbWidth={378}
     fill="#000000"
     focusable={false}
     height={100}
@@ -71,8 +71,8 @@ exports[`Barcode with all format renders successfully with CODE128 1`] = `
   testID="Barcode"
 >
   <RNSVGSvgView
-    bbHeight="100"
-    bbWidth="378"
+    bbHeight={100}
+    bbWidth={378}
     fill="#000000"
     focusable={false}
     height={100}
@@ -130,8 +130,8 @@ exports[`Barcode with all format renders successfully with CODE128AUTO 1`] = `
   testID="Barcode"
 >
   <RNSVGSvgView
-    bbHeight="100"
-    bbWidth="180"
+    bbHeight={100}
+    bbWidth={180}
     fill="#000000"
     focusable={false}
     height={100}
@@ -189,8 +189,8 @@ exports[`Barcode with all props should be applied properly 1`] = `
   testID="Barcode"
 >
   <RNSVGSvgView
-    bbHeight="200"
-    bbWidth="300"
+    bbHeight={200}
+    bbWidth={300}
     fill="red"
     focusable={false}
     height={200}

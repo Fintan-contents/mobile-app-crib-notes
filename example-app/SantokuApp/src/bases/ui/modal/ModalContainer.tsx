@@ -16,7 +16,7 @@
 
 import React from 'react';
 import {StyleSheet, View, ViewProps} from 'react-native';
-import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
+import Reanimated, {AnimatedProps, WithTimingConfig} from 'react-native-reanimated';
 
 import {useModalContainer} from './useModalContainer';
 
@@ -25,7 +25,7 @@ export const DEFAULT_SLIDE_OUT_DURATION = 300;
 
 // React Native ReanimatedのLayout Animationsを使用すると↓の不具合が発生するため、'exiting'・'entering'の指定ができないようにしています。
 // https://github.com/software-mansion/react-native-reanimated/issues/2906
-export type ModalContainerProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exiting' | 'entering'> & {
+export type ModalContainerProps = Omit<AnimatedProps<ViewProps>, 'exiting' | 'entering'> & {
   isVisible: boolean;
   afterSlideIn?: (finished?: boolean) => unknown;
   afterSlideOut?: (finished?: boolean) => unknown;

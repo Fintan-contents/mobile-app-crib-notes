@@ -17,7 +17,7 @@
 import {composePressableStyles} from 'bases/core/utils/composePressableStyles';
 import React, {useMemo} from 'react';
 import {Modal as RNModal, ModalProps, Pressable, PressableProps, StyleSheet, ViewProps} from 'react-native';
-import Reanimated, {WithTimingConfig} from 'react-native-reanimated';
+import {AnimatedProps, WithTimingConfig} from 'react-native-reanimated';
 
 import {useModalBackdrop} from './useModalBackdrop';
 
@@ -28,7 +28,7 @@ export const DEFAULT_FADE_OUT_DURATION = 150;
 
 // React Native ReanimatedのLayout Animationsを使用すると↓の不具合が発生するため、'exiting'・'entering'の指定ができないようにしています。
 // https://github.com/software-mansion/react-native-reanimated/issues/2906
-export type ModalBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'exiting' | 'entering'> & {
+export type ModalBackdropProps = Omit<AnimatedProps<ViewProps>, 'exiting' | 'entering'> & {
   isVisible: boolean;
   onPress?: () => unknown;
   afterFadeIn?: (finished?: boolean) => unknown;

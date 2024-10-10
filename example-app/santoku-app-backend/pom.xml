@@ -176,7 +176,7 @@
     <dependency>
       <groupId>com.google.firebase</groupId>
       <artifactId>firebase-admin</artifactId>
-      <version>8.1.0</version>
+      <version>9.3.0</version>
     </dependency>
 
     <!-- Java11用 -->

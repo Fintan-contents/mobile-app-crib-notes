@@ -12,8 +12,8 @@ on:
 jobs:
   deploy-pages:
     name: Deploy Pages
-    # https://github.com/actions/runner-images/blob/main/images/macos/macos-13-Readme.md
-    runs-on: macos-13
+    # https://github.com/actions/runner-images/blob/main/images/macos/macos-14-Readme.md
+    runs-on: macos-14
     if: >
       ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:

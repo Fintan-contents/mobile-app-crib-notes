@@ -8,8 +8,10 @@ export const withAndroidAddNativeModulePackages: ConfigPlugin = config => {
   return withMainApplication(config, config => {
     if (config.modResults.language === 'java') {
       config.modResults.contents = apply(config.modResults.contents);
+    } else if (config.modResults.language === 'kt') {
+      config.modResults.contents = applyKotlin(config.modResults.contents);
     } else {
-      throw new Error('In this app, only java is supported as the language for MainApplication.');
+      throw new Error('In this app, only java or kotlin is supported as the language for MainApplication.');
     }
     return config;
   });
@@ -22,5 +24,15 @@ const apply = (mainApplication: string): string => {
       @SuppressWarnings("UnnecessaryLocalVariable")
       List<ReactPackage> packages = new PackageList(this).getPackages();
       packages.add(new ThrowErrorPackage());`,
+  );
+};
+
+const applyKotlin = (mainApplication: string): string => {
+  return mainApplication.replace(
+    /override\s+fun\s+getPackages\(\):\s+List<ReactPackage>\s+{[\s\S]*return\s+PackageList\(this\)\.packages/,
+    `override fun getPackages(): List<ReactPackage> {
+            val packages = PackageList(this).packages
+            packages.add(ThrowErrorPackage())
+            return packages`,
   );
 };

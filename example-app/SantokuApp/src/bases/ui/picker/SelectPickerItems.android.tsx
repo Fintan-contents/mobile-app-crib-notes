@@ -15,7 +15,7 @@
  */
 
 import React, {useCallback, useMemo} from 'react';
-import {FlatList, FlatListProps, ListRenderItemInfo, StyleSheet, View} from 'react-native';
+import {ListRenderItemInfo, StyleSheet, View} from 'react-native';
 import Reanimated from 'react-native-reanimated';
 
 import {Fader, FaderPosition} from './Fader';
@@ -41,13 +41,6 @@ const FaderBottom = React.memo(({itemHeight}: {itemHeight: number}) => (
 const DECELERATION_RATE = 0.98;
 
 const defaultKeyExtractor = <ItemT,>(item: Item<ItemT>, index: number) => `${String(item.key ?? item.value)}.${index}`;
-
-/*
-  eslint-disable-next-line @typescript-eslint/no-explicit-any --
-  Reanimated.createAnimatedComponentにはジェネリクス<ItemT>を渡す手段がない
-  Item<unknown>とかにすると、AnimatedFlatListのkeyExtractorやrenderItemで型エラーになるためanyで定義しておく
- */
-const AnimatedFlatList = Reanimated.createAnimatedComponent<FlatListProps<Item<any>>>(FlatList);
 
 type SelectPickerItemsAndroid<ItemT> = Omit<SelectPickerItemsProps<ItemT>, 'style'>;
 
@@ -78,7 +71,6 @@ export const SelectPickerItems = <ItemT,>({
     getItemLayout,
     flatListRef,
     scrollHandler,
-    onMomentumScrollBegin,
   } = useSelectPickerItems<ItemT>({
     selectedValue,
     items,
@@ -125,13 +117,12 @@ export const SelectPickerItems = <ItemT,>({
 
   return (
     <View style={styles.container} pointerEvents="box-none" {...rest}>
-      <AnimatedFlatList
+      <Reanimated.FlatList
         data={items}
         keyExtractor={keyExtractor ?? defaultKeyExtractor}
         style={StyleSheet.flatten([itemsHeightStyle, styles.items])}
         onScroll={scrollHandler}
         onMomentumScrollEnd={handleValueChange}
-        onMomentumScrollBegin={onMomentumScrollBegin}
         showsVerticalScrollIndicator={false}
         onLayout={scrollToPassedIndex}
         ref={flatListRef}

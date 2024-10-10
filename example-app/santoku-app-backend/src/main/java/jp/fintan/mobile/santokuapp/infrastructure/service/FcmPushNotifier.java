@@ -95,7 +95,7 @@ public class FcmPushNotifier implements PushNotifier {
       List<DeviceToken> failureDeviceTokens,
       List<DeviceToken> unregisteredDeviceTokens) {
     try {
-      BatchResponse batchResponse = FirebaseMessaging.getInstance().sendMulticast(multicastMessage);
+      BatchResponse batchResponse = FirebaseMessaging.getInstance().sendEachForMulticast(multicastMessage);
       final List<SendResponse> responses = batchResponse.getResponses();
       for (int i = 0; i < responses.size(); i++) {
         final SendResponse response = responses.get(i);

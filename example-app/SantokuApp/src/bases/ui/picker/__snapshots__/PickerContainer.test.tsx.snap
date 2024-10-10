@@ -13,7 +13,8 @@ exports[`PickerContainer only with required props renders successfully only with
   }
 >
   <View
-    animatedStyle={
+    collapsable={false}
+    jestAnimatedStyle={
       {
         "value": {
           "transform": [
@@ -24,7 +25,6 @@ exports[`PickerContainer only with required props renders successfully only with
         },
       }
     }
-    collapsable={false}
     onLayout={[Function]}
     style={
       {
@@ -62,7 +62,8 @@ exports[`PickerContainer only with required props renders successfully only with
   }
 >
   <View
-    animatedStyle={
+    collapsable={false}
+    jestAnimatedStyle={
       {
         "value": {
           "transform": [
@@ -73,13 +74,12 @@ exports[`PickerContainer only with required props renders successfully only with
         },
       }
     }
-    collapsable={false}
     onLayout={[Function]}
     style={
       {
         "transform": [
           {
-            "translateY": 1000,
+            "translateY": 0,
           },
         ],
       }
@@ -101,7 +101,8 @@ exports[`PickerContainer only with required props renders successfully only with
   }
 >
   <View
-    animatedStyle={
+    collapsable={false}
+    jestAnimatedStyle={
       {
         "value": {
           "transform": [
@@ -112,7 +113,6 @@ exports[`PickerContainer only with required props renders successfully only with
         },
       }
     }
-    collapsable={false}
     onLayout={[Function]}
     style={
       {
@@ -150,7 +150,8 @@ exports[`PickerContainer only with required props renders successfully only with
   }
 >
   <View
-    animatedStyle={
+    collapsable={false}
+    jestAnimatedStyle={
       {
         "value": {
           "transform": [
@@ -161,7 +162,6 @@ exports[`PickerContainer only with required props renders successfully only with
         },
       }
     }
-    collapsable={false}
     onLayout={[Function]}
     style={
       {
@@ -199,7 +199,8 @@ exports[`PickerContainer only with required props renders successfully only with
   }
 >
   <View
-    animatedStyle={
+    collapsable={false}
+    jestAnimatedStyle={
       {
         "value": {
           "transform": [
@@ -210,7 +211,6 @@ exports[`PickerContainer only with required props renders successfully only with
         },
       }
     }
-    collapsable={false}
     onLayout={[Function]}
     style={
       {
@@ -252,7 +252,8 @@ exports[`PickerContainer with all props should be applied properly: PickerContai
   }
 >
   <View
-    animatedStyle={
+    collapsable={false}
+    jestAnimatedStyle={
       {
         "value": {
           "transform": [
@@ -263,8 +264,8 @@ exports[`PickerContainer with all props should be applied properly: PickerContai
         },
       }
     }
-    collapsable={false}
     onLayout={[Function]}
+    pointerEvents="none"
     style={
       {
         "backgroundColor": "green",

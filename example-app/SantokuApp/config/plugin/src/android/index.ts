@@ -3,7 +3,7 @@ export * from './withAndroidAddAppActivityAndroidManifest';
 export * from './withAndroidAddLicensePlugin';
 export * from './withAndroidAddManifestPlaceholders';
 export * from './withAndroidAppBuildGradleForRelease';
-export * from './withAndroidCopyTemplateJavaFile';
+export * from './withAndroidCopyTemplateSourceFile';
 export * from './withAndroidDisabledWindowDrawsSystemBarBackgrounds';
 export * from './withAndroidEnabledStatusBarTranslucent';
 export * from './withAndroidCopyMainActivity';
