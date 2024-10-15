@@ -17,10 +17,12 @@
 import {useWorkletCallback} from 'bases/core/utils/useWorkletCallback';
 import React, {useMemo} from 'react';
 import {StyleSheet, View, ViewProps} from 'react-native';
-import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';
+import Reanimated, {AnimatedProps, BaseAnimationBuilder, FadeIn, FadeOut} from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-export type ModalContainerProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
+import {ReanimatedKeyframe} from './ReanimatedKeyframe';
+
+export type ModalContainerProps = Omit<AnimatedProps<ViewProps>, 'entering' | 'exiting'> & {
   isVisible: boolean;
   /**
    * iOSの場合、アニメーションが終わった後に呼び出されます。
@@ -32,12 +34,12 @@ export type ModalContainerProps = Omit<Reanimated.AnimateProps<ViewProps>, 'ente
    * enteringに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
    * withCallbackで実行する関数は、enteringCallbackで指定してください。
    */
-  entering?: BaseAnimationBuilder | Keyframe;
+  entering?: BaseAnimationBuilder | ReanimatedKeyframe;
   /**
    * exitingに指定したAnimationBuilderなどでwithCallbackを指定しても、本コンポーネント内で上書きしているため実行できません。
    * withCallbackで実行する関数は、exitingCallbackで指定してください。
    */
-  exiting?: BaseAnimationBuilder | Keyframe;
+  exiting?: BaseAnimationBuilder | ReanimatedKeyframe;
 };
 
 export const MODAL_CONTAINER_DEFAULT_FADE_IN_DURATION = 300;

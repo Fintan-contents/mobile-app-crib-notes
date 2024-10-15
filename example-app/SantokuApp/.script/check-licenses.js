@@ -4,6 +4,7 @@ const listDependencies = require("./list-dependencies");
 const licenseWhitelist = [
   '0BSD', // [パーミッシブ・ライセンス] = BSDスタイルライセンス
   'Apache-2.0', // [パーミッシブ・ライセンス]
+  'BlueOak-1.0.0', // [パーミッシブ・ライセンス]
   'BSD-2-Clause', // 二条項BSDライセンス [パーミッシブ・ライセンス]
   'BSD-3-Clause', // 三条項BSDライセンス [パーミッシブ・ライセンス]
   'CC-BY-4.0', // クリエイティブ・コモンズ
@@ -20,9 +21,9 @@ const licenseWhitelist = [
 ];
 
 /**
- * 
+ *
  * @param {string} target ライセンス文字列. example: 'MIT', '(MIT OR Apache-2.0)', ...
- * @param {string[]} licenseList 
+ * @param {string[]} licenseList
  * @returns {boolean}
  */
 const includeLicenses = (target, licenseList) => {
@@ -62,7 +63,7 @@ listDependencies().then(dependencies => {
   const suspiciousLicenseFileList = dependencies.filter(d => String(d.licenseFile).match(/README/i));
   if (suspiciousLicenseFileList.length) {
     const message = 'licenseFile is README!!!!';
-    // errors.push(message); // TODO: managed-license.js で管理するようにしたらコメントアウトを外す 
+    // errors.push(message); // TODO: managed-license.js で管理するようにしたらコメントアウトを外す
     console.warn('[WARN]', message, Object.fromEntries(suspiciousLicenseFileList.map(({id, licenseFile}) => ([id, licenseFile]))));
   }
 

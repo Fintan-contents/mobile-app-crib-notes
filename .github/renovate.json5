@@ -38,6 +38,7 @@
       enabled: false,
       matchPackageNames: [
         '@babel/core',
+        '@expo/config-plugins',
         '@react-native-async-storage/async-storage',
         '@react-native-community/datetimepicker',
         '@react-native-community/netinfo',
@@ -46,6 +47,7 @@
         '@types/react',
         'babel-preset-expo',
         'expo',
+        'expo-application',
         'expo-build-properties',
         'expo-crypto',
         'expo-dev-client',
@@ -76,8 +78,6 @@
       groupName: 'Depends on Expo version',
       enabled: false,
       matchPackageNames: [
-        // expo -> @expo/cli
-        '@expo/config-plugins',
         // jest-expo -> jest
         '@types/jest',
         // react, jest-expo -> react-test-renderer

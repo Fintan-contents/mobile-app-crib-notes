@@ -17,16 +17,12 @@ exports[`OverlayContainer only with required props renders successfully only wit
   }
 >
   <View
-    animatedStyle={
-      {
-        "value": {},
-      }
-    }
     collapsable={false}
     entering={
       FadeIn {
         "build": [Function],
         "callbackV": [Function],
+        "dampingRatioV": undefined,
         "dampingV": undefined,
         "delayV": undefined,
         "durationV": 300,
@@ -35,6 +31,7 @@ exports[`OverlayContainer only with required props renders successfully only wit
         "massV": undefined,
         "overshootClampingV": undefined,
         "randomizeDelay": false,
+        "reduceMotionV": "system",
         "restDisplacementThresholdV": undefined,
         "restSpeedThresholdV": undefined,
         "rotateV": undefined,
@@ -46,6 +43,7 @@ exports[`OverlayContainer only with required props renders successfully only wit
       FadeOut {
         "build": [Function],
         "callbackV": [Function],
+        "dampingRatioV": undefined,
         "dampingV": undefined,
         "delayV": undefined,
         "durationV": 300,
@@ -54,11 +52,17 @@ exports[`OverlayContainer only with required props renders successfully only wit
         "massV": undefined,
         "overshootClampingV": undefined,
         "randomizeDelay": false,
+        "reduceMotionV": "system",
         "restDisplacementThresholdV": undefined,
         "restSpeedThresholdV": undefined,
         "rotateV": undefined,
         "stiffnessV": undefined,
         "type": undefined,
+      }
+    }
+    jestAnimatedStyle={
+      {
+        "value": {},
       }
     }
     pointerEvents="box-none"
@@ -83,16 +87,12 @@ exports[`OverlayContainer with all props should be applied properly: OverlayCont
   }
 >
   <View
-    animatedStyle={
-      {
-        "value": {},
-      }
-    }
     collapsable={false}
     entering={
       ZoomIn {
         "build": [Function],
         "callbackV": [Function],
+        "dampingRatioV": undefined,
         "dampingV": undefined,
         "delayV": undefined,
         "durationV": 500,
@@ -101,6 +101,7 @@ exports[`OverlayContainer with all props should be applied properly: OverlayCont
         "massV": undefined,
         "overshootClampingV": undefined,
         "randomizeDelay": false,
+        "reduceMotionV": "system",
         "restDisplacementThresholdV": undefined,
         "restSpeedThresholdV": undefined,
         "rotateV": undefined,
@@ -112,6 +113,7 @@ exports[`OverlayContainer with all props should be applied properly: OverlayCont
       ZoomOut {
         "build": [Function],
         "callbackV": [Function],
+        "dampingRatioV": undefined,
         "dampingV": undefined,
         "delayV": undefined,
         "durationV": 300,
@@ -120,11 +122,17 @@ exports[`OverlayContainer with all props should be applied properly: OverlayCont
         "massV": undefined,
         "overshootClampingV": undefined,
         "randomizeDelay": false,
+        "reduceMotionV": "system",
         "restDisplacementThresholdV": undefined,
         "restSpeedThresholdV": undefined,
         "rotateV": undefined,
         "stiffnessV": undefined,
         "type": undefined,
+      }
+    }
+    jestAnimatedStyle={
+      {
+        "value": {},
       }
     }
     pointerEvents="box-none"

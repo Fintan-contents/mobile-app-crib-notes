@@ -19,8 +19,8 @@ import {Pressable, PressableProps, StyleSheet, Text, TextProps} from 'react-nati
 
 import {Item} from './SelectPicker';
 
-export type SelectPickerItemType<ItemT> = {
-  item: Item<ItemT>;
+export type SelectPickerItemType = {
+  item: Item<any>; // eslint-disable-line @typescript-eslint/no-explicit-any -- anyを利用しないと、keyが必須となりエラーとなる。
   index: number;
   offset: number;
   itemHeight: number;
@@ -30,18 +30,20 @@ export type SelectPickerItemType<ItemT> = {
   textProps?: TextProps;
 };
 
-const Component = <ItemT,>({
-  item: {label, inputLabel, key, value, ...itemPropsStyle},
+const Component = ({
+  item: {label, color, fontFamily},
   itemHeight,
   pressableProps,
   textProps: {style: textStyle, ...textProps} = {},
-}: SelectPickerItemType<ItemT>) => {
+}: SelectPickerItemType) => {
   const pressableHeightStyle = useMemo(() => ({height: itemHeight}), [itemHeight]);
+  const textFontStyle = useMemo(() => {
+    return {...(color && {color}), ...(fontFamily && {fontFamily})};
+  }, [color, fontFamily]);
 
   return (
     <Pressable style={StyleSheet.flatten([pressableHeightStyle, styles.pressable])} {...pressableProps}>
-      {/* AnimatedStyleの場合はStyleSheet.flattenだとマージされないため、配列で指定 */}
-      <Text style={StyleSheet.flatten([styles.text, textStyle, itemPropsStyle])} {...textProps}>
+      <Text style={StyleSheet.flatten([styles.text, textStyle, textFontStyle])} {...textProps}>
         {label}
       </Text>
     </Pressable>

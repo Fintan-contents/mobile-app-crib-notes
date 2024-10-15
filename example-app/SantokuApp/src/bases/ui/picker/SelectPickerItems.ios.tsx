@@ -41,7 +41,7 @@ export const SelectPickerItems = <ItemT,>({
     <Picker selectedValue={selectedValue} onValueChange={onValueChange} {...rest}>
       {items.map((item, index) => (
         <Picker.Item
-          key={keyExtractor ? keyExtractor(item, index) : item.key ?? item.label}
+          key={keyExtractor ? keyExtractor(item, index) : (item.key ?? item.label)}
           label={item.label}
           value={item.key ?? item.value}
           color={item.color}

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {fireEvent, render, screen} from '@testing-library/react-native';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import {StyleSheet, TextInputProps, View, ViewProps, ViewStyle} from 'react-native';
 
@@ -104,7 +104,7 @@ describe('DateTimePicker with default value', () => {
 });
 
 describe('DateTimePicker with all props', () => {
-  it('should be applied all properly with default xxx component', () => {
+  it('should be applied all properly with default xxx component', async () => {
     const onSelectedItemChange = jest.fn();
     const onDismiss = jest.fn();
     const onDelete = jest.fn();
@@ -193,7 +193,9 @@ describe('DateTimePicker with all props', () => {
     const pickerBackdropPressable = screen.getByTestId('pickerBackdropPressable');
     const pickerBackdropModal = screen.getByTestId('pickerBackdropModal');
     const pickerBackdropProps = pickerBackdropPressable.props as PickerBackdropProps;
-    fireEvent(pickerBackdropModal, 'onRequestClose');
+    await waitFor(() => {
+      fireEvent(pickerBackdropModal, 'onRequestClose');
+    });
     expect(pickerBackdropProps.style).toEqual({
       backgroundColor: 'green',
       borderColor: 'red',
@@ -222,26 +224,32 @@ describe('DateTimePicker with all props', () => {
     const deleteLink = screen.getByTestId('deleteLink');
     const deleteText = screen.queryByText('delete');
     expect(deleteText).not.toBeNull();
-    fireEvent.press(deleteLink);
+    await waitFor(() => {
+      fireEvent.press(deleteLink);
+    });
     expect(onDelete).toHaveBeenCalledTimes(1);
     fireEvent.press(pressableContainer);
     const cancelLink = screen.getByTestId('cancelLink');
     const cancelText = screen.queryByText('cancel');
     expect(cancelText).not.toBeNull();
-    fireEvent.press(cancelLink);
+    await waitFor(() => {
+      fireEvent.press(cancelLink);
+    });
     expect(onCancel).toHaveBeenCalledTimes(1);
     fireEvent.press(pressableContainer);
     const doneLink = screen.getByTestId('doneLink');
     const doneText = screen.queryByText('done');
     expect(doneText).not.toBeNull();
-    fireEvent.press(doneLink);
+    await waitFor(() => {
+      fireEvent.press(doneLink);
+    });
     expect(onDone).toHaveBeenCalledTimes(1);
 
     // formatText
     expect(formatText).toHaveBeenCalledTimes(1);
   });
 
-  it('should be applied all properly with custom xxx component', () => {
+  it('should be applied all properly with custom xxx component', async () => {
     const CustomPickerAccessory = <View testID="customPickerAccessory" />;
     const CustomPicker = <View testID="customPicker" />;
     const CustomTextInput = <View testID="customTextInput" />;
@@ -285,7 +293,9 @@ describe('DateTimePicker with all props', () => {
     const pickerBackdropPressable = screen.getByTestId('pickerBackdropPressable');
     const pickerBackdropModal = screen.getByTestId('pickerBackdropModal');
     const pickerBackdropProps = pickerBackdropPressable.props as PickerBackdropProps;
-    fireEvent(pickerBackdropModal, 'onRequestClose');
+    await waitFor(() => {
+      fireEvent(pickerBackdropModal, 'onRequestClose');
+    });
     expect(pickerBackdropProps.style).toEqual({
       backgroundColor: 'green',
       borderColor: 'red',

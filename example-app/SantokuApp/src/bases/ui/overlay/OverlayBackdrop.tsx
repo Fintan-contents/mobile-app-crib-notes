@@ -17,9 +17,10 @@
 import {composePressableStyles} from 'bases/core/utils/composePressableStyles';
 import React, {useMemo} from 'react';
 import {Pressable, PressableProps, StyleSheet, View, ViewProps} from 'react-native';
-import Reanimated, {BaseAnimationBuilder, FadeIn, FadeOut, Keyframe} from 'react-native-reanimated';
+import Reanimated, {AnimatedProps, BaseAnimationBuilder, FadeIn, FadeOut} from 'react-native-reanimated';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
+import {ReanimatedKeyframe} from './ReanimatedKeyframe';
 import {useOverlayBackdrop} from './useOverlayBackdrop';
 
 export const OVERLAY_BACKDROP_DEFAULT_COLOR = 'rgba(0,0,0,0.4)';
@@ -28,7 +29,7 @@ export const OVERLAY_BACKDROP_DEFAULT_FADE_OUT_DURATION = 300;
 export const OVERLAY_BACKDROP_DEFAULT_ENTERING = FadeIn.duration(OVERLAY_BACKDROP_DEFAULT_FADE_IN_DURATION);
 export const OVERLAY_BACKDROP_DEFAULT_EXITING = FadeOut.duration(OVERLAY_BACKDROP_DEFAULT_FADE_OUT_DURATION);
 
-export type OverlayBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'entering' | 'exiting'> & {
+export type OverlayBackdropProps = Omit<AnimatedProps<ViewProps>, 'entering' | 'exiting'> & {
   isVisible: boolean;
   onPress?: () => unknown;
   /**
@@ -43,12 +44,12 @@ export type OverlayBackdropProps = Omit<Reanimated.AnimateProps<ViewProps>, 'ent
    * enteringに指定したAnimationBuilderなどでwithCallbackを指定しても、このコンポーネントの中で上書きしているため実行できません。
    * withCallbackで実行する関数は、enteringCallbackで指定してください。
    */
-  entering?: BaseAnimationBuilder | Keyframe;
+  entering?: BaseAnimationBuilder | typeof BaseAnimationBuilder | ReanimatedKeyframe;
   /**
    * exitingに指定したAnimationBuilderなどでwithCallbackを指定しても、このコンポーネントの中で上書きしているため実行できません。
    * withCallbackで実行する関数は、exitingCallbackで指定してください。
    */
-  exiting?: BaseAnimationBuilder | Keyframe;
+  exiting?: BaseAnimationBuilder | typeof BaseAnimationBuilder | ReanimatedKeyframe;
 };
 
 /**

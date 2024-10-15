@@ -12,11 +12,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
   testID="SelectPickerItems"
 >
   <RCTScrollView
-    animatedStyle={
-      {
-        "value": {},
-      }
-    }
+    CellRendererComponent={[Function]}
     centerContent={true}
     collapsable={false}
     contentContainerStyle={
@@ -31,6 +27,11 @@ exports[`SelectPickerItems only with required props renders successfully if item
     getItemCount={[Function]}
     getItemLayout={[Function]}
     initialScrollIndex={null}
+    jestAnimatedStyle={
+      {
+        "value": {},
+      }
+    }
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
@@ -41,7 +42,7 @@ exports[`SelectPickerItems only with required props renders successfully if item
     onScrollEndDrag={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
+    scrollEventThrottle={1}
     showsVerticalScrollIndicator={false}
     snapToInterval={44}
     stickyHeaderIndices={[]}
@@ -127,11 +128,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
   testID="SelectPickerItems"
 >
   <RCTScrollView
-    animatedStyle={
-      {
-        "value": {},
-      }
-    }
+    CellRendererComponent={[Function]}
     centerContent={true}
     collapsable={false}
     contentContainerStyle={
@@ -157,6 +154,11 @@ exports[`SelectPickerItems only with required props renders successfully with mo
     getItemCount={[Function]}
     getItemLayout={[Function]}
     initialScrollIndex={0}
+    jestAnimatedStyle={
+      {
+        "value": {},
+      }
+    }
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
@@ -167,7 +169,7 @@ exports[`SelectPickerItems only with required props renders successfully with mo
     onScrollEndDrag={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
+    scrollEventThrottle={1}
     showsVerticalScrollIndicator={false}
     snapToInterval={44}
     stickyHeaderIndices={[]}
@@ -181,8 +183,13 @@ exports[`SelectPickerItems only with required props renders successfully with mo
   >
     <View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        collapsable={false}
+        jestAnimatedStyle={
+          {
+            "value": {},
+          }
+        }
+        style={{}}
       >
         <View
           accessibilityState={
@@ -235,8 +242,13 @@ exports[`SelectPickerItems only with required props renders successfully with mo
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        collapsable={false}
+        jestAnimatedStyle={
+          {
+            "value": {},
+          }
+        }
+        style={{}}
       >
         <View
           accessibilityState={
@@ -362,11 +374,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
   testID="SelectPickerItems"
 >
   <RCTScrollView
-    animatedStyle={
-      {
-        "value": {},
-      }
-    }
+    CellRendererComponent={[Function]}
     centerContent={true}
     collapsable={false}
     contentContainerStyle={
@@ -413,6 +421,11 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
     getItemCount={[Function]}
     getItemLayout={[Function]}
     initialScrollIndex={0}
+    jestAnimatedStyle={
+      {
+        "value": {},
+      }
+    }
     keyExtractor={[Function]}
     onContentSizeChange={[Function]}
     onLayout={[Function]}
@@ -423,7 +436,7 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
     onScrollEndDrag={[Function]}
     removeClippedSubviews={false}
     renderItem={[Function]}
-    scrollEventThrottle={50}
+    scrollEventThrottle={1}
     showsVerticalScrollIndicator={false}
     snapToInterval={60}
     stickyHeaderIndices={[]}
@@ -438,8 +451,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
   >
     <View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        collapsable={false}
+        jestAnimatedStyle={
+          {
+            "value": {},
+          }
+        }
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
@@ -496,8 +514,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        collapsable={false}
+        jestAnimatedStyle={
+          {
+            "value": {},
+          }
+        }
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
@@ -554,8 +577,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        collapsable={false}
+        jestAnimatedStyle={
+          {
+            "value": {},
+          }
+        }
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
@@ -612,8 +640,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        collapsable={false}
+        jestAnimatedStyle={
+          {
+            "value": {},
+          }
+        }
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
@@ -670,8 +703,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        collapsable={false}
+        jestAnimatedStyle={
+          {
+            "value": {},
+          }
+        }
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"
@@ -728,8 +766,13 @@ exports[`SelectPickerItems with all props should be applied properly: SelectPick
         </View>
       </View>
       <View
-        onFocusCapture={[Function]}
-        style={null}
+        collapsable={false}
+        jestAnimatedStyle={
+          {
+            "value": {},
+          }
+        }
+        style={{}}
       >
         <View
           accessibilityLabel="testAccessibilityLabel"

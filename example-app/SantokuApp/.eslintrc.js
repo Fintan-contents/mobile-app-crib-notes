@@ -98,6 +98,13 @@ module.exports = {
     'src/features/sandbox/apis/**/*.ts',
     'src/features/acknowledgements/constants/ThirdPartyDependencies.ts',
     'config/plugin/build/**',
+    '.bundle',
+    '.expo',
+    'android',
+    'ios',
+    'node_modules',
+    'patches',
+    'prebuild',
   ],
   rules: {
     'strict-dependencies/strict-dependencies': [

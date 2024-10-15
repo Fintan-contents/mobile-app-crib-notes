@@ -18,11 +18,11 @@ import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import {FlatList, NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 import {useAnimatedRef, useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
 
-import {Item} from './SelectPicker';
+import {Item, ItemSelectionKey} from './SelectPicker';
 import {useListMiddleIndex} from './useListMiddleIndex';
 
 type SelectPickerItemsTypes<ItemT> = {
-  selectedValue?: React.Key | ItemT;
+  selectedValue?: ItemSelectionKey | ItemT;
   children?: React.JSX.Element | React.JSX.Element[];
   items: Item<ItemT>[];
   itemHeight: number;
@@ -42,11 +42,6 @@ export const useSelectPickerItems = <ItemT>({
   const scrollHandler = useAnimatedScrollHandler(e => {
     offset.value = e.contentOffset.y;
   });
-  // // 1回のスクロールで、onMomentumScrollEndが複数回実行されてしまう事象に対応
-  // https://github.com/facebook/react-native/issues/32696
-  const canMomentum = useRef(false);
-  const onMomentumScrollBegin = useCallback(() => (canMomentum.current = true), []);
-
   const middleIndex = useListMiddleIndex({itemHeight, listSize: items.length});
 
   const selectedIndex = useMemo(() => {
@@ -75,11 +70,8 @@ export const useSelectPickerItems = <ItemT>({
 
   const handleValueChange = useCallback(
     (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      if (canMomentum.current) {
-        canMomentum.current = false;
-        const {index, value} = getRowItemAtOffset(event.nativeEvent.contentOffset.y);
-        _onChange(value, index);
-      }
+      const {index, value} = getRowItemAtOffset(event.nativeEvent.contentOffset.y);
+      _onChange(value, index);
     },
     [_onChange, getRowItemAtOffset],
   );
@@ -152,6 +144,5 @@ export const useSelectPickerItems = <ItemT>({
     height,
     selectItem,
     getItemLayout,
-    onMomentumScrollBegin,
   };
 };

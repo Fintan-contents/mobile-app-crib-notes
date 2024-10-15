@@ -17,7 +17,7 @@
 import {render, screen} from '@testing-library/react-native';
 import React from 'react';
 import {ViewProps} from 'react-native';
-import Reanimated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
+import {AnimatedProps, ZoomIn, ZoomOut} from 'react-native-reanimated';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {MODAL_CONTAINER_DEFAULT_ENTERING, MODAL_CONTAINER_DEFAULT_EXITING, OverlayContainer} from './OverlayContainer';
@@ -43,7 +43,7 @@ describe('OverlayContainer only with required props', () => {
   it('renders successfully only with required props', () => {
     render(<OverlayContainer isVisible testID="containerAnimated" />, {wrapper: Wrapper});
     const animatedView = screen.getByTestId('containerAnimated');
-    const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
+    const animatedViewProps = animatedView.props as AnimatedProps<ViewProps>;
     // Animated.Viewのentering/exitingをテストで実行することができなかったため、entering/exitingにデフォルトアニメーションが設定されていることのみを確認する。
     expect(screen).toMatchSnapshot('AnimatedView with visible.');
     expect(animatedView).not.toBeNull();
@@ -86,7 +86,7 @@ describe('OverlayContainer with all props', () => {
     const animatedView = screen.getByTestId('animatedView');
 
     // assert animatedView
-    const animatedViewProps = animatedView.props as Reanimated.AnimateProps<ViewProps>;
+    const animatedViewProps = animatedView.props as AnimatedProps<ViewProps>;
     expect(animatedViewProps.style).toEqual({backgroundColor: 'green'});
     expect(animatedViewProps.entering).toBe(entering);
     expect(animatedViewProps.exiting).toBe(exiting);
