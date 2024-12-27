@@ -21,26 +21,17 @@ title: プロジェクトの作成
 :::
 
 ```bash
-npx react-native@0.75.4 init --npm --template https://github.com/ws-4020/rn-spoiler#{@inject: rnSpoilerTag} <YourAppName>
+npx @react-native-community/cli init --pm npm --template https://github.com/ws-4020/rn-spoiler#{@inject: rnSpoilerTag} <YourAppName>
 ```
 
 RN Spoilerは、Expoの[テンプレート](https://github.com/expo/expo/tree/master/templates)をベースにしているので、このあとの[アプリの実行](./launch-created-app.mdx)で紹介しているExpo Goで動作します。
 
 :::info
-[npm](https://www.npmjs.com/)ではなく[Yarn](https://yarnpkg.com/)を利用したい場合は、`--npm`というオプションを削除してください。Yarnがインストールされている場合は、Yarnを利用してパッケージがインストールされます。
-
-```bash
-npx react-native@0.75.4 init --template https://github.com/ws-4020/rn-spoiler#{@inject: rnSpoilerTag} <YourAppName>
-```
-
-:::
-
-:::info
-初めて`npx react-native@0.75.4 init ...`を実行すると、次のように不足しているパッケージをインストールするかと聞かれます。`react-native`をインストールしようとしていれば問題ないので、エンターキーを押して実行してください。
+初めて`npx @react-native-community/cli init ...`を実行すると、次のように不足しているパッケージをインストールするかと聞かれます。`@react-native-community/cli`をインストールしようとしていれば問題ないので、エンターキーを押して実行してください。
 
 ```console
 Need to install the following packages:
-  react-native
+  @react-native-community/cli
 Ok to proceed? (y)
 ```
 
